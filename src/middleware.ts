@@ -28,9 +28,17 @@ export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname
 
   // Protect platform routes
-  if (path.startsWith('/app') || path.startsWith('/admin')) {
+  if (path.startsWith('/app')) {
     if (!user) {
       return NextResponse.redirect(new URL('/auth/login', request.url))
+    }
+  }
+
+  // Protect admin routes - Change this email to your actual admin email
+  if (path.startsWith('/admin')) {
+    if (!user) return NextResponse.redirect(new URL('/auth/login', request.url))
+    if (user.email !== 'contact@digitn.tech') { // Replace with actual admin email later
+      return NextResponse.redirect(new URL('/app', request.url))
     }
   }
 
