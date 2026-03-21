@@ -1,0 +1,316 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Anthropic warm paper-like backgrounds */
+  --cream: #F4F0EB;
+  --card: #EAE5D9;
+  --card-strong: #E0D9CC;
+  /* Text colors — soft charcoal, never harsh black */
+  --black: #1A1A1A;
+  --terra-cotta: #C96442;
+  --card-border: rgba(26, 26, 26, 0.08);
+  --text-secondary: rgba(26, 26, 26, 0.55);
+  --text-tertiary: rgba(26, 26, 26, 0.35);
+  /* Font stacks */
+  --font-serif: 'Tiempos Text', var(--font-playfair), 'Merriweather', Georgia, serif;
+  --font-sans: 'Roobert', var(--font-inter), system-ui, sans-serif;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--black);
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+  line-height: 1.6;
+}
+
+/* Typography — Anthropic style headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+h1 {
+  font-weight: 700;
+}
+
+/* Labels — crisp geometric sans, small, uppercase, wide tracking */
+.label {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+/* Subtle dividers */
+.divider {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Card default — warm Anthropic style */
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+}
+
+/* Reveal animation */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+[data-reveal].show {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Stagger children */
+[data-reveal].show [data-child="1"] {
+  transition-delay: 0.08s;
+}
+
+[data-reveal].show [data-child="2"] {
+  transition-delay: 0.16s;
+}
+
+[data-reveal].show [data-child="3"] {
+  transition-delay: 0.24s;
+}
+
+[data-reveal].show [data-child="4"] {
+  transition-delay: 0.32s;
+}
+
+[data-reveal].show [data-child="5"] {
+  transition-delay: 0.40s;
+}
+
+/* Card hover */
+.card-hover {
+  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.45s ease, border-color 0.45s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px -12px rgba(25, 25, 24, 0.10);
+  border-color: rgba(25, 25, 24, 0.10);
+}
+
+/* Logo typing animation */
+@keyframes blink-caret {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+.logo-cursor {
+  animation: blink-caret 1s step-end infinite;
+}
+
+@keyframes typeD {
+  0% {
+    content: '';
+  }
+
+  14% {
+    content: 'D';
+  }
+
+  28% {
+    content: 'DI';
+  }
+
+  42% {
+    content: 'DIG';
+  }
+
+  56% {
+    content: 'DIGI';
+  }
+
+  70% {
+    content: 'DIGIT';
+  }
+
+  85% {
+    content: 'DIGITN';
+  }
+
+  100% {
+    content: 'DIGITN';
+  }
+}
+
+/* Tunisia map marker pulse */
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* D3 Globe Styles - Enhanced */
+.globe-sphere {
+  fill: url(#sphereGradient);
+  stroke: #c2bcb3;
+  stroke-width: 1.5px;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}
+
+.graticule {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.06);
+  stroke-width: 0.5px;
+  stroke-dasharray: 2, 2;
+}
+
+.world-path {
+  fill: #e8e5dc;
+  stroke: #d1cbc1;
+  stroke-width: 0.5px;
+  transition: fill 0.5s ease, stroke 0.5s ease;
+}
+
+.world-path:hover {
+  fill: #e0d9cc;
+}
+
+.state-path {
+  fill: #e8e5dc;
+  stroke: #a39e94;
+  stroke-width: 1px;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.state-path:hover {
+  fill: rgba(201, 100, 66, 0.15);
+  stroke: #C96442;
+  stroke-width: 1.5px;
+}
+
+.state-path.active {
+  fill: rgba(201, 100, 66, 0.45);
+  stroke: #C96442;
+  stroke-width: 3px;
+  filter: url(#glow) url(#pulse);
+  animation: region-pulse 2s ease-in-out infinite;
+}
+
+/* Enhanced animations */
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes region-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.002);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Gradient utilities */
+.bg-gradient-radial {
+  background-image: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+/* Floating WhatsApp button animation */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .card-hover {
+    transition: none;
+  }
+
+  .logo-cursor {
+    animation: none;
+  }
+
+  .fixed[style*="float"] {
+    animation: none !important;
+  }
+}

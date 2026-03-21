@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Tunisia AI Quotes Map</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
+    
+    <style>
+        body { 
+            background-color: #f1efe8; /* Exact beige from screenshot */
+            font-family: 'Inter', sans-serif; 
+            margin: 0;
+            overflow: hidden;
+        }
+        
+        .map-container { 
+            width: 100vw; 
+            height: 100vh; 
+            position: relative;
+        }
+        
+        #map-svg { 
+            width: 100%; 
+            height: 100%; 
+            cursor: grab;
+        }
+
+        #map-svg:active {
+            cursor: grabbing;
+        }
+
+        /* D3 Paths Styling */
+        .globe-sphere {
+            fill: #f1efe8;
+            stroke: #c2bcb3;
+            stroke-width: 1px;
+        }
+
+        .graticule {
+            fill: none;
+            stroke: rgba(0, 0, 0, 0.08);
+            stroke-width: 0.5px;
+        }
+        
+        .world-path {
+            fill: #e8e5dc;
+            stroke: #d1cbc1;
+            stroke-width: 0.4px;
+        }
+
+        .state-path {
+            fill: #e8e5dc;
+            stroke: #a39e94;
+            stroke-width: 0.8px;
+            transition: fill 0.4s ease, stroke-width 0.4s ease;
+        }
+
+        .state-path.active {
+            fill: rgba(229, 168, 64, 0.4);
+            stroke: #e5a840;
+            stroke-width: 2px;
+        }
+
+        /* Overlay UI Styling */
+        .overlay-content {
+            position: absolute;
+            bottom: 10%;
+            left: 5%;
+            max-width: 600px;
+            width: 90%;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .state-tag {
+            background-color: #b5c7e3; /* Blue tag like the alarm text in your screenshot */
+            color: #1a1a1a;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            line-height: 1.15;
+            color: #1a1a1a;
+            margin: 0;
+            min-height: 140px;
+            text-shadow: 0 0 20px rgba(241, 239, 232, 0.8); /* Helps legibility over map lines */
+        }
+
+        @media (max-width: 768px) {
+            .quote-text { font-size: 1.8rem; min-height: 100px; }
+            .overlay-content { bottom: 12%; }
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background-color: #1a1a1a;
+            vertical-align: text-bottom;
+            animation: blink 1s step-end infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        /* Pagination dots */
+        .pagination { display: flex; gap: 6px; margin-bottom: 15px; flex-wrap: wrap; max-width: 80%; }
+        .dot { width: 8px; height: 8px; border-radius: 50%; border: 1px solid #a39e94; background: transparent; transition: all 0.3s; }
+        .dot.active { background: #1a1a1a; border-color: #1a1a1a; }
+
+        /* Floating Controls */
+        .controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 10;
+        }
+
+        .btn {
+            background-color: #f1efe8;
+            border: 1px solid #c2bcb3;
+            color: #1a1a1a;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #ffffff;
+            border-color: #a39e94;
+            transform: translateY(-2px);
+        }
+
+        .btn.active {
+            background-color: #1a1a1a;
+            color: white;
+            border-color: #1a1a1a;
+        }
+
+        /* Loader */
+        .spinner { 
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            border: 4px solid rgba(0,0,0,0.1); width: 40px; height: 40px; 
+            border-radius: 50%; border-left-color: #1a1a1a; 
+            animation: spin 1s linear infinite; 
+        }
+        @keyframes spin { 0% { transform: translate(-50%, -50%) rotate(0deg); } 100% { transform: translate(-50%, -50%) rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div class="map-container">
+        <div id="loader" class="spinner"></div>
+        
+        <svg id="map-svg" viewBox="0 0 1000 800" preserveAspectRatio="xMidYMid slice">
+            <g id="map-group"></g>
+        </svg>
+
+        <!-- Quote Overlay -->
+        <div class="overlay-content hidden" id="ui-overlay">
+            <div class="pagination" id="pagination-dots"></div>
+            <div class="state-tag" id="state-tag">LOADING</div>
+            <h2 class="quote-text"><span id="quote-text-span"></span><span class="typing-cursor" id="cursor"></span></h2>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls hidden" id="controls">
+            <button class="btn active" id="btn-story">Jump to Story</button>
+            <button class="btn" id="btn-globe">Explore Globe</button>
+        </div>
+    </div>
+
+    <script>
+        // Expanded Data
+        const storyData = [
+            { targetName: "Tunis", quote: "“The tech ecosystem here is evolving faster than ever.”" },
+            { targetName: "Nabeul", quote: "“Tourism and agriculture are meeting modern supply chains.”" },
+            { targetName: "Sousse", quote: "“Digital innovation is reshaping our coastal economy day by day.”" },
+            { targetName: "Monastir", quote: "“University hubs are producing world-class developers.”" },
+            { targetName: "Kairouan", quote: "“Our historical heritage is being preserved through digital realities.”" },
+            { targetName: "Sfax", quote: "“I think I can even start a business alone and my partner will be AI.”" },
+            { targetName: "Gabes", quote: "“Green tech is solving our oldest industrial challenges.”" },
+            { targetName: "Medenine", quote: "“Remote work brings incredible new opportunities to Djerba.”" },
+            { targetName: "Bizerte", quote: "“Northern winds are powering our new sustainable data centers.”" }
+        ];
+
+        let currentIndex = 0;
+        let mode = "story"; // "story" or "globe"
+        let isTransitioning = false;
+        
+        const width = 1000;
+        const height = 800;
+        const svg = d3.select("#map-svg");
+        const mapGroup = d3.select("#map-group");
+        
+        // Setup 3D Orthographic Projection
+        let projection = d3.geoOrthographic()
+            .scale(350) // Default globe scale
+            .translate([width / 2, height / 2])
+            .clipAngle(90); // Hides the back side of the globe
+            
+        let pathGenerator = d3.geoPath().projection(projection);
+
+        function normalizeString(str) {
+            return str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : "";
+        }
+
+        function sanitizeId(str) {
+            return normalizeString(str).replace(/[^a-z0-9]/g, '-');
+        }
+
+        async function initMap() {
+            try {
+                // Fetch World Map (110m) and Tunisia States simultaneously
+                // We use a CORS proxy (allorigins) for Highcharts to bypass local server CORS blocks
+                const highchartsUrl = encodeURIComponent('https://code.highcharts.com/mapdata/countries/tn/tn-all.topo.json');
+                
+                const [worldRes, tnRes] = await Promise.all([
+                    fetch('https://unpkg.com/world-atlas@2.0.2/countries-110m.json'),
+                    fetch(`https://api.allorigins.win/raw?url=${highchartsUrl}`)
+                ]);
+                
+                const worldTopo = await worldRes.json();
+                const tnTopo = await tnRes.json();
+                
+                const worldData = topojson.feature(worldTopo, worldTopo.objects.countries).features;
+                const tnGeoData = topojson.feature(tnTopo, Object.values(tnTopo.objects)[0]).features;
+
+                // 1. Draw Globe Sphere
+                mapGroup.append("path")
+                    .datum({type: "Sphere"})
+                    .attr("class", "globe-sphere")
+                    .attr("d", pathGenerator);
+
+                // 2. Draw Graticules (Grid lines)
+                mapGroup.append("path")
+                    .datum(d3.geoGraticule()())
+                    .attr("class", "graticule")
+                    .attr("d", pathGenerator);
+
+                // 3. Draw World Countries
+                mapGroup.selectAll(".world-path")
+                    .data(worldData)
+                    .enter()
+                    .append("path")
+                    .attr("class", "world-path")
+                    .attr("d", pathGenerator);
+
+                // 4. Draw Tunisia States on top
+                mapGroup.selectAll(".state-path")
+                    .data(tnGeoData)
+                    .enter()
+                    .append("path")
+                    .attr("class", "state-path")
+                    .attr("d", pathGenerator)
+                    .attr("id", d => `state-${sanitizeId(d.properties.name || d.properties.NAME_1)}`);
+
+                // Map story features
+                storyData.forEach(story => {
+                    const feature = tnGeoData.find(f => {
+                        const propName = f.properties.name || f.properties.NAME_1 || "";
+                        return normalizeString(propName).includes(normalizeString(story.targetName));
+                    });
+                    if(feature) {
+                        story.feature = feature;
+                        story.id = `state-${sanitizeId(feature.properties.name || feature.properties.NAME_1)}`;
+                        story.centroid = d3.geoCentroid(feature);
+                    }
+                });
+                
+                // UI Setup
+                const dotsContainer = document.getElementById('pagination-dots');
+                storyData.forEach((_, i) => {
+                    const dot = document.createElement('div');
+                    dot.className = 'dot';
+                    dotsContainer.appendChild(dot);
+                });
+
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('ui-overlay').classList.remove('hidden');
+                document.getElementById('controls').classList.remove('hidden');
+                
+                // Initialize Drag Behavior for Globe mode
+                const drag = d3.drag()
+                    .on("drag", (event) => {
+                        if(mode !== "globe") return;
+                        const rotate = projection.rotate();
+                        const k = 75 / projection.scale(); // Adjust sensitivity
+                        projection.rotate([rotate[0] + event.dx * k, rotate[1] - event.dy * k]);
+                        mapGroup.selectAll("path").attr("d", pathGenerator);
+                    });
+                svg.call(drag);
+
+                // Start the story
+                startAnimationLoop();
+
+                // Button Listeners
+                document.getElementById('btn-story').addEventListener('click', () => setMode('story'));
+                document.getElementById('btn-globe').addEventListener('click', () => setMode('globe'));
+
+            } catch (error) {
+                console.error("Error loading map data:", error);
+                document.getElementById('loader').style.display = 'none';
+                document.body.innerHTML += `<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-red-600 font-bold bg-white p-4 rounded-lg shadow-lg">Failed to load map data. ${error.message}</div>`;
+            }
+        }
+
+        function setMode(newMode) {
+            if (mode === newMode || isTransitioning) return;
+            mode = newMode;
+            
+            document.getElementById('btn-story').classList.toggle('active', mode === 'story');
+            document.getElementById('btn-globe').classList.toggle('active', mode === 'globe');
+
+            if (mode === 'globe') {
+                // Switch to Globe: Fade out text, Zoom out to space
+                document.getElementById('ui-overlay').style.opacity = '0';
+                mapGroup.selectAll(".state-path").classed("active", false);
+                
+                // Zoom out to global view (Centered roughly on Africa/Europe)
+                tweenProjection([-10, -20], 350, 1500);
+            } else {
+                // Switch back to Story
+                document.getElementById('ui-overlay').style.opacity = '1';
+                currentIndex = 0; // Reset story
+                startAnimationLoop();
+            }
+        }
+
+        // Tween the actual 3D projection smoothly
+        function tweenProjection(targetRotate, targetScale, duration) {
+            isTransitioning = true;
+            return new Promise(resolve => {
+                d3.select({}).transition() // Dummy object for transition timer
+                    .duration(duration)
+                    .ease(d3.easeCubicInOut)
+                    .tween("projection", function() {
+                        const iRotate = d3.interpolate(projection.rotate(), targetRotate);
+                        const iScale = d3.interpolate(projection.scale(), targetScale);
+                        return function(t) {
+                            projection.rotate(iRotate(t)).scale(iScale(t));
+                            mapGroup.selectAll("path").attr("d", pathGenerator);
+                        };
+                    })
+                    .on("end", () => {
+                        isTransitioning = false;
+                        resolve();
+                    });
+            });
+        }
+
+        function typeText(text, elementId) {
+            return new Promise(resolve => {
+                const el = document.getElementById(elementId);
+                el.innerText = "";
+                let i = 0;
+                let isCancelled = false;
+                
+                // Store cancel function globally so we can interrupt typing if mode switches
+                window.cancelTyping = () => { isCancelled = true; };
+
+                const interval = setInterval(() => {
+                    if (isCancelled || mode !== 'story') {
+                        clearInterval(interval);
+                        resolve();
+                        return;
+                    }
+                    el.innerText += text.charAt(i);
+                    i++;
+                    if (i >= text.length) {
+                        clearInterval(interval);
+                        resolve();
+                    }
+                }, 35);
+            });
+        }
+
+        async function startAnimationLoop() {
+            while (mode === 'story') {
+                const currentData = storyData[currentIndex];
+                if (!currentData.feature) {
+                    currentIndex = (currentIndex + 1) % storyData.length;
+                    continue;
+                }
+
+                // Update Pagination
+                document.querySelectorAll('.dot').forEach((d, i) => {
+                    d.classList.toggle('active', i === currentIndex);
+                });
+
+                // 1. Zoom out slightly to show Tunisia Context
+                document.getElementById('state-tag').style.opacity = '0';
+                document.getElementById('quote-text-span').innerText = "";
+                mapGroup.selectAll(".state-path").classed("active", false);
+
+                // Rotate to Tunisia center, scale to view whole country
+                if(mode === 'story') await tweenProjection([-9.5, -34], 2500, 1200);
+
+                if (mode !== 'story') break;
+                await new Promise(r => setTimeout(r, 200)); // Short pause
+
+                // 2. Target the specific State
+                mapGroup.select(`#${currentData.id}`).classed("active", true);
+
+                // Calculate target rotation (negative longitude, negative latitude)
+                const [lon, lat] = currentData.centroid;
+                const targetRotate = [-lon, -lat];
+                
+                // Calculate dynamic scale based on state size using a temporary projection
+                const tempProj = d3.geoOrthographic()
+                    .rotate(targetRotate)
+                    .fitExtent([[200, 100], [width-100, height-100]], currentData.feature);
+                // Cap scale so small states don't zoom in extremely close
+                const targetScale = Math.min(tempProj.scale(), 12000);
+
+                // Zoom IN to state
+                if(mode === 'story') await tweenProjection(targetRotate, targetScale, 1500);
+
+                if (mode !== 'story') break;
+
+                // 3. Update UI
+                const tagEl = document.getElementById('state-tag');
+                tagEl.innerText = currentData.targetName;
+                tagEl.style.opacity = '1';
+                
+                await typeText(currentData.quote, 'quote-text-span');
+
+                // 4. Hold for reading
+                let waitTime = 0;
+                while (waitTime < 3500 && mode === 'story') {
+                    await new Promise(r => setTimeout(r, 100));
+                    waitTime += 100;
+                }
+
+                if (mode === 'story') {
+                    currentIndex = (currentIndex + 1) % storyData.length;
+                }
+            }
+        }
+
+        // Initialize
+        initMap();
+
+    </script>
+</body>
+</html>
