@@ -6,7 +6,8 @@
       "Bash(gh auth:*)",
       "Bash(gh repo:*)",
       "Bash(vercel:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(nslookup:*)"
     ]
   }
 }
