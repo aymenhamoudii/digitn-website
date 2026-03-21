@@ -15,7 +15,10 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(node:*)",
       "Bash(cd:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(mkdir -p bridge/src/routes bridge/src/lib)",
+      "Bash(npm init:*)",
+      "Bash(git add:*)"
     ]
   }
 }
