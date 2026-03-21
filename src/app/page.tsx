@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, FormEvent } from 'react'
 import dynamic from 'next/dynamic'
 import { siteConfig } from '@/config/site'
 import { trackConversion } from '@/lib/analytics'
+import { faqSchema, serviceSchema } from './metadata'
 
 const GlobeMap = dynamic(() => import('./GlobeMap'), { ssr: false })
 
@@ -947,6 +948,17 @@ export default function Home() {
 
   return (
     <main>
+      {/* FAQ Schema for Rich Snippets */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      {/* Service Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+
       <Navbar />
       <Hero />
       <GlobeMap />

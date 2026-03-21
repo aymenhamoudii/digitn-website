@@ -4,7 +4,7 @@ export const siteConfig = {
   url: 'https://digitn.tech',
   phone: '+216 52 335 899',
   phoneRaw: '21652335899',
-  email: 'contact@digitn.tn',
+  email: 'contact@digitn.tech',
   address: 'Tunis, Tunisie',
   social: {
     facebook: 'https://facebook.com/digitn',
