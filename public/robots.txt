@@ -5,4 +5,4 @@ Allow: /
 # Disallow admin or private pages if any
 # Disallow: /admin/
 
-Sitemap: https://digitn.tn/sitemap.xml
+Sitemap: https://digitn.tech/sitemap.xml
