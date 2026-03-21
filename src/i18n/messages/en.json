@@ -1,0 +1,94 @@
+{
+  "nav": {
+    "chat": "Chat",
+    "builder": "Builder",
+    "projects": "Projects",
+    "settings": "Settings",
+    "admin": "Admin",
+    "upgrade": "Upgrade",
+    "logout": "Log out"
+  },
+  "auth": {
+    "login": "Sign in",
+    "signup": "Create account",
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "loginTitle": "Welcome back",
+    "signupTitle": "Create your account",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "orContinueWith": "Or continue with",
+    "google": "Google",
+    "error": "Authentication error",
+    "forgotPassword": "Forgot password?"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome, {name}",
+    "requestsLeft": "{count} requests left today",
+    "recentProjects": "Recent projects",
+    "noProjects": "No projects yet. Start building!",
+    "startBuilding": "Start building"
+  },
+  "chat": {
+    "title": "AI Chat",
+    "placeholder": "Ask me anything...",
+    "send": "Send",
+    "thinking": "Thinking...",
+    "newChat": "New chat",
+    "quotaExceeded": "Daily quota reached. Upgrade to DIGITN PRO for more."
+  },
+  "builder": {
+    "title": "Project Builder",
+    "placeholder": "Describe the project you want to build...",
+    "planning": "Planning your project...",
+    "building": "Building your project...",
+    "ready": "Your project is ready!",
+    "preview": "Live preview",
+    "download": "Download code",
+    "expiresIn": "Expires in {time}",
+    "rebuild": "Rebuild",
+    "approveplan": "Approve this plan",
+    "editplan": "Edit plan"
+  },
+  "projects": {
+    "title": "My Projects",
+    "status": {
+      "building": "Building",
+      "ready": "Ready",
+      "failed": "Failed",
+      "expired": "Expired"
+    },
+    "empty": "No projects yet. Create one in the Builder!"
+  },
+  "pricing": {
+    "title": "Choose your plan",
+    "free": "DIGITN FAST",
+    "pro": "DIGITN PRO",
+    "plus": "DIGITN PLUS",
+    "freePrice": "Free",
+    "proPrice": "$9/month",
+    "plusPrice": "$25/month",
+    "requestsDay": "{count} requests/day",
+    "unlimited": "Unlimited",
+    "previewTime": "{time} min preview",
+    "choosePlan": "Choose plan",
+    "currentPlan": "Current plan"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "plan": "My plan",
+    "profile": "Profile",
+    "save": "Save"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "network": "Network error. Check your connection.",
+    "unauthorized": "Unauthorized. Please log in."
+  }
+}

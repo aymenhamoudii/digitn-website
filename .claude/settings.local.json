@@ -7,7 +7,15 @@
       "Bash(gh repo:*)",
       "Bash(vercel:*)",
       "Bash(npm install:*)",
-      "Bash(nslookup:*)"
+      "Bash(nslookup:*)",
+      "Bash(claude plugin:*)",
+      "Bash(npx skills:*)",
+      "Bash(npx vercel:*)",
+      "WebSearch",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(node:*)",
+      "Bash(cd:*)",
+      "Bash(npx tsc:*)"
     ]
   }
 }

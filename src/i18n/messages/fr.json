@@ -1,0 +1,94 @@
+{
+  "nav": {
+    "chat": "Chat",
+    "builder": "Créateur",
+    "projects": "Projets",
+    "settings": "Paramètres",
+    "admin": "Admin",
+    "upgrade": "Mettre à niveau",
+    "logout": "Déconnexion"
+  },
+  "auth": {
+    "login": "Connexion",
+    "signup": "Inscription",
+    "email": "Email",
+    "password": "Mot de passe",
+    "name": "Nom",
+    "loginTitle": "Bon retour",
+    "signupTitle": "Créer un compte",
+    "noAccount": "Pas encore de compte ?",
+    "hasAccount": "Déjà un compte ?",
+    "orContinueWith": "Ou continuer avec",
+    "google": "Google",
+    "error": "Erreur d'authentification",
+    "forgotPassword": "Mot de passe oublié ?"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "welcome": "Bienvenue, {name}",
+    "requestsLeft": "{count} requêtes restantes aujourd'hui",
+    "recentProjects": "Projets récents",
+    "noProjects": "Aucun projet encore. Commencez à créer !",
+    "startBuilding": "Commencer à créer"
+  },
+  "chat": {
+    "title": "Chat IA",
+    "placeholder": "Posez-moi n'importe quelle question...",
+    "send": "Envoyer",
+    "thinking": "En train de réfléchir...",
+    "newChat": "Nouveau chat",
+    "quotaExceeded": "Quota journalier atteint. Passez à DIGITN PRO pour plus."
+  },
+  "builder": {
+    "title": "Créateur de projets",
+    "placeholder": "Décrivez le projet que vous souhaitez créer...",
+    "planning": "Planification en cours...",
+    "building": "Construction en cours...",
+    "ready": "Votre projet est prêt !",
+    "preview": "Aperçu en direct",
+    "download": "Télécharger le code",
+    "expiresIn": "Expire dans {time}",
+    "rebuild": "Reconstruire",
+    "approveplan": "Approuver ce plan",
+    "editplan": "Modifier le plan"
+  },
+  "projects": {
+    "title": "Mes projets",
+    "status": {
+      "building": "En construction",
+      "ready": "Prêt",
+      "failed": "Échec",
+      "expired": "Expiré"
+    },
+    "empty": "Aucun projet. Créez-en un dans le Créateur !"
+  },
+  "pricing": {
+    "title": "Choisissez votre plan",
+    "free": "DIGITN FAST",
+    "pro": "DIGITN PRO",
+    "plus": "DIGITN PLUS",
+    "freePrice": "Gratuit",
+    "proPrice": "29 DT/mois",
+    "plusPrice": "79 DT/mois",
+    "requestsDay": "{count} requêtes/jour",
+    "unlimited": "Illimité",
+    "previewTime": "Aperçu {time} min",
+    "choosePlan": "Choisir ce plan",
+    "currentPlan": "Plan actuel"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "language": "Langue",
+    "theme": "Thème",
+    "light": "Clair",
+    "dark": "Sombre",
+    "plan": "Mon plan",
+    "profile": "Profil",
+    "save": "Enregistrer"
+  },
+  "errors": {
+    "generic": "Une erreur s'est produite. Réessayez.",
+    "network": "Erreur réseau. Vérifiez votre connexion.",
+    "unauthorized": "Non autorisé. Veuillez vous connecter."
+  }
+}

@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
+import { NextIntlClientProvider } from 'next-intl'
+import { getLocale, getMessages } from 'next-intl/server'
+import { Toaster } from 'react-hot-toast'
 import './globals.css'
 import { siteConfig } from '@/config/site'
 import Script from 'next/script'
@@ -92,11 +95,15 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const locale = await getLocale()
+  const messages = await getMessages()
+  const isRTL = locale === 'ar'
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
@@ -154,8 +161,23 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="fr" className={`${inter.variable} ${playfair.variable}`}>
+    <html
+      lang={locale}
+      dir={isRTL ? 'rtl' : 'ltr'}
+      className={`${inter.variable} ${playfair.variable}`}
+      suppressHydrationWarning
+    >
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const theme = localStorage.getItem('digitn-theme') || 'light';
+                document.documentElement.setAttribute('data-theme', theme);
+              } catch (e) {}
+            `,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -193,7 +215,12 @@ export default function RootLayout({
           </Script>
         )}
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <NextIntlClientProvider messages={messages}>
+          {children}
+          <Toaster position="bottom-right" />
+        </NextIntlClientProvider>
+      </body>
     </html>
   )
 }

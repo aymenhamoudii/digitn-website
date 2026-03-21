@@ -1,0 +1,94 @@
+{
+  "nav": {
+    "chat": "محادثة",
+    "builder": "المنشئ",
+    "projects": "المشاريع",
+    "settings": "الإعدادات",
+    "admin": "الإدارة",
+    "upgrade": "ترقية",
+    "logout": "تسجيل الخروج"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "name": "الاسم",
+    "loginTitle": "مرحباً بعودتك",
+    "signupTitle": "إنشاء حسابك",
+    "noAccount": "ليس لديك حساب؟",
+    "hasAccount": "لديك حساب بالفعل؟",
+    "orContinueWith": "أو تابع بـ",
+    "google": "Google",
+    "error": "خطأ في المصادقة",
+    "forgotPassword": "نسيت كلمة المرور؟"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "welcome": "مرحباً، {name}",
+    "requestsLeft": "{count} طلبات متبقية اليوم",
+    "recentProjects": "المشاريع الأخيرة",
+    "noProjects": "لا توجد مشاريع بعد. ابدأ الإنشاء!",
+    "startBuilding": "ابدأ الإنشاء"
+  },
+  "chat": {
+    "title": "محادثة الذكاء الاصطناعي",
+    "placeholder": "اسألني أي شيء...",
+    "send": "إرسال",
+    "thinking": "جاري التفكير...",
+    "newChat": "محادثة جديدة",
+    "quotaExceeded": "تم استنفاد الحصة اليومية. قم بالترقية إلى DIGITN PRO للمزيد."
+  },
+  "builder": {
+    "title": "منشئ المشاريع",
+    "placeholder": "صف المشروع الذي تريد إنشاءه...",
+    "planning": "جاري التخطيط للمشروع...",
+    "building": "جاري بناء المشروع...",
+    "ready": "مشروعك جاهز!",
+    "preview": "معاينة مباشرة",
+    "download": "تحميل الكود",
+    "expiresIn": "ينتهي خلال {time}",
+    "rebuild": "إعادة البناء",
+    "approveplan": "الموافقة على هذه الخطة",
+    "editplan": "تعديل الخطة"
+  },
+  "projects": {
+    "title": "مشاريعي",
+    "status": {
+      "building": "قيد البناء",
+      "ready": "جاهز",
+      "failed": "فشل",
+      "expired": "منتهي"
+    },
+    "empty": "لا توجد مشاريع بعد. أنشئ واحداً في المنشئ!"
+  },
+  "pricing": {
+    "title": "اختر خطتك",
+    "free": "DIGITN FAST",
+    "pro": "DIGITN PRO",
+    "plus": "DIGITN PLUS",
+    "freePrice": "مجاني",
+    "proPrice": "29 دينار/شهر",
+    "plusPrice": "79 دينار/شهر",
+    "requestsDay": "{count} طلبات/يوم",
+    "unlimited": "غير محدود",
+    "previewTime": "معاينة {time} دقيقة",
+    "choosePlan": "اختر الخطة",
+    "currentPlan": "الخطة الحالية"
+  },
+  "settings": {
+    "title": "الإعدادات",
+    "language": "اللغة",
+    "theme": "المظهر",
+    "light": "فاتح",
+    "dark": "داكن",
+    "plan": "خطتي",
+    "profile": "الملف الشخصي",
+    "save": "حفظ"
+  },
+  "errors": {
+    "generic": "حدث خطأ. حاول مرة أخرى.",
+    "network": "خطأ في الشبكة. تحقق من اتصالك.",
+    "unauthorized": "غير مصرح. يرجى تسجيل الدخول."
+  }
+}
