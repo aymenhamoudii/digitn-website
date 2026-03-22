@@ -5,15 +5,22 @@ const router = express.Router();
 
 // Trigger a new build
 router.post('/start', async (req, res) => {
-  const { projectId, planText, userId } = req.body;
+  const { projectId, planText, answers, userId } = req.body;
   if (!projectId || !planText) return res.status(400).json({ error: 'Missing parameters' });
 
   try {
     const { data: user } = await supabase.from('users').select('tier').eq('id', userId).single();
     const tier = user?.tier || 'free';
 
+    // Construct full instruction if answers are provided (though Next.js also appends them)
+    // This ensures bridge logic aligns with spec
+    let fullPlanText = planText;
+    if (answers && !planText.includes('Additional Clarifications')) {
+        fullPlanText = `${planText}\n\nAdditional Clarifications:\n${answers}`;
+    }
+
     // Start asynchronously (don't await)
-    startProjectBuild(projectId, planText, tier);
+    startProjectBuild(projectId, fullPlanText, tier);
 
     return res.json({ success: true, projectId });
   } catch (err) {
