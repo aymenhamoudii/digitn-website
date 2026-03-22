@@ -42,23 +42,7 @@ CREATE POLICY "Users can insert their own builder chat messages"
     )
   );
 
--- Step 6: Update project_status enum
--- Create new enum type
-CREATE TYPE project_status_new AS ENUM ('planning', 'analyzing', 'building', 'ready', 'failed', 'expired');
-
--- Add temporary column
-ALTER TABLE projects ADD COLUMN status_new project_status_new;
-
--- Copy data
-UPDATE projects SET status_new = status::text::project_status_new;
-
--- Drop old column, rename new
-ALTER TABLE projects DROP COLUMN status;
-ALTER TABLE projects RENAME COLUMN status_new TO status;
-
--- Drop old type, rename new type
-DROP TYPE project_status;
-ALTER TYPE project_status_new RENAME TO project_status;
-
--- Set default
-ALTER TABLE projects ALTER COLUMN status SET DEFAULT 'planning'::project_status;
+-- Step 6: Update project status check constraint to include 'analyzing'
+ALTER TABLE projects DROP CONSTRAINT IF EXISTS projects_status_check;
+ALTER TABLE projects ADD CONSTRAINT projects_status_check CHECK (status IN ('planning', 'analyzing', 'building', 'ready', 'failed', 'expired'));
+ALTER TABLE projects ALTER COLUMN status SET DEFAULT 'planning';
