@@ -268,6 +268,18 @@ function Navbar() {
           >
             Contact
           </a>
+          <a
+            href="/auth/login"
+            className="px-5 py-2 text-sm font-medium text-[#1A1A1A]/70 hover:text-[#1A1A1A] transition-colors duration-300"
+          >
+            Connexion
+          </a>
+          <a
+            href="/auth/signup"
+            className="px-5 py-2 bg-[#C96442] text-white text-sm rounded-full hover:bg-[#C96442]/85 transition-colors duration-300"
+          >
+            Commencer
+          </a>
         </div>
 
         {/* Mobile hamburger */}
@@ -291,6 +303,21 @@ function Navbar() {
               {l.label}
             </a>
           ))}
+          <hr className="border-[#1A1A1A]/10" />
+          <a
+            href="/auth/login"
+            onClick={() => setMenuOpen(false)}
+            className="text-sm font-medium text-[#1A1A1A]/70 hover:text-[#1A1A1A] px-2 py-1"
+          >
+            Connexion
+          </a>
+          <a
+            href="/auth/signup"
+            onClick={() => setMenuOpen(false)}
+            className="mx-2 px-5 py-2 bg-[#C96442] text-white text-sm text-center rounded-full hover:bg-[#C96442]/85 transition-colors duration-300"
+          >
+            Commencer
+          </a>
         </div>
       )}
     </nav>
@@ -334,6 +361,12 @@ function Hero() {
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1A1A1A] text-white text-sm font-medium rounded-full hover:shadow-lg hover:shadow-[#1A1A1A]/20 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300"
             >
               Demander un devis <Arrow />
+            </a>
+            <a
+              href="/auth/signup"
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#C96442] text-white text-sm font-medium rounded-full hover:bg-[#C96442]/85 hover:shadow-lg hover:shadow-[#C96442]/20 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300"
+            >
+              Essayer gratuitement <Arrow />
             </a>
             <a
               href="#portfolio"
