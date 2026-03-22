@@ -36,8 +36,8 @@ export default async function ProjectsPage() {
                   <div className="flex justify-between items-start mb-4">
                     <h3 className="font-medium text-[var(--text-primary)] truncate" title={p.name}>{p.name}</h3>
                     <span className={`text-[10px] uppercase font-bold px-2 py-1 rounded-sm ${
-                      isExpired ? 'bg-gray-200 text-gray-600' :
-                      p.status === 'ready' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
+                      isExpired ? 'bg-[var(--card-strong)] text-[var(--text-tertiary)]' :
+                      p.status === 'ready' ? 'bg-green-500/15 text-green-600' : 'bg-yellow-500/15 text-yellow-600'
                     }`}>
                       {isExpired ? 'Expiré' : p.status}
                     </span>

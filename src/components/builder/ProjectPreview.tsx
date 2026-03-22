@@ -59,7 +59,7 @@ export function ProjectPreview({ projectId, projectName, expiresAt, onRebuild }:
 
       {/* Frame Container */}
       <div className="flex-1 bg-[var(--bg-primary)] flex items-center justify-center p-4">
-        <div className={`transition-all duration-300 border border-[var(--border-strong)] bg-white rounded-md overflow-hidden shadow-lg ${
+        <div className={`transition-all duration-300 border border-[var(--border-strong)] bg-[var(--bg-primary)] rounded-md overflow-hidden shadow-lg ${
           device === 'mobile' ? 'w-[375px] h-[812px]' : 'w-full h-full'
         }`}>
           <iframe

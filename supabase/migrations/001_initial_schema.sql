@@ -131,3 +131,8 @@ CREATE INDEX IF NOT EXISTS idx_projects_user ON public.projects(user_id);
 CREATE INDEX IF NOT EXISTS idx_projects_status ON public.projects(status);
 CREATE INDEX IF NOT EXISTS idx_projects_expires ON public.projects(expires_at);
 CREATE INDEX IF NOT EXISTS idx_usage_quotas_user_date ON public.usage_quotas(user_id, date);
+
+-- Admin config: only service role can write (no public access)
+ALTER TABLE public.admin_config ENABLE ROW LEVEL SECURITY;
+-- No SELECT policy for anon = blocked by default with RLS enabled
+-- Service role key bypasses RLS automatically

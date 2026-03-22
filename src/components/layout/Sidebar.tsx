@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { FiMessageSquare, FiCode, FiFolder, FiSettings, FiZap, FiLogOut } from 'react-icons/fi'
 import { useTranslations } from 'next-intl'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
+import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 
@@ -81,7 +82,10 @@ export function Sidebar({ userTier }: { userTier: string }) {
         </div>
 
         <div className="flex items-center justify-between px-1">
-          <ThemeToggle />
+          <div className="flex items-center gap-1">
+            <ThemeToggle />
+            <LanguageSwitcher />
+          </div>
           <button
             onClick={handleLogout}
             className="flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors px-2 py-1 rounded-md hover:bg-[var(--card-bg)]"
