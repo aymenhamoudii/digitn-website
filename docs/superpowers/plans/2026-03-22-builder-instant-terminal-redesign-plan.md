@@ -112,7 +112,7 @@ router.post('/analyze', async (req, res) => {
   try {
     const { data: user } = await supabase.from('users').select('tier').eq('id', userId).single();
     const tier = user?.tier || 'free';
-    const { client } = await getRouterClient(tier);
+    const { client, models } = await getRouterClient(tier);
 
     const prompt = `You are analyzing a project description to determine if it's clear enough to build.
 
@@ -146,7 +146,7 @@ Rules:
 - Return ONLY valid JSON, no markdown, no explanation`;
 
     const completion = await client.chat.completions.create({
-      model: tier === 'free' ? 'ag/gemini-3-flash' : 'ag/claude-sonnet-4-6',
+      model: models[0],
       messages: [{ role: 'user', content: prompt }],
       temperature: 0.3,
     });
@@ -378,20 +378,32 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: true, projectId });
     }
 
-    // For fresh builds moving from analyzing to building, consume 1 quota
     const { data: userData } = await supabase.from('users').select('tier').eq('id', user.id).maybeSingle();
     const tier = userData?.tier || 'free';
 
-    try {
-      await checkAndIncrementQuota(supabase, user.id, tier, 'builder');
-    } catch (err: any) {
-      if (err.code === 'QUOTA_EXCEEDED') {
-        return NextResponse.json(
-          { error: 'Builder limit reached. Resets at midnight — or upgrade your plan.', code: 'QUOTA_EXCEEDED' },
-          { status: 429 }
-        );
+    // Check if analysis was done recently AND there are no answers (meaning it's part of the same original request)
+    // If it's a resume after questionnaire (has answers) or a late retry, consume quota
+    let shouldConsumeQuota = true;
+    if (!answers) {
+       const createdTime = new Date(project.created_at).getTime();
+       const now = new Date().getTime();
+       if (now - createdTime < 5 * 60 * 1000) {
+           shouldConsumeQuota = false; // Already consumed in /analyze
+       }
+    }
+
+    if (shouldConsumeQuota) {
+      try {
+        await checkAndIncrementQuota(supabase, user.id, tier, 'builder');
+      } catch (err: any) {
+        if (err.code === 'QUOTA_EXCEEDED') {
+          return NextResponse.json(
+            { error: 'Builder limit reached. Resets at midnight — or upgrade your plan.', code: 'QUOTA_EXCEEDED' },
+            { status: 429 }
+          );
+        }
+        throw err;
       }
-      throw err;
     }
 
     let fullDescription = project.description;
@@ -666,6 +678,20 @@ DO NOT wait for user input. Just make the changes.`;
                 content: assistantFullResponse.trim()
             });
         }
+
+        
+        // Repackage ZIP
+        const archiver = require('archiver');
+        const zipPath = `/var/www/zips/${projectId}.zip`;
+        await new Promise((resolve, reject) => {
+          const output = require('fs').createWriteStream(zipPath);
+          const archive = archiver('zip', { zlib: { level: 9 } });
+          output.on('close', resolve);
+          archive.on('error', reject);
+          archive.pipe(output);
+          archive.glob('**/*', { cwd: projectDir, ignore: ['node_modules/**', '.build-prompt.txt'] });
+          archive.finalize();
+        });
 
         emit({ type: 'status', status: 'complete' });
       } else {
