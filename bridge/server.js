@@ -29,6 +29,8 @@ app.use('/chat', chatRoutes);
 app.use('/build', buildRoutes);
 const builderAnalyzeRoutes = require('./src/routes/builder-analyze');
 app.use('/builder', builderAnalyzeRoutes);
+const builderChatRoutes = require('./src/routes/builder-chat');
+app.use('/builder', builderChatRoutes);
 
 const PORT = process.env.BRIDGE_PORT || 3001;
 
