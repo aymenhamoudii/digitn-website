@@ -1,12 +1,12 @@
 // src/app/api/builder/start/route.ts
 import { NextResponse } from 'next/server';
-import { createServerClient } from '@/lib/supabase/server';
+import { createClient } from '@/lib/supabase/server';
 import { BRIDGE_URL } from '@/config/platform';
 import { checkAndIncrementQuota } from '@/lib/quota';
 
 export async function POST(req: Request) {
   try {
-    const supabase = createServerClient();
+    const supabase = createClient();
     const { data: { user } } = await supabase.auth.getUser();
 
     if (!user) {

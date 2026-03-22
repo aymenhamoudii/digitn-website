@@ -21,6 +21,7 @@ router.post('/chat/:id', async (req, res) => {
       .from('projects')
       .select('serve_path, type, description, questionnaire_answers')
       .eq('id', projectId)
+      .eq('user_id', userId)
       .single();
 
     if (!project || !project.serve_path) {
