@@ -111,7 +111,7 @@ DO NOT create new files unless absolutely necessary. Modify existing files.
 DO NOT wait for user input. Just make the changes.`;
 
     // Use Claude Code CLI
-    const claudeProcess = spawn('npx', [
+    const claudeProcess = spawn(process.platform === 'win32' ? 'npx.cmd' : 'npx', [
       '-y', '@anthropic-ai/claude-code',
       '--print',
       '-p', instruction
