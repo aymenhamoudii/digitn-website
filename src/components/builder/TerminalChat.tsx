@@ -139,30 +139,32 @@ export default function TerminalChat({ projectId, projectName, initialStatus, pr
       // Refresh the iframe preview
       const iframe = document.getElementById('preview-iframe') as HTMLIFrameElement;
       if (iframe) {
-         iframe.src = iframe.src;
+          const baseUrl = iframe.src.split('?')[0];
+          iframe.src = `${baseUrl}?t=${new Date().getTime()}`;
       }
 
-    } catch (err: any) {
-      setLogs(prev => [...prev, `\n[System Error] ${err.message}`]);
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'An unknown error occurred';
+      setLogs(prev => [...prev, `\n[System Error] ${errorMessage}`]);
       setIsProcessing(false);
       setStatus('ready');
-      toast.error(err.message);
+      toast.error(errorMessage);
     }
   };
 
   return (
     <div className={`flex flex-col h-[calc(100vh-140px)] gap-4 ${showPreview && isWebProject ? 'lg:flex-row' : ''}`}>
       {/* Main Terminal Column */}
-      <div className={`flex flex-col bg-[#1a1a19] rounded-xl border border-[#333] overflow-hidden ${showPreview && isWebProject ? 'lg:w-[40%]' : 'w-full'} h-full transition-all duration-300`}>
+      <div className={`flex flex-col bg-[var(--card-bg)] rounded-xl border border-[var(--border)] overflow-hidden ${showPreview && isWebProject ? 'lg:w-[40%]' : 'w-full'} h-full transition-all duration-300`}>
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 bg-[#222220] border-b border-[#333]">
+        <div className="flex items-center justify-between px-4 py-3 bg-[var(--bg-secondary)] border-b border-[var(--border)]">
           <div className="flex items-center gap-3">
             <div className="flex gap-1.5">
               <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
               <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
               <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
             </div>
-            <span className="font-mono text-sm text-gray-300 ml-2 hidden sm:inline-block truncate max-w-[150px]">{projectName}</span>
+            <span className="font-mono text-sm text-[var(--text-secondary)] ml-2 hidden sm:inline-block truncate max-w-[150px]">{projectName}</span>
             <span className={`px-2 py-0.5 rounded text-xs ml-2 uppercase
               ${status === 'ready' ? 'bg-green-900/50 text-green-400' :
                 status === 'failed' ? 'bg-red-900/50 text-red-400' :
@@ -176,7 +178,7 @@ export default function TerminalChat({ projectId, projectName, initialStatus, pr
             {status === 'ready' && isWebProject && (
               <button
                 onClick={() => setShowPreview(!showPreview)}
-                className={`p-1.5 rounded transition-colors ${showPreview ? 'bg-[var(--accent)] text-white' : 'bg-[#333] hover:bg-[#444] text-gray-300'}`}
+                className={`p-1.5 rounded transition-colors ${showPreview ? 'bg-[var(--accent)] text-white' : 'bg-[var(--bg-primary)] hover:bg-[var(--border)] text-[var(--text-secondary)]'}`}
                 title="Toggle Preview"
               >
                 <FiLayout />
@@ -186,14 +188,14 @@ export default function TerminalChat({ projectId, projectName, initialStatus, pr
               <a
                 href={`/zips/${projectId}.zip`}
                 download
-                className="flex items-center gap-2 px-3 py-1.5 bg-[#333] hover:bg-[#444] text-white text-sm rounded transition-colors"
+                className="flex items-center gap-2 px-3 py-1.5 bg-[var(--bg-primary)] hover:bg-[var(--border)] text-[var(--text-primary)] text-sm rounded transition-colors"
               >
                 <FiDownload />
                 <span className="hidden sm:inline">Download ZIP</span>
               </a>
             )}
             {status === 'modifying' && (
-              <button disabled className="flex items-center gap-2 px-3 py-1.5 bg-[#333] opacity-50 text-white text-sm rounded cursor-not-allowed">
+              <button disabled className="flex items-center gap-2 px-3 py-1.5 bg-[var(--bg-primary)] opacity-50 text-[var(--text-primary)] text-sm rounded cursor-not-allowed">
                 <FiDownload />
                 <span className="hidden sm:inline">Updating...</span>
               </button>
@@ -204,7 +206,7 @@ export default function TerminalChat({ projectId, projectName, initialStatus, pr
         {/* Terminal Output */}
         <div
           ref={scrollRef}
-          className="flex-1 overflow-y-auto p-4 font-mono text-sm text-gray-300 whitespace-pre-wrap leading-relaxed"
+          className="flex-1 overflow-y-auto p-4 font-mono text-sm text-[var(--text-primary)] whitespace-pre-wrap leading-relaxed"
         >
           {logs.map((log, i) => (
             <span key={i}>{log}</span>
@@ -215,21 +217,21 @@ export default function TerminalChat({ projectId, projectName, initialStatus, pr
         </div>
 
         {/* Chat Input */}
-        <div className="p-4 bg-[#222220] border-t border-[#333]">
+        <div className="p-4 bg-[var(--bg-secondary)] border-t border-[var(--border)]">
           <form onSubmit={handleSubmit} className="relative flex items-center">
-            <span className="absolute left-4 text-gray-500 font-mono text-lg">{'>'}</span>
+            <span className="absolute left-4 text-[var(--text-tertiary)] font-mono text-lg">{'>'}</span>
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               disabled={status !== 'ready' || isProcessing}
               placeholder={status === 'ready' && !isProcessing ? "Type a message to modify the project..." : "Please wait..."}
-              className="w-full bg-[#1a1a19] text-gray-200 font-mono text-sm py-3 pl-10 pr-12 rounded border border-[#444] focus:outline-none focus:border-[var(--accent)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-[var(--bg-primary)] text-[var(--text-primary)] font-mono text-sm py-3 pl-10 pr-12 rounded border border-[var(--border)] focus:outline-none focus:border-[var(--accent)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             />
             <button
               type="submit"
               disabled={!input.trim() || status !== 'ready' || isProcessing}
-              className="absolute right-3 p-1.5 text-gray-400 hover:text-[var(--accent)] disabled:opacity-50 transition-colors"
+              className="absolute right-3 p-1.5 text-[var(--text-secondary)] hover:text-[var(--accent)] disabled:opacity-50 transition-colors"
             >
               <FiSend />
             </button>
