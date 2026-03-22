@@ -1220,8 +1220,8 @@ export default function TerminalChat({ projectId, projectName, initialStatus, pr
         const { value, done } = await reader.read();
         if (done) break;
 
-        const chunk = decoder.decode(value, { stream: true });
-        const lines = chunk.split('\n\n');
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split("\\n\\n");\n        buffer = lines.pop() || "";
 
         for (const line of lines) {
           if (line.startsWith('data: ')) {
