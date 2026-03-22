@@ -1,15 +1,30 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { createClient } from '@/lib/supabase/client';
 
 export default function SettingsPage() {
   const [loading, setLoading] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null);
   const searchParams = useSearchParams();
-  const success = searchParams.get('success');
-  const canceled = searchParams.get('canceled');
+  const paymentStatus = searchParams.get('payment');
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data }) => {
+      if (data.user) {
+        setUserId(data.user.id);
+      }
+    });
+  }, []);
 
   const handleSubscribe = async (provider: 'stripe' | 'konnect') => {
+    if (!userId) {
+      console.error('User not authenticated');
+      return;
+    }
+
     try {
       setLoading(true);
       const res = await fetch('/api/subscriptions/create', {
@@ -20,7 +35,7 @@ export default function SettingsPage() {
         body: JSON.stringify({
           provider,
           planId: provider === 'stripe' ? 'price_pro_monthly' : 'plan_pro_monthly',
-          userId: 'user_123', // In real app, get from auth context
+          userId,
         }),
       });
 
@@ -42,37 +57,54 @@ export default function SettingsPage() {
     <div className="p-8 max-w-4xl mx-auto">
       <h1 className="text-3xl font-bold mb-8">Account Settings</h1>
 
-      {success && (
-        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-6">
+      {paymentStatus === 'success' && (
+        <div
+          className="border px-4 py-3 rounded relative mb-6"
+          style={{ backgroundColor: 'var(--success-bg, #d1fae5)', borderColor: 'var(--success-border, #34d399)', color: 'var(--success-text, #065f46)' }}
+        >
           <strong className="font-bold">Success!</strong>
           <span className="block sm:inline"> Your subscription is active.</span>
         </div>
       )}
 
-      {canceled && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6">
-          <strong className="font-bold">Canceled!</strong>
-          <span className="block sm:inline"> Checkout was canceled.</span>
+      {paymentStatus === 'failed' && (
+        <div
+          className="border px-4 py-3 rounded relative mb-6"
+          style={{ backgroundColor: 'var(--error-bg, #fee2e2)', borderColor: 'var(--error-border, #f87171)', color: 'var(--error-text, #991b1b)' }}
+        >
+          <strong className="font-bold">Payment Failed!</strong>
+          <span className="block sm:inline"> Please try again.</span>
         </div>
       )}
 
-      <div className="bg-white shadow rounded-lg p-6">
+      <div
+        className="shadow rounded-lg p-6"
+        style={{ backgroundColor: 'var(--card-bg, #ffffff)' }}
+      >
         <h2 className="text-xl font-semibold mb-4">Subscription Plan</h2>
-        <p className="text-gray-600 mb-6">Upgrade to Pro for advanced features.</p>
+        <p className="mb-6" style={{ color: 'var(--text-secondary, #6b7280)' }}>
+          Upgrade to Pro for advanced features.
+        </p>
 
         <div className="flex gap-4">
           <button
             onClick={() => handleSubscribe('stripe')}
-            disabled={loading}
-            className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 disabled:opacity-50"
+            disabled={loading || !userId}
+            className="text-white px-6 py-2 rounded-md disabled:opacity-50 transition-colors"
+            style={{ backgroundColor: 'var(--accent, #2563eb)' }}
+            onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+            onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
           >
             {loading ? 'Processing...' : 'Subscribe with Stripe'}
           </button>
 
           <button
             onClick={() => handleSubscribe('konnect')}
-            disabled={loading}
-            className="bg-purple-600 text-white px-6 py-2 rounded-md hover:bg-purple-700 disabled:opacity-50"
+            disabled={loading || !userId}
+            className="text-white px-6 py-2 rounded-md disabled:opacity-50 transition-colors"
+            style={{ backgroundColor: 'var(--accent-secondary, #7c3aed)' }}
+            onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
+            onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
           >
             {loading ? 'Processing...' : 'Subscribe with Konnect'}
           </button>

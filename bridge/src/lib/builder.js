@@ -127,7 +127,7 @@ function attachClientToStream(projectId, res) {
   res.write(`data: ${JSON.stringify({ type: 'log', text: stream.log })}\n\n`);
   stream.clients.push(res);
 
-  req.on('close', () => {
+  res.on('close', () => {
     stream.clients = stream.clients.filter(c => c !== res);
   });
 

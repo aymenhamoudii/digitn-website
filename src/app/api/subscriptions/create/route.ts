@@ -1,10 +1,16 @@
 import { NextResponse } from 'next/server';
 import { stripe } from '@/lib/payments/stripe';
-import { konnectAPI } from '@/lib/payments/konnect';
+import { createKonnectPayment } from '@/lib/payments/konnect';
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseAdmin = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
 
 export async function POST(req: Request) {
   try {
-    const { provider, planId, userId } = await req.json();
+    const { provider, planId, userId, tier = 'pro' } = await req.json();
 
     if (provider === 'stripe') {
       const session = await stripe.checkout.sessions.create({
@@ -16,15 +22,26 @@ export async function POST(req: Request) {
           },
         ],
         mode: 'subscription',
-        success_url: `${process.env.NEXT_PUBLIC_APP_URL}/app/settings?success=true`,
-        cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/app/settings?canceled=true`,
+        success_url: `${process.env.NEXT_PUBLIC_APP_URL}/app/settings?payment=success`,
+        cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/app/settings?payment=failed`,
         client_reference_id: userId,
+        metadata: { tier },
       });
 
       return NextResponse.json({ url: session.url });
     } else if (provider === 'konnect') {
-      const session = await konnectAPI.createPayment({ planId, userId });
-      return NextResponse.json({ url: session.checkoutUrl });
+      // Fetch user email/name from Supabase for Konnect checkout
+      const { data: user } = await supabaseAdmin
+        .from('users')
+        .select('email, full_name')
+        .eq('id', userId)
+        .single();
+
+      const email = user?.email || '';
+      const name = user?.full_name || 'Client DIGITN';
+
+      const result = await createKonnectPayment(userId, tier, email, name);
+      return NextResponse.json({ url: result.payUrl });
     }
 
     return NextResponse.json({ error: 'Invalid provider' }, { status: 400 });
