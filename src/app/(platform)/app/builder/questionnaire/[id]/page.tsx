@@ -1,9 +1,9 @@
-import { createServerClient } from '@/lib/supabase/server';
+import { createClient } from '@/lib/supabase/server';
 import { notFound, redirect } from 'next/navigation';
 import QuestionnaireForm from '@/components/builder/QuestionnaireForm';
 
 export default async function QuestionnairePage({ params }: { params: { id: string } }) {
-  const supabase = createServerClient();
+  const supabase = createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) redirect('/auth/login');
