@@ -1,7 +1,8 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
-import { FiHome, FiSettings, FiUsers, FiActivity } from 'react-icons/fi'
+import { FiHome, FiActivity } from 'react-icons/fi'
+import { DigItnLogo } from '@/components/ui/DigItnLogo'
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const supabase = createClient()
@@ -14,7 +15,10 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       {/* Admin Sidebar */}
       <aside className="w-64 fixed left-0 top-0 h-full border-r border-[var(--border)] bg-[var(--bg-secondary)] z-40">
         <div className="p-6 border-b border-[var(--border)]">
-          <Link href="/admin" className="font-serif font-bold text-xl text-[var(--text-primary)]">DIGITN ADMIN</Link>
+          <Link href="/admin" className="flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
+            <DigItnLogo size={20} />
+            <span className="font-serif font-bold text-xl text-[var(--text-primary)]">ADMIN</span>
+          </Link>
         </div>
         <nav className="p-4 space-y-2">
           <Link href="/admin" className="flex items-center gap-3 px-3 py-2 bg-[var(--card-bg)] rounded-md text-sm text-[var(--text-primary)] font-medium"><FiHome /> Overview</Link>

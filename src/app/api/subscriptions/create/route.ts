@@ -33,12 +33,12 @@ export async function POST(req: Request) {
       // Fetch user email/name from Supabase for Konnect checkout
       const { data: user } = await supabaseAdmin
         .from('users')
-        .select('email, full_name')
+        .select('email, name')
         .eq('id', userId)
         .single();
 
       const email = user?.email || '';
-      const name = user?.full_name || 'Client DIGITN';
+      const name = user?.name || 'Client DIGITN';
 
       const result = await createKonnectPayment(userId, tier, email, name);
       return NextResponse.json({ url: result.payUrl });

@@ -51,7 +51,7 @@ export function BuildProgress({ projectId, onComplete }: BuildProgressProps) {
           {status === 'building' ? <FiLoader className="animate-spin" /> :
            status === 'ready' ? <FiCheckCircle className="text-green-500" /> :
            <FiXCircle className="text-red-500" />}
-          <span>Termial - DIGITN AI Builder</span>
+          <span>Terminal — DIGITN AI Builder</span>
         </div>
         <div className="flex gap-1.5">
           <div className="w-3 h-3 rounded-full bg-red-500/80" />
@@ -61,8 +61,12 @@ export function BuildProgress({ projectId, onComplete }: BuildProgressProps) {
       </div>
 
       <div className="p-4 h-[400px] overflow-y-auto whitespace-pre-wrap leading-relaxed">
-        {logs}
-        {status === 'building' && <span className="animate-pulse">_</span>}
+        {logs === '' && status === 'building' ? (
+          <span className="text-white/40 text-sm">Connecting to build server...</span>
+        ) : (
+          logs
+        )}
+        {status === 'building' && logs !== '' && <span className="animate-pulse">_</span>}
         <div ref={logEndRef} />
       </div>
     </div>

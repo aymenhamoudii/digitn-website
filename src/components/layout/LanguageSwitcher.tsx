@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { FiGlobe } from 'react-icons/fi';
+import { useRouter } from 'next/navigation';
 
 const LANGUAGES = [
   { code: 'fr', label: 'Français', flag: '🇫🇷' },
@@ -13,6 +14,7 @@ export function LanguageSwitcher() {
   const [open, setOpen] = useState(false);
   const [current, setCurrent] = useState('fr');
   const ref = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const saved = document.cookie.split(';').find(c => c.trim().startsWith('NEXT_LOCALE='));
@@ -31,7 +33,7 @@ export function LanguageSwitcher() {
     document.cookie = `NEXT_LOCALE=${code};path=/;max-age=31536000`;
     setCurrent(code);
     setOpen(false);
-    window.location.reload();
+    router.refresh();
   };
 
   const currentLang = LANGUAGES.find(l => l.code === current) || LANGUAGES[0];

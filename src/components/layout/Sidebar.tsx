@@ -6,12 +6,13 @@ import { FiMessageSquare, FiCode, FiFolder, FiSettings, FiZap, FiLogOut } from '
 import { useTranslations } from 'next-intl'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { LanguageSwitcher } from '@/components/layout/LanguageSwitcher'
+import { DigItnLogo } from '@/components/ui/DigItnLogo'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 
-const navItems = [
-  { href: '/app', icon: FiZap, key: 'chat' as const, exact: true },
-  { href: '/app/chat', icon: FiMessageSquare, key: 'chat' as const },
+const navItems: { href: string; icon: ({ size }: { size?: number }) => JSX.Element; key: string; exact?: boolean }[] = [
+  { href: '/app', icon: FiZap, key: 'dashboard', exact: true },
+  { href: '/app/chat', icon: FiMessageSquare, key: 'chat' },
   { href: '/app/builder', icon: FiCode, key: 'builder' as const },
   { href: '/app/projects', icon: FiFolder, key: 'projects' as const },
   { href: '/app/settings', icon: FiSettings, key: 'settings' as const },
@@ -39,8 +40,8 @@ export function Sidebar({ userTier }: { userTier: string }) {
     >
       {/* Brand */}
       <div className="px-5 py-6 border-b border-[var(--border)]">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-[var(--accent)] font-light text-xl">|</span>
+        <Link href="/" className="flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
+          <DigItnLogo size={22} />
           <span className="font-bold text-lg tracking-[0.06em] font-serif text-[var(--text-primary)]">
             DIGITN
           </span>
@@ -77,7 +78,7 @@ export function Sidebar({ userTier }: { userTier: string }) {
       <div className="px-3 py-4 border-t border-[var(--border)] space-y-2">
         {/* Tier badge */}
         <div className="px-3 py-2 rounded-md bg-[var(--card-bg)] border border-[var(--border)]">
-          <p className="text-[10px] uppercase tracking-[0.12em] text-[var(--text-tertiary)]">Plan actif</p>
+          <p className="text-[10px] uppercase tracking-[0.12em] text-[var(--text-tertiary)]">{t('activePlan')}</p>
           <p className="text-sm font-semibold text-[var(--accent)] mt-0.5">{tierName}</p>
         </div>
 

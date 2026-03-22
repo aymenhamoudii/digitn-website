@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
+import { checkAndIncrementQuota } from '@/lib/quota';
 
 export async function POST(req: Request) {
   try {
@@ -8,60 +9,66 @@ export async function POST(req: Request) {
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
     const body = await req.json();
-    const { name, planText, conversationId } = body;
+    const { name, description, stack } = body;
 
-    // 1. Quota Check (Same logic as chat)
-    const today = new Date().toISOString().split('T')[0];
-    const { data: userData } = await supabase.from('users').select('tier').eq('id', user.id).single();
-    const limit = userData?.tier === 'free' ? 10 : userData?.tier === 'pro' ? 50 : 9999;
+    // 1. Builder quota check (separate from chat)
+    const { data: userData } = await supabase.from('users').select('tier').eq('id', user.id).maybeSingle();
+    const tier = userData?.tier || 'free';
 
-    let { data: quota } = await supabase.from('usage_quotas').select('*').eq('user_id', user.id).eq('date', today).single();
-    if (!quota) {
-      const { data: newQuota } = await supabase.from('usage_quotas').insert({ user_id: user.id, date: today, requests_used: 0, requests_limit: limit }).select().single();
-      quota = newQuota;
+    try {
+      await checkAndIncrementQuota(supabase, user.id, tier, 'builder');
+    } catch (err: any) {
+      if (err.code === 'QUOTA_EXCEEDED') {
+        return NextResponse.json(
+          { error: 'Builder limit reached. Resets at midnight — or upgrade your plan.', code: 'QUOTA_EXCEEDED' },
+          { status: 429 }
+        );
+      }
+      throw err;
     }
 
-    if (quota!.requests_used >= quota!.requests_limit) {
-      return NextResponse.json({ error: 'Quota exceeded', code: 'QUOTA_EXCEEDED' }, { status: 429 });
+    // 2. Check active project limit
+    const { data: tierData } = await supabase.from('users').select('tier').eq('id', user.id).single();
+    const maxProjects = tierData?.tier === 'plus' ? 9999 : tierData?.tier === 'pro' ? 3 : 1;
+
+    const { count: activeCount } = await supabase
+      .from('projects')
+      .select('id', { count: 'exact', head: true })
+      .eq('user_id', user.id)
+      .in('status', ['planning', 'building', 'ready']);
+
+    if ((activeCount || 0) >= maxProjects) {
+      return NextResponse.json(
+        { error: `You've reached your active project limit (${maxProjects}). Delete or wait for a project to expire.`, code: 'PROJECT_LIMIT' },
+        { status: 429 }
+      );
     }
 
-    await supabase.from('usage_quotas').update({ requests_used: quota!.requests_used + 1 }).eq('id', quota!.id);
+    // 3. Create conversation for this project's planning chat
+    const { data: conv } = await supabase.from('conversations')
+      .insert({
+        user_id: user.id,
+        mode: 'builder',
+        title: name || description?.substring(0, 40) || 'New Project',
+      })
+      .select().single();
 
-    // 2. Create DB Project Record
-    // Set expiry: 15 minutes from now for ALL tiers
-    const expiresAt = new Date(Date.now() + 15 * 60000).toISOString();
-
+    // 4. Create project record (status: planning — not building yet)
     const { data: project, error: dbErr } = await supabase.from('projects').insert({
       user_id: user.id,
-      conversation_id: conversationId,
-      name: name || 'Untitled Project',
-      status: 'building',
-      expires_at: expiresAt
+      conversation_id: conv?.id,
+      name: name || description?.substring(0, 40) || 'Untitled Project',
+      description: description || '',
+      type: stack || 'website',
+      status: 'planning',
     }).select().single();
 
     if (dbErr) throw dbErr;
 
-    // 3. Trigger Bridge Async Build
-    const bridgeUrl = process.env.BRIDGE_URL || 'http://127.0.0.1:3001';
-
-    // We don't await the result of the stream, just the acknowledgement
-    await fetch(`${bridgeUrl}/build/start`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.BRIDGE_SECRET}`,
-      },
-      body: JSON.stringify({
-        projectId: project.id,
-        planText,
-        userId: user.id
-      }),
-    });
-
-    return NextResponse.json({ projectId: project.id });
+    return NextResponse.json({ projectId: project.id, conversationId: conv?.id });
 
   } catch (error) {
-    console.error('Build trigger error:', error);
+    console.error('Build create error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

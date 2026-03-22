@@ -34,9 +34,13 @@ export function Header({ title, userName, requestsLeft, requestsTotal }: HeaderP
           </div>
         )}
 
-        <button className="w-8 h-8 flex items-center justify-center rounded-md hover:bg-[var(--card-bg)] text-[var(--text-secondary)]">
+        <div
+          title="Notifications — coming soon"
+          className="w-8 h-8 flex items-center justify-center rounded-md text-[var(--text-tertiary)] cursor-not-allowed opacity-40"
+          aria-label="Notifications coming soon"
+        >
           <FiBell size={15} />
-        </button>
+        </div>
 
         {userName && (
           <div className="w-7 h-7 rounded-md bg-[var(--accent)] flex items-center justify-center text-white text-xs font-semibold">

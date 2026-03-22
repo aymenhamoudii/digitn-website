@@ -1,6 +1,6 @@
-﻿'use client'
+'use client'
 
-import { useEffect, useRef, useState, FormEvent } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { siteConfig } from '@/config/site'
 import { trackConversion } from '@/lib/analytics'
@@ -37,7 +37,7 @@ function useReveal() {
 }
 
 /* ===========================================
-   ICONS
+   ICONS (all use currentColor)
    =========================================== */
 const Arrow = () => (
   <svg width="14" height="14" fill="none" viewBox="0 0 14 14">
@@ -63,27 +63,15 @@ const WhatsApp = () => (
   </svg>
 )
 
-const Guarantee = () => (
-  <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+const SunIcon = () => (
+  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
   </svg>
 )
 
-const Lock = () => (
-  <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-  </svg>
-)
-
-const Lightning = () => (
-  <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-    <path strokeLinecap="round" strokeLinejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z" />
-  </svg>
-)
-
-const Chat = () => (
-  <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+const MoonIcon = () => (
+  <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+    <path strokeLinecap="round" strokeLinejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
   </svg>
 )
 
@@ -115,7 +103,7 @@ function AnimatedCounter({ target, suffix = '', duration = 2000 }: { target: num
             const startTime = performance.now()
             const animate = (now: number) => {
               const progress = Math.min((now - startTime) / duration, 1)
-              const eased = 1 - Math.pow(1 - progress, 3) // easeOutCubic
+              const eased = 1 - Math.pow(1 - progress, 3)
               setCount(Math.floor(eased * target))
               if (progress < 1) requestAnimationFrame(animate)
             }
@@ -134,11 +122,7 @@ function AnimatedCounter({ target, suffix = '', duration = 2000 }: { target: num
 }
 
 /* ===========================================
-   MORPHING LOGO - SVG + <g> groups
-   Same technique as Anthropic Lottie SVG.
-   Each letter is a <g> with transform & opacity.
-   The \ slides its translateX to before D.
-   D never moves. Pure SVG, zero layout cost.
+   MORPHING LOGO
    =========================================== */
 function MorphLogo({ scrolled }: { scrolled: boolean }) {
   const letterT = scrolled
@@ -156,37 +140,30 @@ function MorphLogo({ scrolled }: { scrolled: boolean }) {
       className="select-none"
       style={{ overflow: 'visible' }}
     >
-      {/* D - fixed, never moves */}
       <g transform="matrix(1,0,0,1,13,0)">
-        <text fill="#1A1A1A" fontSize="15.5" fontWeight="700"
+        <text fill="var(--text-primary)" fontSize="15.5" fontWeight="700"
           fontFamily="var(--font-inter), system-ui, sans-serif"
           letterSpacing="0.02em" y="13">D</text>
       </g>
-
-      {/* I */}
       <g transform="matrix(1,0,0,1,26,0)"
         opacity={scrolled ? 0 : 1} style={{ transition: letterT }}>
-        <text fill="#1A1A1A" fontSize="15.5" fontWeight="700"
+        <text fill="var(--text-primary)" fontSize="15.5" fontWeight="700"
           fontFamily="var(--font-inter), system-ui, sans-serif"
           letterSpacing="0.02em" y="13">I</text>
       </g>
-
-      {/* G */}
       <g transform="matrix(1,0,0,1,33,0)"
         opacity={scrolled ? 0 : 1} style={{ transition: letterT }}>
-        <text fill="#1A1A1A" fontSize="15.5" fontWeight="700"
+        <text fill="var(--text-primary)" fontSize="15.5" fontWeight="700"
           fontFamily="var(--font-inter), system-ui, sans-serif"
           letterSpacing="0.02em" y="13">G</text>
       </g>
-
-      {/* Accent: skewed rect = flat top/bottom like Anthropic \ */}
       <g
         transform={scrolled ? 'translate(8,0.7)' : 'translate(48,1)'}
         style={{ transition: rectT }}
       >
         <rect
           x="0" y="1" width="2.5" height="11.5" rx="0.6"
-          fill="#C96442"
+          fill="var(--accent)"
           style={{
             transform: scrolled ? 'skewX(0deg)' : 'skewX(30deg)',
             transformOrigin: '1.6px 7.5px',
@@ -194,19 +171,15 @@ function MorphLogo({ scrolled }: { scrolled: boolean }) {
           }}
         />
       </g>
-
-      {/* T */}
       <g transform="matrix(1,0,0,1,52,0)"
         opacity={scrolled ? 0 : 1} style={{ transition: letterT }}>
-        <text fill="#1A1A1A" fontSize="15.5" fontWeight="700"
+        <text fill="var(--text-primary)" fontSize="15.5" fontWeight="700"
           fontFamily="var(--font-inter), system-ui, sans-serif"
           letterSpacing="0.02em" y="13">T</text>
       </g>
-
-      {/* N */}
       <g transform="matrix(1,0,0,1,62,0)"
         opacity={scrolled ? 0 : 1} style={{ transition: letterT }}>
-        <text fill="#1A1A1A" fontSize="15.5" fontWeight="700"
+        <text fill="var(--text-primary)" fontSize="15.5" fontWeight="700"
           fontFamily="var(--font-inter), system-ui, sans-serif"
           letterSpacing="0.02em" y="13">N</text>
       </g>
@@ -216,33 +189,42 @@ function MorphLogo({ scrolled }: { scrolled: boolean }) {
 
 /* ===========================================
    NAVBAR
-   Triggers on smallest scroll (>5px)
    =========================================== */
 function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [isDark, setIsDark] = useState(true)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 5)
     window.addEventListener('scroll', onScroll, { passive: true })
+    // Read current theme from DOM (already set by inline script in layout)
+    setIsDark(document.documentElement.getAttribute('data-theme') !== 'light')
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  const toggleTheme = () => {
+    const current = document.documentElement.getAttribute('data-theme')
+    const next = current === 'dark' ? 'light' : 'dark'
+    document.documentElement.setAttribute('data-theme', next)
+    localStorage.setItem('digitn-theme', next)
+    setIsDark(next === 'dark')
+  }
+
   const links = [
-    { label: 'Services', href: '#services' },
-    { label: 'Portfolio', href: '#portfolio' },
-    { label: 'Tarifs', href: '#tarifs' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Features', href: '#features' },
+    { label: 'Pricing', href: '#pricing' },
+    { label: 'How it Works', href: '#how-it-works' },
   ]
 
   return (
     <nav
       className="fixed top-0 w-full z-50"
       style={{
-        backgroundColor: 'rgba(244,240,235,0.85)',
+        backgroundColor: 'var(--nav-bg)',
         backdropFilter: 'blur(12px)',
         WebkitBackdropFilter: 'blur(12px)',
-        borderBottom: '1px solid rgba(25,25,24,0.06)',
+        borderBottom: '1px solid var(--nav-border)',
         padding: '16px 24px',
       }}
     >
@@ -257,37 +239,52 @@ function Navbar() {
             <a
               key={l.href}
               href={l.href}
-              className="text-sm text-[#1A1A1A]/60 hover:text-[#1A1A1A] transition-colors duration-300"
+              style={{ color: 'var(--text-secondary)' }}
+              className="text-sm hover:opacity-100 transition-opacity duration-300"
             >
               {l.label}
             </a>
           ))}
-          <a
-            href="#contact"
-            className="px-5 py-2 bg-[#1A1A1A] text-white text-sm rounded-full hover:bg-[#1A1A1A]/85 transition-colors duration-300"
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-lg transition-colors duration-300"
+            style={{ color: 'var(--text-secondary)' }}
+            aria-label="Toggle theme"
           >
-            Contact
-          </a>
+            {isDark ? <SunIcon /> : <MoonIcon />}
+          </button>
           <a
             href="/auth/login"
-            className="px-5 py-2 text-sm font-medium text-[#1A1A1A]/70 hover:text-[#1A1A1A] transition-colors duration-300"
+            className="px-5 py-2 text-sm font-medium transition-colors duration-300"
+            style={{ color: 'var(--text-secondary)' }}
           >
-            Connexion
+            Sign In
           </a>
           <a
             href="/auth/signup"
-            className="px-5 py-2 bg-[#C96442] text-white text-sm rounded-full hover:bg-[#C96442]/85 transition-colors duration-300"
+            className="px-5 py-2 text-white text-sm font-medium rounded-full transition-all duration-300 hover:opacity-90"
+            style={{ backgroundColor: 'var(--accent)' }}
           >
-            Commencer
+            Start Building
           </a>
         </div>
 
         {/* Mobile hamburger */}
-        <button className="md:hidden flex flex-col gap-1" onClick={() => setMenuOpen(!menuOpen)}>
-          <span className={`w-5 h-[2px] bg-[#1A1A1A] transition-transform duration-300 ${menuOpen ? 'rotate-45 translate-y-[4px]' : ''}`} />
-          <span className={`w-5 h-[2px] bg-[#1A1A1A] transition-opacity duration-300 ${menuOpen ? 'opacity-0' : ''}`} />
-          <span className={`w-5 h-[2px] bg-[#1A1A1A] transition-transform duration-300 ${menuOpen ? '-rotate-45 -translate-y-[4px]' : ''}`} />
-        </button>
+        <div className="md:hidden flex items-center gap-3">
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-lg"
+            style={{ color: 'var(--text-secondary)' }}
+            aria-label="Toggle theme"
+          >
+            {isDark ? <SunIcon /> : <MoonIcon />}
+          </button>
+          <button className="flex flex-col gap-1" onClick={() => setMenuOpen(!menuOpen)}>
+            <span className="w-5 h-[2px] transition-transform duration-300" style={{ backgroundColor: 'var(--text-primary)', transform: menuOpen ? 'rotate(45deg) translateY(4px)' : 'none' }} />
+            <span className="w-5 h-[2px] transition-opacity duration-300" style={{ backgroundColor: 'var(--text-primary)', opacity: menuOpen ? 0 : 1 }} />
+            <span className="w-5 h-[2px] transition-transform duration-300" style={{ backgroundColor: 'var(--text-primary)', transform: menuOpen ? 'rotate(-45deg) translateY(-4px)' : 'none' }} />
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -298,25 +295,28 @@ function Navbar() {
               key={l.href}
               href={l.href}
               onClick={() => setMenuOpen(false)}
-              className="text-sm text-[#1A1A1A]/60 hover:text-[#1A1A1A] px-2 py-1"
+              className="text-sm px-2 py-1"
+              style={{ color: 'var(--text-secondary)' }}
             >
               {l.label}
             </a>
           ))}
-          <hr className="border-[#1A1A1A]/10" />
+          <hr style={{ borderColor: 'var(--border)' }} />
           <a
             href="/auth/login"
             onClick={() => setMenuOpen(false)}
-            className="text-sm font-medium text-[#1A1A1A]/70 hover:text-[#1A1A1A] px-2 py-1"
+            className="text-sm font-medium px-2 py-1"
+            style={{ color: 'var(--text-secondary)' }}
           >
-            Connexion
+            Sign In
           </a>
           <a
             href="/auth/signup"
             onClick={() => setMenuOpen(false)}
-            className="mx-2 px-5 py-2 bg-[#C96442] text-white text-sm text-center rounded-full hover:bg-[#C96442]/85 transition-colors duration-300"
+            className="mx-2 px-5 py-2 text-white text-sm text-center rounded-full transition-colors duration-300"
+            style={{ backgroundColor: 'var(--accent)' }}
           >
-            Commencer
+            Start Building
           </a>
         </div>
       )}
@@ -325,84 +325,174 @@ function Navbar() {
 }
 
 /* ===========================================
-   HERO - Anthropic style with Playfair Display
-   Big bold heading with underlined keywords (left)
-   Description paragraph + CTA (right)
+   HERO + DEMO CHAT
    =========================================== */
 function Hero() {
   const ref = useReveal()
+  const [demoStep, setDemoStep] = useState(0)
+  const [typedResponse, setTypedResponse] = useState('')
+  const fullResponse = "I'll create a modern restaurant site with online reservations, a beautiful menu page, photo gallery, and contact section. Let me set that up for you..."
+
+  useEffect(() => {
+    // Step 0: show user message after 1s
+    const t1 = setTimeout(() => setDemoStep(1), 1000)
+    // Step 1: start AI typing after 2s
+    const t2 = setTimeout(() => setDemoStep(2), 2500)
+    return () => { clearTimeout(t1); clearTimeout(t2) }
+  }, [])
+
+  useEffect(() => {
+    if (demoStep < 2) return
+    let i = 0
+    const interval = setInterval(() => {
+      i++
+      if (i <= fullResponse.length) {
+        setTypedResponse(fullResponse.slice(0, i))
+      } else {
+        clearInterval(interval)
+      }
+    }, 50)
+    return () => clearInterval(interval)
+  }, [demoStep])
 
   return (
-    <section className="pt-44 pb-16 px-6">
-      <div ref={ref} data-reveal className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-16 items-end">
-        {/* Left: Big heading */}
-        <div>
-          <h1
-            style={{
-              fontSize: 'clamp(38px, 5.5vw, 74px)',
-              fontWeight: 700,
-              lineHeight: 1.08,
-              letterSpacing: '-0.03em',
-              color: '#1A1A1A',
-              fontFamily: 'var(--font-serif)',
-            }}
-          >
-            <span style={{ textDecoration: 'underline', textDecorationThickness: '3px', textUnderlineOffset: '6px', textDecorationColor: '#C96442' }}>
-              Cr&eacute;ation
-            </span>{' '}web et<br />
-            <span style={{ textDecoration: 'underline', textDecorationThickness: '3px', textUnderlineOffset: '6px', textDecorationColor: '#C96442' }}>
-              solutions
-            </span>{' '}digitales<br />
-            sur mesure
-          </h1>
-          <div className="flex flex-wrap gap-4 mt-10">
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#1A1A1A] text-white text-sm font-medium rounded-full hover:shadow-lg hover:shadow-[#1A1A1A]/20 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300"
-            >
-              Demander un devis <Arrow />
-            </a>
-            <a
-              href="/auth/signup"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#C96442] text-white text-sm font-medium rounded-full hover:bg-[#C96442]/85 hover:shadow-lg hover:shadow-[#C96442]/20 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300"
-            >
-              Essayer gratuitement <Arrow />
-            </a>
-            <a
-              href="#portfolio"
-              className="inline-flex items-center gap-2 px-7 py-3.5 border border-[#1A1A1A]/15 text-sm font-medium text-[#1A1A1A]/70 rounded-full hover:border-[#1A1A1A]/30 hover:text-[#1A1A1A] transition-all duration-300"
-            >
-              Voir nos projets
-            </a>
-          </div>
-        </div>
-
-        {/* Right: Description */}
-        <p
+    <section className="pt-36 pb-8 px-6" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      <div ref={ref} data-reveal className="max-w-4xl mx-auto text-center">
+        <h1
           style={{
-            fontSize: 16,
-            lineHeight: 1.75,
-            color: 'rgba(25,25,24,0.6)',
-            maxWidth: 380,
+            fontSize: 'clamp(36px, 5.5vw, 72px)',
+            fontWeight: 700,
+            lineHeight: 1.1,
+            letterSpacing: '-0.03em',
+            color: 'var(--text-primary)',
+            fontFamily: 'var(--font-serif)',
           }}
         >
-          DIGITN est une agence web tunisienne sp&eacute;cialis&eacute;e dans la cr&eacute;ation de sites performants et le d&eacute;veloppement de solutions digitales qui transforment vos visiteurs en clients.
-        </p>
-      </div>
+          Describe it.
+          <br />
+          <span style={{ textDecoration: 'underline', textDecorationThickness: '3px', textUnderlineOffset: '6px', textDecorationColor: 'var(--accent)' }}>
+            We build it.
+          </span>
+        </h1>
 
-      {/* Stats Strip */}
-      <div className="max-w-6xl mx-auto mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 md:divide-x divide-[#1A1A1A]/10">
+        <p
+          className="mx-auto mt-6"
+          style={{
+            fontSize: 18,
+            lineHeight: 1.7,
+            color: 'var(--text-secondary)',
+            maxWidth: 560,
+          }}
+        >
+          DIGITN AI turns your ideas into production-ready websites and apps. Just describe what you want — our AI handles the rest.
+        </p>
+
+        <div className="flex flex-wrap justify-center gap-4 mt-10">
+          <a
+            href="/auth/signup"
+            className="inline-flex items-center gap-2 px-7 py-3.5 text-white text-sm font-medium rounded-full hover:opacity-90 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300"
+            style={{ backgroundColor: 'var(--accent)' }}
+          >
+            Start Building Free <Arrow />
+          </a>
+          <a
+            href="#how-it-works"
+            className="inline-flex items-center gap-2 px-7 py-3.5 text-sm font-medium rounded-full hover:-translate-y-0.5 transition-all duration-300"
+            style={{ border: '1px solid var(--border-strong)', color: 'var(--text-secondary)' }}
+          >
+            See how it works
+          </a>
+        </div>
+
+        {/* Demo Chat Interface */}
+        <div
+          className="mx-auto mt-16 rounded-2xl overflow-hidden text-left"
+          style={{
+            maxWidth: 640,
+            backgroundColor: 'var(--card-bg)',
+            border: '1px solid var(--border)',
+            boxShadow: 'var(--shadow-lg)',
+          }}
+        >
+          {/* Window chrome */}
+          <div className="flex items-center gap-2 px-4 py-3" style={{ borderBottom: '1px solid var(--border)' }}>
+            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />
+            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: 'var(--border-strong)' }} />
+            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: 'var(--border-strong)' }} />
+            <div className="ml-3 flex items-center gap-1.5" style={{ color: 'var(--text-primary)' }}>
+              <svg width="16" height="16" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="5" y="6" width="4" height="20" rx="1.5" fill="#d97757" transform="skewX(-8)" />
+                <text x="13" y="24" fontFamily="system-ui, sans-serif" fontSize="20" fontWeight="700" fill="currentColor">D</text>
+              </svg>
+              <span className="text-xs font-medium" style={{ color: 'var(--text-tertiary)' }}>DIGITN AI</span>
+            </div>
+          </div>
+
+          <div className="p-5 space-y-4" style={{ minHeight: 200 }}>
+            {/* User message */}
+            <div
+              className="flex justify-end transition-all duration-500"
+              style={{ opacity: demoStep >= 1 ? 1 : 0, transform: demoStep >= 1 ? 'translateY(0)' : 'translateY(8px)' }}
+            >
+              <div
+                className="px-4 py-2.5 rounded-2xl rounded-br-sm text-sm max-w-[80%]"
+                style={{ backgroundColor: 'var(--card-strong)', color: 'var(--text-primary)', border: '1px solid var(--border)' }}
+              >
+                Build me a restaurant website with online reservations
+              </div>
+            </div>
+
+            {/* AI response — Claude style: logo + text, no bubble */}
+            <div
+              className="flex gap-3 transition-all duration-500"
+              style={{ opacity: demoStep >= 2 ? 1 : 0, transform: demoStep >= 2 ? 'translateY(0)' : 'translateY(8px)' }}
+            >
+              <div className="flex-shrink-0 w-6 h-6 flex items-center justify-center mt-0.5" style={{ color: 'var(--text-primary)' }}>
+                <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="5" y="6" width="4" height="20" rx="1.5" fill="#d97757" transform="skewX(-8)" />
+                  <text x="13" y="24" fontFamily="system-ui, sans-serif" fontSize="20" fontWeight="700" fill="currentColor">D</text>
+                </svg>
+              </div>
+              <p className="text-sm leading-relaxed flex-1 pt-0.5" style={{ color: 'var(--text-primary)' }}>
+                {typedResponse}
+                {typedResponse.length < fullResponse.length && (
+                  <span
+                    className="inline-block w-[2px] h-[1em] align-text-bottom ml-[2px]"
+                    style={{ backgroundColor: 'var(--accent)', animation: 'blink 0.9s step-end infinite' }}
+                  />
+                )}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ===========================================
+   STATS STRIP
+   =========================================== */
+function StatsStrip() {
+  return (
+    <section className="py-12 px-6" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      <div
+        className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 md:divide-x"
+        style={{ borderColor: 'var(--border)' }}
+      >
         {[
-          { value: 50, suffix: '+', label: 'Projets livr\u00e9s' },
-          { value: 30, suffix: '+', label: 'Clients satisfaits' },
-          { value: 98, suffix: '%', label: 'Satisfaction' },
-          { value: 24, suffix: 'h', label: 'Temps de r\u00e9ponse' },
+          { value: 10, suffix: 'K+', label: 'Projects created' },
+          { value: 50, suffix: '+', label: 'Countries' },
+          { value: 99, suffix: '.9%', label: 'Uptime' },
+          { value: 30, suffix: 's', label: 'Build time', prefix: '<' },
         ].map((stat, i) => (
-          <div key={i} className="text-center py-4">
-            <p className="text-3xl lg:text-4xl font-medium text-[#1A1A1A] tracking-tight">
-              <AnimatedCounter target={stat.value} suffix={stat.suffix} />
+          <div key={i} className="text-center py-4" style={{ borderColor: 'var(--border)' }}>
+            <p className="text-3xl lg:text-4xl font-medium tracking-tight" style={{ color: 'var(--text-primary)' }}>
+              {stat.prefix || ''}<AnimatedCounter target={stat.value} suffix={stat.suffix} />
             </p>
-            <p className="text-xs text-[#1A1A1A]/40 mt-1 uppercase tracking-[0.15em] font-medium">{stat.label}</p>
+            <p className="text-xs mt-1 uppercase tracking-[0.15em] font-medium" style={{ color: 'var(--text-tertiary)' }}>
+              {stat.label}
+            </p>
           </div>
         ))}
       </div>
@@ -411,56 +501,82 @@ function Hero() {
 }
 
 /* ===========================================
-   SERVICES
+   HOW IT WORKS
    =========================================== */
-function Services() {
-  const items = [
+function HowItWorks() {
+  const steps = [
     {
       num: '01',
-      title: 'D\u00e9veloppement Web',
-      desc: 'Sites vitrines, e-commerce et applications web sur mesure.',
-      icon: <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" /><path d="M8 21h8M12 17v4" /></svg>,
+      title: 'Describe',
+      desc: 'Tell DIGITN AI what you want to build. Be as detailed or brief as you like.',
+      icon: (
+        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+        </svg>
+      ),
     },
     {
       num: '02',
-      title: 'Design UI/UX',
-      desc: 'Interfaces \u00e9l\u00e9gantes pens\u00e9es pour convertir.',
-      icon: <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" /></svg>,
+      title: 'Build',
+      desc: 'Watch in real-time as our AI writes code, designs layouts, and sets up your project.',
+      icon: (
+        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" />
+        </svg>
+      ),
     },
     {
       num: '03',
-      title: 'SEO & Marketing',
-      desc: 'R\u00e9f\u00e9rencement naturel et strat\u00e9gies digitales.',
-      icon: <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></svg>,
-    },
-    {
-      num: '04',
-      title: 'Maintenance',
-      desc: 'Support technique et mises \u00e0 jour r\u00e9guli\u00e8res.',
-      icon: <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#1A1A1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z" /></svg>,
+      title: 'Launch',
+      desc: 'Preview your project instantly. Download the code or request changes.',
+      icon: (
+        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+        </svg>
+      ),
     },
   ]
 
   return (
-    <section id="services" className="py-24 px-6">
+    <section id="how-it-works" className="py-24 px-6" style={{ backgroundColor: 'var(--bg-primary)' }}>
       <div className="max-w-6xl mx-auto">
-        <Reveal>
-          <p className="text-xs uppercase tracking-[0.2em] text-[#1A1A1A]/40 mb-3 font-medium">Services</p>
-          <h2 className="text-3xl lg:text-4xl font-medium text-[#1A1A1A] mb-16 tracking-[-0.02em]">Ce que nous faisons</h2>
+        <Reveal className="text-center mb-16">
+          <p className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: 'var(--text-tertiary)' }}>
+            How it Works
+          </p>
+          <h2 className="text-3xl lg:text-4xl font-medium tracking-[-0.02em]" style={{ color: 'var(--text-primary)' }}>
+            Three steps to launch
+          </h2>
         </Reveal>
 
-        <div className="grid md:grid-cols-2 gap-5">
-          {items.map((item, i) => (
+        <div className="grid md:grid-cols-3 gap-6">
+          {steps.map((step, i) => (
             <Reveal key={i}>
-              <div className="group p-8 bg-[#EAE5D9] rounded-2xl border border-[#1A1A1A]/[0.06] hover:border-[#1A1A1A]/[0.12] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#1A1A1A]/[0.06] transition-all duration-500 cursor-pointer">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-[#1A1A1A]/[0.06] flex items-center justify-center">
-                    {item.icon}
+              <div
+                className="relative p-8 rounded-2xl h-full flex flex-col hover:-translate-y-1 transition-all duration-500"
+                style={{
+                  backgroundColor: 'var(--card-bg)',
+                  border: '1px solid var(--border)',
+                }}
+              >
+                {/* Connector dots (between cards) */}
+                {i < 2 && (
+                  <div className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10 items-center gap-1">
+                    <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: 'var(--border-strong)' }} />
+                    <div className="w-1 h-1 rounded-full" style={{ backgroundColor: 'var(--border-strong)', opacity: 0.5 }} />
                   </div>
-                  <span className="text-xs text-[#1A1A1A]/25 font-medium">{item.num}</span>
+                )}
+                <div className="flex items-center justify-between mb-6">
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center"
+                    style={{ backgroundColor: 'var(--bg-secondary)', color: 'var(--text-primary)' }}
+                  >
+                    {step.icon}
+                  </div>
+                  <span className="text-xs font-medium" style={{ color: 'var(--text-tertiary)' }}>{step.num}</span>
                 </div>
-                <h3 className="text-xl font-medium text-[#1A1A1A] mb-3 group-hover:text-[#1A1A1A]/80 transition-colors duration-300">{item.title}</h3>
-                <p className="text-sm text-[#1A1A1A]/50 leading-relaxed">{item.desc}</p>
+                <h3 className="text-xl font-medium mb-3" style={{ color: 'var(--text-primary)' }}>{step.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{step.desc}</p>
               </div>
             </Reveal>
           ))}
@@ -471,111 +587,97 @@ function Services() {
 }
 
 /* ===========================================
-   PORTFOLIO - Anthropic "Latest releases" style
+   FEATURES GRID
    =========================================== */
-function Portfolio() {
-  const projects = [
+function Features() {
+  const features = [
     {
-      name: "Côte d'Or",
-      cat: 'Restaurant',
-      accent: '#C96442',
-      result: '+45% réservations',
-      desc: 'Site vitrine avec système de réservation en ligne et menu interactif.',
-      date: 'Décembre 2025',
-      icon: <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.871c1.355 0 2.697.056 4.024.166C17.155 8.51 18 9.473 18 10.608v2.513M15 8.25v-1.5m-6 1.5v-1.5m12 9.75-1.5.75a3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0 3.354 3.354 0 0 0-3 0 3.354 3.354 0 0 1-3 0L3 16.5m15-3.379a48.474 48.474 0 0 0-6-.371c-2.032 0-4.034.126-6 .371m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.169c0 .621-.504 1.125-1.125 1.125H4.125A1.125 1.125 0 0 1 3 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 0 1 6 13.12M12.265 3.11a.375.375 0 1 1-.53 0L12 2.845l.265.265Zm-3 0a.375.375 0 1 1-.53 0L9 2.845l.265.265Zm6 0a.375.375 0 1 1-.53 0L15 2.845l.265.265Z" /></svg>
+      title: 'AI-Powered Builder',
+      desc: 'Our built-in AI engine creates full projects from natural language descriptions.',
+      icon: (
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z" />
+        </svg>
+      ),
     },
     {
-      name: 'Beauty Luxe',
-      cat: 'Beauté',
-      accent: '#B8936A',
-      result: '+120 RDV/mois',
-      desc: 'Plateforme de prise de rendez-vous avec galerie portfolio.',
-      date: 'Novembre 2025',
-      icon: <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" /></svg>
+      title: 'Real-time Preview',
+      desc: 'See your project live as it is being built, right in your browser.',
+      icon: (
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+      ),
     },
     {
-      name: 'TechShop',
-      cat: 'E-commerce',
-      accent: '#9A7B5B',
-      result: '3× ventes',
-      desc: 'Boutique en ligne complète avec paiement sécurisé et suivi de commandes.',
-      date: 'Octobre 2025',
-      icon: <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" /></svg>
+      title: 'Code Download',
+      desc: 'Download your complete source code anytime. You own everything you build.',
+      icon: (
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+        </svg>
+      ),
     },
     {
-      name: 'Dr. Amira',
-      cat: 'Médical',
-      accent: '#8B7355',
-      result: 'Top 3 Google',
-      desc: 'Site médical avec réservation, fiches patients et blog santé.',
-      date: 'Septembre 2025',
-      icon: <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" /></svg>
+      title: 'Multiple Project Types',
+      desc: 'Websites, web apps, e-commerce stores, APIs — build anything you need.',
+      icon: (
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+        </svg>
+      ),
     },
     {
-      name: 'Café Arabica',
-      cat: 'Food & Beverage',
-      accent: '#C9A042',
-      result: '+2K abonnés',
-      desc: 'Site avec commande en ligne, programme fidélité et marketing digital.',
-      date: 'Août 2025',
-      icon: <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.468 5.99 5.99 0 0 0-1.925 3.547 5.975 5.975 0 0 1-2.133-1.001A3.75 3.75 0 0 0 12 18Z" /></svg>
+      title: 'Instant Deploy',
+      desc: 'Projects go live on a preview URL immediately. Share with anyone.',
+      icon: (
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+        </svg>
+      ),
     },
     {
-      name: 'Médina Palace',
-      cat: 'Hôtellerie',
-      accent: '#A67C52',
-      result: '+60% réservations',
-      desc: 'Site hôtelier avec moteur de réservation et visite virtuelle.',
-      date: 'Juillet 2025',
-      icon: <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" /></svg>
+      title: 'Chat Interface',
+      desc: 'Talk to DIGITN AI naturally to describe, refine, and iterate on your project.',
+      icon: (
+        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+        </svg>
+      ),
     },
   ]
 
   return (
-    <section id="portfolio" className="py-24 px-6 bg-[#F4F0EB]">
+    <section id="features" className="py-24 px-6" style={{ backgroundColor: 'var(--bg-secondary)' }}>
       <div className="max-w-6xl mx-auto">
-        <Reveal>
-          <p className="text-xs uppercase tracking-[0.2em] text-[#1A1A1A]/40 mb-3 font-medium">Portfolio</p>
-          <h2 className="text-3xl lg:text-4xl font-medium text-[#1A1A1A] mb-16 tracking-[-0.02em]">Des projets concrets, des résultats mesurables</h2>
+        <Reveal className="text-center mb-16">
+          <p className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: 'var(--text-tertiary)' }}>
+            Features
+          </p>
+          <h2 className="text-3xl lg:text-4xl font-medium tracking-[-0.02em]" style={{ color: 'var(--text-primary)' }}>
+            Everything you need to build
+          </h2>
         </Reveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {projects.map((p, i) => (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {features.map((f, i) => (
             <Reveal key={i}>
-              <div className="group cursor-pointer bg-[#EAE5D9] rounded-2xl overflow-hidden h-full flex flex-col border border-[#1A1A1A]/[0.04] hover:border-[#1A1A1A]/[0.08] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#1A1A1A]/[0.06] transition-all duration-500">
-                {/* Icon header with gradient */}
+              <div
+                className="group p-7 rounded-2xl h-full flex flex-col hover:-translate-y-1 transition-all duration-500 cursor-default"
+                style={{
+                  backgroundColor: 'var(--card-bg)',
+                  border: '1px solid var(--border)',
+                }}
+              >
                 <div
-                  className="h-32 w-full flex items-center justify-center relative overflow-hidden"
-                  style={{
-                    background: `linear-gradient(135deg, ${p.accent}15, ${p.accent}05)`,
-                  }}
+                  className="w-11 h-11 rounded-xl flex items-center justify-center mb-5"
+                  style={{ backgroundColor: 'var(--bg-secondary)', color: 'var(--text-primary)' }}
                 >
-                  <div className="text-[#1A1A1A]/80 group-hover:text-[#1A1A1A] transition-colors duration-300">
-                    {p.icon}
-                  </div>
+                  {f.icon}
                 </div>
-
-                <div className="p-7 flex flex-col flex-grow">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-xl font-semibold text-[#1A1A1A] group-hover:text-[#1A1A1A]/80 transition-colors duration-300">
-                      {p.name}
-                    </h3>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full font-medium uppercase tracking-wider" style={{ backgroundColor: `${p.accent}18`, color: p.accent }}>
-                      {p.cat}
-                    </span>
-                  </div>
-                  <p className="text-sm text-[#1A1A1A]/50 leading-relaxed mb-6 flex-grow">
-                    {p.desc}
-                  </p>
-                  <div className="inline-flex items-center gap-1.5 text-sm font-medium mb-6 transition-colors duration-300" style={{ color: p.accent }}>
-                    <span className="font-bold">{p.result}</span>
-                    <Arrow />
-                  </div>
-                  <div className="pt-5 border-t border-[#1A1A1A]/[0.08] flex items-center justify-between">
-                    <p className="text-xs text-[#1A1A1A]/40">{p.date}</p>
-                    <span className="text-xs text-[#1A1A1A]/30 group-hover:text-[#1A1A1A]/50 transition-colors duration-300">Voir le projet →</span>
-                  </div>
-                </div>
+                <h3 className="text-lg font-medium mb-2" style={{ color: 'var(--text-primary)' }}>{f.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{f.desc}</p>
               </div>
             </Reveal>
           ))}
@@ -588,61 +690,258 @@ function Portfolio() {
 /* ===========================================
    PRICING
    =========================================== */
-function Pricing({ onSelectPlan }: { onSelectPlan?: (plan: { name: string; price: string }) => void }) {
+function Pricing() {
   const plans = [
-    { name: 'Starter', price: '499', features: ['5 pages', 'Responsive', 'Contact', 'SEO base'] },
-    { name: 'Business', price: '999', features: ['15 pages', 'Premium', 'Animations', 'SEO complet', 'Blog', '3 mois support'], popular: true },
-    { name: 'E-commerce', price: '1999', features: ['Boutique', 'Paiements', 'Stocks', 'Dashboard', '6 mois support'] },
+    {
+      name: 'DIGITN FAST',
+      price: 'Free',
+      priceSuffix: '',
+      features: [
+        '10 requests / day',
+        '1 active project',
+        'Standard AI models',
+        '15-min preview',
+        'Community support',
+      ],
+      cta: 'Start Free',
+      href: '/auth/signup',
+      popular: false,
+    },
+    {
+      name: 'DIGITN PRO',
+      price: '$9',
+      priceSuffix: '/mo',
+      priceAlt: '29 DT',
+      features: [
+        '50 requests / day',
+        '3 active projects',
+        'Premium AI models',
+        '15-min preview',
+        'Priority support',
+      ],
+      cta: 'Upgrade to PRO',
+      href: '/auth/signup',
+      popular: true,
+    },
+    {
+      name: 'DIGITN PLUS',
+      price: '$25',
+      priceSuffix: '/mo',
+      priceAlt: '79 DT',
+      features: [
+        'Unlimited requests',
+        'Unlimited projects',
+        'Premium AI models',
+        '15-min preview',
+        'Dedicated support',
+      ],
+      cta: 'Go PLUS',
+      href: '/auth/signup',
+      popular: false,
+    },
   ]
 
-  const handleSelectPlan = (plan: { name: string; price: string }) => {
-    trackConversion('plan_selected', { plan_name: plan.name, plan_price: plan.price })
-    onSelectPlan?.(plan)
-  }
-
   return (
-    <section id="tarifs" className="py-24 px-6">
+    <section id="pricing" className="py-24 px-6" style={{ backgroundColor: 'var(--bg-primary)' }}>
       <div className="max-w-5xl mx-auto">
         <Reveal className="text-center mb-16">
-          <p className="text-xs uppercase tracking-[0.2em] text-[#1A1A1A]/40 mb-3 font-medium">Tarifs</p>
-          <h2 className="text-3xl lg:text-4xl font-medium text-[#1A1A1A] tracking-[-0.02em]">Prix transparents</h2>
+          <p className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: 'var(--text-tertiary)' }}>
+            Pricing
+          </p>
+          <h2 className="text-3xl lg:text-4xl font-medium tracking-[-0.02em]" style={{ color: 'var(--text-primary)' }}>
+            Simple, transparent pricing
+          </h2>
         </Reveal>
 
         <div className="grid lg:grid-cols-3 gap-5">
           {plans.map((plan, i) => (
             <Reveal key={i}>
-              <div className={`relative p-8 rounded-2xl h-full flex flex-col transition-all duration-500 hover:-translate-y-1 ${plan.popular
-                ? 'bg-[#1A1A1A] text-white shadow-xl'
-                : 'bg-[#EAE5D9] border border-[#1A1A1A]/[0.06] hover:shadow-lg hover:border-[#1A1A1A]/[0.10]'
-                }`}>
+              <div
+                className={`relative p-8 rounded-2xl h-full flex flex-col transition-all duration-500 hover:-translate-y-1 ${plan.popular ? 'plan-glow' : ''}`}
+                style={{
+                  backgroundColor: plan.popular ? 'var(--text-primary)' : 'var(--card-bg)',
+                  color: plan.popular ? 'var(--bg-primary)' : 'var(--text-primary)',
+                  border: plan.popular ? 'none' : '1px solid var(--border)',
+                }}
+              >
                 {plan.popular && (
-                  <span className="absolute -top-3 left-6 px-3 py-1 bg-[#1A1A1A] text-white text-[10px] font-medium rounded-full uppercase border border-white/20">
-                    Populaire
+                  <span
+                    className="absolute -top-3 left-6 px-3 py-1 text-[10px] font-medium rounded-full uppercase text-white"
+                    style={{ backgroundColor: 'var(--accent)' }}
+                  >
+                    Popular
                   </span>
                 )}
                 <h3 className="text-lg font-medium mb-6">{plan.name}</h3>
-                <div className="mb-8">
+                <div className="mb-2">
                   <span className="text-4xl font-medium">{plan.price}</span>
-                  <span className={plan.popular ? 'text-white/50' : 'text-[#1A1A1A]/40'}> DT</span>
+                  {plan.priceSuffix && (
+                    <span style={{ opacity: 0.5 }}>{plan.priceSuffix}</span>
+                  )}
                 </div>
+                {plan.priceAlt && (
+                  <p className="text-xs mb-6" style={{ opacity: 0.4 }}>{plan.priceAlt} / month</p>
+                )}
+                {!plan.priceAlt && <div className="mb-6" />}
                 <ul className="space-y-3 mb-8 flex-grow">
                   {plan.features.map((f, j) => (
                     <li key={j} className="flex items-center gap-2 text-sm">
-                      <Check />
-                      <span className={plan.popular ? 'text-white/70' : 'text-[#1A1A1A]/60'}>{f}</span>
+                      <span style={{ color: plan.popular ? 'var(--bg-primary)' : 'var(--text-primary)' }}>
+                        <Check />
+                      </span>
+                      <span style={{ opacity: 0.7 }}>{f}</span>
                     </li>
                   ))}
                 </ul>
                 <a
-                  href="#contact"
-                  onClick={() => handleSelectPlan({ name: plan.name, price: plan.price })}
-                  className={`block text-center py-3 rounded-full text-sm font-medium transition-colors duration-300 ${plan.popular
-                    ? 'bg-white text-[#1A1A1A] hover:bg-white/90'
-                    : 'bg-[#1A1A1A] text-white hover:bg-[#1A1A1A]/90'
-                    }`}
+                  href={plan.href}
+                  onClick={() => trackConversion('plan_selected', { plan_name: plan.name })}
+                  className="block text-center py-3 rounded-full text-sm font-medium transition-all duration-300 hover:opacity-90"
+                  style={{
+                    backgroundColor: plan.popular ? 'var(--bg-primary)' : 'var(--text-primary)',
+                    color: plan.popular ? 'var(--text-primary)' : 'var(--bg-primary)',
+                  }}
                 >
-                  Choisir
+                  {plan.cta}
                 </a>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ===========================================
+   PORTFOLIO — "Built with DIGITN AI"
+   =========================================== */
+function Portfolio() {
+  const projects = [
+    {
+      name: "Cote d'Or",
+      cat: 'Restaurant',
+      result: '+45% reservations',
+      desc: 'Full restaurant site with online reservations, interactive menu, and photo gallery.',
+      icon: (
+        <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.871c1.355 0 2.697.056 4.024.166C17.155 8.51 18 9.473 18 10.608v2.513M15 8.25v-1.5m-6 1.5v-1.5m12 9.75-1.5.75a3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0L3 16.5m15-3.379a48.474 48.474 0 00-6-.371c-2.032 0-4.034.126-6 .371m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.169c0 .621-.504 1.125-1.125 1.125H4.125A1.125 1.125 0 013 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 016 13.12M12.265 3.11a.375.375 0 11-.53 0L12 2.845l.265.265zm-3 0a.375.375 0 11-.53 0L9 2.845l.265.265zm6 0a.375.375 0 11-.53 0L15 2.845l.265.265z" />
+        </svg>
+      ),
+    },
+    {
+      name: 'Beauty Luxe',
+      cat: 'Beauty',
+      result: '+120 bookings/mo',
+      desc: 'Appointment booking platform with portfolio gallery and customer reviews.',
+      icon: (
+        <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+        </svg>
+      ),
+    },
+    {
+      name: 'TechShop',
+      cat: 'E-commerce',
+      result: '3x sales',
+      desc: 'Complete online store with secure payments, inventory management, and order tracking.',
+      icon: (
+        <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+        </svg>
+      ),
+    },
+    {
+      name: 'Dr. Amira',
+      cat: 'Medical',
+      result: 'Top 3 Google',
+      desc: 'Medical practice site with appointment booking, patient forms, and health blog.',
+      icon: (
+        <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+        </svg>
+      ),
+    },
+    {
+      name: 'Cafe Arabica',
+      cat: 'Food & Beverage',
+      result: '+2K followers',
+      desc: 'Online ordering platform with loyalty program and integrated digital marketing.',
+      icon: (
+        <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.047 8.287 8.287 0 009 9.601a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 00.495-7.468 5.99 5.99 0 00-1.925 3.547 5.975 5.975 0 01-2.133-1.001A3.75 3.75 0 0012 18z" />
+        </svg>
+      ),
+    },
+    {
+      name: 'Medina Palace',
+      cat: 'Hospitality',
+      result: '+60% bookings',
+      desc: 'Hotel website with booking engine, virtual tour, and multilingual support.',
+      icon: (
+        <svg width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
+        </svg>
+      ),
+    },
+  ]
+
+  return (
+    <section id="portfolio" className="py-24 px-6" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
+      <div className="max-w-6xl mx-auto">
+        <Reveal>
+          <p className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: 'var(--text-tertiary)' }}>
+            Showcase
+          </p>
+          <h2 className="text-3xl lg:text-4xl font-medium mb-16 tracking-[-0.02em]" style={{ color: 'var(--text-primary)' }}>
+            Built with DIGITN AI
+          </h2>
+        </Reveal>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {projects.map((p, i) => (
+            <Reveal key={i}>
+              <div
+                className="group cursor-pointer rounded-2xl overflow-hidden h-full flex flex-col hover:-translate-y-1 transition-all duration-500"
+                style={{
+                  backgroundColor: 'var(--card-bg)',
+                  border: '1px solid var(--border)',
+                }}
+              >
+                {/* Icon header */}
+                <div
+                  className="h-32 w-full flex items-center justify-center relative overflow-hidden"
+                  style={{ backgroundColor: 'var(--bg-secondary)' }}
+                >
+                  <div style={{ color: 'var(--text-secondary)' }} className="group-hover:scale-110 transition-transform duration-500">
+                    {p.icon}
+                  </div>
+                </div>
+
+                <div className="p-7 flex flex-col flex-grow">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-xl font-semibold" style={{ color: 'var(--text-primary)' }}>
+                      {p.name}
+                    </h3>
+                    <span
+                      className="text-[10px] px-2 py-0.5 rounded-full font-medium uppercase tracking-wider"
+                      style={{ backgroundColor: 'var(--bg-secondary)', color: 'var(--text-secondary)' }}
+                    >
+                      {p.cat}
+                    </span>
+                  </div>
+                  <p className="text-sm leading-relaxed mb-6 flex-grow" style={{ color: 'var(--text-secondary)' }}>
+                    {p.desc}
+                  </p>
+                  <div className="inline-flex items-center gap-1.5 text-sm font-medium mb-6" style={{ color: 'var(--accent)' }}>
+                    <span className="font-bold">{p.result}</span>
+                    <Arrow />
+                  </div>
+                  <div className="pt-5 flex items-center justify-between" style={{ borderTop: '1px solid var(--border)' }}>
+                    <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Built by DIGITN AI users</p>
+                  </div>
+                </div>
               </div>
             </Reveal>
           ))}
@@ -657,81 +956,54 @@ function Pricing({ onSelectPlan }: { onSelectPlan?: (plan: { name: string; price
    =========================================== */
 function Testimonials() {
   const items = [
-    { name: 'Ahmed Ben Ali', role: 'Restaurant Côte d\'Or', text: 'Les réservations ont explosé de 45% en 2 mois. Interface simple et efficace.', initial: 'A' },
-    { name: 'Nadia Mansour', role: 'Salon Beauty Luxe', text: 'Le système de RDV nous fait gagner un temps fou. Clients très satisfaits.', initial: 'N' },
-    { name: 'Karim Trabelsi', role: 'TechShop E-commerce', text: '3 fois plus de ventes en 3 mois. Support toujours disponible et réactif.', initial: 'K' },
+    { name: 'Ahmed Ben Ali', role: 'Restaurant Owner', text: 'Reservations jumped 45% in two months. The interface is simple and incredibly effective.', initial: 'A' },
+    { name: 'Nadia Mansour', role: 'Beauty Luxe Salon', text: 'The booking system saves us hours every week. Our clients love how easy it is.', initial: 'N' },
+    { name: 'Karim Trabelsi', role: 'TechShop E-commerce', text: '3x more sales in 3 months. Support is always responsive and helpful.', initial: 'K' },
   ]
 
   return (
-    <section className="py-24 px-6 bg-[#F4F0EB]">
+    <section className="py-24 px-6" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
       <div className="max-w-6xl mx-auto">
         <Reveal>
-          <p className="text-xs uppercase tracking-[0.2em] text-[#1A1A1A]/40 mb-3 font-medium">Témoignages</p>
-          <h2 className="text-3xl lg:text-4xl font-medium text-[#1A1A1A] mb-16 tracking-[-0.02em]">Ce que disent nos clients</h2>
+          <p className="text-xs uppercase tracking-[0.2em] font-medium mb-3" style={{ color: 'var(--text-tertiary)' }}>
+            Testimonials
+          </p>
+          <h2 className="text-3xl lg:text-4xl font-medium mb-16 tracking-[-0.02em]" style={{ color: 'var(--text-primary)' }}>
+            What our users say
+          </h2>
         </Reveal>
 
         <div className="grid lg:grid-cols-3 gap-6">
           {items.map((t, i) => (
             <Reveal key={i}>
-              <div className="p-8 bg-[#EAE5D9] rounded-2xl h-full flex flex-col hover:shadow-lg hover:-translate-y-1 transition-all duration-500 border border-[#1A1A1A]/[0.06]">
+              <div
+                className="p-8 rounded-2xl h-full flex flex-col hover:-translate-y-1 transition-all duration-500"
+                style={{
+                  backgroundColor: 'var(--card-bg)',
+                  border: '1px solid var(--border)',
+                }}
+              >
                 <div className="flex gap-1 mb-5">
-                  {[...Array(5)].map((_, j) => <Star key={j} className="text-[#C9A042]" />)}
+                  {[...Array(5)].map((_, j) => <Star key={j} className="text-[color:var(--accent)]" />)}
                 </div>
-                <p className="text-[#1A1A1A]/70 leading-relaxed mb-6 flex-grow transition-colors duration-500 text-base">
+                <p className="leading-relaxed mb-6 flex-grow text-base" style={{ color: 'var(--text-secondary)' }}>
                   &ldquo;{t.text}&rdquo;
                 </p>
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full bg-[#1A1A1A] flex items-center justify-center text-white font-semibold text-lg shadow-md">
+                  <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center font-semibold text-lg shadow-md"
+                    style={{ backgroundColor: 'var(--text-primary)', color: 'var(--bg-primary)' }}
+                  >
                     {t.initial}
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-[#1A1A1A]">{t.name}</p>
-                    <p className="text-xs text-[#1A1A1A]/50">{t.role}</p>
+                    <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>{t.name}</p>
+                    <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>{t.role}</p>
                   </div>
                 </div>
               </div>
             </Reveal>
           ))}
-        </div>
-
-        {/* Trust badges */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6">
-          <Reveal>
-            <div className="text-center p-6 bg-[#EAE5D9] rounded-xl border border-[#1A1A1A]/[0.06] hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-              <div className="flex justify-center mb-3 text-[#1A1A1A]">
-                <Guarantee />
-              </div>
-              <p className="text-sm font-medium text-[#1A1A1A]">Garantie satisfait</p>
-              <p className="text-xs text-[#1A1A1A]/50 mt-1">ou remboursé</p>
-            </div>
-          </Reveal>
-          <Reveal>
-            <div className="text-center p-6 bg-[#EAE5D9] rounded-xl border border-[#1A1A1A]/[0.06] hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-              <div className="flex justify-center mb-3 text-[#1A1A1A]">
-                <Lock />
-              </div>
-              <p className="text-sm font-medium text-[#1A1A1A]">Paiement sécurisé</p>
-              <p className="text-xs text-[#1A1A1A]/50 mt-1">SSL & cryptage</p>
-            </div>
-          </Reveal>
-          <Reveal>
-            <div className="text-center p-6 bg-[#EAE5D9] rounded-xl border border-[#1A1A1A]/[0.06] hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-              <div className="flex justify-center mb-3 text-[#1A1A1A]">
-                <Lightning />
-              </div>
-              <p className="text-sm font-medium text-[#1A1A1A]">Livraison rapide</p>
-              <p className="text-xs text-[#1A1A1A]/50 mt-1">2-4 semaines</p>
-            </div>
-          </Reveal>
-          <Reveal>
-            <div className="text-center p-6 bg-[#EAE5D9] rounded-xl border border-[#1A1A1A]/[0.06] hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-              <div className="flex justify-center mb-3 text-[#1A1A1A]">
-                <Chat />
-              </div>
-              <p className="text-sm font-medium text-[#1A1A1A]">Support 24/7</p>
-              <p className="text-xs text-[#1A1A1A]/50 mt-1">Toujours disponible</p>
-            </div>
-          </Reveal>
         </div>
       </div>
     </section>
@@ -739,162 +1011,50 @@ function Testimonials() {
 }
 
 /* ===========================================
-   CONTACT
+   CTA SECTION
    =========================================== */
-function Contact({ selectedPlan }: { selectedPlan?: { name: string; price: string } | null }) {
-  const [form, setForm] = useState({ name: '', email: '', message: '' })
-  const [focus, setFocus] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [status, setStatus] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
-  const appliedPlanRef = useRef('')
-
-  // Auto-fill message when a plan is selected
-  useEffect(() => {
-    if (selectedPlan && selectedPlan.name !== appliedPlanRef.current) {
-      appliedPlanRef.current = selectedPlan.name
-      setForm(prev => ({
-        ...prev,
-        message: `Bonjour, je suis intéressé(e) par le forfait ${selectedPlan.name} à ${selectedPlan.price} DT. Merci de me contacter pour plus de détails.`,
-      }))
-    }
-  }, [selectedPlan])
-
-  const submitEmail = async (e: FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setStatus(null)
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          message: form.message,
-          plan: selectedPlan?.name,
-        }),
-      })
-
-      const data = await response.json()
-
-      if (response.ok) {
-        setStatus({ type: 'success', message: 'Message envoyé avec succès!' })
-        setForm({ name: '', email: '', message: '' })
-        trackConversion('contact', { method: 'email', plan: selectedPlan?.name })
-      } else {
-        setStatus({ type: 'error', message: data.error || 'Erreur lors de l\'envoi' })
-      }
-    } catch (error) {
-      setStatus({ type: 'error', message: 'Erreur de connexion' })
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const submitWhatsApp = (e: FormEvent) => {
-    e.preventDefault()
-    trackConversion('whatsapp_click', { source: 'contact_form' })
-    window.open(`https://wa.me/${siteConfig.phoneRaw}?text=Bonjour, je suis ${form.name}. ${form.message}`, '_blank')
-  }
+function CtaSection() {
+  const ref = useReveal()
 
   return (
-    <section id="contact" className="py-24 px-6">
-      <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16">
-        <Reveal>
-          <p className="text-xs uppercase tracking-[0.2em] text-[#1A1A1A]/40 mb-3 font-medium">Contact</p>
-          <h2 className="text-3xl lg:text-4xl font-medium text-[#1A1A1A] mb-4 tracking-[-0.02em]">Parlons de votre projet</h2>
-          <p className="text-[#1A1A1A]/50 mb-8">Réponse sous 24h avec devis personnalisé.</p>
-
+    <section className="py-24 px-6" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      <div ref={ref} data-reveal className="max-w-3xl mx-auto text-center">
+        <h2
+          className="text-3xl lg:text-5xl font-medium tracking-[-0.02em] mb-6"
+          style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-serif)' }}
+        >
+          Ready to build something amazing?
+        </h2>
+        <p
+          className="text-lg mb-10 mx-auto"
+          style={{ color: 'var(--text-secondary)', maxWidth: 480 }}
+        >
+          Join thousands of builders using DIGITN AI. Start for free — no credit card required.
+        </p>
+        <div className="flex flex-wrap justify-center gap-4">
+          <a
+            href="/auth/signup"
+            className="inline-flex items-center gap-2 px-8 py-4 text-white text-sm font-medium rounded-full hover:opacity-90 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-300"
+            style={{ backgroundColor: 'var(--accent)' }}
+          >
+            Start Building Free <Arrow />
+          </a>
           <a
             href={`https://wa.me/${siteConfig.phoneRaw}`}
             target="_blank"
-            className="inline-flex items-center gap-3 px-6 py-4 bg-[#1A1A1A] text-white rounded-xl hover:bg-[#1A1A1A]/85 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 text-sm font-medium rounded-full hover:-translate-y-0.5 transition-all duration-300"
+            style={{
+              border: '1px solid var(--border-strong)',
+              color: 'var(--text-secondary)',
+            }}
           >
-            <WhatsApp />
-            <div>
-              <p className="text-sm font-medium">WhatsApp</p>
-              <p className="text-xs text-white/70">{siteConfig.phone}</p>
-            </div>
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" style={{ color: 'var(--accent-green)' }}>
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+            Questions? Chat with us
           </a>
-        </Reveal>
-
-        <Reveal>
-          <form onSubmit={submitEmail} className="bg-[#EAE5D9] p-8 rounded-2xl border border-[#1A1A1A]/[0.06]">
-            {status && (
-              <div className={`mb-5 p-4 rounded-lg text-sm ${status.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                {status.message}
-              </div>
-            )}
-
-            {['name', 'email'].map(field => (
-              <div key={field} className="relative mb-5">
-                <label
-                  className="absolute left-4 transition-all duration-300 pointer-events-none"
-                  style={{
-                    top: focus === field || form[field as keyof typeof form] ? 6 : 14,
-                    fontSize: focus === field || form[field as keyof typeof form] ? 10 : 14,
-                    color: focus === field ? '#1A1A1A' : 'rgba(25,25,24,0.4)',
-                  }}
-                >
-                  {field === 'name' ? 'Nom' : 'Email'}
-                </label>
-                <input
-                  type={field === 'email' ? 'email' : 'text'}
-                  required
-                  disabled={loading}
-                  className="w-full px-4 pt-6 pb-2 rounded-lg bg-[#F4F0EB] border border-[#1A1A1A]/[0.08] outline-none text-sm focus:border-[#1A1A1A]/30 focus:bg-[#F4F0EB] transition-all duration-300 disabled:opacity-50"
-                  value={form[field as keyof typeof form]}
-                  onChange={e => setForm({ ...form, [field]: e.target.value })}
-                  onFocus={() => setFocus(field)}
-                  onBlur={() => setFocus('')}
-                />
-              </div>
-            ))}
-
-            <div className="relative mb-5">
-              <label
-                className="absolute left-4 transition-all duration-300 pointer-events-none"
-                style={{
-                  top: focus === 'message' || form.message ? 6 : 14,
-                  fontSize: focus === 'message' || form.message ? 10 : 14,
-                  color: focus === 'message' ? '#1A1A1A' : 'rgba(25,25,24,0.4)',
-                }}
-              >
-                Message
-              </label>
-              <textarea
-                required
-                rows={4}
-                disabled={loading}
-                className="w-full px-4 pt-6 pb-2 rounded-lg bg-[#F4F0EB] border border-[#1A1A1A]/[0.08] outline-none text-sm resize-none focus:border-[#1A1A1A]/30 focus:bg-[#F4F0EB] transition-all duration-300 disabled:opacity-50"
-                value={form.message}
-                onChange={e => setForm({ ...form, message: e.target.value })}
-                onFocus={() => setFocus('message')}
-                onBlur={() => setFocus('')}
-              />
-            </div>
-
-            <div className="flex gap-3">
-              <button
-                type="submit"
-                disabled={loading}
-                className="flex-1 py-3 bg-[#1A1A1A] text-white text-sm font-medium rounded-lg hover:bg-[#1A1A1A]/90 active:scale-[0.99] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {loading ? 'Envoi...' : 'Envoyer par Email'}
-              </button>
-              <button
-                type="button"
-                onClick={submitWhatsApp}
-                disabled={loading}
-                className="px-4 py-3 bg-[#25D366] text-white text-sm font-medium rounded-lg hover:bg-[#25D366]/90 active:scale-[0.99] transition-all duration-300 disabled:opacity-50"
-                title="Envoyer via WhatsApp"
-              >
-                <WhatsApp />
-              </button>
-            </div>
-          </form>
-        </Reveal>
+        </div>
       </div>
     </section>
   )
@@ -905,45 +1065,46 @@ function Contact({ selectedPlan }: { selectedPlan?: { name: string; price: strin
    =========================================== */
 function Footer() {
   return (
-    <footer className="py-16 px-6 bg-[#1A1A1A] text-white">
+    <footer className="py-16 px-6" style={{ backgroundColor: '#1e1d1b' }}>
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           {/* Logo & Description */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <span className="text-[#C96442] font-light text-2xl">|</span>
-              <span className="font-bold text-xl tracking-[0.06em]">DIGITN</span>
+              <span className="font-light text-2xl" style={{ color: 'var(--accent)' }}>|</span>
+              <span className="font-bold text-xl tracking-[0.06em] text-white">DIGITN</span>
             </div>
             <p className="text-white/60 text-sm leading-relaxed mb-4">
-              Agence web tunisienne spécialisée dans la création de sites performants et solutions digitales.
+              AI-powered platform that turns your ideas into production-ready websites and apps. Describe it — we build it.
             </p>
             <div className="flex gap-4">
               <a href={siteConfig.social.facebook} target="_blank" className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors duration-300">
-                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" className="text-white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
               </a>
               <a href={siteConfig.social.instagram} target="_blank" className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors duration-300">
-                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" className="text-white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
               </a>
               <a href={siteConfig.social.linkedin} target="_blank" className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors duration-300">
-                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" className="text-white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
               </a>
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold mb-4 text-sm uppercase tracking-wider">Navigation</h3>
+            <h3 className="font-semibold mb-4 text-sm uppercase tracking-wider text-white">Navigation</h3>
             <ul className="space-y-2 text-sm">
-              <li><a href="#services" className="text-white/60 hover:text-white transition-colors duration-300">Services</a></li>
-              <li><a href="#portfolio" className="text-white/60 hover:text-white transition-colors duration-300">Portfolio</a></li>
-              <li><a href="#tarifs" className="text-white/60 hover:text-white transition-colors duration-300">Tarifs</a></li>
-              <li><a href="#contact" className="text-white/60 hover:text-white transition-colors duration-300">Contact</a></li>
+              <li><a href="#features" className="text-white/60 hover:text-white transition-colors duration-300">Features</a></li>
+              <li><a href="#pricing" className="text-white/60 hover:text-white transition-colors duration-300">Pricing</a></li>
+              <li><a href="#how-it-works" className="text-white/60 hover:text-white transition-colors duration-300">How it Works</a></li>
+              <li><a href="/auth/login" className="text-white/60 hover:text-white transition-colors duration-300">Sign In</a></li>
+              <li><a href="/auth/signup" className="text-white/60 hover:text-white transition-colors duration-300">Start Building</a></li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h3 className="font-semibold mb-4 text-sm uppercase tracking-wider">Contact</h3>
+            <h3 className="font-semibold mb-4 text-sm uppercase tracking-wider text-white">Contact</h3>
             <ul className="space-y-2 text-sm text-white/60">
               <li>
                 <a href={`tel:${siteConfig.phoneRaw}`} className="hover:text-white transition-colors duration-300">
@@ -962,10 +1123,10 @@ function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-white/40">
-          <p>&copy; 2026 DIGITN. Tous droits réservés.</p>
+          <p>&copy; 2026 DIGITN. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="/mentions-legales" className="hover:text-white/60 transition-colors duration-300">Mentions légales</a>
-            <a href="/politique-confidentialite" className="hover:text-white/60 transition-colors duration-300">Politique de confidentialité</a>
+            <a href="/mentions-legales" className="hover:text-white/60 transition-colors duration-300">Legal</a>
+            <a href="/politique-confidentialite" className="hover:text-white/60 transition-colors duration-300">Privacy</a>
           </div>
         </div>
       </div>
@@ -977,8 +1138,6 @@ function Footer() {
    MAIN PAGE
    =========================================== */
 export default function Home() {
-  const [selectedPlan, setSelectedPlan] = useState<{ name: string; price: string } | null>(null)
-
   return (
     <main>
       {/* FAQ Schema for Rich Snippets */}
@@ -994,12 +1153,14 @@ export default function Home() {
 
       <Navbar />
       <Hero />
+      <StatsStrip />
       <GlobeMap />
-      <Services />
+      <HowItWorks />
+      <Features />
+      <Pricing />
       <Portfolio />
-      <Pricing onSelectPlan={setSelectedPlan} />
       <Testimonials />
-      <Contact selectedPlan={selectedPlan} />
+      <CtaSection />
       <Footer />
 
       {/* Floating WhatsApp Button */}
@@ -1007,9 +1168,13 @@ export default function Home() {
         href={`https://wa.me/${siteConfig.phoneRaw}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-5 py-3 bg-[#1A1A1A] text-white rounded-full shadow-lg shadow-[#1A1A1A]/20 hover:shadow-xl hover:shadow-[#1A1A1A]/30 hover:-translate-y-1 active:scale-95 transition-all duration-300 group"
-        style={{ animation: 'float 3s ease-in-out infinite' }}
-        aria-label="Contactez-nous sur WhatsApp"
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-5 py-3 text-white rounded-full shadow-lg hover:-translate-y-1 active:scale-95 transition-all duration-300 group"
+        style={{
+          backgroundColor: '#25D366',
+          boxShadow: '0 4px 16px rgba(37, 211, 102, 0.35)',
+          animation: 'float 3s ease-in-out infinite',
+        }}
+        aria-label="Contact us on WhatsApp"
       >
         <WhatsApp />
         <span className="text-sm font-medium hidden sm:inline">WhatsApp</span>

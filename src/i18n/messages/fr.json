@@ -1,12 +1,14 @@
 {
   "nav": {
+    "dashboard": "Tableau de bord",
     "chat": "Chat",
     "builder": "Créateur",
     "projects": "Projets",
     "settings": "Paramètres",
     "admin": "Admin",
     "upgrade": "Mettre à niveau",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "activePlan": "Plan actif"
   },
   "auth": {
     "login": "Connexion",
@@ -37,7 +39,8 @@
     "send": "Envoyer",
     "thinking": "En train de réfléchir...",
     "newChat": "Nouveau chat",
-    "quotaExceeded": "Quota journalier atteint. Passez à DIGITN PRO pour plus."
+    "quotaExceeded": "Quota journalier atteint. Passez à DIGITN PRO pour plus.",
+    "disclaimer": "DIGITN AI peut faire des erreurs. Vérifiez les informations importantes."
   },
   "builder": {
     "title": "Créateur de projets",

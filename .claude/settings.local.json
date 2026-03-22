@@ -18,7 +18,32 @@
       "Bash(npx tsc:*)",
       "Bash(mkdir -p bridge/src/routes bridge/src/lib)",
       "Bash(npm init:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(ls:*)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/auth/login)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/auth/signup)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/app)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/admin)",
+      "Bash(curl:*)",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(netstat -ano)",
+      "Bash(findstr \":3000 :3001 :3002\")",
+      "Bash(taskkill /F /PID 3468)",
+      "Bash(taskkill /F /PID 11732)",
+      "Bash(taskkill /F /PID 15124)",
+      "Bash(npx next:*)",
+      "Bash(xargs -I{} taskkill /F /PID {})",
+      "Bash(while read:*)",
+      "Bash(do taskkill:*)",
+      "Bash(done)",
+      "Bash(taskkill /F /PID 15864)",
+      "Bash(cmd.exe /c \"taskkill /F /PID 11732 & taskkill /F /PID 15124 & taskkill /F /PID 15864 & taskkill /F /PID 3468\")",
+      "Bash(wc:*)",
+      "Bash(findstr :3002)",
+      "Bash(findstr LISTENING)",
+      "Bash(cat:*)"
     ]
   }
 }

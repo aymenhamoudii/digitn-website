@@ -1,12 +1,14 @@
 {
   "nav": {
+    "dashboard": "Dashboard",
     "chat": "Chat",
     "builder": "Builder",
     "projects": "Projects",
     "settings": "Settings",
     "admin": "Admin",
     "upgrade": "Upgrade",
-    "logout": "Log out"
+    "logout": "Log out",
+    "activePlan": "Active plan"
   },
   "auth": {
     "login": "Sign in",
@@ -37,7 +39,8 @@
     "send": "Send",
     "thinking": "Thinking...",
     "newChat": "New chat",
-    "quotaExceeded": "Daily quota reached. Upgrade to DIGITN PRO for more."
+    "quotaExceeded": "Daily quota reached. Upgrade to DIGITN PRO for more.",
+    "disclaimer": "DIGITN AI can make mistakes. Verify important information."
   },
   "builder": {
     "title": "Project Builder",

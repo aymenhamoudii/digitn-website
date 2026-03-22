@@ -14,24 +14,43 @@ export default function Icon() {
     (
       <div
         style={{
-          fontSize: 24,
-          background: '#F4F0EB',
           width: '100%',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          color: '#1A1A1A',
-          fontWeight: 700,
+          background: '#1e1d1b',
+          borderRadius: 8,
           position: 'relative',
         }}
       >
-        <div style={{ position: 'absolute', left: 6, top: 8, width: 4, height: 16, background: '#C96442', transform: 'skewX(-15deg)' }} />
-        <div style={{ marginLeft: 4 }}>D</div>
+        {/* Accent bar */}
+        <div
+          style={{
+            position: 'absolute',
+            left: 7,
+            top: 7,
+            width: 4,
+            height: 18,
+            background: '#d97757',
+            borderRadius: 2,
+            transform: 'skewX(-8deg)',
+          }}
+        />
+        {/* D letter */}
+        <div
+          style={{
+            fontSize: 20,
+            fontWeight: 700,
+            color: '#e5e4d9',
+            marginLeft: 6,
+            fontFamily: 'system-ui, sans-serif',
+          }}
+        >
+          D
+        </div>
       </div>
     ),
-    {
-      ...size,
-    }
+    { ...size }
   )
 }

@@ -170,9 +170,6 @@ export default function GlobeMap() {
                     .datum({ type: 'Sphere' } as any)
                     .attr('class', 'globe-sphere')
                     .attr('d', pathGenerator as any)
-                    .attr('fill', '#F4F0EB') // Matches the background
-                    .attr('stroke', '#d1cbc1')
-                    .attr('stroke-width', '1px')
 
                 // Graticules (Grid lines)
                 mapGroup.append('path')
@@ -312,7 +309,7 @@ export default function GlobeMap() {
     }, [loaded, tweenProjection])
 
     return (
-        <section className="relative w-full overflow-hidden bg-gradient-to-br from-[#F4F0EB] via-[#EAE5D9] to-[#F4F0EB]">
+        <section className="relative w-full overflow-hidden" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
 
             {/* Decorative elements for depth */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -321,13 +318,13 @@ export default function GlobeMap() {
                 <div className="absolute bottom-10 left-10 w-[400px] h-[400px] bg-gradient-radial from-[#C96442]/6 to-transparent rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
 
                 {/* Subtle grid pattern */}
-                <div className="absolute inset-0 opacity-[0.015]" style={{
-                    backgroundImage: 'linear-gradient(#1A1A1A 1px, transparent 1px), linear-gradient(90deg, #1A1A1A 1px, transparent 1px)',
+                <div className="absolute inset-0 opacity-[0.03]" style={{
+                    backgroundImage: 'linear-gradient(var(--text-primary) 1px, transparent 1px), linear-gradient(90deg, var(--text-primary) 1px, transparent 1px)',
                     backgroundSize: '60px 60px'
                 }} />
 
                 {/* Radial gradient overlay for focus */}
-                <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-[#F4F0EB]/30" />
+                <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-[var(--bg-tertiary)]/30" />
             </div>
 
             {/* Globe container with enhanced styling */}
@@ -418,13 +415,13 @@ export default function GlobeMap() {
                 <div className="absolute bottom-8 right-8 hidden lg:block pointer-events-none">
                     <div className="relative w-16 h-16 opacity-20">
                         <svg viewBox="0 0 100 100" className="w-full h-full">
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="#1A1A1A" strokeWidth="1"/>
-                            <circle cx="50" cy="50" r="35" fill="none" stroke="#1A1A1A" strokeWidth="0.5"/>
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--text-primary)" strokeWidth="1"/>
+                            <circle cx="50" cy="50" r="35" fill="none" stroke="var(--text-primary)" strokeWidth="0.5"/>
                             <path d="M50 5 L55 45 L50 50 L45 45 Z" fill="#C96442"/>
-                            <path d="M50 95 L55 55 L50 50 L45 55 Z" fill="#1A1A1A" opacity="0.3"/>
-                            <path d="M5 50 L45 55 L50 50 L45 45 Z" fill="#1A1A1A" opacity="0.3"/>
-                            <path d="M95 50 L55 55 L50 50 L55 45 Z" fill="#1A1A1A" opacity="0.3"/>
-                            <text x="50" y="15" textAnchor="middle" fontSize="12" fill="#1A1A1A" fontWeight="bold">N</text>
+                            <path d="M50 95 L55 55 L50 50 L45 55 Z" fill="var(--text-primary)" opacity="0.3"/>
+                            <path d="M5 50 L45 55 L50 50 L45 45 Z" fill="var(--text-primary)" opacity="0.3"/>
+                            <path d="M95 50 L55 55 L50 50 L55 45 Z" fill="var(--text-primary)" opacity="0.3"/>
+                            <text x="50" y="15" textAnchor="middle" fontSize="12" fill="var(--text-primary)" fontWeight="bold">N</text>
                         </svg>
                     </div>
                 </div>
@@ -432,8 +429,8 @@ export default function GlobeMap() {
                 {/* Scale indicator */}
                 <div className="absolute bottom-8 left-8 hidden lg:flex items-center gap-2 pointer-events-none opacity-30">
                     <div className="flex flex-col gap-1">
-                        <div className="h-[2px] w-20 bg-[#1A1A1A]"/>
-                        <div className="flex justify-between text-[10px] text-[#1A1A1A] font-medium">
+                        <div className="h-[2px] w-20" style={{ backgroundColor: 'var(--text-primary)' }}/>
+                        <div className="flex justify-between text-[10px] font-medium" style={{ color: 'var(--text-primary)' }}>
                             <span>0</span>
                             <span>100 km</span>
                         </div>
@@ -443,15 +440,15 @@ export default function GlobeMap() {
 
             {/* Content card - ORIGINAL STYLE */}
             <div className="relative z-10 w-full lg:h-[80vh] lg:min-h-[600px] max-w-7xl mx-auto px-4 sm:px-6 flex items-start lg:items-center py-6 lg:py-0 pointer-events-none">
-                <div className="w-full lg:w-5/12 pointer-events-auto bg-[#F4F0EB]/70 lg:bg-[#F4F0EB]/40 backdrop-blur-sm p-5 sm:p-8 rounded-2xl shadow-[0_0_40px_rgba(241,239,232,0.8)] border border-white/20">
+                <div className="w-full lg:w-5/12 pointer-events-auto backdrop-blur-sm p-5 sm:p-8 rounded-2xl border" style={{ backgroundColor: 'var(--card-bg)', borderColor: 'var(--border)', boxShadow: '0 0 40px rgba(0,0,0,0.08)' }}>
 
                     <div className="mb-6 lg:mb-10">
-                        <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[#1A1A1A]/50 mb-2 sm:mb-3 font-semibold">
+                        <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] mb-2 sm:mb-3 font-semibold" style={{ color: 'var(--text-tertiary)' }}>
                             Nos clients en Tunisie
                         </p>
                         <h2
-                            className="text-2xl sm:text-4xl lg:text-5xl font-medium text-[#1A1A1A] tracking-tight mb-2"
-                            style={{ fontFamily: 'var(--font-serif)' }}
+                            className="text-2xl sm:text-4xl lg:text-5xl font-medium tracking-tight mb-2"
+                            style={{ fontFamily: 'var(--font-serif)', color: 'var(--text-primary)' }}
                         >
                             Des projets partout
                         </h2>
@@ -466,7 +463,7 @@ export default function GlobeMap() {
                                 style={{
                                     width: i === currentIndex ? 20 : 6,
                                     height: 6,
-                                    backgroundColor: i === currentIndex ? '#C96442' : 'rgba(25,25,24,0.15)',
+                                    backgroundColor: i === currentIndex ? '#C96442' : 'var(--border-strong)',
                                 }}
                             />
                         ))}
@@ -490,7 +487,7 @@ export default function GlobeMap() {
                             className="text-lg sm:text-2xl lg:text-3xl leading-snug"
                             style={{
                                 fontFamily: 'var(--font-serif)',
-                                color: '#1a1a1a',
+                                color: 'var(--text-primary)',
                             }}
                         >
                             &ldquo;{typedText}
@@ -510,12 +507,12 @@ export default function GlobeMap() {
                     <div className="h-12 mt-3 sm:mt-4">
                         {stateName && (
                             <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#1A1A1A] flex items-center justify-center text-white text-xs sm:text-sm font-medium shadow-md">
+                                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-xs sm:text-sm font-medium shadow-md" style={{ backgroundColor: 'var(--text-primary)', color: 'var(--bg-primary)' }}>
                                     {storyData[currentIndex]?.targetName?.[0]}
                                 </div>
                                 <div>
-                                    <p className="text-xs sm:text-sm font-bold text-[#1A1A1A]">Client — {storyData[currentIndex]?.targetName}</p>
-                                    <p className="text-[10px] sm:text-xs text-[#1A1A1A]/60 font-medium">Gouvernorat</p>
+                                    <p className="text-xs sm:text-sm font-bold" style={{ color: 'var(--text-primary)' }}>Client — {storyData[currentIndex]?.targetName}</p>
+                                    <p className="text-[10px] sm:text-xs font-medium" style={{ color: 'var(--text-secondary)' }}>Gouvernorat</p>
                                 </div>
                             </div>
                         )}

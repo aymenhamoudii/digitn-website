@@ -25,8 +25,15 @@ export function ProjectPreview({ projectId, projectName, expiresAt, onRebuild }:
       <div className="flex items-center justify-between px-4 py-3 bg-[var(--card-bg)] border-b border-[var(--border)]">
         <div className="flex items-center gap-4">
           <h3 className="font-medium text-[var(--text-primary)]">{projectName}</h3>
-          <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${minsLeft < 5 ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
-            Expire dans {minsLeft} min
+          <span
+            className="rounded-full text-xs font-medium"
+            style={{
+              backgroundColor: minsLeft < 5 ? 'rgba(239, 68, 68, 0.12)' : 'rgba(34, 197, 94, 0.12)',
+              color: minsLeft < 5 ? '#ef4444' : '#22c55e',
+              padding: '2px 8px',
+            }}
+          >
+            {minsLeft} min left
           </span>
         </div>
 
@@ -60,7 +67,7 @@ export function ProjectPreview({ projectId, projectName, expiresAt, onRebuild }:
       {/* Frame Container */}
       <div className="flex-1 bg-[var(--bg-primary)] flex items-center justify-center p-4">
         <div className={`transition-all duration-300 border border-[var(--border-strong)] bg-[var(--bg-primary)] rounded-md overflow-hidden shadow-lg ${
-          device === 'mobile' ? 'w-[375px] h-[812px]' : 'w-full h-full'
+          device === 'mobile' ? 'w-[375px] max-h-[80vh] overflow-y-auto' : 'w-full h-full'
         }`}>
           <iframe
             src={url}

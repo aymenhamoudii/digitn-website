@@ -6,6 +6,7 @@
   /* Backgrounds */
   --bg-primary: #f8f7f5;
   --bg-secondary: #f0eee6;
+  --bg-tertiary: #F4F0EB;
   --card-bg: #eae5d9;
   --card-strong: #e0d9cc;
 
@@ -19,6 +20,7 @@
   --accent-hover: #c4623e;
   --accent-blue: #2e6287;
   --accent-blue-hover: #245071;
+  --accent-green: #25D366;
 
   /* Borders & Shadows */
   --border: #e6e4dc;
@@ -27,17 +29,31 @@
   --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.1);
 
+  /* Skeleton */
+  --skeleton-base: rgba(30, 29, 27, 0.08);
+  --skeleton-shine: rgba(30, 29, 27, 0.04);
+
+  /* Nav (marketing page) */
+  --nav-bg: rgba(248, 247, 245, 0.85);
+  --nav-border: rgba(30, 29, 27, 0.06);
+
   /* Fonts */
   --font-serif: "Newsreader", "Playfair Display", Georgia, serif;
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* Layout */
   --sidebar-width: 250px;
+
+  /* Scrollbar */
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: rgba(30, 29, 27, 0.18);
+  --scrollbar-thumb-hover: rgba(30, 29, 27, 0.35);
 }
 
 [data-theme="dark"] {
   --bg-primary: #121211;
   --bg-secondary: #1a1a19;
+  --bg-tertiary: #161615;
   --card-bg: #222220;
   --card-strong: #2a2a28;
   --text-primary: #e5e4d9;
@@ -48,6 +64,19 @@
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
   --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.5);
+
+  /* Skeleton dark */
+  --skeleton-base: rgba(229, 228, 217, 0.08);
+  --skeleton-shine: rgba(229, 228, 217, 0.04);
+
+  /* Nav dark */
+  --nav-bg: rgba(18, 18, 17, 0.85);
+  --nav-border: rgba(229, 228, 217, 0.06);
+
+  /* Scrollbar dark */
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: rgba(229, 228, 217, 0.15);
+  --scrollbar-thumb-hover: rgba(229, 228, 217, 0.32);
 }
 
 * {
@@ -64,6 +93,41 @@ body {
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===========================================
+   CUSTOM SCROLLBAR — thin, theme-aware
+   =========================================== */
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* Webkit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 99px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--scrollbar-track);
 }
 
 html {
@@ -98,7 +162,11 @@ h1 {
 
 /* Subtle dividers */
 .divider {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--border);
+}
+
+[data-theme="dark"] .divider {
+  border-bottom-color: var(--border);
 }
 
 /* Card default — warm Anthropic style */
@@ -108,7 +176,45 @@ h1 {
   border-radius: 14px;
 }
 
-/* Reveal animation */
+/* ===========================================
+   SKELETON SHIMMER
+   =========================================== */
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--skeleton-shine) 20%,
+    rgba(255, 255, 255, 0.12) 40%,
+    var(--skeleton-shine) 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.8s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ===========================================
+   REVEAL ANIMATION
+   =========================================== */
 [data-reveal] {
   opacity: 0;
   transform: translateY(24px);
@@ -150,6 +256,11 @@ h1 {
   transform: translateY(-4px);
   box-shadow: 0 16px 40px -12px rgba(25, 25, 24, 0.10);
   border-color: rgba(25, 25, 24, 0.10);
+}
+
+[data-theme="dark"] .card-hover:hover {
+  box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.4);
+  border-color: rgba(229, 228, 217, 0.12);
 }
 
 /* Logo typing animation */
@@ -220,10 +331,14 @@ h1 {
 
 /* D3 Globe Styles - Enhanced */
 .globe-sphere {
-  fill: url(#sphereGradient);
-  stroke: #c2bcb3;
+  fill: var(--bg-secondary);
+  stroke: var(--border);
   stroke-width: 1.5px;
   filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}
+
+[data-theme="dark"] .globe-sphere {
+  stroke: #3a3a38;
 }
 
 .graticule {
@@ -233,6 +348,10 @@ h1 {
   stroke-dasharray: 2, 2;
 }
 
+[data-theme="dark"] .graticule {
+  stroke: rgba(229, 228, 217, 0.06);
+}
+
 .world-path {
   fill: #e8e5dc;
   stroke: #d1cbc1;
@@ -240,8 +359,17 @@ h1 {
   transition: fill 0.5s ease, stroke 0.5s ease;
 }
 
+[data-theme="dark"] .world-path {
+  fill: #2a2a28;
+  stroke: #3a3a38;
+}
+
 .world-path:hover {
   fill: #e0d9cc;
+}
+
+[data-theme="dark"] .world-path:hover {
+  fill: #333330;
 }
 
 .state-path {
@@ -250,6 +378,11 @@ h1 {
   stroke-width: 1px;
   transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
+}
+
+[data-theme="dark"] .state-path {
+  fill: #2a2a28;
+  stroke: #4a4a48;
 }
 
 .state-path:hover {
@@ -334,6 +467,43 @@ h1 {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ===========================================
+   TYPING CURSOR FOR AI DEMO
+   =========================================== */
+@keyframes typing-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typing-cursor::after {
+  content: '▊';
+  font-size: 0.85em;
+  color: var(--accent);
+  animation: typing-cursor 1s ease-in-out infinite;
+  margin-left: 2px;
+}
+
+/* ===========================================
+   GRADIENT TEXT
+   =========================================== */
+.gradient-text {
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===========================================
+   PLAN CARD GLOW (for popular/recommended plan)
+   =========================================== */
+.plan-glow {
+  box-shadow: 0 0 0 1px var(--accent), 0 8px 32px -8px rgba(217, 119, 87, 0.2);
+}
+
+[data-theme="dark"] .plan-glow {
+  box-shadow: 0 0 0 1px var(--accent), 0 8px 32px -8px rgba(217, 119, 87, 0.35);
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] {
@@ -350,7 +520,69 @@ h1 {
     animation: none;
   }
 
+  .skeleton-shimmer::after {
+    animation: none;
+  }
+
   .fixed[style*="float"] {
     animation: none !important;
   }
+}
+
+/* ===========================================
+   CHAT MARKDOWN PROSE STYLES
+   =========================================== */
+.digitn-prose p { margin: 0 0 0.75em; color: var(--text-primary); }
+.digitn-prose p:last-child { margin-bottom: 0; }
+.digitn-prose h1,.digitn-prose h2,.digitn-prose h3 {
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+  margin: 1.2em 0 0.4em;
+  font-weight: 600;
+}
+.digitn-prose code {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 13px;
+  color: var(--accent);
+}
+.digitn-prose pre {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  margin: 0.75em 0;
+}
+.digitn-prose pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text-primary);
+  font-size: 13px;
+}
+.digitn-prose ul,.digitn-prose ol {
+  padding-left: 1.4em;
+  margin: 0.5em 0;
+}
+.digitn-prose li { margin: 0.2em 0; color: var(--text-primary); }
+.digitn-prose strong { color: var(--text-primary); font-weight: 600; }
+.digitn-prose blockquote {
+  border-left: 3px solid var(--accent);
+  margin: 0.75em 0;
+  padding: 0.25em 1em;
+  color: var(--text-secondary);
+}
+.digitn-prose a { color: var(--accent); text-decoration: underline; }
+.digitn-prose hr { border-color: var(--border); margin: 1em 0; }
+.digitn-prose table { width: 100%; border-collapse: collapse; margin: 0.75em 0; font-size: 14px; }
+.digitn-prose th { background: var(--card-bg); border: 1px solid var(--border); padding: 6px 10px; text-align: left; font-weight: 600; }
+.digitn-prose td { border: 1px solid var(--border); padding: 6px 10px; }
+
+/* Chat component animations */
+@keyframes bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40% { transform: translateY(-6px); opacity: 1; }
 }

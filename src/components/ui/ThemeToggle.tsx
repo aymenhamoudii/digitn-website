@@ -4,11 +4,17 @@ import { useEffect, useState } from 'react'
 import { FiSun, FiMoon } from 'react-icons/fi'
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light')
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark')
 
   useEffect(() => {
     const saved = localStorage.getItem('digitn-theme') as 'light' | 'dark' | null
-    if (saved) setTheme(saved)
+    if (saved) {
+      setTheme(saved)
+    } else {
+      // Default to dark, or follow device preference
+      const prefersDark = !window.matchMedia('(prefers-color-scheme: light)').matches
+      setTheme(prefersDark ? 'dark' : 'light')
+    }
   }, [])
 
   const toggle = () => {

@@ -116,7 +116,7 @@ export default function QuestionnaireForm({
                 <label
                   key={opt.value}
                   className={`flex items-start p-3 rounded-lg border cursor-pointer transition-colors
-                    ${(q.type === 'single' ? answers[q.id] === opt.value : (answers[q.id] as string[])?.includes(opt.value))
+                    ${(q.type === 'single' ? answers[q.id] === opt.value : Array.isArray(answers[q.id]) && (answers[q.id] as string[]).includes(opt.value))
                       ? 'border-[var(--accent)] bg-[var(--bg-secondary)]'
                       : 'border-[var(--border)] hover:border-[var(--text-tertiary)] bg-[var(--bg-primary)]'
                     }
@@ -130,7 +130,7 @@ export default function QuestionnaireForm({
                       className="w-4 h-4 text-[var(--accent)] bg-transparent border-[var(--border)] focus:ring-[var(--accent)]"
                       checked={q.type === 'single'
                         ? answers[q.id] === opt.value
-                        : ((answers[q.id] as string[]) || []).includes(opt.value)
+                        : Array.isArray(answers[q.id]) && (answers[q.id] as string[]).includes(opt.value)
                       }
                       onChange={() => q.type === 'single'
                         ? handleSingleSelect(q.id, opt.value)
@@ -146,21 +146,27 @@ export default function QuestionnaireForm({
 
               {q.allowCustom && (
                  <label className={`flex items-start p-3 rounded-lg border cursor-pointer transition-colors
-                    ${answers[q.id] === 'custom' ? 'border-[var(--accent)] bg-[var(--bg-secondary)]' : 'border-[var(--border)] hover:border-[var(--text-tertiary)] bg-[var(--bg-primary)]'}
+                    ${(q.type === 'single' ? answers[q.id] === 'custom' : Array.isArray(answers[q.id]) && (answers[q.id] as string[]).includes('custom'))
+                      ? 'border-[var(--accent)] bg-[var(--bg-secondary)]'
+                      : 'border-[var(--border)] hover:border-[var(--text-tertiary)] bg-[var(--bg-primary)]'}
                  `}>
                     <div className="flex items-center h-5 mt-0.5">
                     <input
-                      type="radio"
+                      type={q.type === 'single' ? 'radio' : 'checkbox'}
                       name={q.id}
                       value="custom"
                       className="w-4 h-4 text-[var(--accent)]"
-                      checked={answers[q.id] === 'custom'}
-                      onChange={() => handleSingleSelect(q.id, 'custom')}
+                      checked={q.type === 'single'
+                        ? answers[q.id] === 'custom'
+                        : Array.isArray(answers[q.id]) && (answers[q.id] as string[]).includes('custom')}
+                      onChange={() => q.type === 'single'
+                        ? handleSingleSelect(q.id, 'custom')
+                        : handleMultiSelect(q.id, 'custom')}
                     />
                   </div>
                   <div className="ml-3 text-sm w-full">
                     <span className="text-[var(--text-primary)] block mb-2">Something else</span>
-                    {answers[q.id] === 'custom' && (
+                    {(q.type === 'single' ? answers[q.id] === 'custom' : Array.isArray(answers[q.id]) && (answers[q.id] as string[]).includes('custom')) && (
                         <input
                           type="text"
                           placeholder="Please specify..."

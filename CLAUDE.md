@@ -63,18 +63,18 @@ Vercel has 60-second function timeout. AI builds take 5-10 minutes. Running on V
 
 ---
 
-## Subscription Tiers
+## Subscription Tiers (Dual-Quota System)
 
-| Tier Key | Display Name | Requests/Day | Active Projects | AI Models | Price |
-|----------|-------------|-------------|-----------------|-----------|-------|
-| `free` | DIGITN FAST | 10 | 1 | ag/gemini-3-flash, gh/gpt-5-mini, qw/qwen3-coder-flash | Free forever |
-| `pro` | DIGITN PRO | 50 | 3 | ag/claude-sonnet-4-6, gh/claude-sonnet-4.6, kr/claude-sonnet-4.5 | 29 DT / $9 /month |
-| `plus` | DIGITN PLUS | Unlimited | Unlimited | Same premium models as PRO | 79 DT / $25 /month |
+| Tier Key | Display Name | Chat Requests | Builder Requests | Active Projects | Price |
+|----------|-------------|---------------|------------------|-----------------|-------|
+| `free` | DIGITN FAST | 50 / day | 10 / day | 1 | Free forever |
+| `pro` | DIGITN PRO | 300 / day | 50 / day | 3 | 29 DT / $9 /month |
+| `plus` | DIGITN PLUS | Unlimited | Unlimited | Unlimited | 79 DT / $25 /month |
 
-- PRO and PLUS use the **same premium models** — difference is request limits
-- 9Router automatically selects the best available model from the list
-- Preview expiry: **15 minutes** for ALL tiers (resets on rebuild)
-- Config stored in `admin_config` table and `src/config/platform.ts`
+- PRO and PLUS use the **same premium models** (Claude 3.5 Sonnet).
+- 9Router automatically selects the best available model from the list.
+- Preview expiry: **15 minutes** for ALL tiers (resets on rebuild).
+- Config stored in `admin_config` table and `src/config/platform.ts`.
 
 ---
 
@@ -224,7 +224,8 @@ digitn-pro/
 
 **`usage_quotas`** — daily request tracking
 - user_id, date, requests_used, requests_limit
-- UNIQUE(user_id, date) — one row per user per day
+- UNIQUE(user_id, date) — one row per user per day per type
+- `date` field format: `YYYY-MM-DD-chat` or `YYYY-MM-DD-builder`
 
 **`subscriptions`** — payment records
 - user_id, tier (pro/plus), status (active/cancelled/past_due)
@@ -303,11 +304,11 @@ digitn-pro/
 ## Data Flow: How Chat Works
 
 ```
-1. User types message in ChatInterface.tsx
+1. User types message in ChatInterface.tsx (Claude-style UI)
 2. POST /api/chat/stream (Next.js API route)
-3. API checks auth (Supabase session) and quota (usage_quotas table)
+3. API checks auth (Supabase session) and chat quota (usage_quotas table 'YYYY-MM-DD-chat')
 4. If quota OK: increment requests_used, forward to Bridge
-5. POST bridge:3001/chat/stream with { userId, messages, conversationId, isNew }
+5. POST bridge:3001/chat/stream with { userId, messages, conversationId, mode: 'chat', isNew }
 6. Bridge gets user tier from DB, selects model list
 7. Bridge calls 9Router: POST localhost:20128/v1/chat/completions (OpenAI format, stream: true)
 8. 9Router picks best available provider, streams response
@@ -315,23 +316,26 @@ digitn-pro/
 10. Bridge saves conversation + messages to Supabase
 11. Next.js proxies SSE back to browser
 12. ChatInterface renders tokens in real-time via MessageBubble (Markdown)
+13. If new chat, frontend polls for async generated title while stream finishes
 ```
 
 ## Data Flow: How Builder Works
 
 ```
-1. User describes project in Builder page (planning phase)
-2. AI asks clarifying questions via chat
-3. User approves plan
-4. POST /api/builder/create → creates project in DB with expires_at = now + 15min
-5. Calls bridge:3001/build/start with { projectId, planText, userId }
-6. Bridge spawns Claude Code CLI: npx @anthropic-ai/claude-code --print -p "instruction"
-7. Claude Code generates all files in /var/www/projects/[id]/
-8. Bridge streams stdout/stderr as SSE events to frontend BuildProgress.tsx
-9. On completion: Bridge zips project, updates DB status to 'ready'
-10. Frontend shows ProjectPreview.tsx with iframe pointing to digitn.tech/projects/[id]
-11. User can download ZIP or request changes (resets 15-min timer)
-12. Cleanup cron runs every 2 min: deletes expired projects from disk + DB
+1. User clicks "Create Project" (consumes 1 Builder Request quota)
+2. User describes project, selects Stack (HTML/React/Node etc)
+3. Enters Project Builder Planning Chat (Claude-style UI, same data flow as Chat but with Builder system prompt and Stack injected)
+4. AI asks clarifying questions via chat
+5. User clicks "Build it"
+6. POST /api/builder/start → updates project status to 'building' with expires_at = now + 15min
+7. Calls bridge:3001/build/start with { projectId, planText, userId }
+8. Bridge spawns Claude Code CLI: npx @anthropic-ai/claude-code --print -p "instruction"
+9. Claude Code generates all files in /var/www/projects/[id]/
+10. Bridge streams stdout/stderr as SSE events to frontend BuildProgress.tsx
+11. On completion: Bridge zips project, updates DB status to 'ready'
+12. Frontend shows ProjectPreview.tsx with iframe pointing to digitn.tech/projects/[id]
+13. User can download ZIP or request changes (resets 15-min timer)
+14. Cleanup cron runs every 2 min: deletes expired projects from disk + DB
 ```
 
 ## Data Flow: How Payments Work
@@ -409,27 +413,30 @@ rm -rf .next && npm run dev    # Clear cache and restart
 ### ✅ Phase 1: Infrastructure & Foundation — COMPLETE
 - Next.js 14 SSR (removed static export)
 - Supabase integration (clients, DB schema, RLS)
-- Design system (light + dark mode CSS variables)
+- Design system (light + dark mode CSS variables, global prose styles)
 - i18n (Arabic RTL, French, English via next-intl)
-- Auth (login, signup, Google OAuth, middleware protection)
+- Auth (login, signup, Google OAuth, forgot/reset password, middleware protection)
 - Platform shell (Sidebar, Header, ThemeToggle, LanguageSwitcher)
 - PM2 + Nginx configs ready
 
 ### ✅ Phase 2: Chat Mode — COMPLETE
 - Express Bridge server with 9Router integration
 - SSE streaming chat with real-time token rendering
-- Conversation persistence in Supabase
-- Quota enforcement (10/50/unlimited per tier)
-- Chat history pages (/app/chat/[id])
-- Markdown rendering with react-markdown
+- Claude-style UI overhaul (centered column, large input)
+- Async AI-generated chat titles (optimistic polling)
+- Conversation persistence + Delete chat functionality
+- Independent Chat Quota enforcement (50/300/unlimited)
 
 ### ✅ Phase 3: Builder Mode — COMPLETE
+- Project creation form with Stack selection
+- Dedicated Planning Chat with Builder system prompt
 - Claude Code CLI spawner in Bridge
 - Build progress terminal (SSE EventSource)
 - Project preview iframe with device toggle
 - ZIP download generation
 - Projects list page with status badges
 - 15-minute project expiry system
+- Independent Builder Quota enforcement (10/50/unlimited)
 
 ### ✅ Phase 4: Payments & Subscriptions — COMPLETE
 - Stripe Checkout integration

@@ -169,17 +169,14 @@ export default async function RootLayout({
     >
       <head>
         <script
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                const theme = localStorage.getItem('digitn-theme') || 'light';
-                document.documentElement.setAttribute('data-theme', theme);
-              } catch (e) {}
-            `,
+            __html: `(function(){try{var t=localStorage.getItem('digitn-theme');document.documentElement.setAttribute('data-theme',t||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'));}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();`,
           }}
         />
         <script
           type="application/ld+json"
+          suppressHydrationWarning
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {siteConfig.analytics.googleAnalyticsId && (
