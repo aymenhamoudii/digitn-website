@@ -1,9 +1,9 @@
-import { createServerClient } from '@/lib/supabase/server';
+import { createClient } from '@/lib/supabase/server';
 import { notFound, redirect } from 'next/navigation';
 import TerminalChat from '@/components/builder/TerminalChat';
 
 export default async function TerminalPage({ params }: { params: { id: string } }) {
-  const supabase = createServerClient();
+  const supabase = createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) redirect('/auth/login');
