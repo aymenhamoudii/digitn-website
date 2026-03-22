@@ -35,6 +35,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: true, projectId });
     }
 
+    if (project.status !== 'analyzing' && project.status !== 'failed' && project.status !== 'planning') {
+      return NextResponse.json({ error: 'Invalid project status', code: 'INVALID_STATE' }, { status: 400 });
+    }
+
     const { data: userData } = await supabase.from('users').select('tier').eq('id', user.id).maybeSingle();
     const tier = userData?.tier || 'free';
 
