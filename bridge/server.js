@@ -27,6 +27,8 @@ app.use(async (req, res, next) => {
 
 app.use('/chat', chatRoutes);
 app.use('/build', buildRoutes);
+const builderAnalyzeRoutes = require('./src/routes/builder-analyze');
+app.use('/builder', builderAnalyzeRoutes);
 
 const PORT = process.env.BRIDGE_PORT || 3001;
 
