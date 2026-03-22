@@ -90,11 +90,11 @@ router.post('/chat/:id', async (req, res) => {
 Project directory: ${projectDir}
 Project type: ${project.type}
 Original description: ${project.description}
-${project.questionnaire_answers ? \`Questionnaire answers:\n\${project.questionnaire_answers}\` : ''}
+${project.questionnaire_answers ? `Questionnaire answers:\n\${project.questionnaire_answers}` : ''}
 
 Current files: ${fileList}
 
-${historyText ? \`Recent conversation history:\n\${historyText}\` : ''}
+${historyText ? `Recent conversation history:\n\${historyText}` : ''}
 
 User request: ${message}
 
