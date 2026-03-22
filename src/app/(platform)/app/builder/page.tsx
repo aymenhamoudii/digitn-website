@@ -25,32 +25,45 @@ export default function BuilderPage() {
     setSubmitting(true);
 
     try {
-      // Create project record + consume 1 builder request
-      const res = await fetch('/api/builder/create', {
+      const res = await fetch('/api/builder/analyze', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: name.trim() || description.trim().substring(0, 40),
-          description: description.trim(),
-          stack,
-          // No planText yet — planning happens in the chat
-        }),
+        body: JSON.stringify({ name: name.trim() || description.trim().substring(0, 40), description, stack })
       });
 
       const data = await res.json();
 
       if (res.status === 429) {
         toast.error(data.error || 'Builder limit reached. Resets at midnight.');
+        setSubmitting(false);
         return;
       }
 
-      if (!res.ok) throw new Error(data.error || 'Failed to create project');
+      if (!res.ok) {
+        throw new Error(data.error || 'Une erreur est survenue');
+      }
 
-      // Navigate to the builder chat for this project
-      router.push(`/app/builder/${data.projectId}`);
-    } catch (err: any) {
-      toast.error(err.message || 'Something went wrong.');
-    } finally {
+      // If clear, start build immediately
+      if (data.ready) {
+         const startRes = await fetch('/api/builder/start', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ projectId: data.projectId })
+         });
+
+         if (!startRes.ok) {
+             const startData = await startRes.json();
+             throw new Error(startData.error || 'Failed to start build');
+         }
+
+         router.push(`/app/builder/terminal/${data.projectId}`);
+      } else {
+         // Show questionnaire
+         router.push(`/app/builder/questionnaire/${data.projectId}`);
+      }
+
+    } catch (error: any) {
+      toast.error(error.message);
       setSubmitting(false);
     }
   };
