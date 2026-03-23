@@ -1,3 +1,7 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 # DIGITN SaaS Platform — Complete Project Reference
 
 > **READ THIS FIRST.** This file contains everything about the project. Do NOT read individual code files unless making changes to them. This file IS the context.
@@ -61,6 +65,10 @@ Vercel has 60-second function timeout. AI builds take 5-10 minutes. Running on V
 
 5. **9Router API key is configurable from the admin panel** — no code changes needed to switch providers.
 
+6. **Windows compatibility** — Bridge uses `npx.cmd` instead of `npx` when spawning Claude Code CLI on Windows (detected via `process.platform === 'win32'`).
+
+7. **Project status flow** — Projects go through: analyzing → (optional questionnaire) → planning → building → ready. Status 'analyzing' is used during AI questionnaire generation.
+
 ---
 
 ## Subscription Tiers (Dual-Quota System)
@@ -99,7 +107,7 @@ digitn-pro/
 │       └── 001_initial_schema.sql     # 7 tables + RLS + triggers + indexes + seed data
 │
 ├── bridge/                            # === EXPRESS.JS AI BRIDGE SERVER ===
-│   ├── server.js                      # Express app, auth middleware, mounts /chat + /build, cleanup cron
+│   ├── server.js                      # Express app, auth middleware, mounts routes, cleanup cron
 │   ├── cleanup.js                     # Cron: deletes expired projects every 2 min
 │   ├── package.json                   # express, cors, openai, @supabase/supabase-js, archiver, node-cron
 │   └── src/
@@ -109,7 +117,9 @@ digitn-pro/
 │       │   └── builder.js             # Spawns Claude Code CLI, streams output, zips result
 │       └── routes/
 │           ├── chat.js                # POST /chat/stream → SSE streaming from 9Router
-│           └── build.js               # POST /build/start + GET /build/stream/:id
+│           ├── build.js               # POST /build/start + GET /build/stream/:id
+│           ├── builder-analyze.js     # POST /builder/analyze → AI questionnaire generation
+│           └── builder-chat.js        # POST /builder/chat/:id → modify existing projects
 │
 ├── src/
 │   ├── app/
@@ -131,7 +141,9 @@ digitn-pro/
 │   │   │       │   ├── page.tsx       # New chat page
 │   │   │       │   └── [id]/page.tsx  # Chat history page (loads messages from DB)
 │   │   │       ├── builder/
-│   │   │       │   └── page.tsx       # 3-phase builder: planning → building → preview
+│   │   │       │   ├── page.tsx       # Builder start: project form (name, description, stack)
+│   │   │       │   ├── questionnaire/[id]/page.tsx  # AI-generated questionnaire
+│   │   │       │   └── terminal/[id]/page.tsx       # Build terminal + chat interface
 │   │   │       ├── projects/
 │   │   │       │   └── page.tsx       # Project list with status badges
 │   │   │       └── settings/
@@ -149,8 +161,12 @@ digitn-pro/
 │   │   └── api/                       # === API ROUTES ===
 │   │       ├── chat/stream/route.ts             # SSE proxy: quota check → forward to bridge /chat/stream
 │   │       ├── builder/
-│   │       │   ├── create/route.ts              # Trigger build: quota check → create project → call bridge /build/start
-│   │       │   └── stream/[id]/route.ts         # SSE proxy: ownership check → forward bridge /build/stream/:id
+│   │       │   ├── analyze/route.ts             # Analyze project description, generate questionnaire
+│   │       │   ├── create/route.ts              # Legacy route (may be unused)
+│   │       │   ├── start/route.ts               # Start build: call bridge /build/start
+│   │       │   ├── stream/[id]/route.ts         # SSE proxy: ownership check → forward bridge /build/stream/:id
+│   │       │   └── chat/[id]/route.ts           # Proxy to bridge builder-chat for modifications
+│   │       ├── conversations/[id]/route.ts      # Delete conversation endpoint
 │   │       ├── subscriptions/
 │   │       │   └── create/route.ts              # Create Stripe Checkout or Konnect payment session
 │   │       ├── webhooks/
@@ -166,6 +182,8 @@ digitn-pro/
 │   │   │   ├── ChatInput.tsx          # Auto-resize textarea + send button
 │   │   │   └── MessageBubble.tsx      # Markdown rendering (react-markdown + remark-gfm)
 │   │   ├── builder/
+│   │   │   ├── QuestionnaireForm.tsx  # AI-generated questionnaire UI
+│   │   │   ├── TerminalChat.tsx       # Combined build terminal + chat interface for modifications
 │   │   │   ├── BuildProgress.tsx      # Terminal-like build output (SSE EventSource)
 │   │   │   └── ProjectPreview.tsx     # iframe preview + device toggle + download + expiry countdown
 │   │   ├── layout/
@@ -239,13 +257,18 @@ digitn-pro/
 
 **`projects`** — generated projects
 - user_id, conversation_id, name, description, plan_json
-- status (planning/building/ready/failed/expired)
+- status (analyzing/planning/building/ready/failed/expired)
 - type (website/webapp/ecommerce/api)
 - serve_path (/var/www/projects/[id]), public_url, zip_path
 - expires_at, last_accessed_at
+- analysis_result (JSONB) — stores AI-generated questionnaire
+- questionnaire_answers (TEXT) — stores user's questionnaire responses
 
 **`admin_config`** — dynamic settings (editable from /admin)
 - key/value pairs: bridge_settings, tier_limits, free_models, paid_models
+
+**`builder_chat_messages`** — chat history for project modifications
+- project_id, role (user/assistant), content, created_at
 
 **RLS:** Enabled on all tables. Users can only access their own data. admin_config has RLS enabled (service role only).
 
@@ -324,18 +347,23 @@ digitn-pro/
 ```
 1. User clicks "Create Project" (consumes 1 Builder Request quota)
 2. User describes project, selects Stack (HTML/React/Node etc)
-3. Enters Project Builder Planning Chat (Claude-style UI, same data flow as Chat but with Builder system prompt and Stack injected)
-4. AI asks clarifying questions via chat
-5. User clicks "Build it"
-6. POST /api/builder/start → updates project status to 'building' with expires_at = now + 15min
-7. Calls bridge:3001/build/start with { projectId, planText, userId }
-8. Bridge spawns Claude Code CLI: npx @anthropic-ai/claude-code --print -p "instruction"
-9. Claude Code generates all files in /var/www/projects/[id]/
-10. Bridge streams stdout/stderr as SSE events to frontend BuildProgress.tsx
-11. On completion: Bridge zips project, updates DB status to 'ready'
-12. Frontend shows ProjectPreview.tsx with iframe pointing to digitn.tech/projects/[id]
-13. User can download ZIP or request changes (resets 15-min timer)
-14. Cleanup cron runs every 2 min: deletes expired projects from disk + DB
+3. POST /api/builder/analyze → creates project with status 'analyzing'
+4. Bridge analyzes description via 9Router to determine if questionnaire needed
+5. If questions needed: redirect to /app/builder/questionnaire/[id]
+   - User answers multiple-choice questions
+   - Answers stored in project.questionnaire_answers
+6. If ready or after questionnaire: redirect to /app/builder/terminal/[id]
+7. POST /api/builder/start → updates project status to 'building' with expires_at = now + 15min
+8. Calls bridge:3001/build/start with { projectId, description, stack, userId }
+9. Bridge spawns Claude Code CLI: npx @anthropic-ai/claude-code --print -p "instruction"
+   - On Windows: uses npx.cmd instead of npx
+10. Claude Code generates all files in /var/www/projects/[id]/
+11. Bridge streams stdout/stderr as SSE events to frontend TerminalChat.tsx
+12. On completion: Bridge zips project, updates DB status to 'ready'
+13. Frontend shows iframe preview pointing to digitn.tech/projects/[id]
+14. User can download ZIP or chat to modify project (resets 15-min timer)
+15. Modifications use POST /builder/chat/:id → spawns Claude Code in project dir
+16. Cleanup cron runs every 2 min: deletes expired projects from disk + DB
 ```
 
 ## Data Flow: How Payments Work
@@ -388,8 +416,13 @@ NEXT_PUBLIC_APP_URL=https://digitn.tech  # or http://localhost:4000 for dev
 
 ```bash
 # Development
-npm run dev                    # Start Next.js dev server
-cd bridge && node server.js    # Start AI Bridge (needs 9Router running on VPS)
+npm run dev                    # Start Next.js dev server (port 3000)
+cd bridge && npm start         # Start AI Bridge (needs 9Router running at localhost:20128)
+
+# Testing & Linting
+npx next lint                  # Run Next.js linting
+npm run build                  # Build for production (also runs lint/typecheck)
+# (No test runner currently configured in package.json)
 
 # Production
 npm run build                  # Build for production
@@ -398,12 +431,18 @@ npm start                      # Start production server
 # VPS Deployment
 pm2 start ecosystem.config.js           # Start Next.js via PM2
 pm2 start bridge/server.js --name bridge # Start Bridge via PM2
+pm2 logs                                 # View logs
+pm2 restart all                          # Restart all processes
 
 # Database
-# Run supabase/migrations/001_initial_schema.sql in Supabase SQL Editor
+# Run supabase/migrations/*.sql in Supabase SQL Editor
 
 # Clean restart
 rm -rf .next && npm run dev    # Clear cache and restart
+
+# Windows-specific notes
+# - Bridge uses npx.cmd instead of npx for spawning Claude Code
+# - Use forward slashes in paths (bash shell on Windows)
 ```
 
 ---
@@ -429,14 +468,17 @@ rm -rf .next && npm run dev    # Clear cache and restart
 
 ### ✅ Phase 3: Builder Mode — COMPLETE
 - Project creation form with Stack selection
-- Dedicated Planning Chat with Builder system prompt
+- AI-powered project analysis with questionnaire generation
+- Dynamic questionnaire UI with multiple-choice questions
 - Claude Code CLI spawner in Bridge
 - Build progress terminal (SSE EventSource)
 - Project preview iframe with device toggle
+- Post-build chat interface for modifications
 - ZIP download generation
 - Projects list page with status badges
 - 15-minute project expiry system
 - Independent Builder Quota enforcement (10/50/unlimited)
+- Windows compatibility (npx.cmd for spawning processes)
 
 ### ✅ Phase 4: Payments & Subscriptions — COMPLETE
 - Stripe Checkout integration
@@ -459,17 +501,18 @@ rm -rf .next && npm run dev    # Clear cache and restart
 ## What Still Needs Manual Setup
 
 ### Required Before Going Live:
-1. **Run DB migration** — Execute `supabase/migrations/001_initial_schema.sql` in Supabase SQL Editor
+1. **Run DB migration** — Execute `supabase/migrations/001_initial_schema.sql` in Supabase SQL Editor (includes builder_chat_messages table)
 2. **Disable email confirmation** — Supabase → Auth → Providers → Email → Toggle OFF "Confirm email"
 3. **Enable Google OAuth** — Supabase → Auth → Providers → Google (needs Google Cloud Console credentials)
 4. **Create Stripe products** — DIGITN PRO ($9/mo) and DIGITN PLUS ($25/mo), add price IDs to env
 5. **Set up Stripe webhook** — Point to `https://digitn.tech/api/webhooks/stripe`
 6. **Get Konnect credentials** — API key + wallet ID from konnect.network
-7. **VPS setup** — Clone repo, npm install, npm run build, pm2 start, nginx config, certbot SSL
+7. **VPS setup** — Clone repo, npm install (both root and bridge/), npm run build, pm2 start, nginx config, certbot SSL
 8. **DNS** — Point digitn.tech A record to VPS IP
 9. **9Router** — Ensure running at localhost:20128 on VPS
 10. **Claude Code** — Install on VPS: `npm install -g @anthropic-ai/claude-code`
 11. **Create directories** — `mkdir -p /var/www/projects /var/www/zips`
+12. **Bridge dependencies** — Run `cd bridge && npm install` to install Express and dependencies
 
 ### Optional:
 - Google Analytics ID in `src/config/site.ts`

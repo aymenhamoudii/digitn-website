@@ -84,13 +84,15 @@ CREATE TABLE IF NOT EXISTS public.projects (
   name text NOT NULL,
   description text,
   plan_json jsonb,
-  status text NOT NULL DEFAULT 'building' CHECK (status IN ('planning', 'building', 'ready', 'failed', 'expired')),
+  status text NOT NULL DEFAULT 'analyzing' CHECK (status IN ('analyzing', 'planning', 'building', 'ready', 'failed', 'expired')),
   type text CHECK (type IN ('website', 'webapp', 'ecommerce', 'api')),
   serve_path text,
   public_url text,
   zip_path text,
   expires_at timestamptz,
   last_accessed_at timestamptz,
+  analysis_result jsonb,
+  questionnaire_answers text,
   created_at timestamptz NOT NULL DEFAULT now(),
   updated_at timestamptz NOT NULL DEFAULT now()
 );
@@ -100,6 +102,15 @@ CREATE TABLE IF NOT EXISTS public.admin_config (
   key text PRIMARY KEY,
   value jsonb NOT NULL,
   updated_at timestamptz NOT NULL DEFAULT now()
+);
+
+-- BUILDER CHAT MESSAGES
+CREATE TABLE IF NOT EXISTS public.builder_chat_messages (
+  id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+  project_id uuid NOT NULL REFERENCES public.projects(id) ON DELETE CASCADE,
+  role text NOT NULL CHECK (role IN ('user', 'assistant')),
+  content text NOT NULL,
+  created_at timestamptz NOT NULL DEFAULT now()
 );
 
 INSERT INTO public.admin_config (key, value) VALUES
@@ -116,6 +127,7 @@ ALTER TABLE public.subscriptions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.conversations ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.messages ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.projects ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.builder_chat_messages ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY "Users can read own data" ON public.users FOR SELECT USING (auth.uid() = id);
 CREATE POLICY "Users can update own data" ON public.users FOR UPDATE USING (auth.uid() = id);
@@ -124,6 +136,9 @@ CREATE POLICY "Users can read own subscriptions" ON public.subscriptions FOR SEL
 CREATE POLICY "Users can manage own conversations" ON public.conversations FOR ALL USING (auth.uid() = user_id);
 CREATE POLICY "Users can manage own messages" ON public.messages FOR ALL USING (auth.uid() = user_id);
 CREATE POLICY "Users can manage own projects" ON public.projects FOR ALL USING (auth.uid() = user_id);
+CREATE POLICY "Users can manage own builder chat messages" ON public.builder_chat_messages FOR ALL USING (
+  auth.uid() IN (SELECT user_id FROM public.projects WHERE id = builder_chat_messages.project_id)
+);
 
 -- Indexes
 CREATE INDEX IF NOT EXISTS idx_messages_conversation ON public.messages(conversation_id);
@@ -131,6 +146,7 @@ CREATE INDEX IF NOT EXISTS idx_projects_user ON public.projects(user_id);
 CREATE INDEX IF NOT EXISTS idx_projects_status ON public.projects(status);
 CREATE INDEX IF NOT EXISTS idx_projects_expires ON public.projects(expires_at);
 CREATE INDEX IF NOT EXISTS idx_usage_quotas_user_date ON public.usage_quotas(user_id, date);
+CREATE INDEX IF NOT EXISTS idx_builder_chat_messages_project ON public.builder_chat_messages(project_id);
 
 -- Admin config: only service role can write (no public access)
 ALTER TABLE public.admin_config ENABLE ROW LEVEL SECURITY;

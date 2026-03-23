@@ -35,7 +35,7 @@ export default function DashboardPage() {
         .from('usage_quotas')
         .select('requests_used, requests_limit')
         .eq('user_id', user.id)
-        .eq('date', \`${today}-builder\`)
+        .eq('date', `${today}-builder`)
         .maybeSingle()
 
       // Fetch projects

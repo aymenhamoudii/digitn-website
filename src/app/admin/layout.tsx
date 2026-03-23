@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
-import { FiHome, FiActivity } from 'react-icons/fi'
+import { FiHome, FiActivity, FiUsers, FiCpu, FiSliders } from 'react-icons/fi'
 import { DigItnLogo } from '@/components/ui/DigItnLogo'
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -13,17 +13,22 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   return (
     <div className="min-h-screen bg-[var(--bg-primary)] flex">
       {/* Admin Sidebar */}
-      <aside className="w-64 fixed left-0 top-0 h-full border-r border-[var(--border)] bg-[var(--bg-secondary)] z-40">
+      <aside className="w-64 fixed left-0 top-0 h-full border-r border-[var(--border)] bg-[var(--bg-secondary)] z-40 flex flex-col">
         <div className="p-6 border-b border-[var(--border)]">
           <Link href="/admin" className="flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
             <DigItnLogo size={20} />
             <span className="font-serif font-bold text-xl text-[var(--text-primary)]">ADMIN</span>
           </Link>
         </div>
-        <nav className="p-4 space-y-2">
-          <Link href="/admin" className="flex items-center gap-3 px-3 py-2 bg-[var(--card-bg)] rounded-md text-sm text-[var(--text-primary)] font-medium"><FiHome /> Overview</Link>
-          <Link href="/app" className="flex items-center gap-3 px-3 py-2 hover:bg-[var(--card-bg)] rounded-md text-sm text-[var(--text-secondary)] mt-auto border-t border-[var(--border)] pt-4"><FiActivity /> Exit to App</Link>
+        <nav className="p-4 space-y-2 flex-1">
+          <Link href="/admin" className="flex items-center gap-3 px-3 py-2 hover:bg-[var(--card-bg)] rounded-md text-sm text-[var(--text-primary)] font-medium transition-colors"><FiHome /> Overview</Link>
+          <Link href="/admin/users" className="flex items-center gap-3 px-3 py-2 hover:bg-[var(--card-bg)] rounded-md text-sm text-[var(--text-primary)] font-medium transition-colors"><FiUsers /> Manage Users</Link>
+          <Link href="/admin/models" className="flex items-center gap-3 px-3 py-2 hover:bg-[var(--card-bg)] rounded-md text-sm text-[var(--text-primary)] font-medium transition-colors"><FiCpu /> AI Models</Link>
+          <Link href="/admin/limits" className="flex items-center gap-3 px-3 py-2 hover:bg-[var(--card-bg)] rounded-md text-sm text-[var(--text-primary)] font-medium transition-colors"><FiSliders /> Tier Limits</Link>
         </nav>
+        <div className="p-4 border-t border-[var(--border)]">
+          <Link href="/app" className="flex items-center gap-3 px-3 py-2 hover:bg-[var(--card-bg)] rounded-md text-sm text-[var(--text-secondary)] font-medium transition-colors"><FiActivity /> Exit to App</Link>
+        </div>
       </aside>
 
       <main className="ml-64 flex-1 min-h-screen">

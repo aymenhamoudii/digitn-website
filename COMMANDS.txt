@@ -1,0 +1,85 @@
+# DIGITN Platform - Quick Command Reference
+
+## Commit Changes
+git commit -F .git-commit-message.txt
+git push
+
+## Database Setup (CRITICAL - Do this first!)
+# 1. Open: https://supabase.com/dashboard/project/deccdkiiegniqbvqredq/sql
+# 2. Copy entire contents of: supabase/migrations/001_initial_schema.sql
+# 3. Paste and click "Run"
+# 4. Verify: SELECT table_name FROM information_schema.tables WHERE table_schema = 'public';
+
+## Install Dependencies
+npm install
+cd bridge && npm install && cd ..
+
+## Start Development (3 terminals)
+# Terminal 1 - Next.js
+npm run dev
+
+# Terminal 2 - Bridge
+cd bridge && npm start
+
+# Terminal 3 - Verify 9Router
+curl http://localhost:20128/v1/models
+
+## Test Build
+npm run build
+
+## View Documentation
+cat README_FIXES.md      # Start here
+cat QUICK_START.md       # 5-minute setup
+cat SUMMARY.md           # Complete overview
+cat TESTING_GUIDE.md     # Testing procedures
+cat FIXES_APPLIED.md     # Technical details
+cat CLAUDE.md            # Project reference
+
+## Verify Database Tables
+# Run in Supabase SQL Editor:
+SELECT table_name FROM information_schema.tables 
+WHERE table_schema = 'public' 
+ORDER BY table_name;
+
+# Should see:
+# - admin_config
+# - builder_chat_messages
+# - conversations
+# - messages
+# - projects
+# - subscriptions
+# - usage_quotas
+# - users
+
+## Check Quota System
+SELECT * FROM usage_quotas WHERE date LIKE '2026-03-23-%';
+
+## Check Projects
+SELECT id, name, status, type, created_at FROM projects ORDER BY created_at DESC LIMIT 10;
+
+## Check Builder Chat
+SELECT * FROM builder_chat_messages WHERE project_id = 'your-project-id' ORDER BY created_at;
+
+## Production Deployment
+npm run build
+pm2 start ecosystem.config.js
+pm2 start bridge/server.js --name digitn-bridge
+pm2 save
+pm2 logs
+
+## Troubleshooting
+# Check if services are running
+curl http://localhost:3000
+curl http://localhost:3001
+curl http://localhost:20128/v1/models
+
+# Check logs
+pm2 logs
+tail -f /var/log/digitn/web-error.log
+
+# Restart services
+pm2 restart all
+
+# Clear cache
+rm -rf .next && npm run dev
+

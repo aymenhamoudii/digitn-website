@@ -43,7 +43,11 @@
       "Bash(wc:*)",
       "Bash(findstr :3002)",
       "Bash(findstr LISTENING)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(npm audit:*)",
+      "Bash(npm start:*)",
+      "Bash(cat src/app/\\\\\\(platform\\\\\\)/app/projects/page.tsx)",
+      "Bash(cat src/app/\\\\\\(platform\\\\\\)/app/page.tsx)"
     ]
   }
 }
