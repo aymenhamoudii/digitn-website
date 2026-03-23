@@ -14,7 +14,7 @@ export async function POST(req: Request) {
 
     const { name, description, stack } = await req.json();
 
-    if (!name || !description || !stack) {
+    if (!description || !stack) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
       .from('projects')
       .select('id, analysis_result')
       .eq('user_id', user.id)
-      .eq('name', name)
+      
       .eq('status', 'analyzing')
       .gte('created_at', fiveMinsAgo);
 
@@ -71,8 +71,9 @@ export async function POST(req: Request) {
     const { data: project, error: dbError } = await supabase
       .from('projects')
       .insert({
+        name: name || description.substring(0, 40) || 'Untitled Project',
         user_id: user.id,
-        name,
+
         description,
         type: stack,
         status: 'analyzing'
