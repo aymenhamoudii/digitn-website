@@ -39,7 +39,21 @@ export async function POST(req: Request) {
     const { data: userData } = await supabase.from('users').select('tier').eq('id', user.id).maybeSingle();
     const tier = userData?.tier || 'free';
 
-    const maxProjects = tier === 'plus' ? 9999 : tier === 'pro' ? 3 : 1;
+    // Fetch dynamic limits from admin_config
+    let maxProjects = tier === 'plus' ? 9999 : tier === 'pro' ? 3 : 1;
+    try {
+      const { data: limitsData } = await supabase
+        .from('admin_config')
+        .select('value')
+        .eq('key', 'tier_limits')
+        .single();
+
+      if (limitsData?.value && limitsData.value[tier]) {
+        maxProjects = limitsData.value[tier].max_active_projects;
+      }
+    } catch (e) {
+      console.error('Error fetching dynamic limits:', e);
+    }
 
     const { count: activeCount } = await supabase
       .from('projects')
