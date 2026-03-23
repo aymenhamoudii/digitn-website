@@ -57,7 +57,7 @@ ${planText}`;
 
     // 4. Spawn Claude Code process
     // Note: We use --print to make it run non-interactively
-    const claudeProcess = spawn('npx', [
+    const claudeProcess = spawn(process.platform === 'win32' ? 'npx.cmd' : 'npx', [
       '-y', '@anthropic-ai/claude-code',
       '--print',
       '-p', instruction
