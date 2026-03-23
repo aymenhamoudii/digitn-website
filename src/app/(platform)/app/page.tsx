@@ -35,13 +35,14 @@ export default function DashboardPage() {
         .from('usage_quotas')
         .select('requests_used, requests_limit')
         .eq('user_id', user.id)
-        .eq('date', today)
+        .eq('date', \`${today}-builder\`)
         .maybeSingle()
 
       // Fetch projects
       const { data: projects, count } = await supabase
         .from('projects')
         .select('*', { count: 'exact' })
+        .not('status', 'in', '("expired","failed")')
         .eq('user_id', user.id)
         .order('created_at', { ascending: false })
         .limit(3)

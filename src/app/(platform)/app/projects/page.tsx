@@ -99,7 +99,7 @@ export default function ProjectsPage() {
               return (
                 <Link
                   key={p.id}
-                  href={`/app/builder/${p.id}`}
+                  href={`/app/builder/terminal/${p.id}`}
                   className={`rounded-xl overflow-hidden transition-all block ${
                     isExpired ? 'opacity-60' : 'hover:shadow-md hover:-translate-y-1'
                   }`}
