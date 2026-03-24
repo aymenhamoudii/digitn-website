@@ -1,0 +1,512 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bun-top: #e8a54b;
+    --bun-top-dark: #d4903a;
+    --bun-bottom: #e8a54b;
+    --bun-bottom-dark: #c77d2e;
+    --lettuce: #5bc43a;
+    --lettuce-dark: #4aa32d;
+    --tomato: #e74c3c;
+    --tomato-dark: #c0392b;
+    --cheese: #f4d03f;
+    --cheese-dark: #d4ac0d;
+    --patty: #6e4424;
+    --patty-dark: #4a2e18;
+    --onion: #e8d4d4;
+    --onion-ring: #b8a0a0;
+    --bacon: #c0392b;
+    --bacon-dark: #922b21;
+    --pickle: #27ae60;
+    --pickle-dark: #1e8449;
+    --egg: #f5deb3;
+    --egg-yolk: #ffa500;
+    --bg-gradient: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    --panel-bg: rgba(255, 255, 255, 0.95);
+    --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3.5rem;
+    color: #e74c3c;
+    text-shadow: 3px 3px 0 #c0392b, 5px 5px 0 rgba(0,0,0,0.1);
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 10px;
+}
+
+main {
+    background: var(--panel-bg);
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+    border: 4px solid #fff;
+}
+
+.builder-section {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+h2 {
+    font-family: 'Fredoka One', cursive;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+/* Ingredients Panel */
+.ingredients-panel {
+    background: #fff8f0;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.ingredients-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.ingredient-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 10px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #fff;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.ingredient-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 0 rgba(0,0,0,0.1);
+}
+
+.ingredient-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 0 rgba(0,0,0,0.1);
+}
+
+.ingredient-btn .icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+/* Ingredient Colors */
+.ingredient-btn[data-item="top-bun"] { background: var(--bun-top); color: #fff; }
+.ingredient-btn[data-item="lettuce"] { background: var(--lettuce); color: #fff; }
+.ingredient-btn[data-item="tomato"] { background: var(--tomato); color: #fff; }
+.ingredient-btn[data-item="cheese"] { background: var(--cheese); color: #333; }
+.ingredient-btn[data-item="patty"] { background: var(--patty); color: #fff; }
+.ingredient-btn[data-item="onion"] { background: var(--onion); color: #333; }
+.ingredient-btn[data-item="bacon"] { background: var(--bacon); color: #fff; }
+.ingredient-btn[data-item="pickle"] { background: var(--pickle); color: #fff; }
+.ingredient-btn[data-item="egg"] { background: var(--egg); color: #333; }
+.ingredient-btn[data-item="bottom-bun"] { background: var(--bun-bottom); color: #fff; }
+
+/* Burger Preview */
+.burger-preview {
+    background: linear-gradient(180deg, #87ceeb 0%, #e0f4ff 50%, #fff 100%);
+    border-radius: 20px;
+    padding: 20px;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    border: 4px solid #fff;
+}
+
+.plate {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.burger-stack {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    min-height: 400px;
+    width: 100%;
+}
+
+.empty-message {
+    color: #888;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 200px;
+}
+
+/* Burger Layers */
+.burger-layer {
+    width: 200px;
+    position: relative;
+    animation: dropIn 0.3s ease-out;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.burger-layer:hover {
+    transform: scale(1.05);
+}
+
+@keyframes dropIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Top Bun */
+.burger-layer.top-bun {
+    height: 60px;
+    background: var(--bun-top);
+    border-radius: 100px 100px 10px 10px;
+    margin-bottom: -5px;
+    z-index: 10;
+}
+
+.burger-layer.top-bun::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    width: 15px;
+    height: 15px;
+    background: var(--sesame, #f5deb3);
+    border-radius: 50%;
+    box-shadow: 
+        30px 5px 0 var(--sesame),
+        60px 0 0 var(--sesame),
+        90px 5px 0 var(--sesame),
+        45px 15px 0 var(--sesame),
+        75px 15px 0 var(--sesame);
+}
+
+/* Lettuce */
+.burger-layer.lettuce {
+    height: 25px;
+    background: var(--lettuce);
+    border-radius: 10px;
+    margin: -8px 10px;
+    width: 220px;
+    clip-path: polygon(0% 50%, 5% 0%, 15% 50%, 25% 0%, 35% 50%, 45% 0%, 55% 50%, 65% 0%, 75% 50%, 85% 0%, 95% 50%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+/* Tomato */
+.burger-layer.tomato {
+    height: 20px;
+    background: var(--tomato);
+    border-radius: 10px;
+    margin: -5px 15px;
+    width: 190px;
+}
+
+.burger-layer.tomato::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 20px;
+    width: 8px;
+    height: 8px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 50%;
+    box-shadow: 
+        30px 0 0 rgba(255,255,255,0.3),
+        60px 0 0 rgba(255,255,255,0.3),
+        90px 0 0 rgba(255,255,255,0.3);
+}
+
+/* Cheese */
+.burger-layer.cheese {
+    height: 15px;
+    background: var(--cheese);
+    border-radius: 5px;
+    margin: -5px 5px;
+    width: 210px;
+}
+
+.burger-layer.cheese::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background: var(--cheese);
+    clip-path: polygon(0% 0%, 10% 100%, 20% 0%, 30% 100%, 40% 0%, 50% 100%, 60% 0%, 70% 100%, 80% 0%, 90% 100%, 100% 0%);
+}
+
+/* Patty */
+.burger-layer.patty {
+    height: 35px;
+    background: var(--patty);
+    border-radius: 15px;
+    margin: -5px 15px;
+    width: 190px;
+}
+
+.burger-layer.patty::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 15px;
+    width: 160px;
+    height: 3px;
+    background: var(--patty-dark);
+    border-radius: 2px;
+    opacity: 0.5;
+}
+
+/* Onion */
+.burger-layer.onion {
+    height: 15px;
+    background: transparent;
+    margin: -3px 20px;
+    width: 180px;
+}
+
+.burger-layer.onion::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 30px;
+    width: 30px;
+    height: 15px;
+    border: 4px solid var(--onion-ring);
+    border-radius: 50%;
+    box-shadow: 
+        50px 0 0 var(--onion-ring),
+        100px 0 0 var(--onion-ring);
+}
+
+/* Bacon */
+.burger-layer.bacon {
+    height: 12px;
+    background: var(--bacon);
+    border-radius: 8px;
+    margin: -3px 25px;
+    width: 170px;
+    background-image: repeating-linear-gradient(
+        90deg,
+        var(--bacon) 0px,
+        var(--bacon) 20px,
+        var(--bacon-dark) 20px,
+        var(--bacon-dark) 25px
+    );
+}
+
+/* Pickle */
+.burger-layer.pickle {
+    height: 15px;
+    background: transparent;
+    margin: -3px 15px;
+    width: 190px;
+}
+
+.burger-layer.pickle::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 20px;
+    width: 25px;
+    height: 8px;
+    background: var(--pickle);
+    border-radius: 10px;
+    box-shadow: 
+        40px -3px 0 var(--pickle),
+        80px 3px 0 var(--pickle),
+        120px -3px 0 var(--pickle);
+}
+
+/* Egg */
+.burger-layer.egg {
+    height: 25px;
+    background: var(--egg);
+    border-radius: 15px;
+    margin: -3px 20px;
+    width: 180px;
+}
+
+.burger-layer.egg::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 15px;
+    background: var(--egg-yolk);
+    border-radius: 50%;
+}
+
+/* Bottom Bun */
+.burger-layer.bottom-bun {
+    height: 45px;
+    background: var(--bun-bottom);
+    border-radius: 10px 10px 30px 30px;
+    margin-top: -5px;
+}
+
+/* Info Panel */
+.info-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.calorie-display,
+.ingredient-count {
+    background: #fff8f0;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.calorie-counter {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    border-radius: 15px;
+    padding: 20px;
+    color: #fff;
+}
+
+.calorie-number {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3rem;
+    display: block;
+}
+
+.calorie-label {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.count-display {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3rem;
+    color: #333;
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.reset-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    border: none;
+    padding: 18px 30px;
+    border-radius: 15px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 0 rgba(0,0,0,0.2);
+}
+
+.reset-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 0 rgba(0,0,0,0.2);
+}
+
+.reset-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 rgba(0,0,0,0.2);
+}
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .builder-section {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 2.5rem;
+    }
+
+    .burger-layer {
+        width: 160px;
+    }
+
+    .burger-layer.lettuce {
+        width: 180px;
+    }
+
+    .burger-layer.cheese {
+        width: 170px;
+    }
+}
+
+@media (max-width: 500px) {
+    .ingredients-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .burger-layer {
+        width: 140px;
+    }
+
+    .burger-layer.lettuce {
+        width: 160px;
+    }
+
+    .burger-layer.cheese {
+        width: 150px;
+    }
+}

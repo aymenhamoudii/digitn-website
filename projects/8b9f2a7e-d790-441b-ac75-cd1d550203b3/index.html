@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bomb Game - Minimalist Bomberman</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="ui">
+            <div class="stat">Level: <span id="level-val">1</span></div>
+            <div class="stat">Score: <span id="score-val">0</span></div>
+            <div class="stat">Lives: <span id="lives-val">3</span></div>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+        <div id="overlay" class="hidden">
+            <h1 id="overlay-title">GAME OVER</h1>
+            <p>Final Score: <span id="final-score">0</span></p>
+            <button id="restart-btn">Restart</button>
+        </div>
+        <div id="instructions">
+            Use <b>Arrow Keys</b> or <b>WASD</b> to move. Press <b>Space</b> to drop a bomb.
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

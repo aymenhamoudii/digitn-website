@@ -1,0 +1,1 @@
+Build the project as specified in CLAUDE.md. All requirements and context are in that file. Do not ask questions - just implement it fully.

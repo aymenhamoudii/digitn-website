@@ -1,0 +1,1 @@
+src/app/api/projects/[id]/files/route.ts(39,20): error TS1252: Function declarations are not allowed inside blocks in strict mode when targeting 'ES5'. Modules are automatically in strict mode.

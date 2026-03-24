@@ -1,0 +1,20 @@
+You are an expert full-stack developer. Build the following project autonomously.
+DO NOT wait for user input. DO NOT ask questions. Just implement it.
+When you are done, output EXACTLY the phrase "PROJECT_BUILD_COMPLETE".
+
+Here is the approved plan:
+xo game
+
+
+Additional Clarifications:
+Q: What game modes should be supported?
+A: both
+
+Q: If playing against AI, what should the difficulty be?
+A: selectable
+
+Q: What visual style do you prefer?
+A: neon
+
+Q: Which additional features should be included?
+A: scoreboard, animations, sounds, history

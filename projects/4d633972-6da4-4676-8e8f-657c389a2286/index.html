@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Maker - Realistic Simulation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🍕 Pizza Maker</h1>
+            <p class="subtitle">Create your perfect pizza</p>
+        </header>
+
+        <!-- Main Game Area -->
+        <main class="main-content">
+            <!-- Left Panel - Toppings -->
+            <aside class="toppings-panel">
+                <h2>Toppings</h2>
+                <div class="toppings-category">
+                    <h3>Sauces</h3>
+                    <div class="toppings-grid">
+                        <div class="topping-item" draggable="true" data-topping="tomato-sauce">
+                            <div class="topping-icon sauce tomato"></div>
+                            <span>Tomato Sauce</span>
+                        </div>
+                        <div class="topping-item" draggable="true" data-topping="bbq-sauce">
+                            <div class="topping-icon sauce bbq"></div>
+                            <span>BBQ Sauce</span>
+                        </div>
+                        <div class="topping-item" draggable="true" data-topping="white-sauce">
+                            <div class="topping-icon sauce white"></div>
+                            <span>White Sauce</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="toppings-category">
+                    <h3>Cheeses</h3>
+                    <div class="toppings-grid">
+                        <div class="topping-item" draggable="true" data-topping="mozzarella">
+                            <div class="topping-icon cheese mozzarella"></div>
+                            <span>Mozzarella</span>
+                        </div>
+                        <div class="topping-item" draggable="true" data-topping="parmesan">
+                            <div class="topping-icon cheese parmesan"></div>
+                            <span>Parmesan</span>
+                        </div>
+                        <div class="topping-item" draggable="true" data-topping="cheddar">
+                            <div class="topping-icon cheese cheddar"></div>
+                            <span>Cheddar</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="toppings-category">
+                    <h3>Toppings</h3>
+                    <div class="toppings-grid">
+                        <div class="topping-item" draggable="true" data-topping="pepperoni">
+                            <div class="topping-icon topping pepperoni"></div>
+                            <span>Pepperoni</span>
+                        </div>
+                        <div class="topping-item" draggable="true" data-topping="mushrooms">
+                            <div class="topping-icon topping mushrooms"></div>
+                            <span>Mushrooms</span>
+                        </div>
+                        <div class="topping-item" draggable="true" data-topping="olives">
+                            <div class="topping-icon topping olives"></div>
+                            <span>Olives</span>
+                        </div>
+                        <div class="topping-item" draggable="true" data-topping="onions">
+                            <div class="topping-icon topping onions"></div>
+                            <span>Onions</span>
+                        </div>
+                        <div class="topping-item" draggable="true" data-topping="peppers">
+                            <div class="topping-icon topping peppers"></div>
+                            <span>Bell Peppers</span>
+                        </div>
+                        <div class="topping-item" draggable="true" data-topping="bacon">
+                            <div class="topping-icon topping bacon"></div>
+                            <span>Bacon</span>
+                        </div>
+                        <div class="topping-item" draggable="true" data-topping="pineapple">
+                            <div class="topping-icon topping pineapple"></div>
+                            <span>Pineapple</span>
+                        </div>
+                        <div class="topping-item" draggable="true" data-topping="basil">
+                            <div class="topping-icon topping basil"></div>
+                            <span>Fresh Basil</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Center - Pizza Board -->
+            <section class="pizza-board-section">
+                <div class="pizza-info">
+                    <div class="info-item">
+                        <span class="label">Sauce:</span>
+                        <span id="sauce-display">None</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Cheese:</span>
+                        <span id="cheese-display">None</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Toppings:</span>
+                        <span id="toppings-count">0</span>
+                    </div>
+                </div>
+                
+                <div class="pizza-board">
+                    <div class="pizza-container" id="pizza-container">
+                        <div class="pizza-base" id="pizza-base">
+                            <div class="crust"></div>
+                            <div class="crust-inner"></div>
+                            <div class="pizza-surface" id="pizza-surface">
+                                <!-- Toppings will be added here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-secondary" id="clear-btn">
+                        <span class="btn-icon">🗑️</span>
+                        Clear Pizza
+                    </button>
+                    <button class="btn btn-primary" id="bake-btn">
+                        <span class="btn-icon">🔥</span>
+                        Bake Pizza
+                    </button>
+                </div>
+            </section>
+
+            <!-- Right Panel - Score & Menu -->
+            <aside class="stats-panel">
+                <div class="score-card">
+                    <h2>Your Score</h2>
+                    <div class="score-display">
+                        <span id="score-value">0</span>
+                        <span class="score-label">points</span>
+                    </div>
+                    <div class="score-breakdown">
+                        <div class="score-item">
+                            <span>Sauce</span>
+                            <span id="sauce-score">0</span>
+                        </div>
+                        <div class="score-item">
+                            <span>Cheese</span>
+                            <span id="cheese-score">0</span>
+                        </div>
+                        <div class="score-item">
+                            <span>Toppings</span>
+                            <span id="toppings-score">0</span>
+                        </div>
+                        <div class="score-item">
+                            <span>Balance</span>
+                            <span id="balance-score">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <h2>Menu</h2>
+                    <div class="menu-items">
+                        <button class="menu-item" data-preset="margherita">
+                            <span class="menu-icon">🍕</span>
+                            <span>Margherita</span>
+                        </button>
+                        <button class="menu-item" data-preset="pepperoni">
+                            <span class="menu-icon">🍕</span>
+                            <span>Pepperoni</span>
+                        </button>
+                        <button class="menu-item" data-preset="hawaiian">
+                            <span class="menu-icon">🍕</span>
+                            <span>Hawaiian</span>
+                        </button>
+                        <button class="menu-item" data-preset="bbq-chicken">
+                            <span class="menu-icon">🍕</span>
+                            <span>BBQ Chicken</span>
+                        </button>
+                        <button class="menu-item" data-preset="vegetarian">
+                            <span class="menu-icon">🍕</span>
+                            <span>Vegetarian</span>
+                        </button>
+                        <button class="menu-item" data-preset="supreme">
+                            <span class="menu-icon">🍕</span>
+                            <span>Supreme</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="share-section">
+                    <h2>Share</h2>
+                    <div class="share-buttons">
+                        <button class="share-btn" id="share-facebook">
+                            <span>📘</span> Facebook
+                        </button>
+                        <button class="share-btn" id="share-twitter">
+                            <span>🐦</span> Twitter
+                        </button>
+                        <button class="share-btn" id="share-copy">
+                            <span>📋</span> Copy
+                        </button>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <!-- Oven Modal -->
+        <div class="oven-modal" id="oven-modal">
+            <div class="oven-content">
+                <h2>Baking Your Pizza...</h2>
+                <div class="oven-visual">
+                    <div class="oven">
+                        <div class="oven-door">
+                            <div class="oven-window">
+                                <div class="oven-pizza" id="oven-pizza"></div>
+                            </div>
+                        </div>
+                        <div class="oven-controls">
+                            <div class="oven-light"></div>
+                        </div>
+                    </div>
+                    <div class="oven-timer">
+                        <div class="timer-display">
+                            <span id="bake-time">0</span>s
+                        </div>
+                    </div>
+                </div>
+                <div class="bake-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <p id="bake-status">Preparing...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Modal -->
+        <div class="result-modal" id="result-modal">
+            <div class="result-content">
+                <h2>🎉 Pizza Complete!</h2>
+                <div class="final-pizza" id="final-pizza"></div>
+                <div class="final-score">
+                    <span class="score-number" id="final-score">0</span>
+                    <span class="score-text">points</span>
+                </div>
+                <p class="score-message" id="score-message">Great job!</p>
+                <div class="result-buttons">
+                    <button class="btn btn-secondary" id="new-pizza-btn">Make Another</button>
+                    <button class="btn btn-primary" id="share-result-btn">Share Result</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

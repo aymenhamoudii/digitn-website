@@ -1,0 +1,136 @@
+:root {
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-main: #212529;
+    --text-muted: #adb5bd;
+    --accent: #212529;
+    --snake-head: #212529;
+    --snake-body: #dee2e6;
+    --food: #ff6b6b;
+    --border-radius: 12px;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-family);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.game-container {
+    width: 100%;
+    max-width: 440px;
+    padding: 20px;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.score-board {
+    display: flex;
+    justify-content: space-between;
+    background: var(--card-bg);
+    padding: 15px 25px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+}
+
+.score-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+#score, #high-score {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.canvas-wrapper {
+    position: relative;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    line-height: 0;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+}
+
+.overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#overlay-content h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+#overlay-content p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.footer {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.controls-hint {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.separator {
+    margin: 0 10px;
+    opacity: 0.5;
+}
+
+@media (max-width: 480px) {
+    .game-container {
+        padding: 10px;
+    }
+}

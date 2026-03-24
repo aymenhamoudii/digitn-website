@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimalist Snake</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <div class="score-board">
+                <div class="score-item">
+                    <span class="label">SCORE</span>
+                    <span id="score">000</span>
+                </div>
+                <div class="score-item">
+                    <span class="label">HIGH SCORE</span>
+                    <span id="high-score">000</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="canvas-wrapper">
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+            <div id="overlay" class="overlay hidden">
+                <div id="overlay-content">
+                    <h1 id="status-text">PAUSED</h1>
+                    <p id="instruction-text">Press SPACE to Resume</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="controls-hint">
+                <span>Arrows to Move</span>
+                <span class="separator">•</span>
+                <span>Space to Pause</span>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

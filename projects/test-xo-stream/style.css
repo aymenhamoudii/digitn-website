@@ -1,0 +1,127 @@
+:root {
+    --bg-color: #f0f2f5;
+    --card-bg: #ffffff;
+    --text-color: #333;
+    --accent-color: #4a90e2;
+    --x-color: #e74c3c;
+    --o-color: #2ecc71;
+    --cell-size: 100px;
+    --board-gap: 10px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+h1 {
+    margin-bottom: 1rem;
+    font-weight: 800;
+    color: #2c3e50;
+}
+
+.status {
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    height: 1.5rem;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, var(--cell-size));
+    grid-template-rows: repeat(3, var(--cell-size));
+    gap: var(--board-gap);
+    margin: 0 auto 2rem;
+    background-color: #ddd;
+    border: var(--board-gap) solid #ddd;
+    border-radius: 10px;
+}
+
+.cell {
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.cell:hover {
+    background-color: #f9f9f9;
+}
+
+.cell.x {
+    color: var(--x-color);
+}
+
+.cell.o {
+    color: var(--o-color);
+}
+
+.cell.winner {
+    background-color: #d1f2eb;
+    animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(0.95); }
+}
+
+.controls button {
+    padding: 10px 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin-bottom: 2rem;
+}
+
+.controls button:hover {
+    opacity: 0.9;
+}
+
+.scores {
+    display: flex;
+    justify-content: space-between;
+}
+
+.score-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.score-label {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.score-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+}

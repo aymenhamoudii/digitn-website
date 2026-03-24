@@ -1,0 +1,22 @@
+You are an expert full-stack developer. Build the following project autonomously.
+DO NOT wait for user input. DO NOT ask questions. Just implement it.
+When you are done, output EXACTLY the phrase "PROJECT_BUILD_COMPLETE".
+
+Here is the approved plan:
+bomb game
+
+Additional Clarifications:
+Q: What type of 'bomb game' are you envisioning?
+A: minesweeper
+
+Q: What is the preferred visual style?
+A: retro
+
+Q: How should the player interact with the game?
+A: mouse
+
+Q: How is the game structured?
+A: levels
+
+Q: Which additional features are required?
+A: timer, sound, animations

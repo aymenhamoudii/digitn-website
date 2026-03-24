@@ -1,0 +1,77 @@
+# solitaire game
+
+This is a html-css-js project that needs to be built autonomously.
+
+## CRITICAL: Read This First
+
+You are in AUTONOMOUS BUILD MODE. This means:
+- DO NOT ask questions - all requirements are below
+- DO NOT create placeholder files (a.txt, b.txt, c.txt)
+- DO NOT use TODO comments or incomplete code
+- START CODING IMMEDIATELY with full implementation
+
+## Project Type: html-css-js
+
+## Full Requirements
+
+solitaire game
+
+Additional Clarifications:
+Q: Which Solitaire variant should be implemented?
+A: spider
+
+Q: For Klondike-style play, which draw rule should be used?
+A: draw1
+
+Q: How should users move cards in the UI?
+A: both
+
+Q: Which optional features should be included (select all that apply)?
+A: timer_score, autofinish, hint, undo
+
+Q: Target platforms / responsiveness?
+A: responsive
+
+=== USER ANSWERED THESE QUESTIONS ===
+Q: Which Solitaire variant should be implemented?
+A: spider
+
+Q: For Klondike-style play, which draw rule should be used?
+A: draw1
+
+Q: How should users move cards in the UI?
+A: both
+
+Q: Which optional features should be included (select all that apply)?
+A: timer_score, autofinish, hint, undo
+
+Q: Target platforms / responsiveness?
+A: responsive
+=== END OF ANSWERS ===
+
+## Common Interpretations
+
+- "solitaire game" = Classic Klondike solitaire card game
+- "bomb game" = Minesweeper-style game
+- "xo game" = Tic-tac-toe game
+- "snake game" = Classic snake game
+- "memory game" = Card matching memory game
+
+## What You Must Do
+
+1. Read and understand ALL requirements above (including Q&A sections)
+2. Create a complete file structure for this html-css-js
+3. Write ALL code files with full, production-ready implementations
+4. For web projects: Start with index.html, add CSS and JavaScript
+5. Make it fully functional and ready to run immediately
+
+## File Structure Guidelines
+
+For html-css-js:
+
+- Follow standard conventions for html-css-js
+
+
+## Execute Now
+
+Begin implementation immediately. Create all files with complete, working code.

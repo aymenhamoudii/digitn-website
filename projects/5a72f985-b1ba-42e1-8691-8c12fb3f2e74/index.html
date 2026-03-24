@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>SNAKE</h1>
+            <div class="stats">
+                <div class="stat">
+                    <span class="label">Score</span>
+                    <span class="value" id="score">0</span>
+                </div>
+                <div class="stat">
+                    <span class="label">High Score</span>
+                    <span class="value" id="highscore">0</span>
+                </div>
+                <div class="stat">
+                    <span class="label">Level</span>
+                    <span class="value" id="level">1</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="menu" class="menu">
+            <h2>Select Grid Size</h2>
+            <div class="grid-options">
+                <button class="grid-btn" data-size="15">Small (15x15)</button>
+                <button class="grid-btn" data-size="20">Medium (20x20)</button>
+                <button class="grid-btn" data-size="25">Large (25x25)</button>
+            </div>
+            <div class="controls-info">
+                <p>Use <strong>W A S D</strong> to control the snake</p>
+            </div>
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+
+        <div id="gameOver" class="game-over hidden">
+            <h2>Game Over!</h2>
+            <p>Final Score: <span id="finalScore">0</span></p>
+            <p>Level Reached: <span id="finalLevel">1</span></p>
+            <button id="restartBtn" class="restart-btn">Play Again</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -26,28 +26,8 @@ interface TerminalChatProps {
 export default function TerminalChat({ projectId, projectName, initialStatus, projectType, projectDescription, questionnaireAnswers, history = [] }: TerminalChatProps) {
   const [logs, setLogs] = useState<LogEntry[]>(() => {
     if (initialStatus === 'building' || initialStatus === 'analyzing') {
-      // Show the build context that persists on refresh
-      const initialLogs: LogEntry[] = [
-        { type: 'system', content: `> Initializing workspace for ${projectName}...`, id: 'init-0' }
-      ];
-
-      if (projectDescription) {
-        initialLogs.push({
-          type: 'system',
-          content: `\nCreate a ${projectType} project named ${projectName}\n\nRequirements:\n${projectDescription}`,
-          id: 'init-1'
-        });
-      }
-
-      if (questionnaireAnswers && questionnaireAnswers.trim()) {
-        initialLogs.push({
-          type: 'system',
-          content: `\nAdditional Clarifications:\n${questionnaireAnswers}`,
-          id: 'init-2'
-        });
-      }
-
-      return initialLogs;
+      // Don't show static messages - let SSE populate the terminal in real-time
+      return [];
     } else if (initialStatus === 'ready' && history && history.length > 0) {
       // Only show history if project is ready and has chat history
       const initialLogs: LogEntry[] = [
@@ -170,6 +150,9 @@ export default function TerminalChat({ projectId, projectName, initialStatus, pr
               }
               return [...prev, { type: 'ai', content: data.text, id: eventId }];
             });
+          } else if (data.type === 'system_status') {
+            // System status messages from bridge
+            setLogs(prev => [...prev, { type: 'system', content: data.text, id: eventId }]);
           } else if (data.type === 'status') {
             if (data.status === 'content_chunk') {
               setLogs(prev => {
@@ -486,7 +469,13 @@ export default function TerminalChat({ projectId, projectName, initialStatus, pr
                 </svg>
               </div>
               <span className="font-mono text-xs text-white/50 uppercase tracking-widest pt-1 block">
-                {status === 'modifying' ? 'DIGITN AI is modifying your project...' : 'Executing operation...'}
+                {status === 'modifying'
+                  ? 'DIGITN AI is modifying your project...'
+                  : status === 'building'
+                    ? 'DIGITN AI is building your project...'
+                    : status === 'analyzing'
+                      ? 'Analyzing project requirements...'
+                      : 'Executing operation...'}
               </span>
             </div>
           )}

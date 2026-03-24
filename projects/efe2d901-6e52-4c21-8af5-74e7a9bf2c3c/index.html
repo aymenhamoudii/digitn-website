@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger Builder</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>🍔 Burger Builder</h1>
+            <p class="subtitle">Click ingredients to build your masterpiece!</p>
+        </header>
+
+        <main>
+            <div class="builder-section">
+                <div class="ingredients-panel">
+                    <h2>Ingredients</h2>
+                    <div class="ingredients-grid" id="ingredientsGrid">
+                        <!-- Ingredients will be added by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="burger-preview">
+                    <h2>Your Burger</h2>
+                    <div class="plate">
+                        <div class="burger-stack" id="burgerStack">
+                            <div class="empty-message">Start clicking ingredients to build your burger!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-panel">
+                    <div class="calorie-display">
+                        <h2>Calories</h2>
+                        <div class="calorie-counter" id="calorieCounter">
+                            <span class="calorie-number">0</span>
+                            <span class="calorie-label">kcal</span>
+                        </div>
+                    </div>
+                    
+                    <div class="ingredient-count">
+                        <h2>Layers</h2>
+                        <div class="count-display" id="layerCount">0</div>
+                    </div>
+
+                    <button class="reset-btn" id="resetBtn">🔄 Start Over</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Build the most epic burger ever! 🎉</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

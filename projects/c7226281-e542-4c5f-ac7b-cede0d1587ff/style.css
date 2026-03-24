@@ -1,0 +1,940 @@
+/* Talking Tom Game - Style */
+:root {
+  /* Color Palette */
+  --tom-gray: #8a8a8a;
+  --tom-gray-light: #a8a8a8;
+  --tom-gray-dark: #6b6b6b;
+  --tom-white: #f5f5f5;
+  --tom-pink: #ffb6c1;
+  --tom-pink-dark: #ff9cad;
+  
+  /* Background */
+  --bg-warm: #fff5e6;
+  --bg-accent: #ffe4cc;
+  
+  /* UI Colors */
+  --primary: #ff7b54;
+  --primary-dark: #ff5c30;
+  --secondary: #54d2ff;
+  --accent: #ffd93d;
+  
+  /* Text */
+  --text-dark: #4a3728;
+  --text-light: #7a6252;
+  
+  /* Status */
+  --success: #4ade80;
+  --heart: #ff6b9d;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+  
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Fredoka', sans-serif;
+  background: var(--bg-warm);
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--text-dark);
+}
+
+/* Animated background pattern */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(255, 123, 84, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(84, 210, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 217, 61, 0.08) 0%, transparent 40%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.game-container {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-md);
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  padding: var(--space-lg) 0;
+}
+
+.header h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--primary);
+  text-shadow: 2px 2px 0 var(--accent);
+  margin-bottom: var(--space-md);
+  animation: bounceIn 0.6s ease-out;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Stats */
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+}
+
+.friendship-meter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: white;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: 50px;
+  box-shadow: var(--shadow-sm);
+}
+
+.friendship-meter .label {
+  font-size: 0.875rem;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.meter-track {
+  width: 120px;
+  height: 12px;
+  background: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.meter-fill {
+  width: 10%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.friendship-meter .level {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--primary);
+  min-width: 70px;
+}
+
+/* Game Area */
+.game-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-lg) 0;
+}
+
+/* Tom Container */
+.tom-container {
+  position: relative;
+  width: 320px;
+  height: 380px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Tom the Cat */
+.tom {
+  position: relative;
+  width: 280px;
+  height: 340px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.tom:hover {
+  transform: scale(1.02);
+}
+
+/* Ears */
+.ear {
+  position: absolute;
+  width: 60px;
+  height: 70px;
+  background: var(--tom-gray);
+  border-radius: 50% 50% 0 0;
+  top: -10px;
+  z-index: 1;
+}
+
+.ear::after {
+  content: '';
+  position: absolute;
+  width: 35px;
+  height: 45px;
+  background: var(--tom-pink);
+  border-radius: 50% 50% 0 0;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.ear-left {
+  left: 30px;
+  transform: rotate(-15deg);
+}
+
+.ear-right {
+  right: 30px;
+  transform: rotate(15deg);
+}
+
+.ear-inner {
+  position: absolute;
+  width: 30px;
+  height: 35px;
+  background: var(--tom-pink-dark);
+  border-radius: 50% 50% 0 0;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Head */
+.head {
+  position: absolute;
+  width: 220px;
+  height: 180px;
+  background: var(--tom-gray);
+  border-radius: 50% 50% 45% 45%;
+  left: 50%;
+  top: 40px;
+  transform: translateX(-50%);
+  z-index: 2;
+  box-shadow: inset -10px -10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.head::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--tom-gray-light), var(--tom-gray));
+  border-radius: 50% 50% 0 0;
+  top: 0;
+}
+
+#head-zone {
+  position: absolute;
+  width: 100%;
+  height: 70%;
+  top: 0;
+  border-radius: 50% 50% 40% 40%;
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Face */
+.face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 20px;
+}
+
+/* Eyes */
+.eyes {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  padding-top: 20px;
+}
+
+.eye {
+  width: 45px;
+  height: 50px;
+  background: white;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pupil {
+  width: 28px;
+  height: 32px;
+  background: #2d2d2d;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.2s ease;
+}
+
+.highlight {
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 6px;
+  left: 6px;
+}
+
+/* Eye animations */
+.eye.happy .pupil {
+  height: 10px;
+  border-radius: 50% 50% 0 0;
+}
+
+.eye.surprised .pupil {
+  width: 32px;
+  height: 32px;
+}
+
+.eye.closed {
+  height: 8px;
+  border-radius: 0 0 50% 50%;
+  background: #2d2d2d;
+}
+
+.eye.closed .pupil,
+.eye.closed .highlight {
+  display: none;
+}
+
+/* Nose */
+.nose {
+  width: 20px;
+  height: 15px;
+  background: var(--tom-pink);
+  border-radius: 50% 50% 40% 40%;
+  margin: 15px auto 0;
+  position: relative;
+}
+
+#nose-zone {
+  position: absolute;
+  width: 40px;
+  height: 30px;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Mouth */
+.mouth {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  margin-top: 5px;
+}
+
+.mouth-left,
+.mouth-right {
+  width: 25px;
+  height: 15px;
+  border: 3px solid #5a5a5a;
+  border-top: none;
+  border-radius: 0 0 50% 50%;
+}
+
+.mouth-left {
+  border-right: none;
+}
+
+.mouth-right {
+  border-left: none;
+}
+
+.mouth.happy .mouth-left,
+.mouth.happy .mouth-right {
+  height: 20px;
+  background: var(--tom-pink);
+}
+
+/* Whiskers */
+.whiskers {
+  position: absolute;
+  width: 100%;
+  top: 95px;
+}
+
+.whisker {
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  background: white;
+  border-radius: 2px;
+}
+
+.whisker-left-1 {
+  left: -10px;
+  top: -10px;
+  transform: rotate(-10deg);
+}
+
+.whisker-left-2 {
+  left: -15px;
+  top: 0;
+}
+
+.whisker-left-3 {
+  left: -10px;
+  top: 10px;
+  transform: rotate(10deg);
+}
+
+.whisker-right-1 {
+  right: -10px;
+  top: -10px;
+  transform: rotate(10deg);
+}
+
+.whisker-right-2 {
+  right: -15px;
+  top: 0;
+}
+
+.whisker-right-3 {
+  right: -10px;
+  top: 10px;
+  transform: rotate(-10deg);
+}
+
+/* Cheeks */
+.cheek {
+  position: absolute;
+  width: 30px;
+  height: 20px;
+  background: var(--tom-pink);
+  border-radius: 50%;
+  opacity: 0.5;
+  top: 100px;
+}
+
+.cheek-left {
+  left: 20px;
+}
+
+.cheek-right {
+  right: 20px;
+}
+
+/* Chin Zone */
+.chin-zone {
+  position: absolute;
+  width: 80px;
+  height: 40px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 0 0 50% 50%;
+}
+
+#chin-zone {
+  position: absolute;
+  width: 80px;
+  height: 40px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  z-index: 10;
+}
+
+/* Body */
+.body {
+  position: absolute;
+  width: 180px;
+  height: 140px;
+  background: var(--tom-gray);
+  border-radius: 40% 40% 50% 50%;
+  left: 50%;
+  top: 180px;
+  transform: translateX(-50%);
+  z-index: 1;
+  box-shadow: inset -10px -10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.body::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(to bottom, var(--tom-gray-light), var(--tom-gray));
+  border-radius: 40% 40% 0 0;
+  top: 0;
+}
+
+/* Belly */
+.belly {
+  position: absolute;
+  width: 100px;
+  height: 70px;
+  background: var(--tom-white);
+  border-radius: 50% 50% 45% 45%;
+  left: 50%;
+  top: 40px;
+  transform: translateX(-50%);
+}
+
+#belly-zone {
+  position: absolute;
+  width: 120px;
+  height: 80px;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+}
+
+.belly-spots {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.spot {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: var(--tom-gray-light);
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.spot:nth-child(1) { top: 10px; left: 20px; }
+.spot:nth-child(2) { top: 25px; left: 60px; }
+.spot:nth-child(3) { top: 45px; left: 30px; }
+.spot:nth-child(4) { top: 40px; left: 65px; }
+.spot:nth-child(5) { top: 55px; left: 50px; }
+
+/* Paws */
+.paws {
+  position: absolute;
+  width: 100%;
+  bottom: -10px;
+}
+
+.paw {
+  position: absolute;
+  width: 50px;
+  height: 35px;
+  background: var(--tom-white);
+  border-radius: 25px 25px 20px 20px;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  padding-top: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.paw:hover {
+  transform: translateY(-5px);
+}
+
+.paw-left {
+  left: 20px;
+}
+
+.paw-right {
+  right: 20px;
+}
+
+.toe {
+  width: 12px;
+  height: 12px;
+  background: var(--tom-pink);
+  border-radius: 50%;
+}
+
+#paw-left,
+#paw-right {
+  position: absolute;
+  cursor: pointer;
+  z-index: 10;
+}
+
+#paw-left {
+  bottom: 10px;
+  left: 35px;
+  width: 50px;
+  height: 35px;
+}
+
+#paw-right {
+  bottom: 10px;
+  right: 35px;
+  width: 50px;
+  height: 35px;
+}
+
+/* Tail */
+.tail {
+  position: absolute;
+  bottom: 60px;
+  right: 10px;
+  z-index: 0;
+}
+
+#tail-zone {
+  position: absolute;
+  width: 80px;
+  height: 100px;
+  right: 0;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.tail-segments {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  animation: tailWag 2s ease-in-out infinite;
+}
+
+@keyframes tailWag {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(15deg);
+  }
+  75% {
+    transform: rotate(-15deg);
+  }
+}
+
+.segment {
+  width: 25px;
+  height: 25px;
+  background: var(--tom-gray);
+  border-radius: 50%;
+  margin-top: -8px;
+}
+
+.segment:first-child {
+  width: 30px;
+  height: 30px;
+}
+
+.segment:last-child {
+  width: 20px;
+  height: 20px;
+}
+
+/* Hearts effect */
+.hearts {
+  position: absolute;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.heart {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  animation: floatUp 1.5s ease-out forwards;
+}
+
+.heart::before,
+.heart::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 25px;
+  background: var(--heart);
+  border-radius: 50% 50% 0 0;
+}
+
+.heart::before {
+  left: 15px;
+  transform: rotate(-45deg);
+  transform-origin: bottom right;
+}
+
+.heart::after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: bottom left;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(0.5);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px) scale(1.2);
+  }
+}
+
+/* Sparkles effect */
+.sparkles {
+  position: absolute;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.sparkle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 50%;
+  animation: sparkle 0.8s ease-out forwards;
+}
+
+@keyframes sparkle {
+  0% {
+    opacity: 1;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+/* Hints */
+.hints {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+  max-width: 400px;
+}
+
+.hint {
+  background: white;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  box-shadow: var(--shadow-sm);
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  animation: hintPulse 2s ease-in-out infinite;
+}
+
+.hint:nth-child(1) { animation-delay: 0s; }
+.hint:nth-child(2) { animation-delay: 0.3s; }
+.hint:nth-child(3) { animation-delay: 0.6s; }
+.hint:nth-child(4) { animation-delay: 0.9s; }
+.hint:nth-child(5) { animation-delay: 1.2s; }
+
+@keyframes hintPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+.hint:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* Sound Toggle */
+.sound-toggle {
+  position: fixed;
+  top: var(--space-md);
+  right: var(--space-md);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: white;
+  color: var(--primary);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.sound-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-lg);
+}
+
+.sound-toggle svg {
+  width: 24px;
+  height: 24px;
+}
+
+.sound-off {
+  display: none;
+}
+
+.sound-toggle.muted .sound-on {
+  display: none;
+}
+
+.sound-toggle.muted .sound-off {
+  display: block;
+}
+
+/* Tom Animations */
+.tom.bouncing {
+  animation: bounce 0.5s ease-in-out;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.tom.shaking {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+.tom.rolling {
+  animation: roll 0.6s ease-in-out;
+}
+
+@keyframes roll {
+  0% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  50% {
+    transform: translateX(-50%) rotate(180deg);
+  }
+  100% {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+.tom.shrinking {
+  animation: shrink 0.3s ease-in-out;
+}
+
+@keyframes shrink {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.95);
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .game-container {
+    padding: var(--space-sm);
+  }
+  
+  .tom-container {
+    width: 280px;
+    height: 340px;
+  }
+  
+  .tom {
+    width: 240px;
+    height: 300px;
+  }
+  
+  .head {
+    width: 180px;
+    height: 150px;
+  }
+  
+  .body {
+    width: 150px;
+    height: 120px;
+    top: 160px;
+  }
+  
+  .hints {
+    max-width: 300px;
+  }
+  
+  .hint {
+    font-size: 0.65rem;
+    padding: var(--space-xs) 6px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus states */
+button:focus-visible,
+.tom:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}

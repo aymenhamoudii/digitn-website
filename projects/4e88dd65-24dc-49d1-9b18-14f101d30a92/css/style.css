@@ -1,0 +1,227 @@
+/* Retro Snake Game Styles */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0a0a0a;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Press Start 2P', cursive;
+    overflow: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(90deg, rgba(0,255,0,0.03) 1px, transparent 1px),
+        linear-gradient(rgba(0,255,0,0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.header {
+    text-align: center;
+    width: 100%;
+}
+
+.header h1 {
+    color: #00ff00;
+    font-size: 48px;
+    text-shadow: 
+        0 0 10px #00ff00,
+        0 0 20px #00ff00,
+        0 0 30px #00ff00;
+    margin-bottom: 20px;
+    letter-spacing: 8px;
+    animation: flicker 3s infinite;
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    92% { opacity: 1; }
+    93% { opacity: 0.8; }
+    94% { opacity: 1; }
+    96% { opacity: 0.9; }
+    97% { opacity: 1; }
+}
+
+.stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.stat-box {
+    background: #1a1a1a;
+    border: 2px solid #00ff00;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 
+        0 0 10px rgba(0, 255, 0, 0.3),
+        inset 0 0 10px rgba(0, 255, 0, 0.1);
+}
+
+.stat-box .label {
+    color: #00aa00;
+    font-size: 10px;
+    margin-bottom: 5px;
+}
+
+.stat-box span:not(.label) {
+    color: #00ff00;
+    font-size: 16px;
+}
+
+.game-area {
+    position: relative;
+    border: 4px solid #00ff00;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 0, 0.5),
+        inset 0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+#gameCanvas {
+    display: block;
+    background-color: #000000;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.overlay.hidden {
+    display: none;
+}
+
+.overlay-content {
+    text-align: center;
+    color: #00ff00;
+}
+
+.overlay-content h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.overlay-content p {
+    font-size: 14px;
+    margin-bottom: 30px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.controls-hint {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    color: #00aa00;
+    font-size: 10px;
+}
+
+.controls-hint span {
+    display: inline-block;
+    border: 1px solid #00aa00;
+    padding: 5px 10px;
+}
+
+.level-indicator {
+    background: #1a1a1a;
+    border: 2px solid #ffaa00;
+    padding: 8px 20px;
+    color: #ffaa00;
+    font-size: 12px;
+    box-shadow: 0 0 10px rgba(255, 170, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+.level-indicator.visible {
+    opacity: 1;
+}
+
+/* Screen effects */
+.game-area::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.1) 2px,
+        rgba(0, 0, 0, 0.1) 4px
+    );
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Scanline effect */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        rgba(255,255,255,0) 50%,
+        rgba(0,0,0,0.1) 50%,
+        rgba(0,0,0,0.1)
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* Game over state */
+.overlay-content.game-over h2 {
+    color: #ff0000;
+    text-shadow: 0 0 10px #ff0000;
+}
+
+/* Pause state */
+.overlay-content.paused h2 {
+    color: #ffff00;
+    text-shadow: 0 0 10px #ffff00;
+}

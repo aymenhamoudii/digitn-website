@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vector Bird</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="sky">
+            <div class="cloud" style="top: 20%; left: 10%;"></div>
+            <div class="cloud" style="top: 40%; left: 60%;"></div>
+            <div class="cloud" style="top: 10%; left: 80%;"></div>
+        </div>
+        
+        <div id="game-world">
+            <div id="bird" class="skin-default">
+                <div class="bird-eye"></div>
+                <div class="bird-wing"></div>
+                <div class="bird-beak"></div>
+            </div>
+        </div>
+
+        <div id="ui-layer">
+            <div id="score-display">0</div>
+            
+            <div id="start-screen" class="overlay">
+                <h1>VECTOR BIRD</h1>
+                <p>Press SPACE, CLICK or TAP to Jump</p>
+                
+                <div class="menu-section">
+                    <h3>Difficulty</h3>
+                    <div class="difficulty-options">
+                        <button class="diff-btn" data-diff="easy">Easy</button>
+                        <button class="diff-btn active" data-diff="normal">Normal</button>
+                        <button class="diff-btn" data-diff="hard">Hard</button>
+                    </div>
+                </div>
+
+                <div class="menu-section">
+                    <h3>Skin</h3>
+                    <div class="skin-options">
+                        <div class="skin-preview skin-default active" data-skin="default"></div>
+                        <div class="skin-preview skin-gold" data-skin="gold"></div>
+                        <div class="skin-preview skin-blue" data-skin="blue"></div>
+                        <div class="skin-preview skin-pink" data-skin="pink"></div>
+                    </div>
+                </div>
+
+                <button id="start-button">START GAME</button>
+                <div class="high-score-text">High Score: <span id="high-score">0</span></div>
+            </div>
+
+            <div id="game-over-screen" class="overlay hidden">
+                <h1>GAME OVER</h1>
+                <div class="stats">
+                    <p>Score: <span id="final-score">0</span></p>
+                    <p>Best: <span id="best-score">0</span></p>
+                </div>
+                <button id="restart-button">PLAY AGAIN</button>
+            </div>
+        </div>
+
+        <div id="ground"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

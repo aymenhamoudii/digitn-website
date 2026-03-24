@@ -1,0 +1,19 @@
+You are an expert full-stack developer. Build the following project autonomously.
+DO NOT wait for user input. DO NOT ask questions. Just implement it.
+When you are done, output EXACTLY the phrase "PROJECT_BUILD_COMPLETE".
+
+Here is the approved plan:
+xo game
+
+Additional Clarifications:
+Q: What visual style do you prefer for the game?
+A: neon
+
+Q: Who will the player be competing against?
+A: pve_hard
+
+Q: Which additional features should be included?
+A: animations, sound, dark_mode, score
+
+Q: Should the board size be fixed or adjustable?
+A: fixed

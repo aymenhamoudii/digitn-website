@@ -1,0 +1,25 @@
+You are an expert full-stack developer. Build the following project autonomously.
+DO NOT wait for user input. DO NOT ask questions. Just implement it.
+When you are done, output EXACTLY the phrase "PROJECT_BUILD_COMPLETE".
+
+Here is the approved plan:
+solitaire game
+
+Additional Clarifications:
+Q: Which solitaire variant should be implemented?
+A: spider
+
+Q: If implementing Klondike, what stock/waste dealing rule should be used?
+A: turn1
+
+Q: Which player interactions should the UI support?
+A: dragdrop, clickmove, touchgestures
+
+Q: Which gameplay features should be included?
+A: undo, hint, autofinish, animations, timer_score
+
+Q: Preferred visual style/theme?
+A: classic
+
+Q: How should game state and progress be persisted?
+A: none

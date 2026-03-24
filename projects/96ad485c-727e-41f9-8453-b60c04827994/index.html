@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>Snake Game</h1>
+            <div class="score-board">
+                <div class="score-item">
+                    <span class="score-label">Score</span>
+                    <span class="score-value" id="score">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label">High Score</span>
+                    <span class="score-value" id="highScore">0</span>
+                </div>
+                <div class="score-item">
+                    <span class="score-label">Level</span>
+                    <span class="score-value" id="level">1</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="game-area">
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+            <div class="overlay" id="overlay">
+                <div class="overlay-content">
+                    <h2 id="overlayTitle">Snake Game</h2>
+                    <p id="overlayMessage">Use arrow keys or buttons to move</p>
+                    <button class="btn" id="startBtn">Start Game</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="mobile-controls">
+                <div class="control-row">
+                    <button class="control-btn" id="upBtn">▲</button>
+                </div>
+                <div class="control-row">
+                    <button class="control-btn" id="leftBtn">◄</button>
+                    <button class="control-btn" id="downBtn">▼</button>
+                    <button class="control-btn" id="rightBtn">►</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Press <kbd>Space</kbd> to pause • <kbd>R</kbd> to restart</p>
+        </footer>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

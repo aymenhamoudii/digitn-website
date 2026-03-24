@@ -1,0 +1,634 @@
+
+> digitn-pro@1.0.0 dev
+> next dev
+
+  ▲ Next.js 14.2.35
+  - Local:        http://localhost:3000
+  - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1576ms
+ ○ Compiling /src/middleware ...
+ ✓ Compiled /src/middleware in 672ms (122 modules)
+ ○ Compiling /app ...
+ ✓ Compiled /app in 4.2s (1040 modules)
+ GET /app 200 in 4674ms
+ ✓ Compiled in 455ms (443 modules)
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (140kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+ ○ Compiling /app/projects ...
+ ✓ Compiled /app/projects in 619ms (1035 modules)
+ ○ Compiling /app/builder/terminal/[id] ...
+ ✓ Compiled /app/builder/terminal/[id] in 2s (1626 modules)
+ ✓ Compiled /api/projects/[id]/[...path] in 248ms (959 modules)
+ GET /api/projects/8b9f2a7e-d790-441b-ac75-cd1d550203b3/index.html 200 in 637ms
+ GET /api/projects/8b9f2a7e-d790-441b-ac75-cd1d550203b3/style.css 200 in 15ms
+ GET /api/projects/8b9f2a7e-d790-441b-ac75-cd1d550203b3/game.js 200 in 12ms
+ ✓ Compiled in 661ms (1640 modules)
+ ✓ Compiled /api/builder/chat/[id] in 425ms (960 modules)
+ ⨯ Error: Cannot find module './vendor-chunks/@supabase.js'
+Require stack:
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\webpack-runtime.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\app\api\builder\chat\[id]\route.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\compiled\jest-worker\processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1421:15)
+    at C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1504:12)
+    at mod.require (C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16) {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\webpack-runtime.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\app\\api\\builder\\chat\\[id]\\route.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\require.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\load-components.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\build\\utils.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\dev\\static-paths-worker.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\compiled\\jest-worker\\processChild.js'
+  ],
+  page: '/api/builder/chat/8b9f2a7e-d790-441b-ac75-cd1d550203b3'
+}
+ ○ Compiling /_error ...
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\pagefile.sys'
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\swapfile.sys'
+ ✓ Compiled /_error in 896ms (1880 modules)
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\pagefile.sys'
+Watchpack Error (initial scan): Error: EINVAL: invalid argument, lstat 'C:\swapfile.sys'
+ POST /api/builder/chat/8b9f2a7e-d790-441b-ac75-cd1d550203b3 500 in 2136ms
+ ⨯ Failed to generate static paths for /app/builder/terminal/[id]:
+Error: Cannot find module './vendor-chunks/@supabase.js'
+Require stack:
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\webpack-runtime.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\app\(platform)\app\builder\terminal\[id]\page.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\compiled\jest-worker\processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1421:15)
+    at C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1504:12)
+    at mod.require (C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16) {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\webpack-runtime.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\app\\(platform)\\app\\builder\\terminal\\[id]\\page.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\require.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\load-components.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\build\\utils.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\dev\\static-paths-worker.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\compiled\\jest-worker\\processChild.js'
+  ]
+}
+ ✓ Compiled /api/projects/[id]/[...path] in 403ms (1003 modules)
+ GET /api/projects/8b9f2a7e-d790-441b-ac75-cd1d550203b3/index.html 200 in 655ms
+ GET /api/projects/8b9f2a7e-d790-441b-ac75-cd1d550203b3/style.css 200 in 13ms
+ GET /api/projects/8b9f2a7e-d790-441b-ac75-cd1d550203b3/game.js 200 in 12ms
+ ⨯ Error: Cannot find module './vendor-chunks/@supabase.js'
+Require stack:
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\webpack-runtime.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\app\(platform)\app\builder\terminal\[id]\page.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\compiled\jest-worker\processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1421:15)
+    at C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1504:12)
+    at mod.require (C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16) {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\webpack-runtime.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\app\\(platform)\\app\\builder\\terminal\\[id]\\page.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\require.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\load-components.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\build\\utils.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\dev\\static-paths-worker.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\compiled\\jest-worker\\processChild.js'
+  ],
+  page: '/app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3'
+}
+ ⨯ Error: Cannot find module './vendor-chunks/@supabase.js'
+Require stack:
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\webpack-runtime.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\app\(platform)\app\builder\terminal\[id]\page.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\compiled\jest-worker\processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1421:15)
+    at C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1504:12)
+    at mod.require (C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16) {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\webpack-runtime.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\app\\(platform)\\app\\builder\\terminal\\[id]\\page.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\require.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\load-components.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\build\\utils.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\dev\\static-paths-worker.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\compiled\\jest-worker\\processChild.js'
+  ],
+  page: '/app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3'
+}
+ GET /app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3 500 in 313ms
+ ⨯ Error: Cannot find module './vendor-chunks/@supabase.js'
+Require stack:
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\webpack-runtime.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\app\(platform)\app\builder\terminal\[id]\page.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\compiled\jest-worker\processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1421:15)
+    at C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1504:12)
+    at mod.require (C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16) {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\webpack-runtime.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\app\\(platform)\\app\\builder\\terminal\\[id]\\page.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\require.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\load-components.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\build\\utils.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\dev\\static-paths-worker.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\compiled\\jest-worker\\processChild.js'
+  ],
+  page: '/app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3'
+}
+ GET /app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3 500 in 291ms
+[Error: ENOENT: no such file or directory, stat 'C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\cache\webpack\client-development\9.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\cache\\webpack\\client-development\\9.pack.gz'
+}
+ ⨯ unhandledRejection: [Error: ENOENT: no such file or directory, stat 'C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\cache\webpack\client-development\9.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\cache\\webpack\\client-development\\9.pack.gz'
+}
+ ⨯ unhandledRejection: [Error: ENOENT: no such file or directory, stat 'C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\cache\webpack\client-development\9.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\cache\\webpack\\client-development\\9.pack.gz'
+}
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, stat 'C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\cache\webpack\client-development\9.pack.gz'
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, lstat 'C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\pages'
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving '../../../../.next/server/pages/_error' in C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server for build dependencies doesn't lead to expected result 'C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\pages\_error.js', but to 'Error: Can't resolve '../../../../.next/server/pages/_error' in 'C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ../../../../.next/server/pages/_error (expected C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\pages\_error.js)
+<w>  at file dependencies C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+<w>  at file C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+<w>  at file dependencies C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+<w>  at file C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+<w>  at file dependencies C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+<w>  at file C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+<w>  at file dependencies C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w>  at file C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w>  at resolve commonjs C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving '../../../../.next/server/pages/_app' in C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server for build dependencies doesn't lead to expected result 'C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\pages\_app.js', but to 'Error: Can't resolve '../../../../.next/server/pages/_app' in 'C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ../../../../.next/server/pages/_app (expected C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\pages\_app.js)
+<w>  at file dependencies C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+<w>  at file C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+<w>  at file dependencies C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+<w>  at file C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+<w>  at file dependencies C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+<w>  at file C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+<w>  at file dependencies C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w>  at file C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w>  at resolve commonjs C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving '../../../../.next/server/pages/_document' in C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server for build dependencies doesn't lead to expected result 'C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\pages\_document.js', but to 'Error: Can't resolve '../../../../.next/server/pages/_document' in 'C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ../../../../.next/server/pages/_document (expected C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\pages\_document.js)
+<w>  at file dependencies C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+<w>  at file C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+<w>  at file dependencies C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+<w>  at file C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+<w>  at file dependencies C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+<w>  at file C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+<w>  at file dependencies C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w>  at file C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w>  at resolve commonjs C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Resolving '../../../../.next/server/app/(platform)/app/builder/terminal/[id]/page' in C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server for build dependencies doesn't lead to expected result 'C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\app\(platform)\app\builder\terminal\[id]\page.js', but to 'Error: Can't resolve '../../../../.next/server/app/(platform)/app/builder/terminal/[id]/page' in 'C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server'' instead. Resolving dependencies are ignored for this path.
+<w>  at resolve commonjs file ../../../../.next/server/app/(platform)/app/builder/terminal/[id]/page (expected C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\app\(platform)\app\builder\terminal\[id]\page.js)
+<w>  at file dependencies C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+<w>  at file C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+<w>  at file dependencies C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+<w>  at file C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+<w>  at file dependencies C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+<w>  at file C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+<w>  at file dependencies C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w>  at file C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+<w>  at resolve commonjs C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\webpack\loaders\next-route-loader\index.js
+ ○ Compiling / ...
+ ✓ Compiled / in 2.5s (3035 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET / 200 in 2633ms
+ ⨯ Error: Cannot find module './vendor-chunks/@supabase.js'
+Require stack:
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\webpack-runtime.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\app\(platform)\app\builder\terminal\[id]\page.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\compiled\jest-worker\processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1421:15)
+    at C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1504:12)
+    at mod.require (C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16) {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\webpack-runtime.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\app\\(platform)\\app\\builder\\terminal\\[id]\\page.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\require.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\load-components.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\build\\utils.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\dev\\static-paths-worker.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\compiled\\jest-worker\\processChild.js'
+  ],
+  page: '/app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3'
+}
+ GET /app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3 500 in 200ms
+ ⨯ Error: Cannot find module './vendor-chunks/@supabase.js'
+Require stack:
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\webpack-runtime.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\app\(platform)\app\builder\terminal\[id]\page.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\compiled\jest-worker\processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1421:15)
+    at C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1504:12)
+    at mod.require (C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16) {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\webpack-runtime.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\app\\(platform)\\app\\builder\\terminal\\[id]\\page.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\require.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\load-components.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\build\\utils.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\dev\\static-paths-worker.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\compiled\\jest-worker\\processChild.js'
+  ],
+  page: '/app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3'
+}
+ GET /app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3 500 in 184ms
+ ⨯ Error: Cannot find module './vendor-chunks/@supabase.js'
+Require stack:
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\webpack-runtime.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\app\(platform)\app\builder\terminal\[id]\page.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\compiled\jest-worker\processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1421:15)
+    at C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1504:12)
+    at mod.require (C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16) {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\webpack-runtime.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\app\\(platform)\\app\\builder\\terminal\\[id]\\page.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\require.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\load-components.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\build\\utils.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\dev\\static-paths-worker.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\compiled\\jest-worker\\processChild.js'
+  ],
+  page: '/app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3'
+}
+ GET /app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3 500 in 233ms
+ ⨯ Error: Cannot find module './vendor-chunks/@supabase.js'
+Require stack:
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\webpack-runtime.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\app\(platform)\app\builder\terminal\[id]\page.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\compiled\jest-worker\processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1421:15)
+    at C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1504:12)
+    at mod.require (C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16) {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\webpack-runtime.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\app\\(platform)\\app\\builder\\terminal\\[id]\\page.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\require.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\load-components.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\build\\utils.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\dev\\static-paths-worker.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\compiled\\jest-worker\\processChild.js'
+  ],
+  page: '/app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3'
+}
+ GET /app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3 500 in 197ms
+ ⨯ Error: Cannot find module './vendor-chunks/@supabase.js'
+Require stack:
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\webpack-runtime.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\app\(platform)\app\builder\terminal\[id]\page.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\compiled\jest-worker\processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1421:15)
+    at C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1504:12)
+    at mod.require (C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16) {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\webpack-runtime.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\app\\(platform)\\app\\builder\\terminal\\[id]\\page.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\require.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\load-components.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\build\\utils.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\dev\\static-paths-worker.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\compiled\\jest-worker\\processChild.js'
+  ],
+  page: '/app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3'
+}
+ GET /app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3 500 in 204ms
+ ✓ Compiled /_not-found in 481ms (3036 modules)
+ GET /app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3 404 in 565ms
+ ⨯ Error: Cannot find module './vendor-chunks/mdast-util-to-markdown.js'
+Require stack:
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\webpack-runtime.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\app\(platform)\app\builder\terminal\[id]\page.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\compiled\jest-worker\processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1421:15)
+    at C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1504:12)
+    at mod.require (C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16) {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\webpack-runtime.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\app\\(platform)\\app\\builder\\terminal\\[id]\\page.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\require.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\load-components.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\build\\utils.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\dev\\static-paths-worker.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\compiled\\jest-worker\\processChild.js'
+  ],
+  page: '/app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3'
+}
+ GET /app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3 500 in 230ms
+ ⨯ Error: Cannot find module './vendor-chunks/mdast-util-to-markdown.js'
+Require stack:
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\webpack-runtime.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\app\(platform)\app\builder\terminal\[id]\page.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\compiled\jest-worker\processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1421:15)
+    at C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1504:12)
+    at mod.require (C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16) {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\webpack-runtime.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\app\\(platform)\\app\\builder\\terminal\\[id]\\page.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\require.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\load-components.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\build\\utils.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\dev\\static-paths-worker.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\compiled\\jest-worker\\processChild.js'
+  ],
+  page: '/app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3'
+}
+ GET /app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3 500 in 209ms
+ ⨯ Error: Cannot find module './vendor-chunks/mdast-util-to-markdown.js'
+Require stack:
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\webpack-runtime.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\app\(platform)\app\builder\terminal\[id]\page.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\compiled\jest-worker\processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1421:15)
+    at C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1504:12)
+    at mod.require (C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16) {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\webpack-runtime.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\app\\(platform)\\app\\builder\\terminal\\[id]\\page.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\require.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\load-components.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\build\\utils.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\dev\\static-paths-worker.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\compiled\\jest-worker\\processChild.js'
+  ],
+  page: '/app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3'
+}
+ GET /app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3 500 in 215ms
+ ⨯ Error: Cannot find module './vendor-chunks/mdast-util-to-markdown.js'
+Require stack:
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\webpack-runtime.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\app\(platform)\app\builder\terminal\[id]\page.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\compiled\jest-worker\processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1421:15)
+    at C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1504:12)
+    at mod.require (C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16) {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\webpack-runtime.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\app\\(platform)\\app\\builder\\terminal\\[id]\\page.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\require.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\load-components.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\build\\utils.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\dev\\static-paths-worker.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\compiled\\jest-worker\\processChild.js'
+  ],
+  page: '/app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3'
+}
+ GET /app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3 500 in 214ms
+ ⨯ Error: Cannot find module './vendor-chunks/mdast-util-to-markdown.js'
+Require stack:
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\webpack-runtime.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\app\(platform)\app\builder\terminal\[id]\page.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\compiled\jest-worker\processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1421:15)
+    at C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1504:12)
+    at mod.require (C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16) {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\webpack-runtime.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\app\\(platform)\\app\\builder\\terminal\\[id]\\page.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\require.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\load-components.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\build\\utils.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\dev\\static-paths-worker.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\compiled\\jest-worker\\processChild.js'
+  ],
+  page: '/app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3'
+}
+ GET /app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3 500 in 214ms
+ ⨯ Error: Cannot find module './vendor-chunks/mdast-util-to-markdown.js'
+Require stack:
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\webpack-runtime.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\server\app\(platform)\app\builder\terminal\[id]\page.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\load-components.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\build\utils.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\dev\static-paths-worker.js
+- C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\compiled\jest-worker\processChild.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1421:15)
+    at C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:55:36
+    at defaultResolveImpl (node:internal/modules/cjs/loader:1059:19)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1064:22)
+    at Module._load (node:internal/modules/cjs/loader:1227:37)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1504:12)
+    at mod.require (C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\node_modules\next\dist\server\require-hook.js:65:28)
+    at require (node:internal/modules/helpers:152:16) {
+  type: 'Error',
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\webpack-runtime.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\.next\\server\\app\\(platform)\\app\\builder\\terminal\\[id]\\page.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\require.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\load-components.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\build\\utils.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\server\\dev\\static-paths-worker.js',
+    'C:\\Users\\Administrator\\Downloads\\Telegram Desktop\\digitn-pro-website-slim\\digitn-pro\\node_modules\\next\\dist\\compiled\\jest-worker\\processChild.js'
+  ],
+  page: '/app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3'
+}
+ GET /app/builder/terminal/8b9f2a7e-d790-441b-ac75-cd1d550203b3 500 in 212ms
+[?25h

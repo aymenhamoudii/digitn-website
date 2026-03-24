@@ -34,13 +34,19 @@ async function startProjectBuild(projectId, planText, tier) {
     stream.clients.forEach(res => res.write(`data: ${JSON.stringify({ type: 'status', status, ...payload })}\n\n`));
   };
 
+  const emitSystemStatus = (message) => {
+    const stream = activeStreams.get(projectId);
+    if (!stream) return;
+    stream.clients.forEach(res => res.write(`data: ${JSON.stringify({ type: 'system_status', text: message })}\n\n`));
+  };
+
   try {
     // 1. Ensure directories exist
     await fs.mkdir(projectDir, { recursive: true });
     await fs.mkdir(path.join(baseDir, 'zips'), { recursive: true });
     await supabase.from('projects').update({ status: 'building' }).eq('id', projectId);
 
-    emit('Initializing workspace...\n');
+    emitSystemStatus('Initializing workspace...\n');
 
     // 2. Fetch routing config for tier
     const { models } = await getRouterClient(tier);
@@ -140,7 +146,7 @@ START BUILDING NOW.`;
     const promptPath = path.join(projectDir, '.build-prompt.txt');
     await fs.writeFile(promptPath, instruction);
 
-    emit(`Starting Claude Code agent (Model: ${tier} tier)...\n`);
+    emitSystemStatus(`Starting Claude Code agent (Model: ${tier} tier)...\n`);
 
     // 9. Spawn Claude Code process with correct flags
     const isWindows = process.platform === 'win32';
@@ -224,7 +230,7 @@ START BUILDING NOW.`;
       });
     });
 
-    emit('\nCode generation complete. Packaging project...\n');
+    emitSystemStatus('\nCode generation complete. Packaging project...\n');
 
     // 5. Generate ZIP
     await new Promise((resolve, reject) => {

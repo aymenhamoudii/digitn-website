@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1 class="game-title">SNAKE</h1>
+            <div class="scores-container">
+                <div class="score-box">
+                    <span class="score-label">SCORE</span>
+                    <span class="score-value" id="score">0</span>
+                </div>
+                <div class="score-box">
+                    <span class="score-label">HIGH SCORE</span>
+                    <span class="score-value" id="highscore">0</span>
+                </div>
+            </div>
+        </header>
+        
+        <div class="game-info">
+            <div class="level-indicator">
+                <span>LEVEL</span>
+                <span id="level">1</span>
+            </div>
+            <div class="speed-indicator">
+                <span>SPEED</span>
+                <span id="speed">1x</span>
+            </div>
+        </div>
+
+        <div class="game-board-wrapper">
+            <canvas id="gameCanvas" width="600" height="600"></canvas>
+            <div class="game-overlay" id="overlay">
+                <div class="overlay-content">
+                    <h2 id="overlayTitle">SNAKE</h2>
+                    <p id="overlayMessage">Press SPACE to Start</p>
+                    <div class="controls-hint">
+                        <span>↑ ↓ ← →</span>
+                        <span>or WASD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="powerups-info">
+            <div class="powerup-item" id="powerupSpeed">
+                <div class="powerup-icon speed">⚡</div>
+                <span>Speed Boost</span>
+            </div>
+            <div class="powerup-item" id="powerupSlow">
+                <div class="powerup-icon slow">🐢</div>
+                <span>Slow Down</span>
+            </div>
+            <div class="powerup-item" id="powerupDouble">
+                <div class="powerup-icon double">✖2</div>
+                <span>2x Points</span>
+            </div>
+            <div class="powerup-item" id="powerupShield">
+                <div class="powerup-icon shield">🛡</div>
+                <span>Shield</span>
+            </div>
+        </div>
+
+        <div class="sound-toggle">
+            <button id="soundBtn" class="sound-btn">🔊 Sound ON</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

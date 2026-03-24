@@ -1,0 +1,864 @@
+/* Pizza Maker - Realistic Simulation Styles */
+
+:root {
+    --primary: #e63946;
+    --primary-dark: #c1121f;
+    --secondary: #f4a261;
+    --accent: #2a9d8f;
+    --dark: #264653;
+    --light: #fefae0;
+    --white: #ffffff;
+    --crust: #d4a574;
+    --crust-dark: #b8956a;
+    --dough: #f5deb3;
+    --shadow: rgba(0, 0, 0, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    min-height: 100vh;
+    color: var(--white);
+    overflow-x: hidden;
+}
+
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    padding: 20px 0 30px;
+}
+
+.header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--secondary);
+    text-shadow: 2px 2px 4px var(--shadow);
+    margin-bottom: 5px;
+}
+
+.header .subtitle {
+    color: #aaa;
+    font-size: 1.1rem;
+}
+
+/* Main Content */
+.main-content {
+    display: grid;
+    grid-template-columns: 250px 1fr 280px;
+    gap: 25px;
+    align-items: start;
+}
+
+/* Toppings Panel */
+.toppings-panel {
+    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+.toppings-panel h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--secondary);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.toppings-category {
+    margin-bottom: 20px;
+}
+
+.toppings-category h3 {
+    color: #888;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 5px;
+}
+
+.toppings-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.topping-item {
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 12px 8px;
+    text-align: center;
+    cursor: grab;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.topping-item:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateY(-3px);
+    border-color: var(--secondary);
+}
+
+.topping-item:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+}
+
+.topping-icon {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 8px;
+    border-radius: 50%;
+}
+
+/* Sauce Icons */
+.sauce.tomato {
+    background: linear-gradient(135deg, #e63946 0%, #c1121f 100%);
+}
+
+.sauce.bbq {
+    background: linear-gradient(135deg, #8b4513 0%, #5d2e0c 100%);
+}
+
+.sauce.white {
+    background: linear-gradient(135deg, #fffaf0 0%, #f5f5dc 100%);
+}
+
+/* Cheese Icons */
+.cheese.mozzarella {
+    background: linear-gradient(135deg, #fff 0%, #f0f0e8 100%);
+}
+
+.cheese.parmesan {
+    background: linear-gradient(135deg, #d4a017 0%, #b8860b 100%);
+}
+
+.cheese.cheddar {
+    background: linear-gradient(135deg, #ffa500 0%, #ff8c00 100%);
+}
+
+/* Topping Icons */
+.topping.pepperoni {
+    background: radial-gradient(circle, #c41e3a 40%, #8b0000 100%);
+}
+
+.topping.mushrooms {
+    background: radial-gradient(circle, #deb887 40%, #a0522d 100%);
+}
+
+.topping.olives {
+    background: radial-gradient(circle, #2f2f2f 40%, #1a1a1a 100%);
+}
+
+.topping.onions {
+    background: radial-gradient(circle, #e6e6fa 40%, #dda0dd 100%);
+}
+
+.topping.peppers {
+    background: linear-gradient(135deg, #228b22 0%, #006400 100%);
+}
+
+.topping.bacon {
+    background: linear-gradient(90deg, #8b4513 50%, #c41e3a 50%);
+}
+
+.topping.pineapple {
+    background: linear-gradient(135deg, #ffd700 0%, #daa520 100%);
+}
+
+.topping.basil {
+    background: linear-gradient(135deg, #228b22 0%, #006400 100%);
+}
+
+.topping-item span {
+    font-size: 0.75rem;
+    color: #ccc;
+}
+
+/* Pizza Board Section */
+.pizza-board-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.pizza-info {
+    display: flex;
+    gap: 30px;
+    background: rgba(255,255,255,0.1);
+    padding: 15px 30px;
+    border-radius: 50px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info-item .label {
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+}
+
+.info-item span:last-child {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--secondary);
+}
+
+/* Pizza Board */
+.pizza-board {
+    background: linear-gradient(180deg, #4a3728 0%, #3d2e22 100%);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 2px 10px rgba(255,255,255,0.1);
+    position: relative;
+}
+
+.pizza-board::before {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border: 2px solid rgba(255,255,255,0.1);
+    border-radius: 15px;
+    pointer-events: none;
+}
+
+.pizza-container {
+    width: 400px;
+    height: 400px;
+    position: relative;
+}
+
+.pizza-base {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+    background: var(--dough);
+    box-shadow: 
+        inset 0 5px 20px rgba(0,0,0,0.2),
+        0 10px 30px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}
+
+.pizza-base.drag-over {
+    transform: scale(1.02);
+}
+
+.crust {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--crust) 0%, var(--crust-dark) 100%);
+    box-shadow: 
+        inset 0 -5px 15px rgba(0,0,0,0.2),
+        0 5px 15px rgba(0,0,0,0.3);
+}
+
+.crust-inner {
+    position: absolute;
+    inset: 15px;
+    border-radius: 50%;
+    border: 4px solid var(--crust-dark);
+}
+
+.pizza-surface {
+    position: absolute;
+    inset: 25px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #f5deb3;
+    transition: background 0.5s ease;
+}
+
+/* Sauce on pizza */
+.pizza-surface.has-tomato-sauce {
+    background: linear-gradient(135deg, #e63946 0%, #c1121f 100%);
+}
+
+.pizza-surface.has-bbq-sauce {
+    background: linear-gradient(135deg, #8b4513 0%, #5d2e0c 100%);
+}
+
+.pizza-surface.has-white-sauce {
+    background: linear-gradient(135deg, #fffaf0 0%, #f5f5dc 100%);
+}
+
+/* Toppings on pizza */
+.pizza-topping {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    animation: dropIn 0.3s ease-out;
+}
+
+@keyframes dropIn {
+    0% {
+        transform: translate(-50%, -50%) scale(2);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Cheese styling */
+.pizza-topping.cheese {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    opacity: 0.9;
+}
+
+.pizza-topping.mozzarella {
+    background: radial-gradient(ellipse at 30% 30%, #fff 0%, #f0f0e8 50%, #e8e8e0 100%);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.pizza-topping.parmesan {
+    background: radial-gradient(ellipse at 30% 30%, #d4a017 0%, #b8860b 100%);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.pizza-topping.cheddar {
+    background: radial-gradient(ellipse at 30% 30%, #ffa500 0%, #ff8c00 100%);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+/* Pepperoni */
+.pizza-topping.pepperoni {
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle at 40% 40%, #c41e3a 0%, #8b0000 100%);
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.pizza-topping.pepperoni::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+}
+
+/* Mushrooms */
+.pizza-topping.mushrooms {
+    width: 35px;
+    height: 30px;
+    background: radial-gradient(ellipse at 50% 30%, #deb887 0%, #a0522d 100%);
+    border-radius: 50% 50% 40% 40%;
+}
+
+/* Olives */
+.pizza-topping.olives {
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle at 40% 40%, #4a4a4a 0%, #1a1a1a 100%);
+    border-radius: 50%;
+}
+
+.pizza-topping.olives::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: #c41e3a;
+    border-radius: 50%;
+}
+
+/* Onions */
+.pizza-topping.onions {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #e6e6fa;
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+/* Peppers */
+.pizza-topping.peppers {
+    width: 25px;
+    height: 40px;
+    background: linear-gradient(180deg, #228b22 0%, #006400 100%);
+    border-radius: 30% 30% 50% 50%;
+}
+
+/* Bacon */
+.pizza-topping.bacon {
+    width: 50px;
+    height: 15px;
+    background: linear-gradient(90deg, #8b4513 0%, #c41e3a 50%, #8b4513 100%);
+    border-radius: 10px;
+}
+
+/* Pineapple */
+.pizza-topping.pineapple {
+    width: 25px;
+    height: 25px;
+    background: linear-gradient(135deg, #ffd700 0%, #daa520 100%);
+    border-radius: 5px;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+/* Basil */
+.pizza-topping.basil {
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(ellipse at 50% 50%, #228b22 0%, #006400 100%);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-icon {
+    font-size: 1.2rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.5);
+}
+
+.btn-secondary {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+.btn-secondary:hover {
+    background: rgba(255,255,255,0.25);
+    transform: translateY(-2px);
+}
+
+/* Stats Panel */
+.stats-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.score-card, .menu-section, .share-section {
+    background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+}
+
+.stats-panel h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--secondary);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.score-display {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#score-value {
+    display: block;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--secondary);
+    line-height: 1;
+}
+
+.score-label {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.score-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.score-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.score-item span:first-child {
+    color: #aaa;
+}
+
+.score-item span:last-child {
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+/* Menu Section */
+.menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    background: rgba(255,255,255,0.08);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.menu-item:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateX(5px);
+}
+
+.menu-icon {
+    font-size: 1.2rem;
+}
+
+/* Share Section */
+.share-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.share-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    background: rgba(255,255,255,0.08);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+}
+
+#share-facebook:hover { background: #1877f2; }
+#share-twitter:hover { background: #1da1f2; }
+#share-copy:hover { background: var(--accent); }
+
+/* Oven Modal */
+.oven-modal, .result-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.oven-modal.active, .result-modal.active {
+    display: flex;
+}
+
+.oven-content, .result-content {
+    background: linear-gradient(180deg, #2d2d2d 0%, #1a1a1a 100%);
+    padding: 40px;
+    border-radius: 30px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    border: 2px solid rgba(255,255,255,0.1);
+}
+
+.oven-content h2, .result-content h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--secondary);
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.oven-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.oven {
+    width: 200px;
+    height: 180px;
+    background: linear-gradient(180deg, #444 0%, #333 100%);
+    border-radius: 15px 15px 5px 5px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.oven-door {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 40px;
+    background: #222;
+    border-radius: 10px;
+    border: 3px solid #555;
+}
+
+.oven-window {
+    position: absolute;
+    inset: 10px;
+    background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.oven-pizza {
+    width: 80px;
+    height: 80px;
+    background: var(--dough);
+    border-radius: 50%;
+    position: relative;
+}
+
+.oven-pizza.baking {
+    animation: bake 2s infinite;
+}
+
+@keyframes bake {
+    0%, 100% { transform: scale(1); filter: brightness(1); }
+    50% { transform: scale(1.05); filter: brightness(1.2); }
+}
+
+.oven-controls {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.oven-light {
+    width: 15px;
+    height: 15px;
+    background: #ff4444;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #ff4444, 0 0 40px #ff4444;
+    animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+    from { opacity: 0.7; }
+    to { opacity: 1; }
+}
+
+.oven-timer {
+    background: #111;
+    padding: 15px 25px;
+    border-radius: 10px;
+    border: 2px solid #333;
+}
+
+.timer-display {
+    font-family: 'Courier New', monospace;
+    font-size: 2rem;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.bake-progress {
+    margin-top: 20px;
+}
+
+.progress-bar {
+    height: 20px;
+    background: #222;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+#bake-status {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* Result Modal */
+.final-pizza {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: var(--dough);
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.final-pizza::before {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border-radius: 50%;
+    border: 8px solid var(--crust);
+}
+
+.final-pizza::after {
+    content: '';
+    position: absolute;
+    inset: 25px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e63946 0%, #c1121f 100%);
+}
+
+.final-score {
+    margin-bottom: 10px;
+}
+
+.score-number {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--secondary);
+}
+
+.score-text {
+    font-size: 1rem;
+    color: #888;
+    margin-left: 5px;
+}
+
+.score-message {
+    color: #aaa;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+.result-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* Baked Pizza Styles */
+.pizza-base.baked {
+    background: #e8c88a;
+}
+
+.pizza-base.baked .crust {
+    background: linear-gradient(135deg, #c49464 0%, #a8744a 100%);
+}
+
+.pizza-surface.baked {
+    filter: brightness(0.9);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .main-content {
+        grid-template-columns: 200px 1fr 220px;
+    }
+}
+
+@media (max-width: 900px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .toppings-panel, .stats-panel {
+        max-height: none;
+    }
+    
+    .pizza-container {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+/* Scrollbar */
+.toppings-panel::-webkit-scrollbar {
+    width: 8px;
+}
+
+.toppings-panel::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.05);
+    border-radius: 4px;
+}
+
+.toppings-panel::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+}
+
+.toppings-panel::-webkit-scrollbar-thumb:hover {
+    background: rgba(255,255,255,0.3);
+}

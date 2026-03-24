@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game - Retro Edition</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1>SNAKE</h1>
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="label">SCORE</span>
+                    <span id="score">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">LEVEL</span>
+                    <span id="level">1</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">HIGH</span>
+                    <span id="highScore">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-area">
+            <canvas id="gameCanvas" width="600" height="600"></canvas>
+            <div class="overlay" id="overlay">
+                <div class="overlay-content">
+                    <h2 id="overlayTitle">SNAKE</h2>
+                    <p id="overlayMessage">Press SPACE to Start</p>
+                    <div class="controls-hint">
+                        <span>↑</span><span>↓</span><span>←</span><span>→</span> to move
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="level-indicator" id="levelIndicator">
+            <span>LEVEL <span id="currentLevel">1</span></span>
+        </div>
+    </div>
+
+    <script src="js/game.js"></script>
+</body>
+</html>

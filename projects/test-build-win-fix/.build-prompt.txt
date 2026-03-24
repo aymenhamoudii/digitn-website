@@ -1,0 +1,6 @@
+You are an expert full-stack developer. Build the following project autonomously.
+DO NOT wait for user input. DO NOT ask questions. Just implement it.
+When you are done, output EXACTLY the phrase "PROJECT_BUILD_COMPLETE".
+
+Here is the approved plan:
+test

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Snake Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="crt-container">
+        <div class="scanline"></div>
+        <div class="game-container">
+            <div class="header">
+                <div class="score-board">
+                    <div class="score-item">SC: <span id="current-score">0000</span></div>
+                    <div class="score-item">HI: <span id="high-score">0000</span></div>
+                </div>
+            </div>
+            
+            <div class="canvas-wrapper">
+                <canvas id="gameCanvas" width="300" height="300"></canvas>
+                <div id="overlay" class="overlay hidden">
+                    <div id="overlay-content">
+                        <h2 id="overlay-title">SNAKE</h2>
+                        <p id="overlay-message">PRESS SPACE</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls-info">
+                <p>ARROWS: MOVE | SPACE: PAUSE</p>
+            </div>
+
+            <div class="settings">
+                <label class="toggle">
+                    <input type="checkbox" id="wrap-toggle" checked>
+                    <span class="slider"></span>
+                    <span class="label-text">WRAP</span>
+                </label>
+                <label class="toggle">
+                    <input type="checkbox" id="sound-toggle" checked>
+                    <span class="slider"></span>
+                    <span class="label-text">SOUND</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

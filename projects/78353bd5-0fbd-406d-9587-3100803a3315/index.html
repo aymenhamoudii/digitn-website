@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Minimal Piano Tiles</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="ui-layer">
+            <div id="score-container">
+                <div id="score">0</div>
+                <div id="highscore">Best: 0</div>
+            </div>
+            <div id="start-screen" class="overlay">
+                <h1>Piano Tiles</h1>
+                <p>Don't tap the white tiles</p>
+                <p class="controls-hint">Use <span>D</span> <span>F</span> <span>J</span> <span>K</span> or Click</p>
+                <button id="start-btn">Start Game</button>
+            </div>
+            <div id="game-over-screen" class="overlay hidden">
+                <h1>Game Over</h1>
+                <div id="final-score">Score: 0</div>
+                <div id="final-highscore">Best: 0</div>
+                <button id="restart-btn">Try Again</button>
+            </div>
+        </div>
+        <div id="game-canvas-container">
+            <canvas id="game-canvas"></canvas>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
