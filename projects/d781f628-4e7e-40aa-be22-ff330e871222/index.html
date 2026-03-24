@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scientific Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="calculator-container">
+    <header class="calculator-header">
+      <h1>Scientific Calculator</h1>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </header>
+
+    <main class="calculator">
+      <section class="display-section" aria-label="Calculator display">
+        <div class="history-panel" id="historyPanel" aria-live="polite">
+          <div class="history-header">
+            <span>History</span>
+            <button class="clear-history" id="clearHistory" aria-label="Clear history">Clear</button>
+          </div>
+          <ul class="history-list" id="historyList"></ul>
+        </div>
+        <div class="display">
+          <div class="expression" id="expression"></div>
+          <div class="result" id="result">0</div>
+        </div>
+      </section>
+
+      <section class="keypad" aria-label="Calculator keypad">
+        <div class="row">
+          <button class="btn btn-function" data-action="sin" aria-label="Sine">sin</button>
+          <button class="btn btn-function" data-action="cos" aria-label="Cosine">cos</button>
+          <button class="btn btn-function" data-action="tan" aria-label="Tangent">tan</button>
+          <button class="btn btn-function" data-action="log" aria-label="Logarithm">log</button>
+          <button class="btn btn-function" data-action="ln" aria-label="Natural log">ln</button>
+        </div>
+        <div class="row">
+          <button class="btn btn-function" data-action="sqrt" aria-label="Square root">√</button>
+          <button class="btn btn-function" data-action="pow" aria-label="Power">x²</button>
+          <button class="btn btn-function" data-action="pi" aria-label="Pi constant">π</button>
+          <button class="btn btn-function" data-action="e" aria-label="Euler's number">e</button>
+          <button class="btn btn-function" data-action="factorial" aria-label="Factorial">n!</button>
+        </div>
+        <div class="row">
+          <button class="btn btn-operator" data-action="openParen" aria-label="Open parenthesis">(</button>
+          <button class="btn btn-operator" data-action="closeParen" aria-label="Close parenthesis">)</button>
+          <button class="btn btn-memory" data-action="MC" aria-label="Memory clear">MC</button>
+          <button class="btn btn-memory" data-action="MR" aria-label="Memory recall">MR</button>
+          <button class="btn btn-memory" data-action="M+" aria-label="Memory add">M+</button>
+        </div>
+        <div class="row">
+          <button class="btn btn-number" data-value="7">7</button>
+          <button class="btn btn-number" data-value="8">8</button>
+          <button class="btn btn-number" data-value="9">9</button>
+          <button class="btn btn-operator" data-action="divide" aria-label="Divide">÷</button>
+          <button class="btn btn-action" data-action="clear" aria-label="Clear entry">CE</button>
+        </div>
+        <div class="row">
+          <button class="btn btn-number" data-value="4">4</button>
+          <button class="btn btn-number" data-value="5">5</button>
+          <button class="btn btn-number" data-value="6">6</button>
+          <button class="btn btn-operator" data-action="multiply" aria-label="Multiply">×</button>
+          <button class="btn btn-action" data-action="backspace" aria-label="Backspace">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="17 1 21 5 17 9"></polyline>
+              <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+              <polyline points="7 23 3 19 7 15"></polyline>
+              <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="row">
+          <button class="btn btn-number" data-value="1">1</button>
+          <button class="btn btn-number" data-value="2">2</button>
+          <button class="btn btn-number" data-value="3">3</button>
+          <button class="btn btn-operator" data-action="subtract" aria-label="Subtract">−</button>
+          <button class="btn btn-equals" data-action="calculate" aria-label="Calculate result">=</button>
+        </div>
+        <div class="row">
+          <button class="btn btn-number" data-value="0">0</button>
+          <button class="btn btn-number" data-value="00">00</button>
+          <button class="btn btn-number" data-value=".">.</button>
+          <button class="btn btn-operator" data-action="add" aria-label="Add">+</button>
+          <button class="btn btn-action" data-action="allClear" aria-label="All clear">AC</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

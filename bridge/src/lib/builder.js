@@ -19,24 +19,27 @@ async function startProjectBuild(projectId, planText, tier) {
   const zipPath = path.join(baseDir, 'zips', `${projectId}.zip`);
 
   // Setup stream buffer
-  activeStreams.set(projectId, { clients: [], log: '' });
+  activeStreams.set(projectId, { clients: [], events: [] });
   let assistantFullResponse = '';
+
   const emit = (data) => {
     const stream = activeStreams.get(projectId);
     if (!stream) return;
-    stream.log += data;
+    stream.events.push({ type: 'log', text: data });
     stream.clients.forEach(res => res.write(`data: ${JSON.stringify({ type: 'log', text: data })}\n\n`));
   };
 
   const emitStatus = (status, payload = {}) => {
     const stream = activeStreams.get(projectId);
     if (!stream) return;
+    stream.events.push({ type: 'status', status, ...payload });
     stream.clients.forEach(res => res.write(`data: ${JSON.stringify({ type: 'status', status, ...payload })}\n\n`));
   };
 
   const emitSystemStatus = (message) => {
     const stream = activeStreams.get(projectId);
     if (!stream) return;
+    stream.events.push({ type: 'system_status', text: message });
     stream.clients.forEach(res => res.write(`data: ${JSON.stringify({ type: 'system_status', text: message })}\n\n`));
   };
 
@@ -286,8 +289,10 @@ function attachClientToStream(projectId, res) {
   const stream = activeStreams.get(projectId);
   if (!stream) return false;
 
-  // Send backlog
-  res.write(`data: ${JSON.stringify({ type: 'log', text: stream.log })}\n\n`);
+  // Send backlog of individual events
+  stream.events.forEach(event => {
+    res.write(`data: ${JSON.stringify(event)}\n\n`);
+  });
   stream.clients.push(res);
 
   res.on('close', () => {
