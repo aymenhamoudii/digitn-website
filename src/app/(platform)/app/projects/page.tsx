@@ -6,6 +6,7 @@ import { Header } from '@/components/layout/Header'
 import { SkeletonProjectCard } from '@/components/ui/Skeleton'
 import Link from 'next/link'
 import { FiGlobe, FiClock, FiTrash2, FiBox, FiDownload } from 'react-icons/fi'
+import toast from 'react-hot-toast'
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<any[]>([])
@@ -47,6 +48,49 @@ export default function ProjectsPage() {
     }
 
     setProjects(prev => prev.filter(p => p.id !== projectId))
+  }
+
+  const handleDownload = async (projectId: string, projectName: string, e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    try {
+      toast.loading('Generating ZIP...', { id: 'zip' })
+
+      // Fetch project files
+      const response = await fetch(`/api/projects/${projectId}/files`)
+      if (!response.ok) throw new Error('Failed to load files')
+
+      const data = await response.json()
+      const files = data.files || {}
+
+      // Dynamically import JSZip
+      const JSZip = (await import('jszip')).default
+      const zip = new JSZip()
+
+      // Add all files to ZIP
+      Object.entries(files).forEach(([filePath, content]) => {
+        zip.file(filePath, content as string)
+      })
+
+      // Generate ZIP blob
+      const blob = await zip.generateAsync({ type: 'blob' })
+
+      // Download
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `${projectName || 'project'}.zip`
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      URL.revokeObjectURL(url)
+
+      toast.success('ZIP downloaded!', { id: 'zip' })
+    } catch (err) {
+      console.error('Failed to generate ZIP:', err)
+      toast.error('Failed to generate ZIP', { id: 'zip' })
+    }
   }
 
   return (
@@ -94,13 +138,13 @@ export default function ProjectsPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map(p => {
-              const isExpired = p.status === 'expired' || new Date(p.expires_at) < new Date()
+              const isExpired = p.status === 'expired'
 
               return (
                 <Link
                   key={p.id}
                   href={`/app/builder/terminal/${p.id}`}
-                  className={`rounded-xl overflow-hidden transition-all block ${
+                  className={`rounded-xl overflow-hidden transition-all flex flex-col ${
                     isExpired ? 'opacity-60' : 'hover:shadow-md hover:-translate-y-1'
                   }`}
                   style={{
@@ -137,7 +181,7 @@ export default function ProjectsPage() {
                     </span>
                   </div>
 
-                  <div className="p-5">
+                  <div className="p-5 flex flex-col h-full flex-1">
                     <h3
                       className="font-medium truncate mb-1"
                       style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-serif)' }}
@@ -161,34 +205,31 @@ export default function ProjectsPage() {
                     </p>
 
                     <div
-                      className="flex justify-between items-center pt-4"
+                      className="flex justify-between items-center pt-4 mt-auto"
                       style={{ borderTop: '1px solid var(--border)' }}
                     >
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-3">
                         {p.status === 'ready' && !isExpired && (
                           <>
-                            <a
-                              href={p.public_url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-xs font-medium flex items-center gap-1 transition-colors hover:opacity-80"
+                            <Link
+                              href={`/app/builder/terminal/${p.id}`}
+                              className="text-xs font-medium flex items-center gap-1.5 transition-all hover:-translate-y-0.5"
                               style={{ color: 'var(--accent-blue)' }}
+                              onClick={(e) => e.stopPropagation()}
                             >
-                              <FiGlobe size={13} /> Open
-                            </a>
-                            {p.zip_path && (
-                              <a
-                                href={p.zip_path}
-                                className="text-xs font-medium flex items-center gap-1 transition-colors hover:opacity-80"
-                                style={{ color: 'var(--accent)' }}
-                              >
-                                <FiDownload size={13} /> Download
-                              </a>
-                            )}
+                              <FiGlobe size={14} /> Open
+                            </Link>
+                            <button
+                              onClick={(e) => handleDownload(p.id, p.name, e)}
+                              className="text-xs font-medium flex items-center gap-1.5 transition-all hover:-translate-y-0.5"
+                              style={{ color: 'var(--accent)' }}
+                            >
+                              <FiDownload size={14} /> Download
+                            </button>
                           </>
                         )}
                         {(isExpired || p.status !== 'ready') && (
-                          <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
+                          <span className="text-xs font-medium" style={{ color: 'var(--text-tertiary)' }}>
                             {isExpired ? 'Preview expired' : 'Building...'}
                           </span>
                         )}
@@ -196,10 +237,11 @@ export default function ProjectsPage() {
 
                       <button
                         onClick={(e) => handleDelete(p.id, e)}
-                        className="transition-colors hover:text-red-500"
+                        className="p-2 rounded-md transition-all hover:bg-red-50 hover:-translate-y-0.5 group z-10 relative"
                         style={{ color: 'var(--text-tertiary)' }}
+                        title="Delete project"
                       >
-                        <FiTrash2 size={15} />
+                        <FiTrash2 size={16} className="transition-colors group-hover:text-red-500" />
                       </button>
                     </div>
                   </div>

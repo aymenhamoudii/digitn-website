@@ -84,10 +84,16 @@ export function ChatInterface({ initialMessages = [], conversationId, hideHistor
         .select('id, title, mode, created_at')
         .eq('id', convId)
         .single();
-      if (data?.title) {
-        setConversations(prev =>
-          prev.map(c => c.id === convId ? { ...c, title: data.title } : c)
-        );
+      if (data?.title && data.title.length > 0) {
+        // Silently update just this conversation's title without triggering a full reload
+        setConversations(prev => {
+          const exists = prev.find(c => c.id === convId);
+          if (!exists) return prev; // Don't add if not in list
+          // Only update if title actually changed to avoid unnecessary re-renders
+          const current = prev.find(c => c.id === convId);
+          if (current?.title === data.title) return prev;
+          return prev.map(c => c.id === convId ? { ...c, title: data.title } : c);
+        });
       }
     };
     // Poll twice — once after stream finishes, once more in case title generation is slow

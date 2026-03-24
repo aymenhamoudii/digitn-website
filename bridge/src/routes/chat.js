@@ -105,7 +105,10 @@ CRITICAL RULES:
       }
     }
 
-    // 6. Save AI response & finish stream
+    // Add DIGITN signature marker at the end (will be rendered as styled component in frontend)
+    res.write(`data: ${JSON.stringify({ type: 'signature' })}\n\n`);
+
+    // 6. Save AI response & finish stream (save without signature to avoid duplication on reload)
     await supabase.from('messages').insert({
       conversation_id: activeConvId,
       user_id: userId,

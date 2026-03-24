@@ -17,13 +17,10 @@ export default function LimitsAdmin() {
   useEffect(() => {
     async function loadLimits() {
       try {
-        const { data, error } = await supabase
-          .from('admin_config')
-          .select('value')
-          .eq('key', 'tier_limits')
-          .single();
+        const res = await fetch('/api/admin/config?key=tier_limits');
+        const data = await res.json();
 
-        if (error) throw error;
+        if (!res.ok) throw new Error(data.error);
         if (data?.value) setLimits(data.value);
       } catch (err) {
         console.error(err);

@@ -14,7 +14,10 @@ import {
   FiActivity,
   FiFolder,
   FiArrowRight,
+  FiUser,
+  FiMail,
 } from 'react-icons/fi';
+import toast from 'react-hot-toast';
 
 /* ------------------------------------------------------------------ */
 /*  Types & constants                                                  */
@@ -55,7 +58,6 @@ const PLANS: PlanConfig[] = [
       '10 requests / day',
       '1 active project',
       'Standard AI models',
-      '15-min preview',
       'Community support',
     ],
   },
@@ -76,7 +78,6 @@ const PLANS: PlanConfig[] = [
       '50 requests / day',
       '3 active projects',
       'Premium AI models',
-      '15-min preview',
       'Priority support',
     ],
   },
@@ -96,7 +97,6 @@ const PLANS: PlanConfig[] = [
       'Unlimited requests',
       'Unlimited projects',
       'Premium AI models',
-      '15-min preview',
       'Dedicated support',
     ],
   },
@@ -121,6 +121,8 @@ export default function SettingsPage() {
   const [loading, setLoading] = useState(true);
   const [subscribing, setSubscribing] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string>('');
+  const [userEmail, setUserEmail] = useState<string>('');
   const [tier, setTier] = useState<TierKey>('free');
   const [requestsUsed, setRequestsUsed] = useState(0);
   const [requestsLimit, setRequestsLimit] = useState(10);
@@ -139,27 +141,36 @@ export default function SettingsPage() {
     // Fetch tier
     const { data: userData } = await supabase
       .from('users')
-      .select('tier')
+      .select('tier, name, email')
       .eq('id', user.id)
       .single();
 
+    if (userData) {
+      setUserName(userData.name || user.user_metadata?.name || '');
+      setUserEmail(userData.email || user.email || '');
+    }
+
+    let userTier: TierKey = 'free';
     if (userData?.tier) {
-      setTier(userData.tier as TierKey);
+      userTier = userData.tier as TierKey;
+      setTier(userTier);
     }
 
     // Fetch today's quota
     const today = new Date().toISOString().split('T')[0];
     const { data: quota } = await supabase
       .from('usage_quotas')
-      .select('requests_used, requests_limit')
+      .select('requests_used')
       .eq('user_id', user.id)
-      .eq('date', today)
+      .eq('date', `${today}-builder`)
       .maybeSingle();
 
-    if (quota) {
-      setRequestsUsed(quota.requests_used);
-      setRequestsLimit(quota.requests_limit);
-    }
+    // Use dynamic limit from PLANS rather than the DB
+    const planConfig = PLANS.find(p => p.key === userTier);
+    const dynamicLimit = planConfig?.requestsPerDay === 'Unlimited' ? 9999 : parseInt(planConfig?.requestsPerDay || '10');
+
+    setRequestsUsed(quota?.requests_used || 0);
+    setRequestsLimit(dynamicLimit);
 
     // Fetch active projects count
     const { count } = await supabase
@@ -239,7 +250,7 @@ export default function SettingsPage() {
               letterSpacing: '-0.02em',
             }}
           >
-            Settings
+            Profile & Settings
           </h1>
           <p
             style={{
@@ -248,9 +259,69 @@ export default function SettingsPage() {
               color: 'var(--text-secondary)',
             }}
           >
-            Manage your subscription and account
+            Manage your account and subscription
           </p>
         </div>
+
+        {/* --- Profile Card --- */}
+        {loading ? (
+          <div style={{ marginBottom: '40px' }}>
+            <SkeletonStat />
+          </div>
+        ) : (
+          <div
+            style={{
+              backgroundColor: 'var(--card-bg)',
+              border: '1px solid var(--border)',
+              borderRadius: '14px',
+              padding: '28px 32px',
+              marginBottom: '40px',
+              boxShadow: 'var(--shadow-sm)',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+              <div
+                style={{
+                  width: '72px',
+                  height: '72px',
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--bg-primary)',
+                  border: '1px solid var(--border)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'var(--text-secondary)',
+                }}
+              >
+                <FiUser size={32} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <h3
+                  style={{
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '18px',
+                    fontWeight: 600,
+                    color: 'var(--text-primary)',
+                    margin: '0 0 8px 0',
+                  }}
+                >
+                  {userName || 'DIGITN User'}
+                </h3>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-secondary)' }}>
+                  <FiMail size={14} />
+                  <span style={{ fontSize: '14px' }}>{userEmail}</span>
+                </div>
+              </div>
+              <button
+                className="px-4 py-2 rounded-md text-sm font-medium transition-colors"
+                style={{ backgroundColor: 'var(--bg-primary)', border: '1px solid var(--border)', color: 'var(--text-primary)' }}
+                onClick={() => toast.success('Profile updates coming soon!')}
+              >
+                Edit Profile
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* --- Payment Status Alerts --- */}
         {paymentStatus && alertVisible && (
@@ -448,25 +519,27 @@ export default function SettingsPage() {
                   </div>
 
                   {/* Progress bar */}
-                  <div
-                    style={{
-                      width: '100%',
-                      height: '6px',
-                      borderRadius: '3px',
-                      backgroundColor: 'var(--bg-secondary)',
-                      overflow: 'hidden',
-                    }}
-                  >
+                  {!isUnlimited && (
                     <div
                       style={{
-                        width: isUnlimited ? '15%' : `${quotaPercentage}%`,
-                        height: '100%',
+                        width: '100%',
+                        height: '6px',
                         borderRadius: '3px',
-                        backgroundColor: quotaPercentage > 85 ? '#e05252' : 'var(--accent)',
-                        transition: 'width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                        backgroundColor: 'var(--bg-secondary)',
+                        overflow: 'hidden',
                       }}
-                    />
-                  </div>
+                    >
+                      <div
+                        style={{
+                          width: `${quotaPercentage}%`,
+                          height: '100%',
+                          borderRadius: '3px',
+                          backgroundColor: quotaPercentage > 85 ? '#e05252' : 'var(--accent)',
+                          transition: 'width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                        }}
+                      />
+                    </div>
+                  )}
                   {isUnlimited && (
                     <p
                       style={{
@@ -865,8 +938,6 @@ export default function SettingsPage() {
             lineHeight: 1.6,
           }}
         >
-          All plans include a 15-minute live preview for generated projects. Preview resets when you request changes.
-          <br />
           Prices in DT (Tunisian Dinar) for local payments, USD for international cards.
         </p>
       </div>

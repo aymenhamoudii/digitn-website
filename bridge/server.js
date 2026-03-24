@@ -34,14 +34,7 @@ app.use('/builder', builderChatRoutes);
 
 const PORT = process.env.BRIDGE_PORT || 3001;
 
-const cron = require('node-cron');
-const { cleanupExpiredProjects } = require('./cleanup');
-
-// Run cleanup every 2 minutes
-cron.schedule('*/2 * * * *', () => {
-  cleanupExpiredProjects();
-});
-console.log('Cleanup cron job scheduled (runs every 2 minutes)');
+// Project expiration cron job removed per user request
 
 app.listen(PORT, '127.0.0.1', () => {
   console.log(`AI Bridge running on http://127.0.0.1:${PORT}`);

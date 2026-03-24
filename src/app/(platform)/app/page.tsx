@@ -6,6 +6,7 @@ import { Header } from '@/components/layout/Header'
 import { Skeleton, SkeletonStat } from '@/components/ui/Skeleton'
 import Link from 'next/link'
 import { FiMessageSquare, FiBox, FiFolder, FiArrowRight, FiZap, FiClock } from 'react-icons/fi'
+import { TIERS } from '@/config/platform'
 
 export default function DashboardPage() {
   const [loading, setLoading] = useState(true)
@@ -47,10 +48,14 @@ export default function DashboardPage() {
         .order('created_at', { ascending: false })
         .limit(3)
 
+      const userTier = userData?.tier || 'free'
+      const tierConfig = TIERS[userTier as keyof typeof TIERS] || TIERS.free
+      const actualLimit = tierConfig.builderRequestsPerDay
+
       setUserName(userData?.name || user.email?.split('@')[0] || 'User')
-      setTier(userData?.tier || 'free')
+      setTier(userTier)
       setRequestsUsed(quota?.requests_used || 0)
-      setRequestsLimit(quota?.requests_limit || 10)
+      setRequestsLimit(actualLimit)
       setProjectCount(count || 0)
       setRecentProjects(projects || [])
       setLoading(false)
@@ -58,7 +63,9 @@ export default function DashboardPage() {
     loadData()
   }, [])
 
-  const requestsLeft = requestsLimit - requestsUsed
+  // For display purposes, handle unlimited (9999) gracefully
+  const isUnlimited = requestsLimit > 1000
+  const requestsLeft = isUnlimited ? 'Unlimited' : (requestsLimit - requestsUsed)
   const tierDisplay = tier === 'free' ? 'DIGITN FAST' : tier === 'pro' ? 'DIGITN PRO' : 'DIGITN PLUS'
   const tierColor = tier === 'free' ? 'var(--text-secondary)' : 'var(--accent)'
 
@@ -67,7 +74,7 @@ export default function DashboardPage() {
       <Header
         title="Dashboard"
         userName={userName}
-        requestsLeft={requestsLeft}
+        requestsLeft={isUnlimited ? undefined : (requestsLimit - requestsUsed)}
         requestsTotal={requestsLimit}
       />
       <div className="px-16 py-12 max-w-platform">
@@ -94,7 +101,7 @@ export default function DashboardPage() {
                 {tierDisplay}
               </span>
               <span style={{ color: 'var(--text-secondary)' }} className="text-sm">
-                {requestsLeft} requests remaining today
+                {isUnlimited ? 'Unlimited requests remaining today' : `${requestsLeft} requests remaining today`}
               </span>
             </div>
           </div>
@@ -121,18 +128,29 @@ export default function DashboardPage() {
                   </span>
                 </div>
                 <p className="text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
-                  {requestsUsed} / {requestsLimit}
+                  {isUnlimited ? (
+                    <span className="flex items-center gap-2">{requestsUsed} <span className="text-sm font-normal text-[var(--text-tertiary)]">used</span></span>
+                  ) : (
+                    `${requestsUsed} / ${requestsLimit}`
+                  )}
                 </p>
                 {/* Progress bar */}
-                <div className="mt-3 h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--border)' }}>
-                  <div
-                    className="h-full rounded-full transition-all duration-500"
-                    style={{
-                      width: `${Math.min((requestsUsed / requestsLimit) * 100, 100)}%`,
-                      backgroundColor: requestsUsed / requestsLimit > 0.8 ? '#ef4444' : 'var(--accent)',
-                    }}
-                  />
-                </div>
+                {!isUnlimited && (
+                  <div className="mt-3 h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: 'var(--border)' }}>
+                    <div
+                      className="h-full rounded-full transition-all duration-500"
+                      style={{
+                        width: `${Math.min((requestsUsed / requestsLimit) * 100, 100)}%`,
+                        backgroundColor: requestsUsed / requestsLimit > 0.8 ? '#ef4444' : 'var(--accent)',
+                      }}
+                    />
+                  </div>
+                )}
+                {isUnlimited && (
+                  <p className="text-xs mt-1" style={{ color: 'var(--text-tertiary)' }}>
+                    Unlimited plan
+                  </p>
+                )}
               </div>
 
               <div
@@ -150,24 +168,6 @@ export default function DashboardPage() {
                 </p>
                 <p className="text-xs mt-1" style={{ color: 'var(--text-tertiary)' }}>
                   {tier === 'free' ? '1 active max' : tier === 'pro' ? '3 active max' : 'Unlimited'}
-                </p>
-              </div>
-
-              <div
-                className="p-5 rounded-xl transition-all hover:-translate-y-0.5"
-                style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border)' }}
-              >
-                <div className="flex items-center gap-2 mb-3">
-                  <FiClock size={14} style={{ color: 'var(--accent)' }} />
-                  <span className="text-xs uppercase tracking-[0.12em] font-medium" style={{ color: 'var(--text-tertiary)' }}>
-                    Preview Time
-                  </span>
-                </div>
-                <p className="text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
-                  15 min
-                </p>
-                <p className="text-xs mt-1" style={{ color: 'var(--text-tertiary)' }}>
-                  Per project, resets on rebuild
                 </p>
               </div>
             </>
@@ -261,7 +261,7 @@ export default function DashboardPage() {
             </div>
             <div className="space-y-3">
               {recentProjects.map((p) => {
-                const isExpired = p.status === 'expired' || new Date(p.expires_at) < new Date()
+                const isExpired = p.status === 'expired'
                 return (
                   <div
                     key={p.id}

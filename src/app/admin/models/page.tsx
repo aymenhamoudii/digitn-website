@@ -15,12 +15,12 @@ export default function ModelsAdmin() {
     async function loadModels() {
       try {
         const [freeRes, paidRes] = await Promise.all([
-          supabase.from('admin_config').select('value').eq('key', 'free_models').single(),
-          supabase.from('admin_config').select('value').eq('key', 'paid_models').single()
+          fetch('/api/admin/config?key=free_models').then(r => r.json()),
+          fetch('/api/admin/config?key=paid_models').then(r => r.json())
         ]);
 
-        if (freeRes.data) setFreeModels(freeRes.data.value || []);
-        if (paidRes.data) setPaidModels(paidRes.data.value || []);
+        if (freeRes.value) setFreeModels(freeRes.value || []);
+        if (paidRes.value) setPaidModels(paidRes.value || []);
       } catch (err) {
         console.error(err);
         toast.error("Failed to load models");

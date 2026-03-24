@@ -10,13 +10,20 @@ export default async function TerminalPage({ params }: { params: { id: string } 
 
   const { data: project } = await supabase
     .from('projects')
-    .select('id, name, type, user_id, status')
+    .select('id, name, type, user_id, status, description, questionnaire_answers')
     .eq('id', params.id)
     .single();
 
   if (!project || project.user_id !== user.id) {
     notFound();
   }
+
+  // Fetch chat history
+  const { data: history } = await supabase
+    .from('builder_chat_messages')
+    .select('role, content, created_at')
+    .eq('project_id', project.id)
+    .order('created_at', { ascending: true });
 
   return (
     <div className="w-full max-w-7xl mx-auto pb-8 px-4 lg:px-0">
@@ -30,6 +37,9 @@ export default async function TerminalPage({ params }: { params: { id: string } 
         projectName={project.name}
         initialStatus={project.status}
         projectType={project.type}
+        projectDescription={project.description}
+        questionnaireAnswers={project.questionnaire_answers}
+        history={history || []}
       />
     </div>
   );

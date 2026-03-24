@@ -1,26 +1,20 @@
 const express = require('express');
 const { supabase } = require('../lib/supabase');
-const { startProjectBuild, attachClientToStream } = require('../lib/builder');
+const { startDirectBuild, attachClientToStream } = require('../lib/direct-builder');
 const router = express.Router();
 
 // Trigger a new build
 router.post('/start', async (req, res) => {
-  const { projectId, planText, answers, userId } = req.body;
+  const { projectId, planText, userId } = req.body;
   if (!projectId || !planText) return res.status(400).json({ error: 'Missing parameters' });
 
   try {
     const { data: user } = await supabase.from('users').select('tier').eq('id', userId).single();
     const tier = user?.tier || 'free';
 
-    // Construct full instruction if answers are provided (though Next.js also appends them)
-    // This ensures bridge logic aligns with spec
-    let fullPlanText = planText;
-    if (answers && !planText.includes('Additional Clarifications')) {
-        fullPlanText = `${planText}\n\nAdditional Clarifications:\n${answers}`;
-    }
-
-    // Start asynchronously (don't await)
-    startProjectBuild(projectId, fullPlanText, tier);
+    // planText already contains the full description with answers if applicable
+    // No need to modify it here
+    startDirectBuild(projectId, planText, tier);
 
     return res.json({ success: true, projectId });
   } catch (err) {

@@ -187,6 +187,8 @@ function MorphLogo({ scrolled }: { scrolled: boolean }) {
   )
 }
 
+import { createClient } from '@/lib/supabase/client'
+
 /* ===========================================
    NAVBAR
    =========================================== */
@@ -194,12 +196,20 @@ function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [isDark, setIsDark] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 5)
     window.addEventListener('scroll', onScroll, { passive: true })
-    // Read current theme from DOM (already set by inline script in layout)
+    // Read current theme from DOM
     setIsDark(document.documentElement.getAttribute('data-theme') !== 'light')
+
+    // Check auth status
+    const supabase = createClient()
+    supabase.auth.getSession().then(({ data }) => {
+      setIsLoggedIn(!!data.session)
+    })
+
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
@@ -253,20 +263,42 @@ function Navbar() {
           >
             {isDark ? <SunIcon /> : <MoonIcon />}
           </button>
-          <a
-            href="/auth/login"
-            className="px-5 py-2 text-sm font-medium transition-colors duration-300"
-            style={{ color: 'var(--text-secondary)' }}
-          >
-            Sign In
-          </a>
-          <a
-            href="/auth/signup"
-            className="px-5 py-2 text-white text-sm font-medium rounded-full transition-all duration-300 hover:opacity-90"
-            style={{ backgroundColor: 'var(--accent)' }}
-          >
-            Start Building
-          </a>
+
+          {isLoggedIn ? (
+            <>
+              <a
+                href="/app/settings"
+                className="px-5 py-2 text-sm font-medium transition-colors duration-300"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                Profile
+              </a>
+              <a
+                href="/app"
+                className="px-5 py-2 text-white text-sm font-medium rounded-full transition-all duration-300 hover:opacity-90"
+                style={{ backgroundColor: 'var(--accent)' }}
+              >
+                Dashboard
+              </a>
+            </>
+          ) : (
+            <>
+              <a
+                href="/auth/login"
+                className="px-5 py-2 text-sm font-medium transition-colors duration-300"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                Sign In
+              </a>
+              <a
+                href="/auth/signup"
+                className="px-5 py-2 text-white text-sm font-medium rounded-full transition-all duration-300 hover:opacity-90"
+                style={{ backgroundColor: 'var(--accent)' }}
+              >
+                Start Building
+              </a>
+            </>
+          )}
         </div>
 
         {/* Mobile hamburger */}
@@ -302,22 +334,45 @@ function Navbar() {
             </a>
           ))}
           <hr style={{ borderColor: 'var(--border)' }} />
-          <a
-            href="/auth/login"
-            onClick={() => setMenuOpen(false)}
-            className="text-sm font-medium px-2 py-1"
-            style={{ color: 'var(--text-secondary)' }}
-          >
-            Sign In
-          </a>
-          <a
-            href="/auth/signup"
-            onClick={() => setMenuOpen(false)}
-            className="mx-2 px-5 py-2 text-white text-sm text-center rounded-full transition-colors duration-300"
-            style={{ backgroundColor: 'var(--accent)' }}
-          >
-            Start Building
-          </a>
+          {isLoggedIn ? (
+            <>
+              <a
+                href="/app/settings"
+                onClick={() => setMenuOpen(false)}
+                className="text-sm font-medium px-2 py-1"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                Profile
+              </a>
+              <a
+                href="/app"
+                onClick={() => setMenuOpen(false)}
+                className="mx-2 px-5 py-2 text-white text-sm text-center rounded-full transition-colors duration-300"
+                style={{ backgroundColor: 'var(--accent)' }}
+              >
+                Dashboard
+              </a>
+            </>
+          ) : (
+            <>
+              <a
+                href="/auth/login"
+                onClick={() => setMenuOpen(false)}
+                className="text-sm font-medium px-2 py-1"
+                style={{ color: 'var(--text-secondary)' }}
+              >
+                Sign In
+              </a>
+              <a
+                href="/auth/signup"
+                onClick={() => setMenuOpen(false)}
+                className="mx-2 px-5 py-2 text-white text-sm text-center rounded-full transition-colors duration-300"
+                style={{ backgroundColor: 'var(--accent)' }}
+              >
+                Start Building
+              </a>
+            </>
+          )}
         </div>
       )}
     </nav>
@@ -700,7 +755,6 @@ function Pricing() {
         '10 requests / day',
         '1 active project',
         'Standard AI models',
-        '15-min preview',
         'Community support',
       ],
       cta: 'Start Free',
@@ -716,7 +770,6 @@ function Pricing() {
         '50 requests / day',
         '3 active projects',
         'Premium AI models',
-        '15-min preview',
         'Priority support',
       ],
       cta: 'Upgrade to PRO',
@@ -732,7 +785,6 @@ function Pricing() {
         'Unlimited requests',
         'Unlimited projects',
         'Premium AI models',
-        '15-min preview',
         'Dedicated support',
       ],
       cta: 'Go PLUS',

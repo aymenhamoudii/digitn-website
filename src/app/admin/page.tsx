@@ -16,15 +16,17 @@ export default function AdminDashboard() {
     async function loadData() {
       try {
         // Load config
-        const { data: cfg } = await supabase.from('admin_config').select('value').eq('key', 'bridge_settings').single();
-        if (cfg) setConfig(cfg.value);
+        const res = await fetch('/api/admin/config?key=bridge_settings');
+        const cfg = await res.json();
+        if (cfg.value) setConfig(cfg.value);
 
-        // Load stats
-        const { count: users } = await supabase.from('users').select('*', { count: 'exact', head: true });
-        const { count: pro } = await supabase.from('users').select('*', { count: 'exact', head: true }).eq('tier', 'pro');
-        const { count: plus } = await supabase.from('users').select('*', { count: 'exact', head: true }).eq('tier', 'plus');
+        // Load stats via API (to bypass RLS)
+        const statsRes = await fetch('/api/admin/stats');
+        const statsData = await statsRes.json();
 
-        setStats({ users: users || 0, pro: pro || 0, plus: plus || 0 });
+        if (statsData) {
+          setStats(statsData);
+        }
       } finally {
         setLoading(false);
       }

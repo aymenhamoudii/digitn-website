@@ -16,15 +16,14 @@ export default function UsersAdmin() {
 
   async function loadUsers() {
     setLoading(true);
-    const { data, error } = await supabase
-      .from('users')
-      .select('id, email, name, tier, created_at')
-      .order('created_at', { ascending: false });
-
-    if (error) {
+    try {
+      const res = await fetch('/api/admin/users');
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      setUsers(data.users || []);
+    } catch (error: any) {
       toast.error('Failed to load users');
-    } else {
-      setUsers(data || []);
+      console.error(error);
     }
     setLoading(false);
   }
@@ -32,12 +31,14 @@ export default function UsersAdmin() {
   const changeUserTier = async (userId: string, newTier: string) => {
     setUpdating(userId);
     try {
-      const { error } = await supabase
-        .from('users')
-        .update({ tier: newTier })
-        .eq('id', userId);
+      const res = await fetch('/api/admin/users', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, newTier })
+      });
 
-      if (error) throw error;
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
 
       toast.success(`User tier updated to ${newTier.toUpperCase()}`);
 

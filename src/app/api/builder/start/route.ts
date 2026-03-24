@@ -69,12 +69,14 @@ export async function POST(req: Request) {
 
     let fullDescription = project.description;
     if (answers) {
+      // Don't modify the description field - keep it clean
+      // Just pass the combined text to the bridge
       fullDescription = `${project.description}\n\nAdditional Clarifications:\n${answers}`;
 
-      // Save answers to DB
+      // Save answers separately in questionnaire_answers field only
       await supabase
         .from('projects')
-        .update({ questionnaire_answers: answers, description: fullDescription })
+        .update({ questionnaire_answers: answers })
         .eq('id', projectId);
     }
 
@@ -83,7 +85,7 @@ export async function POST(req: Request) {
       .from('projects')
       .update({
         status: 'building',
-        expires_at: new Date(Date.now() + 15 * 60000).toISOString(),
+        // expires_at: new Date(Date.now() + 15 * 60000).toISOString(), // Removed project expiration
       })
       .eq('id', projectId);
 
