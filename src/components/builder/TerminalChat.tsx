@@ -645,6 +645,27 @@ export default function TerminalChat({
       const initialLogs: LogEntry[] = [];
       let entryId = 0;
 
+      // Prepend the "ready" message before showing history
+      initialLogs.push(
+        {
+          type: "system",
+          content: `> Project ${projectName} is ready.`,
+          id: "ready-1",
+        },
+        {
+          type: "system",
+          content: `> You can request changes below or download the code.`,
+          id: "ready-2",
+        }
+      );
+      if (initialPlanContent) {
+        initialLogs.push({
+          type: "plan_complete",
+          content: "",
+          id: "plan-complete-0",
+        });
+      }
+
       history.forEach((msg) => {
         const eventType = msg.event_type || "message";
 

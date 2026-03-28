@@ -341,3 +341,13 @@ export async function requireAdmin(): Promise<User> {
 export function isAdmin(user: User | null): boolean {
   return user?.role === 'admin'
 }
+
+// ──────────────────────────────────────────────
+// Project Messages
+// ──────────────────────────────────────────────
+
+export async function listProjectMessages(projectId: string): Promise<any[] | null> {
+  const data = await fetchApi<{ results: any[] } | any[]>(`/projects/${projectId}/messages`)
+  if (Array.isArray(data)) return data
+  return data?.results ?? null
+}
