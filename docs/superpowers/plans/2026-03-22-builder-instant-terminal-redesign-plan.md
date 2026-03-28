@@ -1,7 +1,5 @@
 # Builder Instant Terminal Redesign Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
-
 **Goal:** Redesign the Builder flow into a unified terminal-style interface where form submission immediately triggers analysis, shows an optional questionnaire if vague, and provides a real-time terminal that transitions into a post-build chat interface.
 
 **Architecture:** We will create a new analysis endpoint that uses the AI Bridge to determine project clarity. If unclear, it returns multiple-choice questions displayed on a new Questionnaire page. If clear (or after questionnaire submission), the build starts and streams logs to a new Terminal page. The Terminal page doubles as a post-build chat interface, storing message history in a new database table and streaming file modifications.

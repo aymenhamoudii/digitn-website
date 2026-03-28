@@ -1,7 +1,5 @@
 # DIGITN SaaS Platform — Phase 2: Chat Mode & AI Bridge Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
-
 **Goal:** Build the Express.js AI Bridge server to handle connections to 9Router, and implement the real-time AI Chat interface in the Next.js frontend with message streaming, history persistence, and quota enforcement.
 
 **Architecture:** Next.js frontend sends POST requests to `/api/chat/stream` which connects to the Express Bridge at `localhost:3001`. The Bridge connects to 9Router (`localhost:20128`), streams the LLM chunks via Server-Sent Events (SSE) back to Next.js, and saves conversations/messages to Supabase securely.

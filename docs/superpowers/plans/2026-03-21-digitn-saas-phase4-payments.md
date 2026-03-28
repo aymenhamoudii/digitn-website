@@ -1,7 +1,5 @@
 # DIGITN SaaS Platform — Phase 4: Payments & Subscriptions Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
-
 **Goal:** Implement the pricing page and payment gateways (Stripe + Konnect) so users can upgrade their accounts to DIGITN PRO or DIGITN PLUS, unlocking higher daily requests and premium AI models.
 
 **Architecture:**

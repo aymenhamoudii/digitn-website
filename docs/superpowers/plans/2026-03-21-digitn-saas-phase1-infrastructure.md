@@ -1,7 +1,5 @@
 # DIGITN SaaS Platform — Phase 1: Infrastructure & Foundation
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
-
 **Goal:** Transform digitn.tech from a static Vercel site into a server-rendered Next.js 14 app running on a VPS with Nginx, Supabase DB schema, design system foundation, and i18n scaffolding — while keeping the existing French marketing page fully working.
 
 **Architecture:** Next.js 14 App Router runs on VPS via PM2 on port 3000. Nginx sits in front, proxying `/` to Next.js and serving `/projects/` as static files. Supabase cloud handles DB + Auth. The Express AI Bridge (Phase 3) runs separately at port 3001.

@@ -1,7 +1,5 @@
 # DIGITN SaaS Platform — Phase 3: AI Builder Mode & Execution Engine
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
-
 **Goal:** Implement the "Builder Mode" where users describe a project, the AI asks clarifying questions (planning phase), and then autonomously builds and deploys the codebase using the Claude Code SDK running on the VPS.
 
 **Architecture:**

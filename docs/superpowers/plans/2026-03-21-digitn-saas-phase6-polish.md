@@ -1,7 +1,5 @@
 # DIGITN SaaS Platform — Phase 6: Polish & Auto-Cleanup Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
-
 **Goal:** Implement the auto-cleanup script to enforce the 15-minute project preview limit and polish the platform with a smooth user experience.
 
 **Architecture:** A standalone Node.js script (`bridge/cleanup.js`) running on a timer (cron or interval) on the VPS. It queries Supabase for any `projects` where `expires_at < now()`, deletes the physical files from `/var/www/projects/[id]/`, removes the ZIP from `/var/www/zips/[id].zip`, and updates the database status to `expired`.

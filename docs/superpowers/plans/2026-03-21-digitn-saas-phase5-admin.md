@@ -1,7 +1,5 @@
 # DIGITN SaaS Platform — Phase 5: Admin Dashboard Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
-
 **Goal:** Build a secure Admin Dashboard allowing the owner to monitor platform usage, view active subscriptions, and configure 9Router AI models and API keys dynamically without redeploying the app.
 
 **Architecture:** A protected Next.js route `/admin` (only accessible by users with `email === 'admin@digitn.tech'` or a specific DB flag). It queries the `admin_config`, `users`, and `usage_quotas` tables in Supabase.
