@@ -824,6 +824,92 @@ export default function PresentationStudio({
           ? statusMessages[statusMessages.length - 1]
           : "Preparing your presentation...";
 
+  const renderPaletteSelector = () => {
+    if (!palette.accent1) return null;
+
+    return (
+      <div className="px-4 py-3 border-t flex-shrink-0" style={{ borderColor: "var(--border)" }}>
+        <div className="flex items-center justify-between mb-2">
+          <p className="text-[10px] uppercase tracking-wider" style={{ color: "var(--text-tertiary)" }}>
+            Color Pattern
+          </p>
+          <button
+            onClick={() => {
+              if (showPaletteModal) setShowPaletteModal(false);
+              else handleSuggestPalettes();
+            }}
+            className="text-[10px] font-medium px-2 py-0.5 rounded border transition-colors hover:bg-[var(--bg-secondary)]"
+            style={{
+              borderColor: "var(--border)",
+              color: "var(--text-secondary)",
+              backgroundColor: showPaletteModal ? "var(--bg-secondary)" : "transparent"
+            }}
+          >
+            {showPaletteModal ? "Close" : "Suggest"}
+          </button>
+        </div>
+        <div className="flex gap-1.5 mb-2">
+          {[palette.bg, palette.accent1, palette.accent2, palette.accent3, palette.text].filter(Boolean).map((color, i) => (
+            <div key={i} className="flex-1 h-6 rounded-md border" style={{ backgroundColor: color, borderColor: "var(--border)" }} title={color} />
+          ))}
+        </div>
+
+        {/* Inline Expandable Suggestions */}
+        {showPaletteModal && (
+          <div className="mt-3 pt-3 border-t flex flex-col gap-3 animate-in slide-in-from-top-1 fade-in duration-200" style={{ borderColor: "var(--border)" }}>
+            {isSuggestingPalettes ? (
+              <div className="flex flex-col gap-2">
+                <p className="text-[10px] text-center" style={{ color: "var(--text-tertiary)" }}>Finding patterns...</p>
+                <div className="flex gap-1.5">
+                  {[1, 2, 3, 4, 5].map(i => (
+                    <div key={i} className="flex-1 h-6 rounded-md border animate-pulse" style={{ backgroundColor: "var(--bg-secondary)", borderColor: "var(--border)", animationDelay: `${i * 0.1}s` }} />
+                  ))}
+                </div>
+                <div className="flex gap-1.5">
+                  {[1, 2, 3, 4, 5].map(i => (
+                    <div key={i} className="flex-1 h-6 rounded-md border animate-pulse" style={{ backgroundColor: "var(--bg-secondary)", borderColor: "var(--border)", animationDelay: `${(i+5) * 0.1}s` }} />
+                  ))}
+                </div>
+              </div>
+            ) : paletteError ? (
+              <div className="text-center py-2 flex flex-col gap-2">
+                <p className="text-[10px]" style={{ color: "var(--status-failed)" }}>{paletteError}</p>
+                <button
+                  onClick={handleSuggestPalettes}
+                  className="text-[10px] px-2 py-1 rounded border self-center"
+                  style={{ borderColor: "var(--border)", color: "var(--text-secondary)" }}
+                >
+                  Retry
+                </button>
+              </div>
+            ) : suggestedPalettes ? (
+              <div className="flex flex-col gap-2 max-h-[160px] overflow-y-auto pr-1">
+                {suggestedPalettes.map((p, i) => (
+                  <button
+                    key={i}
+                    onClick={() => {
+                      handleSelectPalette(p);
+                      setShowPaletteModal(false);
+                    }}
+                    className="flex flex-col gap-1.5 p-2 rounded-md border text-left transition-colors hover:bg-[var(--bg-secondary)]"
+                    style={{ backgroundColor: "var(--bg-primary)", borderColor: "var(--border)" }}
+                  >
+                    <span className="text-[10px] font-medium" style={{ color: "var(--text-primary)" }}>{p.name || `Pattern ${i + 1}`}</span>
+                    <div className="flex gap-1.5">
+                      {[p.bg, p.accent1, p.accent2, p.accent3, p.text].filter(Boolean).map((color, idx) => (
+                        <div key={idx} className="flex-1 h-6 rounded-sm border" style={{ backgroundColor: color, borderColor: "rgba(0,0,0,0.1)" }} title={color} />
+                      ))}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        )}
+      </div>
+    );
+  };
+
   return (
     <div className="flex flex-col h-[calc(100vh-140px)]">
       {/* Header Bar */}
@@ -1649,27 +1735,7 @@ export default function PresentationStudio({
                 </div>
               ))}
             </div>
-            {palette.accent1 && (
-              <div className="px-4 py-3 border-t flex-shrink-0" style={{ borderColor: "var(--border)" }}>
-                <div className="flex items-center justify-between mb-2">
-                  <p className="text-[10px] uppercase tracking-wider" style={{ color: "var(--text-tertiary)" }}>
-                    Color Palette
-                  </p>
-                  <button
-                    onClick={handleSuggestPalettes}
-                    className="text-[10px] font-medium px-2 py-0.5 rounded border transition-colors hover:bg-[var(--bg-secondary)]"
-                    style={{ borderColor: "var(--border)", color: "var(--text-secondary)" }}
-                  >
-                    Suggest
-                  </button>
-                </div>
-                <div className="flex gap-1.5">
-                  {[palette.bg, palette.accent1, palette.accent2, palette.accent3, palette.text].filter(Boolean).map((color, i) => (
-                    <div key={i} className="w-6 h-6 rounded-md border" style={{ backgroundColor: color, borderColor: "var(--border)" }} title={color} />
-                  ))}
-                </div>
-              </div>
-            )}
+            {renderPaletteSelector()}
           </div>
         ) : (
           /* ── AI Chat Panel (right side, when complete) ── */
@@ -1844,87 +1910,10 @@ export default function PresentationStudio({
             </div>
 
             {/* Color Palette (Under Chat) */}
-            {palette.accent1 && (
-              <div className="px-3 py-3 border-t flex-shrink-0" style={{ borderColor: "var(--border)", backgroundColor: "var(--bg-primary)" }}>
-                <div className="flex items-center justify-between mb-2">
-                  <p className="text-[10px] uppercase tracking-wider" style={{ color: "var(--text-tertiary)" }}>
-                    Color Palette
-                  </p>
-                  <button
-                    onClick={handleSuggestPalettes}
-                    className="text-[10px] font-medium px-2 py-0.5 rounded border transition-colors hover:bg-[var(--bg-secondary)]"
-                    style={{ borderColor: "var(--border)", color: "var(--text-secondary)" }}
-                  >
-                    Suggest
-                  </button>
-                </div>
-                <div className="flex gap-1.5">
-                  {[palette.bg, palette.accent1, palette.accent2, palette.accent3, palette.text].filter(Boolean).map((color, i) => (
-                    <div key={i} className="w-6 h-6 rounded-md border" style={{ backgroundColor: color, borderColor: "var(--border)" }} title={color} />
-                  ))}
-                </div>
-              </div>
-            )}
+            {renderPaletteSelector()}
           </div>
         )}
       </div>
-
-      {/* Palette Suggestion Modal */}
-      {showPaletteModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ backgroundColor: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)" }}>
-          <div
-            className="w-full max-w-md rounded-xl p-6 shadow-2xl border flex flex-col gap-4 relative"
-            style={{ backgroundColor: "var(--card-bg)", borderColor: "var(--border)" }}
-          >
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-serif" style={{ color: "var(--text-primary)" }}>Alternative Palettes</h3>
-              <button
-                onClick={() => setShowPaletteModal(false)}
-                className="p-1 rounded-md hover:bg-[var(--bg-secondary)]"
-                style={{ color: "var(--text-tertiary)" }}
-              >
-                ✕
-              </button>
-            </div>
-
-            {isSuggestingPalettes ? (
-              <div className="py-8 flex flex-col items-center justify-center gap-3">
-                <div className="w-6 h-6 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: "var(--accent)", borderTopColor: "transparent" }} />
-                <p className="text-sm" style={{ color: "var(--text-secondary)" }}>DIGITN AI is analyzing your topic...</p>
-              </div>
-            ) : paletteError ? (
-              <div className="py-6 flex flex-col items-center gap-3">
-                <p className="text-sm" style={{ color: "var(--status-failed, #ef4444)" }}>{paletteError}</p>
-                <button
-                  onClick={handleSuggestPalettes}
-                  className="px-4 py-2 rounded-md text-sm font-medium"
-                  style={{ backgroundColor: "var(--bg-secondary)", color: "var(--text-primary)" }}
-                >
-                  Try Again
-                </button>
-              </div>
-            ) : suggestedPalettes ? (
-              <div className="flex flex-col gap-3">
-                {suggestedPalettes.map((p, i) => (
-                  <button
-                    key={i}
-                    onClick={() => handleSelectPalette(p)}
-                    className="flex flex-col gap-2 p-3 rounded-lg border text-left transition-all hover:-translate-y-0.5 cursor-pointer"
-                    style={{ backgroundColor: "var(--bg-primary)", borderColor: "var(--border)" }}
-                  >
-                    <span className="text-sm font-medium" style={{ color: "var(--text-primary)" }}>{p.name || `Option ${i + 1}`}</span>
-                    <div className="flex gap-2">
-                      {[p.bg, p.accent1, p.accent2, p.accent3, p.text].filter(Boolean).map((color, idx) => (
-                        <div key={idx} className="w-8 h-8 rounded-md border shadow-sm" style={{ backgroundColor: color, borderColor: "rgba(0,0,0,0.1)" }} title={color} />
-                      ))}
-                    </div>
-                  </button>
-                ))}
-              </div>
-            ) : null}
-          </div>
-        </div>
-      )}
 
       {/* CSS Keyframes */}
       <style jsx>{`
