@@ -10,7 +10,7 @@ A feature to allow users to generate and select from 3 AI-suggested color palett
 4. **AI Bridge**: A new route (`bridge/src/routes/builder-suggest-palettes.js`) receives the request. It uses a specific system prompt and calls the 9Router API (using `router9.js`) to generate exactly 3 palette JSON objects.
 5. **Response**: The 3 palettes are returned to the frontend.
 6. **User Selection**: The modal displays the 3 palettes. The user clicks one to select it.
-7. **Application**: The frontend calls `setPalette(selectedPalette)`, which immediately updates the CSS variables and re-renders the presentation with the new colors. (Optionally, we should also save this new palette to the backend project via an update call).
+7. **Application**: The frontend calls `setPalette(selectedPalette)`, which immediately updates the CSS variables and re-renders the presentation with the new colors. We also save this new palette to the backend project via an update call.
 
 ## Components
 
