@@ -356,7 +356,7 @@ export default function PresentationStudio({
       }
       // Return HTML without the injected script
       let raw = document.documentElement.outerHTML;
-      raw = raw.replace(/<script id="digitn-inspector-script">[\s\S]*?<\/script>/, '');
+      raw = raw.replace(/<script id="digitn-inspector-script">[\\s\\S]*?<\\/script>/, '');
       window.parent.postMessage({ type: 'html-response', html: '<!DOCTYPE html>\\n' + raw }, '*');
       if (currentHighlight) {
         currentHighlight.style.outline = '2px solid #d97757';
@@ -1840,6 +1840,29 @@ export default function PresentationStudio({
                 </button>
               </div>
             </div>
+
+            {/* Color Palette (Under Chat) */}
+            {palette.accent1 && (
+              <div className="px-3 py-3 border-t flex-shrink-0" style={{ borderColor: "var(--border)", backgroundColor: "var(--bg-primary)" }}>
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-[10px] uppercase tracking-wider" style={{ color: "var(--text-tertiary)" }}>
+                    Color Palette
+                  </p>
+                  <button
+                    onClick={handleSuggestPalettes}
+                    className="text-[10px] font-medium px-2 py-0.5 rounded border transition-colors hover:bg-[var(--bg-secondary)]"
+                    style={{ borderColor: "var(--border)", color: "var(--text-secondary)" }}
+                  >
+                    Suggest
+                  </button>
+                </div>
+                <div className="flex gap-1.5">
+                  {[palette.bg, palette.accent1, palette.accent2, palette.accent3, palette.text].filter(Boolean).map((color, i) => (
+                    <div key={i} className="w-6 h-6 rounded-md border" style={{ backgroundColor: color, borderColor: "var(--border)" }} title={color} />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
