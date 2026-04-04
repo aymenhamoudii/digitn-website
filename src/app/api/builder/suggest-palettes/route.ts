@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { serverApi } from "@/lib/api/server";
+import { getProject, getUserTier } from "@/lib/api/server";
 
 export async function POST(req: Request) {
   try {
@@ -10,12 +10,12 @@ export async function POST(req: Request) {
     }
 
     // 1. Fetch project to get topic/questionnaire
-    const projectRes = await serverApi.get(`/projects/${projectId}/`);
-    if (!projectRes.ok) {
-      return NextResponse.json({ error: "Project not found or unauthorized" }, { status: projectRes.status });
+    const project = await getProject(projectId);
+    if (!project) {
+      return NextResponse.json({ error: "Project not found or unauthorized" }, { status: 404 });
     }
 
-    const project = await projectRes.json();
+    const tier = await getUserTier(project.user);
 
     // 2. Call Bridge
     const bridgeUrl = process.env.BRIDGE_URL || "http://localhost:3001";
@@ -28,9 +28,9 @@ export async function POST(req: Request) {
         "Authorization": `Bearer ${bridgeSecret}`
       },
       body: JSON.stringify({
-        topic: project.plan_text || project.name || "Presentation",
+        topic: project.description || project.source_text || project.name || "Presentation",
         questionnaire_answers: project.questionnaire_answers || {},
-        tier: project.tier || "free" // Pass tier if available to use the right models
+        tier: tier || "free"
       })
     });
 
