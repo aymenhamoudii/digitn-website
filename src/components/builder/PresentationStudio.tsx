@@ -70,7 +70,9 @@ export default function PresentationStudio({
   );
   const [slidePreviewHtml, setSlidePreviewHtml] = useState("");
   const [slideBlurred, setSlideBlurred] = useState(true);
-  const [palette, setPalette] = useState<Palette>({});
+  const [palette, setPalette] = useState<Palette>(
+    (presentationJson?.palette as Palette) || {}
+  );
   const [statusMessages, setStatusMessages] = useState<string[]>([]);
   const [isComplete, setIsComplete] = useState(initialStatus === "ready");
   const [planContent, setPlanContent] = useState("");
