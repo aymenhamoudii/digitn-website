@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Discover Tunisia: North Africa&#039;s Hidden Gem</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+    --bg: #26215C;
+    --bg2: #312A6E;
+    --surface: #3D3580;
+    --surface2: #3c376c;
+    --border: rgba(255,255,255,.07);
+    --border-md: rgba(255,255,255,.11);
+    --accent1: #D85A30;
+    --accent1-dim: rgba(216, 90, 48, 0.18);
+    --accent2: #FAC775;
+    --accent2-dim: rgba(250, 199, 117, 0.18);
+    --accent3: #0F6E56;
+    --accent3-dim: rgba(15, 110, 86, 0.18);
+    --t1: #F1EFE8;
+    --t2: #F1EFE899;
+    --t3: rgba(241, 239, 232, 0.3);
+    --mono: 'Source Code Pro', monospace;
+    --sans: 'Source Sans 3', system-ui, sans-serif;
+    --serif: 'Cormorant Garamond', serif;
+  }
+    
+  /* ─── Reset ─── */
+  ::-webkit-scrollbar{display:none}
+  *{scrollbar-width:none;-ms-overflow-style:none;box-sizing:border-box;margin:0;padding:0}
+  html{scroll-snap-type:y mandatory;overflow-y:scroll;overflow-x:hidden;scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  /* ─── Slide ─── */
+  section{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;padding:clamp(28px,5vh,56px) clamp(32px,5vw,72px);display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+  /* ─── Typography ─── */
+  h1,h2,h3{font-family:var(--serif);color:var(--t1);text-transform:none;letter-spacing:-.02em;font-weight:800;margin:0}
+  h1{font-size:clamp(1.8rem,4vw,3rem);line-height:1.1}
+  h2{font-size:clamp(1.3rem,2.8vw,2rem);margin-bottom:.4em}
+  h3{font-size:clamp(.8rem,1.2vw,1rem);font-weight:700}
+  p,li{font-size:clamp(.7rem,1vw,.88rem);line-height:1.65;color:var(--t2)}
+  ul{list-style:none;padding:0}
+  ul li{padding:4px 0}
+
+  /* ─── Stagger animation — triggers when slide scrolls into view ─── */
+  .s{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
+  .s>*{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+  section.active .s>*{opacity:1;transform:translateY(0)}
+  section.active .s>*:nth-child(1){transition-delay:.03s}
+  section.active .s>*:nth-child(2){transition-delay:.09s}
+  section.active .s>*:nth-child(3){transition-delay:.15s}
+  section.active .s>*:nth-child(4){transition-delay:.21s}
+  section.active .s>*:nth-child(5){transition-delay:.27s}
+  section.active .s>*:nth-child(6){transition-delay:.33s}
+  section.active .s>*:nth-child(7){transition-delay:.39s}
+  section.active .s>*:nth-child(8){transition-delay:.45s}
+  .cx{justify-content:center;align-items:center;text-align:center}
+
+  /* ─── Section Label ─── */
+  .sl{font-family:var(--mono);font-size:clamp(.55rem,.8vw,.72rem);color:var(--accent1);text-transform:uppercase;letter-spacing:3px;margin-bottom:4px;opacity:.9}
+
+  /* ─── Divider ─── */
+  .dv{height:1px;width:120px;background:linear-gradient(90deg,transparent,var(--border-md),transparent);margin:18px auto;border:none}
+
+  /* ─── Card ─── */
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:clamp(12px,1.5vw,20px);position:relative;overflow:hidden}
+  .card-accent1{border-top:2px solid var(--accent1)}
+  .card-accent2{border-top:2px solid var(--accent2)}
+  .card-accent3{border-top:2px solid var(--accent3)}
+
+  /* ─── Metric Pill ─── */
+  .metric{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:var(--surface2);border:1px solid var(--border-md);border-radius:40px;margin:3px}
+  .metric .num{font-family:var(--serif);font-size:clamp(.9rem,1.4vw,1.2rem);font-weight:900;color:var(--t1)}
+  .metric .lab{font-size:clamp(.5rem,.7vw,.62rem);color:var(--t2);text-transform:uppercase;letter-spacing:1px}
+
+  /* ─── Icon Circle ─── */
+  .ic{width:clamp(32px,3.5vw,44px);height:clamp(32px,3.5vw,44px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:clamp(12px,1.3vw,16px);flex-shrink:0;line-height:1}
+  .ic.accent1{background:var(--accent1-dim);color:var(--accent1)}
+  .ic.accent2{background:var(--accent2-dim);color:var(--accent2)}
+  .ic.accent3{background:var(--accent3-dim);color:var(--accent3)}
+
+  /* ─── Hover Card ─── */
+  .hcard{padding:clamp(14px,1.5vw,20px) clamp(10px,1.2vw,16px);border-radius:12px;background:var(--surface);border:1px solid var(--border);text-align:center;transition:border-color .25s,background .25s;display:flex;flex-direction:column;align-items:center;overflow:hidden}
+  .hcard:hover{background:var(--surface2);border-color:var(--border-md)}
+  .hcard .iw{width:clamp(36px,4vw,52px);height:clamp(36px,4vw,52px);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;background:var(--bg2);font-size:clamp(14px,1.5vw,20px);flex-shrink:0;line-height:1}
+
+  /* ─── Badge ─── */
+  .badge{display:inline-block;padding:4px 12px;border-radius:6px;font-family:var(--mono);font-size:clamp(.5rem,.7vw,.62rem);text-transform:uppercase;letter-spacing:1px;font-weight:600}
+  .badge.accent1{background:var(--accent1-dim);color:var(--accent1)}
+  .badge.accent2{background:var(--accent2-dim);color:var(--accent2)}
+  .badge.accent3{background:var(--accent3-dim);color:var(--accent3)}
+
+  /* ─── Chip ─── */
+  .chip{display:inline-block;padding:4px 12px;border-radius:20px;font-size:clamp(.5rem,.7vw,.62rem);font-family:var(--mono);border:1px solid;margin:2px}
+  .chip.accent1{border-color:var(--accent1);color:var(--accent1)}
+  .chip.accent2{border-color:var(--accent2);color:var(--accent2)}
+  .chip.accent3{border-color:var(--accent3);color:var(--accent3)}
+
+  /* ─── Feature Row ─── */
+  .frow{display:flex;align-items:center;gap:clamp(10px,1.2vw,16px);padding:clamp(8px,1vh,14px) 0;border-bottom:1px solid var(--border)}
+  .frow:last-child{border-bottom:none}
+  .frow .fi{flex-shrink:0}
+
+  /* ─── Ring Chart ─── */
+  .ring{position:relative;width:clamp(72px,8vw,110px);height:clamp(72px,8vw,110px);display:inline-flex;align-items:center;justify-content:center;flex-direction:column;flex-shrink:0}
+  .ring svg{position:absolute;width:100%;height:100%;transform:rotate(-90deg)}
+  .ring .rbg{fill:none;stroke:var(--surface2);stroke-width:6}
+  .ring .rprog{fill:none;stroke:var(--accent1);stroke-width:6;stroke-linecap:round}
+  .ring .rval{font-family:var(--serif);font-size:clamp(.9rem,1.5vw,1.4rem);font-weight:900;color:var(--t1);z-index:1}
+  .ring .rlab{font-family:var(--mono);font-size:clamp(.4rem,.6vw,.5rem);color:var(--t2);text-transform:uppercase;letter-spacing:1px;z-index:1}
+
+  /* ─── Timeline ─── */
+  .timeline{display:flex;gap:0;padding:16px 0}
+  .tl-item{flex:1;position:relative;padding:18px 12px 0;text-align:center}
+  .tl-item::before{content:'';position:absolute;top:8px;left:0;right:0;height:2px;background:var(--border-md)}
+  .tl-item:first-child::before{left:50%}
+  .tl-item:last-child::before{right:50%}
+  .tl-dot{width:12px;height:12px;border-radius:50%;margin:0 auto 10px;position:relative;z-index:1}
+  .tl-dot.accent1{background:var(--accent1);box-shadow:0 0 0 4px var(--accent1-dim)}
+  .tl-dot.accent2{background:var(--accent2);box-shadow:0 0 0 4px var(--accent2-dim)}
+  .tl-dot.accent3{background:var(--accent3);box-shadow:0 0 0 4px var(--accent3-dim)}
+
+  /* ─── Grids ─── */
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.2vw,16px);margin-top:12px}
+  .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(10px,1.2vw,16px);margin-top:12px}
+  .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1vw,14px);margin-top:12px}
+  .g5{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(6px,.8vw,12px);margin-top:12px}
+
+  /* ─── Image Box ─── */
+  .img-box{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;border-radius:12px;overflow:hidden;background:var(--surface);border:1px solid var(--border)}
+  .img-box img{max-width:100%;max-height:100%;object-fit:contain}
+
+  /* ─── Big Numbers ─── */
+  .bignum{font-family:var(--serif);font-size:clamp(2rem,4vw,3.5rem);font-weight:900;color:var(--t1);line-height:1}
+
+  /* ─── Header Meta ─── */
+  .hm{display:flex;gap:clamp(16px,2.5vw,30px);font-size:clamp(.55rem,.8vw,.7rem);color:var(--t3);font-weight:500}
+  .hm span{display:flex;align-items:center;gap:8px}
+
+  /* ─── Left border accents ─── */
+  .line-accent1{border-left:2px solid var(--accent1)}
+  .line-accent2{border-left:2px solid var(--accent2)}
+  .line-accent3{border-left:2px solid var(--accent3)}
+
+  /* ─── Flex utilities ─── */
+  .flex{display:flex}
+  .flex-col{flex-direction:column}
+  .flex-wrap{display:flex;flex-wrap:wrap}
+  .flex-center{display:flex;justify-content:center;align-items:center}
+  .flex-1{flex:1;min-height:0}
+  .gap-sm{gap:8px}
+  .gap-md{gap:16px}
+  .gap-lg{gap:24px}
+  .mt-auto{margin-top:auto}
+  .mb-sm{margin-bottom:8px}
+  .mb-md{margin-bottom:16px}
+
+  /* ─── Slide counter ─── */
+  #slide-counter{position:fixed;bottom:20px;right:24px;font-family:var(--mono);font-size:12px;color:var(--t3);background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 12px;z-index:100;pointer-events:none}
+
+  /* ─── Progress bar ─── */
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--accent1);z-index:100;transition:width .3s ease}
+
+  </style>
+</head>
+<body>
+  <div id="progress" style="width:0"></div>
+  <div id="slide-counter">1 / 7</div>
+  <section>
+  <div class="s cx">
+    <div style="display:flex;gap:10px;margin-bottom:18px">
+      <div class="ic accent1"><i class="fas fa-sun"></i></div>
+      <div class="ic accent2"><i class="fas fa-mosque"></i></div>
+      <div class="ic accent3"><i class="fas fa-utensils"></i></div>
+    </div>
+    <h1>Discover Tunisia</h1>
+    <p style="font-size:1.15em;color:var(--t2);margin-bottom:18px">North Africa's Hidden Gem</p>
+    <hr class="dv">
+    <div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;justify-content:center">
+      <span class="badge accent1">Culture</span>
+      <span class="badge accent2">Cuisine</span>
+      <span class="badge accent3">Daily Life</span>
+    </div>
+    <p style="font-size:0.65em;color:var(--t3);margin-top:24px;letter-spacing:1px">Where Mediterranean Meets Sahara</p>
+  </div>
+  <aside class="notes" style="display:none">Welcome travelers to an inspirational journey through Tunisia. Set the tone by emphasizing this is about authentic experiences, not just tourist spots. Mention Tunisia sits at the crossroads of civilizations.</aside>
+  <aside class="notes">Welcome travelers to an inspirational journey through Tunisia. Set the tone by emphasizing this is about authentic experiences, not just tourist spots. Mention Tunisia sits at the crossroads of civilizations.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Your Journey Awaits</p>
+    <h2>What We'll Explore Together</h2>
+    <div class="g3" style="flex:1;min-height:0;margin-top:18px">
+      <div class="hcard">
+        <div class="iw"><div class="ic accent1"><i class="fas fa-archway"></i></div></div>
+        <h3>Ancient Medinas</h3>
+        <p>Living heritage preserved in winding alleyways and timeless architecture</p>
+        <span class="badge accent1" style="margin-top:10px">Heritage</span>
+      </div>
+      <div class="hcard">
+        <div class="iw"><div class="ic accent2"><i class="fas fa-pepper-hot"></i></div></div>
+        <h3>Tunisian Cuisine</h3>
+        <p>Bold flavors from harissa to couscous that tell stories of tradition</p>
+        <span class="badge accent2" style="margin-top:10px">Flavors</span>
+      </div>
+      <div class="hcard">
+        <div class="iw"><div class="ic accent3"><i class="fas fa-hands-holding-heart"></i></div></div>
+        <h3>Warm Hospitality</h3>
+        <p>Daily rhythms and genuine connections that welcome every visitor</p>
+        <span class="badge accent3" style="margin-top:10px">Connection</span>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Preview the three main themes. Explain that Tunisia offers a complete sensory experience—sights, tastes, and genuine human connection that few destinations can match.</aside>
+  <aside class="notes">Preview the three main themes. Explain that Tunisia offers a complete sensory experience—sights, tastes, and genuine human connection that few destinations can match.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Living Heritage</p>
+    <h2>Medinas: Walking Through Time</h2>
+    <div style="display:flex;gap:22px;flex:1;min-height:0;margin-top:14px">
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+        <div class="card card-accent1">
+          <h3><i class="fas fa-landmark" style="color:var(--accent1);margin-right:8px"></i>Tunis Medina</h3>
+          <p>UNESCO World Heritage since 1979, a living museum of Islamic architecture</p>
+          <span class="chip accent1" style="margin-top:8px">UNESCO Site</span>
+        </div>
+        <div class="card card-accent2">
+          <h3><i class="fas fa-hammer" style="color:var(--accent2);margin-right:8px"></i>Artisan Souks</h3>
+          <p>Craftsmen practicing unchanged trades for centuries—copper, leather, textiles</p>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+        <div class="card card-accent3">
+          <h3><i class="fas fa-water" style="color:var(--accent3);margin-right:8px"></i>Sidi Bou Said</h3>
+          <p>Blue-white village perched above the Mediterranean, an artist's paradise</p>
+        </div>
+        <div class="card card-accent1">
+          <h3><i class="fas fa-star-and-crescent" style="color:var(--accent1);margin-right:8px"></i>Kairouan</h3>
+          <p>Fourth holiest city in Islam with profound spiritual significance</p>
+          <span class="chip accent2" style="margin-top:8px">Sacred</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Paint a picture of wandering narrow alleyways where craftsmen still practice ancient trades. Mention the sensory overload—spices, leather, copper. Sidi Bou Said's Instagram-worthy beauty contrasts with Kairouan's profound spirituality.</aside>
+  <aside class="notes">Paint a picture of wandering narrow alleyways where craftsmen still practice ancient trades. Mention the sensory overload—spices, leather, copper. Sidi Bou Said's Instagram-worthy beauty contrasts with Kairouan's profound spirituality.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Culinary Journey</p>
+    <h2>A Feast for the Senses</h2>
+    <div class="g4" style="flex:1;min-height:0;margin-top:16px">
+      <div class="card card-accent1" style="text-align:center">
+        <div class="ic accent1" style="margin:0 auto 12px"><i class="fas fa-bowl-food"></i></div>
+        <h3>Couscous</h3>
+        <p>Friday family tradition bringing generations together</p>
+        <span class="chip accent1" style="margin-top:8px">Tradition</span>
+      </div>
+      <div class="card card-accent2" style="text-align:center">
+        <div class="ic accent2" style="margin:0 auto 12px"><i class="fas fa-egg"></i></div>
+        <h3>Brik</h3>
+        <p>Crispy parcels of egg and tuna—eat without breaking!</p>
+        <span class="chip accent2" style="margin-top:8px">Street Food</span>
+      </div>
+      <div class="card card-accent3" style="text-align:center">
+        <div class="ic accent3" style="margin:0 auto 12px"><i class="fas fa-fire-flame-curved"></i></div>
+        <h3>Harissa</h3>
+        <p>The fiery soul of every Tunisian kitchen</p>
+        <span class="chip accent1" style="margin-top:8px">Signature</span>
+      </div>
+      <div class="card card-accent2" style="text-align:center">
+        <div class="ic accent1" style="margin:0 auto 12px"><i class="fas fa-mug-hot"></i></div>
+        <h3>Mint Tea</h3>
+        <p>Rituals that seal friendships and welcome strangers</p>
+        <span class="chip accent3" style="margin-top:8px">Hospitality</span>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Food is central to Tunisian identity. Describe the communal couscous tradition, the skill of eating brik without breaking the egg, and how harissa appears in almost every meal. Tea ceremonies are about connection, not caffeine.</aside>
+  <aside class="notes">Food is central to Tunisian identity. Describe the communal couscous tradition, the skill of eating brik without breaking the egg, and how harissa appears in almost every meal. Tea ceremonies are about connection, not caffeine.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Daily Rhythms</p>
+    <h2>A Day in Tunisian Life</h2>
+    <div class="timeline" style="margin-top:28px">
+      <div class="tl-item">
+        <div class="tl-dot accent1"></div>
+        <span class="badge accent1" style="margin-bottom:6px">Morning</span>
+        <h3><i class="fas fa-coffee" style="color:var(--accent1);margin-right:6px"></i>Café Culture</h3>
+        <p>Espresso, newspapers, and conversations at corner cafés</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot accent2"></div>
+        <span class="badge accent2" style="margin-bottom:6px">Midday</span>
+        <h3><i class="fas fa-home" style="color:var(--accent2);margin-right:6px"></i>Family Retreat</h3>
+        <p>Families gather for long lunches and sacred siesta time</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot accent3"></div>
+        <span class="badge accent3" style="margin-bottom:6px">Afternoon</span>
+        <h3><i class="fas fa-store" style="color:var(--accent3);margin-right:6px"></i>Market Life</h3>
+        <p>Souks come alive with bargaining and fresh produce</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot accent1"></div>
+        <span class="badge accent1" style="margin-bottom:6px">Evening</span>
+        <h3><i class="fas fa-moon" style="color:var(--accent1);margin-right:6px"></i>Promenade</h3>
+        <p>Coastal strolls along the corniche as the sun sets</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Help the audience visualize daily rhythms. Tunisians balance French café culture with Arab hospitality. The afternoon siesta is sacred, and evenings are for socializing. Life moves at a human pace here.</aside>
+  <aside class="notes">Help the audience visualize daily rhythms. Tunisians balance French café culture with Arab hospitality. The afternoon siesta is sacred, and evenings are for socializing. Life moves at a human pace here.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Why Tunisia</p>
+    <h2>Numbers That Inspire</h2>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin:24px 0">
+      <div class="metric">
+        <span class="num" style="color:var(--accent1)">3,000+</span>
+        <span class="lab">Years of Civilization</span>
+      </div>
+      <div class="metric">
+        <span class="num" style="color:var(--accent2)">1,300</span>
+        <span class="lab">km of Coastline</span>
+      </div>
+      <div class="metric">
+        <span class="num" style="color:var(--accent3)">8</span>
+        <span class="lab">UNESCO Sites</span>
+      </div>
+    </div>
+    <hr class="dv">
+    <div style="display:flex;gap:22px;flex:1;min-height:0;margin-top:18px">
+      <div class="ring" style="flex:0 0 auto">
+        <svg viewBox="0 0 120 120">
+          <circle class="rbg" cx="60" cy="60" r="52"/>
+          <circle class="rprog" cx="60" cy="60" r="52" stroke-dasharray="327" stroke-dashoffset="33" style="stroke:var(--accent2)"/>
+        </svg>
+        <div class="rval">90%</div>
+        <div class="rlab">Sunny Days</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
+        <div class="frow">
+          <div class="fi"><div class="ic accent1"><i class="fas fa-monument"></i></div></div>
+          <div><h3>From Carthage to Today</h3><p>History lives in every stone and story</p></div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent2"><i class="fas fa-umbrella-beach"></i></div></div>
+          <div><h3>Mediterranean Paradise</h3><p>Endless beaches from Djerba to Hammamet</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Use these statistics to create impact. Three millennia of history from Carthage to today. Endless beaches. World-recognized heritage. Build toward the emotional close—this isn't just a trip, it's a transformation.</aside>
+  <aside class="notes">Use these statistics to create impact. Three millennia of history from Carthage to today. Endless beaches. World-recognized heritage. Build toward the emotional close—this isn't just a trip, it's a transformation.</aside>
+</section>
+  <section>
+  <div class="s cx">
+    <p class="sl">Your Adventure Begins</p>
+    <hr class="dv" style="margin-bottom:24px">
+    <div style="display:flex;gap:10px;justify-content:center;margin-bottom:20px">
+      <div class="ic accent1"><i class="fas fa-compass"></i></div>
+      <div class="ic accent2"><i class="fas fa-heart"></i></div>
+      <div class="ic accent3"><i class="fas fa-plane-departure"></i></div>
+    </div>
+    <h2 style="font-size:2.2em;font-style:italic;font-weight:400;line-height:1.4;max-width:700px;color:var(--t1)">"Come for the history, stay for the hospitality—every corner tells a story waiting to be discovered."</h2>
+    <hr class="dv" style="margin:24px 0">
+    <p style="font-size:0.85em;color:var(--t2);margin-bottom:16px">Your North African adventure awaits</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <span class="badge accent1"><i class="fas fa-check" style="margin-right:5px"></i>Authentic</span>
+      <span class="badge accent2"><i class="fas fa-check" style="margin-right:5px"></i>Affordable</span>
+      <span class="badge accent3"><i class="fas fa-check" style="margin-right:5px"></i>Welcoming</span>
+    </div>
+    <p style="font-size:1.1em;color:var(--accent2);margin-top:28px;font-family:var(--serif);font-weight:700">Tunisia Is Calling</p>
+  </div>
+  <aside class="notes" style="display:none">End on an inspirational note. Tunisia isn't overcrowded like Morocco or expensive like European alternatives. It's authentic, affordable, and profoundly welcoming. Encourage the audience to start planning their journey today.</aside>
+  <aside class="notes">End on an inspirational note. Tunisia isn't overcrowded like Morocco or expensive like European alternatives. It's authentic, affordable, and profoundly welcoming. Encourage the audience to start planning their journey today.</aside>
+</section>
+
+<script>
+(function(){
+  const sections = document.querySelectorAll('section');
+  const total = sections.length;
+  const counter = document.getElementById('slide-counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  // IntersectionObserver: mark the visible slide as .active (triggers CSS animations)
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        sections.forEach(s => s.classList.remove('active'));
+        e.target.classList.add('active');
+        current = Array.from(sections).indexOf(e.target);
+        if (counter) counter.textContent = (current+1) + ' / ' + total;
+        if (progress) progress.style.width = ((current+1)/total*100) + '%';
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s => obs.observe(s));
+
+  // Activate first slide immediately
+  if (sections[0]) sections[0].classList.add('active');
+  if (counter) counter.textContent = '1 / ' + total;
+  if (progress) progress.style.width = (1/total*100) + '%';
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      if (current < total - 1) sections[current + 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (current > 0) sections[current - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      sections[0].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      sections[total - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'f' || e.key === 'F11') {
+      e.preventDefault();
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>

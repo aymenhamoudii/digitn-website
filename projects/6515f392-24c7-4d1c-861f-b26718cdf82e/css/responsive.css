@@ -1,0 +1,32 @@
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  body {
+    padding: 0;
+    font-size: 0.9rem;
+  }
+
+  #app {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.5rem;
+  }
+
+  canvas {
+    width: 100%;
+    height: auto;
+  }
+
+  #controls {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  button {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  #high-score, #current-score {
+    font-size: 0.9rem;
+  }
+}

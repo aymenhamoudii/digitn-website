@@ -1,0 +1,16 @@
+.navbar-toggle {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .navbar-toggle {
+        display: block;
+        cursor: pointer;
+    }
+    .navbar-menu {
+        display: none;
+    }
+    .navbar-menu.is-active {
+        display: block;
+    }
+}

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Health Care Can&#039;t Wait Until Graduation</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+    --bg: #04342C;
+    --bg2: #085041;
+    --surface: #0F6E56;
+    --surface2: #1d4841;
+    --border: rgba(255, 255, 255, .07);
+    --border-md: rgba(255, 255, 255, .11);
+    --accent1: #D85A30;
+    --accent1-dim: rgba(216, 90, 48, 0.18);
+    --accent2: #97C459;
+    --accent2-dim: rgba(151, 196, 89, 0.18);
+    --accent3: #FAC775;
+    --accent3-dim: rgba(250, 199, 117, 0.18);
+    --t1: #F1EFE8;
+    --t2: #B4B2A9;
+    --t3: rgba(241, 239, 232, 0.3);
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+    --serif: 'Playfair Display', serif;
+  }
+    
+  ::-webkit-scrollbar { display: none }
+  * { scrollbar-width: none; -ms-overflow-style: none; box-sizing: border-box; }
+  html, body { overflow: hidden; margin: 0; padding: 0 }
+
+  .reveal { font-family: var(--sans); color: var(--t1); background: var(--bg) }
+  .reveal .slides { text-align: left }
+  .reveal .slides section { padding: 48px 68px; height: 100%; display: flex; flex-direction: column }
+  .reveal h1, .reveal h2, .reveal h3 { font-family: var(--serif); color: var(--t1); text-transform: none; letter-spacing: -.02em; font-weight: 800; margin: 0 }
+  .reveal h1 { font-size: 2.8em; line-height: 1.1 }
+  .reveal h2 { font-size: 1.85em; margin-bottom: 8px }
+  .reveal h3 { font-size: 1em; font-weight: 700 }
+  .reveal p, .reveal li { font-size: .74em; line-height: 1.7; color: var(--t2); margin: 0 }
+  .reveal ul { list-style: none; padding: 0; margin: 0 }
+  .reveal ul li { padding: 5px 0 }
+  .reveal .slide-number { font-family: var(--mono); font-size: 12px; color: var(--t3); background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 5px 12px; right: 28px; bottom: 28px }
+  .reveal .controls { color: var(--accent1); opacity: .3 }
+  .reveal .progress span { background: var(--accent1) }
+
+  /* Animation */
+  .s > * { opacity: 0; transform: translateY(16px); transition: all .45s cubic-bezier(.4, 0, .2, 1) }
+  section.present .s > * { opacity: 1; transform: translateY(0) }
+  section.present .s > *:nth-child(1) { transition-delay: .04s }
+  section.present .s > *:nth-child(2) { transition-delay: .10s }
+  section.present .s > *:nth-child(3) { transition-delay: .16s }
+  section.present .s > *:nth-child(4) { transition-delay: .22s }
+  section.present .s > *:nth-child(5) { transition-delay: .28s }
+  section.present .s > *:nth-child(6) { transition-delay: .34s }
+  section.present .s > *:nth-child(7) { transition-delay: .40s }
+  section.present .s > *:nth-child(8) { transition-delay: .46s }
+  section.present .s > *:nth-child(9) { transition-delay: .52s }
+  section.present .s > *:nth-child(10) { transition-delay: .58s }
+  .s { height: 100%; display: flex; flex-direction: column }
+  .cx { justify-content: center; align-items: center; text-align: center }
+
+  /* Section Label */
+  .sl { font-family: var(--mono); font-size: .48em; color: var(--accent1); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 6px; opacity: .9 }
+
+  /* Divider */
+  .dv { height: 1px; width: 120px; background: linear-gradient(90deg, transparent, var(--border-md), transparent); margin: 18px auto; border: none }
+
+  /* Card */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 22px; position: relative }
+  .card-accent1 { border-top: 2px solid var(--accent1) }
+  .card-accent2 { border-top: 2px solid var(--accent2) }
+  .card-accent3 { border-top: 2px solid var(--accent3) }
+
+  /* Metric Pill */
+  .metric { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; background: var(--surface2); border: 1px solid var(--border-md); border-radius: 40px; margin: 4px }
+  .metric .num { font-family: var(--serif); font-size: 1.25em; font-weight: 900; color: var(--t1) }
+  .metric .lab { font-size: .52em; color: var(--t2); text-transform: uppercase; letter-spacing: 1px }
+
+  /* Icon Circle */
+  .ic { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; line-height: 1 }
+  .ic.accent1 { background: var(--accent1-dim); color: var(--accent1) }
+  .ic.accent2 { background: var(--accent2-dim); color: var(--accent2) }
+  .ic.accent3 { background: var(--accent3-dim); color: var(--accent3) }
+
+  /* Hover Card */
+  .hcard { padding: 22px 18px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); text-align: center; transition: border-color .25s, background .25s; display: flex; flex-direction: column; align-items: center }
+  .hcard:hover { background: var(--surface2); border-color: var(--border-md) }
+  .hcard .iw { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; background: var(--bg2) }
+
+  /* Badge */
+  .badge { display: inline-block; padding: 4px 12px; border-radius: 6px; font-family: var(--mono); font-size: .42em; text-transform: uppercase; letter-spacing: 1px; font-weight: 600 }
+  .badge.accent1 { background: var(--accent1-dim); color: var(--accent1) }
+  .badge.accent2 { background: var(--accent2-dim); color: var(--accent2) }
+  .badge.accent3 { background: var(--accent3-dim); color: var(--accent3) }
+
+  /* Chip */
+  .chip { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: .48em; font-family: var(--mono); border: 1px solid; margin: 3px }
+  .chip.accent1 { border-color: var(--accent1); color: var(--accent1) }
+  .chip.accent2 { border-color: var(--accent2); color: var(--accent2) }
+  .chip.accent3 { border-color: var(--accent3); color: var(--accent3) }
+
+  /* Feature Row */
+  .frow { display: flex; align-items: center; gap: 18px; padding: 14px 0; border-bottom: 1px solid var(--border) }
+  .frow:last-child { border-bottom: none }
+  .frow .fi { flex-shrink: 0 }
+
+  /* Ring Chart */
+  .ring { position: relative; width: 120px; height: 120px; display: inline-flex; align-items: center; justify-content: center; flex-direction: column }
+  .ring svg { position: absolute; width: 100%; height: 100%; transform: rotate(-90deg) }
+  .ring .rbg { fill: none; stroke: var(--surface2); stroke-width: 8 }
+  .ring .rprog { fill: none; stroke: var(--accent1); stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset .6s ease }
+  .ring .rval { font-family: var(--serif); font-size: 1.5em; font-weight: 900; color: var(--t1); z-index: 1 }
+  .ring .rlab { font-family: var(--mono); font-size: .42em; color: var(--t2); text-transform: uppercase; letter-spacing: 1px; z-index: 1 }
+
+  /* Timeline */
+  .timeline { display: flex; gap: 0; padding: 20px 0 }
+  .tl-item { flex: 1; position: relative; padding: 20px 16px 0; text-align: center }
+  .tl-item::before { content: ''; position: absolute; top: 8px; left: 0; right: 0; height: 2px; background: var(--border-md) }
+  .tl-item:first-child::before { left: 50% }
+  .tl-item:last-child::before { right: 50% }
+  .tl-dot { width: 14px; height: 14px; border-radius: 50%; margin: 0 auto 12px; position: relative; z-index: 1 }
+  .tl-dot.accent1 { background: var(--accent1); box-shadow: 0 0 0 4px var(--accent1-dim) }
+  .tl-dot.accent2 { background: var(--accent2); box-shadow: 0 0 0 4px var(--accent2-dim) }
+  .tl-dot.accent3 { background: var(--accent3); box-shadow: 0 0 0 4px var(--accent3-dim) }
+
+  /* Grids */
+  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px }
+  .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 16px }
+  .g4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 16px }
+  .g5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 16px }
+
+  /* Image Box */
+  .img-box { flex:1; min-height:0; display:flex; align-items:center; justify-content:center; border-radius:14px; overflow:hidden; background:var(--surface); border:1px solid var(--border) }
+  .img-box img { max-width:100%; max-height:100%; object-fit:contain }
+
+  /* Big Numbers */
+  .bignum { font-family:var(--serif); font-size:3.2em; font-weight:900; color:var(--t1); line-height:1 }
+
+  /* Header Meta */
+  .hm { display:flex; gap:30px; font-size:.62em; color:var(--t3); font-weight:500 }
+  .hm span { display:flex; align-items:center; gap:9px }
+
+  /* Left border accents */
+  .line-accent1 { border-left:2px solid var(--accent1) }
+  .line-accent2 { border-left:2px solid var(--accent2) }
+  .line-accent3 { border-left:2px solid var(--accent3) }
+
+  /* Flex utilities */
+  .flex { display: flex }
+  .flex-col { flex-direction: column }
+  .flex-wrap { display:flex; flex-wrap:wrap }
+  .flex-center { display:flex; justify-content:center; align-items:center }
+  .flex-1 { flex:1 }
+  .gap-sm { gap: 8px }
+  .gap-md { gap: 16px }
+  .gap-lg { gap: 24px }
+  .mt-auto { margin-top: auto }
+  .mb-sm { margin-bottom: 8px }
+  .mb-md { margin-bottom: 16px }
+
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section style="background-image:radial-gradient(circle at 20% 20%, rgba(216,90,48,0.06) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(151,196,89,0.04) 0%, transparent 50%)">
+  <div class="s cx" style="text-align:center;padding:60px">
+    <div style="display:flex;gap:14px;font-size:.58em;color:var(--t3);font-weight:500;justify-content:center;margin-bottom:28px;flex-wrap:wrap">
+      <span class="badge accent1"><i class="fas fa-graduation-cap"></i> Student Focus</span>
+      <span class="badge accent2"><i class="fas fa-shield-alt"></i> Essential Protection</span>
+      <span class="badge accent3"><i class="fas fa-clock"></i> Time-Sensitive</span>
+    </div>
+    <h1 style="font-size:3.4em;margin-bottom:18px">Why Health Care Can't Wait Until Graduation</h1>
+    <hr class="dv" style="margin:24px auto;width:120px">
+    <p style="font-size:1.1em;color:var(--t2);max-width:640px;margin:0 auto;line-height:1.6">Protecting Your Future Starts Today</p>
+    <div style="display:flex;gap:30px;font-size:.62em;color:var(--t3);font-weight:500;justify-content:center;margin-top:36px">
+      <span style="display:flex;align-items:center;gap:9px"><i class="fas fa-calendar" style="color:var(--accent1)"></i> 2025</span>
+      <span style="display:flex;align-items:center;gap:9px"><i class="fas fa-user-graduate" style="color:var(--accent2)"></i> For Students</span>
+      <span style="display:flex;align-items:center;gap:9px"><i class="fas fa-heartbeat" style="color:var(--accent3)"></i> Health Matters</span>
+    </div>
+  </div>
+  <aside class="notes">
+    Open with a relatable scenario: a student facing a medical emergency during finals week. Hook the audience by highlighting that health crises don't wait for convenient timing, and the consequences of waiting can derail their degree and financial future.
+  </aside>
+</section>
+      <section style="background-image:radial-gradient(circle at 75% 25%, rgba(250,199,117,0.05) 0%, transparent 45%)">
+  <div class="s" style="padding:50px">
+    <p class="sl">The Reality Check</p>
+    <h2>What We're Facing</h2>
+    <p style="max-width:720px">Students often believe they're invincible or that health care is for "later." Let's dismantle that myth and examine the immediate stakes threatening your academic journey.</p>
+    <div class="g3" style="margin-top:28px">
+      <div class="hcard" style="border-top:2px solid var(--accent1)">
+        <div class="iw"><div class="ic accent1"><i class="fas fa-user-shield"></i></div></div>
+        <h3>The Vulnerability Myth</h3>
+        <p>Young adults aged 18-25 experience health emergencies at the same rate as older adults. Your age doesn't make you immune to accidents, infections, or chronic conditions that emerge without warning.</p>
+      </div>
+      <div class="hcard" style="border-top:2px solid var(--accent2)">
+        <div class="iw"><div class="ic accent2"><i class="fas fa-money-bill-wave"></i></div></div>
+        <h3>Financial Devastation</h3>
+        <p>One ER visit can cost $1,200+. Without coverage, a single health crisis can wipe out savings and force students to choose between medical care and semester tuition payments.</p>
+      </div>
+      <div class="hcard" style="border-top:2px solid var(--accent3)">
+        <div class="iw"><div class="ic accent3"><i class="fas fa-book-dead"></i></div></div>
+        <h3>Academic Impact</h3>
+        <p>Untreated health issues lead to missed classes, lower grades, and delayed graduation. Medical debt is a leading cause of student dropout—don't let it derail your degree.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    Set up the argument structure. Students often believe they're invincible or that health care is for 'later,' but this section will dismantle that myth and show the immediate stakes.
+  </aside>
+</section>
+      <section style="background-image:radial-gradient(circle at 85% 15%, rgba(216,90,48,0.06) 0%, transparent 40%)">
+  <div class="s" style="padding:50px">
+    <p class="sl">The Hidden Crisis</p>
+    <h2>What Students Don't See Coming</h2>
+    <div style="display:flex;gap:28px;flex:1;min-height:0;margin-top:22px">
+      <div style="flex:1.3;display:flex;flex-direction:column;gap:14px">
+        <div class="frow">
+          <div class="fi"><div class="ic accent1"><i class="fas fa-percentage"></i></div></div>
+          <div>
+            <h3>42% Skip Necessary Care</h3>
+            <p>Nearly half of all students postpone or skip medical treatment due to cost concerns. Minor conditions become major emergencies when ignored.</p>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent2"><i class="fas fa-hospital"></i></div></div>
+          <div>
+            <h3>From Minor to Major</h3>
+            <p>Untreated infections, ignored symptoms, and delayed checkups routinely escalate into emergency room visits costing 10x more than preventive care.</p>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent3"><i class="fas fa-graduation-cap"></i></div></div>
+          <div>
+            <h3>#1 Cause of Dropout</h3>
+            <p>Medical debt now exceeds student loans as the primary reason students leave college before completing their degree.</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+          <span class="badge accent1"><i class="fas fa-exclamation-triangle"></i> Critical</span>
+          <span class="badge accent2"><i class="fas fa-chart-line"></i> Growing</span>
+          <span class="badge accent3"><i class="fas fa-users"></i> Affects All</span>
+        </div>
+      </div>
+      <div style="flex:1;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px;display:flex;flex-direction:column;justify-content:center">
+        <div style="text-align:center;margin-bottom:20px">
+          <div style="font-family:var(--serif);font-size:4em;font-weight:900;color:var(--accent1);line-height:1">42%</div>
+          <p style="font-size:.68em;color:var(--t3);margin-top:8px">of students delay care due to cost</p>
+        </div>
+        <hr class="dv" style="margin:14px 0">
+        <div style="display:flex;align-items:center;gap:18px;margin-top:16px">
+          <div style="flex:1">
+            <div style="font-size:.6em;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Preventive Visit</div>
+            <div style="font-size:1.2em;font-weight:700;color:var(--accent2)">$0</div>
+          </div>
+          <div style="color:var(--t3)"><i class="fas fa-arrow-right"></i></div>
+          <div style="flex:1">
+            <div style="font-size:.6em;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">ER Visit</div>
+            <div style="font-size:1.2em;font-weight:700;color:var(--accent1)">$1,200+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    Paint the vivid picture of the current crisis: students choosing between textbooks and antibiotics, ignoring symptoms until they become emergencies, and graduating with crushing medical debt that overshadows student loans.
+  </aside>
+</section>
+      <section style="background-image:radial-gradient(circle at 30% 70%, rgba(151,196,89,0.05) 0%, transparent 45%), radial-gradient(circle at 70% 30%, rgba(250,199,117,0.04) 0%, transparent 40%)">
+  <div class="s" style="padding:50px">
+    <p class="sl">By The Numbers</p>
+    <h2>The Data Tells a Clear Story</h2>
+    <p style="max-width:680px">Health coverage isn't just about emergencies—it's an academic success tool. Students with access to care perform better, graduate faster, and avoid catastrophic debt.</p>
+    <div style="display:flex;gap:22px;margin-top:32px;flex-wrap:wrap;justify-content:center">
+      <div class="metric" style="min-width:200px;padding:28px">
+        <div class="num" style="color:var(--accent1);font-size:3em">$1,200</div>
+        <div class="lab" style="font-size:.72em;color:var(--t2)">Average ER Visit Cost</div>
+        <div style="font-size:.6em;color:var(--t3);margin-top:10px"><i class="fas fa-arrow-up" style="color:var(--accent1)"></i> vs $0 preventive care</div>
+      </div>
+      <div class="metric" style="min-width:200px;padding:28px">
+        <div class="num" style="color:var(--accent2);font-size:3em">67%</div>
+        <div class="lab" style="font-size:.72em;color:var(--t2)">Higher GPA</div>
+        <div style="font-size:.6em;color:var(--t3);margin-top:10px"><i class="fas fa-arrow-up" style="color:var(--accent2)"></i> with health access</div>
+      </div>
+      <div class="metric" style="min-width:200px;padding:28px">
+        <div class="num" style="color:var(--accent3);font-size:3em">3x</div>
+        <div class="lab" style="font-size:.72em;color:var(--t2)">More Likely to Graduate</div>
+        <div style="font-size:.6em;color:var(--t3);margin-top:10px"><i class="fas fa-check" style="color:var(--accent3)"></i> with coverage</div>
+      </div>
+      <div class="metric" style="min-width:200px;padding:28px">
+        <div class="num" style="color:var(--accent1);font-size:3em">$0</div>
+        <div class="lab" style="font-size:.72em;color:var(--t2)">Preventive Care</div>
+        <div style="font-size:.6em;color:var(--t3);margin-top:10px"><i class="fas fa-check" style="color:var(--accent2)"></i> under most plans</div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:28px;border-left:2px solid var(--accent1);padding:20px">
+      <p style="font-size:.68em;line-height:1.8">
+        <i class="fas fa-lightbulb" style="color:var(--accent1);margin-right:10px"></i>
+        <strong style="color:var(--t1)">Key Insight:</strong> Every dollar spent on preventive care saves $8 in emergency treatment costs. Health coverage is an investment, not an expense.
+      </p>
+    </div>
+  </div>
+  <aside class="notes">
+    Drive home the data correlation: health coverage isn't just about emergencies—it's an academic success tool. Students with access to care perform better, graduate faster, and avoid catastrophic debt.
+  </aside>
+</section>
+      <section style="background-image:radial-gradient(circle at 15% 85%, rgba(216,90,48,0.05) 0%, transparent 40%), radial-gradient(circle at 85% 15%, rgba(97,196,89,0.04) 0%, transparent 40%)">
+  <div class="s" style="padding:50px">
+    <p class="sl">Your Health Toolkit</p>
+    <h2>Resources You Probably Already Have</h2>
+    <p style="max-width:720px">Most students don't realize they already have resources available. Shift from fear to empowerment—these tools are accessible and often already paid for.</p>
+    <div class="g4" style="margin-top:28px">
+      <div class="card card-accent1" style="padding:24px">
+        <div class="ic accent1" style="margin-bottom:16px;width:50px;height:50px;font-size:1.3em"><i class="fas fa-university"></i></div>
+        <h3 style="margin-bottom:10px">Campus Health Centers</h3>
+        <p style="font-size:.68em">Often prepaid through tuition. Basic care, prescriptions, and referrals included.</p>
+        <div style="margin-top:14px;display:flex;gap:6px;flex-wrap:wrap">
+          <span class="chip accent1"><i class="fas fa-check"></i> Prepaid</span>
+          <span class="chip accent1"><i class="fas fa-clock"></i> Walk-in</span>
+        </div>
+      </div>
+      <div class="card card-accent2" style="padding:24px">
+        <div class="ic accent2" style="margin-bottom:16px;width:50px;height:50px;font-size:1.3em"><i class="fas fa-shield-alt"></i></div>
+        <h3 style="margin-bottom:10px">Catastrophic Plans</h3>
+        <p style="font-size:.68em">Low monthly premiums for emergency coverage. ACA-compliant options available.</p>
+        <div style="margin-top:14px;display:flex;gap:6px;flex-wrap:wrap">
+          <span class="chip accent2"><i class="fas fa-dollar-sign"></i> Low Cost</span>
+          <span class="chip accent2"><i class="fas fa-ambulance"></i> Emergency</span>
+        </div>
+      </div>
+      <div class="card card-accent3" style="padding:24px">
+        <div class="ic accent3" style="margin-bottom:16px;width:50px;height:50px;font-size:1.3em"><i class="fas fa-laptop-medical"></i></div>
+        <h3 style="margin-bottom:10px">Telehealth Services</h3>
+        <p style="font-size:.68em">24/7 virtual consultations. Get prescriptions and diagnoses from your dorm room.</p>
+        <div style="margin-top:14px;display:flex;gap:6px;flex-wrap:wrap">
+          <span class="chip accent3"><i class="fas fa-video"></i> Video</span>
+          <span class="chip accent3"><i class="fas fa-mobile-alt"></i> App</span>
+        </div>
+      </div>
+      <div class="card card-accent1" style="padding:24px">
+        <div class="ic accent1" style="margin-bottom:16px;width:50px;height:50px;font-size:1.3em"><i class="fas fa-brain"></i></div>
+        <h3 style="margin-bottom:10px">Mental Health</h3>
+        <p style="font-size:.68em">Counseling, therapy, and crisis support often included at no extra cost.</p>
+        <div style="margin-top:14px;display:flex;gap:6px;flex-wrap:wrap">
+          <span class="chip accent1"><i class="fas fa-heart"></i> Confidential</span>
+          <span class="chip accent1"><i class="fas fa-user-md"></i> Therapy</span>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:14px;margin-top:22px;justify-content:center">
+      <div class="badge accent1"><i class="fas fa-info-circle"></i> Check your student fees statement</div>
+      <div class="badge accent2"><i class="fas fa-hand-holding-usd"></i> ACA subsidies may cover 100%</div>
+    </div>
+  </div>
+  <aside class="notes">
+    Shift to empowerment: most students don't realize they already have resources available. Campus health is often included in tuition, telehealth is affordable, and preventive care is free under the ACA.
+  </aside>
+</section>
+      <section style="background-image:radial-gradient(circle at 50% 50%, rgba(216,90,48,0.08) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(250,199,117,0.06) 0%, transparent 45%)">
+  <div class="s cx" style="text-align:center;padding:60px">
+    <div class="ic accent1" style="width:70px;height:70px;font-size:2em;margin-bottom:28px"><i class="fas fa-quote-left"></i></div>
+    <blockquote style="font-family:var(--serif);font-size:2.2em;font-weight:600;color:var(--t1);line-height:1.35;max-width:800px;margin:0 auto;font-style:italic">
+      "Health is the foundation upon which academic dreams are built—protect it like you protect your GPA."
+    </blockquote>
+    <hr class="dv" style="margin:32px auto;width:100px">
+    <div style="font-size:.72em;color:var(--t2);margin-top:8px">An Investment, Not an Expense</div>
+    <div style="display:flex;gap:12px;margin-top:28px;justify-content:center;flex-wrap:wrap">
+      <span class="badge accent1"><i class="fas fa-graduation-cap"></i> Your Degree Depends On It</span>
+      <span class="badge accent2"><i class="fas fa-shield-alt"></i> Your Future Is Worth It</span>
+      <span class="badge accent3"><i class="fas fa-clock"></i> Start Today</span>
+    </div>
+  </div>
+  <aside class="notes">
+    Emotional appeal to seal the persuasion. Reframe health care not as an expense or hassle, but as an investment in their degree, their future career, and their financial stability.
+  </aside>
+</section>
+      <section style="background-image:radial-gradient(circle at 30% 70%, rgba(151,196,89,0.08) 0%, transparent 45%), radial-gradient(circle at 70% 30%, rgba(216,90,48,0.05) 0%, transparent 40%)">
+  <div class="s cx" style="text-align:center;padding:50px">
+    <p class="sl" style="margin-bottom:16px">Take Action Today</p>
+    <h1 style="font-size:2.8em;margin-bottom:16px">Three Steps to Secure Your Health</h1>
+    <p style="font-size:1em;color:var(--t2);max-width:620px;margin:0 auto 28px">Move from convinced to committed. These simple actions take under 30 minutes and can save your degree.</p>
+    <div class="g3" style="max-width:900px;margin:28px auto 0">
+      <div class="card" style="border-top:3px solid var(--accent1);padding:28px;display:flex;flex-direction:column;align-items:center">
+        <div style="font-family:var(--serif);font-size:2.6em;font-weight:900;color:var(--accent1);line-height:1;margin-bottom:12px">1</div>
+        <div class="ic accent1" style="width:60px;height:60px;font-size:1.4em;margin-bottom:16px"><i class="fas fa-search"></i></div>
+        <h3>Verify Coverage</h3>
+        <p style="font-size:.68em;margin-top:8px">Check your current status. Call your school's health office or review your tuition breakdown.</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--accent2);padding:28px;display:flex;flex-direction:column;align-items:center">
+        <div style="font-family:var(--serif);font-size:2.6em;font-weight:900;color:var(--accent2);line-height:1;margin-bottom:12px">2</div>
+        <div class="ic accent2" style="width:60px;height:60px;font-size:1.4em;margin-bottom:16px"><i class="fas fa-calendar-check"></i></div>
+        <h3>Schedule One Visit</h3>
+        <p style="font-size:.68em;margin-top:8px">Book a preventive care appointment before you need emergency care. Establish your baseline.</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--accent3);padding:28px;display:flex;flex-direction:column;align-items:center">
+        <div style="font-family:var(--serif);font-size:2.6em;font-weight:900;color:var(--accent3);line-height:1;margin-bottom:12px">3</div>
+        <div class="ic accent3" style="width:60px;height:60px;font-size:1.4em;margin-bottom:16px"><i class="fas fa-phone-alt"></i></div>
+        <h3>Save the Hotline</div>
+        <p style="font-size:.68em;margin-top:8px">Program your campus health and crisis numbers. Be prepared before an emergency strikes.</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:14px;justify-content:center;margin-top:28px;flex-wrap:wrap">
+      <span class="badge accent1"><i class="fas fa-check-circle"></i> Doable in 30 Minutes</span>
+      <span class="badge accent2"><i class="fas fa-shield-alt"></i> Protects Your Future</span>
+      <span class="badge accent3"><i class="fas fa-bolt"></i> Start Before You Leave</span>
+    </div>
+  </div>
+  <aside class="notes">
+    Close with concrete, immediate actions they can take today. The goal is to move them from convinced to committed—make the next steps simple, specific, and achievable before they leave the room.
+  </aside>
+</section>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.js"></script>
+  <script>
+    Reveal.initialize({
+      controls: true,
+      controlsTutorial: false,
+      slideNumber: 'c/t',
+      progress: true,
+      transition: 'fade',
+      transitionSpeed: 'fast',
+      backgroundTransition: 'fade',
+      hash: true,
+      respondToHashChanges: true,
+      embedded: false,
+      help: true,
+      display: 'flex',
+      center: false,
+      width: 960,
+      height: 700,
+      margin: 0.04,
+      minScale: 0.2,
+      maxScale: 2.0
+    });
+  </script>
+</body>
+</html>

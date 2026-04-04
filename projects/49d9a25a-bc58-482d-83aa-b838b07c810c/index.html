@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>GPON: The Future of Fiber Connectivity</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Karla:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+    --bg: #501313;
+    --bg2: #6B2020;
+    --surface: #8C2E2E;
+    --surface2: #622b2b;
+    --border: rgba(255,255,255,.07);
+    --border-md: rgba(255,255,255,.11);
+    --accent1: #791F1F;
+    --accent1-dim: rgba(121, 31, 31, 0.18);
+    --accent2: #04342C;
+    --accent2-dim: rgba(4, 52, 44, 0.18);
+    --accent3: #EF9F27;
+    --accent3-dim: rgba(239, 159, 39, 0.18);
+    --t1: #FCEBEB;
+    --t2: #C4B5B5;
+    --t3: rgba(252, 235, 235, 0.3);
+    --mono: 'Source Code Pro', monospace;
+    --sans: 'Karla', system-ui, sans-serif;
+    --serif: 'Lora', serif;
+  }
+    
+  /* ─── Reset ─── */
+  ::-webkit-scrollbar{display:none}
+  *{scrollbar-width:none;-ms-overflow-style:none;box-sizing:border-box;margin:0;padding:0}
+  html{scroll-snap-type:y mandatory;overflow-y:scroll;overflow-x:hidden;scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  /* ─── Slide ─── */
+  section{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;padding:clamp(28px,5vh,56px) clamp(32px,5vw,72px);display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+  /* ─── Typography ─── */
+  h1,h2,h3{font-family:var(--serif);color:var(--t1);text-transform:none;letter-spacing:-.02em;font-weight:800;margin:0}
+  h1{font-size:clamp(1.8rem,4vw,3rem);line-height:1.1}
+  h2{font-size:clamp(1.3rem,2.8vw,2rem);margin-bottom:.4em}
+  h3{font-size:clamp(.8rem,1.2vw,1rem);font-weight:700}
+  p,li{font-size:clamp(.7rem,1vw,.88rem);line-height:1.65;color:var(--t2)}
+  ul{list-style:none;padding:0}
+  ul li{padding:4px 0}
+
+  /* ─── Stagger animation — triggers when slide scrolls into view ─── */
+  .s{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
+  .s>*{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+  section.active .s>*{opacity:1;transform:translateY(0)}
+  section.active .s>*:nth-child(1){transition-delay:.03s}
+  section.active .s>*:nth-child(2){transition-delay:.09s}
+  section.active .s>*:nth-child(3){transition-delay:.15s}
+  section.active .s>*:nth-child(4){transition-delay:.21s}
+  section.active .s>*:nth-child(5){transition-delay:.27s}
+  section.active .s>*:nth-child(6){transition-delay:.33s}
+  section.active .s>*:nth-child(7){transition-delay:.39s}
+  section.active .s>*:nth-child(8){transition-delay:.45s}
+  .cx{justify-content:center;align-items:center;text-align:center}
+
+  /* ─── Section Label ─── */
+  .sl{font-family:var(--mono);font-size:clamp(.55rem,.8vw,.72rem);color:var(--accent1);text-transform:uppercase;letter-spacing:3px;margin-bottom:4px;opacity:.9}
+
+  /* ─── Divider ─── */
+  .dv{height:1px;width:120px;background:linear-gradient(90deg,transparent,var(--border-md),transparent);margin:18px auto;border:none}
+
+  /* ─── Card ─── */
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:clamp(12px,1.5vw,20px);position:relative;overflow:hidden}
+  .card-accent1{border-top:2px solid var(--accent1)}
+  .card-accent2{border-top:2px solid var(--accent2)}
+  .card-accent3{border-top:2px solid var(--accent3)}
+
+  /* ─── Metric Pill ─── */
+  .metric{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:var(--surface2);border:1px solid var(--border-md);border-radius:40px;margin:3px}
+  .metric .num{font-family:var(--serif);font-size:clamp(.9rem,1.4vw,1.2rem);font-weight:900;color:var(--t1)}
+  .metric .lab{font-size:clamp(.5rem,.7vw,.62rem);color:var(--t2);text-transform:uppercase;letter-spacing:1px}
+
+  /* ─── Icon Circle ─── */
+  .ic{width:clamp(32px,3.5vw,44px);height:clamp(32px,3.5vw,44px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:clamp(12px,1.3vw,16px);flex-shrink:0;line-height:1}
+  .ic.accent1{background:var(--accent1-dim);color:var(--accent1)}
+  .ic.accent2{background:var(--accent2-dim);color:var(--accent2)}
+  .ic.accent3{background:var(--accent3-dim);color:var(--accent3)}
+
+  /* ─── Hover Card ─── */
+  .hcard{padding:clamp(14px,1.5vw,20px) clamp(10px,1.2vw,16px);border-radius:12px;background:var(--surface);border:1px solid var(--border);text-align:center;transition:border-color .25s,background .25s;display:flex;flex-direction:column;align-items:center;overflow:hidden}
+  .hcard:hover{background:var(--surface2);border-color:var(--border-md)}
+  .hcard .iw{width:clamp(36px,4vw,52px);height:clamp(36px,4vw,52px);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;background:var(--bg2);font-size:clamp(14px,1.5vw,20px);flex-shrink:0;line-height:1}
+
+  /* ─── Badge ─── */
+  .badge{display:inline-block;padding:4px 12px;border-radius:6px;font-family:var(--mono);font-size:clamp(.5rem,.7vw,.62rem);text-transform:uppercase;letter-spacing:1px;font-weight:600}
+  .badge.accent1{background:var(--accent1-dim);color:var(--accent1)}
+  .badge.accent2{background:var(--accent2-dim);color:var(--accent2)}
+  .badge.accent3{background:var(--accent3-dim);color:var(--accent3)}
+
+  /* ─── Chip ─── */
+  .chip{display:inline-block;padding:4px 12px;border-radius:20px;font-size:clamp(.5rem,.7vw,.62rem);font-family:var(--mono);border:1px solid;margin:2px}
+  .chip.accent1{border-color:var(--accent1);color:var(--accent1)}
+  .chip.accent2{border-color:var(--accent2);color:var(--accent2)}
+  .chip.accent3{border-color:var(--accent3);color:var(--accent3)}
+
+  /* ─── Feature Row ─── */
+  .frow{display:flex;align-items:center;gap:clamp(10px,1.2vw,16px);padding:clamp(8px,1vh,14px) 0;border-bottom:1px solid var(--border)}
+  .frow:last-child{border-bottom:none}
+  .frow .fi{flex-shrink:0}
+
+  /* ─── Ring Chart ─── */
+  .ring{position:relative;width:clamp(72px,8vw,110px);height:clamp(72px,8vw,110px);display:inline-flex;align-items:center;justify-content:center;flex-direction:column;flex-shrink:0}
+  .ring svg{position:absolute;width:100%;height:100%;transform:rotate(-90deg)}
+  .ring .rbg{fill:none;stroke:var(--surface2);stroke-width:6}
+  .ring .rprog{fill:none;stroke:var(--accent1);stroke-width:6;stroke-linecap:round}
+  .ring .rval{font-family:var(--serif);font-size:clamp(.9rem,1.5vw,1.4rem);font-weight:900;color:var(--t1);z-index:1}
+  .ring .rlab{font-family:var(--mono);font-size:clamp(.4rem,.6vw,.5rem);color:var(--t2);text-transform:uppercase;letter-spacing:1px;z-index:1}
+
+  /* ─── Timeline ─── */
+  .timeline{display:flex;gap:0;padding:16px 0}
+  .tl-item{flex:1;position:relative;padding:18px 12px 0;text-align:center}
+  .tl-item::before{content:'';position:absolute;top:8px;left:0;right:0;height:2px;background:var(--border-md)}
+  .tl-item:first-child::before{left:50%}
+  .tl-item:last-child::before{right:50%}
+  .tl-dot{width:12px;height:12px;border-radius:50%;margin:0 auto 10px;position:relative;z-index:1}
+  .tl-dot.accent1{background:var(--accent1);box-shadow:0 0 0 4px var(--accent1-dim)}
+  .tl-dot.accent2{background:var(--accent2);box-shadow:0 0 0 4px var(--accent2-dim)}
+  .tl-dot.accent3{background:var(--accent3);box-shadow:0 0 0 4px var(--accent3-dim)}
+
+  /* ─── Grids ─── */
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.2vw,16px);margin-top:12px}
+  .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(10px,1.2vw,16px);margin-top:12px}
+  .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1vw,14px);margin-top:12px}
+  .g5{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(6px,.8vw,12px);margin-top:12px}
+
+  /* ─── Image Box ─── */
+  .img-box{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;border-radius:12px;overflow:hidden;background:var(--surface);border:1px solid var(--border)}
+  .img-box img{max-width:100%;max-height:100%;object-fit:contain}
+
+  /* ─── Big Numbers ─── */
+  .bignum{font-family:var(--serif);font-size:clamp(2rem,4vw,3.5rem);font-weight:900;color:var(--t1);line-height:1}
+
+  /* ─── Header Meta ─── */
+  .hm{display:flex;gap:clamp(16px,2.5vw,30px);font-size:clamp(.55rem,.8vw,.7rem);color:var(--t3);font-weight:500}
+  .hm span{display:flex;align-items:center;gap:8px}
+
+  /* ─── Left border accents ─── */
+  .line-accent1{border-left:2px solid var(--accent1)}
+  .line-accent2{border-left:2px solid var(--accent2)}
+  .line-accent3{border-left:2px solid var(--accent3)}
+
+  /* ─── Flex utilities ─── */
+  .flex{display:flex}
+  .flex-col{flex-direction:column}
+  .flex-wrap{display:flex;flex-wrap:wrap}
+  .flex-center{display:flex;justify-content:center;align-items:center}
+  .flex-1{flex:1;min-height:0}
+  .gap-sm{gap:8px}
+  .gap-md{gap:16px}
+  .gap-lg{gap:24px}
+  .mt-auto{margin-top:auto}
+  .mb-sm{margin-bottom:8px}
+  .mb-md{margin-bottom:16px}
+
+  /* ─── Slide counter ─── */
+  #slide-counter{position:fixed;bottom:20px;right:24px;font-family:var(--mono);font-size:12px;color:var(--t3);background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 12px;z-index:100;pointer-events:none}
+
+  /* ─── Progress bar ─── */
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--accent1);z-index:100;transition:width .3s ease}
+
+  </style>
+</head>
+<body>
+  <div id="progress" style="width:0"></div>
+  <div id="slide-counter">1 / 8</div>
+  <section>
+  <div class="s cx">
+    <div class="iw">
+      <div class="ic accent1" style="width:90px;height:90px;font-size:2.2em"><i class="fas fa-network-wired"></i></div>
+    </div>
+    <h1 style="font-size:2.6em;margin-top:24px">GPON: Fiber Connectivity Evolved</h1>
+    <p style="font-size:0.95em;color:var(--t2);max-width:600px;margin:16px 0 28px">Gigabit Passive Optical Networks for Next-Generation Infrastructure</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+      <span class="badge accent2">2.5 Gbps Downstream</span>
+      <span class="badge accent3">Passive Infrastructure</span>
+      <span class="badge accent1">Future-Proof</span>
+    </div>
+    <hr class="dv" style="width:120px;margin:32px auto">
+    <div style="display:flex;gap:20px;justify-content:center">
+      <div class="ic accent2" style="width:48px;height:48px;font-size:1.1em"><i class="fas fa-server"></i></div>
+      <div class="ic accent3" style="width:48px;height:48px;font-size:1.1em"><i class="fas fa-bolt"></i></div>
+      <div class="ic accent1" style="width:48px;height:48px;font-size:1.1em"><i class="fas fa-shield-alt"></i></div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Welcome technical team. GPON isn't just another fiber standard—it's the backbone of modern connectivity that eliminates active components in the field.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Overview</p>
+    <h2>Why GPON Matters</h2>
+    <p style="font-size:0.76em;margin-bottom:28px">Transforming infrastructure economics while delivering massive bandwidth</p>
+    <div class="g3" style="flex:1;min-height:0">
+      <div class="hcard">
+        <div class="iw"><div class="ic accent1"><i class="fas fa-microchip"></i></div></div>
+        <h3>Zero Active Components</h3>
+        <p>Passive splitters eliminate electronics in the field</p>
+      </div>
+      <div class="hcard">
+        <div class="iw"><div class="ic accent2"><i class="fas fa-sitemap"></i></div></div>
+        <h3>Point-to-Multipoint</h3>
+        <p>Efficient 1:64/1:128 split ratios maximize fiber usage</p>
+      </div>
+      <div class="hcard">
+        <div class="iw"><div class="ic accent3"><i class="fas fa-tv"></i></div></div>
+        <h3>Triple-Play Ready</h3>
+        <p>Seamless voice, video, and data delivery</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Today we'll explore how GPON transforms infrastructure economics while delivering massive bandwidth to end users.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Architecture</p>
+    <h2>The GPON Framework</h2>
+    <div style="display:flex;gap:24px;flex:1;min-height:0">
+      <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+        <div class="frow">
+          <div class="fi"><div class="ic accent1"><i class="fas fa-building"></i></div></div>
+          <div><h3>OLT — Central Hub</h3><p>Optical Line Terminal at the central office controls the network</p></div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent2"><i class="fas fa-code-branch"></i></div></div>
+          <div><h3>Passive Splitters</h3><p>Glass-based devices enabling 1:64 or 1:128 fan-out with zero power</p></div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent3"><i class="fas fa-home"></i></div></div>
+          <div><h3>ONU/ONT</h3><p>End-user devices converting optical signals at customer premises</p></div>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+        <div class="card card-accent1">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+            <div class="ic accent1"><i class="fas fa-bolt"></i></div>
+            <span class="badge accent1">Key Advantage</span>
+          </div>
+          <p>One fiber from the CO serves 128 customers with zero active electronics in the field, dramatically reducing failure points and maintenance.</p>
+        </div>
+        <div class="card card-accent2" style="flex:1">
+          <div style="display:flex;gap:16px;justify-content:center;align-items:center;height:100%">
+            <div style="text-align:center">
+              <div class="ic accent1" style="margin:0 auto 8px"><i class="fas fa-server"></i></div>
+              <p style="font-size:0.6em">OLT</p>
+            </div>
+            <i class="fas fa-arrow-right" style="color:var(--accent3)"></i>
+            <div style="text-align:center">
+              <div class="ic accent2" style="margin:0 auto 8px"><i class="fas fa-project-diagram"></i></div>
+              <p style="font-size:0.6em">Splitter</p>
+            </div>
+            <i class="fas fa-arrow-right" style="color:var(--accent3)"></i>
+            <div style="text-align:center">
+              <div class="ic accent3" style="margin:0 auto 8px"><i class="fas fa-wifi"></i></div>
+              <p style="font-size:0.6em">ONU</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">The beauty lies in simplicity—one fiber from the CO serves 128 customers with zero active electronics in the field, reducing failure points.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Performance</p>
+    <h2>Technical Specifications</h2>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin:24px 0 28px">
+      <div class="metric">
+        <span class="num">2.5G</span>
+        <span class="lab">Downstream Gbps</span>
+      </div>
+      <div class="metric">
+        <span class="num">1.2G</span>
+        <span class="lab">Upstream Gbps</span>
+      </div>
+      <div class="metric">
+        <span class="num">20km</span>
+        <span class="lab">Max Reach</span>
+      </div>
+      <div class="metric">
+        <span class="num">1:128</span>
+        <span class="lab">Split Ratio</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:24px;flex:1;min-height:0">
+      <div class="card card-accent1" style="flex:1">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+          <div class="ic accent1"><i class="fas fa-broadcast-tower"></i></div>
+          <h3>Extended Reach</h3>
+        </div>
+        <p>Twenty kilometer reach means fewer central offices and wider coverage—no active repeaters required.</p>
+      </div>
+      <div class="card card-accent2" style="flex:1">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+          <div class="ic accent2"><i class="fas fa-check-double"></i></div>
+          <h3>Five Nines Reliability</h3>
+        </div>
+        <p>99.999% uptime target through passive infrastructure and redundant design.</p>
+      </div>
+      <div class="card card-accent3" style="flex:1">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+          <div class="ic accent3"><i class="fas fa-layer-group"></i></div>
+          <h3>Multi-Service</h3>
+        </div>
+        <p>Native support for voice, video, and data with guaranteed QoS per service.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">These aren't just numbers—they represent operational freedom. Twenty kilometer reach means fewer central offices and wider coverage.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Advantages</p>
+    <h2>Compelling Benefits</h2>
+    <div class="g2" style="flex:1;min-height:0">
+      <div class="card card-accent1">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+          <div class="ic accent1"><i class="fas fa-coins"></i></div>
+          <span class="chip accent1">60% Savings</span>
+        </div>
+        <h3>CAPEX Reduction</h3>
+        <p>Up to 60% lower capital expenditure versus active Ethernet deployments—less equipment, less rack space.</p>
+      </div>
+      <div class="card card-accent2">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+          <div class="ic accent2"><i class="fas fa-leaf"></i></div>
+          <span class="chip accent2">80% Less Power</span>
+        </div>
+        <h3>Energy Efficiency</h3>
+        <p>Passive splitters consume zero power. Network operates with dramatically lower energy footprint.</p>
+      </div>
+      <div class="card card-accent3">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+          <div class="ic accent3"><i class="fas fa-arrow-up"></i></div>
+          <span class="chip accent3">10G+ Ready</span>
+        </div>
+        <h3>Future Scalability</h3>
+        <p>Upgrade path to XGS-PON and 100G-PON using existing fiber plant—protect your investment.</p>
+      </div>
+      <div class="card card-accent1">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+          <div class="ic accent1"><i class="fas fa-tools"></i></div>
+          <span class="chip accent1">Centralized</span>
+        </div>
+        <h3>Unified Management</h3>
+        <p>All intelligence resides in the OLT. Troubleshoot and upgrade from one location, not thousands.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">The business case is clear: lower costs, higher scalability, and greener operations through passive infrastructure.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Roadmap</p>
+    <h2>Implementation Strategy</h2>
+    <p style="font-size:0.76em;margin-bottom:36px">Rapid deployment in under 90 days through phased rollout</p>
+    <div class="timeline" style="flex:1;align-items:flex-start">
+      <div class="tl-item">
+        <div class="tl-dot accent1"></div>
+        <span class="badge accent1">Weeks 1-2</span>
+        <h3>Phase 1: Survey</h3>
+        <p>Site assessment and splitter cabinet placement planning. Fiber path optimization.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot accent2"></div>
+        <span class="badge accent2">Weeks 3-6</span>
+        <h3>Phase 2: Build</h3>
+        <p>OLT installation at CO. Fiber deployment and passive splitter installation.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot accent3"></div>
+        <span class="badge accent3">Weeks 7-12</span>
+        <h3>Phase 3: Launch</h3>
+        <p>Customer activation and monitoring setup. Full service turn-up complete.</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px;justify-content:center;margin-top:28px">
+      <span class="chip accent1"><i class="fas fa-map-marked-alt" style="margin-right:6px"></i>Site Ready</span>
+      <span class="chip accent2"><i class="fas fa-ethernet" style="margin-right:6px"></i>Fiber Laid</span>
+      <span class="chip accent3"><i class="fas fa-rocket" style="margin-right:6px"></i>Go Live</span>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Rapid deployment is possible because we're laying passive glass, not complex electronics—enabling full rollout in under 90 days.</aside>
+</section>
+  <section>
+  <div class="s cx">
+    <p class="sl">The Vision</p>
+    <div style="max-width:800px">
+      <blockquote style="font-family:var(--serif);font-size:1.5em;font-weight:600;line-height:1.4;text-align:center;margin:0;padding:0;color:var(--t1)">
+        <span style="color:var(--accent3);font-size:1.8em">" </span>
+        Connecting communities isn't just about cables—it's about unlocking potential. GPON is the foundation of the gigabit society.
+        <span style="color:var(--accent3);font-size:1.8em"> "</span>
+      </blockquote>
+      <hr class="dv" style="width:80px;margin:36px auto">
+      <div style="display:flex;gap:16px;justify-content:center">
+        <div class="ic accent1" style="width:56px;height:56px"><i class="fas fa-users"></i></div>
+        <div class="ic accent2" style="width:56px;height:56px"><i class="fas fa-graduation-cap"></i></div>
+        <div class="ic accent3" style="width:56px;height:56px"><i class="fas fa-laptop-code"></i></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Pause here. Let this sink in—we're building the invisible highways of the digital age that empower communities.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Action Items</p>
+    <h2>Next Steps</h2>
+    <div style="display:flex;gap:28px;flex:1;min-height:0">
+      <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+        <div class="frow">
+          <div class="fi"><div class="ic accent1"><i class="fas fa-flask"></i></div></div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+              <h3>Pilot Program</h3>
+              <span class="chip accent1">Q3 Launch</span>
+            </div>
+            <p>Select 500-home test area for initial deployment and validation</p>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent2"><i class="fas fa-handshake"></i></div></div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+              <h3>Vendor Evaluation</h3>
+              <span class="chip accent2">This Month</span>
+            </div>
+            <p>RFP review and OLT/ONU vendor selection process</p>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent3"><i class="fas fa-chalkboard-teacher"></i></div></div>
+          <div style="flex:1">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+              <h3>Team Training</h3>
+              <span class="chip accent3">Scheduled</span>
+            </div>
+            <p>Technical certification for operations and field engineering</p>
+          </div>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+        <div class="card card-accent2" style="flex:1">
+          <div style="text-align:center;padding:20px">
+            <div class="ic accent3" style="width:64px;height:64px;font-size:1.5em;margin:0 auto 16px"><i class="fas fa-comments"></i></div>
+            <h3>Open Discussion</h3>
+            <p>Questions on architecture, deployment, or vendor selection?</p>
+            <div style="display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap">
+              <span class="badge accent1">Architecture</span>
+              <span class="badge accent2">Cost Analysis</span>
+              <span class="badge accent3">Timeline</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="dv" style="margin-top:24px">
+    <div style="display:flex;justify-content:center;gap:20px;margin-top:16px">
+      <span style="font-family:var(--mono);font-size:0.55em;color:var(--t3);letter-spacing:1px"><i class="fas fa-envelope" style="margin-right:6px"></i>Contact: technical-team@company.com</span>
+      <span style="font-family:var(--mono);font-size:0.55em;color:var(--t3);letter-spacing:1px"><i class="fas fa-calendar" style="margin-right:6px"></i>Follow-up: Next Week</span>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Let's discuss how we move from concept to connected communities, starting with our pilot deployment strategy.</aside>
+</section>
+
+<script>
+(function(){
+  const sections = document.querySelectorAll('section');
+  const total = sections.length;
+  const counter = document.getElementById('slide-counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  // IntersectionObserver: mark the visible slide as .active (triggers CSS animations)
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        sections.forEach(s => s.classList.remove('active'));
+        e.target.classList.add('active');
+        current = Array.from(sections).indexOf(e.target);
+        if (counter) counter.textContent = (current+1) + ' / ' + total;
+        if (progress) progress.style.width = ((current+1)/total*100) + '%';
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s => obs.observe(s));
+
+  // Activate first slide immediately
+  if (sections[0]) sections[0].classList.add('active');
+  if (counter) counter.textContent = '1 / ' + total;
+  if (progress) progress.style.width = (1/total*100) + '%';
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      if (current < total - 1) sections[current + 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (current > 0) sections[current - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      sections[0].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      sections[total - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'f' || e.key === 'F11') {
+      e.preventDefault();
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>

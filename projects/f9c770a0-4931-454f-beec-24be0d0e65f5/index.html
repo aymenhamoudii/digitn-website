@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ember & Olive - Fine dining restaurant offering fresh, seasonal cuisine in an elegant atmosphere. Reserve your table today.">
+  <title>Ember & Olive | Fine Dining Restaurant</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav" id="mainNav">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">Ember & Olive</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#menu" class="nav-link">Menu</a></li>
+        <li><a href="#gallery" class="nav-link">Gallery</a></li>
+        <li><a href="#reservation" class="nav-link">Reserve</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero-grid">
+      <div class="hero-image hero-image-1">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80" alt="Artisan plate with grilled vegetables and herbs" loading="eager">
+      </div>
+      <div class="hero-image hero-image-2">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Elegant fine dining presentation" loading="eager">
+      </div>
+      <div class="hero-image hero-image-3">
+        <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=800&q=80" alt="Fresh seasonal salad with edible flowers" loading="eager">
+      </div>
+      <div class="hero-image hero-image-4">
+        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=800&q=80" alt="Restaurant interior ambiance" loading="eager">
+      </div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-tagline">Seasonal Fine Dining</p>
+      <h1 class="hero-title">Ember & Olive</h1>
+      <p class="hero-subtitle">Where fire meets freshness. Experience cuisine crafted with intention, served with warmth.</p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn btn-primary">View Menu</a>
+        <a href="#reservation" class="btn btn-secondary">Reserve a Table</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll to explore</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="about-container">
+      <div class="about-content">
+        <span class="section-label">Our Story</span>
+        <h2 class="section-title">A Passion for Flavor</h2>
+        <p class="about-text">Founded in 2018 by Chef Elena Marquez, Ember & Olive was born from a simple belief: that exceptional food tells a story. Every dish we create is a conversation between tradition and innovation, where seasonal ingredients take center stage.</p>
+        <p class="about-text">Our name reflects our philosophy — the ember representing the ancient art of fire cooking, the olive symbolizing the Mediterranean roots that inspire our flavor palette. Together, they embody the warmth and authenticity that defines every meal we serve.</p>
+        <blockquote class="about-quote">
+          "We don't just cook. We curate experiences that linger in memory long after the last bite."
+          <cite>— Chef Elena Marquez</cite>
+        </blockquote>
+      </div>
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=800&q=80" alt="Chef Elena Marquez preparing a signature dish" loading="lazy">
+        <div class="about-image-accent"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Preview Section -->
+  <section class="menu" id="menu">
+    <div class="menu-container">
+      <div class="menu-header">
+        <span class="section-label">Signature Dishes</span>
+        <h2 class="section-title">From Our Kitchen</h2>
+        <p class="menu-intro">Each dish showcases the finest seasonal ingredients, prepared with technique and served with love.</p>
+      </div>
+      
+      <div class="menu-grid">
+        <article class="menu-card">
+          <div class="menu-card-image">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80" alt="Seared sea bass with Mediterranean vegetables" loading="lazy">
+          </div>
+          <div class="menu-card-content">
+            <h3 class="menu-card-title">Mediterranean Sea Bass</h3>
+            <p class="menu-card-desc">Wild-caught sea bass, roasted cherry tomatoes, olives, capers, fresh herbs, lemon butter sauce</p>
+            <span class="menu-card-price">$48</span>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <div class="menu-card-image">
+            <img src="https://images.unsplash.com/photo-1546833998-877b37c2e5c6?w=600&q=80" alt="Braised short rib with root vegetables" loading="lazy">
+          </div>
+          <div class="menu-card-content">
+            <h3 class="menu-card-title">Braised Short Rib</h3>
+            <p class="menu-card-desc">48-hour braised beef, parsnip purée, glazed carrots, red wine reduction, crispy shallots</p>
+            <span class="menu-card-price">$52</span>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <div class="menu-card-image">
+            <img src="https://images.unsplash.com/photo-1512132411229-c30391241dd8?w=600&q=80" alt="Handmade pappardelle with wild boar ragù" loading="lazy">
+          </div>
+          <div class="menu-card-content">
+            <h3 class="menu-card-title">Wild Boar Pappardelle</h3>
+            <p class="menu-card-desc">House-made pasta, slow-cooked wild boar, san marzano tomatoes, pecorino romano, fresh thyme</p>
+            <span class="menu-card-price">$38</span>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <div class="menu-card-image">
+            <img src="https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?w=600&q=80" alt="Roasted duck breast with cherry gastrique" loading="lazy">
+          </div>
+          <div class="menu-card-content">
+            <h3 class="menu-card-title">Roasted Duck Breast</h3>
+            <p class="menu-card-desc">Pan-seared duck, cherry gastrique, roasted beets, farro risotto, micro arugula</p>
+            <span class="menu-card-price">$56</span>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <div class="menu-card-image">
+            <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&q=80" alt="Herb-crusted lamb rack with mint gremolata" loading="lazy">
+          </div>
+          <div class="menu-card-content">
+            <h3 class="menu-card-title">Herb-Crusted Lamb</h3>
+            <p class="menu-card-desc">New Zealand lamb rack, rosemary crust, mint gremolata, roasted fingerling potatoes</p>
+            <span class="menu-card-price">$65</span>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <div class="menu-card-image">
+            <img src="https://images.unsplash.com/photo-1626804475297-411d863b5285?w=600&q=80" alt="Seasonal vegetable tasting with edible flowers" loading="lazy">
+          </div>
+          <div class="menu-card-content">
+            <h3 class="menu-card-title">Seasonal Vegetable Tasting</h3>
+            <p class="menu-card-desc">Chef's selection of roasted and raw vegetables, house-made dips, edible flowers, pumpkin seed oil</p>
+            <span class="menu-card-price">$32</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="menu-cta">
+        <a href="#" class="btn-link">View Full Menu →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="gallery" id="gallery">
+    <div class="gallery-container">
+      <div class="gallery-header">
+        <span class="section-label">The Experience</span>
+        <h2 class="section-title">Savor the Atmosphere</h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item gallery-item-large">
+          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=900&q=80" alt="Elegant restaurant dining room" loading="lazy">
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80" alt="Intimate corner seating" loading="lazy">
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=600&q=80" alt="Artisan cocktail preparation" loading="lazy">
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?w=600&q=80" alt="Warm ambient lighting" loading="lazy">
+        </div>
+        <div class="gallery-item">
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="Fresh pizza from wood-fired oven" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reservation Section -->
+  <section class="reservation" id="reservation">
+    <div class="reservation-container">
+      <div class="reservation-content">
+        <span class="section-label">Join Us</span>
+        <h2 class="section-title">Reserve Your Table</h2>
+        <p class="reservation-intro">Whether it's an intimate dinner or a celebration, we'd be honored to host you.</p>
+        
+        <form class="reservation-form" id="reservationForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="resName" class="form-label">Your Name</label>
+              <input type="text" id="resName" name="name" class="form-input" placeholder="John Smith" required>
+            </div>
+            <div class="form-group">
+              <label for="resEmail" class="form-label">Email Address</label>
+              <input type="email" id="resEmail" name="email" class="form-input" placeholder="john@example.com" required>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="resDate" class="form-label">Preferred Date</label>
+              <input type="date" id="resDate" name="date" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label for="resTime" class="form-label">Time</label>
+              <select id="resTime" name="time" class="form-input form-select" required>
+                <option value="" disabled selected>Select time</option>
+                <option value="17:00">5:00 PM</option>
+                <option value="17:30">5:30 PM</option>
+                <option value="18:00">6:00 PM</option>
+                <option value="18:30">6:30 PM</option>
+                <option value="19:00">7:00 PM</option>
+                <option value="19:30">7:30 PM</option>
+                <option value="20:00">8:00 PM</option>
+                <option value="20:30">8:30 PM</option>
+                <option value="21:00">9:00 PM</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="resParty" class="form-label">Party Size</label>
+              <select id="resParty" name="party" class="form-input form-select" required>
+                <option value="" disabled selected>Select guests</option>
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="5">5 Guests</option>
+                <option value="6">6 Guests</option>
+                <option value="7">7 Guests</option>
+                <option value="8">8+ Guests</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="resNotes" class="form-label">Special Requests (Optional)</label>
+            <textarea id="resNotes" name="notes" class="form-input form-textarea" placeholder="Dietary restrictions, allergies, special occasions..."></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn-primary btn-full">
+            <span class="btn-text">Request Reservation</span>
+            <span class="btn-loading">Processing...</span>
+          </button>
+          
+          <p class="form-note">For parties larger than 8, please call us directly.</p>
+        </form>
+      </div>
+      
+      <div class="reservation-image">
+        <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80" alt="Elegant table setting with wine glasses" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="contact-container">
+      <div class="contact-info">
+        <span class="section-label">Get in Touch</span>
+        <h2 class="section-title">Visit Us</h2>
+        
+        <div class="contact-details">
+          <div class="contact-item">
+            <h3 class="contact-label">Address</h3>
+            <p class="contact-value">247 Oak Street<br>San Francisco, CA 94102</p>
+          </div>
+          
+          <div class="contact-item">
+            <h3 class="contact-label">Hours</h3>
+            <p class="contact-value">Tuesday – Thursday: 5pm – 10pm<br>Friday – Saturday: 5pm – 11pm<br>Sunday: 5pm – 9pm<br>Monday: Closed</p>
+          </div>
+          
+          <div class="contact-item">
+            <h3 class="contact-label">Phone</h3>
+            <p class="contact-value"><a href="tel:+14155551234">(415) 555-1234</a></p>
+          </div>
+          
+          <div class="contact-item">
+            <h3 class="contact-label">Email</h3>
+            <p class="contact-value"><a href="mailto:hello@emberandolive.com">hello@emberandolive.com</a></p>
+          </div>
+        </div>
+        
+        <div class="contact-social">
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Facebook">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Twitter">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+      
+      <div class="contact-map">
+        <div class="map-placeholder">
+          <div class="map-pin">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </div>
+          <p>247 Oak Street, San Francisco</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3 class="footer-logo">Ember & Olive</h3>
+        <p class="footer-tagline">Fine dining redefined.</p>
+      </div>
+      
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#reservation">Reservations</a>
+        <a href="#contact">Contact</a>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2024 Ember & Olive. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

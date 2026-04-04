@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MENU | L'ÉCLIPSE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Tenor+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        .menu-page-header {
+            padding: var(--space-24) 0 var(--space-12);
+            text-align: center;
+            background: linear-gradient(to bottom, var(--bg-charcoal), var(--bg-obsidian));
+        }
+
+        .menu-nav {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-8);
+            margin-bottom: var(--space-16);
+            border-bottom: 1px solid color-mix(in srgb, var(--gold-primary), transparent 90%);
+            padding-bottom: var(--space-4);
+        }
+
+        .menu-nav-link {
+            font-size: var(--text-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+            padding: var(--space-2) var(--space-4);
+            cursor: pointer;
+            transition: var(--transition-base);
+        }
+
+        .menu-nav-link.active {
+            color: var(--gold-primary);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-12);
+            transition: opacity 0.3s ease;
+        }
+
+        .menu-item-card {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .menu-item-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .menu-item-image {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .menu-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-slow);
+        }
+
+        .menu-item-card:hover .menu-item-image img {
+            transform: scale(1.05);
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px solid color-mix(in srgb, var(--gold-muted), transparent 85%);
+            padding-bottom: var(--space-2);
+            margin-bottom: var(--space-2);
+        }
+
+        .menu-item-title {
+            font-size: var(--text-lg);
+            color: var(--gold-primary);
+        }
+
+        .menu-item-price {
+            font-size: var(--text-sm);
+            color: var(--gold-muted);
+        }
+
+        .menu-item-description {
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .menu-nav {
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding-left: var(--space-6);
+                -webkit-overflow-scrolling: touch;
+            }
+            .menu-nav::-webkit-scrollbar { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar--scrolled">
+        <div class="container nav-content">
+            <a href="index.html" class="nav-logo">L'ÉCLIPSE</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="menu.html" class="nav-link nav-link--active">Menu</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="reservation.html" class="nav-link">Reservations</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="section-padding">
+        <div class="container">
+            <div class="menu-page-header">
+                <p class="hero-subtitle">Selection culinaire</p>
+                <h1 class="hero-title" style="font-size: var(--text-3xl);">Our Autumn Menu</h1>
+            </div>
+
+            <div class="menu-nav">
+                <div class="menu-nav-link active" data-category="appetizers">Appetizers</div>
+                <div class="menu-nav-link" data-category="mains">Mains</div>
+                <div class="menu-nav-link" data-category="desserts">Desserts</div>
+                <div class="menu-nav-link" data-category="wine">Wine List</div>
+            </div>
+
+            <div id="menu-items-grid" class="menu-grid">
+                <!-- Dynamically filled by menu-renderer.js -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <!-- Re-use footer structure from index.html -->
+        <div class="container">
+            <div class="footer-bottom">
+                &copy; 2024 L'ÉCLIPSE RESTAURANT GROUP. ALL RIGHTS RESERVED.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/navigation.js"></script>
+    <script src="js/menu-data.js"></script>
+    <script src="js/menu-renderer.js"></script>
+</body>
+</html>

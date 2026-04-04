@@ -1,0 +1,188 @@
+/* Menu Component Styles */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 5rem 4rem;
+    padding: 3rem 6%;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.menu-item {
+    position: relative;
+    background: var(--bg-surface);
+    border: 1px solid rgba(212, 175, 55, 0.03);
+    border-radius: 20px;
+    padding: 4rem 3rem;
+    box-shadow: var(--neu-outset);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.8s;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    perspective: 1200px;
+}
+
+.menu-item:hover {
+    transform: translateY(-12px) rotateX(5deg) rotateY(-5deg);
+    box-shadow: var(--neu-outset-hover);
+    border-color: rgba(212, 175, 55, 0.15);
+}
+
+.menu-item-inner {
+    position: relative;
+    z-index: 1;
+    transform: translateZ(40px);
+}
+
+/* Simulated 3D dish visual using inset shadows and gradients */
+.dish-visual {
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 3.5rem;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #1f1d1a, #0d0c0b);
+    box-shadow: 
+        inset 12px 12px 24px rgba(0,0,0,0.9), 
+        inset -12px -12px 24px rgba(255,255,255,0.02),
+        30px 30px 60px var(--shadow-dark),
+        -15px -15px 45px var(--shadow-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menu-item:hover .dish-visual {
+    transform: translateZ(70px) scale(1.08);
+    box-shadow: 
+        inset 15px 15px 30px rgba(0,0,0,0.9), 
+        inset -15px -15px 30px rgba(255,255,255,0.03),
+        40px 40px 80px var(--shadow-dark),
+        -20px -20px 60px var(--shadow-light);
+}
+
+/* Pseudo-element for the plate rim */
+.dish-visual::before {
+    content: '';
+    position: absolute;
+    width: 84%;
+    height: 84%;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: inset 6px 6px 18px rgba(0,0,0,0.95);
+}
+
+.dish-img {
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 2;
+    filter: drop-shadow(0 20px 20px rgba(0,0,0,0.7));
+    transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menu-item:hover .dish-img {
+    transform: rotate(10deg) scale(1.08);
+}
+
+.dish-info {
+    text-align: center;
+}
+
+.dish-name {
+    font-size: var(--text-2xl);
+    color: var(--accent-gold);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+    font-weight: 400;
+}
+
+.dish-desc {
+    font-size: var(--text-base);
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+    font-weight: 300;
+    padding: 0 1rem;
+}
+
+.dish-price {
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    font-weight: 400;
+    color: var(--text-primary);
+    display: inline-block;
+    padding: 0.8rem 2.5rem;
+    border-radius: 6px;
+    background: var(--bg-color);
+    box-shadow: var(--neu-inset);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    letter-spacing: 0.08em;
+}
+
+/* Interactive Details Overlay */
+.dish-details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(20, 19, 17, 0.97);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateZ(90px) scale(0.92);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 4rem;
+    text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+}
+
+.menu-item:focus-within .dish-details,
+.menu-item.active-details .dish-details {
+    opacity: 1;
+    visibility: visible;
+    transform: translateZ(90px) scale(1);
+}
+
+.dish-details h4 {
+    color: var(--accent-gold);
+    font-size: var(--text-lg);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5rem;
+}
+
+.btn-small {
+    padding: 1rem 2.5rem;
+    font-size: var(--text-xs);
+    margin-top: 2.5rem;
+}
+
+.tags {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.tag {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    color: var(--text-secondary);
+    background: var(--bg-color);
+    box-shadow: var(--neu-outset-sm);
+    border: 1px solid rgba(212, 175, 55, 0.05);
+}

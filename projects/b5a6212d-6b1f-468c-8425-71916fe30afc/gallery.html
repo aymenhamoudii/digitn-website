@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GALLERY | L'ÉCLIPSE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Tenor+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-4);
+            grid-auto-rows: 300px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .gallery-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-slow);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Span variations for masonry-like feel */
+        .gallery-item--wide { grid-column: span 2; }
+        .gallery-item--tall { grid-row: span 2; }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-base);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-icon {
+            color: var(--gold-primary);
+            font-size: var(--text-xl);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-12);
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 90vh;
+            border: 2px solid var(--gold-muted);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: var(--gold-primary);
+            font-size: var(--text-2xl);
+            cursor: pointer;
+        }
+
+        @media (max-width: 992px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                grid-auto-rows: 250px;
+            }
+            .gallery-item--wide { grid-column: auto; }
+            .gallery-item--tall { grid-row: auto; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar--scrolled">
+        <div class="container nav-content">
+            <a href="index.html" class="nav-logo">L'ÉCLIPSE</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="menu.html" class="nav-link">Menu</a></li>
+                <li><a href="gallery.html" class="nav-link nav-link--active">Gallery</a></li>
+                <li><a href="reservation.html" class="nav-link">Reservations</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="section-padding">
+        <div class="container">
+            <div style="text-align: center; margin-bottom: var(--space-16);">
+                <p class="hero-subtitle">Visual Experience</p>
+                <h1 class="hero-title" style="font-size: var(--text-3xl);">The Atmosphere</h1>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item gallery-item--wide">
+                    <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=1200" alt="Restaurant ambience">
+                    <div class="gallery-overlay"><span class="gallery-icon">+</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1550966842-2849a2202774?auto=format&fit=crop&q=80&w=600" alt="Gourmet dish 1">
+                    <div class="gallery-overlay"><span class="gallery-icon">+</span></div>
+                </div>
+                <div class="gallery-item gallery-item--tall">
+                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=600" alt="Fine wine selection">
+                    <div class="gallery-overlay"><span class="gallery-icon">+</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format&fit=crop&q=80&w=600" alt="Pasta dish">
+                    <div class="gallery-overlay"><span class="gallery-icon">+</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=600" alt="Meat entree">
+                    <div class="gallery-overlay"><span class="gallery-icon">+</span></div>
+                </div>
+                <div class="gallery-item gallery-item--wide">
+                    <img src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?auto=format&fit=crop&q=80&w=1200" alt="Bar area">
+                    <div class="gallery-overlay"><span class="gallery-icon">+</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&q=80&w=600" alt="Chocolate dessert">
+                    <div class="gallery-overlay"><span class="gallery-icon">+</span></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Lightbox Element -->
+    <div id="gallery-lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close">&times;</button>
+            <img id="lightbox-image" class="lightbox-image" src="" alt="Full size preview">
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                &copy; 2024 L'ÉCLIPSE RESTAURANT GROUP. ALL RIGHTS RESERVED.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/navigation.js"></script>
+    <script src="js/gallery-manager.js"></script>
+</body>
+</html>

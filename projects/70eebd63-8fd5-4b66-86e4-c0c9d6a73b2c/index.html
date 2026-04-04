@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="container" aria-label="Calculator">
+      <h1 class="app-title">Calculator</h1>
+      <section class="calculator card" aria-label="Calculator">
+        <div class="display" id="display" aria-live="polite" aria-atomic="true" tabindex="0">0</div>
+        <form class="calc-grid" id="calcButtons" autocomplete="off" onsubmit="return false">
+          <button type="button" class="btn btn-secondary" aria-label="Clear all" data-action="clear">AC</button>
+          <button type="button" class="btn btn-secondary" aria-label="Delete last" data-action="delete">DEL</button>
+          <button type="button" class="btn btn-ghost" aria-label="Divide" data-value="/">÷</button>
+          <button type="button" class="btn btn-primary" aria-label="Multiply" data-value="*">×</button>
+
+          <button type="button" class="btn btn-ghost" aria-label="Seven" data-value="7">7</button>
+          <button type="button" class="btn btn-ghost" aria-label="Eight" data-value="8">8</button>
+          <button type="button" class="btn btn-ghost" aria-label="Nine" data-value="9">9</button>
+          <button type="button" class="btn btn-primary" aria-label="Subtract" data-value="-">−</button>
+
+          <button type="button" class="btn btn-ghost" aria-label="Four" data-value="4">4</button>
+          <button type="button" class="btn btn-ghost" aria-label="Five" data-value="5">5</button>
+          <button type="button" class="btn btn-ghost" aria-label="Six" data-value="6">6</button>
+          <button type="button" class="btn btn-primary" aria-label="Add" data-value="+">+</button>
+
+          <button type="button" class="btn btn-ghost" aria-label="One" data-value="1">1</button>
+          <button type="button" class="btn btn-ghost" aria-label="Two" data-value="2">2</button>
+          <button type="button" class="btn btn-ghost" aria-label="Three" data-value="3">3</button>
+          <button type="button" class="btn btn-secondary" aria-label="Equals" data-action="equals" style="grid-row: 4 / span 2; grid-column: 4 / span 1;">=</button>
+
+          <button type="button" class="btn btn-ghost" aria-label="Zero" data-value="0" style="grid-column: 1 / span 2;">0</button>
+          <button type="button" class="btn btn-ghost" aria-label="Decimal point" data-value=".">.</button>
+        </form>
+      </section>
+      <footer class="attribution">
+        <small>Accessible calculator built by DIGITN Builder AI</small>
+      </footer>
+    </main>
+    <script src="script.js" defer></script>
+  </body>
+</html>

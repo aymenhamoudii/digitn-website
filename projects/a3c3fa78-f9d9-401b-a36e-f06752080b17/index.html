@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEON DRIVE | DIGITN AI</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        
+        <div id="hud">
+            <div class="stat-box">
+                <span class="label">SPEED</span>
+                <span id="speed-value" class="value">0</span>
+            </div>
+            <div class="stat-box">
+                <span class="label">DISTANCE</span>
+                <span id="distance-value" class="value">0</span>
+            </div>
+            <div class="stat-box">
+                <span class="label">BITS</span>
+                <span id="bits-value" class="value">0</span>
+            </div>
+        </div>
+
+        <div id="menu-overlay" class="overlay">
+            <div class="content">
+                <h1>NEON DRIVE</h1>
+                <p class="tagline">MINIMALIST ENDLESS RACER</p>
+                <button id="start-btn" class="btn-primary">START ENGINE</button>
+                <button id="upgrades-btn" class="btn-secondary">UPGRADES</button>
+            </div>
+        </div>
+
+        <div id="upgrade-overlay" class="overlay hidden">
+            <div class="content">
+                <h2>GARAGE</h2>
+                <div class="upgrade-list">
+                    <div class="upgrade-item" data-upgrade="speed">
+                        <div class="info">
+                            <h3>TOP SPEED</h3>
+                            <p>Increase maximum velocity</p>
+                        </div>
+                        <button class="upgrade-action" id="upgrade-speed-btn">50 BITS</button>
+                    </div>
+                    <div class="upgrade-item" data-upgrade="handling">
+                        <div class="info">
+                            <h3>HANDLING</h3>
+                            <p>Sharper lateral movement</p>
+                        </div>
+                        <button class="upgrade-action" id="upgrade-handling-btn">75 BITS</button>
+                    </div>
+                </div>
+                <button id="close-upgrades-btn" class="btn-ghost">BACK</button>
+            </div>
+        </div>
+
+        <div id="game-over-overlay" class="overlay hidden">
+            <div class="content">
+                <h2 class="danger">CRASHED</h2>
+                <div class="final-stats">
+                    <p>DISTANCE: <span id="final-distance">0</span>m</p>
+                    <p>BITS EARNED: <span id="final-bits">0</span></p>
+                </div>
+                <button id="restart-btn" class="btn-primary">RESTART</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/input.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/road.js"></script>
+    <script src="js/traffic.js"></script>
+    <script src="js/upgrades.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

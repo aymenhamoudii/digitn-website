@@ -1,0 +1,37 @@
+:root {
+    --primary-color: #ff6347;
+    --secondary-color: #4b0082;
+    --neutral-color: #ffffff;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--neutral-color);
+    color: var(--secondary-color);
+}
+
+h1, h2, h3 {
+    color: var(--primary-color);
+}
+
+nav {
+    background-color: var(--primary-color);
+    padding: 1rem;
+}
+
+nav a {
+    color: var(--neutral-color);
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.footer {
+    background-color: var(--secondary-color);
+    color: var(--neutral-color);
+    text-align: center;
+    padding: 1rem;
+}

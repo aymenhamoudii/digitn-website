@@ -1,0 +1,52 @@
+[
+  {
+    "id": "1",
+    "name": "Cured & Smoked Salmon",
+    "course": "Starter",
+    "description": "House-cured salmon with citrus gel, dill oil, and rye crisp.",
+    "ingredients": ["salmon","dill","citrus","rye"],
+    "price": 18,
+    "tags": ["fish","gluten"],
+    "seasonal": true
+  },
+  {
+    "id": "2",
+    "name": "Heirloom Tomato Salad",
+    "course": "Starter",
+    "description": "Heritage tomatoes, burrata, basil, aged balsamic.",
+    "ingredients": ["tomato","burrata","basil"],
+    "price": 16,
+    "tags": ["vegetarian","gluten-free"],
+    "seasonal": true
+  },
+  {
+    "id": "3",
+    "name": "Seared Scallops",
+    "course": "Main",
+    "description": "Pan-seared scallops, cauliflower purée, brown butter vinaigrette.",
+    "ingredients": ["scallops","cauliflower","butter"],
+    "price": 34,
+    "tags": ["shellfish","gluten-free"],
+    "seasonal": false
+  },
+  {
+    "id": "4",
+    "name": "Wagyu Sirloin",
+    "course": "Main",
+    "description": "Grilled wagyu with roasted root vegetables and truffle jus.",
+    "ingredients": ["beef","truffle","root vegetables"],
+    "price": 58,
+    "tags": ["beef"],
+    "seasonal": false
+  },
+  {
+    "id": "5",
+    "name": "Chocolate Fondant",
+    "course": "Dessert",
+    "description": "Warm chocolate fondant with pistachio crumble and salted caramel.",
+    "ingredients": ["chocolate","pistachio","caramel"],
+    "price": 14,
+    "tags": ["vegetarian"],
+    "seasonal": false
+  }
+]

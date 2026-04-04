@@ -1,0 +1,82 @@
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Raleway', sans-serif;
+  background-color: #f8f0fc;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  background: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+header h1 {
+  font-size: 2rem;
+  margin: 0;
+  color: #6a4c93;
+}
+
+#scoreboard {
+  margin-top: 0.5rem;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+main {
+  width: 100%;
+}
+
+#game-grid {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  display: grid;
+  background-color: #d0e6f6;
+  border: 2px solid #6a4c93;
+  border-radius: 4px;
+}
+
+footer {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #7acba5;
+  border: 2px solid #6a4c93;
+  color: #ffffff;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background-color: #9fe8cd;
+}
+
+button:active {
+  transform: scale(0.95);
+}

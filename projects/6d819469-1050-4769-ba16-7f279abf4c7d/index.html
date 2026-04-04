@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Death Note: The Psychology of Justice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@400;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+    --bg: #0D0D0D;
+    --bg2: #151515;
+    --surface: #1F1F1F;
+    --surface2: #252525;
+    --border: rgba(255,255,255,.07);
+    --border-md: rgba(255,255,255,.11);
+    --accent1: #A30000;
+    --accent1-dim: rgba(163, 0, 0, 0.18);
+    --accent2: #E0E0E0;
+    --accent2-dim: rgba(224, 224, 224, 0.18);
+    --accent3: #4D4D4D;
+    --accent3-dim: rgba(77, 77, 77, 0.18);
+    --t1: #F5F5F5;
+    --t2: #B0B0B0;
+    --t3: rgba(245, 245, 245, 0.3);
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+    --serif: 'Playfair Display', serif;
+  }
+    
+  /* ─── Reset ─── */
+  ::-webkit-scrollbar{display:none}
+  *{scrollbar-width:none;-ms-overflow-style:none;box-sizing:border-box;margin:0;padding:0}
+  html{overflow-y:scroll;overflow-x:hidden;scroll-behavior:smooth;scroll-snap-type:y mandatory}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  /* ─── Slide wrapper (viewport-sized snap target) ─── */
+  .slide-wrap{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--bg);position:relative}
+
+  /* ─── Slide (fluid responsive canvas) ─── */
+  section{width:100%;height:100%;display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+  /* ─── Stagger animation (.s container) ─── */
+  .s{display:flex;flex-direction:column;flex:1;min-height:0;padding:6vh 6vw;box-sizing:border-box;overflow:hidden}
+  .s>*{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+  .slide-wrap.active .s>*{opacity:1;transform:translateY(0)}
+  .slide-wrap.active .s>*:nth-child(1){transition-delay:.03s}
+  .slide-wrap.active .s>*:nth-child(2){transition-delay:.09s}
+  .slide-wrap.active .s>*:nth-child(3){transition-delay:.15s}
+  .slide-wrap.active .s>*:nth-child(4){transition-delay:.21s}
+  .slide-wrap.active .s>*:nth-child(5){transition-delay:.27s}
+  .slide-wrap.active .s>*:nth-child(6){transition-delay:.33s}
+  .slide-wrap.active .s>*:nth-child(7){transition-delay:.39s}
+  .slide-wrap.active .s>*:nth-child(8){transition-delay:.45s}
+
+  /* ─── Centering utility ─── */
+  .cx{display:flex;justify-content:center;align-items:center;text-align:center}
+
+  /* ─── Speaker notes (hidden) ─── */
+  aside.notes{display:none!important}
+
+  /* ─── Slide counter ─── */
+  #slide-counter{position:fixed;bottom:16px;right:24px;font-family:var(--mono);font-size:13px;color:var(--t3);background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:6px 14px;z-index:100;pointer-events:none}
+
+  /* ─── Progress bar ─── */
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--accent1);z-index:100;transition:width .3s ease}
+
+  /* ─── Print/PDF Styles ─── */
+  @media print {
+    ::-webkit-scrollbar { display: none !important; }
+    html, body { overflow: visible !important; scroll-snap-type: none !important; margin: 0 !important; padding: 0 !important; }
+    body { background-color: var(--bg) !important; -webkit-print-color-adjust: exact; color-adjust: exact; }
+    .slide-wrap { width: 100vw !important; height: 100vh !important; scroll-snap-align: none !important; page-break-after: always !important; page-break-inside: avoid !important; }
+    .slide-wrap:last-child { page-break-after: auto !important; }
+    .slide-wrap.active .s>*, .slide-wrap .s>* { opacity: 1 !important; transform: none !important; transition: none !important; }
+    #slide-counter, #progress { display: none !important; }
+  }
+
+  </style>
+</head>
+<body>
+  <div id="progress" style="width:0"></div>
+  <div id="slide-counter">1 / 12</div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg); color: var(--t1); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 5vh 5vw; overflow: hidden; position: relative;">
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.05; background-image: radial-gradient(var(--accent1) 1px, transparent 1px); background-size: 2rem 2rem; pointer-events: none;"></div>
+  
+  <div class="s cx" style="width: 100%; max-width: 90vw; z-index: 1;">
+    <div style="display: flex; gap: 1rem; margin-bottom: 3vh; flex-wrap: wrap; justify-content: center;">
+      <span style="background-color: var(--accent1); color: white; padding: 0.5rem 1.5rem; font-family: var(--mono); font-size: clamp(0.7rem, 1.2vw, 1rem); text-transform: uppercase; letter-spacing: 0.2rem; border-radius: 4px;">Top Secret</span>
+      <span style="border: 1px solid var(--accent2); color: var(--accent2); padding: 0.5rem 1.5rem; font-family: var(--mono); font-size: clamp(0.7rem, 1.2vw, 1rem); text-transform: uppercase; letter-spacing: 0.2rem; border-radius: 4px;">Case #037</span>
+    </div>
+
+    <h1 style="font-family: var(--serif); font-size: clamp(4rem, 15vw, 11rem); line-height: 0.85; margin: 0; text-transform: uppercase; letter-spacing: -0.02em; color: var(--t1); font-weight: 900;">
+      Kira <span style="color: var(--accent1);">vs.</span> L
+    </h1>
+    
+    <div style="width: 20vw; height: 0.5vh; min-height: 2px; background-color: var(--accent1); margin: 5vh 0;"></div>
+    
+    <p style="font-family: var(--sans); font-size: clamp(1.2rem, 3vw, 2.5rem); color: var(--t2); max-width: 80rem; line-height: 1.3; margin-bottom: 5vh; font-weight: 300;">
+      A Psychological Deconstruction of <span style="color: var(--t1); font-weight: 500;">Justice</span> and <span style="color: var(--t1); font-weight: 500;">Morality</span>
+    </p>
+
+    <div style="display: flex; gap: 4vw; flex-wrap: wrap; justify-content: center;">
+      <div style="display: flex; align-items: center; gap: 0.8rem; color: var(--accent2); font-family: var(--mono); font-size: clamp(0.8rem, 1.5vw, 1.1rem);">
+        <i class="fas fa-brain" style="color: var(--accent1);"></i> DEEP ANALYSIS
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.8rem; color: var(--accent2); font-family: var(--mono); font-size: clamp(0.8rem, 1.5vw, 1.1rem);">
+        <i class="fas fa-balance-scale" style="color: var(--accent1);"></i> CLASH OF IDEALS
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.8rem; color: var(--accent2); font-family: var(--mono); font-size: clamp(0.8rem, 1.5vw, 1.1rem);">
+        <i class="fas fa-moon" style="color: var(--accent1);"></i> NOIR AESTHETIC
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Welcome to this deep dive into the psychological warfare of the 2006 anime masterpiece. We aren't just looking at the plot, but the clashing minds of two geniuses.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg2); color: var(--t1); display: flex; flex-direction: column; padding: 6vh 6vw; overflow: hidden; position: relative;">
+  <div style="position: absolute; top: 3vh; left: 4vw; font-family: var(--mono); color: var(--accent1); font-size: clamp(0.7rem, 1.2vw, 1rem); letter-spacing: 0.3rem; text-transform: uppercase; opacity: 0.7;">
+    The Premise // System Analysis
+  </div>
+
+  <div class="s" style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
+    <h2 style="font-family: var(--serif); font-size: clamp(2.5rem, 6vw, 5rem); margin-bottom: 6vh; color: var(--t1); border-left: 0.6vw solid var(--accent1); padding-left: 2rem;">
+      The God Complex
+    </h2>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 4vw; align-items: start;">
+      
+      <!-- Card 1: Messiah Delusion -->
+      <div style="background-color: var(--surface); padding: 5vh 4vw; border-radius: 8px; border-bottom: 0.5vh solid var(--accent1); position: relative; overflow: hidden; box-shadow: 0 1rem 3rem rgba(0,0,0,0.3);">
+        <div style="position: absolute; top: -1vh; right: -1vw; font-size: clamp(5rem, 10vw, 8rem); color: var(--bg); opacity: 0.4; font-family: var(--serif); font-weight: 900; pointer-events: none;">01</div>
+        <div style="width: 4.5rem; height: 4.5rem; background-color: var(--accent1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 3vh; box-shadow: 0 0 20px rgba(163, 0, 0, 0.4);">
+          <i class="fas fa-crown" style="color: white; font-size: 1.8rem;"></i>
+        </div>
+        <h3 style="font-family: var(--serif); font-size: clamp(1.5rem, 2.5vw, 2.2rem); margin-bottom: 2vh; color: var(--accent2);">Messiah Delusion</h3>
+        <p style="font-family: var(--sans); font-size: clamp(1rem, 1.3vw, 1.3rem); line-height: 1.6; color: var(--t2);">
+          Light Yagami's descent begins with the conviction that he alone possesses the intellectual and moral superiority to judge humanity.
+        </p>
+      </div>
+
+      <!-- Card 2: Psychological Toll -->
+      <div style="background-color: var(--surface); padding: 5vh 4vw; border-radius: 8px; border-bottom: 0.5vh solid var(--accent3); position: relative; overflow: hidden; box-shadow: 0 1rem 3rem rgba(0,0,0,0.3);">
+        <div style="position: absolute; top: -1vh; right: -1vw; font-size: clamp(5rem, 10vw, 8rem); color: var(--bg); opacity: 0.4; font-family: var(--serif); font-weight: 900; pointer-events: none;">02</div>
+        <div style="width: 4.5rem; height: 4.5rem; background-color: var(--accent3); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 3vh;">
+          <i class="fas fa-book-dead" style="color: white; font-size: 1.8rem;"></i>
+        </div>
+        <h3 style="font-family: var(--serif); font-size: clamp(1.5rem, 2.5vw, 2.2rem); margin-bottom: 2vh; color: var(--accent2);">The Notebook's Burden</h3>
+        <p style="font-family: var(--sans); font-size: clamp(1rem, 1.3vw, 1.3rem); line-height: 1.6; color: var(--t2);">
+          The power to kill from a distance creates a profound psychological detachment, eroding empathy and replacing it with cold utility.
+        </p>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 6vh; padding: 3vh 4vw; border: 1px solid var(--accent3); background-color: rgba(77, 77, 77, 0.1); border-radius: 8px;">
+      <div style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
+        <i class="fas fa-exclamation-triangle" style="color: var(--accent1); font-size: 2.5rem;"></i>
+        <div style="font-family: var(--mono); font-size: clamp(0.9rem, 1.1vw, 1.1rem); color: var(--t1); line-height: 1.4; flex: 1; min-width: 250px;">
+          <span style="color: var(--accent1); font-weight: bold;">CRITICAL OBSERVATION:</span> 
+          Empathy levels show a 94% decrease within the first 30 days of notebook acquisition.
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">We begin with Light Yagami. His transformation from a bored honor student to the self-proclaimed 'God of the New World' is a case study in narcissistic personality development.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg); color: var(--t1); display: flex; align-items: center; justify-content: center; padding: 5vh 5vw; overflow: hidden; position: relative;">
+  <!-- Background Decor -->
+  <div style="position: absolute; bottom: -5vh; right: -5vw; font-size: 30rem; font-family: var(--serif); color: var(--accent1); opacity: 0.05; pointer-events: none; font-weight: 900;">KIRA</div>
+
+  <div class="s" style="width: 100%; max-width: 85vw; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 5vw; align-items: center;">
+    
+    <!-- Profile Card (Left Column) -->
+    <div style="background-color: var(--surface); padding: 6vh 4vw; border-radius: 12px; border: 1px solid var(--accent3); box-shadow: 2vh 2vh 5vh rgba(0,0,0,0.5); text-align: center; position: relative;">
+      <div style="width: clamp(8rem, 15vw, 12rem); height: clamp(8rem, 15vw, 12rem); margin: 0 auto 3vh; background-color: var(--bg); border: 0.5vh solid var(--accent1); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative;">
+        <i class="fas fa-user-tie" style="font-size: clamp(3rem, 6vw, 6rem); color: var(--accent1);"></i>
+        <div style="position: absolute; bottom: 0.5rem; right: 0.5rem; width: 3rem; height: 3rem; background-color: var(--accent1); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 0.5vh solid var(--surface);">
+          <i class="fas fa-check" style="color: white; font-size: 1rem;"></i>
+        </div>
+      </div>
+      <h2 style="font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); color: var(--t1); margin-bottom: 0.5rem;">Light Yagami</h2>
+      <p style="font-family: var(--mono); font-size: clamp(0.8rem, 1.2vw, 1.2rem); color: var(--accent1); text-transform: uppercase; letter-spacing: 0.2rem; margin-bottom: 3vh;">The Architect</p>
+      
+      <div style="display: flex; flex-direction: column; gap: 2vh; text-align: left;">
+        <div style="background-color: var(--bg2); padding: 2vh 2vw; border-radius: 8px; display: flex; justify-content: space-between; align-items: baseline;">
+          <span style="font-family: var(--mono); color: var(--t2); font-size: 0.8rem; text-transform: uppercase;">Intelligence</span>
+          <span style="font-family: var(--serif); font-size: 2rem; color: var(--accent1); font-weight: 900;">GENIUS</span>
+        </div>
+        <div style="background-color: var(--bg2); padding: 2vh 2vw; border-radius: 8px; display: flex; justify-content: space-between; align-items: baseline;">
+          <span style="font-family: var(--mono); color: var(--t2); font-size: 0.8rem; text-transform: uppercase;">Adaptability</span>
+          <span style="font-family: var(--serif); font-size: 2rem; color: var(--t1); font-weight: 900;">9/10</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content (Right Column) -->
+    <div style="display: flex; flex-direction: column; gap: 4vh;">
+      <h3 style="font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.5rem); color: var(--accent2); margin-bottom: 1vh;">Utilitarian Justice</h3>
+      
+      <div style="display: flex; gap: 2rem; align-items: flex-start; margin-bottom: 1.5vh;">
+        <i class="fas fa-microchip" style="color: var(--accent1); font-size: 2.5rem; margin-top: 0.5rem; flex-shrink: 0;"></i>
+        <div>
+          <h4 style="font-family: var(--sans); font-size: clamp(1.4rem, 2vw, 1.8rem); color: var(--t1); margin-bottom: 0.5rem;">Calculated Motivation</h4>
+          <p style="font-family: var(--sans); font-size: clamp(1rem, 1.2vw, 1.2rem); color: var(--t2); line-height: 1.5;">Views crime as a disease that can be excised through selective elimination. Every action is a tactical calculation.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 2rem; align-items: flex-start; margin-bottom: 1.5vh;">
+        <i class="fas fa-skull-crossbones" style="color: var(--accent1); font-size: 2.5rem; margin-top: 0.5rem; flex-shrink: 0;"></i>
+        <div>
+          <h4 style="font-family: var(--sans); font-size: clamp(1.4rem, 2vw, 1.8rem); color: var(--t1); margin-bottom: 0.5rem;">The Fatal Flaw: Hubris</h4>
+          <p style="font-family: var(--sans); font-size: clamp(1rem, 1.2vw, 1.2rem); color: var(--t2); line-height: 1.5;">His belief in his own godhood makes him blind to his own moral decay and the potential for error.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 2rem; align-items: flex-start;">
+        <i class="fas fa-eye" style="color: var(--accent1); font-size: 2.5rem; margin-top: 0.5rem; flex-shrink: 0;"></i>
+        <div>
+          <h4 style="font-family: var(--sans); font-size: clamp(1.4rem, 2vw, 1.8rem); color: var(--t1); margin-bottom: 0.5rem;">Visionary Narrative</h4>
+          <p style="font-family: var(--sans); font-size: clamp(1rem, 1.2vw, 1.2rem); color: var(--t2); line-height: 1.5;">Seeks to rewrite the world's social contract, placing himself at its center as the final arbiter.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <aside class="notes">Light represents a cold, calculated form of justice. He believes the end justifies the means, viewing human lives as mere variables in his grand design for a crime-free world.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg2); color: var(--t1); padding: 6vh 8vw; overflow: hidden; position: relative;">
+  <!-- Progress Bar (Vertical) -->
+  <div style="position: absolute; right: 4vw; top: 15vh; bottom: 15vh; width: 0.6vw; min-width: 4px; background-color: var(--surface); border-radius: 4px;">
+    <div style="height: 75%; width: 100%; background-color: var(--accent1); box-shadow: 0 0 15px rgba(163, 0, 0, 0.6); border-radius: 4px;"></div>
+  </div>
+
+  <div class="s" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+    <header style="margin-bottom: 5vh;">
+      <h2 style="font-family: var(--serif); font-size: clamp(2.5rem, 6vw, 4.5rem); margin: 0; color: var(--t1); text-transform: uppercase; font-weight: 900; letter-spacing: -0.01em;">The Descent</h2>
+      <p style="font-family: var(--mono); color: var(--accent1); font-size: clamp(0.9rem, 1.2vw, 1.2rem); text-transform: uppercase; letter-spacing: 0.3rem;">Psychological Evolution Timeline</p>
+    </header>
+
+    <div style="flex-grow: 1; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3vw; align-items: stretch; margin-bottom: 3vh;">
+      
+      <!-- Timeline Entry 1 -->
+      <div style="background-color: var(--surface); padding: 4vh 2.5vw; border-radius: 8px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--border);">
+        <div>
+          <div style="font-family: var(--mono); color: var(--accent1); font-size: 0.9rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--accent1); padding-bottom: 0.5rem; display: inline-block; width: fit-content;">STAGE 01: THE FIRST KILL</div>
+          <h3 style="font-family: var(--serif); font-size: clamp(1.5rem, 2vw, 2.2rem); color: var(--t1); margin: 1vh 0;">Denial & Shock</h3>
+          <p style="font-family: var(--sans); font-size: clamp(0.9rem, 1.1vw, 1.1rem); line-height: 1.6; color: var(--t2);">Initial realization of power. A brief moment of horror that is quickly suppressed to maintain psychological stability.</p>
+        </div>
+        <div style="margin-top: 2rem; display: flex; align-items: center; gap: 1rem; font-family: var(--mono); color: var(--accent1); font-size: 0.9rem; font-weight: bold;">
+          <i class="fas fa-microchip"></i> COMPASSION: 80%
+        </div>
+      </div>
+
+      <!-- Timeline Entry 2 -->
+      <div style="background-color: var(--surface); padding: 4vh 2.5vw; border-radius: 8px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--border);">
+        <div>
+          <div style="font-family: var(--mono); color: var(--accent1); font-size: 0.9rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--accent1); padding-bottom: 0.5rem; display: inline-block; width: fit-content;">STAGE 02: VALIDATION</div>
+          <h3 style="font-family: var(--serif); font-size: clamp(1.5rem, 2vw, 2.2rem); color: var(--t1); margin: 1vh 0;">The Savior Complex</h3>
+          <p style="font-family: var(--sans); font-size: clamp(0.9rem, 1.1vw, 1.1rem); line-height: 1.6; color: var(--t2);">The belief that his 'gift' is for a greater purpose. Morality is replaced by a sense of divine duty.</p>
+        </div>
+        <div style="margin-top: 2rem; display: flex; align-items: center; gap: 1rem; font-family: var(--mono); color: var(--accent1); font-size: 0.9rem; font-weight: bold;">
+          <i class="fas fa-microchip"></i> COMPASSION: 45%
+        </div>
+      </div>
+
+      <!-- Timeline Entry 3 -->
+      <div style="background-color: var(--surface); padding: 4vh 2.5vw; border-radius: 8px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid var(--border);">
+        <div>
+          <div style="font-family: var(--mono); color: var(--accent1); font-size: 0.9rem; margin-bottom: 1.5rem; border-bottom: 2px solid var(--accent1); padding-bottom: 0.5rem; display: inline-block; width: fit-content;">STAGE 03: RUTHLESSNESS</div>
+          <h3 style="font-family: var(--serif); font-size: clamp(1.5rem, 2vw, 2.2rem); color: var(--t1); margin: 1vh 0;">Ray Penber Incident</h3>
+          <p style="font-family: var(--sans); font-size: clamp(0.9rem, 1.1vw, 1.1rem); line-height: 1.6; color: var(--t2);">Killing the innocent to protect the secret. The final break from conventional morality.</p>
+        </div>
+        <div style="margin-top: 2rem; display: flex; align-items: center; gap: 1rem; font-family: var(--mono); color: var(--accent1); font-size: 0.9rem; font-weight: bold;">
+          <i class="fas fa-microchip"></i> COMPASSION: 05%
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <aside class="notes">Observe the progression. Each step away from his initial morality makes the next atrocity easier. The psychological cost of the notebook is the total loss of his original self.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg); color: var(--t1); display: flex; align-items: center; justify-content: center; padding: 5vh 5vw; overflow: hidden; position: relative;">
+  <!-- Background Decor -->
+  <div style="position: absolute; top: -5vh; left: -5vw; font-size: 30rem; font-family: var(--serif); color: var(--accent2); opacity: 0.05; pointer-events: none; font-weight: 900;">L</div>
+
+  <div class="s" style="width: 100%; max-width: 85vw; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 5vw; align-items: center;">
+    
+    <!-- Content (Left Column) -->
+    <div style="display: flex; flex-direction: column; gap: 4vh;">
+      <h2 style="font-family: var(--serif); font-size: clamp(3rem, 6vw, 5rem); color: var(--t1); margin-bottom: 0.5rem; text-transform: uppercase;">The Anomaly</h2>
+      <p style="font-family: var(--mono); color: var(--accent2); font-size: clamp(0.9rem, 1.2vw, 1.2rem); text-transform: uppercase; letter-spacing: 0.3rem; margin-bottom: 2rem;">L Lawliet</p>
+      
+      <div style="display: flex; gap: 2rem; align-items: flex-start; margin-bottom: 1vh;">
+        <i class="fas fa-search" style="color: var(--accent2); font-size: 2.5rem; margin-top: 0.5rem; flex-shrink: 0;"></i>
+        <div>
+          <h4 style="font-family: var(--sans); font-size: clamp(1.4rem, 2vw, 1.8rem); color: var(--t1); margin-bottom: 0.5rem;">Obsessive Logical Dedication</h4>
+          <p style="font-family: var(--sans); font-size: clamp(1rem, 1.2vw, 1.2rem); color: var(--t2); line-height: 1.5;">L's mind operates on raw data and objective patterns. His justice is not personal; it is a systematic dismantling of anomalies.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 2rem; align-items: flex-start; margin-bottom: 1vh;">
+        <i class="fas fa-candy-cane" style="color: var(--accent2); font-size: 2.5rem; margin-top: 0.5rem; flex-shrink: 0;"></i>
+        <div>
+          <h4 style="font-family: var(--sans); font-size: clamp(1.4rem, 2vw, 1.8rem); color: var(--t1); margin-bottom: 0.5rem;">Duality of Persona</h4>
+          <p style="font-family: var(--sans); font-size: clamp(1rem, 1.2vw, 1.2rem); color: var(--t2); line-height: 1.5;">The child-like exterior masks a fierce, competitive intellect. His eccentricities are shields against social intrusion.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2vh;">
+        <span style="background-color: var(--surface); color: var(--accent2); border: 1px solid var(--accent3); padding: 0.5rem 1.5rem; font-family: var(--mono); font-size: 0.8rem; border-radius: 50px;">99% SUCCESS RATE</span>
+        <span style="background-color: var(--surface); color: var(--accent2); border: 1px solid var(--accent3); padding: 0.5rem 1.5rem; font-family: var(--mono); font-size: 0.8rem; border-radius: 50px;">ANONYMOUS ENTITY</span>
+        <span style="background-color: var(--accent1); color: white; padding: 0.5rem 1.5rem; font-family: var(--mono); font-size: 0.8rem; border-radius: 50px;">CASE: KIRA</span>
+      </div>
+    </div>
+
+    <!-- Profile Card (Right Column) -->
+    <div style="background-color: var(--surface); padding: 6vh 4vw; border-radius: 12px; border: 1px solid var(--accent3); box-shadow: -2vh 2vh 5vh rgba(0,0,0,0.5); text-align: center; position: relative;">
+      <div style="width: clamp(8rem, 15vw, 12rem); height: clamp(8rem, 15vw, 12rem); margin: 0 auto 3vh; background-color: var(--bg); border: 0.5vh solid var(--accent2); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+        <i class="fas fa-fingerprint" style="font-size: clamp(3rem, 6vw, 6rem); color: var(--accent2); opacity: 0.6;"></i>
+      </div>
+      <h3 style="font-family: var(--serif); font-size: clamp(1.8rem, 3vw, 2.5rem); color: var(--t1); margin-bottom: 1.5rem; font-weight: 700;">Objective Truth</h3>
+      <p style="font-family: var(--sans); font-size: clamp(1rem, 1.2vw, 1.2rem); color: var(--t2); line-height: 1.6; margin-bottom: 2rem;">
+        "Justice will prevail, no matter the cost to my own sanity."
+      </p>
+      
+      <div style="display: flex; flex-direction: column; gap: 1.5vh;">
+        <div style="display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 0.8rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">
+          <span style="color: var(--t2);">STATUS</span>
+          <span style="color: var(--accent1); font-weight: bold;">COMPROMISED</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; font-family: var(--mono); font-size: 0.8rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">
+          <span style="color: var(--t2);">PRIORITY</span>
+          <span style="color: var(--t1);">ULTRA-HIGH</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <aside class="notes">Contrast Light with L. L is the antithesis of the 'perfect' student. He is messy, antisocial, and obsessive, yet he maintains a rigid adherence to the rule of law.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg2); color: var(--t1); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 10vh 10vw; overflow: hidden; position: relative;">
+  <!-- Background Decor -->
+  <div style="position: absolute; width: 100%; height: 100%; opacity: 0.1; background-image: repeating-linear-gradient(45deg, var(--accent3), var(--accent3) 10px, transparent 10px, transparent 20px); pointer-events: none;"></div>
+
+  <div class="s cx" style="max-width: 1000px; z-index: 1;">
+    <div style="width: 80px; height: 80px; background-color: var(--accent1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 4rem; box-shadow: 0 0 30px rgba(163,0,0,0.4);">
+      <i class="fas fa-balance-scale" style="color: white; font-size: 2.5rem;"></i>
+    </div>
+
+    <blockquote style="margin: 0; padding: 0;">
+      <p style="font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.3; color: var(--t1); margin-bottom: 3rem; font-style: italic; font-weight: 600;">
+        "Justice is not something that can be achieved by a single person's subjective judgment. It is the <span style="color: var(--accent1); border-bottom: 3px solid var(--accent1);">foundation of society</span>, built on the rule of law and due process."
+      </p>
+      <cite style="font-family: var(--mono); color: var(--accent2); font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.5rem; font-style: normal; display: block; border-left: 10px solid var(--accent1); padding-left: 2rem;">
+        L Lawliet // Code: L
+      </cite>
+    </blockquote>
+
+    <div style="display: flex; gap: 4vw; margin-top: 6vh; flex-wrap: wrap; justify-content: center;">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+        <span style="font-family: var(--mono); font-size: 0.9rem; color: var(--accent2);">ETHICAL BOUNDARIES</span>
+        <div style="width: 100px; height: 4px; background-color: var(--accent1);"></div>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+        <span style="font-family: var(--mono); font-size: 0.9rem; color: var(--accent2);">OBJECTIVE TRUTH</span>
+        <div style="width: 100px; height: 4px; background-color: var(--accent1); opacity: 0.5;"></div>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+        <span style="font-family: var(--mono); font-size: 0.9rem; color: var(--accent2);">INSTITUTIONAL INTEGRITY</span>
+        <div style="width: 100px; height: 4px; background-color: var(--accent1); opacity: 0.25;"></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">L represents the institutional form of justice. He believes that no matter how 'noble' the goal, bypassing the law makes the executioner no better than the criminal.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg); color: var(--t1); display: flex; flex-direction: column; padding: 6vh 8vw; overflow: hidden; position: relative;">
+  <!-- Background Decor -->
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.03; background-image: radial-gradient(var(--accent1) 1px, transparent 1px); background-size: 20px 20px; pointer-events: none;"></div>
+
+  <div class="s" style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
+    <div style="display: flex; align-items: flex-end; gap: 2rem; margin-bottom: 6vh;">
+      <h2 style="font-family: var(--serif); font-size: clamp(3rem, 7vw, 5rem); margin: 0; color: var(--t1); line-height: 1; text-transform: uppercase;">Tactical Warfare</h2>
+      <div style="background-color: var(--accent1); padding: 0.8rem 1.5rem; font-family: var(--mono); color: white; font-size: 1rem; border-radius: 4px; letter-spacing: 0.2rem; margin-bottom: 0.5rem;">STATUS: ENGAGED</div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3vw; align-items: stretch;">
+      
+      <!-- Trap 1 -->
+      <div style="background-color: var(--surface); padding: 3rem; border: 1px solid var(--accent3); border-top: 5px solid var(--accent1); position: relative;">
+        <div style="font-family: var(--mono); color: var(--accent1); font-size: 0.9rem; margin-bottom: 2rem; letter-spacing: 0.2rem;">OPERATIONAL CASE // 01</div>
+        <h3 style="font-family: var(--serif); font-size: 2.2rem; color: var(--t1); margin-bottom: 1.5rem;">Lind L. Tailor Trap</h3>
+        <p style="font-family: var(--sans); font-size: 1.1rem; color: var(--t2); line-height: 1.6; margin-bottom: 2rem;">
+          A surgical strike using psychology to confirm Kira's location and basic personality profile. L used Kira's own pride against him.
+        </p>
+        <div style="display: flex; align-items: center; gap: 1rem; color: var(--accent1); font-family: var(--mono); font-size: 0.9rem; font-weight: bold;">
+          <i class="fas fa-bullseye"></i> TARGET ACQUIRED
+        </div>
+      </div>
+
+      <!-- Trap 2 -->
+      <div style="background-color: var(--surface); padding: 3rem; border: 1px solid var(--accent3); border-top: 5px solid var(--accent2); position: relative;">
+        <div style="font-family: var(--mono); color: var(--accent2); font-size: 0.9rem; margin-bottom: 2rem; letter-spacing: 0.2rem;">OPERATIONAL CASE // 02</div>
+        <h3 style="font-family: var(--serif); font-size: 2.2rem; color: var(--t1); margin-bottom: 1.5rem;">Social Engineering</h3>
+        <p style="font-family: var(--sans); font-size: 1.1rem; color: var(--t2); line-height: 1.6; margin-bottom: 2rem;">
+          The university confrontation. L forces Kira into a direct social bond, making every interaction a potential leak of information.
+        </p>
+        <div style="display: flex; align-items: center; gap: 1rem; color: var(--accent2); font-family: var(--mono); font-size: 0.9rem; font-weight: bold;">
+          <i class="fas fa-users"></i> SOCIAL MAPPING
+        </div>
+      </div>
+
+      <!-- Trap 3 -->
+      <div style="background-color: var(--surface); padding: 3rem; border: 1px solid var(--accent3); border-top: 5px solid var(--accent3); position: relative;">
+        <div style="font-family: var(--mono); color: var(--accent3); font-size: 0.9rem; margin-bottom: 2rem; letter-spacing: 0.2rem;">OPERATIONAL CASE // 03</div>
+        <h3 style="font-family: var(--serif); font-size: 2.2rem; color: var(--t1); margin-bottom: 1.5rem;">Risk Management</h3>
+        <p style="font-family: var(--sans); font-size: 1.1rem; color: var(--t2); line-height: 1.6; margin-bottom: 2rem;">
+          The use of decoys and cameras. Constant observation designed to induce stress and force a catastrophic error.
+        </p>
+        <div style="display: flex; align-items: center; gap: 1rem; color: var(--accent3); font-family: var(--mono); font-size: 0.9rem; font-weight: bold;">
+          <i class="fas fa-video"></i> CONSTANT SURVEILLANCE
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <aside class="notes">The rivalry is a high-stakes chess match. Every move is designed to provoke a psychological reaction from the opponent. It's a game of waiting for the first crack in the facade.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg2); color: var(--t1); display: flex; align-items: center; justify-content: center; padding: 5vh 5vw; overflow: hidden; position: relative;">
+  <!-- Background Decor -->
+  <div style="position: absolute; right: -5vw; bottom: -5vh; width: 40vw; height: 40vw; opacity: 0.1; background-image: radial-gradient(var(--accent1) 10%, transparent 10%); background-size: 30px 30px; pointer-events: none;"></div>
+
+  <div class="s" style="width: 100%; max-width: 1200px; display: grid; grid-template-columns: 1fr 1.2fr; gap: 5vw; align-items: center;">
+    
+    <!-- Left Column: Portrait & Stats -->
+    <div style="display: flex; flex-direction: column; gap: 3vh;">
+      <div style="background-color: var(--surface); padding: 4rem; border-radius: 8px; border: 1px solid var(--accent1); text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
+        <div style="width: 120px; height: 120px; margin: 0 auto 2.5rem; background-color: var(--bg); border: 4px solid var(--accent1); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative;">
+          <i class="fas fa-heart-broken" style="font-size: 4rem; color: var(--accent1);"></i>
+        </div>
+        <h3 style="font-family: var(--serif); font-size: 2.5rem; color: var(--t1); margin-bottom: 0.5rem;">Misa Amane</h3>
+        <p style="font-family: var(--mono); color: var(--accent1); font-size: 1rem; text-transform: uppercase; letter-spacing: 0.3rem;">The Catalyst</p>
+        
+        <div style="margin-top: 3rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div style="background-color: var(--bg); padding: 1.5rem; border-radius: 4px;">
+            <div style="font-family: var(--mono); font-size: 0.7rem; color: var(--accent2); margin-bottom: 0.5rem;">LOYALTY</div>
+            <div style="font-family: var(--serif); font-size: 1.8rem; color: var(--accent1);">100%</div>
+          </div>
+          <div style="background-color: var(--bg); padding: 1.5rem; border-radius: 4px;">
+            <div style="font-family: var(--mono); font-size: 0.7rem; color: var(--accent2); margin-bottom: 0.5rem;">STABILITY</div>
+            <div style="font-family: var(--serif); font-size: 1.8rem; color: var(--accent1);">12%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Analysis -->
+    <div style="display: flex; flex-direction: column; gap: 4vh;">
+      <h2 style="font-family: var(--serif); font-size: clamp(2.5rem, 6vw, 4rem); color: var(--t1); line-height: 1.1; margin-bottom: 1rem;">The Unpredictable Variable</h2>
+      
+      <div style="display: flex; gap: 2rem; align-items: flex-start;">
+        <div style="width: 50px; height: 50px; background-color: var(--accent1); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <i class="fas fa-eye" style="color: white; font-size: 1.2rem;"></i>
+        </div>
+        <div>
+          <h4 style="font-family: var(--sans); font-size: 1.5rem; color: var(--t1); margin-bottom: 0.5rem;">The Victimhood of Trauma</h4>
+          <p style="font-family: var(--sans); font-size: 1.1rem; color: var(--t2); line-height: 1.6;">Her devotion to Kira stems from a profound psychological debt. This blind allegiance bypasses self-preservation and rational thought.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 2rem; align-items: flex-start;">
+        <div style="width: 50px; height: 50px; background-color: var(--accent3); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <i class="fas fa-random" style="color: white; font-size: 1.2rem;"></i>
+        </div>
+        <div>
+          <h4 style="font-family: var(--sans); font-size: 1.5rem; color: var(--t1); margin-bottom: 0.5rem;">The Tactical Liability</h4>
+          <p style="font-family: var(--sans); font-size: 1.1rem; color: var(--t2); line-height: 1.6;">While her Shinigami Eyes provide essential data, her emotional volatility makes her a liability in the cold war between Light and L.</p>
+        </div>
+      </div>
+
+      <div style="background-color: rgba(163,0,0,0.1); border-left: 5px solid var(--accent1); padding: 1.5rem; margin-top: 2vh;">
+        <p style="font-family: var(--mono); color: var(--t1); font-size: 0.95rem; line-height: 1.4;">
+          <span style="color: var(--accent1); font-weight: bold;">[SYSTEM NOTE]</span> Misa introduces a chaotic element that neither Light nor L can fully control or predict.
+        </p>
+      </div>
+    </div>
+
+  </div>
+  <aside class="notes">Misa introduces an unpredictable element. Her psychological profile is rooted in trauma and dependency, making her both Light's greatest tool and his most dangerous liability.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg); color: var(--t1); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 5vh 10vw; overflow: hidden; position: relative;">
+  <!-- Background Decor -->
+  <div style="position: absolute; top: -5vh; right: -5vw; width: 40vw; height: 40vw; opacity: 0.1; background-image: radial-gradient(var(--accent1) 10%, transparent 10%); background-size: 30px 30px; pointer-events: none;"></div>
+
+  <div class="s cx" style="width: 100%; max-width: 1200px;">
+    <h2 style="font-family: var(--serif); font-size: clamp(3rem, 7vw, 5rem); color: var(--accent1); margin-bottom: 2rem; text-transform: uppercase; font-weight: 900; letter-spacing: -0.01em;">The Eye Deal</h2>
+    <p style="font-family: var(--mono); color: var(--accent2); font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.3rem; margin-bottom: 6vh;">The Ultimate Sacrifice</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 6vw; width: 100%; align-items: center;">
+      
+      <!-- Circle visualization: Lifespan Cost -->
+      <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+        <div style="width: 250px; height: 250px; position: relative; display: flex; align-items: center; justify-content: center; margin-bottom: 3rem;">
+          <svg style="width: 100%; height: 100%; transform: rotate(-90deg);">
+            <circle cx="125" cy="125" r="110" fill="none" stroke="var(--surface)" stroke-width="12"></circle>
+            <circle cx="125" cy="125" r="110" fill="none" stroke="var(--accent1)" stroke-width="12" stroke-dasharray="691" stroke-dashoffset="345.5" stroke-linecap="round"></circle>
+          </svg>
+          <div style="position: absolute; display: flex; flex-direction: column; align-items: center; text-align: center;">
+            <span style="font-family: var(--serif); font-size: 4rem; font-weight: 900; color: var(--t1); line-height: 1;">50%</span>
+            <span style="font-family: var(--mono); font-size: 0.8rem; color: var(--accent1); text-transform: uppercase; letter-spacing: 0.1rem; margin-top: 0.5rem;">LIFESPAN COST</span>
+          </div>
+        </div>
+        <h3 style="font-family: var(--serif); font-size: 2rem; color: var(--t1); margin-bottom: 1.5rem;">The Human Price</h3>
+        <p style="font-family: var(--sans); font-size: 1.1rem; color: var(--t2); line-height: 1.6;">A literal quantification of one's humanity. Trading time for total control. The ultimate deal for the ultimate narcissist.</p>
+      </div>
+
+      <!-- Features/Dehumanization -->
+      <div style="display: flex; flex-direction: column; gap: 4vh; text-align: left;">
+        <div style="background-color: var(--surface); padding: 3rem; border-radius: 4px; border-left: 8px solid var(--accent1);">
+          <h4 style="font-family: var(--serif); font-size: 1.8rem; color: var(--t1); margin-bottom: 1rem;">Dehumanization of Sight</h4>
+          <p style="font-family: var(--sans); font-size: 1.1rem; color: var(--t2); line-height: 1.6;">People are reduced to names and expiration dates. The eye deal creates a psychological buffer, making murder a mere clerical task.</p>
+        </div>
+
+        <div style="background-color: var(--surface); padding: 3rem; border-radius: 4px; border-left: 8px solid var(--accent3);">
+          <h4 style="font-family: var(--serif); font-size: 1.8rem; color: var(--t1); margin-bottom: 1rem;">Ryuk's Amoral Gaze</h4>
+          <p style="font-family: var(--sans); font-size: 1.1rem; color: var(--t2); line-height: 1.6;">The Shinigami represents a detached, bored observation of human folly. His lack of morality acts as a mirror to Light's own descent.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <aside class="notes">The Eye Deal symbolizes the ultimate sacrifice of humanity for control. It quantifies life, reducing people to names and numbers, which mirrors the characters' own psychological detachment.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg); color: var(--t1); padding: 0; overflow: hidden; position: relative; height: 100vh;">
+  <div style="display: flex; height: 100%; width: 100%; position: relative;">
+    
+    <!-- Left Side: Kira (Subjective Utilitarianism) -->
+    <div style="flex: 1; background-color: var(--bg2); padding: 8vh 6vw; display: flex; flex-direction: column; justify-content: center; position: relative;">
+      <div style="position: absolute; right: -50px; top: 0; bottom: 0; width: 100px; background-color: var(--bg2); transform: skewX(-10deg); z-index: 2;"></div>
+      <div style="position: absolute; top: 4vh; left: 4vw; font-family: var(--mono); color: var(--accent1); font-size: 1rem; letter-spacing: 0.3rem;">THE VISIONARY</div>
+      
+      <div class="s" style="z-index: 3;">
+        <h2 style="font-family: var(--serif); font-size: clamp(3rem, 7vw, 6rem); color: var(--accent1); margin-bottom: 2rem; text-transform: uppercase;">Kira</h2>
+        <h3 style="font-family: var(--serif); font-size: 2.2rem; color: var(--t1); margin-bottom: 2.5rem; line-height: 1.2;">Subjective Utilitarianism</h3>
+        
+        <ul style="list-style: none; padding: 0; font-family: var(--sans); font-size: 1.2rem; line-height: 1.8; color: var(--t2);">
+          <li style="margin-bottom: 1.5rem; display: flex; align-items: flex-start; gap: 1.5rem;">
+            <i class="fas fa-arrow-right" style="color: var(--accent1); margin-top: 0.5rem;"></i>
+            <span>The Ends Justify the Means</span>
+          </li>
+          <li style="margin-bottom: 1.5rem; display: flex; align-items: flex-start; gap: 1.5rem;">
+            <i class="fas fa-arrow-right" style="color: var(--accent1); margin-top: 0.5rem;"></i>
+            <span>Justice as a Result, Not a Process</span>
+          </li>
+          <li style="display: flex; align-items: flex-start; gap: 1.5rem;">
+            <i class="fas fa-arrow-right" style="color: var(--accent1); margin-top: 0.5rem;"></i>
+            <span>Fear as the Ultimate Deterrent</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Right Side: L (Objective Institutionalism) -->
+    <div style="flex: 1; background-color: var(--surface); padding: 8vh 6vw; display: flex; flex-direction: column; justify-content: center; position: relative;">
+      <div style="position: absolute; top: 4vh; right: 4vw; font-family: var(--mono); color: var(--accent2); font-size: 1rem; letter-spacing: 0.3rem; text-align: right;">THE DETECTIVE</div>
+      
+      <div class="s" style="z-index: 3; text-align: right;">
+        <h2 style="font-family: var(--serif); font-size: clamp(3rem, 7vw, 6rem); color: var(--accent2); margin-bottom: 2rem; text-transform: uppercase;">L</h2>
+        <h3 style="font-family: var(--serif); font-size: 2.2rem; color: var(--t1); margin-bottom: 2.5rem; line-height: 1.2;">Objective Institutionalism</h3>
+        
+        <ul style="list-style: none; padding: 0; font-family: var(--sans); font-size: 1.2rem; line-height: 1.8; color: var(--t2); display: inline-block; text-align: left;">
+          <li style="margin-bottom: 1.5rem; display: flex; align-items: flex-start; gap: 1.5rem;">
+            <i class="fas fa-arrow-left" style="color: var(--accent2); margin-top: 0.5rem;"></i>
+            <span>Justice as a System of Rules</span>
+          </li>
+          <li style="margin-bottom: 1.5rem; display: flex; align-items: flex-start; gap: 1.5rem;">
+            <i class="fas fa-arrow-left" style="color: var(--accent2); margin-top: 0.5rem;"></i>
+            <span>Truth as the Only Real Anchor</span>
+          </li>
+          <li style="display: flex; align-items: flex-start; gap: 1.5rem;">
+            <i class="fas fa-arrow-left" style="color: var(--accent2); margin-top: 0.5rem;"></i>
+            <span>The Process Defines the Result</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Center Clash Symbol -->
+    <div style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 10;">
+      <div style="width: clamp(80px, 10vw, 150px); height: clamp(80px, 10vw, 150px); background-color: var(--bg); border: 8px solid var(--accent1); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 50px rgba(0,0,0,0.8);">
+        <i class="fas fa-bolt" style="font-size: 3rem; color: var(--accent1);"></i>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">The series forces the audience to choose. Is the world truly better under Kira's fear-based peace, or is the flawed, slow justice of L's world more sustainable?</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg2); color: var(--t1); display: flex; flex-direction: column; padding: 6vh 8vw; overflow: hidden; position: relative;">
+  <!-- Background Decor -->
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.05; background-image: repeating-linear-gradient(45deg, var(--accent3), var(--accent3) 1px, transparent 1px, transparent 10px); pointer-events: none;"></div>
+
+  <div class="s" style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
+    <div style="display: flex; align-items: flex-end; gap: 2rem; margin-bottom: 6vh;">
+      <h2 style="font-family: var(--serif); font-size: clamp(2.5rem, 6vw, 4.5rem); margin: 0; color: var(--t1); line-height: 1; text-transform: uppercase;">The Mirror Effect</h2>
+      <div style="background-color: var(--accent3); padding: 0.8rem 1.5rem; font-family: var(--mono); color: white; font-size: 1rem; border-radius: 4px; letter-spacing: 0.2rem; margin-bottom: 0.5rem;">SIMILARITY MAPPING</div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4vw; align-items: stretch;">
+      
+      <!-- Shared Point 1 -->
+      <div style="background-color: var(--surface); padding: 3rem; border: 1px solid var(--accent3); position: relative; border-radius: 8px;">
+        <div style="width: 50px; height: 50px; background-color: var(--accent1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+          <i class="fas fa-trophy" style="color: white; font-size: 1.2rem;"></i>
+        </div>
+        <h3 style="font-family: var(--serif); font-size: 2rem; color: var(--t1); margin-bottom: 1.5rem;">Competitive Drive</h3>
+        <p style="font-family: var(--sans); font-size: 1.1rem; color: var(--t2); line-height: 1.6;">
+          Both Light and L are fundamentally driven by the need to win. Justice often becomes secondary to the thrill of outsmarting an equal.
+        </p>
+      </div>
+
+      <!-- Shared Point 2 -->
+      <div style="background-color: var(--surface); padding: 3rem; border: 1px solid var(--accent3); position: relative; border-radius: 8px;">
+        <div style="width: 50px; height: 50px; background-color: var(--accent1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+          <i class="fas fa-user-friends" style="color: white; font-size: 1.2rem;"></i>
+        </div>
+        <h3 style="font-family: var(--serif); font-size: 2rem; color: var(--t1); margin-bottom: 1.5rem;">Intellectual Isolation</h3>
+        <p style="font-family: var(--sans); font-size: 1.1rem; color: var(--t2); line-height: 1.6;">
+          Their genius separates them from society. Paradoxically, the opponent is the only person who truly understands their mental landscape.
+        </p>
+      </div>
+
+      <!-- Shared Point 3 -->
+      <div style="background-color: var(--surface); padding: 3rem; border: 1px solid var(--accent3); position: relative; border-radius: 8px;">
+        <div style="width: 50px; height: 50px; background-color: var(--accent1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem;">
+          <i class="fas fa-chess" style="color: white; font-size: 1.2rem;"></i>
+        </div>
+        <h3 style="font-family: var(--serif); font-size: 2rem; color: var(--t1); margin-bottom: 1.5rem;">Zero-Sum Logic</h3>
+        <p style="font-family: var(--sans); font-size: 1.1rem; color: var(--t2); line-height: 1.6;">
+          They both view the conflict as a binary game. There is no compromise; one must be erased for the other to prevail.
+        </p>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 6vh; padding: 2.5rem; background-color: rgba(163,0,0,0.05); border: 1px dashed var(--accent1); border-radius: 8px; text-align: center;">
+      <p style="font-family: var(--mono); color: var(--t1); font-size: 1.1rem;">
+        "I've never met anyone as similar to me as you are."
+      </p>
+    </div>
+  </div>
+  <aside class="notes">The tragedy of the story is that Light and L are fundamentally similar. Their isolation and intellect made them perfect rivals, and perhaps, under different circumstances, friends.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg); color: var(--t1); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 5vh 10vw; overflow: hidden; position: relative;">
+  <!-- Background Decor -->
+  <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background-image: linear-gradient(to top, var(--bg2), transparent); opacity: 0.5;"></div>
+
+  <div class="s cx" style="max-width: 1000px; z-index: 1;">
+    <div style="width: 120px; height: 120px; background-color: var(--surface); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 4rem; border: 2px solid var(--accent3);">
+      <i class="fas fa-feather" style="color: var(--accent1); font-size: 3rem; opacity: 0.7;"></i>
+    </div>
+
+    <h2 style="font-family: var(--serif); font-size: clamp(3rem, 8vw, 6rem); color: var(--t1); margin-bottom: 2rem; font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em;">The Silence</h2>
+    
+    <div style="width: 10vw; height: 2px; background-color: var(--accent1); margin: 3rem 0; opacity: 0.5;"></div>
+    
+    <p style="font-family: var(--sans); font-size: clamp(1.2rem, 3vw, 2rem); color: var(--t2); max-width: 800px; line-height: 1.5; margin-bottom: 4rem; font-weight: 300; font-style: italic;">
+      "In the end, all humans must die. And when they do, they return to MU (Nothingness)."
+    </p>
+
+    <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; margin-top: 2vh;">
+      <span style="border: 1px solid var(--accent3); color: var(--accent3); padding: 0.8rem 2rem; font-family: var(--mono); font-size: 1rem; text-transform: uppercase; letter-spacing: 0.3rem; border-radius: 4px;">FINIS</span>
+      <span style="border: 1px solid var(--accent3); color: var(--accent3); padding: 0.8rem 2rem; font-family: var(--mono); font-size: 1rem; text-transform: uppercase; letter-spacing: 0.3rem; border-radius: 4px;">CASE CLOSED</span>
+    </div>
+
+    <div style="margin-top: 10vh; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+      <p style="font-family: var(--mono); font-size: 0.8rem; color: var(--accent3); letter-spacing: 0.5rem; text-transform: uppercase;">A DIGITN AI PRESENTATION</p>
+    </div>
+  </div>
+  <aside class="notes">In the end, neither 'justice' truly wins. The notebook leaves only a void, reminding us that the pursuit of absolute power—even for 'good'—is a psychological dead end.</aside>
+</section>
+  </div>
+
+<script>
+(function(){
+  const wraps = document.querySelectorAll('.slide-wrap');
+  const sections = document.querySelectorAll('.slide-wrap > section');
+  const total = wraps.length;
+  const counter = document.getElementById('slide-counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  // IntersectionObserver: mark the visible slide-wrap as .active (triggers CSS animations)
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        wraps.forEach(w => w.classList.remove('active'));
+        e.target.classList.add('active');
+        current = Array.from(wraps).indexOf(e.target);
+        if (counter) counter.textContent = (current+1) + ' / ' + total;
+        if (progress) progress.style.width = ((current+1)/total*100) + '%';
+      }
+    });
+  }, { threshold: 0.5 });
+  wraps.forEach(w => obs.observe(w));
+
+  // Activate first slide immediately
+  if (wraps[0]) wraps[0].classList.add('active');
+  if (counter) counter.textContent = '1 / ' + total;
+  if (progress) progress.style.width = (1/total*100) + '%';
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      if (current < total - 1) wraps[current + 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (current > 0) wraps[current - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      wraps[0].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      wraps[total - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'f' || e.key === 'F11') {
+      e.preventDefault();
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>

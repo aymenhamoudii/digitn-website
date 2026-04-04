@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>The Man of Steel: Cinematic Odyssey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+    --bg: #0D2C54;
+    --bg2: #1A4175;
+    --surface: #F5F5F5;
+    --surface2: #254165;
+    --border: rgba(255,255,255,.07);
+    --border-md: rgba(255,255,255,.11);
+    --accent1: #E63946;
+    --accent1-dim: rgba(230, 57, 70, 0.18);
+    --accent2: #FFB703;
+    --accent2-dim: rgba(255, 183, 3, 0.18);
+    --accent3: #457B9D;
+    --accent3-dim: rgba(69, 123, 157, 0.18);
+    --t1: #FFFFFF;
+    --t2: #A8DADC;
+    --t3: rgba(255, 255, 255, 0.3);
+    --mono: 'Source Code Pro', monospace;
+    --sans: 'Source Sans 3', system-ui, sans-serif;
+    --serif: 'Cormorant Garamond', serif;
+  }
+    
+  /* ─── Reset ─── */
+  ::-webkit-scrollbar{display:none}
+  *{scrollbar-width:none;-ms-overflow-style:none;box-sizing:border-box;margin:0;padding:0}
+  html{scroll-snap-type:y mandatory;overflow-y:scroll;overflow-x:hidden;scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  /* ─── Slide (full viewport) ─── */
+  section{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+  /* ─── Stagger animation (.s container) ─── */
+  .s{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
+  .s>*{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+  section.active .s>*{opacity:1;transform:translateY(0)}
+  section.active .s>*:nth-child(1){transition-delay:.03s}
+  section.active .s>*:nth-child(2){transition-delay:.09s}
+  section.active .s>*:nth-child(3){transition-delay:.15s}
+  section.active .s>*:nth-child(4){transition-delay:.21s}
+  section.active .s>*:nth-child(5){transition-delay:.27s}
+  section.active .s>*:nth-child(6){transition-delay:.33s}
+  section.active .s>*:nth-child(7){transition-delay:.39s}
+  section.active .s>*:nth-child(8){transition-delay:.45s}
+
+  /* ─── Centering utility ─── */
+  .cx{justify-content:center;align-items:center;text-align:center}
+
+  /* ─── Speaker notes (hidden) ─── */
+  aside.notes{display:none!important}
+
+  /* ─── Slide counter ─── */
+  #slide-counter{position:fixed;bottom:2vh;right:2vw;font-family:var(--mono);font-size:1.6vh;color:var(--t3);background:var(--surface);border:1px solid var(--border);border-radius:1vh;padding:.8vh 1.6vh;z-index:100;pointer-events:none}
+
+  /* ─── Progress bar ─── */
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--accent1);z-index:100;transition:width .3s ease}
+
+  </style>
+</head>
+<body>
+  <div id="progress" style="width:0"></div>
+  <div id="slide-counter">1 / 12</div>
+  <section style="background: var(--bg); background-image: radial-gradient(circle at 20% 30%, var(--bg2) 0%, var(--bg) 70%); color: var(--text); font-family: var(--sans); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+  <!-- Pop Art Dots Background -->
+  <div style="position: absolute; inset: 0; opacity: 0.1; background-image: radial-gradient(var(--accent2) 2px, transparent 2px); background-size: 30px 30px;"></div>
+  
+  <div class="s cx" style="z-index: 10; text-align: center; max-width: 900px; padding: 40px; position: relative;">
+    <!-- Large Hero Element (Shield-like container) -->
+    <div style="margin-bottom: 40px; display: inline-block; position: relative;">
+      <div style="width: 160px; height: 160px; background: var(--accent1); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 40px rgba(0,0,0,0.4); border: 4px solid var(--accent2);">
+        <i class="fas fa-bolt" style="font-size: 80px; color: var(--accent2); filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.5));"></i>
+      </div>
+      <!-- Accent pop art rays -->
+      <div style="position: absolute; top: 50%; left: 50%; width: 300px; height: 300px; background: repeating-conic-gradient(from 0deg, transparent 0 15deg, rgba(255,255,255,0.05) 15deg 30deg); transform: translate(-50%, -50%); z-index: -1;"></div>
+    </div>
+
+    <h1 style="font-family: var(--serif); font-size: 5.5rem; font-weight: 900; text-transform: uppercase; margin: 0; line-height: 0.9; letter-spacing: -2px; color: var(--text); text-shadow: 4px 4px 0px var(--accent1), 8px 8px 0px var(--bg2);">
+      The Man<br><span style="color: var(--accent2);">of Steel</span>
+    </h1>
+    
+    <div style="height: 6px; width: 120px; background: var(--accent1); margin: 30px auto; border-radius: 3px;"></div>
+
+    <p style="font-size: 1.5rem; font-weight: 500; color: var(--text2); max-width: 600px; margin: 0 auto 40px; letter-spacing: 1px; text-transform: uppercase;">
+      An Exploration of Superman in Live-Action Cinema
+    </p>
+
+    <div style="display: flex; gap: 20px; justify-content: center;">
+      <span style="background: var(--accent1); color: white; padding: 8px 24px; border-radius: 50px; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; box-shadow: 4px 4px 0px var(--bg2);">Iconic Origins</span>
+      <span style="background: var(--accent3); color: white; padding: 8px 24px; border-radius: 50px; font-weight: 700; font-size: 0.9rem; text-transform: uppercase; box-shadow: 4px 4px 0px var(--bg2);">Legacy of Hope</span>
+    </div>
+  </div>
+
+  <aside class="notes" style="display:none">
+    Welcome to our exploration of the world's most iconic superhero. Today we focus specifically on his journey through live-action film and the profound burden of his abilities.
+  </aside>
+  <aside class="notes">Welcome to our exploration of the world's most iconic superhero. Today we focus specifically on his journey through live-action film and the profound burden of his abilities.</aside>
+</section>
+  <section style="background: var(--surface); color: var(--bg); font-family: var(--sans); display: flex; flex-direction: column; overflow: hidden; position: relative;">
+  <!-- Half-tone Pattern Background -->
+  <div style="position: absolute; inset: 0; opacity: 0.05; background-image: radial-gradient(var(--bg) 20%, transparent 20%); background-size: 15px 15px;"></div>
+  
+  <!-- Section Label -->
+  <div style="position: absolute; top: 40px; right: 40px; font-family: var(--mono); color: var(--accent1); font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">
+    01 // Introduction
+  </div>
+
+  <div class="s" style="flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; padding: 80px; align-items: center; z-index: 2;">
+    
+    <!-- Left Column: Content -->
+    <div style="display: flex; flex-direction: column; gap: 30px;">
+      <h2 style="font-family: var(--serif); font-size: 4rem; line-height: 1; color: var(--bg); margin: 0; position: relative;">
+        From Panel to <span style="color: var(--accent1); background: var(--accent2); padding: 0 15px; display: inline-block; transform: rotate(-1deg);">Projector</span>
+      </h2>
+      
+      <p style="font-size: 1.25rem; line-height: 1.6; color: var(--bg); opacity: 0.8; max-width: 500px;">
+        Superman's journey didn't start on a 60-foot screen. It began in the vibrant, pulp-filled pages of Action Comics #1. This transition redefined how we view heroism.
+      </p>
+
+      <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 15px;">
+        <li style="display: flex; align-items: center; gap: 15px; font-weight: 700; font-size: 1.1rem; color: var(--bg);">
+          <div style="width: 32px; height: 32px; background: var(--accent3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+            <i class="fas fa-book-open" style="font-size: 0.8rem;"></i>
+          </div>
+          Comic Book Heritage
+        </li>
+        <li style="display: flex; align-items: center; gap: 15px; font-weight: 700; font-size: 1.1rem; color: var(--bg);">
+          <div style="width: 32px; height: 32px; background: var(--accent1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+            <i class="fas fa-film" style="font-size: 0.8rem;"></i>
+          </div>
+          Cinematic Evolution
+        </li>
+        <li style="display: flex; align-items: center; gap: 15px; font-weight: 700; font-size: 1.1rem; color: var(--bg);">
+          <div style="width: 32px; height: 32px; background: var(--accent2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--bg);">
+            <i class="fas fa-globe-americas" style="font-size: 0.8rem;"></i>
+          </div>
+          Global Impact
+        </li>
+      </ul>
+    </div>
+
+    <!-- Right Column: Comparison Cards -->
+    <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
+      <div style="background: white; border: 4px solid var(--bg); padding: 30px; box-shadow: 12px 12px 0px var(--accent2); position: relative; transform: rotate(1deg);">
+        <div style="position: absolute; top: -15px; left: 20px; background: var(--accent1); color: white; padding: 4px 12px; font-family: var(--mono); font-weight: 900; font-size: 0.8rem; text-transform: uppercase;">1938 Origins</div>
+        <p style="margin: 0; font-weight: 800; font-size: 1.4rem; color: var(--bg); line-height: 1.2;">The Golden Age Hero</p>
+        <p style="margin: 10px 0 0; font-size: 0.95rem; color: var(--bg); opacity: 0.7;">Born from the Depression, a champion of the oppressed with clear-cut moral boundaries and primary-color aesthetics.</p>
+      </div>
+
+      <div style="background: white; border: 4px solid var(--bg); padding: 30px; box-shadow: 12px 12px 0px var(--accent3); position: relative; transform: rotate(-1deg);">
+        <div style="position: absolute; top: -15px; left: 20px; background: var(--bg2); color: white; padding: 4px 12px; font-family: var(--mono); font-weight: 900; font-size: 0.8rem; text-transform: uppercase;">Modern Era</div>
+        <p style="margin: 0; font-weight: 800; font-size: 1.4rem; color: var(--bg); line-height: 1.2;">The Cinematic Mythos</p>
+        <p style="margin: 10px 0 0; font-size: 0.95rem; color: var(--bg); opacity: 0.7;">Exploring the internal conflict of an alien outsider trying to find his place in a complex, skeptical modern world.</p>
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes" style="display:none">
+    Superman's transition from 1938 comics to the silver screen changed cinema forever. We'll examine how different directors interpreted the Man of Tomorrow.
+  </aside>
+  <aside class="notes">Superman's transition from 1938 comics to the silver screen changed cinema forever. We'll examine how different directors interpreted the Man of Tomorrow.</aside>
+</section>
+  <section style="background: var(--bg2); color: var(--text); font-family: var(--sans); display: flex; flex-direction: column; overflow: hidden; position: relative;">
+  <!-- Section Label -->
+  <div style="position: absolute; top: 40px; right: 40px; font-family: var(--mono); color: var(--accent2); font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">
+    02 // History
+  </div>
+
+  <div class="s" style="flex: 1; padding: 60px 80px; display: flex; flex-direction: column; justify-content: center; z-index: 2;">
+    <h2 style="font-family: var(--serif); font-size: 4.5rem; margin: 0 0 60px; line-height: 1; text-shadow: 3px 3px 0px var(--accent1);">
+      Eras of <span style="color: var(--accent2);">the Cape</span>
+    </h2>
+
+    <!-- Timeline Container -->
+    <div style="position: relative; display: flex; flex-direction: column; gap: 30px;">
+      <!-- Vertical Line -->
+      <div style="position: absolute; left: 40px; top: 10px; bottom: 10px; width: 4px; background: rgba(255,255,255,0.1);"></div>
+
+      <!-- Item 1 -->
+      <div style="display: flex; gap: 40px; align-items: flex-start; position: relative;">
+        <div style="width: 80px; height: 80px; flex-shrink: 0; background: var(--accent1); border: 6px solid var(--bg2); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 3; box-shadow: 0 0 0 2px var(--accent1);">
+          <span style="font-weight: 900; font-size: 1.2rem; font-family: var(--mono);">70s</span>
+        </div>
+        <div style="padding-top: 15px;">
+          <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+            <h3 style="margin: 0; font-size: 1.8rem; font-family: var(--serif); color: var(--accent2);">The Reeve Years</h3>
+            <span style="font-family: var(--mono); font-size: 0.9rem; background: rgba(255,255,255,0.1); padding: 2px 10px; border-radius: 4px;">1978 – 1987</span>
+          </div>
+          <p style="margin: 0; font-size: 1.1rem; color: var(--text2); max-width: 700px;">The definitive silver-screen portrayal. Focused on wonder, sincerity, and the classic dichotomy between Clark Kent and the hero.</p>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div style="display: flex; gap: 40px; align-items: flex-start; position: relative;">
+        <div style="width: 80px; height: 80px; flex-shrink: 0; background: var(--accent3); border: 6px solid var(--bg2); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 3; box-shadow: 0 0 0 2px var(--accent3);">
+          <span style="font-weight: 900; font-size: 1.2rem; font-family: var(--mono);">00s</span>
+        </div>
+        <div style="padding-top: 15px;">
+          <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+            <h3 style="margin: 0; font-size: 1.8rem; font-family: var(--serif); color: var(--accent2);">The Returns Era</h3>
+            <span style="font-family: var(--mono); font-size: 0.9rem; background: rgba(255,255,255,0.1); padding: 2px 10px; border-radius: 4px;">2006</span>
+          </div>
+          <p style="margin: 0; font-size: 1.1rem; color: var(--text2); max-width: 700px;">A nostalgic homage to the Donner films. Explored a world that had moved on from Superman and his role as a celestial observer.</p>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div style="display: flex; gap: 40px; align-items: flex-start; position: relative;">
+        <div style="width: 80px; height: 80px; flex-shrink: 0; background: var(--accent2); border: 6px solid var(--bg2); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 3; box-shadow: 0 0 0 2px var(--accent2);">
+          <span style="font-weight: 900; font-size: 1.2rem; font-family: var(--mono); color: var(--bg);">10s</span>
+        </div>
+        <div style="padding-top: 15px;">
+          <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 10px;">
+            <h3 style="margin: 0; font-size: 1.8rem; font-family: var(--serif); color: var(--accent2);">The Modern Myth</h3>
+            <span style="font-family: var(--mono); font-size: 0.9rem; background: rgba(255,255,255,0.1); padding: 2px 10px; border-radius: 4px;">2013 – Present</span>
+          </div>
+          <p style="margin: 0; font-size: 1.1rem; color: var(--text2); max-width: 700px;">The DCEU reinterpretation. Gritty realism focusing on the weight of godhood and the consequences of being the world's most powerful being.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes" style="display:none">
+    Let's walk through the major cinematic eras, starting with the definitive portrayal by Christopher Reeve to the gritty realism of the modern day.
+  </aside>
+  <aside class="notes">Let's walk through the major cinematic eras, starting with the definitive portrayal by Christopher Reeve to the gritty realism of the modern day.</aside>
+</section>
+  <section style="background: var(--bg); color: var(--text); font-family: var(--serif); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+  <!-- Dramatic Background Elements -->
+  <div style="position: absolute; width: 120%; height: 120%; top: -10%; left: -10%; background: radial-gradient(circle at center, var(--bg2) 0%, var(--bg) 80%); opacity: 0.6; z-index: 1;"></div>
+  
+  <!-- Pop Art Splash -->
+  <div style="position: absolute; top: 10%; right: 10%; width: 400px; height: 400px; background: var(--accent1); border-radius: 50%; filter: blur(150px); opacity: 0.3; z-index: 2;"></div>
+  <div style="position: absolute; bottom: 10%; left: 10%; width: 400px; height: 400px; background: var(--accent3); border-radius: 50%; filter: blur(150px); opacity: 0.3; z-index: 2;"></div>
+
+  <div class="s cx" style="z-index: 10; max-width: 1000px; padding: 60px; text-align: center;">
+    <i class="fas fa-quote-left" style="font-size: 4rem; color: var(--accent1); margin-bottom: 40px; opacity: 0.8;"></i>
+    
+    <blockquote style="margin: 0; padding: 0; border: none;">
+      <h2 style="font-size: 4.8rem; line-height: 1.1; font-weight: 900; margin-bottom: 40px; color: var(--text); letter-spacing: -1px; text-shadow: 2px 2px 20px rgba(0,0,0,0.5);">
+        "You will give the people of Earth an <span style="color: var(--accent2);">ideal to strive for.</span>"
+      </h2>
+      
+      <div style="width: 80px; height: 4px; background: var(--accent1); margin: 0 auto 30px;"></div>
+      
+      <p style="font-family: var(--mono); font-size: 1.4rem; color: var(--accent3); text-transform: uppercase; font-weight: 700; letter-spacing: 4px; margin: 0;">
+        — Jor-El, Man of Steel
+      </p>
+    </blockquote>
+
+    <div style="margin-top: 60px; display: flex; flex-direction: column; align-items: center; gap: 15px;">
+      <div style="font-family: var(--sans); font-size: 1.2rem; color: var(--text2); text-transform: uppercase; letter-spacing: 2px; font-weight: 500;">
+        The Philosophy of Power
+      </div>
+      <div style="height: 2px; width: 250px; background: linear-gradient(90deg, transparent, var(--accent2), transparent);"></div>
+    </div>
+  </div>
+
+  <aside class="notes" style="display:none">
+    At the core of Superman is a paradox: a being with the power of a god who chooses to live as a man. This quote from Jor-El defines his cinematic purpose.
+  </aside>
+  <aside class="notes">At the core of Superman is a paradox: a being with the power of a god who chooses to live as a man. This quote from Jor-El defines his cinematic purpose.</aside>
+</section>
+  <section style="background: var(--surface); color: var(--bg); font-family: var(--sans); display: flex; flex-direction: column; overflow: hidden; position: relative;">
+  <!-- Section Label -->
+  <div style="position: absolute; top: 40px; right: 40px; font-family: var(--mono); color: var(--accent1); font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">
+    03 // Abilities
+  </div>
+
+  <div class="s" style="flex: 1; padding: 60px 80px; display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: center; z-index: 2;">
+    <!-- Left Column: Title and Icon -->
+    <div style="display: flex; flex-direction: column; gap: 30px;">
+      <div style="width: 120px; height: 120px; background: var(--accent2); border: 4px solid var(--bg); display: flex; align-items: center; justify-content: center; box-shadow: 10px 10px 0px var(--accent3); transform: rotate(-3deg);">
+        <i class="fas fa-sun" style="font-size: 3.5rem; color: var(--accent1);"></i>
+      </div>
+      
+      <h2 style="font-family: var(--serif); font-size: 4rem; line-height: 1; margin: 0; color: var(--bg);">
+        God-Like <br><span style="color: var(--accent3);">Capabilities</span>
+      </h2>
+      
+      <p style="font-size: 1.2rem; color: var(--bg); opacity: 0.8; max-width: 400px; line-height: 1.6;">
+        His powers are derived from Earth's yellow sun, turning his body into a living battery of immense cosmic energy.
+      </p>
+    </div>
+
+    <!-- Right Column: Stats Meters -->
+    <div style="display: flex; flex-direction: column; gap: 40px;">
+      <!-- Stat 1 -->
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+          <span style="font-family: var(--serif); font-size: 1.8rem; font-weight: 900; text-transform: uppercase; color: var(--bg);">Solar Absorption</span>
+          <span style="font-family: var(--mono); font-size: 1.1rem; color: var(--accent1); font-weight: 700;">// FULL CAPACITY</span>
+        </div>
+        <div style="height: 14px; width: 100%; background: var(--bg2); border-radius: 7px; overflow: hidden; border: 2px solid var(--bg);">
+          <div style="height: 100%; width: 95%; background: linear-gradient(90deg, var(--accent2), var(--accent1)); border-radius: 5px;"></div>
+        </div>
+        <p style="margin: 0; font-size: 0.9rem; color: var(--bg); opacity: 0.6; font-style: italic;">Primary energy source fueling all physical manifestations of power.</p>
+      </div>
+
+      <!-- Stat 2 -->
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+          <span style="font-family: var(--serif); font-size: 1.8rem; font-weight: 900; text-transform: uppercase; color: var(--bg);">Invulnerability</span>
+          <span style="font-family: var(--mono); font-size: 1.1rem; color: var(--accent1); font-weight: 700;">// ABSOLUTE</span>
+        </div>
+        <div style="height: 14px; width: 100%; background: var(--bg2); border-radius: 7px; overflow: hidden; border: 2px solid var(--bg);">
+          <div style="height: 100%; width: 99%; background: linear-gradient(90deg, var(--accent3), var(--accent1)); border-radius: 5px;"></div>
+        </div>
+        <p style="margin: 0; font-size: 0.9rem; color: var(--bg); opacity: 0.6; font-style: italic;">Unparalleled cellular density granting immunity to almost all known weapons.</p>
+      </div>
+
+      <!-- Stat 3 -->
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+          <span style="font-family: var(--serif); font-size: 1.8rem; font-weight: 900; text-transform: uppercase; color: var(--bg);">Sensory Overload</span>
+          <span style="font-family: var(--mono); font-size: 1.1rem; color: var(--accent1); font-weight: 700;">// CRITICAL DEPTH</span>
+        </div>
+        <div style="height: 14px; width: 100%; background: var(--bg2); border-radius: 7px; overflow: hidden; border: 2px solid var(--bg);">
+          <div style="height: 100%; width: 88%; background: linear-gradient(90deg, var(--accent1), var(--accent2)); border-radius: 5px;"></div>
+        </div>
+        <p style="margin: 0; font-size: 0.9rem; color: var(--bg); opacity: 0.6; font-style: italic;">The burden of hearing and seeing everything, requiring immense focus to manage.</p>
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes" style="display:none">
+    His powers aren't just gifts; they are constants that he must manage. We look at his flight, strength, and senses from a high-level perspective.
+  </aside>
+  <aside class="notes">His powers aren't just gifts; they are constants that he must manage. We look at his flight, strength, and senses from a high-level perspective.</aside>
+</section>
+  <section style="background: var(--bg); color: var(--text); font-family: var(--sans); display: flex; flex-direction: column; overflow: hidden; position: relative;">
+  <!-- Dot-matrix Overlay -->
+  <div style="position: absolute; inset: 0; opacity: 0.15; background-image: radial-gradient(var(--accent2) 1px, transparent 1px); background-size: 20px 20px;"></div>
+  
+  <!-- Section Label -->
+  <div style="position: absolute; top: 40px; right: 40px; font-family: var(--mono); color: var(--accent2); font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">
+    04 // Themes
+  </div>
+
+  <div class="s" style="flex: 1; padding: 60px 80px; display: flex; flex-direction: column; justify-content: center; z-index: 2;">
+    <div style="text-align: center; margin-bottom: 60px;">
+      <h2 style="font-family: var(--serif); font-size: 5rem; margin: 0; line-height: 1; color: var(--text); text-shadow: 4px 4px 0px var(--accent1);">
+        The <span style="color: var(--accent2);">Burden</span> of Power
+      </h2>
+      <p style="font-size: 1.25rem; color: var(--text2); margin-top: 20px; font-weight: 400; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Being Superman isn't just about winning fights. It's the psychological weight of knowing you can't save everyone despite having the power to save many.
+      </p>
+    </div>
+
+    <!-- Info Cards Grid -->
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
+      
+      <!-- Card 1 -->
+      <div style="background: var(--bg2); border: 2px solid var(--accent1); border-radius: 12px; padding: 40px; display: flex; flex-direction: column; gap: 20px; box-shadow: 8px 8px 0px var(--accent1); position: relative; transition: transform 0.3s ease;">
+        <div style="width: 70px; height: 70px; background: var(--accent1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+          <i class="fas fa-ghost" style="font-size: 2rem; color: white;"></i>
+        </div>
+        <h3 style="font-family: var(--serif); font-size: 1.8rem; color: var(--accent2); margin: 0;">Isolation and Loneliness</h3>
+        <p style="font-size: 1rem; color: var(--text2); line-height: 1.5; margin: 0;">
+          The realization of being the last of his kind, forever separated from humanity by his very nature and the secrets he must keep.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div style="background: var(--bg2); border: 2px solid var(--accent3); border-radius: 12px; padding: 40px; display: flex; flex-direction: column; gap: 20px; box-shadow: 8px 8px 0px var(--accent3); position: relative; transition: transform 0.3s ease;">
+        <div style="width: 70px; height: 70px; background: var(--accent3); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+          <i class="fas fa-balance-scale" style="font-size: 2rem; color: white;"></i>
+        </div>
+        <h3 style="font-family: var(--serif); font-size: 1.8rem; color: var(--accent2); margin: 0;">Moral Responsibility</h3>
+        <p style="font-size: 1rem; color: var(--text2); line-height: 1.5; margin: 0;">
+          The constant pressure of knowing that his presence alone changes the geopolitical landscape and the course of human destiny.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div style="background: var(--bg2); border: 2px solid var(--accent2); border-radius: 12px; padding: 40px; display: flex; flex-direction: column; gap: 20px; box-shadow: 8px 8px 0px var(--accent2); position: relative; transition: transform 0.3s ease;">
+        <div style="width: 70px; height: 70px; background: var(--accent2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 10px;">
+          <i class="fas fa-exclamation-triangle" style="font-size: 2rem; color: var(--bg);"></i>
+        </div>
+        <h3 style="font-family: var(--serif); font-size: 1.8rem; color: var(--accent2); margin: 0;">The Fear of Failure</h3>
+        <p style="font-size: 1rem; color: var(--text2); line-height: 1.5; margin: 0;">
+          The paralyzing weight of choice: with the power to do anything, how does one decide what to do first, and who to leave behind?
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <aside class="notes" style="display:none">
+    Being Superman isn't just about winning fights. It's the psychological weight of knowing you can't save everyone despite having the power to save many.
+  </aside>
+  <aside class="notes">Being Superman isn't just about winning fights. It's the psychological weight of knowing you can't save everyone despite having the power to save many.</aside>
+</section>
+  <section style="background: var(--bg2); color: var(--text); font-family: var(--sans); display: flex; flex-direction: column; overflow: hidden; position: relative;">
+  <!-- Background Pattern -->
+  <div style="position: absolute; inset: 0; opacity: 0.1; background-image: repeating-linear-gradient(45deg, var(--accent1) 0, var(--accent1) 2px, transparent 2px, transparent 10px);"></div>
+  
+  <!-- Section Label -->
+  <div style="position: absolute; top: 40px; right: 40px; font-family: var(--mono); color: var(--accent2); font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">
+    05 // Leadership
+  </div>
+
+  <div class="s" style="flex: 1; padding: 60px 80px; display: flex; flex-direction: column; justify-content: center; z-index: 2;">
+    <h2 style="font-family: var(--serif); font-size: 4.5rem; margin: 0 0 60px; line-height: 1; color: var(--text); text-shadow: 3px 3px 0px var(--accent1);">
+      Leading the <span style="color: var(--accent2);">Justice League</span>
+    </h2>
+
+    <div style="display: flex; flex-direction: column; gap: 20px; max-width: 900px; position: relative;">
+      
+      <!-- Feature Row 1 -->
+      <div style="background: var(--bg); padding: 40px; border-radius: 20px; display: flex; gap: 40px; align-items: center; border-left: 8px solid var(--accent1); box-shadow: 10px 10px 0px rgba(0,0,0,0.2);">
+        <div style="width: 100px; height: 100px; flex-shrink: 0; background: var(--accent1); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+          <i class="fas fa-compass" style="font-size: 3rem; color: white;"></i>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <h3 style="font-family: var(--serif); font-size: 2.2rem; color: var(--accent2); margin: 0;">Moral Compass</h3>
+          <p style="font-size: 1.15rem; color: var(--text2); margin: 0; line-height: 1.5;">Superman's presence provides a set of ethics that guides every decision made by the League, ensuring they remain heroes of the people.</p>
+        </div>
+      </div>
+
+      <!-- Feature Row 2 -->
+      <div style="background: var(--bg); padding: 40px; border-radius: 20px; display: flex; gap: 40px; align-items: center; border-left: 8px solid var(--accent3); box-shadow: 10px 10px 0px rgba(0,0,0,0.2);">
+        <div style="width: 100px; height: 100px; flex-shrink: 0; background: var(--accent3); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+          <i class="fas fa-lightbulb" style="font-size: 3rem; color: white;"></i>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <h3 style="font-family: var(--serif); font-size: 2.2rem; color: var(--accent2); margin: 0;">Tactical Inspiration</h3>
+          <p style="font-size: 1.15rem; color: var(--text2); margin: 0; line-height: 1.5;">He doesn't just command; he inspires through his own willingness to sacrifice, leading by example in the most dire situations.</p>
+        </div>
+      </div>
+
+      <!-- Feature Row 3 -->
+      <div style="background: var(--bg); padding: 40px; border-radius: 20px; display: flex; gap: 40px; align-items: center; border-left: 8px solid var(--accent2); box-shadow: 10px 10px 0px rgba(0,0,0,0.2);">
+        <div style="width: 100px; height: 100px; flex-shrink: 0; background: var(--accent2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+          <i class="fas fa-link" style="font-size: 3rem; color: var(--bg);"></i>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <h3 style="font-family: var(--serif); font-size: 2.2rem; color: var(--bg); margin: 0; background: var(--accent2); display: inline-block; padding: 0 10px;">The Bridge Between Worlds</h3>
+          <p style="font-size: 1.15rem; color: var(--text2); margin: 0; line-height: 1.5;">As a man of two worlds, he serves as the vital link between human concerns and cosmic realities within the Justice League.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <aside class="notes" style="display:none">
+    Superman serves as the heart of the Justice League. He doesn't just lead through strength, but by being the standard that other heroes look up to.
+  </aside>
+  <aside class="notes">Superman serves as the heart of the Justice League. He doesn't just lead through strength, but by being the standard that other heroes look up to.</aside>
+</section>
+  <section style="background: var(--surface); color: var(--bg); font-family: var(--sans); display: flex; flex-direction: column; overflow: hidden; position: relative;">
+  <!-- Dot Gradients & Pop Art Patterns -->
+  <div style="position: absolute; width: 100%; height: 100%; opacity: 0.1; background: radial-gradient(circle, var(--accent1) 20%, transparent 20%) 0 0, radial-gradient(circle, var(--accent1) 20%, transparent 20%) 10px 10px; background-size: 20px 20px; z-index: 1;"></div>
+  
+  <div class="s" style="flex: 1; padding: 60px 80px; z-index: 2; display: flex; flex-direction: column; gap: 40px; justify-content: center;">
+    
+    <div style="display: flex; gap: 40px; align-items: flex-end;">
+      <h2 style="font-family: var(--serif); font-size: 7rem; line-height: 0.8; margin: 0; color: var(--accent1); text-transform: uppercase; font-weight: 900; -webkit-text-stroke: 3px var(--bg); text-shadow: 10px 10px 0px var(--accent2);">
+        The Pop<br>Art Lens
+      </h2>
+      <div style="background: var(--bg); color: white; padding: 15px 30px; font-family: var(--mono); font-weight: 900; font-size: 1.5rem; transform: rotate(-5deg); box-shadow: 5px 5px 0px var(--accent3);">
+        BOOM! POW!
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px;">
+      <!-- Feature 1 -->
+      <div style="background: white; border: 4px solid var(--bg); padding: 40px; box-shadow: 15px 15px 0px var(--accent1); display: flex; flex-direction: column; gap: 20px;">
+        <h3 style="font-family: var(--serif); font-size: 2.2rem; margin: 0; color: var(--bg);">Vibrant Color Palettes</h3>
+        <p style="font-size: 1.1rem; color: var(--bg); line-height: 1.5; margin: 0;">Drawing directly from the primary colors of the 1930s comics, modern films maintain a vivid, almost surreal visual punch.</p>
+        <div style="display: flex; gap: 10px;">
+          <div style="width: 30px; height: 30px; background: var(--accent1); border-radius: 50%;"></div>
+          <div style="width: 30px; height: 30px; background: var(--accent2); border-radius: 50%;"></div>
+          <div style="width: 30px; height: 30px; background: var(--accent3); border-radius: 50%;"></div>
+        </div>
+      </div>
+
+      <!-- Feature 2 -->
+      <div style="background: white; border: 4px solid var(--bg); padding: 40px; box-shadow: 15px 15px 0px var(--accent2); display: flex; flex-direction: column; gap: 20px;">
+        <h3 style="font-family: var(--serif); font-size: 2.2rem; margin: 0; color: var(--bg);">Dynamic Action Frames</h3>
+        <p style="font-size: 1.1rem; color: var(--bg); line-height: 1.5; margin: 0;">Film choreography often mirrors the dramatic perspective and 'impossible' angles of classic comic book panels.</p>
+        <div style="width: 100%; height: 60px; background: repeating-linear-gradient(-45deg, var(--bg) 0, var(--bg) 2px, transparent 2px, transparent 8px); opacity: 0.2;"></div>
+      </div>
+
+      <!-- Feature 3 -->
+      <div style="background: white; border: 4px solid var(--bg); padding: 40px; box-shadow: 15px 15px 0px var(--accent3); display: flex; flex-direction: column; gap: 20px;">
+        <h3 style="font-family: var(--serif); font-size: 2.2rem; margin: 0; color: var(--bg);">Onomatopoeic Visuals</h3>
+        <p style="font-size: 1.1rem; color: var(--bg); line-height: 1.5; margin: 0;">VFX designs, especially sonic booms and energy beams, echo the literal 'sound effect' text used in graphic novels.</p>
+        <div style="font-family: var(--mono); font-weight: 900; color: var(--accent1); font-size: 1.2rem;">>>> IMPACT DETECTED <<<</div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes" style="display:none">
+    Even in modern films, the visual DNA of the vintage comic book remains. We use pop-art aesthetics here to bridge the gap between the film and its source.
+  </aside>
+  <aside class="notes">Even in modern films, the visual DNA of the vintage comic book remains. We use pop-art aesthetics here to bridge the gap between the film and its source.</aside>
+</section>
+  <section style="background: var(--bg2); color: var(--text); font-family: var(--sans); display: flex; flex-direction: column; overflow: hidden; position: relative;">
+  <!-- Starburst Pattern Overlay -->
+  <div style="position: absolute; inset: 0; opacity: 0.1; background-image: repeating-conic-gradient(from 0deg, var(--accent2) 0 10deg, transparent 10deg 20deg);"></div>
+  
+  <!-- Section Label -->
+  <div style="position: absolute; top: 40px; right: 40px; font-family: var(--mono); color: var(--accent2); font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">
+    06 // Portrayals
+  </div>
+
+  <div class="s" style="flex: 1; padding: 60px 80px; display: flex; flex-direction: column; justify-content: center; z-index: 2;">
+    <div style="margin-bottom: 50px;">
+      <h2 style="font-family: var(--serif); font-size: 4.5rem; margin: 0; line-height: 1; color: var(--text); text-shadow: 3px 3px 0px var(--accent1);">
+        The Faces of <span style="color: var(--accent2);">Kal-El</span>
+      </h2>
+      <p style="font-size: 1.2rem; color: var(--text2); margin-top: 15px; max-width: 700px;">Every actor brings a different facet of the character to life—from classic charm to intense internal struggle.</p>
+    </div>
+
+    <!-- Portrayal Cards -->
+    <div style="display: flex; gap: 30px; justify-content: space-between;">
+      
+      <!-- Card 1 -->
+      <div style="flex: 1; background: var(--bg); border: 2px solid var(--accent1); padding: 40px; border-radius: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.3); position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; right: 0; background: var(--accent1); padding: 5px 20px; font-family: var(--mono); font-size: 0.8rem; font-weight: 900; color: white; border-bottom-left-radius: 15px;">THE IDEALIST</div>
+        <div style="width: 80px; height: 80px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+          <i class="fas fa-certificate" style="font-size: 2.5rem; color: var(--accent1);"></i>
+        </div>
+        <h3 style="font-family: var(--serif); font-size: 2rem; color: var(--accent2); margin: 0 0 10px;">Christopher Reeve</h3>
+        <p style="font-size: 1rem; color: var(--text2); line-height: 1.5; margin: 0;">Redefined Superman for a global audience with unparalleled sincerity, grace, and a clear moral foundation.</p>
+        <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-family: var(--mono); font-size: 0.8rem; color: var(--accent1);">YEARS: 1978 – 1987</div>
+      </div>
+
+      <!-- Card 2 -->
+      <div style="flex: 1; background: var(--bg); border: 2px solid var(--accent3); padding: 40px; border-radius: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.3); position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; right: 0; background: var(--accent3); padding: 5px 20px; font-family: var(--mono); font-size: 0.8rem; font-weight: 900; color: white; border-bottom-left-radius: 15px;">THE OUTSIDER</div>
+        <div style="width: 80px; height: 80px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+          <i class="fas fa-mask" style="font-size: 2.5rem; color: var(--accent3);"></i>
+        </div>
+        <h3 style="font-family: var(--serif); font-size: 2rem; color: var(--accent2); margin: 0 0 10px;">Henry Cavill</h3>
+        <p style="font-size: 1rem; color: var(--text2); line-height: 1.5; margin: 0;">Captured the intense internal conflict of an alien outsider trying to find his place and purpose in a cynical modern world.</p>
+        <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-family: var(--mono); font-size: 0.8rem; color: var(--accent3);">YEARS: 2013 – 2022</div>
+      </div>
+
+      <!-- Card 3 -->
+      <div style="flex: 1; background: var(--bg); border: 2px solid var(--accent2); padding: 40px; border-radius: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.3); position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; right: 0; background: var(--accent2); padding: 5px 20px; font-family: var(--mono); font-size: 0.8rem; font-weight: 900; color: var(--bg); border-bottom-left-radius: 15px;">THE BEACON</div>
+        <div style="width: 80px; height: 80px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+          <i class="fas fa-eye" style="font-size: 2.5rem; color: var(--accent2);"></i>
+        </div>
+        <h3 style="font-family: var(--serif); font-size: 2rem; color: var(--accent2); margin: 0 0 10px;">Brandon Routh</h3>
+        <p style="font-size: 1rem; color: var(--text2); line-height: 1.5; margin: 0;">A powerful bridge to the classic era, emphasizing Superman's loneliness as a silent observer of the world he loves.</p>
+        <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-family: var(--mono); font-size: 0.8rem; color: var(--accent2);">YEARS: 2006, 2019</div>
+      </div>
+
+    </div>
+  </div>
+
+  <aside class="notes" style="display:none">
+    Every actor brings a different facet of the character to life—from Reeve's charm to Cavill's intense internal struggle with his place on Earth.
+  </aside>
+  <aside class="notes">Every actor brings a different facet of the character to life—from Reeve's charm to Cavill's intense internal struggle with his place on Earth.</aside>
+</section>
+  <section style="background: var(--bg); color: var(--text); font-family: var(--sans); display: flex; flex-direction: column; overflow: hidden; position: relative;">
+  <!-- Section Label -->
+  <div style="position: absolute; top: 40px; right: 40px; font-family: var(--mono); color: var(--accent1); font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">
+    07 // Conflict
+  </div>
+
+  <div class="s" style="flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 0; z-index: 2;">
+    
+    <!-- Left Column: Lex / Intellect -->
+    <div style="background: var(--surface); color: var(--bg); padding: 80px; display: flex; flex-direction: column; justify-content: center; position: relative; clip-path: polygon(0 0, 100% 0, 90% 100%, 0% 100%);">
+      <div style="margin-bottom: 30px;">
+        <i class="fas fa-brain" style="font-size: 3.5rem; color: var(--accent1);"></i>
+      </div>
+      <h2 style="font-family: var(--serif); font-size: 3.5rem; line-height: 1; margin: 0 0 20px;">Humanity's <br><span style="color: var(--accent1);">Challenge</span></h2>
+      <p style="font-size: 1.2rem; line-height: 1.6; opacity: 0.8; max-width: 400px; margin-bottom: 30px;">Lex Luthor represents the human insecurity when faced with a god. His challenge is philosophical and intellectual.</p>
+      
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <div style="display: flex; align-items: center; gap: 15px;">
+          <div style="width: 10px; height: 10px; background: var(--accent1); border-radius: 50%;"></div>
+          <span style="font-weight: 700; font-family: var(--mono);">LEX LUTHOR'S INTELLECT</span>
+        </div>
+        <p style="margin: 0; font-size: 0.95rem; opacity: 0.7; padding-left: 25px;">The belief that a god makes humanity obsolete and weak by comparison.</p>
+      </div>
+    </div>
+
+    <!-- Right Column: Zod / Krypton / Public -->
+    <div style="background: var(--bg2); padding: 80px; display: flex; flex-direction: column; justify-content: center;">
+      <div style="margin-bottom: 30px;">
+        <i class="fas fa-shield-alt" style="font-size: 3.5rem; color: var(--accent2);"></i>
+      </div>
+      <h2 style="font-family: var(--serif); font-size: 3.5rem; line-height: 1; margin: 0 0 20px; color: var(--text);">The Weight of <span style="color: var(--accent2);">Heritage</span></h2>
+      <p style="font-size: 1.2rem; line-height: 1.6; opacity: 0.8; max-width: 400px; margin-bottom: 30px; color: var(--text2);">General Zod represents the ghost of a lost civilization, forcing Superman to choose between his biology and his adopted home.</p>
+      
+      <div style="display: flex; flex-direction: column; gap: 15px;">
+        <div style="display: flex; align-items: center; gap: 15px;">
+          <div style="width: 10px; height: 10px; background: var(--accent2); border-radius: 50%;"></div>
+          <span style="font-weight: 700; font-family: var(--mono); color: var(--text);">KRYPTONIAN THREATS</span>
+        </div>
+        <p style="margin: 0; font-size: 0.95rem; color: var(--text2); opacity: 0.7; padding-left: 25px;">The physical manifestation of what he could have been, without human morality.</p>
+        
+        <div style="display: flex; align-items: center; gap: 15px; margin-top: 10px;">
+          <div style="width: 10px; height: 10px; background: var(--accent3); border-radius: 50%;"></div>
+          <span style="font-weight: 700; font-family: var(--mono); color: var(--text);">THE PUBLIC'S PERCEPTION</span>
+        </div>
+        <p style="margin: 0; font-size: 0.95rem; color: var(--text2); opacity: 0.7; padding-left: 25px;">The shifting tide of public opinion, from worship to fear and suspicion.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <aside class="notes" style="display:none">
+    His greatest challenges aren't always physical. Lex Luthor represents the human insecurity when faced with a god, while Zod represents his lost heritage.
+  </aside>
+  <aside class="notes">His greatest challenges aren't always physical. Lex Luthor represents the human insecurity when faced with a god, while Zod represents his lost heritage.</aside>
+</section>
+  <section style="background: var(--surface); color: var(--bg); font-family: var(--sans); display: flex; flex-direction: column; overflow: hidden; position: relative;">
+  <!-- Section Label -->
+  <div style="position: absolute; top: 40px; right: 40px; font-family: var(--mono); color: var(--accent1); font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">
+    08 // Legacy
+  </div>
+
+  <div class="s cx" style="flex: 1; padding: 60px 80px; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+    
+    <div style="margin-bottom: 60px; max-width: 800px;">
+      <h2 style="font-family: var(--serif); font-size: 5rem; line-height: 0.95; margin: 0; color: var(--bg); text-transform: uppercase; font-weight: 900;">
+        Why He Matters <span style="color: var(--accent1); background: var(--accent2); padding: 0 10px; display: inline-block; transform: rotate(-1deg);">Today</span>
+      </h2>
+      <p style="font-size: 1.4rem; color: var(--bg); opacity: 0.7; margin-top: 25px; line-height: 1.6;">In an era of anti-heroes and moral ambiguity, Superman's unwavering light remains a necessary beacon of humanity.</p>
+    </div>
+
+    <!-- Circular Icons Grid -->
+    <div style="display: flex; gap: 60px; align-items: flex-start; justify-content: center;">
+      
+      <!-- Icon 1 -->
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 25px; width: 250px;">
+        <div style="width: 150px; height: 150px; border-radius: 50%; border: 4px dashed var(--accent1); padding: 10px; position: relative;">
+          <div style="width: 100%; height: 100%; border-radius: 50%; background: var(--accent1); display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);">
+            <i class="fas fa-hand-holding-heart" style="font-size: 3.5rem; color: white;"></i>
+          </div>
+        </div>
+        <h3 style="font-family: var(--serif); font-size: 1.8rem; margin: 0; color: var(--bg);">Symbol of Hope</h3>
+        <p style="font-size: 0.95rem; line-height: 1.4; color: var(--bg); opacity: 0.8;">The universal S-shield has become a global glyph for the possibility of a better tomorrow.</p>
+      </div>
+
+      <!-- Icon 2 -->
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 25px; width: 250px;">
+        <div style="width: 150px; height: 150px; border-radius: 50%; border: 4px dashed var(--accent3); padding: 10px; position: relative;">
+          <div style="width: 100%; height: 100%; border-radius: 50%; background: var(--accent3); display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(69, 123, 157, 0.3);">
+            <i class="fas fa-chess-king" style="font-size: 3.5rem; color: white;"></i>
+          </div>
+        </div>
+        <h3 style="font-family: var(--serif); font-size: 1.8rem; margin: 0; color: var(--bg);">Archetype</h3>
+        <p style="font-size: 0.95rem; line-height: 1.4; color: var(--bg); opacity: 0.8;">He is the blueprint from which all modern cinematic heroes are drawn, the original cinematic myth.</p>
+      </div>
+
+      <!-- Icon 3 -->
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 25px; width: 250px;">
+        <div style="width: 150px; height: 150px; border-radius: 50%; border: 4px dashed var(--accent2); padding: 10px; position: relative;">
+          <div style="width: 100%; height: 100%; border-radius: 50%; background: var(--accent2); display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(255, 183, 3, 0.3);">
+            <i class="fas fa-infinity" style="font-size: 3.5rem; color: var(--bg);"></i>
+          </div>
+        </div>
+        <h3 style="font-family: var(--serif); font-size: 1.8rem; margin: 0; color: var(--bg);">Resilience</h3>
+        <p style="font-size: 0.95rem; line-height: 1.4; color: var(--bg); opacity: 0.8;">Despite changing tastes and trends, the core character remains culturally essential for every generation.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <aside class="notes" style="display:none">
+    In an era of anti-heroes, Superman's unwavering morality remains a necessary beacon. He is the blueprint for all who follow.
+  </aside>
+  <aside class="notes">In an era of anti-heroes, Superman's unwavering morality remains a necessary beacon. He is the blueprint for all who follow.</aside>
+</section>
+  <section style="background: var(--bg); background-image: radial-gradient(circle at 80% 20%, var(--bg2) 0%, var(--bg) 80%); color: var(--text); font-family: var(--sans); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+  <!-- Pop Art Background Elements -->
+  <div style="position: absolute; width: 100%; height: 100%; opacity: 0.15; background-image: radial-gradient(var(--accent2) 1.5px, transparent 1.5px); background-size: 25px 25px;"></div>
+  
+  <div class="s cx" style="z-index: 10; text-align: center; max-width: 900px; padding: 40px;">
+    
+    <!-- Large Symbol Icon -->
+    <div style="margin-bottom: 50px; display: inline-block; position: relative;">
+      <div style="width: 140px; height: 140px; background: var(--accent1); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); display: flex; align-items: center; justify-content: center; box-shadow: 0 15px 30px rgba(0,0,0,0.5); border: 4px solid var(--accent2);">
+        <i class="fas fa-flag" style="font-size: 60px; color: var(--accent2);"></i>
+      </div>
+      <!-- Accent pop art rays -->
+      <div style="position: absolute; top: 50%; left: 50%; width: 400px; height: 400px; background: repeating-conic-gradient(from 0deg, transparent 0 15deg, rgba(255,255,255,0.05) 15deg 30deg); transform: translate(-50%, -50%); z-index: -1;"></div>
+    </div>
+
+    <h2 style="font-family: var(--serif); font-size: 6rem; font-weight: 900; text-transform: uppercase; margin: 0; line-height: 0.85; letter-spacing: -2px; color: var(--text); text-shadow: 5px 5px 0px var(--accent1), 10px 10px 0px var(--bg2);">
+      Truth and <br><span style="color: var(--accent2);">Justice</span>
+    </h2>
+    
+    <div style="height: 6px; width: 120px; background: var(--accent3); margin: 40px auto; border-radius: 3px;"></div>
+
+    <p style="font-size: 1.8rem; font-weight: 700; color: var(--text2); margin: 0 auto 50px; letter-spacing: 2px; text-transform: uppercase; font-family: var(--mono);">
+      Thank You for Joining the Journey
+    </p>
+
+    <div style="display: flex; gap: 40px; justify-content: center;">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+        <div style="width: 60px; height: 60px; background: var(--accent1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+          <i class="fab fa-twitter" style="font-size: 1.5rem;"></i>
+        </div>
+        <span style="font-family: var(--mono); font-size: 0.8rem; font-weight: 700; color: var(--text2);">@DIGITN_AI</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+        <div style="width: 60px; height: 60px; background: var(--accent3); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+          <i class="fas fa-globe" style="font-size: 1.5rem;"></i>
+        </div>
+        <span style="font-family: var(--mono); font-size: 0.8rem; font-weight: 700; color: var(--text2);">DIGITN.AI</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+        <div style="width: 60px; height: 60px; background: var(--accent2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--bg);">
+          <i class="fas fa-play" style="font-size: 1.5rem;"></i>
+        </div>
+        <span style="font-family: var(--mono); font-size: 0.8rem; font-weight: 700; color: var(--text2);">WATCH LATER</span>
+      </div>
+    </div>
+  </div>
+
+  <aside class="notes" style="display:none">
+    Thank you for your time. Whether you prefer the classic films or the modern epics, the Man of Steel continues to fly high in our collective imagination.
+  </aside>
+  <aside class="notes">Thank you for your time. Whether you prefer the classic films or the modern epics, the Man of Steel continues to fly high in our collective imagination.</aside>
+</section>
+
+<script>
+(function(){
+  const sections = document.querySelectorAll('section');
+  const total = sections.length;
+  const counter = document.getElementById('slide-counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  // IntersectionObserver: mark the visible slide as .active (triggers CSS animations)
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        sections.forEach(s => s.classList.remove('active'));
+        e.target.classList.add('active');
+        current = Array.from(sections).indexOf(e.target);
+        if (counter) counter.textContent = (current+1) + ' / ' + total;
+        if (progress) progress.style.width = ((current+1)/total*100) + '%';
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s => obs.observe(s));
+
+  // Activate first slide immediately
+  if (sections[0]) sections[0].classList.add('active');
+  if (counter) counter.textContent = '1 / ' + total;
+  if (progress) progress.style.width = (1/total*100) + '%';
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      if (current < total - 1) sections[current + 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (current > 0) sections[current - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      sections[0].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      sections[total - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'f' || e.key === 'F11') {
+      e.preventDefault();
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>

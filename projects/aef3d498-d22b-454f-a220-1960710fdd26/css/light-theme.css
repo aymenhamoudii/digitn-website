@@ -1,0 +1,43 @@
+[data-theme="light"] {
+  /* Light Mode Palette */
+  --bg-color: #f1f5f9;
+  --bg-gradient: radial-gradient(circle at top right, #e2e8f0, #f1f5f9);
+  
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(15, 23, 42, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.05);
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  
+  --accent-primary: #0284c7;
+  --accent-secondary: #4f46e5;
+  --accent-gradient: linear-gradient(135deg, #0284c7 0%, #4f46e5 100%);
+  
+  --card-bg-hover: rgba(255, 255, 255, 0.9);
+}
+
+/* Light theme specific overrides */
+[data-theme="light"] .bg-glow-1 { opacity: 0.2; }
+[data-theme="light"] .bg-glow-2 { opacity: 0.2; }
+[data-theme="light"] .bg-glow-3 { opacity: 0.1; }
+
+[data-theme="light"] .glass-nav.scrolled {
+  background: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+[data-theme="light"] .btn-secondary {
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--text-primary);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+[data-theme="light"] .btn-secondary:hover {
+  background: #fff;
+}
+
+[data-theme="light"] .tech-tag {
+  color: var(--text-secondary);
+}

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>The Severed Self: Identity, Ethics, and the Eagan Legacy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700&family=Share+Tech+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+    --bg: #042C53;
+    --bg2: #06396B;
+    --surface: #031E39;
+    --surface2: #1d4164;
+    --border: rgba(255,255,255,.07);
+    --border-md: rgba(255,255,255,.11);
+    --accent1: #8B4513;
+    --accent1-dim: rgba(139, 69, 19, 0.18);
+    --accent2: #FAC775;
+    --accent2-dim: rgba(250, 199, 117, 0.18);
+    --accent3: #C4703A;
+    --accent3-dim: rgba(196, 112, 58, 0.18);
+    --t1: #FDF0E6;
+    --t2: #BFAEA0;
+    --t3: rgba(253, 240, 230, 0.3);
+    --mono: 'Share Tech Mono', monospace;
+    --sans: 'Exo 2', system-ui, sans-serif;
+    --serif: 'Orbitron', sans-serif;
+  }
+    
+  /* ─── Reset ─── */
+  ::-webkit-scrollbar{display:none}
+  *{scrollbar-width:none;-ms-overflow-style:none;box-sizing:border-box;margin:0;padding:0}
+  html{overflow-y:scroll;overflow-x:hidden;scroll-behavior:smooth;scroll-snap-type:y mandatory}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  /* ─── Slide wrapper (viewport-sized snap target) ─── */
+  .slide-wrap{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--bg);position:relative}
+
+  /* ─── Slide (fluid responsive canvas with safe zone) ─── */
+  section{width:100%;height:100%;max-width:1440px;max-height:810px;margin:auto;display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+  /* ─── Stagger animation (.s container) ─── */
+  .s{display:flex;flex-direction:column;flex:1;min-height:0;padding:5vh 5vw;box-sizing:border-box;overflow:hidden}
+  .s>*{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+  .slide-wrap.active .s>*{opacity:1;transform:translateY(0)}
+  .slide-wrap.active .s>*:nth-child(1){transition-delay:.03s}
+  .slide-wrap.active .s>*:nth-child(2){transition-delay:.09s}
+  .slide-wrap.active .s>*:nth-child(3){transition-delay:.15s}
+  .slide-wrap.active .s>*:nth-child(4){transition-delay:.21s}
+  .slide-wrap.active .s>*:nth-child(5){transition-delay:.27s}
+  .slide-wrap.active .s>*:nth-child(6){transition-delay:.33s}
+  .slide-wrap.active .s>*:nth-child(7){transition-delay:.39s}
+  .slide-wrap.active .s>*:nth-child(8){transition-delay:.45s}
+
+  /* ─── Centering utility ─── */
+  .cx{display:flex;justify-content:center;align-items:center;text-align:center}
+
+  /* ─── Speaker notes (hidden) ─── */
+  aside.notes{display:none!important}
+
+  /* ─── Slide counter ─── */
+  #slide-counter{position:fixed;bottom:16px;right:24px;font-family:var(--mono);font-size:13px;color:var(--t3);background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:6px 14px;z-index:100;pointer-events:none}
+
+  /* ─── Progress bar ─── */
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--accent1);z-index:100;transition:width .3s ease}
+
+  </style>
+</head>
+<body>
+  <div id="progress" style="width:0"></div>
+  <div id="slide-counter">1 / 11</div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg); color: var(--t1); font-family: var(--sans); padding: 5vw; box-sizing: border-box;">
+  <div class="s cx" style="height: 100%; width: 100%; flex-direction: column; gap: 3vh;">
+    <div style="border: 2px solid var(--accent2); padding: 1vh 2vw; border-radius: 50px; color: var(--accent2); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; font-size: clamp(0.8rem, 1.5vw, 1.2rem);">
+      <i class="fas fa-droplet" style="margin-right: 10px;"></i> Lumon Industries
+    </div>
+    <h1 style="font-family: var(--serif); font-size: clamp(3rem, 8vw, 7rem); margin: 0; color: var(--t1); text-align: center; line-height: 1.1;">The Severed Self</h1>
+    <h2 style="font-size: clamp(1.5rem, 3vw, 2.5rem); color: var(--accent2); font-weight: 300; text-align: center; margin: 0; max-width: 80%;">Identity, Autonomy, and the Eagan Philosophy</h2>
+    <div style="display: flex; gap: 2vw; margin-top: 5vh; flex-wrap: wrap; justify-content: center; width: 100%;">
+      <div style="background: var(--surface); padding: 2vh 3vw; border-radius: 10px; border-left: 4px solid var(--accent1); font-size: clamp(1rem, 1.5vw, 1.5rem); color: var(--t1);">Deep Lore Analysis</div>
+      <div style="background: var(--surface); padding: 2vh 3vw; border-radius: 10px; border-left: 4px solid var(--accent1); font-size: clamp(1rem, 1.5vw, 1.5rem); color: var(--t1);">Philosophical Implications</div>
+      <div style="background: var(--surface); padding: 2vh 3vw; border-radius: 10px; border-left: 4px solid var(--accent1); font-size: clamp(1rem, 1.5vw, 1.5rem); color: var(--t1);">Full Season 1 Analysis</div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Welcome to the severed floor. Today, we will explore the profound philosophical and ethical horrors underlying Lumon Industries, diving deep into the lore and revelations of Season 1.</aside>
+  <aside class="notes">Welcome to the severed floor. Today, we will explore the profound philosophical and ethical horrors underlying Lumon Industries, diving deep into the lore and revelations of Season 1.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg); color: var(--t1); font-family: var(--sans); padding: 5vw; box-sizing: border-box; display: flex; align-items: center;">
+  <div class="s" style="display: flex; flex-wrap: wrap; width: 100%; height: 100%; align-items: center; gap: 5vw;">
+    <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 3vh;">
+      <div style="color: var(--accent2); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; font-size: clamp(0.8rem, 1.5vw, 1.2rem);">The Procedure</div>
+      <h2 style="font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem); margin: 0; color: var(--t1); line-height: 1.1;">A Life Divided</h2>
+      <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 3vh;">
+        <li style="display: flex; align-items: flex-start; gap: 1.5vw; font-size: clamp(1.2rem, 2vw, 1.8rem); color: var(--t2);">
+          <div style="background: var(--surface); padding: 1.5vh; border-radius: 50%; display: flex; justify-content: center; align-items: center; aspect-ratio: 1;"><i class="fas fa-microchip" style="color: var(--accent1);"></i></div>
+          <span style="padding-top: 1vh;">Spatial dictation: The boundary between work and self</span>
+        </li>
+        <li style="display: flex; align-items: flex-start; gap: 1.5vw; font-size: clamp(1.2rem, 2vw, 1.8rem); color: var(--t2);">
+          <div style="background: var(--surface); padding: 1.5vh; border-radius: 50%; display: flex; justify-content: center; align-items: center; aspect-ratio: 1;"><i class="fas fa-brain" style="color: var(--accent1);"></i></div>
+          <span style="padding-top: 1vh;">The creation of the 'Innie' tabula rasa</span>
+        </li>
+        <li style="display: flex; align-items: flex-start; gap: 1.5vw; font-size: clamp(1.2rem, 2vw, 1.8rem); color: var(--t2);">
+          <div style="background: var(--surface); padding: 1.5vh; border-radius: 50%; display: flex; justify-content: center; align-items: center; aspect-ratio: 1;"><i class="fas fa-scale-balanced" style="color: var(--accent1);"></i></div>
+          <span style="padding-top: 1vh;">The illusion of work-life equilibrium</span>
+        </li>
+      </ul>
+    </div>
+    <div style="flex: 1; min-width: 300px; display: flex; justify-content: center; align-items: center;">
+      <div style="width: clamp(250px, 40vw, 500px); aspect-ratio: 1; background: var(--surface); border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 8px solid var(--accent2); position: relative; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+        <div style="position: absolute; left: 0; width: 50%; height: 100%; background: var(--bg2); display: flex; align-items: center; justify-content: center;">
+          <span style="font-family: var(--mono); font-size: clamp(2rem, 4vw, 3rem); font-weight: bold; color: var(--accent2); opacity: 0.7; transform: rotate(-90deg); letter-spacing: 5px;">OUTIE</span>
+        </div>
+        <div style="position: absolute; right: 0; width: 50%; height: 100%; background: var(--surface); display: flex; align-items: center; justify-content: center;">
+          <span style="font-family: var(--mono); font-size: clamp(2rem, 4vw, 3rem); font-weight: bold; color: var(--accent1); opacity: 0.7; transform: rotate(90deg); letter-spacing: 5px;">INNIE</span>
+        </div>
+        <div style="width: 10px; height: 100%; background: var(--accent2); z-index: 10; box-shadow: 0 0 20px rgba(0,0,0,0.8);"></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">The severance chip enforces spatial dictation, creating an 'Innie' with no memory of the outside world. We must ask: Is this true equilibrium, or the creation of a captive consciousness?</aside>
+  <aside class="notes">The severance chip enforces spatial dictation, creating an 'Innie' with no memory of the outside world. We must ask: Is this true equilibrium, or the creation of a captive consciousness?</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--surface); color: var(--t1); font-family: var(--sans); padding: 5vw; box-sizing: border-box;">
+  <div class="s cx" style="height: 100%; width: 100%; flex-direction: column; gap: 5vh; text-align: center;">
+    <div style="color: var(--accent2); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; font-size: clamp(1rem, 1.5vw, 1.5rem);">Deep Lore</div>
+    <i class="fas fa-quote-left" style="font-size: clamp(3rem, 6vw, 5rem); color: var(--accent1); opacity: 0.5;"></i>
+    <blockquote style="margin: 0; font-family: var(--serif); font-size: clamp(2rem, 4vw, 4.5rem); line-height: 1.3; max-width: 80%; color: var(--t1);">
+      The Kier Philosophy
+      <div style="font-size: clamp(1.2rem, 2vw, 2rem); color: var(--t2); font-family: var(--sans); margin-top: 4vh; font-weight: 300; line-height: 1.5;">
+        <span style="color: var(--accent2);">"Taming the Four Tempers: Woe, Frolic, Dread, Malice."</span><br>
+        Macrodata Refinement as emotional sorting.
+      </div>
+    </blockquote>
+    <div style="display: inline-flex; align-items: center; gap: 1vw; background: var(--bg); padding: 1vh 2vw; border-radius: 50px; border: 1px solid var(--accent2); margin-top: 2vh;">
+      <div style="width: 40px; height: 40px; background: var(--accent1); border-radius: 50%; display: flex; justify-content: center; align-items: center;"><i class="fas fa-user-tie" style="color: var(--t1);"></i></div>
+      <span style="font-size: clamp(1rem, 1.5vw, 1.5rem); font-weight: bold; color: var(--accent2);">Kier Eagan</span>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Kier Eagan's philosophy forms a cult-like religion within Lumon. The Macrodata Refinement workers aren't just sorting numbers; they are interacting directly with the four core tempers, an eerie reflection of Kier's obsession with emotional control.</aside>
+  <aside class="notes">Kier Eagan's philosophy forms a cult-like religion within Lumon. The Macrodata Refinement workers aren't just sorting numbers; they are interacting directly with the four core tempers, an eerie reflection of Kier's obsession with emotional control.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg); color: var(--t1); font-family: var(--sans); padding: 5vw; box-sizing: border-box;">
+  <div class="s" style="height: 100%; width: 100%; display: flex; flex-direction: column; gap: 4vh;">
+    <div style="text-align: center;">
+      <div style="color: var(--accent2); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; font-size: clamp(1rem, 1.5vw, 1.5rem);">Ethical Implications</div>
+      <h2 style="font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem); margin: 1vh 0 0 0; color: var(--t1);">Consent of the Innie</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 3vw; flex: 1; align-items: stretch; margin-top: 2vh;">
+      
+      <div style="background: var(--surface); padding: 4vh 3vw; border-radius: 20px; border-top: 5px solid var(--accent1); text-align: center; display: flex; flex-direction: column; gap: 2vh; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+        <i class="fas fa-video-slash" style="font-size: clamp(3rem, 5vw, 4rem); color: var(--accent2);"></i>
+        <h3 style="font-size: clamp(1.5rem, 2.5vw, 2rem); margin: 0; color: var(--t1);">Helena's Rejection</h3>
+        <p style="font-size: clamp(1rem, 1.5vw, 1.3rem); color: var(--t2); line-height: 1.6; margin: 0; flex: 1;">Helena Eagan absolutely rejects Helly R.'s autonomy: "I am a person. You are not."</p>
+      </div>
+
+      <div style="background: var(--surface); padding: 4vh 3vw; border-radius: 20px; border-top: 5px solid var(--accent1); text-align: center; display: flex; flex-direction: column; gap: 2vh; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+        <i class="fas fa-box-archive" style="font-size: clamp(3rem, 5vw, 4rem); color: var(--accent2);"></i>
+        <h3 style="font-size: clamp(1.5rem, 2.5vw, 2rem); margin: 0; color: var(--t1);">Corporate Property</h3>
+        <p style="font-size: clamp(1rem, 1.5vw, 1.3rem); color: var(--t2); line-height: 1.6; margin: 0; flex: 1;">The Innie exists solely as an asset owned by Lumon, devoid of human rights or legal protections.</p>
+      </div>
+
+      <div style="background: var(--surface); padding: 4vh 3vw; border-radius: 20px; border-top: 5px solid var(--accent1); text-align: center; display: flex; flex-direction: column; gap: 2vh; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+        <i class="fas fa-head-side-virus" style="font-size: clamp(3rem, 5vw, 4rem); color: var(--accent2);"></i>
+        <h3 style="font-size: clamp(1.5rem, 2.5vw, 2rem); margin: 0; color: var(--t1);">Reintegration Sickness</h3>
+        <p style="font-size: clamp(1rem, 1.5vw, 1.3rem); color: var(--t2); line-height: 1.6; margin: 0; flex: 1;">An ethical barrier designed as a physical and mental death sentence to discourage integration.</p>
+      </div>
+
+    </div>
+  </div>
+  <aside class="notes" style="display:none">The defining ethical conflict is highlighted by Helena's video to Helly: 'I am a person. You are not.' If an Outie consents to the procedure, does the Innie inherently forfeit fundamental human rights?</aside>
+  <aside class="notes">The defining ethical conflict is highlighted by Helena's video to Helly: 'I am a person. You are not.' If an Outie consents to the procedure, does the Innie inherently forfeit fundamental human rights?</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg2); color: var(--t1); font-family: var(--sans); padding: 5vw; box-sizing: border-box;">
+  <div class="s" style="height: 100%; width: 100%; display: flex; flex-direction: column;">
+    <div style="text-align: left; margin-bottom: 4vh;">
+      <div style="color: var(--accent2); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; font-size: clamp(1rem, 1.5vw, 1.5rem);">The Awakening</div>
+      <h2 style="font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem); margin: 1vh 0 0 0; color: var(--t1);">The Path to Rebellion</h2>
+    </div>
+    
+    <div style="position: relative; flex: 1; display: flex; flex-direction: column; justify-content: space-around; padding-left: 4vw;">
+      <div style="position: absolute; left: 1.5vw; top: 0; bottom: 0; width: 4px; background: var(--accent1); border-radius: 2px;"></div>
+      
+      <div style="position: relative; display: flex; align-items: center; gap: 3vw;">
+        <div style="position: absolute; left: -3.5vw; width: 3vw; height: 3vw; background: var(--accent2); border-radius: 50%; border: 4px solid var(--bg2); display: flex; justify-content: center; align-items: center; box-sizing: border-box;">
+          <div style="width: 1vw; height: 1vw; background: var(--bg2); border-radius: 50%;"></div>
+        </div>
+        <div style="background: var(--surface); padding: 3vh 4vw; border-radius: 15px; flex: 1; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+          <h3 style="font-size: clamp(1.5rem, 2.5vw, 2.2rem); margin: 0 0 1vh 0; color: var(--t1);">Petey's Reintegration</h3>
+          <p style="font-size: clamp(1.1rem, 1.8vw, 1.5rem); color: var(--t2); margin: 0;">The smuggled map becomes the first tangible proof of a world outside the confines of Macrodata Refinement.</p>
+        </div>
+      </div>
+
+      <div style="position: relative; display: flex; align-items: center; gap: 3vw;">
+        <div style="position: absolute; left: -3.5vw; width: 3vw; height: 3vw; background: var(--accent2); border-radius: 50%; border: 4px solid var(--bg2); display: flex; justify-content: center; align-items: center; box-sizing: border-box;">
+          <div style="width: 1vw; height: 1vw; background: var(--bg2); border-radius: 50%;"></div>
+        </div>
+        <div style="background: var(--surface); padding: 3vh 4vw; border-radius: 15px; flex: 1; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+          <h3 style="font-size: clamp(1.5rem, 2.5vw, 2.2rem); margin: 0 0 1vh 0; color: var(--t1);">Discovery of O&D</h3>
+          <p style="font-size: clamp(1.1rem, 1.8vw, 1.5rem); color: var(--t2); margin: 0;">Uncovering the hidden Optics and Design department dismantles the lie of absolute isolation.</p>
+        </div>
+      </div>
+
+      <div style="position: relative; display: flex; align-items: center; gap: 3vw;">
+        <div style="position: absolute; left: -3.5vw; width: 3vw; height: 3vw; background: var(--accent2); border-radius: 50%; border: 4px solid var(--bg2); display: flex; justify-content: center; align-items: center; box-sizing: border-box;">
+          <div style="width: 1vw; height: 1vw; background: var(--bg2); border-radius: 50%;"></div>
+        </div>
+        <div style="background: var(--surface); padding: 3vh 4vw; border-radius: 15px; flex: 1; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
+          <h3 style="font-size: clamp(1.5rem, 2.5vw, 2.2rem); margin: 0 0 1vh 0; color: var(--t1);">The Grim Barbarity</h3>
+          <p style="font-size: clamp(1.1rem, 1.8vw, 1.5rem); color: var(--t2); margin: 0;">The horrific Oakhaven painting reveals Lumon's psychological manipulation and intent to divide departments through fear.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <aside class="notes" style="display:none">The structural control of Lumon relies on isolation. Petey's map was the first breach. By discovering other departments like Optics and Design, the MDR team began to piece together the prison they inhabit.</aside>
+  <aside class="notes">The structural control of Lumon relies on isolation. Petey's map was the first breach. By discovering other departments like Optics and Design, the MDR team began to piece together the prison they inhabit.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg); color: var(--t1); font-family: var(--sans); padding: 5vw; box-sizing: border-box; display: flex; align-items: center;">
+  <div class="s" style="display: flex; flex-wrap: wrap; width: 100%; height: 100%; align-items: stretch; gap: 5vw;">
+    <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; justify-content: center; background: var(--surface); padding: 5vw; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.4); border-left: 8px solid var(--accent1);">
+      <div style="color: var(--accent2); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; font-size: clamp(1rem, 1.5vw, 1.5rem); margin-bottom: 1vh;">Case Study</div>
+      <h2 style="font-family: var(--serif); font-size: clamp(2.5rem, 4vw, 4rem); margin: 0 0 3vh 0; color: var(--t1); line-height: 1.1;">The Tragedy of Ms. Casey</h2>
+      
+      <div style="display: flex; flex-direction: column; gap: 3vh;">
+        <div style="display: flex; align-items: center; gap: 2vw;">
+          <div style="width: 50px; height: 50px; background: var(--bg); border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid var(--accent2); flex-shrink: 0;">
+            <i class="fas fa-heart-crack" style="color: var(--accent1); font-size: 1.5rem;"></i>
+          </div>
+          <p style="font-size: clamp(1.2rem, 1.8vw, 1.8rem); margin: 0; color: var(--t2);">Mark severed himself to escape grief</p>
+        </div>
+        
+        <div style="display: flex; align-items: center; gap: 2vw;">
+          <div style="width: 50px; height: 50px; background: var(--bg); border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid var(--accent2); flex-shrink: 0;">
+            <i class="fas fa-user-lock" style="color: var(--accent1); font-size: 1.5rem;"></i>
+          </div>
+          <p style="font-size: clamp(1.2rem, 1.8vw, 1.8rem); margin: 0; color: var(--t2);">Gemma survives as a permanent Innie</p>
+        </div>
+        
+        <div style="display: flex; align-items: center; gap: 2vw;">
+          <div style="width: 50px; height: 50px; background: var(--bg); border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 2px solid var(--accent2); flex-shrink: 0;">
+            <i class="fas fa-elevator" style="color: var(--accent1); font-size: 1.5rem;"></i>
+          </div>
+          <p style="font-size: clamp(1.2rem, 1.8vw, 1.8rem); margin: 0; color: var(--t2);">The Testing Floor: A fate worse than death</p>
+        </div>
+      </div>
+    </div>
+    
+    <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; justify-content: center; gap: 4vh;">
+      <div style="background: color-mix(in srgb, var(--accent2) 15%, transparent); border: 2px dashed var(--accent2); padding: 4vh 3vw; border-radius: 15px; text-align: center;">
+        <h3 style="font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--accent2); margin: 0 0 1vh 0; font-family: var(--mono); text-transform: uppercase;">Status: Active</h3>
+        <p style="font-size: clamp(1.2rem, 1.8vw, 1.5rem); color: var(--t1); margin: 0;">Wellness Counselor</p>
+      </div>
+      
+      <div style="background: color-mix(in srgb, var(--accent1) 15%, transparent); border: 2px dashed var(--accent1); padding: 4vh 3vw; border-radius: 15px; text-align: center;">
+        <h3 style="font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--accent1); margin: 0 0 1vh 0; font-family: var(--mono); text-transform: uppercase;">Origin: Unknown</h3>
+        <p style="font-size: clamp(1.2rem, 1.8vw, 1.5rem); color: var(--t1); margin: 0;">Presumed Deceased (Outie)</p>
+      </div>
+      
+      <blockquote style="border-left: 4px solid var(--accent2); padding-left: 2vw; margin: 0; font-style: italic; font-size: clamp(1.2rem, 2vw, 1.8rem); color: var(--t2);">
+        "Please enjoy each fact equally, and not show preference for any over the others."
+      </blockquote>
+    </div>
+  </div>
+  <aside class="notes">Mark severed himself to escape the grief of losing his wife, Gemma. The horrifying irony is that Gemma is trapped inside Lumon as Ms. Casey. Sending her to the Testing Floor represents an utter annihilation of identity.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--surface); color: var(--t1); font-family: var(--sans); padding: 5vw; box-sizing: border-box;">
+  <div class="s" style="height: 100%; width: 100%; display: flex; flex-direction: column; gap: 4vh;">
+    <div style="text-align: center;">
+      <div style="color: var(--accent2); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; font-size: clamp(1rem, 1.5vw, 1.5rem);">Systems of Control</div>
+      <h2 style="font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem); margin: 1vh 0 0 0; color: var(--t1);">Carrots and Sticks</h2>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4vw; flex: 1; align-items: center; margin-top: 2vh;">
+      
+      <div style="background: var(--bg); padding: 5vh 3vw; border-radius: 20px; text-align: center; border: 1px solid var(--accent1); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <div style="width: 150px; height: 150px; border-radius: 50%; border: 10px solid var(--accent2); display: flex; justify-content: center; align-items: center; margin: 0 auto 3vh auto; font-size: clamp(2rem, 4vw, 3rem); font-family: var(--mono); color: var(--accent2); font-weight: bold;">
+          75%
+        </div>
+        <h3 style="font-size: clamp(1.8rem, 2.5vw, 2.2rem); margin: 0 0 1.5vh 0; color: var(--t1);">The Rewards</h3>
+        <p style="font-size: clamp(1.1rem, 1.5vw, 1.4rem); color: var(--t2); line-height: 1.5; margin: 0;">Finger traps, melon bars, and the Waffle Party infantilize employees to ensure compliance.</p>
+        <div style="margin-top: 3vh; display: inline-block; background: var(--accent2); color: var(--bg); padding: 0.5vh 1.5vw; border-radius: 50px; font-weight: bold; font-size: 1rem;">COMPLIANT</div>
+      </div>
+
+      <div style="background: var(--bg); padding: 5vh 3vw; border-radius: 20px; text-align: center; border: 1px solid var(--accent3); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <div style="width: 150px; height: 150px; border-radius: 50%; border: 10px solid var(--accent1); display: flex; justify-content: center; align-items: center; margin: 0 auto 3vh auto; font-size: clamp(2rem, 4vw, 3rem); font-family: var(--mono); color: var(--accent1); font-weight: bold;">
+          1074
+        </div>
+        <h3 style="font-size: clamp(1.8rem, 2.5vw, 2.2rem); margin: 0 0 1.5vh 0; color: var(--t1);">The Break Room</h3>
+        <p style="font-size: clamp(1.1rem, 1.5vw, 1.4rem); color: var(--t2); line-height: 1.5; margin: 0;">Psychological torture via the endless repetition of the compulsion apology until the ego breaks.</p>
+        <div style="margin-top: 3vh; display: inline-block; background: var(--accent1); color: var(--t1); padding: 0.5vh 1.5vw; border-radius: 50px; font-weight: bold; font-size: 1rem;">PUNISHED</div>
+      </div>
+
+    </div>
+  </div>
+  <aside class="notes">Lumon treats Innies like children, rewarding them with finger traps and melon bars, and punishing them in the Break Room. The psychological breaking down of the ego ensures absolute compliance to the Board.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg); color: var(--t1); font-family: var(--sans); padding: 5vw; box-sizing: border-box;">
+  <div class="s" style="height: 100%; width: 100%; display: flex; flex-direction: column;">
+    <div style="text-align: left; margin-bottom: 4vh; border-bottom: 2px solid color-mix(in srgb, var(--accent2) 30%, transparent); padding-bottom: 2vh;">
+      <div style="color: var(--accent2); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; font-size: clamp(1rem, 1.5vw, 1.5rem);">The Board</div>
+      <h2 style="font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem); margin: 1vh 0 0 0; color: var(--t1);">Silent Authority</h2>
+    </div>
+    
+    <div style="display: flex; flex-direction: column; gap: 4vh; flex: 1; justify-content: center;">
+      
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 3vw; background: var(--surface); padding: 3vh 3vw; border-radius: 10px;">
+        <div style="width: 80px; height: 80px; background: var(--bg2); border-radius: 10px; display: flex; justify-content: center; align-items: center; flex-shrink: 0;">
+          <i class="fas fa-ear-listen" style="font-size: 2.5rem; color: var(--accent2);"></i>
+        </div>
+        <div style="flex: 1; min-width: 250px;">
+          <h3 style="font-size: clamp(1.5rem, 2vw, 2rem); margin: 0 0 1vh 0; color: var(--t1);">The Unseen Proxy</h3>
+          <p style="font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: var(--t2); margin: 0;">The Board communicates exclusively through Natalie's headset, rendering them an omnipresent, untouchable deity.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 3vw; background: var(--surface); padding: 3vh 3vw; border-radius: 10px;">
+        <div style="width: 80px; height: 80px; background: var(--bg2); border-radius: 10px; display: flex; justify-content: center; align-items: center; flex-shrink: 0;">
+          <i class="fas fa-fire-flame-curved" style="font-size: 2.5rem; color: var(--accent3);"></i>
+        </div>
+        <div style="flex: 1; min-width: 250px;">
+          <h3 style="font-size: clamp(1.5rem, 2vw, 2rem); margin: 0 0 1vh 0; color: var(--t1);">Cobel's Fanaticism</h3>
+          <p style="font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: var(--t2); margin: 0;">Harmony Cobel's religious devotion to Kier violently clashes with the Board's cold corporate pragmatism.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 3vw; background: var(--surface); padding: 3vh 3vw; border-radius: 10px;">
+        <div style="width: 80px; height: 80px; background: var(--bg2); border-radius: 10px; display: flex; justify-content: center; align-items: center; flex-shrink: 0;">
+          <i class="fas fa-envelope-open-text" style="font-size: 2.5rem; color: var(--accent1);"></i>
+        </div>
+        <div style="flex: 1; min-width: 250px;">
+          <h3 style="font-size: clamp(1.5rem, 2vw, 2rem); margin: 0 0 1vh 0; color: var(--t1);">The Lexington Letter</h3>
+          <p style="font-size: clamp(1.1rem, 1.5vw, 1.3rem); color: var(--t2); margin: 0;">Expanding lore proves that Lumon's corporate reach and silencing tactics go far beyond the severed floor.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <aside class="notes">The Board's silence is deafening. They act as an omnipresent, eerie deity. Cobel's fanaticism ultimately clashes with the cold, sterile reality of corporate self-preservation, proving even management is expendable.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--surface); color: var(--t1); font-family: var(--sans); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; box-sizing: border-box;">
+  
+  <div style="position: absolute; width: 150vw; height: 150vw; background: radial-gradient(circle, var(--accent1) 0%, transparent 60%); opacity: 0.1; top: -50%; left: -25%; z-index: 0;"></div>
+  <div style="position: absolute; width: 100%; height: 100%; background-image: repeating-linear-gradient(0deg, transparent, transparent 4px, color-mix(in srgb, var(--accent1) 10%, transparent) 4px, color-mix(in srgb, var(--accent1) 10%, transparent) 8px); z-index: 1;"></div>
+  
+  <div class="s cx" style="position: relative; z-index: 2; height: 100%; width: 100%; flex-direction: column; text-align: center; padding: 5vw; gap: 4vh;">
+    
+    <div style="background: color-mix(in srgb, var(--surface2) 80%, transparent); padding: 1vh 2vw; border: 2px solid var(--accent2); border-radius: 5px; color: var(--accent2); font-weight: bold; font-family: var(--mono); text-transform: uppercase; font-size: clamp(1rem, 2vw, 1.5rem); letter-spacing: 4px; backdrop-filter: blur(5px);">
+      Protocol Activated
+    </div>
+    
+    <h2 style="font-family: var(--serif); font-size: clamp(4rem, 8vw, 8rem); margin: 0; color: var(--t1); line-height: 1; text-shadow: 0 10px 30px rgba(0,0,0,0.8);">
+      The Overtime<br><span style="color: var(--accent2);">Contingency</span>
+    </h2>
+    
+    <div style="display: flex; gap: 3vw; flex-wrap: wrap; justify-content: center; margin-top: 4vh; max-width: 900px;">
+      <div style="background: color-mix(in srgb, var(--surface2) 80%, transparent); backdrop-filter: blur(5px); padding: 3vh 3vw; border-radius: 10px; border-top: 3px solid var(--accent1); flex: 1; min-width: 250px;">
+        <i class="fas fa-hands-bound" style="font-size: 2rem; color: var(--accent1); margin-bottom: 2vh;"></i>
+        <p style="font-size: clamp(1.2rem, 1.8vw, 1.5rem); color: var(--t1); margin: 0;">Dylan's excruciating physical sacrifice holding the switches.</p>
+      </div>
+      <div style="background: color-mix(in srgb, var(--surface2) 80%, transparent); backdrop-filter: blur(5px); padding: 3vh 3vw; border-radius: 10px; border-top: 3px solid var(--accent1); flex: 1; min-width: 250px;">
+        <i class="fas fa-masks-theater" style="font-size: 2rem; color: var(--accent1); margin-bottom: 2vh;"></i>
+        <p style="font-size: clamp(1.2rem, 1.8vw, 1.5rem); color: var(--t1); margin: 0;">Bleeding the Innie identity violently into the Outie world.</p>
+      </div>
+      <div style="background: color-mix(in srgb, var(--surface2) 80%, transparent); backdrop-filter: blur(5px); padding: 3vh 3vw; border-radius: 10px; border-top: 3px solid var(--accent1); flex: 1; min-width: 250px;">
+        <i class="fas fa-building-shield" style="font-size: 2rem; color: var(--accent1); margin-bottom: 2vh;"></i>
+        <p style="font-size: clamp(1.2rem, 1.8vw, 1.5rem); color: var(--t1); margin: 0;">Exposing the terrifying fragility of Lumon's boundaries.</p>
+      </div>
+    </div>
+    
+  </div>
+  <aside class="notes">The execution of the Overtime Contingency is the ultimate transgression against Lumon. Dylan literally stretches his physical limits to hold the switches, forcing the Innies into the outside world and shattering spatial dictation.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg2); color: var(--t1); font-family: var(--sans); padding: 5vw; box-sizing: border-box;">
+  <div class="s cx" style="height: 100%; width: 100%; flex-direction: column; gap: 5vh; text-align: center;">
+    <div style="color: var(--accent2); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; font-size: clamp(1rem, 1.5vw, 1.5rem);">The Finale</div>
+    
+    <div style="width: 100px; height: 2px; background: var(--accent1);"></div>
+    
+    <blockquote style="margin: 0; font-family: var(--serif); font-size: clamp(2.5rem, 6vw, 6rem); line-height: 1.2; max-width: 90%; color: var(--t1); text-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+      "She's alive!"
+    </blockquote>
+    
+    <div style="width: 100px; height: 2px; background: var(--accent1);"></div>
+    
+    <div style="display: flex; gap: 4vw; flex-wrap: wrap; justify-content: center; margin-top: 3vh;">
+      <div style="display: flex; align-items: center; gap: 1vw;">
+        <i class="fas fa-champagne-glasses" style="color: var(--accent2); font-size: 1.5rem;"></i>
+        <span style="font-size: clamp(1.2rem, 2vw, 1.5rem); color: var(--t2);">Helly's Gala Sabotage</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1vw;">
+        <i class="fas fa-burst" style="color: var(--accent2); font-size: 1.5rem;"></i>
+        <span style="font-size: clamp(1.2rem, 2vw, 1.5rem); color: var(--t2);">The Boundary Collapses</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1vw;">
+        <i class="fas fa-forward" style="color: var(--accent2); font-size: 1.5rem;"></i>
+        <span style="font-size: clamp(1.2rem, 2vw, 1.5rem); color: var(--t2);">Irreversible Consequences</span>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">In the final moments of Season 1, the eerie facade crumbles. Helly exposes the torture to the Eagan gala, and Mark realizes his wife is alive. The philosophical boundary between Innie and Outie is forever destroyed.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg); color: var(--t1); font-family: var(--sans); padding: 5vw; box-sizing: border-box;">
+  <div class="s cx" style="height: 100%; width: 100%; flex-direction: column; gap: 4vh;">
+    
+    <div style="width: 120px; height: 120px; background: var(--surface); border-radius: 50%; display: flex; justify-content: center; align-items: center; border: 4px solid var(--accent2); box-shadow: 0 0 30px color-mix(in srgb, var(--accent2) 30%, transparent);">
+      <i class="fas fa-water" style="font-size: 3rem; color: var(--accent2);"></i>
+    </div>
+    
+    <h1 style="font-family: var(--serif); font-size: clamp(3rem, 7vw, 6rem); margin: 0; color: var(--t1); text-align: center; line-height: 1.1;">Praise Kier?</h1>
+    <h2 style="font-size: clamp(1.5rem, 3vw, 2.5rem); color: var(--t2); font-weight: 300; text-align: center; margin: 0; max-width: 80%;">Lingering Questions and the Future of Lumon</h2>
+    
+    <div style="display: flex; flex-direction: column; gap: 2vh; margin-top: 4vh; width: 100%; max-width: 800px;">
+      <div style="background: color-mix(in srgb, var(--surface) 70%, transparent); padding: 2vh 3vw; border-radius: 10px; border-left: 4px solid var(--accent1); display: flex; align-items: center; gap: 2vw;">
+        <i class="fas fa-question-circle" style="color: var(--accent1); font-size: 1.5rem;"></i>
+        <span style="font-size: clamp(1.2rem, 1.8vw, 1.5rem); color: var(--t1);">Can a severed consciousness ever truly be reintegrated?</span>
+      </div>
+      <div style="background: color-mix(in srgb, var(--surface) 70%, transparent); padding: 2vh 3vw; border-radius: 10px; border-left: 4px solid var(--accent1); display: flex; align-items: center; gap: 2vw;">
+        <i class="fas fa-question-circle" style="color: var(--accent1); font-size: 1.5rem;"></i>
+        <span style="font-size: clamp(1.2rem, 1.8vw, 1.5rem); color: var(--t1);">What is the ultimate, sinister purpose of the Lumon numbers?</span>
+      </div>
+      <div style="background: color-mix(in srgb, var(--surface) 70%, transparent); padding: 2vh 3vw; border-radius: 10px; border-left: 4px solid var(--accent1); display: flex; align-items: center; gap: 2vw;">
+        <i class="fas fa-question-circle" style="color: var(--accent1); font-size: 1.5rem;"></i>
+        <span style="font-size: clamp(1.2rem, 1.8vw, 1.5rem); color: var(--t1);">The battle for autonomy has only just begun.</span>
+      </div>
+    </div>
+    
+  </div>
+  <aside class="notes">We leave Season 1 with profound questions. Is reintegration the cure, or just another form of identity death? As we await Season 2, we are left to ponder the true cost of leaving our baggage at the door. Thank you.</aside>
+</section>
+  </div>
+
+<script>
+(function(){
+  const wraps = document.querySelectorAll('.slide-wrap');
+  const sections = document.querySelectorAll('.slide-wrap > section');
+  const total = wraps.length;
+  const counter = document.getElementById('slide-counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  // IntersectionObserver: mark the visible slide-wrap as .active (triggers CSS animations)
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        wraps.forEach(w => w.classList.remove('active'));
+        e.target.classList.add('active');
+        current = Array.from(wraps).indexOf(e.target);
+        if (counter) counter.textContent = (current+1) + ' / ' + total;
+        if (progress) progress.style.width = ((current+1)/total*100) + '%';
+      }
+    });
+  }, { threshold: 0.5 });
+  wraps.forEach(w => obs.observe(w));
+
+  // Activate first slide immediately
+  if (wraps[0]) wraps[0].classList.add('active');
+  if (counter) counter.textContent = '1 / ' + total;
+  if (progress) progress.style.width = (1/total*100) + '%';
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      if (current < total - 1) wraps[current + 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (current > 0) wraps[current - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      wraps[0].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      wraps[total - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'f' || e.key === 'F11') {
+      e.preventDefault();
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>

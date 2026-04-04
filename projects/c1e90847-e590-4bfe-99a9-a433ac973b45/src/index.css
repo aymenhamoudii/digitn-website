@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-amber-50: #f8f1e3;
+  --color-amber-900: #3f2e1e;
+  --color-emerald-700: #4a7040;
+  --color-orange-600: #c26b4f;
+}
+
+h1, h2, h3 {
+  font-family: Georgia, serif;
+}
+
+body {
+  font-feature-settings: "ss01";
+}

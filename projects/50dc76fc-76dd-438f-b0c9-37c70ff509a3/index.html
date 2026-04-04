@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Nitro - Endless Side-Scroller</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts for retro feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Main Canvas -->
+        <canvas id="game-canvas"></canvas>
+
+        <!-- HUD -->
+        <div id="hud" class="hidden">
+            <div class="stats-top">
+                <div id="score-display">DISTANCE: <span id="score-val">0</span>m</div>
+                <div id="coins-display">COINS: <span id="coins-val">0</span></div>
+            </div>
+            <div class="stats-bottom">
+                <div class="health-bar-container">
+                    <label>SHIELD</label>
+                    <div class="progress-bg"><div id="health-bar" style="width: 100%;"></div></div>
+                </div>
+                <div class="boost-bar-container">
+                    <label>NITRO</label>
+                    <div class="progress-bg"><div id="boost-bar" style="width: 0%;"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Menu -->
+        <div id="main-menu" class="overlay">
+            <h1 class="pixel-text">PIXEL NITRO</h1>
+            <p class="subtitle">RETRO SIDE-SCROLLER CHALLENGE</p>
+            <div class="menu-actions">
+                <button id="start-btn" class="btn-primary">START ENGINE</button>
+                <button id="shop-btn" class="btn-secondary">GARAGE</button>
+            </div>
+            <div class="controls-hint">
+                <p>WASD / ARROWS to Move</p>
+                <p>SPACE for Nitro Boost</p>
+            </div>
+        </div>
+
+        <!-- Shop / Garage Overlay -->
+        <div id="shop-overlay" class="overlay hidden">
+            <h2 class="pixel-text">GARAGE</h2>
+            <div class="shop-content">
+                <div class="shop-item" data-upgrade="speed">
+                    <div class="item-info">
+                        <h3>ENGINE (SPEED)</h3>
+                        <p id="speed-level">LVL: 1</p>
+                    </div>
+                    <button class="buy-btn" id="buy-speed">UPGRADE: <span class="cost">100</span></button>
+                </div>
+                <div class="shop-item" data-upgrade="handling">
+                    <div class="item-info">
+                        <h3>TIRES (HANDLING)</h3>
+                        <p id="handling-level">LVL: 1</p>
+                    </div>
+                    <button class="buy-btn" id="buy-handling">UPGRADE: <span class="cost">150</span></button>
+                </div>
+                <div class="shop-item" data-upgrade="shield">
+                    <div class="item-info">
+                        <h3>CHASSIS (SHIELD)</h3>
+                        <p id="shield-level">LVL: 1</p>
+                    </div>
+                    <button class="buy-btn" id="buy-shield">UPGRADE: <span class="cost">200</span></button>
+                </div>
+            </div>
+            <div class="shop-footer">
+                <p>WALLET: <span id="shop-coins">0</span> COINS</p>
+                <button id="close-shop" class="btn-secondary">BACK TO MENU</button>
+            </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div id="game-over" class="overlay hidden">
+            <h2 class="pixel-text color-error">TOTALED!</h2>
+            <div class="results">
+                <p>DISTANCE: <span id="final-score">0</span>m</p>
+                <p>COINS COLLECTED: <span id="final-coins">0</span></p>
+                <p class="high-score-text">BEST: <span id="high-score">0</span>m</p>
+            </div>
+            <button id="restart-btn" class="btn-primary">REPAIR & RESTART</button>
+            <button id="menu-btn" class="btn-secondary">EXIT TO MENU</button>
+        </div>
+
+        <!-- Sound Controls -->
+        <button id="mute-toggle" aria-label="Toggle Mute">
+            <span id="mute-icon">🔊</span>
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

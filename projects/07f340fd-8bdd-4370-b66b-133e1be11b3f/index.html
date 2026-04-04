@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Copper Fork - Fine dining restaurant offering seasonal American cuisine in an elegant atmosphere">
+    <title>The Copper Fork | Fine Dining Restaurant</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,400&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-container">
+            <a href="#hero" class="logo">
+                <span class="logo-icon">🍴</span>
+                <span class="logo-text">The Copper Fork</span>
+            </a>
+            
+            <nav class="nav" id="nav">
+                <ul class="nav-list">
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#menu" class="nav-link">Menu</a></li>
+                    <li><a href="#reservations" class="nav-link">Reservations</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <p class="hero-tagline">Est. 1987 • Seasonal American</p>
+            <h1 class="hero-title">Where Every Meal<br>Tells a Story</h1>
+            <p class="hero-subtitle">Farm-to-table cuisine crafted with passion, served in an atmosphere of timeless elegance</p>
+            <div class="hero-cta">
+                <a href="#reservations" class="btn btn-primary">Reserve a Table</a>
+                <a href="#menu" class="btn btn-secondary">View Menu</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-image-wrapper">
+                <div class="hero-image-placeholder">
+                    <svg viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="500" fill="#2C3E2D"/>
+                        <path d="M200 150 L250 250 L200 350 L150 250 Z" fill="#B87333" opacity="0.8"/>
+                        <circle cx="200" cy="200" r="40" fill="#D4A574" opacity="0.6"/>
+                        <path d="M120 400 Q200 350 280 400" stroke="#D4A574" stroke-width="3" fill="none"/>
+                        <circle cx="160" cy="180" r="15" fill="#8B4513" opacity="0.5"/>
+                        <circle cx="240" cy="190" r="10" fill="#8B4513" opacity="0.4"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <p class="section-tag">Our Story</p>
+                    <h2 class="section-title">Three Decades of Culinary Excellence</h2>
+                    <p class="about-text" id="aboutText1"></p>
+                    <p class="about-text" id="aboutText2"></p>
+                    <div class="about-signature">
+                        <span class="signature">James & Catherine Morrison</span>
+                        <span class="signature-title">Founders</span>
+                    </div>
+                </div>
+                <div class="about-images">
+                    <div class="about-image-card about-image-card-1">
+                        <div class="about-image-placeholder">
+                            <svg viewBox="0 0 200 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="200" height="250" fill="#3D4F3F"/>
+                                <rect x="50" y="60" width="100" height="80" rx="4" fill="#B87333" opacity="0.7"/>
+                                <circle cx="100" cy="100" r="25" fill="#D4A574" opacity="0.5"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="about-image-card about-image-card-2">
+                        <div class="about-image-placeholder">
+                            <svg viewBox="0 0 200 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="200" height="250" fill="#2C3E2D"/>
+                                <circle cx="100" cy="125" r="60" fill="#B87333" opacity="0.6"/>
+                                <circle cx="100" cy="125" r="30" fill="#D4A574" opacity="0.4"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="container">
+            <div class="menu-header">
+                <p class="section-tag">The Menu</p>
+                <h2 class="section-title">Seasonal Creations</h2>
+                <p class="menu-description">Our menu changes with the seasons to showcase the finest local ingredients</p>
+            </div>
+            
+            <div class="menu-categories" id="menuCategories">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+            
+            <div class="menu-cta">
+                <a href="#reservations" class="btn btn-primary">Join Us Tonight</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservations Section -->
+    <section class="reservations" id="reservations">
+        <div class="container">
+            <div class="reservations-wrapper">
+                <div class="reservations-content">
+                    <p class="section-tag">Reservations</p>
+                    <h2 class="section-title">Reserve Your Table</h2>
+                    <p class="reservations-text">Experience an unforgettable evening at The Copper Fork. For parties of 8 or more, please call us directly.</p>
+                    
+                    <div class="reservations-info">
+                        <div class="info-item">
+                            <span class="info-icon">📞</span>
+                            <div>
+                                <strong>Phone</strong>
+                                <span>(555) 234-5678</span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-icon">📍</span>
+                            <div>
+                                <strong>Location</strong>
+                                <span>742 Evergreen Terrace</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reservations-form-wrapper">
+                    <form class="reservation-form" id="reservationForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required placeholder="John Smith">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required placeholder="john@example.com">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="date">Date</label>
+                                <input type="date" id="date" name="date" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="time">Time</label>
+                                <select id="time" name="time" required>
+                                    <option value="">Select time</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="guests">Party Size</label>
+                            <select id="guests" name="guests" required>
+                                <option value="">Select guests</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="special">Special Requests</label>
+                            <textarea id="special" name="special" rows="3" placeholder="Allergies, celebrations, seating preferences..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-full">Confirm Reservation</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <p class="section-tag">Contact</p>
+                    <h2 class="section-title">Visit Us</h2>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <h3>Address</h3>
+                            <p>742 Evergreen Terrace<br>Springfield, ST 12345</p>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <h3>Hours</h3>
+                            <p id="hoursWeekday">Monday - Thursday: 5pm - 10pm</p>
+                            <p id="hoursWeekend">Friday - Saturday: 5pm - 11pm</p>
+                            <p>Sunday: 4pm - 9pm</p>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <h3>Contact</h3>
+                            <p>Phone: (555) 234-5678</p>
+                            <p>Email: hello@copperfork.com</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-map">
+                    <div class="map-placeholder">
+                        <svg viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="300" fill="#2C3E2D"/>
+                            <path d="M100 200 L150 150 L200 180 L250 120 L300 160 L300 250 L100 250 Z" fill="#3D4F3F"/>
+                            <circle cx="200" cy="160" r="8" fill="#B87333"/>
+                            <path d="M180 160 L220 160" stroke="#D4A574" stroke-width="2"/>
+                            <path d="M200 140 L200 180" stroke="#D4A574" stroke-width="2"/>
+                            <text x="200" y="280" fill="#D4A574" font-size="12" text-anchor="middle">742 Evergreen Terrace</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#hero" class="footer-logo">
+                        <span class="logo-icon">🍴</span>
+                        <span class="logo-text">The Copper Fork</span>
+                    </a>
+                    <p class="footer-tagline">Fine dining since 1987</p>
+                </div>
+                
+                <div class="footer-nav">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#reservations">Reservations</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Get in Touch</h4>
+                    <p>(555) 234-5678</p>
+                    <p>hello@copperfork.com</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">f</a>
+                        <a href="#" aria-label="Instagram">in</a>
+                        <a href="#" aria-label="Twitter">tw</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 The Copper Fork. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Demo Data -->
+    <script src="js/content-data.js"></script>
+    
+    <!-- Main Script -->
+    <script src="js/main.js"></script>
+</body>
+</html>

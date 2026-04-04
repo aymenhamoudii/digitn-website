@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Space: Exploration &amp; Missions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;800;900&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+    --bg: #0B1428;
+    --bg2: #141E35;
+    --surface: #1a2847;
+    --surface2: #232c3e;
+    --border: rgba(255,255,255,.07);
+    --border-md: rgba(255,255,255,.11);
+    --accent1: #FF6B35;
+    --accent1-dim: rgba(255, 107, 53, 0.18);
+    --accent2: #4ECDC4;
+    --accent2-dim: rgba(78, 205, 196, 0.18);
+    --accent3: #FFD93D;
+    --accent3-dim: rgba(255, 217, 61, 0.18);
+    --t1: #F5F5F7;
+    --t2: #B8B8C4;
+    --t3: rgba(245, 245, 247, 0.3);
+    --mono: 'Fira Code', monospace;
+    --sans: 'Outfit', system-ui, sans-serif;
+    --serif: 'Fraunces', serif;
+  }
+    
+  /* ─── Reset ─── */
+  ::-webkit-scrollbar{display:none}
+  *{scrollbar-width:none;-ms-overflow-style:none;box-sizing:border-box;margin:0;padding:0}
+  html{scroll-snap-type:y mandatory;overflow-y:scroll;overflow-x:hidden;scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  /* ─── Slide (full viewport) ─── */
+  section{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+  /* ─── Stagger animation (.s container) ─── */
+  .s{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
+  .s>*{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+  section.active .s>*{opacity:1;transform:translateY(0)}
+  section.active .s>*:nth-child(1){transition-delay:.03s}
+  section.active .s>*:nth-child(2){transition-delay:.09s}
+  section.active .s>*:nth-child(3){transition-delay:.15s}
+  section.active .s>*:nth-child(4){transition-delay:.21s}
+  section.active .s>*:nth-child(5){transition-delay:.27s}
+  section.active .s>*:nth-child(6){transition-delay:.33s}
+  section.active .s>*:nth-child(7){transition-delay:.39s}
+  section.active .s>*:nth-child(8){transition-delay:.45s}
+
+  /* ─── Centering utility ─── */
+  .cx{justify-content:center;align-items:center;text-align:center}
+
+  /* ─── Speaker notes (hidden) ─── */
+  aside.notes{display:none!important}
+
+  /* ─── Slide counter ─── */
+  #slide-counter{position:fixed;bottom:2vh;right:2vw;font-family:var(--mono);font-size:1.6vh;color:var(--t3);background:var(--surface);border:1px solid var(--border);border-radius:1vh;padding:.8vh 1.6vh;z-index:100;pointer-events:none}
+
+  /* ─── Progress bar ─── */
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--accent1);z-index:100;transition:width .3s ease}
+
+  </style>
+</head>
+<body>
+  <div id="progress" style="width:0"></div>
+  <div id="slide-counter">1 / 9</div>
+  <section style="background: linear-gradient(135deg, var(--bg) 0%, var(--bg2) 100%); position: relative; overflow: hidden;">
+  <div style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;">
+    <svg style="width: 100%; height: 100%; opacity: 0.15;" viewBox="0 0 1000 1000" preserveAspectRatio="none">
+      <defs>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <circle cx="100" cy="150" r="2" fill="var(--accent2)" filter="url(#glow)"/>
+      <circle cx="250" cy="200" r="1.5" fill="var(--accent3)" filter="url(#glow)"/>
+      <circle cx="450" cy="100" r="1" fill="var(--accent1)" filter="url(#glow)"/>
+      <circle cx="650" cy="250" r="2" fill="var(--accent2)" filter="url(#glow)"/>
+      <circle cx="800" cy="150" r="1.5" fill="var(--accent3)" filter="url(#glow)"/>
+      <circle cx="150" cy="500" r="1" fill="var(--accent1)" filter="url(#glow)"/>
+      <circle cx="500" cy="600" r="2" fill="var(--accent2)" filter="url(#glow)"/>
+      <circle cx="850" cy="700" r="1.5" fill="var(--accent3)" filter="url(#glow)"/>
+      <circle cx="300" cy="800" r="1" fill="var(--accent1)" filter="url(#glow)"/>
+      <circle cx="700" cy="850" r="2" fill="var(--accent2)" filter="url(#glow)"/>
+    </svg>
+  </div>
+  <div class="s cx" style="position: relative; z-index: 10; text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; gap: 2vh;">
+    <div style="font-size: 8vh; font-family: var(--serif); font-weight: 900; color: var(--t1); letter-spacing: -0.02em; line-height: 1;">Space</div>
+    <div style="font-size: 2.2vh; font-family: var(--sans); font-weight: 300; color: var(--t2); max-width: 70vw; letter-spacing: 0.02em; margin-top: 1vh;">Exploring the Universe & Humanity's Greatest Missions</div>
+    <div style="display: flex; gap: 1.5vh; margin-top: 3vh; flex-wrap: wrap; justify-content: center;">
+      <div style="background: rgba(255, 107, 53, 0.2); border: 1px solid var(--accent1); padding: 0.8vh 1.5vh; border-radius: 2vh; font-size: 1.3vh; font-family: var(--sans); color: var(--accent1); font-weight: 600; letter-spacing: 0.05em;">EXPLORATION</div>
+      <div style="background: rgba(78, 205, 196, 0.2); border: 1px solid var(--accent2); padding: 0.8vh 1.5vh; border-radius: 2vh; font-size: 1.3vh; font-family: var(--sans); color: var(--accent2); font-weight: 600; letter-spacing: 0.05em;">DISCOVERY</div>
+      <div style="background: rgba(255, 217, 61, 0.2); border: 1px solid var(--accent3); padding: 0.8vh 1.5vh; border-radius: 2vh; font-size: 1.3vh; font-family: var(--sans); color: var(--accent3); font-weight: 600; letter-spacing: 0.05em;">INSPIRATION</div>
+    </div>
+  </div>
+</section>
+<aside class="notes" style="display:none">
+Welcome everyone. Today we're embarking on a journey through space exploration—from the earliest missions to the cutting-edge explorations happening right now. This is a story of human curiosity, innovation, and wonder.
+</aside>
+  <section style="background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%); padding: 8vh; overflow: hidden;">
+  <div class="s" style="display: flex; flex-direction: column; height: 100vh; justify-content: space-around;">
+    <div style="text-align: center;">
+      <div style="font-size: 1.2vh; font-family: var(--mono); color: var(--accent2); font-weight: 700; letter-spacing: 0.1em; margin-bottom: 2vh;">HISTORY</div>
+      <div style="font-size: 5vh; font-family: var(--serif); font-weight: 900; color: var(--t1); letter-spacing: -0.01em;">The Space Race Timeline</div>
+    </div>
+    <div style="position: relative; padding: 4vh 0; display: flex; justify-content: space-between; align-items: flex-start; gap: 2vh;">
+      <div style="position: absolute; top: 3vh; left: 5%; right: 5%; height: 2px; background: linear-gradient(90deg, var(--accent1) 0%, var(--accent2) 50%, var(--accent3) 100%);"></div>
+      <div style="text-align: center; flex: 1; position: relative; z-index: 2;">
+        <div style="width: 3.5vh; height: 3.5vh; background: linear-gradient(135deg, var(--accent1), rgba(255,107,53,0.6)); border-radius: 50%; margin: 0 auto 2vh; display: flex; align-items: center; justify-content: center;"><i class="fas fa-user-astronaut" style="color: white; font-size: 1.5vh;"></i></div>
+        <div style="font-size: 2.2vh; font-family: var(--serif); font-weight: 900; color: var(--accent1); margin-bottom: 0.5vh;">1961</div>
+        <div style="font-size: 1.3vh; font-family: var(--sans); color: var(--t2); line-height: 1.4;">Gagarin<br/>First Human in Space</div>
+      </div>
+      <div style="text-align: center; flex: 1; position: relative; z-index: 2;">
+        <div style="width: 3.5vh; height: 3.5vh; background: linear-gradient(135deg, var(--accent2), rgba(78,205,196,0.6)); border-radius: 50%; margin: 0 auto 2vh; display: flex; align-items: center; justify-content: center;"><i class="fas fa-moon" style="color: white; font-size: 1.5vh;"></i></div>
+        <div style="font-size: 2.2vh; font-family: var(--serif); font-weight: 900; color: var(--accent2); margin-bottom: 0.5vh;">1969</div>
+        <div style="font-size: 1.3vh; font-family: var(--sans); color: var(--t2); line-height: 1.4;">Apollo 11<br/>Moon Landing</div>
+      </div>
+      <div style="text-align: center; flex: 1; position: relative; z-index: 2;">
+        <div style="width: 3.5vh; height: 3.5vh; background: linear-gradient(135deg, var(--accent3), rgba(255,217,61,0.6)); border-radius: 50%; margin: 0 auto 2vh; display: flex; align-items: center; justify-content: center;"><i class="fas fa-rocket" style="color: white; font-size: 1.5vh;"></i></div>
+        <div style="font-size: 2.2vh; font-family: var(--serif); font-weight: 900; color: var(--accent3); margin-bottom: 0.5vh;">1981</div>
+        <div style="font-size: 1.3vh; font-family: var(--sans); color: var(--t2); line-height: 1.4;">Space Shuttle<br/>First Launch</div>
+      </div>
+      <div style="text-align: center; flex: 1; position: relative; z-index: 2;">
+        <div style="width: 3.5vh; height: 3.5vh; background: linear-gradient(135deg, var(--accent1), rgba(255,107,53,0.6)); border-radius: 50%; margin: 0 auto 2vh; display: flex; align-items: center; justify-content: center;"><i class="fas fa-robot" style="color: white; font-size: 1.5vh;"></i></div>
+        <div style="font-size: 2.2vh; font-family: var(--serif); font-weight: 900; color: var(--accent1); margin-bottom: 0.5vh;">2004</div>
+        <div style="font-size: 1.3vh; font-family: var(--sans); color: var(--t2); line-height: 1.4;">Mars Rovers<br/>Begin Exploration</div>
+      </div>
+    </div>
+  </div>
+</section>
+<aside class="notes" style="display:none">
+Let's look at some pivotal moments in space exploration. From Yuri Gagarin's historic flight to the Apollo moon landings, each milestone pushed the boundaries of what we thought possible. These achievements inspired generations.
+</aside>
+  <section style="background: linear-gradient(135deg, var(--bg2) 0%, var(--bg) 100%); padding: 8vh; overflow: hidden;">
+  <div class="s" style="display: grid; grid-template-columns: 1fr 1fr; gap: 5vh; align-items: center; height: 100vh;">
+    <div style="display: flex; flex-direction: column; justify-content: center;">
+      <div style="font-size: 4.5vh; font-family: var(--serif); font-weight: 900; color: var(--t1); line-height: 1.1; margin-bottom: 2vh;">Why Space<br/>Exploration<br/>Matters</div>
+      <div style="width: 4vh; height: 0.4vh; background: linear-gradient(90deg, var(--accent1), var(--accent2)); margin-bottom: 3vh;"></div>
+      <div style="display: flex; flex-direction: column; gap: 2.5vh;">
+        <div style="display: flex; gap: 2vh; align-items: flex-start;">
+          <div style="width: 3vh; height: 3vh; background: rgba(255, 107, 53, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.2vh;"><i class="fas fa-flask" style="color: var(--accent1); font-size: 1.3vh;"></i></div>
+          <div>
+            <div style="font-size: 1.5vh; font-family: var(--sans); font-weight: 700; color: var(--t1); margin-bottom: 0.5vh;">Scientific Discovery</div>
+            <div style="font-size: 1.2vh; font-family: var(--sans); color: var(--t2); line-height: 1.5;">Understanding our universe</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 2vh; align-items: flex-start;">
+          <div style="width: 3vh; height: 3vh; background: rgba(78, 205, 196, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.2vh;"><i class="fas fa-lightbulb" style="color: var(--accent2); font-size: 1.3vh;"></i></div>
+          <div>
+            <div style="font-size: 1.5vh; font-family: var(--sans); font-weight: 700; color: var(--t1); margin-bottom: 0.5vh;">Technological Innovation</div>
+            <div style="font-size: 1.2vh; font-family: var(--sans); color: var(--t2); line-height: 1.5;">Solutions that transform Earth</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 2vh; align-items: flex-start;">
+          <div style="width: 3vh; height: 3vh; background: rgba(255, 217, 61, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.2vh;"><i class="fas fa-star" style="color: var(--accent3); font-size: 1.3vh;"></i></div>
+          <div>
+            <div style="font-size: 1.5vh; font-family: var(--sans); font-weight: 700; color: var(--t1); margin-bottom: 0.5vh;">Inspiration & Wonder</div>
+            <div style="font-size: 1.2vh; font-family: var(--sans); color: var(--t2); line-height: 1.5;">Inspiring future generations</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 2vh; align-items: flex-start;">
+          <div style="width: 3vh; height: 3vh; background: rgba(255, 107, 53, 0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.2vh;"><i class="fas fa-earth-americas" style="color: var(--accent1); font-size: 1.3vh;"></i></div>
+          <div>
+            <div style="font-size: 1.5vh; font-family: var(--sans); font-weight: 700; color: var(--t1); margin-bottom: 0.5vh;">Expanding Perspective</div>
+            <div style="font-size: 1.2vh; font-family: var(--sans); color: var(--t2); line-height: 1.5;">Connecting humanity through knowledge</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="position: relative; display: flex; align-items: center; justify-content: center; height: 50vh;">
+      <svg style="width: 100%; height: 100%; max-width: 35vh; max-height: 35vh;" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:0.8" />
+            <stop offset="100%" style="stop-color:#FF6B35;stop-opacity:0.2" />
+          </linearGradient>
+          <linearGradient id="grad2" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#4ECDC4;stop-opacity:0.8" />
+            <stop offset="100%" style="stop-color:#4ECDC4;stop-opacity:0.2" />
+          </linearGradient>
+        </defs>
+        <circle cx="100" cy="100" r="90" fill="none" stroke="url(#grad1)" stroke-width="8" opacity="0.6"/>
+        <circle cx="100" cy="100" r="70" fill="none" stroke="url(#grad2)" stroke-width="6" opacity="0.8"/>
+        <circle cx="100" cy="100" r="50" fill="none" stroke="var(--accent3)" stroke-width="4" opacity="0.9"/>
+        <circle cx="100" cy="100" r="30" fill="var(--accent1)" opacity="0.3"/>
+        <circle cx="100" cy="100" r="10" fill="var(--accent1)"/>
+      </svg>
+    </div>
+  </div>
+</section>
+<aside class="notes" style="display:none">
+Space exploration isn't just about reaching distant worlds. The technology we develop, the knowledge we gain, and the inspiration we share transform life here on Earth. From medical imaging to weather forecasting, space science touches us every day.
+</aside>
+  <section style="background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%); padding: 8vh;">
+  <div class="s" style="display: flex; flex-direction: column; height: 100vh; justify-content: center;">
+    <div style="margin-bottom: 4vh;">
+      <div style="font-size: 1.2vh; font-family: var(--mono); color: var(--accent1); font-weight: 700; letter-spacing: 0.1em; margin-bottom: 2vh;">ACTIVE MISSIONS</div>
+      <div style="font-size: 4.5vh; font-family: var(--serif); font-weight: 900; color: var(--t1); line-height: 1.1;">Exploring Today</div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5vh;">
+      <div style="background: var(--surface); border: 1px solid rgba(78, 205, 196, 0.3); border-radius: 2vh; padding: 3vh; transition: all 0.3s ease; hover: {transform: translateY(-1vh); border-color: var(--accent2); box-shadow: 0 0 2vh rgba(78, 205, 196, 0.2);}">
+        <div style="display: flex; align-items: flex-start; gap: 2vh; margin-bottom: 1.5vh;">
+          <div style="width: 4vh; height: 4vh; background: rgba(78, 205, 196, 0.2); border-radius: 1vh; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i class="fas fa-telescope" style="color: var(--accent2); font-size: 1.8vh;"></i></div>
+          <div>
+            <div style="font-size: 1.4vh; font-family: var(--sans); font-weight: 700; color: var(--t1);">James Webb</div>
+            <div style="font-size: 1vh; font-family: var(--sans); color: var(--accent2); font-weight: 600; letter-spacing: 0.05em;">Space Telescope</div>
+          </div>
+        </div>
+        <div style="font-size: 1.2vh; font-family: var(--sans); color: var(--t2); line-height: 1.5;">Peering into the cosmic dawn, revealing galaxies from the early universe</div>
+      </div>
+      <div style="background: var(--surface); border: 1px solid rgba(255, 107, 53, 0.3); border-radius: 2vh; padding: 3vh; transition: all 0.3s ease;">
+        <div style="display: flex; align-items: flex-start; gap: 2vh; margin-bottom: 1.5vh;">
+          <div style="width: 4vh; height: 4vh; background: rgba(255, 107, 53, 0.2); border-radius: 1vh; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i class="fas fa-robot" style="color: var(--accent1); font-size: 1.8vh;"></i></div>
+          <div>
+            <div style="font-size: 1.4vh; font-family: var(--sans); font-weight: 700; color: var(--t1);">Mars Perseverance</div>
+            <div style="font-size: 1vh; font-family: var(--sans); color: var(--accent1); font-weight: 600; letter-spacing: 0.05em;">Rover</div>
+          </div>
+        </div>
+        <div style="font-size: 1.2vh; font-family: var(--sans); color: var(--t2); line-height: 1.5;">Searching for signs of ancient microbial life and collecting rock samples</div>
+      </div>
+      <div style="background: var(--surface); border: 1px solid rgba(255, 217, 61, 0.3); border-radius: 2vh; padding: 3vh; transition: all 0.3s ease;">
+        <div style="display: flex; align-items: flex-start; gap: 2vh; margin-bottom: 1.5vh;">
+          <div style="width: 4vh; height: 4vh; background: rgba(255, 217, 61, 0.2); border-radius: 1vh; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i class="fas fa-moon" style="color: var(--accent3); font-size: 1.8vh;"></i></div>
+          <div>
+            <div style="font-size: 1.4vh; font-family: var(--sans); font-weight: 700; color: var(--t1);">Artemis Program</div>
+            <div style="font-size: 1vh; font-family: var(--sans); color: var(--accent3); font-weight: 600; letter-spacing: 0.05em;">Lunar Missions</div>
+          </div>
+        </div>
+        <div style="font-size: 1.2vh; font-family: var(--sans); color: var(--t2); line-height: 1.5;">Returning humans to the Moon and establishing sustainable lunar presence</div>
+      </div>
+      <div style="background: var(--surface); border: 1px solid rgba(78, 205, 196, 0.3); border-radius: 2vh; padding: 3vh; transition: all 0.3s ease;">
+        <div style="display: flex; align-items: flex-start; gap: 2vh; margin-bottom: 1.5vh;">
+          <div style="width: 4vh; height: 4vh; background: rgba(78, 205, 196, 0.2); border-radius: 1vh; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i class="fas fa-cube" style="color: var(--accent2); font-size: 1.8vh;"></i></div>
+          <div>
+            <div style="font-size: 1.4vh; font-family: var(--sans); font-weight: 700; color: var(--t1);">ISS</div>
+            <div style="font-size: 1vh; font-family: var(--sans); color: var(--accent2); font-weight: 600; letter-spacing: 0.05em;">Space Station</div>
+          </div>
+        </div>
+        <div style="font-size: 1.2vh; font-family: var(--sans); color: var(--t2); line-height: 1.5;">Continuous human presence in orbit enabling groundbreaking research</div>
+      </div>
+    </div>
+  </div>
+</section>
+<aside class="notes" style="display:none">
+Right now, humanity has multiple missions underway. The James Webb Space Telescope is revealing galaxies from the early universe. Perseverance is collecting rock samples on Mars. Artemis is preparing to take us back to the Moon—and beyond.
+</aside>
+  <section style="background: linear-gradient(135deg, var(--bg2) 0%, var(--bg) 100%); padding: 8vh; display: flex; align-items: center; justify-content: center;">
+  <div class="s" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 3vh; width: 100%; max-width: 100vw;">
+    <div style="background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 107, 53, 0.05)); border: 1px solid rgba(255, 107, 53, 0.3); border-radius: 2vh; padding: 3vh; text-align: center; display: flex; flex-direction: column; justify-content: space-between; min-height: 30vh;">
+      <div>
+        <div style="font-size: 3.5vh; font-family: var(--serif); font-weight: 900; color: var(--accent1); margin-bottom: 1vh; line-height: 1;">385K</div>
+        <div style="font-size: 0.9vh; font-family: var(--mono); color: var(--accent1); font-weight: 600; letter-spacing: 0.1em; margin-bottom: 1.5vh; text-transform: uppercase;">Distance</div>
+      </div>
+      <div style="font-size: 1.1vh; font-family: var(--sans); color: var(--t2); line-height: 1.4;">Kilometers to the Moon</div>
+    </div>
+    <div style="background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(78, 205, 196, 0.05)); border: 1px solid rgba(78, 205, 196, 0.3); border-radius: 2vh; padding: 3vh; text-align: center; display: flex; flex-direction: column; justify-content: space-between; min-height: 30vh;">
+      <div>
+        <div style="font-size: 3.5vh; font-family: var(--serif); font-weight: 900; color: var(--accent2); margin-bottom: 1vh; line-height: 1;">4B+</div>
+        <div style="font-size: 0.9vh; font-family: var(--mono); color: var(--accent2); font-weight: 600; letter-spacing: 0.1em; margin-bottom: 1.5vh; text-transform: uppercase;">Viewers</div>
+      </div>
+      <div style="font-size: 1.1vh; font-family: var(--sans); color: var(--t2); line-height: 1.4;">Watched Apollo 11 Landing</div>
+    </div>
+    <div style="background: linear-gradient(135deg, rgba(255, 217, 61, 0.1), rgba(255, 217, 61, 0.05)); border: 1px solid rgba(255, 217, 61, 0.3); border-radius: 2vh; padding: 3vh; text-align: center; display: flex; flex-direction: column; justify-content: space-between; min-height: 30vh;">
+      <div>
+        <div style="font-size: 3.5vh; font-family: var(--serif); font-weight: 900; color: var(--accent3); margin-bottom: 1vh; line-height: 1;">1500+</div>
+        <div style="font-size: 0.9vh; font-family: var(--mono); color: var(--accent3); font-weight: 600; letter-spacing: 0.1em; margin-bottom: 1.5vh; text-transform: uppercase;">Satellites</div>
+      </div>
+      <div style="font-size: 1.1vh; font-family: var(--sans); color: var(--t2); line-height: 1.4;">Active in Orbit Today</div>
+    </div>
+    <div style="background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(255, 107, 53, 0.05)); border: 1px solid rgba(255, 107, 53, 0.3); border-radius: 2vh; padding: 3vh; text-align: center; display: flex; flex-direction: column; justify-content: space-between; min-height: 30vh;">
+      <div>
+        <div style="font-size: 3.5vh; font-family: var(--serif); font-weight: 900; color: var(--accent1); margin-bottom: 1vh; line-height: 1;">8+</div>
+        <div style="font-size: 0.9vh; font-family: var(--mono); color: var(--accent1); font-weight: 600; letter-spacing: 0.1em; margin-bottom: 1.5vh; text-transform: uppercase;">Rovers</div>
+      </div>
+      <div style="font-size: 1.1vh; font-family: var(--sans); color: var(--t2); line-height: 1.4;">Exploring Mars & Moon</div>
+    </div>
+  </div>
+</section>
+<aside class="notes" style="display:none">
+These numbers put space exploration into perspective. Over a billion people watched humanity land on the Moon. Today, thousands of satellites make modern life possible, from GPS to global communications.
+</aside>
+  <section style="background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%); padding: 8vh;">
+  <div class="s" style="display: flex; flex-direction: column; height: 100vh; justify-content: center;">
+    <div style="margin-bottom: 4vh;">
+      <div style="font-size: 1.2vh; font-family: var(--mono); color: var(--accent2); font-weight: 700; letter-spacing: 0.1em; margin-bottom: 2vh;">INNOVATION</div>
+      <div style="font-size: 4.5vh; font-family: var(--serif); font-weight: 900; color: var(--t1); line-height: 1.1;">Engineering the<br/>Impossible</div>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5vh;">
+      <div style="background: var(--surface); border-left: 4px solid var(--accent1); border-radius: 1vh; padding: 2.5vh;">
+        <div style="display: flex; align-items: center; gap: 1.5vh; margin-bottom: 1.5vh;">
+          <div style="width: 3.5vh; height: 3.5vh; background: rgba(255, 107, 53, 0.2); border-radius: 1vh; display: flex; align-items: center; justify-content: center;"><i class="fas fa-thermometer-half" style="color: var(--accent1); font-size: 1.4vh;"></i></div>
+          <div style="font-size: 1.3vh; font-family: var(--sans); font-weight: 700; color: var(--t1);">Extreme Temperatures</div>
+        </div>
+        <div style="font-size: 1.1vh; font-family: var(--sans); color: var(--t2); line-height: 1.5; margin-bottom: 2vh;">Advanced materials and specialized shielding protect spacecraft and equipment</div>
+        <div style="background: rgba(255, 107, 53, 0.1); border: 1px solid rgba(255, 107, 53, 0.2); border-radius: 0.8vh; padding: 1.5vh;">
+          <div style="font-size: 0.95vh; font-family: var(--mono); color: var(--t2); letter-spacing: 0.03em;">Thermal tiles • Heat shields • Phase-change materials</div>
+        </div>
+      </div>
+      <div style="background: var(--surface); border-left: 4px solid var(--accent2); border-radius: 1vh; padding: 2.5vh;">
+        <div style="display: flex; align-items: center; gap: 1.5vh; margin-bottom: 1.5vh;">
+          <div style="width: 3.5vh; height: 3.5vh; background: rgba(78, 205, 196, 0.2); border-radius: 1vh; display: flex; align-items: center; justify-content: center;"><i class="fas fa-signal" style="color: var(--accent2); font-size: 1.4vh;"></i></div>
+          <div style="font-size: 1.3vh; font-family: var(--sans); font-weight: 700; color: var(--t1);">Communication Delays</div>
+        </div>
+        <div style="font-size: 1.1vh; font-family: var(--sans); color: var(--t2); line-height: 1.5; margin-bottom: 2vh;">Autonomous rovers and artificial intelligence handle decisions independently</div>
+        <div style="background: rgba(78, 205, 196, 0.1); border: 1px solid rgba(78, 205, 196, 0.2); border-radius: 0.8vh; padding: 1.5vh;">
+          <div style="font-size: 0.95vh; font-family: var(--mono); color: var(--t2); letter-spacing: 0.03em;">AI algorithms • Autonomous navigation • Real-time processing</div>
+        </div>
+      </div>
+      <div style="background: var(--surface); border-left: 4px solid var(--accent3); border-radius: 1vh; padding: 2.5vh;">
+        <div style="display: flex; align-items: center; gap: 1.5vh; margin-bottom: 1.5vh;">
+          <div style="width: 3.5vh; height: 3.5vh; background: rgba(255, 217, 61, 0.2); border-radius: 1vh; display: flex; align-items: center; justify-content: center;"><i class="fas fa-heart-pulse" style="color: var(--accent3); font-size: 1.4vh;"></i></div>
+          <div style="font-size: 1.3vh; font-family: var(--sans); font-weight: 700; color: var(--t1);">Life Support in Vacuum</div>
+        </div>
+        <div style="font-size: 1.1vh; font-family: var(--sans); color: var(--t2); line-height: 1.5; margin-bottom: 2vh;">Closed-loop systems recycle air, water, and manage radiation protection</div>
+        <div style="background: rgba(255, 217, 61, 0.1); border: 1px solid rgba(255, 217, 61, 0.2); border-radius: 0.8vh; padding: 1.5vh;">
+          <div style="font-size: 0.95vh; font-family: var(--mono); color: var(--t2); letter-spacing: 0.03em;">Recycling systems • Pressure suits • Radiation shielding</div>
+        </div>
+      </div>
+      <div style="background: var(--surface); border-left: 4px solid var(--accent1); border-radius: 1vh; padding: 2.5vh;">
+        <div style="display: flex; align-items: center; gap: 1.5vh; margin-bottom: 1.5vh;">
+          <div style="width: 3.5vh; height: 3.5vh; background: rgba(255, 107, 53, 0.2); border-radius: 1vh; display: flex; align-items: center; justify-content: center;"><i class="fas fa-location-dot" style="color: var(--accent1); font-size: 1.4vh;"></i></div>
+          <div style="font-size: 1.3vh; font-family: var(--sans); font-weight: 700; color: var(--t1);">Precision Landing</div>
+        </div>
+        <div style="font-size: 1.1vh; font-family: var(--sans); color: var(--t2); line-height: 1.5; margin-bottom: 2vh;">Advanced guidance, sensors, and retrorocket systems achieve pinpoint accuracy</div>
+        <div style="background: rgba(255, 107, 53, 0.1); border: 1px solid rgba(255, 107, 53, 0.2); border-radius: 0.8vh; padding: 1.5vh;">
+          <div style="font-size: 0.95vh; font-family: var(--mono); color: var(--t2); letter-spacing: 0.03em;">Terrain recognition • Inertial measurement • Throttle control</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<aside class="notes" style="display:none">
+Every mission solves complex engineering challenges. Landing on Mars requires technologies that didn't exist decades ago. The solutions we develop often find applications back on Earth—water purification, medical devices, and more.
+</aside>
+  <section style="background: linear-gradient(135deg, var(--bg2) 0%, var(--bg) 100%); padding: 8vh;">
+  <div class="s" style="display: flex; flex-direction: column; height: 100vh; justify-content: center;">
+    <div style="margin-bottom: 4vh;">
+      <div style="font-size: 1.2vh; font-family: var(--mono); color: var(--accent3); font-weight: 700; letter-spacing: 0.1em; margin-bottom: 2vh;">THE ROAD AHEAD</div>
+      <div style="font-size: 4.5vh; font-family: var(--serif); font-weight: 900; color: var(--t1); line-height: 1.1;">Next Frontiers</div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 2vh;">
+      <div style="display: flex; gap: 3vh; align-items: flex-start;">
+        <div style="position: relative;">
+          <div style="width: 4vh; height: 4vh; background: linear-gradient(135deg, var(--accent1), rgba(255,107,53,0.6)); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i class="fas fa-rocket" style="color: white; font-size: 1.8vh;"></i></div>
+          <div style="position: absolute; width: 2px; height: 8vh; background: linear-gradient(180deg, var(--accent1), rgba(255,107,53,0.2)); left: 50%; top: 4vh; transform: translateX(-50%);"></div>
+        </div>
+        <div style="flex-grow: 1; padding-top: 0.5vh;">
+          <div style="font-size: 1.5vh; font-family: var(--sans); font-weight: 700; color: var(--t1); margin-bottom: 0.5vh;">2024-2025: Artemis II</div>
+          <div style="font-size: 1.1vh; font-family: var(--sans); color: var(--t2); line-height: 1.5;">Lunar orbit mission paving the way for human exploration</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 3vh; align-items: flex-start;">
+        <div style="position: relative;">
+          <div style="width: 4vh; height: 4vh; background: linear-gradient(135deg, var(--accent2), rgba(78,205,196,0.6)); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i class="fas fa-moon" style="color: white; font-size: 1.8vh;"></i></div>
+          <div style="position: absolute; width: 2px; height: 8vh; background: linear-gradient(180deg, var(--accent2), rgba(78,205,196,0.2)); left: 50%; top: 4vh; transform: translateX(-50%);"></div>
+        </div>
+        <div style="flex-grow: 1; padding-top: 0.5vh;">
+          <div style="font-size: 1.5vh; font-family: var(--sans); font-weight: 700; color: var(--t1); margin-bottom: 0.5vh;">2026-2027: Artemis III</div>
+          <div style="font-size: 1.1vh; font-family: var(--sans); color: var(--t2); line-height: 1.5;">Return humans to the lunar surface with new exploration capabilities</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 3vh; align-items: flex-start;">
+        <div style="position: relative;">
+          <div style="width: 4vh; height: 4vh; background: linear-gradient(135deg, var(--accent3), rgba(255,217,61,0.6)); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i class="fas fa-building" style="color: white; font-size: 1.8vh;"></i></div>
+          <div style="position: absolute; width: 2px; height: 8vh; background: linear-gradient(180deg, var(--accent3), rgba(255,217,61,0.2)); left: 50%; top: 4vh; transform: translateX(-50%);"></div>
+        </div>
+        <div style="flex-grow: 1; padding-top: 0.5vh;">
+          <div style="font-size: 1.5vh; font-family: var(--sans); font-weight: 700; color: var(--t1); margin-bottom: 0.5vh;">2030s: Lunar Bases</div>
+          <div style="font-size: 1.1vh; font-family: var(--sans); color: var(--t2); line-height: 1.5;">Establishing sustainable habitats for long-term scientific research</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 3vh; align-items: flex-start;">
+        <div style="position: relative;">
+          <div style="width: 4vh; height: 4vh; background: linear-gradient(135deg, var(--accent1), rgba(255,107,53,0.6)); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><i class="fas fa-earth-americas" style="color: white; font-size: 1.8vh;"></i></div>
+        </div>
+        <div style="flex-grow: 1; padding-top: 0.5vh;">
+          <div style="font-size: 1.5vh; font-family: var(--sans); font-weight: 700; color: var(--t1); margin-bottom: 0.5vh;">2040s: Mars Missions</div>
+          <div style="font-size: 1.1vh; font-family: var(--sans); color: var(--t2); line-height: 1.5;">Human expeditions to the Red Planet become reality</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<aside class="notes" style="display:none">
+The coming decades promise even more ambitious goals. We're not just visiting the Moon again—we're building a sustainable presence. Mars is no longer science fiction; it's engineering reality. And beyond Mars, our ambitions continue to grow.
+</aside>
+  <section style="background: linear-gradient(135deg, rgba(255, 107, 53, 0.15), rgba(78, 205, 196, 0.15)), linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%); background-blend-mode: overlay; padding: 8vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+  <div style="position: absolute; width: 50vh; height: 50vh; background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%); border-radius: 50%; top: -10vh; right: -10vh;"></div>
+  <div style="position: absolute; width: 40vh; height: 40vh; background: radial-gradient(circle, rgba(78, 205, 196, 0.1) 0%, transparent 70%); border-radius: 50%; bottom: -5vh; left: -5vh;"></div>
+  <div class="s cx" style="position: relative; z-index: 10; max-width: 80vw; text-align: center;">
+    <div style="font-size: 5.5vh; font-family: var(--serif); font-weight: 900; color: var(--t1); line-height: 1.1; margin-bottom: 2vh;">"The future belongs to those bold enough to explore it"</div>
+    <div style="width: 6vh; height: 0.5vh; background: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3)); margin: 3vh auto;"></div>
+    <div style="font-size: 1.6vh; font-family: var(--sans); color: var(--t2); line-height: 1.6;">Every mission expands human potential. Space exploration represents humanity at its best—curious, ambitious, united in wonder</div>
+  </div>
+</section>
+<aside class="notes" style="display:none">
+Space exploration represents humanity at its best—curious, ambitious, united in wonder. Each mission reminds us that there are no limits to what we can achieve when we dare to dream big.
+</aside>
+  <section style="background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%); padding: 8vh;">
+  <div class="s" style="display: flex; flex-direction: column; height: 100vh; justify-content: center; align-items: center; text-align: center;">
+    <div style="margin-bottom: 4vh;">
+      <div style="font-size: 5vh; font-family: var(--serif); font-weight: 900; color: var(--t1); line-height: 1.1; margin-bottom: 1.5vh;">What Questions<br/>Do You Have?</div>
+      <div style="font-size: 2.2vh; font-family: var(--sans); font-weight: 300; color: var(--t2); letter-spacing: 0.02em;">Let's Explore Together</div>
+    </div>
+    <div style="width: 6vh; height: 0.5vh; background: linear-gradient(90deg, var(--accent1), var(--accent2), var(--accent3)); margin: 3vh auto 4vh;"></div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5vh; margin-bottom: 4vh; max-width: 70vw;">
+      <div style="background: rgba(255, 107, 53, 0.1); border: 1px solid rgba(255, 107, 53, 0.3); border-radius: 1.5vh; padding: 2.5vh;">
+        <div style="font-size: 1.3vh; font-family: var(--sans); font-weight: 700; color: var(--t1); margin-bottom: 1vh;"><i class="fas fa-lightbulb" style="color: var(--accent1); margin-right: 0.8vh;"></i>Inspiration</div>
+        <div style="font-size: 1.1vh; font-family: var(--sans); color: var(--t2); line-height: 1.5;">What aspects of space exploration fascinate you most?</div>
+      </div>
+      <div style="background: rgba(78, 205, 196, 0.1); border: 1px solid rgba(78, 205, 196, 0.3); border-radius: 1.5vh; padding: 2.5vh;">
+        <div style="font-size: 1.3vh; font-family: var(--sans); font-weight: 700; color: var(--t1); margin-bottom: 1vh;"><i class="fas fa-satellite" style="color: var(--accent2); margin-right: 0.8vh;"></i>Innovation</div>
+        <div style="font-size: 1.1vh; font-family: var(--sans); color: var(--t2); line-height: 1.5;">How might space technology improve your life today?</div>
+      </div>
+      <div style="background: rgba(255, 217, 61, 0.1); border: 1px solid rgba(255, 217, 61, 0.3); border-radius: 1.5vh; padding: 2.5vh;">
+        <div style="font-size: 1.3vh; font-family: var(--sans); font-weight: 700; color: var(--t1); margin-bottom: 1vh;"><i class="fas fa-compass" style="color: var(--accent3); margin-right: 0.8vh;"></i>Discovery</div>
+        <div style="font-size: 1.1vh; font-family: var(--sans); color: var(--t2); line-height: 1.5;">Where should humanity explore next?</div>
+      </div>
+      <div style="background: rgba(255, 107, 53, 0.1); border: 1px solid rgba(255, 107, 53, 0.3); border-radius: 1.5vh; padding: 2.5vh;">
+        <div style="font-size: 1.3vh; font-family: var(--sans); font-weight: 700; color: var(--t1); margin-bottom: 1vh;"><i class="fas fa-handshake" style="color: var(--accent1); margin-right: 0.8vh;"></i>Connection</div>
+        <div style="font-size: 1.1vh; font-family: var(--sans); color: var(--t2); line-height: 1.5;">How can we work together on future missions?</div>
+      </div>
+    </div>
+    <div style="background: linear-gradient(135deg, rgba(78, 205, 196, 0.2), rgba(255, 107, 53, 0.2)); border: 1px solid rgba(78, 205, 196, 0.4); border-radius: 2vh; padding: 3vh; max-width: 70vw;">
+      <div style="font-size: 1.2vh; font-family: var(--sans); font-weight: 600; color: var(--t1); margin-bottom: 1.5vh;"><i class="fas fa-comments" style="color: var(--accent2); margin-right: 0.8vh;"></i>Share Your Thoughts</div>
+      <div style="font-size: 1.1vh; font-family: var(--sans); color: var(--t2); line-height: 1.5;">Let's discuss the wonder and science of space together. Your curiosity and questions are what drive exploration forward.</div>
+    </div>
+  </div>
+</section>
+<aside class="notes" style="display:none">
+Now I'd love to hear from you. What aspects of space exploration fascinate you most? Do you have questions about specific missions or the future of exploration? This is our chance to discuss the wonder and science of space together. Please share your thoughts and curiosity.
+</aside>
+
+<script>
+(function(){
+  const sections = document.querySelectorAll('section');
+  const total = sections.length;
+  const counter = document.getElementById('slide-counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  // IntersectionObserver: mark the visible slide as .active (triggers CSS animations)
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        sections.forEach(s => s.classList.remove('active'));
+        e.target.classList.add('active');
+        current = Array.from(sections).indexOf(e.target);
+        if (counter) counter.textContent = (current+1) + ' / ' + total;
+        if (progress) progress.style.width = ((current+1)/total*100) + '%';
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s => obs.observe(s));
+
+  // Activate first slide immediately
+  if (sections[0]) sections[0].classList.add('active');
+  if (counter) counter.textContent = '1 / ' + total;
+  if (progress) progress.style.width = (1/total*100) + '%';
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      if (current < total - 1) sections[current + 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (current > 0) sections[current - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      sections[0].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      sections[total - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'f' || e.key === 'F11') {
+      e.preventDefault();
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>

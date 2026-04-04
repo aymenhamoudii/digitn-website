@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA | 3D Masterpieces</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/gallery.css">
+    <link rel="stylesheet" href="css/forms.css">
+</head>
+<body>
+    <nav class="nav-bar">
+        <a href="#hero" class="nav-logo">AURA</a>
+        <div class="nav-links">
+            <a href="#hero" class="nav-link active">Home</a>
+            <a href="#menu" class="nav-link">Menu</a>
+            <a href="#gallery" class="nav-link">Gallery</a>
+            <a href="#reviews" class="nav-link">Reviews</a>
+            <a href="#reservation" class="nav-link">Reserve</a>
+        </div>
+    </nav>
+
+    <main class="scroll-container">
+        <!-- Hero Section -->
+        <section id="hero" class="scroll-section hero-section">
+            <div class="hero-bg-element"></div>
+            <div class="hero-content">
+                <h1 class="glint-text">AURA</h1>
+                <p class="subtitle">Multi-Dimensional Gastronomy</p>
+                <div class="hero-actions">
+                    <a href="#menu" class="btn-neumorphic hero-btn">Explore Masterpieces</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Section -->
+        <section id="menu" class="scroll-section">
+            <div class="section-header">
+                <h2>Culinary Dimensions</h2>
+                <p>Interact with our masterpieces. Hover to explore.</p>
+            </div>
+            <div class="menu-grid" id="menu-grid">
+                <!-- Rendered by JS -->
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="scroll-section">
+            <div class="section-header">
+                <h2>Visual Symphony</h2>
+                <p>The art of plating, elevated.</p>
+            </div>
+            <div class="gallery-container">
+                <button class="btn-icon neumorphic-circle" id="gallery-prev" aria-label="Previous">❮</button>
+                <div class="gallery-viewport">
+                    <div class="gallery-track" id="gallery-track">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+                <button class="btn-icon neumorphic-circle" id="gallery-next" aria-label="Next">❯</button>
+            </div>
+        </section>
+
+        <!-- Reviews Section -->
+        <section id="reviews" class="scroll-section">
+            <div class="section-header">
+                <h2>Acclaim</h2>
+                <p>Whispers from the dining room.</p>
+            </div>
+            <div class="reviews-grid" id="reviews-grid">
+                <!-- Rendered by JS -->
+            </div>
+        </section>
+
+        <!-- Reservation & Contact Section -->
+        <section id="reservation" class="scroll-section">
+            <div class="split-layout">
+                <div class="form-container neumorphic-panel">
+                    <h2>Reserve a Table</h2>
+                    <p class="form-subtitle">Secure your passage to another dimension.</p>
+                    <form id="reservation-form">
+                        <div class="form-group">
+                            <label for="res-name">Guest Name</label>
+                            <input type="text" id="res-name" required placeholder="Viscountess Astor">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="res-date">Date</label>
+                                <input type="date" id="res-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="res-time">Time</label>
+                                <select id="res-time" required>
+                                    <option value="18:00">6:00 PM</option>
+                                    <option value="19:00">7:00 PM</option>
+                                    <option value="20:00">8:00 PM</option>
+                                    <option value="21:00">9:00 PM</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="res-guests">Party Size</label>
+                            <select id="res-guests" required>
+                                <option value="1">1 Guest</option>
+                                <option value="2" selected>2 Guests</option>
+                                <option value="3">3 Guests</option>
+                                <option value="4">4 Guests</option>
+                                <option value="5">5+ Guests (Private Dining)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-neumorphic btn-submit">Confirm Booking</button>
+                    </form>
+                </div>
+
+                <div class="contact-container neumorphic-panel">
+                    <h2>Location</h2>
+                    <div class="map-wrapper neumorphic-inset-panel">
+                        <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80" alt="Map Location" class="map-image">
+                        <div class="map-pin"></div>
+                    </div>
+                    <div class="contact-details">
+                        <p><strong>AURA</strong></p>
+                        <p>123 Obsidian Way, Nexus District</p>
+                        <p>concierge@auradining.com</p>
+                        <p>+1 (555) 019-8372</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- JS dependencies in correct order. NO ES Modules. -->
+    <script src="js/demo-data.js"></script>
+    <script src="js/scroll.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/carousel.js"></script>
+    <script src="js/booking.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>First Time Pizza — Elegant, Local Pizzeria</title>
+  <meta name="description" content="First Time Pizza — An elegant, upscale pizzeria. Browse our menu, book reservations, see events, and explore our gallery." />
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <link rel="stylesheet" href="css/components/menu.css">
+  <link rel="stylesheet" href="css/components/reservations.css">
+  <link rel="stylesheet" href="css/components/gallery.css">
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="#home" class="brand" aria-label="First Time Pizza home">
+        <picture>
+          <source srcset="assets/images/logo.svg" type="image/svg+xml">
+          <img src="assets/images/logo.png" alt="First Time Pizza logo" class="logo">
+        </picture>
+        <span class="brand-text">First Time Pizza</span>
+      </a>
+      <nav class="main-nav" role="navigation" aria-label="Main navigation">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="primary-menu">Menu</button>
+        <ul id="primary-menu" class="nav-list">
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#reservations">Reservations</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <a class="btn btn-primary" href="#reservations">Reserve a Table</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="home" role="main">
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1 class="hero-title">An Elevated Neighborhood Pizza Experience</h1>
+          <p class="lead">Hand-crafted pies, seasonal ingredients, and a warm, elegant atmosphere. Join us for an unforgettable meal.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#menu">View Menu</a>
+            <a class="btn btn-ghost" href="#reservations">Reserve</a>
+          </div>
+        </div>
+        <div class="hero-media">
+          <picture>
+            <source srcset="assets/images/placeholder.jpg" type="image/jpeg">
+            <img src="assets/images/placeholder.jpg" alt="Wood-fired pizza" loading="lazy">
+          </picture>
+          <noscript>
+            <img src="assets/images/placeholder.jpg" alt="Wood-fired pizza">
+          </noscript>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu" class="section" aria-labelledby="menu-heading">
+      <div class="container">
+        <h2 id="menu-heading">Our Menu</h2>
+        <div id="menu-filters" class="menu-filters" aria-hidden="false"></div>
+        <div id="menu-list" class="menu-list"></div>
+      </div>
+    </section>
+
+    <section id="reservations" class="section" aria-labelledby="reservations-heading">
+      <div class="container">
+        <h2 id="reservations-heading">Reservations</h2>
+        <div class="reservations-grid">
+          <div class="reservation-form-card card">
+            <form id="reservation-form" novalidate>
+              <div class="form-row">
+                <label for="res-name">Full name</label>
+                <input id="res-name" name="name" type="text" required>
+              </div>
+              <div class="form-row">
+                <label for="res-email">Email</label>
+                <input id="res-email" name="email" type="email" required>
+              </div>
+              <div class="form-row">
+                <label for="res-phone">Phone</label>
+                <input id="res-phone" name="phone" type="tel">
+              </div>
+              <div class="form-row split">
+                <div>
+                  <label for="res-date">Date</label>
+                  <input id="res-date" name="date" type="date" required>
+                </div>
+                <div>
+                  <label for="res-time">Time</label>
+                  <input id="res-time" name="time" type="time" required>
+                </div>
+                <div>
+                  <label for="res-party">Party size</label>
+                  <input id="res-party" name="party" type="number" min="1" max="20" value="2" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <label for="res-notes">Special requests</label>
+                <textarea id="res-notes" name="notes" rows="3"></textarea>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Request Reservation</button>
+                <button class="btn btn-secondary" type="button" id="export-bookings">Export Bookings</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="bookings-card card" aria-live="polite">
+            <h3>Upcoming & Pending Bookings</h3>
+            <ul id="booking-list" class="booking-list"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="section" aria-labelledby="gallery-heading">
+      <div class="container">
+        <h2 id="gallery-heading">Gallery</h2>
+        <div id="gallery-grid" class="gallery-grid"></div>
+      </div>
+    </section>
+
+    <section id="events" class="section" aria-labelledby="events-heading">
+      <div class="container">
+        <h2 id="events-heading">Events</h2>
+        <div id="events-list" class="events-list"></div>
+      </div>
+    </section>
+
+    <section id="contact" class="section" aria-labelledby="contact-heading">
+      <div class="container contact-grid">
+        <div>
+          <h2 id="contact-heading">Contact & Hours</h2>
+          <address>
+            <p><strong>First Time Pizza</strong><br>123 Rustic Lane<br>Cityville, ST 12345</p>
+            <p><a href="tel:+15555550123">(555) 555-0123</a><br><a href="mailto:hello@firsttimepizza.example">hello@firsttimepizza.example</a></p>
+          </address>
+
+          <div class="hours" id="opening-hours"></div>
+
+          <div class="map-wrap">
+            <iframe title="Location map" src="https://maps.google.com/maps?q=40.7128,-74.0060&amp;z=15&amp;output=embed" loading="lazy" aria-hidden="false"></iframe>
+          </div>
+        </div>
+
+        <div>
+          <h3>Send us a message</h3>
+          <form id="contact-form" novalidate>
+            <div class="form-row">
+              <label for="contact-name">Name</label>
+              <input id="contact-name" name="name" type="text" required>
+            </div>
+            <div class="form-row">
+              <label for="contact-email">Email</label>
+              <input id="contact-email" name="email" type="email" required>
+            </div>
+            <div class="form-row">
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" name="message" rows="5" required></textarea>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">Send Message</button>
+            </div>
+          </form>
+
+          <div id="social-feed" class="social-feed" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <picture>
+          <source srcset="assets/images/logo.svg" type="image/svg+xml">
+          <img src="assets/images/logo.png" alt="First Time Pizza logo" class="logo-small">
+        </picture>
+        <p>© <span id="current-year"></span> First Time Pizza — All rights reserved.</p>
+      </div>
+      <div class="footer-links">
+        <ul>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#reservations">Reservations</a></li>
+          <li><a href="#events">Events</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram" class="social-link">Instagram</a>
+        <a href="#" aria-label="Facebook" class="social-link">Facebook</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts: dependencies first -->
+  <script src="js/utils.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/reservations.js"></script>
+  <script src="js/social.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

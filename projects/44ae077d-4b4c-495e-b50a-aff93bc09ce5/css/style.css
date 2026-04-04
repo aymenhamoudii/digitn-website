@@ -1,0 +1,71 @@
+/* Core layout and component styles for First Time Pizza (Elegant Upscale) */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600;700&display=swap');
+
+:root{--body-font:'Playfair Display', serif;--ui-font:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+
+/* Override base font families */
+body{font-family:var(--body-font)}
+h1,h2,h3{font-family:var(--ui-font)}
+
+/* Layout structure */
+main{padding-bottom:var(--space-12)}
+.section{padding:var(--space-8) 0}
+
+/* Navigation behavior */
+.main-nav{margin-left:auto}
+.header-actions{margin-left:var(--space-4)}
+
+/* Menu list placeholder */
+.menu-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--space-6);margin-top:var(--space-6)}
+.menu-item{display:flex;gap:var(--space-4);align-items:flex-start}
+.menu-item .thumb{width:110px;height:80px;flex-shrink:0;border-radius:8px;overflow:hidden}
+.menu-item .thumb img{width:100%;height:100%;object-fit:cover}
+.menu-item .meta{flex:1}
+.menu-item .title-row{display:flex;align-items:center;justify-content:space-between;gap:var(--space-2)}
+.diet-tags{display:flex;gap:0.5rem;margin-top:0.5rem}
+.diet-tag{background:var(--neutral-100);padding:0.25rem 0.5rem;border-radius:9999px;font-size:var(--text-xs)}
+
+/* Booking list */
+.booking-list{list-style:none;padding:0;margin:0}
+.booking-item{padding:0.75rem;border-bottom:1px dashed var(--neutral-100);display:flex;justify-content:space-between;align-items:center}
+.booking-item .meta{font-size:0.95rem}
+.booking-item .status{font-weight:700}
+
+/* Gallery */
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:var(--space-4)}
+.gallery-thumb{position:relative;overflow:hidden;border-radius:8px;cursor:pointer}
+.gallery-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.25s ease}
+.gallery-thumb:focus-within img,.gallery-thumb:hover img{transform:scale(1.04)}
+
+/* Lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(2,2,2,0.8);display:flex;align-items:center;justify-content:center;z-index:1000;padding:var(--space-6);}
+.lightbox .inner{max-width:900px;width:100%}
+.lightbox img{width:100%;height:auto;border-radius:12px}
+.lightbox .close{position:absolute;top:var(--space-6);right:var(--space-6);background:transparent;color:#fff;border:0;font-size:1.25rem}
+
+/* Events list */
+.events-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--space-6)}
+.event-card{background:linear-gradient(180deg,#fff,#fff);border-radius:12px;padding:var(--space-4);box-shadow:var(--shadow-sm)}
+.event-meta{font-size:0.95rem;color:var(--neutral-500)}
+
+/* Contact and map */
+.contact-grid{display:grid;grid-template-columns:1fr 360px;gap:var(--space-6);align-items:start}
+.map-wrap iframe{width:100%;height:220px;border:0;border-radius:8px}
+
+/* Small screens adjustments */
+@media (max-width:780px){
+  .contact-grid{grid-template-columns:1fr}
+  .hero-inner{grid-template-columns:1fr}
+  .header-actions{display:none}
+  .nav-toggle{display:inline-block}
+  .nav-list{position:absolute;right:var(--space-4);top:70px;background:#fff;padding:var(--space-4);border-radius:8px;box-shadow:var(--shadow-md);display:none}
+  .nav-list.open{display:block}
+}
+
+/* Printable menu tweaks */
+@media print{
+  body{color:#000;background:#fff}
+  .hero,.site-header,.site-footer,.nav-toggle,.form-actions{display:none}
+  .menu-list{grid-template-columns:1fr}
+  img{max-width:100%;height:auto}
+}

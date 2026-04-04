@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic-Tac-Toe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="game-container">
+    <header class="game-header">
+      <h1 class="game-title">Tic Tac Toe</h1>
+      <p class="game-subtitle">A classic game of strategy</p>
+    </header>
+
+    <div class="game-status" id="gameStatus">
+      <span class="turn-indicator" id="turnIndicator">Player X's turn</span>
+    </div>
+
+    <div class="board" id="board" role="grid" aria-label="Tic-Tac-Toe game board">
+      <button class="cell" data-index="0" role="gridcell" aria-label="Cell 1"></button>
+      <button class="cell" data-index="1" role="gridcell" aria-label="Cell 2"></button>
+      <button class="cell" data-index="2" role="gridcell" aria-label="Cell 3"></button>
+      <button class="cell" data-index="3" role="gridcell" aria-label="Cell 4"></button>
+      <button class="cell" data-index="4" role="gridcell" aria-label="Cell 5"></button>
+      <button class="cell" data-index="5" role="gridcell" aria-label="Cell 6"></button>
+      <button class="cell" data-index="6" role="gridcell" aria-label="Cell 7"></button>
+      <button class="cell" data-index="7" role="gridcell" aria-label="Cell 8"></button>
+      <button class="cell" data-index="8" role="gridcell" aria-label="Cell 9"></button>
+    </div>
+
+    <button class="restart-btn" id="restartBtn" aria-label="Restart game">
+      <span class="restart-icon">↺</span> Play Again
+    </button>
+
+    <div class="stats">
+      <div class="stat-item">
+        <span class="stat-label">X Wins</span>
+        <span class="stat-value" id="xWins">0</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">O Wins</span>
+        <span class="stat-value" id="oWins">0</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Draws</span>
+        <span class="stat-value" id="draws">0</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

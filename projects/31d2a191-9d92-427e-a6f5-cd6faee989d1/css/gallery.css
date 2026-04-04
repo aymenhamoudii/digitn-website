@@ -1,0 +1,91 @@
+/* Asymmetric Gallery Styling */
+.gallery-section {
+    padding: var(--space-xl) 0;
+    background-color: var(--color-white);
+}
+
+.asymmetric-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 250px;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+.gallery-item {
+    overflow: hidden;
+    position: relative;
+    border-radius: var(--border-radius);
+    transition: var(--transition-smooth);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+/* Specific Grid Placements for Asymmetry */
+.gallery-item.large {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.gallery-item.tall {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+.gallery-item.wide {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.gallery-item.medium {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.gallery-item.small {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+/* Animations on Scroll - placeholder logic for CSS intersection observer if needed later */
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.gallery-item.visible {
+    animation: fade-in-up 0.8s forwards;
+}
+
+@media (max-width: 1024px) {
+    .asymmetric-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .asymmetric-gallery {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+    
+    .gallery-item {
+        height: 300px;
+    }
+}

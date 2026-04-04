@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Rick and Morty: An Unnecessary Psychological Deep Dive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;800;900&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+    --bg: #0F6E56;
+    --bg2: #0B5743;
+    --surface: #1A876B;
+    --surface2: #277d67;
+    --border: rgba(255,255,255,.07);
+    --border-md: rgba(255,255,255,.11);
+    --accent1: #ED93B1;
+    --accent1-dim: rgba(237, 147, 177, 0.18);
+    --accent2: #FBEAF0;
+    --accent2-dim: rgba(251, 234, 240, 0.18);
+    --accent3: #1D9E75;
+    --accent3-dim: rgba(29, 158, 117, 0.18);
+    --t1: #F1EFE8;
+    --t2: #C2D1CD;
+    --t3: rgba(241, 239, 232, 0.3);
+    --mono: 'Fira Code', monospace;
+    --sans: 'Outfit', system-ui, sans-serif;
+    --serif: 'Fraunces', serif;
+  }
+    
+  /* ─── Reset ─── */
+  ::-webkit-scrollbar{display:none}
+  *{scrollbar-width:none;-ms-overflow-style:none;box-sizing:border-box;margin:0;padding:0}
+  html{overflow-y:scroll;overflow-x:hidden;scroll-behavior:smooth;scroll-snap-type:y mandatory}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  /* ─── Slide wrapper (viewport-sized snap target) ─── */
+  .slide-wrap{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--bg);position:relative}
+
+  /* ─── Slide (fixed 1920×1080 canvas, scaled to fit) ─── */
+  section{width:1920px;height:1080px;min-width:1920px;min-height:1080px;display:flex;flex-direction:column;position:relative;overflow:hidden;transform-origin:center center;flex-shrink:0}
+  section *{flex-shrink:0}
+  section div{flex-wrap:nowrap}
+
+  /* ─── Stagger animation (.s container) ─── */
+  .s{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
+  .s>*{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+  .slide-wrap.active .s>*{opacity:1;transform:translateY(0)}
+  .slide-wrap.active .s>*:nth-child(1){transition-delay:.03s}
+  .slide-wrap.active .s>*:nth-child(2){transition-delay:.09s}
+  .slide-wrap.active .s>*:nth-child(3){transition-delay:.15s}
+  .slide-wrap.active .s>*:nth-child(4){transition-delay:.21s}
+  .slide-wrap.active .s>*:nth-child(5){transition-delay:.27s}
+  .slide-wrap.active .s>*:nth-child(6){transition-delay:.33s}
+  .slide-wrap.active .s>*:nth-child(7){transition-delay:.39s}
+  .slide-wrap.active .s>*:nth-child(8){transition-delay:.45s}
+
+  /* ─── Centering utility ─── */
+  .cx{justify-content:center;align-items:center;text-align:center}
+
+  /* ─── Speaker notes (hidden) ─── */
+  aside.notes{display:none!important}
+
+  /* ─── Slide counter ─── */
+  #slide-counter{position:fixed;bottom:16px;right:24px;font-family:var(--mono);font-size:13px;color:var(--t3);background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:6px 14px;z-index:100;pointer-events:none}
+
+  /* ─── Progress bar ─── */
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--accent1);z-index:100;transition:width .3s ease}
+
+  </style>
+</head>
+<body>
+  <div id="progress" style="width:0"></div>
+  <div id="slide-counter">1 / 11</div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg); color: var(--t1); padding: 80px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; height: 1080px; width: 1920px; box-sizing: border-box; font-family: var(--sans);">
+  <div class="s cx" style="width: 1600px; display: flex; flex-direction: column; align-items: center; gap: 40px;">
+    
+    <div style="display: flex; gap: 20px; justify-content: center; margin-bottom: 20px;">
+      <span style="background-color: var(--accent1); color: var(--bg); padding: 12px 24px; border-radius: 50px; font-weight: bold; font-size: 24px; text-transform: uppercase; letter-spacing: 2px;">Character Psychology</span>
+      <span style="background-color: var(--accent2); color: var(--bg); padding: 12px 24px; border-radius: 50px; font-weight: bold; font-size: 24px; text-transform: uppercase; letter-spacing: 2px;">Family Dynamics</span>
+      <span style="background-color: var(--accent3); color: var(--bg); padding: 12px 24px; border-radius: 50px; font-weight: bold; font-size: 24px; text-transform: uppercase; letter-spacing: 2px;">Existential Dread</span>
+    </div>
+
+    <h1 style="font-family: var(--serif); font-size: 110px; line-height: 1.1; margin: 0; color: var(--accent2); text-shadow: 4px 4px 0px var(--bg2);">
+      Rick and Morty:<br>
+      <span style="color: var(--accent1);">An Unnecessary Psychological Deep Dive</span>
+    </h1>
+    
+    <div style="width: 200px; height: 8px; background-color: var(--accent3); border-radius: 4px; margin: 20px 0;"></div>
+    
+    <h2 style="font-size: 48px; font-weight: normal; color: var(--t2); margin: 0; width: 1200px; line-height: 1.4;">
+      Analyzing the Deep Lore and Broken Brains of the Smith Family
+    </h2>
+    
+  </div>
+  <aside class="notes" style="display:none">
+    Welcome to this utterly pointless presentation. I hope you brought your high IQs, because we're about to over-analyze a cartoon.
+  </aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg2); color: var(--t1); padding: 120px; display: flex; align-items: center; box-sizing: border-box; height: 1080px; width: 1920px; font-family: var(--sans);">
+  <div class="s" style="width: 1680px; margin: 0 auto; display: grid; grid-template-columns: 672px 924px; gap: 84px;">
+    
+    <div style="display: flex; flex-direction: column; justify-content: center;">
+      <div style="margin-bottom: 30px;">
+        <span style="background-color: var(--accent3); color: var(--bg2); padding: 10px 24px; border-radius: 4px; font-weight: bold; font-size: 28px; text-transform: uppercase; letter-spacing: 3px;">Agenda</span>
+      </div>
+      <h2 style="font-family: var(--serif); font-size: 100px; line-height: 1.1; margin: 0; color: var(--accent1); text-shadow: 3px 3px 0px var(--bg);">
+        What We're<br>Wasting<br>Time On
+      </h2>
+      <p style="font-size: 32px; color: var(--t2); margin-top: 40px; line-height: 1.5; font-style: italic;">
+        A brief overview of why your favorite characters are terrible people.
+      </p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 40px; justify-content: center;">
+      <div style="background-color: var(--surface); padding: 40px; border-radius: 20px; display: flex; align-items: center; gap: 40px; border-left: 12px solid var(--accent1); box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
+        <div style="width: 100px; height: 100px; background-color: var(--accent2); color: var(--bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; flex-shrink: 0;">
+          <i class="fas fa-brain"></i>
+        </div>
+        <div>
+          <h3 style="margin: 0; font-size: 42px; color: var(--t1); font-family: var(--serif);">Rick's insufferable god complex</h3>
+        </div>
+      </div>
+      
+      <div style="background-color: var(--surface); padding: 40px; border-radius: 20px; display: flex; align-items: center; gap: 40px; border-left: 12px solid var(--accent2); box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
+        <div style="width: 100px; height: 100px; background-color: var(--accent1); color: var(--bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; flex-shrink: 0;">
+          <i class="fas fa-ghost"></i>
+        </div>
+        <div>
+          <h3 style="margin: 0; font-size: 42px; color: var(--t1); font-family: var(--serif);">Morty's descent into cynical apathy</h3>
+        </div>
+      </div>
+      
+      <div style="background-color: var(--surface); padding: 40px; border-radius: 20px; display: flex; align-items: center; gap: 40px; border-left: 12px solid var(--accent3); box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
+        <div style="width: 100px; height: 100px; background-color: var(--bg); color: var(--accent1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; flex-shrink: 0; border: 4px solid var(--accent3);">
+          <i class="fas fa-users-slash"></i>
+        </div>
+        <div>
+          <h3 style="margin: 0; font-size: 42px; color: var(--t1); font-family: var(--serif);">The codependent vortex of the Smith family</h3>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <aside class="notes" style="display:none">
+    Here's the agenda. Try to keep up while I explain why your favorite characters are fundamentally broken and terrible for each other.
+  </aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg); color: var(--t1); padding: 100px; display: flex; flex-direction: column; box-sizing: border-box; height: 1080px; width: 1920px; font-family: var(--sans);">
+  <div class="s" style="width: 1720px; margin: 0 auto; display: flex; flex-direction: column; gap: 60px; height: 880px;">
+    
+    <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px;">
+      <span style="background-color: var(--accent2); color: var(--bg); padding: 10px 30px; border-radius: 50px; font-weight: bold; font-size: 24px; text-transform: uppercase; letter-spacing: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">Rick Sanchez</span>
+      <h2 style="font-family: var(--serif); font-size: 85px; line-height: 1.1; margin: 0; color: var(--accent1); text-shadow: 2px 2px 0px var(--bg2);">
+        God Complex or Just a Drunk?
+      </h2>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 546px); gap: 40px; flex-grow: 1; align-items: stretch;">
+      
+      <div style="background-color: var(--surface); border-radius: 30px; padding: 50px; display: flex; flex-direction: column; border-top: 15px solid var(--accent1); box-shadow: 0 25px 50px rgba(0,0,0,0.25); position: relative; overflow: hidden;">
+        <div style="position: absolute; top: -20px; right: -20px; font-size: 200px; color: var(--accent3); opacity: 0.2;">
+          <i class="fas fa-wine-bottle"></i>
+        </div>
+        <div style="font-family: var(--serif); font-size: 100px; font-weight: bold; color: var(--accent1); margin-bottom: 20px; line-height: 1;">1.</div>
+        <h3 style="font-size: 42px; color: var(--t1); margin: 0 0 20px 0; z-index: 1;">Emotional Avoidance</h3>
+        <p style="font-size: 28px; color: var(--t2); line-height: 1.5; margin: 0; z-index: 1;">
+          Uses the infinite multiverse as a convenient excuse to never process a single genuine emotion. If nothing matters, why go to therapy?
+        </p>
+      </div>
+
+      <div style="background-color: var(--bg2); border-radius: 30px; padding: 50px; display: flex; flex-direction: column; border-top: 15px solid var(--accent2); box-shadow: 0 25px 50px rgba(0,0,0,0.25); position: relative; overflow: hidden;">
+        <div style="position: absolute; top: -20px; right: -20px; font-size: 200px; color: var(--surface); opacity: 0.3;">
+          <i class="fas fa-masks-theater"></i>
+        </div>
+        <div style="font-family: var(--serif); font-size: 100px; font-weight: bold; color: var(--accent2); margin-bottom: 20px; line-height: 1;">2.</div>
+        <h3 style="font-size: 42px; color: var(--t1); margin: 0 0 20px 0; z-index: 1;">Masked Depression</h3>
+        <p style="font-size: 28px; color: var(--t2); line-height: 1.5; margin: 0; z-index: 1;">
+          Textbook narcissism expertly deployed to camouflage profound, crippling depression and self-loathing that spans across dimensions.
+        </p>
+      </div>
+
+      <div style="background-color: var(--surface); border-radius: 30px; padding: 50px; display: flex; flex-direction: column; border-top: 15px solid var(--accent3); box-shadow: 0 25px 50px rgba(0,0,0,0.25); position: relative; overflow: hidden;">
+        <div style="position: absolute; top: -20px; right: -20px; font-size: 200px; color: var(--bg2); opacity: 0.3;">
+          <i class="fas fa-wall-brick"></i>
+        </div>
+        <div style="font-family: var(--serif); font-size: 100px; font-weight: bold; color: var(--accent3); margin-bottom: 20px; line-height: 1;">3.</div>
+        <h3 style="font-size: 42px; color: var(--t1); margin: 0 0 20px 0; z-index: 1;">The Ultimate Safe Space</h3>
+        <p style="font-size: 28px; color: var(--t2); line-height: 1.5; margin: 0; z-index: 1;">
+          Literally built a multidimensional wall (The Central Finite Curve) around universes to ensure he's always the smartest guy in the room. Fragile ego much?
+        </p>
+      </div>
+
+    </div>
+    
+  </div>
+  <aside class="notes" style="display:none">
+    Rick Sanchez. The smartest mammal in the universe and the absolute dumbest when it comes to basic emotional regulation. Let's unpack this mess.
+  </aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg2); color: var(--t1); padding: 100px; display: flex; flex-direction: column; align-items: center; box-sizing: border-box; height: 1080px; width: 1920px; font-family: var(--sans);">
+  <div class="s" style="width: 1600px; margin: 0 auto; display: flex; flex-direction: column; height: 880px; gap: 60px;">
+    
+    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 20px; border-bottom: 4px solid var(--accent3); padding-bottom: 40px;">
+      <span style="background-color: var(--accent1); color: var(--bg2); padding: 12px 30px; border-radius: 8px; font-weight: bold; font-size: 26px; text-transform: uppercase; letter-spacing: 2px;">Morty Smith</span>
+      <h2 style="font-family: var(--serif); font-size: 90px; line-height: 1; margin: 0; color: var(--t1);">
+        The Descent into Apathy
+      </h2>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 70px; flex-grow: 1; justify-content: center;">
+      
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+          <h3 style="font-size: 48px; color: var(--t1); margin: 0; font-family: var(--serif);">Season 1: Whimpering human shield</h3>
+          <span style="font-size: 64px; font-weight: bold; color: var(--accent2); font-family: var(--mono); line-height: 1;">10%</span>
+        </div>
+        <div style="width: 1600px; height: 40px; background-color: var(--bg); border-radius: 20px; overflow: hidden; box-shadow: inset 0 5px 15px rgba(0,0,0,0.5);">
+          <div style="width: 160px; height: 40px; background-color: var(--accent2); border-radius: 20px;"></div>
+        </div>
+        <p style="font-size: 28px; color: var(--t2); margin: 0; text-transform: uppercase; letter-spacing: 2px; font-weight: bold;">Trauma Level: Mild Panicking</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+          <h3 style="font-size: 48px; color: var(--t1); margin: 0; font-family: var(--serif);">Season 3: Defusing neutrino bombs</h3>
+          <span style="font-size: 64px; font-weight: bold; color: var(--accent1); font-family: var(--mono); line-height: 1;">50%</span>
+        </div>
+        <div style="width: 1600px; height: 40px; background-color: var(--bg); border-radius: 20px; overflow: hidden; box-shadow: inset 0 5px 15px rgba(0,0,0,0.5);">
+          <div style="width: 800px; height: 40px; background-color: var(--accent1); border-radius: 20px;"></div>
+        </div>
+        <p style="font-size: 28px; color: var(--t2); margin: 0; text-transform: uppercase; letter-spacing: 2px; font-weight: bold;">Trauma Level: Begrudging Competence</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+          <h3 style="font-size: 48px; color: var(--t1); margin: 0; font-family: var(--serif);">Season 7: Ruthless pragmatist</h3>
+          <span style="font-size: 64px; font-weight: bold; color: var(--accent3); font-family: var(--mono); line-height: 1;">99%</span>
+        </div>
+        <div style="width: 1600px; height: 40px; background-color: var(--bg); border-radius: 20px; overflow: hidden; box-shadow: inset 0 5px 15px rgba(0,0,0,0.5);">
+          <div style="width: 1584px; height: 40px; background-color: var(--accent3); border-radius: 20px;"></div>
+        </div>
+        <p style="font-size: 28px; color: var(--t2); margin: 0; text-transform: uppercase; letter-spacing: 2px; font-weight: bold;">Trauma Level: Complete Desensitization</p>
+      </div>
+
+    </div>
+    
+  </div>
+  <aside class="notes" style="display:none">
+    Morty started out as a stuttering human cloaking device and evolved into a hardened, cynical monster. Honestly? Good for him.
+  </aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg); color: var(--t1); padding: 100px; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box; height: 1080px; width: 1920px; font-family: var(--sans);">
+  <div class="s" style="width: 1720px; margin: 0 auto; display: flex; flex-direction: column; gap: 80px;">
+    
+    <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px;">
+      <span style="background-color: var(--accent3); color: var(--bg); padding: 12px 30px; border-radius: 50px; font-weight: bold; font-size: 24px; text-transform: uppercase; letter-spacing: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">The Dynamic</span>
+      <h2 style="font-family: var(--serif); font-size: 90px; line-height: 1.1; margin: 0; color: var(--accent2); text-shadow: 3px 3px 0px var(--bg2);">
+        A Masterclass in Toxic Codependency
+      </h2>
+    </div>
+
+    <div style="display: flex; position: relative; margin-top: 60px; padding: 0 20px; align-items: stretch; height: 500px; width: 1680px; box-sizing: border-box;">
+      
+      <!-- Connecting Line -->
+      <div style="position: absolute; top: 125px; left: 100px; width: 1480px; height: 20px; background-color: var(--surface); z-index: 0; border-radius: 10px;"></div>
+
+      <!-- Stage 1 -->
+      <div style="width: 546px; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; padding: 0 40px; text-align: center; box-sizing: border-box;">
+        <div style="width: 250px; height: 250px; background-color: var(--accent1); border-radius: 50%; border: 15px solid var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--bg); margin-bottom: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); box-sizing: border-box;">
+          <i class="fas fa-brain" style="font-size: 80px; margin-bottom: 10px;"></i>
+          <span style="font-size: 32px; font-weight: bold; text-transform: uppercase;">Initial</span>
+        </div>
+        <h3 style="font-size: 40px; color: var(--accent1); margin: 0 0 20px 0; font-family: var(--serif);">Exploitation</h3>
+        <p style="font-size: 30px; color: var(--t2); line-height: 1.4; margin: 0;">Rick uses Morty purely for his "Morty waves" to hide from the Galactic Federation.</p>
+      </div>
+
+      <!-- Stage 2 -->
+      <div style="width: 546px; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; padding: 0 40px; text-align: center; box-sizing: border-box;">
+        <div style="width: 250px; height: 250px; background-color: var(--accent2); border-radius: 50%; border: 15px solid var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--bg); margin-bottom: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); box-sizing: border-box;">
+          <i class="fas fa-fire-flame-curved" style="font-size: 80px; margin-bottom: 10px;"></i>
+          <span style="font-size: 32px; font-weight: bold; text-transform: uppercase;">Middle</span>
+        </div>
+        <h3 style="font-size: 40px; color: var(--accent2); margin: 0 0 20px 0; font-family: var(--serif);">Resentment</h3>
+        <p style="font-size: 30px; color: var(--t2); line-height: 1.4; margin: 0;">Morty realizes Rick is a fallible, destructive mess and starts actively rebelling against him.</p>
+      </div>
+
+      <!-- Stage 3 -->
+      <div style="width: 546px; display: flex; flex-direction: column; align-items: center; position: relative; z-index: 1; padding: 0 40px; text-align: center; box-sizing: border-box;">
+        <div style="width: 250px; height: 250px; background-color: var(--accent3); border-radius: 50%; border: 15px solid var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--t1); margin-bottom: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); box-sizing: border-box;">
+          <i class="fas fa-handshake-angle" style="font-size: 80px; margin-bottom: 10px;"></i>
+          <span style="font-size: 32px; font-weight: bold; text-transform: uppercase;">Late</span>
+        </div>
+        <h3 style="font-size: 40px; color: var(--accent3); margin: 0 0 20px 0; font-family: var(--serif);">Acceptance</h3>
+        <p style="font-size: 30px; color: var(--t2); line-height: 1.4; margin: 0;">Mutual, begrudging acceptance of their shared, inescapable cosmic misery.</p>
+      </div>
+
+    </div>
+    
+  </div>
+  <aside class="notes" style="display:none">
+    A chronological look at how spending time with your dimension-hopping grandfather completely ruins your moral compass.
+  </aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg2); color: var(--t1); padding: 80px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; box-sizing: border-box; height: 1080px; width: 1920px; font-family: var(--sans);">
+  <div class="s" style="width: 1720px; margin: 0 auto; display: flex; flex-direction: column; gap: 50px; height: 920px;">
+    
+    <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px;">
+      <span style="background-color: var(--accent1); color: var(--bg); padding: 12px 30px; border-radius: 50px; font-weight: bold; font-size: 24px; text-transform: uppercase; letter-spacing: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">Beth & Jerry</span>
+      <h2 style="font-family: var(--serif); font-size: 90px; line-height: 1.1; margin: 0; color: var(--accent2); text-shadow: 3px 3px 0px var(--bg);">
+        A Match Made in Hell
+      </h2>
+    </div>
+
+    <div style="display: flex; position: relative; gap: 60px; justify-content: space-between; align-items: stretch; margin-top: 20px;">
+      
+      <!-- Beth Card -->
+      <div style="width: 830px; background-color: var(--bg); border-radius: 30px; padding: 60px; display: flex; flex-direction: column; border-top: 15px solid var(--accent3); box-shadow: 0 25px 50px rgba(0,0,0,0.3); position: relative; overflow: hidden; box-sizing: border-box;">
+        <i class="fas fa-horse-head" style="position: absolute; top: -30px; right: -30px; font-size: 250px; color: var(--accent3); opacity: 0.15; z-index: 0;"></i>
+        <h3 style="font-size: 60px; color: var(--accent3); margin: 0 0 30px 0; font-family: var(--serif); z-index: 1;">Beth</h3>
+        <p style="font-size: 34px; color: var(--t2); line-height: 1.5; margin: 0; z-index: 1;">Crippling abandonment issues disguised as arrogance and surgical superiority complex.</p>
+      </div>
+
+      <!-- VS Badge -->
+      <div style="position: absolute; top: 150px; left: 800px; width: 120px; height: 120px; background-color: var(--accent1); border-radius: 50%; border: 15px solid var(--bg2); display: flex; align-items: center; justify-content: center; z-index: 10; font-family: var(--serif); font-size: 40px; font-weight: bold; color: var(--bg); box-shadow: 0 10px 30px rgba(0,0,0,0.5); box-sizing: border-box;">
+        VS
+      </div>
+
+      <!-- Jerry Card -->
+      <div style="width: 830px; background-color: var(--surface); border-radius: 30px; padding: 60px; display: flex; flex-direction: column; border-top: 15px solid var(--accent2); box-shadow: 0 25px 50px rgba(0,0,0,0.3); position: relative; overflow: hidden; box-sizing: border-box;">
+        <i class="fas fa-bug" style="position: absolute; top: -30px; right: -30px; font-size: 250px; color: var(--accent2); opacity: 0.15; z-index: 0;"></i>
+        <h3 style="font-size: 60px; color: var(--accent2); margin: 0 0 30px 0; font-family: var(--serif); z-index: 1;">Jerry</h3>
+        <p style="font-size: 34px; color: var(--t2); line-height: 1.5; margin: 0; z-index: 1;">Weaponized incompetence, profound mediocrity, and an insatiable need for pity.</p>
+      </div>
+
+    </div>
+
+    <!-- Together Section -->
+    <div style="background-color: var(--accent3); border-radius: 20px; padding: 40px 60px; display: flex; align-items: center; gap: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.25); margin-top: auto; box-sizing: border-box;">
+      <i class="fas fa-link-slash" style="font-size: 80px; color: var(--bg); flex-shrink: 0;"></i>
+      <div>
+        <h4 style="margin: 0 0 10px 0; font-size: 36px; color: var(--bg); font-family: var(--serif); text-transform: uppercase;">Together</h4>
+        <p style="font-size: 32px; color: var(--t1); margin: 0; font-weight: bold;">A black hole of marital dysfunction that somehow survives intergalactic war.</p>
+      </div>
+    </div>
+    
+  </div>
+  <aside class="notes" style="display:none">
+    Beth has daddy issues; Jerry is just... Jerry. Together, they form an unholy alliance of dysfunction that somehow outlasts the multiverse.
+  </aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg); color: var(--t1); padding: 100px; display: flex; align-items: stretch; justify-content: center; box-sizing: border-box; height: 1080px; width: 1920px; font-family: var(--sans);">
+  <div class="s" style="width: 1720px; margin: 0 auto; display: grid; grid-template-columns: 774px 860px; gap: 86px; height: 880px;">
+    
+    <div style="background-color: var(--surface); border-radius: 40px; padding: 80px; display: flex; flex-direction: column; justify-content: center; border-bottom: 20px solid var(--accent1); box-shadow: 0 30px 60px rgba(0,0,0,0.4); position: relative; overflow: hidden; box-sizing: border-box;">
+      <i class="fas fa-mobile-screen" style="position: absolute; top: -50px; left: -50px; font-size: 350px; color: var(--bg); opacity: 0.15; z-index: 0; transform: rotate(-15deg);"></i>
+      <div style="z-index: 1;">
+        <span style="background-color: var(--bg2); color: var(--accent1); padding: 12px 30px; border-radius: 8px; font-weight: bold; font-size: 26px; text-transform: uppercase; letter-spacing: 2px; border: 2px solid var(--accent1);">Summer Smith</span>
+        <h2 style="font-family: var(--serif); font-size: 100px; line-height: 1; margin: 40px 0 0 0; color: var(--t1); text-shadow: 4px 4px 0px var(--bg);">
+          From Basic to <span style="color: var(--accent1);">Badass</span>
+        </h2>
+        <p style="font-size: 40px; color: var(--accent2); margin-top: 30px; line-height: 1.4; font-family: var(--serif); font-style: italic;">
+          (Barely)
+        </p>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 50px; justify-content: center; box-sizing: border-box;">
+      
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <span style="background-color: var(--accent2); color: var(--bg); padding: 10px 20px; border-radius: 50px; font-weight: bold; font-size: 22px; text-transform: uppercase; letter-spacing: 2px; white-space: nowrap;">Trait 01</span>
+        </div>
+        <div style="background-color: var(--bg2); border-left: 8px solid var(--accent2); padding: 40px; border-radius: 0 20px 20px 0;">
+          <p style="font-size: 34px; color: var(--t1); margin: 0; line-height: 1.4;">The only family member who actually adapts to the chaos instead of whining about it.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <span style="background-color: var(--accent3); color: var(--bg); padding: 10px 20px; border-radius: 50px; font-weight: bold; font-size: 22px; text-transform: uppercase; letter-spacing: 2px; white-space: nowrap;">Trait 02</span>
+        </div>
+        <div style="background-color: var(--bg2); border-left: 8px solid var(--accent3); padding: 40px; border-radius: 0 20px 20px 0;">
+          <p style="font-size: 34px; color: var(--t1); margin: 0; line-height: 1.4;">Craves Rick's toxic validation even more desperately than Morty does.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 20px;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <span style="background-color: var(--accent1); color: var(--bg); padding: 10px 20px; border-radius: 50px; font-weight: bold; font-size: 22px; text-transform: uppercase; letter-spacing: 2px; white-space: nowrap;">Trait 03</span>
+        </div>
+        <div style="background-color: var(--bg2); border-left: 8px solid var(--accent1); padding: 40px; border-radius: 0 20px 20px 0;">
+          <p style="font-size: 34px; color: var(--t1); margin: 0; line-height: 1.4;">Embraces multidimensional nihilism with frightening, almost sociopathic ease.</p>
+        </div>
+      </div>
+
+    </div>
+    
+  </div>
+  <aside class="notes" style="display:none">
+    Summer proved she's actually useful, occasionally acting as the dark horse of the family. Let's just not let it go to her head.
+  </aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg2); color: var(--t1); padding: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-sizing: border-box; height: 1080px; width: 1920px; font-family: var(--sans);">
+  <div class="s cx" style="width: 1600px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 60px;">
+    
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+      <span style="background-color: var(--accent3); color: var(--bg2); padding: 12px 30px; border-radius: 50px; font-weight: bold; font-size: 24px; text-transform: uppercase; letter-spacing: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">Philosophy</span>
+      <h2 style="font-family: var(--serif); font-size: 70px; line-height: 1.1; margin: 0; color: var(--t2); font-weight: normal;">
+        The Core Ethos
+      </h2>
+    </div>
+
+    <div style="position: relative; padding: 60px 100px; width: 1400px; box-sizing: border-box; border-top: 4px solid var(--accent1); border-bottom: 4px solid var(--accent1);">
+      <i class="fas fa-quote-left" style="position: absolute; top: -50px; left: 0; font-size: 100px; color: var(--accent1); opacity: 0.5;"></i>
+      <blockquote style="margin: 0; padding: 0; border: none; background: transparent;">
+        <p style="font-family: var(--serif); font-size: 90px; line-height: 1.2; color: var(--t1); font-style: italic; margin: 0; text-shadow: 4px 4px 0px var(--bg);">
+          "Nobody exists on purpose. Nobody belongs anywhere. Everybody's gonna die. <span style="color: var(--accent1); display: block; margin-top: 20px;">Come watch TV."</span>
+        </p>
+      </blockquote>
+      <i class="fas fa-quote-right" style="position: absolute; bottom: -50px; right: 0; font-size: 100px; color: var(--accent1); opacity: 0.5;"></i>
+    </div>
+
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 30px;">
+      <div style="display: inline-flex; align-items: center; gap: 20px; background-color: var(--surface); padding: 15px 40px; border-radius: 100px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+        <i class="fas fa-user-astronaut" style="font-size: 40px; color: var(--accent2);"></i>
+        <span style="font-size: 36px; font-weight: bold; color: var(--accent2); font-family: var(--sans);">Morty Smith</span>
+      </div>
+
+      <div style="display: flex; gap: 40px; margin-top: 20px;">
+        <div style="background-color: var(--bg); border: 2px solid var(--accent3); padding: 20px 40px; border-radius: 20px; display: flex; align-items: center; gap: 20px;">
+          <i class="fas fa-meteor" style="font-size: 30px; color: var(--accent3);"></i>
+          <span style="font-size: 28px; color: var(--t2);">Cosmic insignificance as a coping mechanism</span>
+        </div>
+        <div style="background-color: var(--bg); border: 2px solid var(--accent3); padding: 20px 40px; border-radius: 20px; display: flex; align-items: center; gap: 20px;">
+          <i class="fas fa-tv" style="font-size: 30px; color: var(--accent3);"></i>
+          <span style="font-size: 28px; color: var(--t2);">Finding meaning in a meaningless multiverse</span>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <aside class="notes" style="display:none">
+    We're throwing in a quote slide to make this look profound. Read it, internalize your cosmic insignificance, and let's move on.
+  </aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg); color: var(--t1); padding: 100px; display: flex; align-items: center; justify-content: center; box-sizing: border-box; height: 1080px; width: 1920px; font-family: var(--sans);">
+  <div class="s" style="width: 1720px; margin: 0 auto; display: grid; grid-template-columns: 774px 860px; gap: 86px; align-items: center; height: 880px;">
+    
+    <div style="display: flex; flex-direction: column; justify-content: center;">
+      <div style="margin-bottom: 30px;">
+        <span style="background-color: var(--accent1); color: var(--bg); padding: 10px 24px; border-radius: 4px; font-weight: bold; font-size: 28px; text-transform: uppercase; letter-spacing: 3px;">Deep Lore</span>
+      </div>
+      <h2 style="font-family: var(--serif); font-size: 90px; line-height: 1.1; margin: 0; color: var(--t1); text-shadow: 3px 3px 0px var(--bg2);">
+        The Central Finite Curve
+      </h2>
+      
+      <div style="margin-top: 60px; display: flex; flex-direction: column; gap: 40px;">
+        <div style="display: flex; align-items: flex-start; gap: 30px;">
+          <div style="width: 40px; height: 40px; border-radius: 50%; background-color: var(--accent2); flex-shrink: 0; margin-top: 10px;"></div>
+          <div>
+            <h4 style="font-size: 36px; margin: 0 0 10px 0; color: var(--accent2); font-family: var(--serif);">Curated Infinity</h4>
+            <p style="font-size: 28px; color: var(--t2); margin: 0; line-height: 1.4;">Separates true infinity into a carefully constructed subset of realities.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: flex-start; gap: 30px;">
+          <div style="width: 40px; height: 40px; border-radius: 50%; background-color: var(--accent3); flex-shrink: 0; margin-top: 10px;"></div>
+          <div>
+            <h4 style="font-size: 36px; margin: 0 0 10px 0; color: var(--accent3); font-family: var(--serif);">Dominant Force</h4>
+            <p style="font-size: 28px; color: var(--t2); margin: 0; line-height: 1.4;">Ensures Rick is always the smartest, most powerful being in every isolated universe.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: flex-start; gap: 30px;">
+          <div style="width: 40px; height: 40px; border-radius: 50%; background-color: var(--accent1); flex-shrink: 0; margin-top: 10px;"></div>
+          <div>
+            <h4 style="font-size: 36px; margin: 0 0 10px 0; color: var(--accent1); font-family: var(--serif);">Fragile Ego Metaphor</h4>
+            <p style="font-size: 28px; color: var(--t2); margin: 0; line-height: 1.4;">The ultimate architectural monument to Rick's debilitating insecurities.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="position: relative; width: 860px; height: 800px; display: flex; align-items: center; justify-content: center; background-color: var(--bg2); border-radius: 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.4); overflow: hidden; box-sizing: border-box;">
+      
+      <!-- Outer Ring (True Infinity) -->
+      <svg width="600" height="600" viewBox="0 0 200 200" style="position: absolute; z-index: 1;">
+        <circle cx="100" cy="100" r="95" fill="none" stroke="var(--accent1)" stroke-width="2" stroke-dasharray="4 8" opacity="0.4" />
+        <circle cx="100" cy="100" r="85" fill="none" stroke="var(--accent1)" stroke-width="1" opacity="0.3" />
+      </svg>
+      <div style="position: absolute; top: 60px; right: 60px; background-color: var(--bg); color: var(--accent1); padding: 10px 20px; border-radius: 20px; font-weight: bold; font-size: 24px; z-index: 5; border: 1px solid var(--accent1);">True Infinity</div>
+
+      <!-- Middle Ring (The Wall) -->
+      <svg width="450" height="450" viewBox="0 0 200 200" style="position: absolute; z-index: 2;">
+        <circle cx="100" cy="100" r="90" fill="none" stroke="var(--accent3)" stroke-width="15" opacity="0.8" />
+      </svg>
+      <div style="position: absolute; bottom: 80px; left: 80px; background-color: var(--accent3); color: var(--bg); padding: 10px 20px; border-radius: 20px; font-weight: bold; font-size: 24px; z-index: 5;">The Wall</div>
+
+      <!-- Inner Ring (CFC) -->
+      <svg width="350" height="350" viewBox="0 0 200 200" style="position: absolute; z-index: 3;">
+        <circle cx="100" cy="100" r="90" fill="var(--surface)" stroke="var(--accent2)" stroke-width="4" opacity="0.9" />
+      </svg>
+      
+      <!-- Center Core -->
+      <div style="position: relative; width: 200px; height: 200px; background-color: var(--accent2); border-radius: 50%; z-index: 4; display: flex; align-items: center; justify-content: center; flex-direction: column; box-shadow: 0 0 50px var(--accent2);">
+        <i class="fas fa-atom" style="font-size: 80px; color: var(--bg); margin-bottom: 10px;"></i>
+        <span style="font-weight: bold; font-size: 24px; color: var(--bg); font-family: var(--serif);">Rick's Ego</span>
+      </div>
+
+    </div>
+    
+  </div>
+  <aside class="notes" style="display:none">
+    The Central Finite Curve. Basically, Rick built a cosmic playpen to ensure he's always the biggest fish. Truly pathetic when you think about it.
+  </aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg2); color: var(--t1); padding: 80px; display: flex; flex-direction: column; align-items: center; box-sizing: border-box; height: 1080px; width: 1920px; font-family: var(--sans);">
+  <div class="s" style="width: 1720px; margin: 0 auto; display: flex; flex-direction: column; gap: 50px; height: 920px;">
+    
+    <div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px;">
+      <span style="background-color: var(--accent2); color: var(--bg); padding: 10px 30px; border-radius: 50px; font-weight: bold; font-size: 24px; text-transform: uppercase; letter-spacing: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">Series Evolution</span>
+      <h2 style="font-family: var(--serif); font-size: 85px; line-height: 1.1; margin: 0; color: var(--accent1); text-shadow: 2px 2px 0px var(--bg);">
+        Seven Seasons of Learning Nothing
+      </h2>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(2, 840px); gap: 40px; flex-grow: 1; align-items: stretch;">
+      
+      <!-- Metric Box 1 -->
+      <div style="background-color: var(--surface); border-radius: 30px; padding: 50px; display: flex; flex-direction: column; border-top: 15px solid var(--accent3); box-shadow: 0 25px 50px rgba(0,0,0,0.25); position: relative; overflow: hidden; box-sizing: border-box;">
+        <i class="fas fa-book-journal-whills" style="position: absolute; bottom: -30px; right: -30px; font-size: 200px; color: var(--bg2); opacity: 0.3;"></i>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; z-index: 1;">
+          <h3 style="font-size: 50px; color: var(--t1); margin: 0; font-family: var(--serif); width: 450px;">Canon vs Episodic</h3>
+          <span style="background-color: var(--accent3); color: var(--bg2); padding: 10px 20px; border-radius: 50px; font-weight: bold; font-size: 24px; display: flex; align-items: center; gap: 10px;"><i class="fas fa-arrow-up-right-dots"></i> Volatile</span>
+        </div>
+        <div style="font-size: 100px; font-weight: bold; color: var(--accent3); margin-bottom: 20px; line-height: 1; font-family: var(--mono); z-index: 1;">50/50</div>
+        <p style="font-size: 32px; color: var(--t2); line-height: 1.5; margin: 0; z-index: 1;">Constant tension between sprawling, serialized multiverse lore and classic "Classic Rick and Morty adventures".</p>
+      </div>
+
+      <!-- Metric Box 2 -->
+      <div style="background-color: var(--bg); border-radius: 30px; padding: 50px; display: flex; flex-direction: column; border-top: 15px solid var(--accent1); box-shadow: 0 25px 50px rgba(0,0,0,0.25); position: relative; overflow: hidden; box-sizing: border-box;">
+        <i class="fas fa-couch" style="position: absolute; bottom: -30px; right: -30px; font-size: 200px; color: var(--surface); opacity: 0.3;"></i>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; z-index: 1;">
+          <h3 style="font-size: 50px; color: var(--t1); margin: 0; font-family: var(--serif); width: 450px;">The Real Threat</h3>
+          <span style="background-color: var(--accent1); color: var(--bg); padding: 10px 20px; border-radius: 50px; font-weight: bold; font-size: 24px; display: flex; align-items: center; gap: 10px;"><i class="fas fa-arrow-trend-up"></i> Rising</span>
+        </div>
+        <div style="font-size: 100px; font-weight: bold; color: var(--accent1); margin-bottom: 20px; line-height: 1; font-family: var(--serif); z-index: 1;">Dr. Wong</div>
+        <p style="font-size: 32px; color: var(--t2); line-height: 1.5; margin: 0; z-index: 1;">The most powerful being in the universe because she actually makes the Smith family process their trauma.</p>
+      </div>
+
+      <!-- Metric Box 3 (Spans both columns) -->
+      <div style="grid-column: span 2; width: 1720px; background-color: var(--surface); border-radius: 30px; padding: 50px; display: flex; align-items: center; gap: 50px; border-left: 15px solid var(--accent2); box-shadow: 0 25px 50px rgba(0,0,0,0.25); position: relative; overflow: hidden; box-sizing: border-box;">
+        <div style="flex-shrink: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 200px; height: 200px; background-color: var(--bg2); border-radius: 50%; border: 10px solid var(--accent2);">
+          <i class="fas fa-skull-crossbones" style="font-size: 80px; color: var(--accent1);"></i>
+        </div>
+        <div style="flex-grow: 1; z-index: 1;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 style="font-size: 50px; color: var(--t1); margin: 0; font-family: var(--serif);">Mythos Destruction</h3>
+            <span style="background-color: var(--accent2); color: var(--bg); padding: 10px 20px; border-radius: 50px; font-weight: bold; font-size: 24px; display: flex; align-items: center; gap: 10px;"><i class="fas fa-arrow-down-long"></i> Plunging</span>
+          </div>
+          <p style="font-size: 34px; color: var(--t2); line-height: 1.5; margin: 0;">The slow, excruciating demolition of the "Rick is an untouchable god" narrative, revealing an increasingly pathetic, broken man.</p>
+        </div>
+      </div>
+
+    </div>
+    
+  </div>
+  <aside class="notes" style="display:none">
+    Seven seasons in, and the only constant is that Dr. Wong is the most powerful being in the universe because she actually makes them do emotional work.
+  </aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background-color: var(--bg); color: var(--t1); padding: 80px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; height: 1080px; width: 1920px; box-sizing: border-box; font-family: var(--sans);">
+  <div class="s cx" style="width: 1600px; display: flex; flex-direction: column; align-items: center; gap: 60px;">
+    
+    <div style="display: flex; gap: 20px; justify-content: center; margin-bottom: 20px;">
+      <span style="background-color: var(--accent2); color: var(--bg); padding: 12px 24px; border-radius: 50px; font-weight: bold; font-size: 24px; text-transform: uppercase; letter-spacing: 2px;">Stop Analyzing Cartoons</span>
+      <span style="background-color: var(--accent1); color: var(--bg); padding: 12px 24px; border-radius: 50px; font-weight: bold; font-size: 24px; text-transform: uppercase; letter-spacing: 2px;">Go Outside</span>
+      <span style="background-color: var(--accent3); color: var(--bg); padding: 12px 24px; border-radius: 50px; font-weight: bold; font-size: 24px; text-transform: uppercase; letter-spacing: 2px;">There Is No Q&A</span>
+    </div>
+
+    <h1 style="font-family: var(--serif); font-size: 130px; line-height: 1.1; margin: 0; color: var(--t1); text-shadow: 5px 5px 0px var(--bg2);">
+      End of the Slideshow.<br>
+      <span style="color: var(--accent1);">Go Away.</span>
+    </h1>
+    
+    <div style="width: 300px; height: 10px; background-color: var(--accent2); border-radius: 5px; margin: 20px 0;"></div>
+    
+    <h2 style="font-size: 60px; font-weight: normal; color: var(--t2); margin: 0; font-family: var(--serif); font-style: italic;">
+      Wubba Lubba Dub Dub (Or Whatever)
+    </h2>
+
+    <div style="margin-top: 40px; display: flex; gap: 30px; align-items: center;">
+      <div style="background-color: var(--accent1); color: var(--bg); padding: 25px 60px; border-radius: 100px; font-size: 36px; font-weight: bold; font-family: var(--sans); text-transform: uppercase; letter-spacing: 3px; cursor: pointer; display: flex; align-items: center; gap: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.3);">
+        <i class="fas fa-power-off"></i> Turn Off Projector
+      </div>
+      
+      <div style="display: flex; gap: 20px; margin-left: 20px;">
+        <div style="width: 80px; height: 80px; border-radius: 50%; background-color: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 40px; color: var(--t2);"><i class="fas fa-trash"></i></div>
+        <div style="width: 80px; height: 80px; border-radius: 50%; background-color: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 40px; color: var(--t2);"><i class="fas fa-ban"></i></div>
+      </div>
+    </div>
+    
+  </div>
+  <aside class="notes" style="display:none">
+    That's it. Presentation's over. Don't ask questions, I'm not answering them. Turn off the projector.
+  </aside>
+</section>
+  </div>
+
+<script>
+(function(){
+  const wraps = document.querySelectorAll('.slide-wrap');
+  const sections = document.querySelectorAll('.slide-wrap > section');
+  const total = wraps.length;
+  const counter = document.getElementById('slide-counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  // Scale each 1920×1080 section to fit its .slide-wrap container
+  function scaleSlides() {
+    wraps.forEach(wrap => {
+      const section = wrap.querySelector('section');
+      if (!section) return;
+      const ww = wrap.clientWidth;
+      const wh = wrap.clientHeight;
+      const scale = Math.min(ww / 1920, wh / 1080);
+      section.style.transform = 'scale(' + scale + ')';
+    });
+  }
+  scaleSlides();
+  window.addEventListener('resize', scaleSlides);
+
+  // IntersectionObserver: mark the visible slide-wrap as .active (triggers CSS animations)
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        wraps.forEach(w => w.classList.remove('active'));
+        e.target.classList.add('active');
+        current = Array.from(wraps).indexOf(e.target);
+        if (counter) counter.textContent = (current+1) + ' / ' + total;
+        if (progress) progress.style.width = ((current+1)/total*100) + '%';
+      }
+    });
+  }, { threshold: 0.5 });
+  wraps.forEach(w => obs.observe(w));
+
+  // Activate first slide immediately
+  if (wraps[0]) wraps[0].classList.add('active');
+  if (counter) counter.textContent = '1 / ' + total;
+  if (progress) progress.style.width = (1/total*100) + '%';
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      if (current < total - 1) wraps[current + 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (current > 0) wraps[current - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      wraps[0].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      wraps[total - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'f' || e.key === 'F11') {
+      e.preventDefault();
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>

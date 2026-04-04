@@ -1,0 +1,9 @@
+
+> digitn-pro@1.0.0 build
+> next build
+
+  ▲ Next.js 14.2.35
+  - Environments: .env.local
+
+   Creating an optimized production build ...
+<w> [webpack.cache.PackFileCacheStrategy] Restoring pack failed from C:\Users\Administrator\Downloads\Telegram Desktop\digitn-pro-website-slim\digitn-pro\.next\cache\webpack\server-production.pack: Error: Unexpected lazy element in stream

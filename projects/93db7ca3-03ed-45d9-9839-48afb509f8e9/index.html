@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Fiber Technology Deep Dive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Nunito+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+    --bg: #412402;
+    --bg2: #5e3408;
+    --surface: #7a4f12;
+    --surface2: #543a1b;
+    --border: rgba(255,255,255,.07);
+    --border-md: rgba(255,255,255,.11);
+    --accent1: #D85A30;
+    --accent1-dim: rgba(216, 90, 48, 0.18);
+    --accent2: #EF9F27;
+    --accent2-dim: rgba(239, 159, 39, 0.18);
+    --accent3: #97C459;
+    --accent3-dim: rgba(151, 196, 89, 0.18);
+    --t1: #FAEEDA;
+    --t2: #968E83;
+    --t3: rgba(250, 238, 218, 0.3);
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'Nunito Sans', system-ui, sans-serif;
+    --serif: 'Libre Baskerville', serif;
+  }
+    
+  /* ─── Reset ─── */
+  ::-webkit-scrollbar{display:none}
+  *{scrollbar-width:none;-ms-overflow-style:none;box-sizing:border-box;margin:0;padding:0}
+  html{scroll-snap-type:y mandatory;overflow-y:scroll;overflow-x:hidden;scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  /* ─── Slide ─── */
+  section{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;padding:clamp(28px,5vh,56px) clamp(32px,5vw,72px);display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+  /* ─── Typography ─── */
+  h1,h2,h3{font-family:var(--serif);color:var(--t1);text-transform:none;letter-spacing:-.02em;font-weight:800;margin:0}
+  h1{font-size:clamp(1.8rem,4vw,3rem);line-height:1.1}
+  h2{font-size:clamp(1.3rem,2.8vw,2rem);margin-bottom:.4em}
+  h3{font-size:clamp(.8rem,1.2vw,1rem);font-weight:700}
+  p,li{font-size:clamp(.7rem,1vw,.88rem);line-height:1.65;color:var(--t2)}
+  ul{list-style:none;padding:0}
+  ul li{padding:4px 0}
+
+  /* ─── Stagger animation — triggers when slide scrolls into view ─── */
+  .s{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
+  .s>*{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+  section.active .s>*{opacity:1;transform:translateY(0)}
+  section.active .s>*:nth-child(1){transition-delay:.03s}
+  section.active .s>*:nth-child(2){transition-delay:.09s}
+  section.active .s>*:nth-child(3){transition-delay:.15s}
+  section.active .s>*:nth-child(4){transition-delay:.21s}
+  section.active .s>*:nth-child(5){transition-delay:.27s}
+  section.active .s>*:nth-child(6){transition-delay:.33s}
+  section.active .s>*:nth-child(7){transition-delay:.39s}
+  section.active .s>*:nth-child(8){transition-delay:.45s}
+  .cx{justify-content:center;align-items:center;text-align:center}
+
+  /* ─── Section Label ─── */
+  .sl{font-family:var(--mono);font-size:clamp(.55rem,.8vw,.72rem);color:var(--accent1);text-transform:uppercase;letter-spacing:3px;margin-bottom:4px;opacity:.9}
+
+  /* ─── Divider ─── */
+  .dv{height:1px;width:120px;background:linear-gradient(90deg,transparent,var(--border-md),transparent);margin:18px auto;border:none}
+
+  /* ─── Card ─── */
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:clamp(12px,1.5vw,20px);position:relative;overflow:hidden}
+  .card-accent1{border-top:2px solid var(--accent1)}
+  .card-accent2{border-top:2px solid var(--accent2)}
+  .card-accent3{border-top:2px solid var(--accent3)}
+
+  /* ─── Metric Pill ─── */
+  .metric{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:var(--surface2);border:1px solid var(--border-md);border-radius:40px;margin:3px}
+  .metric .num{font-family:var(--serif);font-size:clamp(.9rem,1.4vw,1.2rem);font-weight:900;color:var(--t1)}
+  .metric .lab{font-size:clamp(.5rem,.7vw,.62rem);color:var(--t2);text-transform:uppercase;letter-spacing:1px}
+
+  /* ─── Icon Circle ─── */
+  .ic{width:clamp(32px,3.5vw,44px);height:clamp(32px,3.5vw,44px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:clamp(12px,1.3vw,16px);flex-shrink:0;line-height:1}
+  .ic.accent1{background:var(--accent1-dim);color:var(--accent1)}
+  .ic.accent2{background:var(--accent2-dim);color:var(--accent2)}
+  .ic.accent3{background:var(--accent3-dim);color:var(--accent3)}
+
+  /* ─── Hover Card ─── */
+  .hcard{padding:clamp(14px,1.5vw,20px) clamp(10px,1.2vw,16px);border-radius:12px;background:var(--surface);border:1px solid var(--border);text-align:center;transition:border-color .25s,background .25s;display:flex;flex-direction:column;align-items:center;overflow:hidden}
+  .hcard:hover{background:var(--surface2);border-color:var(--border-md)}
+  .hcard .iw{width:clamp(36px,4vw,52px);height:clamp(36px,4vw,52px);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;background:var(--bg2);font-size:clamp(14px,1.5vw,20px);flex-shrink:0;line-height:1}
+
+  /* ─── Badge ─── */
+  .badge{display:inline-block;padding:4px 12px;border-radius:6px;font-family:var(--mono);font-size:clamp(.5rem,.7vw,.62rem);text-transform:uppercase;letter-spacing:1px;font-weight:600}
+  .badge.accent1{background:var(--accent1-dim);color:var(--accent1)}
+  .badge.accent2{background:var(--accent2-dim);color:var(--accent2)}
+  .badge.accent3{background:var(--accent3-dim);color:var(--accent3)}
+
+  /* ─── Chip ─── */
+  .chip{display:inline-block;padding:4px 12px;border-radius:20px;font-size:clamp(.5rem,.7vw,.62rem);font-family:var(--mono);border:1px solid;margin:2px}
+  .chip.accent1{border-color:var(--accent1);color:var(--accent1)}
+  .chip.accent2{border-color:var(--accent2);color:var(--accent2)}
+  .chip.accent3{border-color:var(--accent3);color:var(--accent3)}
+
+  /* ─── Feature Row ─── */
+  .frow{display:flex;align-items:center;gap:clamp(10px,1.2vw,16px);padding:clamp(8px,1vh,14px) 0;border-bottom:1px solid var(--border)}
+  .frow:last-child{border-bottom:none}
+  .frow .fi{flex-shrink:0}
+
+  /* ─── Ring Chart ─── */
+  .ring{position:relative;width:clamp(72px,8vw,110px);height:clamp(72px,8vw,110px);display:inline-flex;align-items:center;justify-content:center;flex-direction:column;flex-shrink:0}
+  .ring svg{position:absolute;width:100%;height:100%;transform:rotate(-90deg)}
+  .ring .rbg{fill:none;stroke:var(--surface2);stroke-width:6}
+  .ring .rprog{fill:none;stroke:var(--accent1);stroke-width:6;stroke-linecap:round}
+  .ring .rval{font-family:var(--serif);font-size:clamp(.9rem,1.5vw,1.4rem);font-weight:900;color:var(--t1);z-index:1}
+  .ring .rlab{font-family:var(--mono);font-size:clamp(.4rem,.6vw,.5rem);color:var(--t2);text-transform:uppercase;letter-spacing:1px;z-index:1}
+
+  /* ─── Timeline ─── */
+  .timeline{display:flex;gap:0;padding:16px 0}
+  .tl-item{flex:1;position:relative;padding:18px 12px 0;text-align:center}
+  .tl-item::before{content:'';position:absolute;top:8px;left:0;right:0;height:2px;background:var(--border-md)}
+  .tl-item:first-child::before{left:50%}
+  .tl-item:last-child::before{right:50%}
+  .tl-dot{width:12px;height:12px;border-radius:50%;margin:0 auto 10px;position:relative;z-index:1}
+  .tl-dot.accent1{background:var(--accent1);box-shadow:0 0 0 4px var(--accent1-dim)}
+  .tl-dot.accent2{background:var(--accent2);box-shadow:0 0 0 4px var(--accent2-dim)}
+  .tl-dot.accent3{background:var(--accent3);box-shadow:0 0 0 4px var(--accent3-dim)}
+
+  /* ─── Grids ─── */
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.2vw,16px);margin-top:12px}
+  .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(10px,1.2vw,16px);margin-top:12px}
+  .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1vw,14px);margin-top:12px}
+  .g5{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(6px,.8vw,12px);margin-top:12px}
+
+  /* ─── Image Box ─── */
+  .img-box{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;border-radius:12px;overflow:hidden;background:var(--surface);border:1px solid var(--border)}
+  .img-box img{max-width:100%;max-height:100%;object-fit:contain}
+
+  /* ─── Big Numbers ─── */
+  .bignum{font-family:var(--serif);font-size:clamp(2rem,4vw,3.5rem);font-weight:900;color:var(--t1);line-height:1}
+
+  /* ─── Header Meta ─── */
+  .hm{display:flex;gap:clamp(16px,2.5vw,30px);font-size:clamp(.55rem,.8vw,.7rem);color:var(--t3);font-weight:500}
+  .hm span{display:flex;align-items:center;gap:8px}
+
+  /* ─── Left border accents ─── */
+  .line-accent1{border-left:2px solid var(--accent1)}
+  .line-accent2{border-left:2px solid var(--accent2)}
+  .line-accent3{border-left:2px solid var(--accent3)}
+
+  /* ─── Flex utilities ─── */
+  .flex{display:flex}
+  .flex-col{flex-direction:column}
+  .flex-wrap{display:flex;flex-wrap:wrap}
+  .flex-center{display:flex;justify-content:center;align-items:center}
+  .flex-1{flex:1;min-height:0}
+  .gap-sm{gap:8px}
+  .gap-md{gap:16px}
+  .gap-lg{gap:24px}
+  .mt-auto{margin-top:auto}
+  .mb-sm{margin-bottom:8px}
+  .mb-md{margin-bottom:16px}
+
+  /* ─── Slide counter ─── */
+  #slide-counter{position:fixed;bottom:20px;right:24px;font-family:var(--mono);font-size:12px;color:var(--t3);background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 12px;z-index:100;pointer-events:none}
+
+  /* ─── Progress bar ─── */
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--accent1);z-index:100;transition:width .3s ease}
+
+  </style>
+</head>
+<body>
+  <div id="progress" style="width:0"></div>
+  <div id="slide-counter">1 / 11</div>
+  <section>
+  <div class="s cx">
+    <h1 style="font-size:2.8em;color:var(--t1);margin-bottom:16px">Fiber Technology Deep Dive</h1>
+    <p style="font-size:1.1em;color:var(--t2);max-width:600px;margin-bottom:28px">Understanding Light Transmission in Modern Cable Infrastructure</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:32px">
+      <span class="badge accent1"><i class="fas fa-server" style="margin-right:6px"></i>Cable Infrastructure</span>
+      <span class="badge accent2"><i class="fas fa-atom" style="margin-right:6px"></i>Physics Focus</span>
+      <span class="badge accent3"><i class="fas fa-graduation-cap" style="margin-right:6px"></i>Educational</span>
+    </div>
+    <hr class="dv" style="width:200px">
+    <p style="font-size:0.65em;color:var(--t3);margin-top:24px;letter-spacing:1px">10 Minute Presentation • Students & Educators</p>
+  </div>
+  <aside class="notes" style="display:none">Welcome the audience and establish the educational tone. Emphasize that this presentation will bridge theoretical physics with practical cable infrastructure, making complex concepts accessible.</aside>
+  <aside class="notes">Welcome the audience and establish the educational tone. Emphasize that this presentation will bridge theoretical physics with practical cable infrastructure, making complex concepts accessible.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Overview</p>
+    <h2>What We'll Cover</h2>
+    <div class="g4" style="flex:1;min-height:0;margin-top:8px">
+      <div class="hcard">
+        <div class="iw"><div class="ic accent1"><i class="fas fa-broadcast-tower"></i></div></div>
+        <h3>Fundamentals</h3>
+        <p>Core concepts of fiber optic technology</p>
+      </div>
+      <div class="hcard">
+        <div class="iw"><div class="ic accent2"><i class="fas fa-layer-group"></i></div></div>
+        <h3>Cable Types</h3>
+        <p>Single mode vs multi mode structures</p>
+      </div>
+      <div class="hcard">
+        <div class="iw"><div class="ic accent3"><i class="fas fa-prism"></i></div></div>
+        <h3>Light Physics</h3>
+        <p>Transmission and total internal reflection</p>
+      </div>
+      <div class="hcard">
+        <div class="iw"><div class="ic accent1"><i class="fas fa-globe"></i></div></div>
+        <h3>Infrastructure</h3>
+        <p>Real-world applications and deployment</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Outline the four main sections. Mention that we'll start with basics and progress to the physics of total internal reflection, ending with practical infrastructure applications.</aside>
+  <aside class="notes">Outline the four main sections. Mention that we'll start with basics and progress to the physics of total internal reflection, ending with practical infrastructure applications.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Fundamentals</p>
+    <h2>What is Fiber Optic Technology?</h2>
+    <div style="display:flex;gap:22px;flex:1;min-height:0;margin-top:8px">
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+        <div class="frow">
+          <div class="fi"><div class="ic accent1"><i class="fas fa-gem"></i></div></div>
+          <div><h3>Glass or Plastic Strands</h3><p>Ultra-pure silica thinner than a human hair</p></div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent2"><i class="fas fa-bolt"></i></div></div>
+          <div><h3>Light Pulse Transmission</h3><p>Data encoded as pulses of laser or LED light</p></div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent3"><i class="fas fa-shield-alt"></i></div></div>
+          <div><h3>EMI Immunity</h3><p>No electrical interference affects signal quality</p></div>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center">
+        <div class="ring">
+          <svg viewBox="0 0 120 120" style="width:140px;height:140px">
+            <circle class="rbg" cx="60" cy="60" r="52"/>
+            <circle class="rprog" cx="60" cy="60" r="52" stroke-dasharray="327" stroke-dashoffset="82"/>
+          </svg>
+          <div class="rval" style="font-size:1.4em">9-62μm</div>
+          <div class="rlab">Core Diameter</div>
+        </div>
+        <p style="font-size:0.7em;color:var(--t3);margin-top:12px;text-align:center">Compare to human hair: ~75μm</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Explain that fiber optics replace copper electricity with light. Use the ring chart to visualize the tiny scale compared to human hair. Emphasize why immunity to EMI matters in infrastructure.</aside>
+  <aside class="notes">Explain that fiber optics replace copper electricity with light. Use the ring chart to visualize the tiny scale compared to human hair. Emphasize why immunity to EMI matters in infrastructure.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Performance</p>
+    <h2>Fiber by the Numbers</h2>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;flex:1;align-items:center;min-height:0">
+      <div class="metric" style="padding:28px 40px">
+        <div class="num" style="font-size:2.4em">99.7%</div>
+        <div class="lab">Transmission Efficiency</div>
+      </div>
+      <div class="metric" style="padding:28px 40px">
+        <div class="num" style="font-size:2.4em">100x</div>
+        <div class="lab">Bandwidth vs Copper</div>
+      </div>
+      <div class="metric" style="padding:28px 40px">
+        <div class="num" style="font-size:2.4em">6,000+</div>
+        <div class="lab">Km Transatlantic Cables</div>
+      </div>
+      <div class="metric" style="padding:28px 40px">
+        <div class="num" style="font-size:2.4em">200K</div>
+        <div class="lab">Km/s Signal Speed</div>
+      </div>
+    </div>
+    <p style="font-size:0.75em;color:var(--t3);text-align:center;margin-top:20px"><i class="fas fa-info-circle" style="margin-right:6px"></i>Light travels slower in glass than vacuum, but vastly faster than electrons in copper</p>
+  </div>
+  <aside class="notes" style="display:none">Present these statistics to establish why fiber dominates modern infrastructure. Note that light travels slower in glass than vacuum, but still vastly faster than electrons in copper.</aside>
+  <aside class="notes">Present these statistics to establish why fiber dominates modern infrastructure. Note that light travels slower in glass than vacuum, but still vastly faster than electrons in copper.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Cable Types</p>
+    <h2>Single Mode vs. Multi Mode Fiber</h2>
+    <div class="g2" style="flex:1;min-height:0;margin-top:12px">
+      <div class="card card-accent1" style="display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <div class="ic accent1"><i class="fas fa-broadcast-tower"></i></div>
+          <div><h3 style="margin:0">Single Mode Fiber</h3></div>
+        </div>
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:10px">
+          <div class="frow" style="padding:8px 0">
+            <div><span class="chip accent1">9μm core</span></div>
+            <p style="margin:0;font-size:0.7em">Narrow path, one light mode</p>
+          </div>
+          <div class="frow" style="padding:8px 0">
+            <div><span class="chip accent2">Laser source</span></div>
+            <p style="margin:0;font-size:0.7em">Coherent light for long distances</p>
+          </div>
+          <div class="frow" style="padding:8px 0;border-bottom:none">
+            <div><span class="chip accent3">Telecom</span></div>
+            <p style="margin:0;font-size:0.7em">Long-haul networks, ISPs, backbone</p>
+          </div>
+        </div>
+      </div>
+      <div class="card card-accent2" style="display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <div class="ic accent2"><i class="fas fa-sitemap"></i></div>
+          <div><h3 style="margin:0">Multi Mode Fiber</h3></div>
+        </div>
+        <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:10px">
+          <div class="frow" style="padding:8px 0">
+            <div><span class="chip accent2">50-62.5μm</span></div>
+            <p style="margin:0;font-size:0.7em">Wider core, multiple light paths</p>
+          </div>
+          <div class="frow" style="padding:8px 0">
+            <div><span class="chip accent1">LED source</span></div>
+            <p style="margin:0;font-size:0.7em">Lower cost, shorter distances</p>
+          </div>
+          <div class="frow" style="padding:8px 0;border-bottom:none">
+            <div><span class="chip accent3">Data Centers</span></div>
+            <p style="margin:0;font-size:0.7em">LANs, campus networks, buildings</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Contrast the two main cable types. Explain that single mode uses a narrow core allowing one light path (mode), while multi mode has wider core allowing multiple paths—causing dispersion but enabling cheaper LED sources.</aside>
+  <aside class="notes">Contrast the two main cable types. Explain that single mode uses a narrow core allowing one light path (mode), while multi mode has wider core allowing multiple paths—causing dispersion but enabling cheaper LED sources.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Infrastructure</p>
+    <h2>Inside the Cable Infrastructure</h2>
+    <div style="display:flex;gap:22px;flex:1;min-height:0;margin-top:8px">
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+        <div class="frow">
+          <div class="fi"><div class="ic accent1"><i class="fas fa-dot-circle"></i></div></div>
+          <div><h3>Core</h3><p>Pure glass pathway where light travels</p></div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent2"><i class="fas fa-circle"></i></div></div>
+          <div><h3>Cladding</h3><p>Lower refractive index glass enables reflection</p></div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent3"><i class="fas fa-shield-alt"></i></div></div>
+          <div><h3>Buffer Coating</h3><p>Protection from moisture and handling</p></div>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px;justify-content:center">
+        <div class="card" style="background:var(--surface);padding:20px">
+          <div style="display:flex;flex-direction:column;gap:10px;align-items:center">
+            <div style="width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;position:relative">
+              <div style="width:80px;height:80px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center">
+                <div style="width:40px;height:40px;border-radius:50%;background:var(--accent1)"></div>
+              </div>
+            </div>
+            <p style="font-size:0.75em;color:var(--t3);text-align:center;margin:0">Core → Cladding → Buffer → Jacket</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Break down the physical layers from inside out. Explain that the cladding is crucial for keeping light inside through total internal reflection. The buffer and jacket protect the fragile glass during installation.</aside>
+  <aside class="notes">Break down the physical layers from inside out. Explain that the cladding is crucial for keeping light inside through total internal reflection. The buffer and jacket protect the fragile glass during installation.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">History</p>
+    <h2>Evolution of Fiber Technology</h2>
+    <div class="timeline" style="flex:1;min-height:0;margin-top:20px">
+      <div class="tl-item">
+        <div class="tl-dot accent1"></div>
+        <h3>1970</h3>
+        <p>First low-loss fiber demonstrated at Corning Glass</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot accent2"></div>
+        <h3>1988</h3>
+        <p>TAT-8: First transatlantic fiber cable deploys</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot accent3"></div>
+        <h3>1990s</h3>
+        <p>Internet backbone transitions from copper</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot accent1"></div>
+        <h3>2020s</h3>
+        <p>FTTH connects billions of homes globally</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Walk through the history showing how fiber moved from laboratory curiosity to global infrastructure. Highlight that transatlantic cables revolutionized international communications capacity.</aside>
+  <aside class="notes">Walk through the history showing how fiber moved from laboratory curiosity to global infrastructure. Highlight that transatlantic cables revolutionized international communications capacity.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Physics</p>
+    <h2>Total Internal Reflection</h2>
+    <div style="display:flex;gap:22px;flex:1;min-height:0;margin-top:8px">
+      <div style="flex:1;display:flex;flex-direction:column;gap:12px">
+        <div class="frow">
+          <div class="fi"><div class="ic accent1"><i class="fas fa-angle-double-right"></i></div></div>
+          <div><h3>Critical Angle (>42°)</h3><p>Light strikes cladding above this threshold</p></div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent2"><i class="fas fa-sync-alt"></i></div></div>
+          <div><h3>Complete Reflection</h3><p>Light bounces back entirely into core</p></div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent3"><i class="fas fa-bezier-curve"></i></div></div>
+          <div><h3>Guided Transmission</h3><p>Signal follows bends without escaping</p></div>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center">
+        <div class="ring">
+          <svg viewBox="0 0 120 120" style="width:140px;height:140px">
+            <circle class="rbg" cx="60" cy="60" r="52"/>
+            <circle class="rprog" cx="60" cy="60" r="52" stroke-dasharray="327" stroke-dashoffset="65"/>
+          </svg>
+          <div class="rval" style="font-size:1.4em">42°</div>
+          <div class="rlab">Critical Angle</div>
+        </div>
+        <p style="font-size:0.75em;color:var(--t3);margin-top:12px;text-align:center;max-width:280px">Refractive index difference between core and cladding creates the waveguide effect</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">This is the key physics concept. Explain that when light hits the core-cladding boundary at a shallow enough angle, it reflects entirely rather than escaping—trapping the signal inside the fiber even when bent.</aside>
+  <aside class="notes">This is the key physics concept. Explain that when light hits the core-cladding boundary at a shallow enough angle, it reflects entirely rather than escaping—trapping the signal inside the fiber even when bent.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Performance</p>
+    <h2>Transmission Performance Metrics</h2>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;flex:1;align-items:center;min-height:0">
+      <div class="metric" style="padding:24px 36px">
+        <div class="num" style="font-size:2em">Tbps</div>
+        <div class="lab">Bandwidth Potential</div>
+      </div>
+      <div class="metric" style="padding:24px 36px">
+        <div class="num" style="font-size:2em">0.2 dB</div>
+        <div class="lab">Attenuation / km</div>
+      </div>
+      <div class="metric" style="padding:24px 36px">
+        <div class="num" style="font-size:2em">5 ms</div>
+        <div class="lab">Latency / 1000km</div>
+      </div>
+      <div class="metric" style="padding:24px 36px">
+        <div class="num" style="font-size:2em">400G</div>
+        <div class="lab">Gbps per Channel</div>
+      </div>
+    </div>
+    <div style="margin-top:24px;text-align:center">
+      <p style="font-size:0.75em;color:var(--t3)"><i class="fas fa-lightbulb" style="margin-right:6px"></i>Different wavelengths can carry separate data streams simultaneously (Wavelength Division Multiplexing)</p>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Discuss performance limits. Attenuation determines how far signal travels without amplification. Mention that different wavelengths (colors) of light can carry separate data streams simultaneously.</aside>
+  <aside class="notes">Discuss performance limits. Attenuation determines how far signal travels without amplification. Mention that different wavelengths (colors) of light can carry separate data streams simultaneously.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Applications</p>
+    <h2>From Ocean Floor to Data Center</h2>
+    <div class="g4" style="flex:1;min-height:0;margin-top:8px">
+      <div class="card card-accent1">
+        <div class="iw"><div class="ic accent1"><i class="fas fa-water"></i></div></div>
+        <h3>Submarine Cables</h3>
+        <p>Global internet backbone crossing oceans</p>
+        <span class="chip accent1">6,000+ km spans</span>
+      </div>
+      <div class="card card-accent2">
+        <div class="iw"><div class="ic accent2"><i class="fas fa-city"></i></div></div>
+        <h3>Metro Networks</h3>
+        <p>Urban fiber rings connecting cities</p>
+        <span class="chip accent2">50-100 km rings</span>
+      </div>
+      <div class="card card-accent3">
+        <div class="iw"><div class="ic accent3"><i class="fas fa-server"></i></div></div>
+        <h3>Data Centers</h3>
+        <p>High-density fiber fabrics inside facilities</p>
+        <span class="chip accent3">Millions of strands</span>
+      </div>
+      <div class="card card-accent1">
+        <div class="iw"><div class="ic accent1"><i class="fas fa-home"></i></div></div>
+        <h3>FTTH</h3>
+        <p>Final mile to homes and businesses</p>
+        <span class="chip accent1">Gigabit speeds</span>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Connect the physics to real infrastructure. Explain the hierarchy: submarine cables cross oceans, metro networks connect cities, and fiber-to-the-home completes the last mile. Show how all rely on the same light physics.</aside>
+  <aside class="notes">Connect the physics to real infrastructure. Explain the hierarchy: submarine cables cross oceans, metro networks connect cities, and fiber-to-the-home completes the last mile. Show how all rely on the same light physics.</aside>
+</section>
+  <section>
+  <div class="s cx">
+    <h1 style="font-size:2.8em;color:var(--t1);margin-bottom:16px">The Future is Lit</h1>
+    <p style="font-size:1.1em;color:var(--t2);max-width:600px;margin-bottom:28px">Light transmission physics enables our connected world</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:32px">
+      <span class="badge accent1"><i class="fas fa-bolt" style="margin-right:6px"></i>Light travels faster</span>
+      <span class="badge accent2"><i class="fas fa-sync" style="margin-right:6px"></i>Total internal reflection</span>
+      <span class="badge accent3"><i class="fas fa-network-wired" style="margin-right:6px"></i>Global infrastructure</span>
+    </div>
+    <hr class="dv" style="width:200px">
+    <div style="display:flex;gap:40px;margin-top:24px;justify-content:center;flex-wrap:wrap">
+      <div style="text-align:center">
+        <div class="ic accent1" style="width:48px;height:48px;font-size:1.2em;margin:0 auto 8px"><i class="fas fa-atom"></i></div>
+        <p style="font-size:0.7em;color:var(--t2);margin:0">Physics enables<br>innovation</p>
+      </div>
+      <div style="text-align:center">
+        <div class="ic accent2" style="width:48px;height:48px;font-size:1.2em;margin:0 auto 8px"><i class="fas fa-globe"></i></div>
+        <p style="font-size:0.7em;color:var(--t2);margin:0">Digital society<br>built on light</p>
+      </div>
+      <div style="text-align:center">
+        <div class="ic accent3" style="width:48px;height:48px;font-size:1.2em;margin:0 auto 8px"><i class="fas fa-question-circle"></i></div>
+        <p style="font-size:0.7em;color:var(--t2);margin:0">Questions?<br>Ask now</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Summarize the core message: understanding the physics of light transmission through cable infrastructure reveals why modern communication is possible. Encourage questions about specific applications.</aside>
+  <aside class="notes">Summarize the core message: understanding the physics of light transmission through cable infrastructure reveals why modern communication is possible. Encourage questions about specific applications.</aside>
+</section>
+
+<script>
+(function(){
+  const sections = document.querySelectorAll('section');
+  const total = sections.length;
+  const counter = document.getElementById('slide-counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  // IntersectionObserver: mark the visible slide as .active (triggers CSS animations)
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        sections.forEach(s => s.classList.remove('active'));
+        e.target.classList.add('active');
+        current = Array.from(sections).indexOf(e.target);
+        if (counter) counter.textContent = (current+1) + ' / ' + total;
+        if (progress) progress.style.width = ((current+1)/total*100) + '%';
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s => obs.observe(s));
+
+  // Activate first slide immediately
+  if (sections[0]) sections[0].classList.add('active');
+  if (counter) counter.textContent = '1 / ' + total;
+  if (progress) progress.style.width = (1/total*100) + '%';
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      if (current < total - 1) sections[current + 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (current > 0) sections[current - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      sections[0].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      sections[total - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'f' || e.key === 'F11') {
+      e.preventDefault();
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>

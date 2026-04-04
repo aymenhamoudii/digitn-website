@@ -1,0 +1,55 @@
+/* Variables & Themes */
+:root {
+  --primary-color: hsl(210, 100%, 50%);
+  --background-color: hsl(0, 0%, 98%);
+  --platform-color: hsl(210, 20%, 70%);
+  --player-color: hsl(142, 71%, 45%);
+  --accent-color: hsl(38, 92%, 50%);
+}
+
+/* Reset */
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+button {
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+/* Canvas and Game Wrapper */
+.game-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--background-color);
+}
+
+canvas {
+  border: 2px solid var(--primary-color);
+  background-color: var(--platform-color);
+}
+
+.controls {
+  margin-top: 1rem;
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  background: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--accent-color);
+}

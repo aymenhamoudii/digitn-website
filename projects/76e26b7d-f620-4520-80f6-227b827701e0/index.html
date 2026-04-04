@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNAKE CORE | Modern Arcade</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="game-header">
+            <div class="brand">
+                <h1>SNAKE<span>CORE</span></h1>
+                <div class="status-indicator">
+                    <span class="dot"></span>
+                    <span class="text">SYSTEM READY</span>
+                </div>
+            </div>
+            <div class="stats-container">
+                <div class="stat-box" aria-label="Current Score">
+                    <span class="label">SCORE</span>
+                    <span id="current-score" class="value">000</span>
+                </div>
+                <div class="stat-box" aria-label="High Score">
+                    <span class="label">BEST</span>
+                    <span id="high-score" class="value">000</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="game-viewport" role="application" aria-label="Snake Game Board">
+            <canvas id="game-canvas"></canvas>
+            
+            <div id="overlay" class="overlay hidden" aria-hidden="true">
+                <div class="overlay-content">
+                    <h2 id="overlay-title">GAME OVER</h2>
+                    <p id="overlay-message">Neural link severed. Final score recorded.</p>
+                    <div class="button-group">
+                        <button id="restart-btn" class="btn-primary">REBOOT SYSTEM</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="start-screen" class="overlay">
+                <div class="overlay-content">
+                    <div class="glitch-title">INITIALIZING...</div>
+                    <h2>NEURAL LINK</h2>
+                    <p>Navigate the grid. Consume data nodes. Avoid self-collision.</p>
+                    <div class="control-legend">
+                        <div class="control-item">
+                            <span class="key">W</span>
+                            <span class="key">A</span>
+                            <span class="key">S</span>
+                            <span class="key">D</span>
+                            <span class="desc">OR ARROWS</span>
+                        </div>
+                    </div>
+                    <button id="start-btn" class="btn-primary">ESTABLISH LINK</button>
+                </div>
+            </div>
+        </main>
+
+        <footer class="game-footer">
+            <div class="engine-info">
+                <span class="tag">ENGINE: DIGITN AI</span>
+                <span class="tag">VER: 1.0.4-LTS</span>
+            </div>
+            <div class="controls-hint">
+                <span class="action">PRESS [P] TO PAUSE</span>
+            </div>
+        </footer>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

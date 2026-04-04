@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>The Hearth & Grain — Rustic Local Eatery</title>
+  <meta name="description" content="A warm, rustic neighborhood restaurant. Seasonal fare, local ingredients, welcoming service.">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@300;400;600&family=Lora:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation">
+        <span class="hamburger" aria-hidden="true"></span>
+      </button>
+
+      <div class="brand">
+        <img src="assets/logo.svg" alt="The Hearth & Grain logo" class="logo">
+        <div class="brand-text">
+          <strong class="site-title">The Hearth & Grain</strong>
+          <span class="site-tag">Seasonal • Local • Familiar</span>
+        </div>
+      </div>
+
+      <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#location">Location</a></li>
+          <li><a href="#contact" class="cta">Reserve / Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-inner container">
+        <div class="hero-media">
+          <img src="assets/hero.jpg" alt="Warm dining room with wooden tables and soft light" class="hero-image" loading="eager">
+        </div>
+        <div class="hero-content">
+          <h1 id="hero-heading">A Neighborhood Table, Handed Down</h1>
+          <p class="lead">Rustic plates, seasonal produce, familiar faces. Stop by for a proper evening — or call ahead for a reserved corner.</p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Reserve a Table</a>
+            <a href="#menu" class="btn btn-secondary">See Menu</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about container" aria-labelledby="about-heading">
+      <h2 id="about-heading">Our Story</h2>
+      <p>Founded by neighbors who love honest food, The Hearth & Grain focuses on farm-friendly plates and welcoming service. We change with the seasons and celebrate time-tested techniques.</p>
+    </section>
+
+    <section id="menu" class="menu-teaser container" aria-labelledby="menu-heading">
+      <h2 id="menu-heading">Tonight's Notes</h2>
+      <p class="microcopy">A rotating small menu tuned for sharing. Call for today's specials.</p>
+      <div class="menu-grid">
+        <article class="menu-card">
+          <h3>Wood-Roasted Vegetables</h3>
+          <p class="price">$12</p>
+          <p>Seasonal roots, charred citrus, herb finish.</p>
+        </article>
+        <article class="menu-card">
+          <h3>Heritage Pork Collar</h3>
+          <p class="price">$24</p>
+          <p>Slow-braised, preserved lemon, winter greens.</p>
+        </article>
+        <article class="menu-card">
+          <h3>Stone-Baked Bread</h3>
+          <p class="price">$6</p>
+          <p>House-milled flour, cultured butter.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="gallery" class="gallery container" aria-labelledby="gallery-heading">
+      <h2 id="gallery-heading">Gallery</h2>
+      <p class="microcopy">Moments from the dining room and kitchen.</p>
+      <div class="gallery-grid" id="gallery-grid">
+        <button class="gallery-item" data-index="0" aria-label="Open image 1">
+          <img src="assets/gallery/1.jpg" alt="Wood table with plates" loading="lazy">
+        </button>
+        <button class="gallery-item large" data-index="1" aria-label="Open image 2">
+          <img src="assets/gallery/2.jpg" alt="Chef plating a dish" loading="lazy">
+        </button>
+        <button class="gallery-item" data-index="2" aria-label="Open image 3">
+          <img src="assets/gallery/3.jpg" alt="Interior with hanging lights" loading="lazy">
+        </button>
+      </div>
+
+      <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <button class="lightbox-close" aria-label="Close viewer">×</button>
+        <button class="lightbox-prev" aria-label="Previous image">‹</button>
+        <div class="lightbox-stage" id="lightbox-stage"></div>
+        <button class="lightbox-next" aria-label="Next image">›</button>
+      </div>
+    </section>
+
+    <section id="location" class="map-section container" aria-labelledby="location-heading">
+      <h2 id="location-heading">Find Us</h2>
+      <p class="microcopy">We are a short walk from the town square. Tap to explore an interactive map.</p>
+      <div class="map-wrap">
+        <a href="#" class="map-static-link">
+          <img src="assets/map-static.jpg" alt="Map showing location of The Hearth & Grain" class="map-static" loading="lazy">
+        </a>
+        <div class="map-actions">
+          <button id="open-map" class="btn btn-secondary">Open Map</button>
+          <a href="tel:+15551234567" class="btn btn-ghost">Call: (555) 123-4567</a>
+          <a href="https://www.google.com/maps/dir/?api=1&destination=The+Hearth+%26+Grain" target="_blank" rel="noopener" class="btn btn-ghost">Get directions</a>
+        </div>
+        <div id="map-container" class="map-container" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact container" aria-labelledby="contact-heading">
+      <h2 id="contact-heading">Reserve or Send a Note</h2>
+      <p class="microcopy">Prefer calling? Tap the call button above for immediate service.</p>
+      <form id="contact-form" class="contact-form" novalidate aria-describedby="form-help">
+        <div id="form-help" class="form-help">Fields marked with * are required.</div>
+
+        <label for="name">Name *</label>
+        <input id="name" name="name" type="text" required minlength="2" aria-required="true">
+        <div class="error" id="error-name" aria-live="polite"></div>
+
+        <label for="phone">Phone *</label>
+        <input id="phone" name="phone" type="tel" required pattern="^[0-9()+\-\s]{7,20}$" aria-required="true" placeholder="(555) 555-5555">
+        <div class="error" id="error-phone" aria-live="polite"></div>
+
+        <label for="date">Date</label>
+        <input id="date" name="date" type="date">
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="4" maxlength="500"></textarea>
+        <div class="error" id="error-form" aria-live="polite"></div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Request Reservation</button>
+          <button type="button" class="btn btn-ghost" id="clear-form">Clear</button>
+        </div>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> The Hearth & Grain — All rights reserved.</p>
+      <p class="small">Address: 12 Market Lane • Open Tue–Sun 5pm–10pm</p>
+    </div>
+    <div class="container attribution">
+      <p class="small">Images included with the project (free sources). Map graphic is a local static image included for offline use.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts (dependencies first) -->
+  <script src="js/utils.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/contact.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

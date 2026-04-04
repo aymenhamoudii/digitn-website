@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #f5f0e8;
+  --color-terracotta: #c2410f;
+  --color-olive: #166534;
+  --color-neutral-dark: #3f2e1e;
+  --color-neutral: #5c4633;
+  --font-family-heading: serif;
+  --font-family-body: system-ui, -apple-system, sans-serif;
+}
+
+@layer base {
+  :root {
+    font-family: var(--font-family-body);
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-family-heading);
+  }
+}
+
+@layer utilities {
+  .section-header {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+  }
+}

@@ -1,0 +1,61 @@
+[Unnecessary comment] bridge/src/lib/direct-builder.js:148 :   // Proper file_created event — NOT wrapped in emitStatus so it doesn't corrupt setStatus() in the frontend
+[Unnecessary comment] bridge/src/lib/direct-builder.js:219 :   // Each SSE event type gets its own row so history is perfectly reconstructable on refresh.
+[Unnecessary comment] bridge/src/lib/direct-builder.js:231 :       return data?.id ?? null; // returns the new row ID
+[Stringly-typed code] bridge/src/lib/direct-chat.js:114 :         historyText += `${msg.role === "user" ? "User" : "Assistant"}: ${msg.content}\n\n`;
+[Stringly-typed code] bridge/src/lib/direct-chat.js:119 :     const baseSystemPrompt = project.type === "presentation" ? PRESENTATION_EDIT_PROMPT : BUILDER_SYSTEM_PROMPT;
+[Stringly-typed code] bridge/src/routes/build.js:46 :       if (project && project.status === 'ready') {
+[Stringly-typed code] bridge/src/routes/build.js:49 :       } else if (project && project.status === 'failed') {
+[Stringly-typed code] bridge/src/routes/build.js:51 :       } else if (project && project.status === 'building') {
+[Stringly-typed code] bridge/src/routes/build.js:53 :       } else if (project && (project.status === 'analyzing' || project.status === 'planning')) {
+[Stringly-typed code] bridge/src/routes/builder-analyze.js:34 :     (q.type === 'single' || q.type === 'multiple') &&
+[Stringly-typed code] bridge/src/routes/chat.js:54 :   const incomingSystem = Array.isArray(messages) && messages[0]?.role === 'system'
+[Stringly-typed code] src/app/(platform)/app/builder/page.tsx:90 :     const content = mode === "upload" ? extractedText : description.trim();
+[Stringly-typed code] src/app/(platform)/app/builder/page.tsx:93 :         mode === "upload"
+[Stringly-typed code] src/app/(platform)/app/builder/page.tsx:107 :           name: mode === "upload" && uploadedFile
+[Stringly-typed code] src/app/(platform)/app/builder/page.tsx:175 :                 backgroundColor: mode === "describe" ? "rgba(217, 119, 87, 0.12)" : "var(--card-bg)",
+[Stringly-typed code] src/app/(platform)/app/builder/page.tsx:176 :                 border: mode === "describe" ? "1.5px solid var(--accent)" : "1px solid var(--border)",
+[Stringly-typed code] src/app/(platform)/app/builder/page.tsx:177 :                 color: mode === "describe" ? "var(--accent)" : "var(--text-secondary)",
+[Stringly-typed code] src/app/(platform)/app/builder/page.tsx:188 :                 backgroundColor: mode === "upload" ? "rgba(217, 119, 87, 0.12)" : "var(--card-bg)",
+[Stringly-typed code] src/app/(platform)/app/builder/page.tsx:189 :                 border: mode === "upload" ? "1.5px solid var(--accent)" : "1px solid var(--border)",
+[Stringly-typed code] src/app/(platform)/app/builder/page.tsx:190 :                 color: mode === "upload" ? "var(--accent)" : "var(--text-secondary)",
+[Stringly-typed code] src/app/(platform)/app/builder/page.tsx:200 :             {mode === "describe" ? (
+[Stringly-typed code] src/app/(platform)/app/builder/page.tsx:358 :                 (mode === "describe" ? !description.trim() : !extractedText)
+[Stringly-typed code] src/app/(platform)/app/builder/questionnaire/[id]/page.tsx:40 :   const isPresentation = project.type === 'presentation';
+[Stringly-typed code] src/app/(platform)/app/builder/terminal/[id]/page.tsx:22 :   if (project.type === "presentation") {
+[Stringly-typed code] src/app/(platform)/app/page.tsx:337 :                 const isExpired = p.status === "expired";
+[Stringly-typed code] src/app/(platform)/app/page.tsx:341 :                     href={p.type === 'presentation' ? `/app/builder/studio/${p.id}` : `/app/builder/terminal/${p.id}`}
+[Stringly-typed code] src/app/(platform)/app/page.tsx:380 :                           : p.status === "ready"
+[Stringly-typed code] src/app/(platform)/app/page.tsx:385 :                           : p.status === "ready"
+[Unnecessary comment] src/app/(platform)/app/projects/page.tsx:15 :   // Django ProjectSerializer returns `user` (UUID string), not `user_id`
+[Stringly-typed code] src/app/api/builder/analyze/route.ts:24 :     const isPresentation = type === 'presentation';
+[Stringly-typed code] src/app/api/builder/analyze/route.ts:30 :       p.status === 'analyzing' && p.user === user.id && p.description === description
+[Stringly-typed code] src/app/api/builder/start/route.ts:31 :     const shouldConsumeQuota = !(!answers && (project.status === 'analyzing' || project.status === 'planning'));
+[Stringly-typed code] src/app/api/builder/start/route.ts:43 :     const isPresentation = project.type === 'presentation';
+[Stringly-typed code] src/components/builder/QuestionnaireForm.tsx:185 :         if (target.tagName === "INPUT" && (target as HTMLInputElement).type === "text") {
+[Stringly-typed code] src/components/builder/QuestionnaireForm.tsx:281 :                     currentQuestion.type === "single"
+[Stringly-typed code] src/components/builder/QuestionnaireForm.tsx:294 :                     currentQuestion.type === "single" ? "radio" : "checkbox"
+[Stringly-typed code] src/components/builder/QuestionnaireForm.tsx:300 :                     currentQuestion.type === "single"
+[Stringly-typed code] src/components/builder/QuestionnaireForm.tsx:306 :                     currentQuestion.type === "single"
+[Stringly-typed code] src/components/builder/QuestionnaireForm.tsx:323 :                   currentQuestion.type === "single"
+[Stringly-typed code] src/components/builder/QuestionnaireForm.tsx:337 :                     currentQuestion.type === "single" ? "radio" : "checkbox"
+[Stringly-typed code] src/components/builder/QuestionnaireForm.tsx:343 :                     currentQuestion.type === "single"
+[Stringly-typed code] src/components/builder/QuestionnaireForm.tsx:349 :                     currentQuestion.type === "single"
+[Stringly-typed code] src/components/builder/QuestionnaireForm.tsx:362 :             {(currentQuestion.type === "single"
+[Unnecessary comment] src/components/builder/TerminalChat.tsx:938 :           // API returns { files: { "path": "content", ... } }
+[Stringly-typed code] src/components/builder/TerminalChat.tsx:1017 :           } else if (data.type === "file_content") {
+[Stringly-typed code] src/components/builder/TerminalChat.tsx:1289 :               if (data.type === "file_content") {
+[Stringly-typed code] src/components/builder/TerminalChat.tsx:1293 :               } else if (data.type === "content") {
+[Stringly-typed code] src/components/builder/TerminalChat.tsx:2024 :             (status === "building" || status === "analyzing") &&
+[Stringly-typed code] src/components/chat/ChatInterface.tsx:129 :       if (updated.length > 0 && updated[updated.length - 1].role === 'assistant') {
+[Stringly-typed code] src/components/chat/ChatInterface.tsx:201 :             if (parsed.type === 'meta' && parsed.conversationId) {
+[Stringly-typed code] src/components/chat/ChatInterface.tsx:214 :             } else if (parsed.type === 'content') {
+[Stringly-typed code] src/components/chat/ChatInterface.tsx:221 :                 if (updated.length > 0 && updated[updated.length - 1].role === 'assistant' && !updated[updated.length - 1].isError) {
+[Stringly-typed code] src/components/chat/ChatInterface.tsx:228 :             } else if (parsed.type === 'error') {
+[Stringly-typed code] src/components/chat/ChatInterface.tsx:253 :         if (updated.length > 0 && updated[updated.length - 1].role === 'assistant') {
+[Stringly-typed code] src/components/chat/ChatInterface.tsx:283 :         if (updated.length > 0 && updated[updated.length - 1].role === 'assistant') {
+[Stringly-typed code] src/components/chat/ChatInterface.tsx:344 :                   onClick={() => router.push(`/app/${conv.mode === 'builder' ? 'builder' : 'chat'}/${conv.id}`)}
+[Stringly-typed code] src/components/chat/ChatInterface.tsx:353 :                   {conv.mode === 'builder' ? <FiCode size={12} className="shrink-0" /> : <FiMessageSquare size={12} className="shrink-0" />}
+[Stringly-typed code] src/components/chat/ChatInterface.tsx:420 :                   const isStreaming = msg.role === 'assistant' && isLoading && isLastMessage && msg.content !== '' && !msg.isError;
+[Stringly-typed code] src/components/chat/ChatInterface.tsx:429 :                       onRegenerate={isLastMessage && msg.role === 'assistant' ? handleRegenerate : undefined}
+[Stringly-typed code] src/components/chat/MessageBubble.tsx:137 :     if (child?.type === 'code') {
+[Stringly-typed code] src/components/chat/MessageBubble.tsx:213 :   const isUser = role === 'user';

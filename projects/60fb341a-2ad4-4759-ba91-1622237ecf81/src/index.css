@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --parallax-distance: 0px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  @apply font-body text-cinematic-white bg-cinematic-black;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold tracking-tighter;
+  }
+  
+  h1 {
+    @apply text-5xl md:text-7xl lg:text-8xl;
+  }
+  
+  h2 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+  
+  h3 {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+  }
+  
+  p {
+    @apply leading-relaxed text-cinematic-silver-primary;
+  }
+  
+  a {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  button {
+    @apply outline-none focus:outline-none focus:ring-2 focus:ring-cinematic-silver-accent focus:ring-offset-2 focus:ring-offset-cinematic-black-light;
+  }
+}
+
+@layer components {
+  .container-cinematic {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .section-spacing {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+  
+  .glass-silver {
+    @apply backdrop-blur-sm bg-gradient-to-br from-white/5 to-silver-900/10 border border-silver-700/20;
+  }
+  
+  .btn-primary {
+    @apply px-8 py-3 bg-cinematic-white text-cinematic-black font-display font-semibold tracking-wider uppercase text-sm transition-all duration-300 hover:bg-cinematic-silver-accent hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl;
+  }
+  
+  .btn-secondary {
+    @apply px-8 py-3 bg-transparent border-2 border-cinematic-white text-cinematic-white font-display font-semibold tracking-wider uppercase text-sm transition-all duration-300 hover:bg-cinematic-white/10 hover:border-cinematic-silver-accent hover:text-cinematic-silver-accent hover:scale-105 active:scale-95;
+  }
+  
+  .card-3d {
+    @apply relative transform-gpu transition-all duration-500 hover:scale-105 hover:shadow-2xl;
+    transform-style: preserve-3d;
+  }
+  
+  .text-gradient-silver {
+    @apply bg-gradient-to-r from-cinematic-silver-primary via-cinematic-silver-accent to-cinematic-white bg-clip-text text-transparent;
+  }
+  
+  .parallax-layer {
+    will-change: transform;
+    transform-style: preserve-3d;
+  }
+  
+  .scroll-indicator {
+    @apply w-6 h-10 border-2 border-cinematic-silver-primary rounded-full flex justify-center;
+  }
+  
+  .scroll-indicator::before {
+    content: '';
+    @apply w-1 h-3 bg-cinematic-silver-primary rounded-full mt-2 animate-bounce;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-cinematic-black-light;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-cinematic-silver-primary/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-cinematic-silver-primary/50;
+}
+
+/* Parallax depth effect */
+.parallax-depth-1 { --depth: 0.1; }
+.parallax-depth-2 { --depth: 0.2; }
+.parallax-depth-3 { --depth: 0.3; }
+.parallax-depth-4 { --depth: 0.4; }
+.parallax-depth-5 { --depth: 0.5; }
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus visible polyfill */
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}

@@ -1,0 +1,25 @@
+/* Mobile-first responsive adjustments */
+
+/* Show hamburger on small screens */
+@media(max-width:799px){
+  .nav-toggle{display:inline-flex}
+  .menu{position:absolute;top:64px;right:1rem;background:#fff;padding:1rem;border-radius:12px;flex-direction:column;box-shadow:0 10px 30px rgba(0,0,0,0.06);display:none}
+  .menu[aria-hidden='false']{display:flex}
+}
+
+/* Larger screens - show menu inline */
+@media(min-width:800px){
+  .nav-toggle{display:none}
+  .menu{display:flex;position:static;background:transparent;padding:0;box-shadow:none}
+}
+
+/* Typography scaling */
+@media(min-width:700px){
+  :root{--text-base:1.0625rem;--text-lg:1.1875rem}
+}
+
+/* Touch target sizes */
+button, .menu a{min-height:44px}
+
+/* Focus visibility for keyboard users */
+:focus{outline-offset:3px}

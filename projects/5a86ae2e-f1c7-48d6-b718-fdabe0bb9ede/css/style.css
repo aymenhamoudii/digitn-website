@@ -1,0 +1,215 @@
+:root {
+  --bg-dark: #1a1a1a;
+  --bg-darker: #0f0f0f;
+  --board-bg: #1a2e1a;
+  --board-border: #2d4a2d;
+  --snake-primary: #4ade80;
+  --snake-secondary: #22c55e;
+  --snake-head: #16a34a;
+  --food-color: #ef4444;
+  --food-glow: #fca5a5;
+  --text-primary: #f5f5f5;
+  --text-secondary: #a3a3a3;
+  --accent: #86efac;
+  --shadow-color: rgba(0, 0, 0, 0.4);
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--bg-darker);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  line-height: 1.5;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 100%;
+}
+
+.game-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.game-title {
+  font-size: clamp(2rem, 8vw, 3rem);
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  color: var(--snake-primary);
+  text-transform: uppercase;
+  text-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
+}
+
+.score-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.score-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.score-value {
+  font-size: clamp(1.5rem, 6vw, 2.5rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.game-board-wrapper {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 
+    0 25px 50px -12px var(--shadow-color),
+    0 0 0 1px rgba(74, 222, 128, 0.1);
+}
+
+#gameCanvas {
+  display: block;
+  background: var(--board-bg);
+  border: 2px solid var(--board-border);
+  border-radius: 12px;
+}
+
+.game-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 15, 15, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-normal);
+  backdrop-filter: blur(4px);
+  border-radius: 12px;
+}
+
+.game-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.overlay-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.overlay-title {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 600;
+  color: var(--food-color);
+  letter-spacing: 0.05em;
+}
+
+.final-score {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+}
+
+.final-score span {
+  color: var(--snake-primary);
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.restart-btn {
+  margin-top: 0.5rem;
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--bg-darker);
+  background: var(--snake-primary);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 14px rgba(74, 222, 128, 0.4);
+}
+
+.restart-btn:hover {
+  background: var(--snake-head);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(74, 222, 128, 0.5);
+}
+
+.restart-btn:active {
+  transform: translateY(0);
+}
+
+.restart-btn:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.controls-hint {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.controls-hint kbd {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-family: inherit;
+  font-weight: 600;
+  background: var(--bg-dark);
+  border: 1px solid var(--board-border);
+  border-radius: 4px;
+  color: var(--text-primary);
+  box-shadow: 0 2px 0 var(--board-border);
+}
+
+@media (min-width: 640px) {
+  body {
+    padding: 2rem;
+  }
+
+  .game-container {
+    gap: 2rem;
+  }
+
+  .game-board-wrapper {
+    box-shadow: 
+      0 25px 50px -12px var(--shadow-color),
+      0 0 40px rgba(74, 222, 128, 0.08),
+      0 0 0 1px rgba(74, 222, 128, 0.1);
+  }
+}

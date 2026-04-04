@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>tunisia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Rubik:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+    --bg: #042C53;
+    --bg2: #0a3a68;
+    --surface: #1a4a7a;
+    --surface2: #1d4164;
+    --border: rgba(255,255,255,.07);
+    --border-md: rgba(255,255,255,.11);
+    --accent1: #E24B4A;
+    --accent1-dim: rgba(226, 75, 74, 0.18);
+    --accent2: #FAC775;
+    --accent2-dim: rgba(250, 199, 117, 0.18);
+    --accent3: #378ADD;
+    --accent3-dim: rgba(55, 138, 221, 0.18);
+    --t1: #FCEBEB;
+    --t2: #e0d0d0;
+    --t3: rgba(252, 235, 235, 0.3);
+    --mono: 'Roboto Mono', monospace;
+    --sans: 'Rubik', system-ui, sans-serif;
+    --serif: 'Sora', sans-serif;
+  }
+    
+  /* ─── Reset ─── */
+  ::-webkit-scrollbar{display:none}
+  *{scrollbar-width:none;-ms-overflow-style:none;box-sizing:border-box;margin:0;padding:0}
+  html{overflow-y:scroll;overflow-x:hidden;scroll-behavior:smooth;scroll-snap-type:y mandatory}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  /* ─── Slide wrapper (viewport-sized snap target) ─── */
+  .slide-wrap{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--bg);position:relative}
+
+  /* ─── Slide (fluid responsive canvas) ─── */
+  section{width:100%;height:100%;display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+  /* ─── Stagger animation (.s container) ─── */
+  .s{display:flex;flex-direction:column;flex:1;min-height:0;padding:6vh 6vw;box-sizing:border-box;overflow:hidden}
+  .s>*{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+  .slide-wrap.active .s>*{opacity:1;transform:translateY(0)}
+  .slide-wrap.active .s>*:nth-child(1){transition-delay:.03s}
+  .slide-wrap.active .s>*:nth-child(2){transition-delay:.09s}
+  .slide-wrap.active .s>*:nth-child(3){transition-delay:.15s}
+  .slide-wrap.active .s>*:nth-child(4){transition-delay:.21s}
+  .slide-wrap.active .s>*:nth-child(5){transition-delay:.27s}
+  .slide-wrap.active .s>*:nth-child(6){transition-delay:.33s}
+  .slide-wrap.active .s>*:nth-child(7){transition-delay:.39s}
+  .slide-wrap.active .s>*:nth-child(8){transition-delay:.45s}
+
+  /* ─── Centering utility ─── */
+  .cx{display:flex;justify-content:center;align-items:center;text-align:center}
+
+  /* ─── Speaker notes (hidden) ─── */
+  aside.notes{display:none!important}
+
+  /* ─── Slide counter ─── */
+  #slide-counter{position:fixed;bottom:16px;right:24px;font-family:var(--mono);font-size:13px;color:var(--t3);background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:6px 14px;z-index:100;pointer-events:none}
+
+  /* ─── Progress bar ─── */
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--accent1);z-index:100;transition:width .3s ease}
+
+  </style>
+</head>
+<body>
+  <div id="progress" style="width:0"></div>
+  <div id="slide-counter">1 / 12</div>
+  <div class="slide-wrap">
+    <section style="background: linear-gradient(135deg, var(--bg) 0%, var(--bg2) 100%); position: relative; overflow: hidden;">
+  <div class="s cx" style="width: 100%; height: 100%; flex-direction: column; gap: 3vh; padding: 5vh 5vw;">
+    <!-- Arabesque Pattern Overlay -->
+    <div style="position: absolute; inset: 0; opacity: 0.05; background-image: radial-gradient(circle at 25% 25%, var(--accent2) 2px, transparent 2px), radial-gradient(circle at 75% 75%, var(--accent2) 2px, transparent 2px); background-size: 50px 50px;"></div>
+    
+    <!-- Floating Ornaments -->
+    <div style="position: absolute; top: 10vh; left: 10vw; width: 80px; height: 80px; opacity: 0.2;">
+      <div style="width: 100%; height: 100%; border: 2px solid var(--accent2); border-radius: 50%; position: relative;">
+        <div style="position: absolute; inset: 10px; border: 1px solid var(--accent2); border-radius: 50%;"></div>
+      </div>
+    </div>
+    <div style="position: absolute; bottom: 15vh; right: 12vw; width: 60px; height: 60px; opacity: 0.15;">
+      <div style="width: 100%; height: 100%; border: 2px solid var(--accent3); transform: rotate(45deg); position: relative;">
+        <div style="position: absolute; inset: 8px; border: 1px solid var(--accent3);"></div>
+      </div>
+    </div>
+    
+    <!-- Main Content -->
+    <h1 style="font-family: var(--serif); font-size: clamp(3rem, 8vw, 6rem); color: var(--text); text-align: center; margin: 0; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">
+      Tunisia
+    </h1>
+    <div style="width: 80px; height: 3px; background: var(--accent1); margin: 2vh 0;"></div>
+    <h2 style="font-family: var(--sans); font-size: clamp(1.5rem, 3vw, 2.5rem); color: var(--text2); text-align: center; font-weight: 300; margin: 0;">
+      Where Ancient Sands Meet Azure Shores
+    </h2>
+    
+    <!-- Key Points -->
+    <div style="display: flex; flex-direction: column; gap: 2vh; margin-top: 5vh; align-items: center;">
+      <div style="background: rgba(226, 75, 74, 0.15); padding: 1.5vh 4vw; border-radius: 50px; border: 1px solid var(--accent1-dim);">
+        <span style="color: var(--accent2); font-family: var(--sans); font-size: clamp(1rem, 2vw, 1.3rem);">North Africa's Hidden Gem</span>
+      </div>
+      <div style="background: rgba(250, 199, 117, 0.1); padding: 1.5vh 4vw; border-radius: 50px; border: 1px solid var(--accent2-dim);">
+        <span style="color: var(--text); font-family: var(--sans); font-size: clamp(1rem, 2vw, 1.3rem);">Culture, Coast & Cosmos</span>
+      </div>
+    </div>
+    
+    <!-- Badge -->
+    <div style="position: absolute; bottom: 5vh; left: 50%; transform: translateX(-50%); background: var(--accent3); padding: 1vh 3vw; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+      <span style="color: var(--bg); font-family: var(--sans); font-weight: 600; font-size: clamp(0.8rem, 1.5vw, 1rem);">Discover More</span>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Welcome! Today we journey through Tunisia – a land where Phoenician ruins whisper beside Mediterranean waves, and Saharan dunes meet star-filled skies. Prepare for an adventure.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background: var(--bg);">
+  <div class="s" style="width: 100%; height: 100%; display: flex; flex-direction: column; padding: 8vh 5vw; gap: 5vh;">
+    <!-- Header -->
+    <div style="text-align: center;">
+      <span style="font-family: var(--sans); font-size: 1rem; color: var(--accent2); text-transform: uppercase; letter-spacing: 2px;">Essence</span>
+      <h2 style="font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.5rem); color: var(--text); margin: 1vh 0;">Why Tunisia Captivates</h2>
+      <div style="width: 60px; height: 2px; background: var(--accent1); margin: 0 auto;"></div>
+    </div>
+    
+    <!-- Icon Circles Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 3vw; max-width: 900px; margin: 0 auto;">
+      <div style="aspect-ratio: 1; background: var(--surface); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--accent1); transition: all 0.3s ease;">
+        <i class="fas fa-water" style="font-size: clamp(2rem, 4vw, 3rem); color: var(--accent3);"></i>
+      </div>
+      <div style="aspect-ratio: 1; background: var(--surface); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--accent2); transition: all 0.3s ease;">
+        <i class="fas fa-landmark" style="font-size: clamp(2rem, 4vw, 3rem); color: var(--accent2);"></i>
+      </div>
+      <div style="aspect-ratio: 1; background: var(--surface); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--accent3); transition: all 0.3s ease;">
+        <i class="fas fa-mountain" style="font-size: clamp(2rem, 4vw, 3rem); color: var(--accent1);"></i>
+      </div>
+      <div style="aspect-ratio: 1; background: var(--surface); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--text); transition: all 0.3s ease;">
+        <i class="fas fa-utensils" style="font-size: clamp(2rem, 4vw, 3rem); color: var(--text);"></i>
+      </div>
+    </div>
+    
+    <!-- Cards Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2vw; max-width: 1000px; margin: 0 auto; width: 100%;">
+      <div style="background: var(--surface); border-radius: 15px; padding: 3vh 2vw; border: 1px solid var(--accent1-dim); transition: all 0.3s ease;">
+        <div style="font-family: var(--serif); font-size: 3rem; color: var(--accent3); font-weight: bold;">1,300</div>
+        <div style="color: var(--text2); font-family: var(--sans); font-size: 1rem;">km of Mediterranean Coastline</div>
+      </div>
+      <div style="background: var(--surface); border-radius: 15px; padding: 3vh 2vw; border: 1px solid var(--accent2-dim);">
+        <div style="font-family: var(--serif); font-size: 3rem; color: var(--accent2); font-weight: bold;">8</div>
+        <div style="color: var(--text2); font-family: var(--sans); font-size: 1rem;">UNESCO World Heritage Sites</div>
+      </div>
+      <div style="background: var(--surface); border-radius: 15px; padding: 3vh 2vw; border: 1px solid var(--accent3-dim);">
+        <div style="font-family: var(--serif); font-size: 2.5rem; color: var(--accent1); font-weight: bold;">Sahara</div>
+        <div style="color: var(--text2); font-family: var(--sans); font-size: 1rem;">Desert Adventures</div>
+      </div>
+      <div style="background: var(--surface); border-radius: 15px; padding: 3vh 2vw; border: 1px solid rgba(252, 235, 235, 0.3);">
+        <div style="font-family: var(--serif); font-size: 2.5rem; color: var(--text); font-weight: bold;">⭐</div>
+        <div style="color: var(--text2); font-family: var(--sans); font-size: 1rem;">World-Class Couscous</div>
+      </div>
+    </div>
+    
+    <!-- Divider -->
+    <div style="margin-top: auto;">
+      <div style="height: 1px; background: linear-gradient(90deg, transparent, var(--accent2), transparent);"></div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Tunisia packs extraordinary diversity into a compact space – more than many countries twice its size. From sun-drenched beaches to ancient medinas and endless deserts, it offers authentic experiences without the crowds.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%); position: relative; z-index: 1;">
+  <div class="s" style="width: 100%; height: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4vw; padding: 8vh 5vw;">
+    <!-- Left Column - Text Content -->
+    <div style="display: flex; flex-direction: column; justify-content: center; gap: 4vh;">
+      <div>
+        <span style="font-family: var(--sans); font-size: 1rem; color: var(--accent2); text-transform: uppercase; letter-spacing: 2px;">Geography</span>
+        <h2 style="font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); color: var(--text); margin: 1vh 0;">Land of Contrasts</h2>
+        <div style="width: 50px; height: 2px; background: var(--accent1);"></div>
+      </div>
+      
+      <!-- Feature Rows -->
+      <div style="display: flex; flex-direction: column; gap: 2vh;">
+        <div style="display: flex; align-items: center; gap: 2vw; padding: 2vh 2vw; background: var(--surface); border-radius: 10px; border-left: 3px solid var(--accent3);">
+          <i class="fas fa-water" style="font-size: 2rem; color: var(--accent3); min-width: 40px;"></i>
+          <div>
+            <div style="color: var(--text); font-family: var(--sans); font-weight: 600;">Mediterranean Coast</div>
+            <div style="color: var(--text2); font-size: 0.9rem;">Northern shoreline with crystal waters</div>
+          </div>
+        </div>
+        
+        <div style="display: flex; align-items: center; gap: 2vw; padding: 2vh 2vw; background: var(--surface); border-radius: 10px; border-left: 3px solid var(--accent1);">
+          <i class="fas fa-mountain" style="font-size: 2rem; color: var(--accent1); min-width: 40px;"></i>
+          <div>
+            <div style="color: var(--text); font-family: var(--sans); font-weight: 600;">Atlas Mountains</div>
+            <div style="color: var(--text2); font-size: 0.9rem;">Central highlands and fertile valleys</div>
+          </div>
+        </div>
+        
+        <div style="display: flex; align-items: center; gap: 2vw; padding: 2vh 2vw; background: var(--surface); border-radius: 10px; border-left: 3px solid var(--accent2);">
+          <i class="fas fa-sun" style="font-size: 2rem; color: var(--accent2); min-width: 40px;"></i>
+          <div>
+            <div style="color: var(--text); font-family: var(--sans); font-weight: 600;">Sahara Desert</div>
+            <div style="color: var(--text2); font-size: 0.9rem;">Southern golden dunes and oases</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Stat Badges -->
+      <div style="display: flex; gap: 2vw; flex-wrap: wrap;">
+        <div style="background: var(--accent3); color: var(--bg); padding: 1.5vh 2vw; border-radius: 20px; font-family: var(--sans); font-weight: 600;">3 Regions</div>
+        <div style="background: var(--accent1); color: var(--text); padding: 1.5vh 2vw; border-radius: 20px; font-family: var(--sans); font-weight: 600;">19 Provinces</div>
+        <div style="background: var(--accent2); color: var(--bg); padding: 1.5vh 2vw; border-radius: 20px; font-family: var(--sans); font-weight: 600;">Crossroads</div>
+      </div>
+    </div>
+    
+    <!-- Right Column - Map Visual -->
+    <div style="display: flex; align-items: center; justify-content: center; position: relative;">
+      <div style="width: 100%; max-width: 400px; aspect-ratio: 3/4; background: var(--surface); border-radius: 15px; border: 2px solid var(--accent2); position: relative; overflow: hidden;">
+        <!-- Abstract Map Representation -->
+        <div style="position: absolute; inset: 0;">
+          <!-- North - Coast -->
+          <div style="position: absolute; top: 0; left: 0; right: 0; height: 30%; background: linear-gradient(180deg, var(--accent3-dim) 0%, transparent 100%); border-bottom: 3px solid var(--accent3);">
+            <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); color: var(--accent3); font-weight: bold;">COAST</div>
+          </div>
+          <!-- Center - Mountains -->
+          <div style="position: absolute; top: 25%; left: 20%; right: 20%; height: 30%; background: linear-gradient(180deg, var(--surface2) 0%, var(--surface) 100%); border-radius: 10px;">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: var(--text); font-weight: bold;">MOUNTAINS</div>
+          </div>
+          <!-- South - Desert -->
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 40%; background: linear-gradient(0deg, var(--accent2-dim) 0%, transparent 100%); border-top: 3px solid var(--accent2);">
+            <div style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); color: var(--accent2); font-weight: bold;">SAHARA</div>
+          </div>
+          <!-- Decorative Elements -->
+          <div style="position: absolute; top: 15%; left: 10%; width: 20px; height: 20px; border: 2px solid var(--accent3); border-radius: 50%;"></div>
+          <div style="position: absolute; top: 35%; left: 60%; width: 15px; height: 15px; border: 2px solid var(--text); border-radius: 50%;"></div>
+          <div style="position: absolute; bottom: 20%; right: 20%; width: 25px; height: 25px; border: 2px solid var(--accent2); border-radius: 50%;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">This map shows Tunisia's incredible geographical variety. Notice how the fertile north transitions to rugged mountains before dissolving into the vast Sahara – all within a few hours' drive. This diversity creates microclimates and unique ecosystems.</aside>
+  <aside class="notes">This map shows Tunisia's incredible geographical variety. Notice how the fertile north transitions to rugged mountains before dissolving into the vast Sahara – all within a few hours' drive. This diversity creates microclimates and unique ecosystems.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background: linear-gradient(135deg, var(--accent3) 0%, var(--accent3-dim) 50%, var(--accent2-dim) 100%); position: relative; overflow: hidden; z-index: 1;">
+  <!-- Simulated Image Background with Overlay -->
+  <div style="position: absolute; inset: 0; background: 
+    linear-gradient(135deg, transparent 0%, rgba(4, 44, 83, 0.7) 100%),
+    radial-gradient(circle at 20% 30%, var(--accent3-dim) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, var(--accent2-dim) 0%, transparent 50%);"></div>
+  
+  <!-- Floating Water Animation -->
+  <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 30%; background: linear-gradient(180deg, transparent 0%, rgba(55, 138, 221, 0.3) 100%);">
+    <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 100px; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,165.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z')"></path></svg>') bottom repeat-x; background-size: cover; animation: wave 10s linear infinite;"></div>
+  </div>
+  
+  <style>
+    @keyframes wave {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+  </style>
+  
+  <div class="s" style="position: relative; z-index: 1; width: 100%; height: 100%; display: flex; flex-direction: column; padding: 8vh 5vw; gap: 4vh;">
+    <!-- Header -->
+    <div style="text-align: center; margin-bottom: 2vh;">
+      <span style="font-family: var(--sans); font-size: 1rem; color: var(--accent2); text-transform: uppercase; letter-spacing: 2px;">Nature</span>
+      <h2 style="font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.5rem); color: var(--text); margin: 1vh 0;">Coastal Paradise</h2>
+      <div style="width: 60px; height: 2px; background: var(--accent1); margin: 0 auto;"></div>
+    </div>
+    
+    <!-- Floating Quote -->
+    <div style="position: absolute; top: 20vh; right: 5vw; max-width: 300px; background: rgba(4, 44, 83, 0.85); backdrop-filter: blur(10px); padding: 3vh 2vw; border-radius: 15px; border: 1px solid var(--accent2); box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+      <div style="font-family: var(--serif); font-size: clamp(1.2rem, 2vw, 1.8rem); color: var(--text); font-style: italic; text-align: right;">
+        "Where turquoise waters meet powdery sands"
+      </div>
+      <div style="color: var(--accent2); margin-top: 2vh; font-size: 0.9rem;">- Mediterranean Dream</div>
+    </div>
+    
+    <!-- Feature Chips -->
+    <div style="display: flex; flex-wrap: wrap; gap: 1.5vw; justify-content: center; margin-top: auto; margin-bottom: 5vh;">
+      <div style="background: var(--accent1); color: var(--text); padding: 2vh 3vw; border-radius: 25px; font-family: var(--sans); font-weight: 600; border: 1px solid var(--accent1-dim); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+        <i class="fas fa-umbrella-beach" style="margin-right: 10px;"></i>
+        Hammamet's Golden Beaches
+      </div>
+      <div style="background: var(--accent2); color: var(--bg); padding: 2vh 3vw; border-radius: 25px; font-family: var(--sans); font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+        <i class="fas fa-island-tropic" style="margin-right: 10px;"></i>
+        Djerba Island Oasis
+      </div>
+      <div style="background: var(--accent3); color: var(--text); padding: 2vh 3vw; border-radius: 25px; font-family: var(--sans); font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+        <i class="fas fa-dove" style="margin-right: 10px;"></i>
+        Ichkeul Lake National Park
+      </div>
+      <div style="background: var(--surface); color: var(--text); padding: 2vh 3vw; border-radius: 25px; font-family: var(--sans); font-weight: 600; border: 1px solid var(--accent3-dim); box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+        <i class="fas fa-water" style="margin-right: 10px;"></i>
+        Kroumirie Waterfalls
+      </div>
+    </div>
+    
+    <!-- Image Overlay Cards -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2vw; max-width: 900px; margin: 0 auto; width: 100%;">
+      <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 3vh 2vw; text-align: center; border: 1px solid rgba(255,255,255,0.2);">
+        <div style="font-size: 2.5rem; margin-bottom: 1vh;">🏖️</div>
+        <div style="color: var(--text); font-weight: 600;">1,300 km Coast</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 3vh 2vw; text-align: center; border: 1px solid rgba(255,255,255,0.2);">
+        <div style="font-size: 2.5rem; margin-bottom: 1vh;">🏝️</div>
+        <div style="color: var(--text); font-weight: 600;">Island Paradise</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 3vh 2vw; text-align: center; border: 1px solid rgba(255,255,255,0.2);">
+        <div style="font-size: 2.5rem; margin-bottom: 1vh;">🦆</div>
+        <div style="color: var(--text); font-weight: 600;">Bird Sanctuary</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 3vh 2vw; text-align: center; border: 1px solid rgba(255,255,255,0.2);">
+        <div style="font-size: 2.5rem; margin-bottom: 1vh;">🌊</div>
+        <div style="color: var(--text); font-weight: 600;">Hidden Falls</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Imagine 1,300 kilometers of coastline where turquoise waters meet powdery sands. Djerba offers island tranquility, while Hammamet boasts luxury resorts. Don't miss Ichkeul's migratory birds or the hidden waterfalls of Kroumirie – nature's secret treasures.</aside>
+  <aside class="notes">Imagine 1,300 kilometers of coastline where turquoise waters meet powdery sands. Djerba offers island tranquility, while Hammamet boasts luxury resorts. Don't miss Ichkeul's migratory birds or the hidden waterfalls of Kroumirie – nature's secret treasures.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background: var(--bg); position: relative; z-index: 1;">
+  <!-- Arabesque Pattern Background -->
+  <div style="position: absolute; inset: 0; opacity: 0.03; background-image: 
+    radial-gradient(circle at 20% 80%, var(--accent2) 2px, transparent 2px),
+    radial-gradient(circle at 80% 20%, var(--accent2) 2px, transparent 2px),
+    radial-gradient(circle at 40% 40%, var(--accent2) 2px, transparent 2px),
+    radial-gradient(circle at 60% 60%, var(--accent2) 2px, transparent 2px); 
+    background-size: 80px 80px;"></div>
+  
+  <div class="s" style="position: relative; width: 100%; height: 100%; padding: 8vh 5vw; display: flex; flex-direction: column; gap: 5vh;">
+    <!-- Header -->
+    <div style="text-align: center;">
+      <span style="font-family: var(--sans); font-size: 1rem; color: var(--accent2); text-transform: uppercase; letter-spacing: 2px;">Heritage</span>
+      <h2 style="font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.5rem); color: var(--text); margin: 1vh 0;">3,000 Years of Civilization</h2>
+      <div style="width: 60px; height: 2px; background: var(--accent1); margin: 0 auto;"></div>
+    </div>
+    
+    <!-- Timeline -->
+    <div style="position: relative; max-width: 1000px; margin: 0 auto; width: 100%;">
+      <!-- Timeline Line -->
+      <div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 4px; background: var(--accent2); transform: translateX(-50%);"></div>
+      
+      <!-- Timeline Events -->
+      <div style="display: flex; flex-direction: column; gap: 6vh; position: relative;">
+        <!-- Carthage Empire -->
+        <div style="display: flex; align-items: center; position: relative;">
+          <div style="flex: 1; text-align: right; padding-right: 5vw;">
+            <div style="background: var(--surface); border-radius: 15px; padding: 3vh 3vw; border-right: 4px solid var(--accent1);">
+              <div style="font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2rem); color: var(--accent1); font-weight: bold;">Carthage Empire</div>
+              <div style="color: var(--text2); margin-top: 1vh;">9th Century BCE</div>
+              <div style="color: var(--text); margin-top: 1vh;">Maritime power rivaling Rome</div>
+            </div>
+          </div>
+          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 30px; height: 30px; background: var(--accent1); border-radius: 50%; border: 4px solid var(--bg); box-shadow: 0 0 0 4px var(--accent1-dim);"></div>
+          <div style="flex: 1; padding-left: 5vw;">
+            <div style="color: var(--text2); font-size: 0.9rem; max-width: 150px;">Ancient Mediterranean dominance</div>
+          </div>
+        </div>
+        
+        <!-- Roman Provincial Glory -->
+        <div style="display: flex; align-items: center; position: relative;">
+          <div style="flex: 1; padding-right: 5vw;">
+            <div style="color: var(--text2); font-size: 0.9rem; text-align: right; max-width: 150px; margin-left: auto;">Spectacular ruins and amphitheaters</div>
+          </div>
+          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 30px; height: 30px; background: var(--accent2); border-radius: 50%; border: 4px solid var(--bg); box-shadow: 0 0 0 4px var(--accent2-dim);"></div>
+          <div style="flex: 1; padding-left: 5vw;">
+            <div style="background: var(--surface); border-radius: 15px; padding: 3vh 3vw; border-left: 4px solid var(--accent2);">
+              <div style="font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2rem); color: var(--accent2); font-weight: bold;">Roman Provincial Glory</div>
+              <div style="color: var(--text2); margin-top: 1vh;">2nd Century CE</div>
+              <div style="color: var(--text); margin-top: 1vh;">North Africa's breadbasket</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Islamic Golden Age -->
+        <div style="display: flex; align-items: center; position: relative;">
+          <div style="flex: 1; text-align: right; padding-right: 5vw;">
+            <div style="background: var(--surface); border-radius: 15px; padding: 3vh 3vw; border-right: 4px solid var(--accent3);">
+              <div style="font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2rem); color: var(--accent3); font-weight: bold;">Islamic Golden Age</div>
+              <div style="color: var(--text2); margin-top: 1vh;">9th-12th Century CE</div>
+              <div style="color: var(--text); margin-top: 1vh;">Knowledge, culture & architecture</div>
+            </div>
+          </div>
+          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 30px; height: 30px; background: var(--accent3); border-radius: 50%; border: 4px solid var(--bg); box-shadow: 0 0 0 4px var(--accent3-dim);"></div>
+          <div style="flex: 1; padding-left: 5vw;">
+            <div style="color: var(--text2); font-size: 0.9rem; max-width: 150px;">Scholars, mosques & medinas</div>
+          </div>
+        </div>
+        
+        <!-- Ottoman Influences -->
+        <div style="display: flex; align-items: center; position: relative;">
+          <div style="flex: 1; padding-right: 5vw;">
+            <div style="color: var(--text2); font-size: 0.9rem; text-align: right; max-width: 150px; margin-left: auto;">Architecture, cuisine & daily life</div>
+          </div>
+          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 30px; height: 30px; background: var(--text); border-radius: 50%; border: 4px solid var(--bg); box-shadow: 0 0 0 4px var(--text2);"></div>
+          <div style="flex: 1; padding-left: 5vw;">
+            <div style="background: var(--surface); border-radius: 15px; padding: 3vh 3vw; border-left: 4px solid var(--text);">
+              <div style="font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2rem); color: var(--text); font-weight: bold;">Ottoman Influences</div>
+              <div style="color: var(--text2); margin-top: 1vh;">16th-19th Century CE</div>
+              <div style="color: var(--text); margin-top: 1vh;">Beylik era & cultural fusion</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Modern Independence -->
+        <div style="display: flex; align-items: center; position: relative;">
+          <div style="flex: 1; text-align: right; padding-right: 5vw;">
+            <div style="background: var(--surface); border-radius: 15px; padding: 3vh 3vw; border-right: 4px solid var(--accent1);">
+              <div style="font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2rem); color: var(--accent1); font-weight: bold;">Modern Independence</div>
+              <div style="color: var(--text2); margin-top: 1vh;">1956</div>
+              <div style="color: var(--text); margin-top: 1vh;">Republic of Tunisia</div>
+            </div>
+          </div>
+          <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 30px; height: 30px; background: var(--accent1); border-radius: 50%; border: 4px solid var(--bg); box-shadow: 0 0 0 4px var(--accent1-dim);"></div>
+          <div style="flex: 1; padding-left: 5vw;">
+            <div style="color: var(--text2); font-size: 0.9rem; max-width: 150px;">Democratic journey & progress</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Icon List -->
+    <div style="display: flex; justify-content: center; gap: 3vw; flex-wrap: wrap; margin-top: auto;">
+      <div style="display: flex; align-items: center; gap: 1vw;">
+        <i class="fas fa-landmark" style="color: var(--accent2); font-size: 1.5rem;"></i>
+        <span style="color: var(--text2);">8 UNESCO Sites</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1vw;">
+        <i class="fas fa-theater-masks" style="color: var(--accent1); font-size: 1.5rem;"></i>
+        <span style="color: var(--text2);">Roman Theaters</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1vw;">
+        <i class="fas fa-mosque" style="color: var(--accent3); font-size: 1.5rem;"></i>
+        <span style="color: var(--text2);">Historic Mosques</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1vw;">
+        <i class="fas fa-scroll-old" style="color: var(--text); font-size: 1.5rem;"></i>
+        <span style="color: var(--text2);">Ancient Manuscripts</span>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Walk through Tunisia's layered history. Carthage rivaled Rome, Romans built magnificent cities, Islamic scholars advanced knowledge, and Ottoman traders filled souks with spices. Each era left architectural marvels waiting to be explored.</aside>
+  <aside class="notes">Walk through Tunisia's layered history. Carthage rivaled Rome, Romans built magnificent cities, Islamic scholars advanced knowledge, and Ottoman traders filled souks with spices. Each era left architectural marvels waiting to be explored.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background: linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%); position: relative; z-index: 1;">
+  <!-- Arabesque Pattern Overlay -->
+  <div style="position: absolute; inset: 0; opacity: 0.04; background-image: 
+    radial-gradient(circle at 10% 20%, var(--accent2) 1px, transparent 1px),
+    radial-gradient(circle at 90% 80%, var(--accent2) 1px, transparent 1px),
+    radial-gradient(circle at 30% 60%, var(--accent3) 1px, transparent 1px),
+    radial-gradient(circle at 70% 40%, var(--accent3) 1px, transparent 1px); 
+    background-size: 60px 60px;"></div>
+  
+  <div class="s" style="position: relative; width: 100%; height: 100%; padding: 8vh 5vw; display: flex; flex-direction: column; gap: 5vh;">
+    <!-- Header -->
+    <div style="text-align: center;">
+      <span style="font-family: var(--sans); font-size: 1rem; color: var(--accent2); text-transform: uppercase; letter-spacing: 2px;">Culture</span>
+      <h2 style="font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.5rem); color: var(--text); margin: 1vh 0;">Living Traditions</h2>
+      <div style="width: 60px; height: 2px; background: var(--accent1); margin: 0 auto;"></div>
+    </div>
+    
+    <!-- Cards Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3vw; max-width: 1200px; margin: 0 auto; width: 100%;">
+      <!-- Medina Card -->
+      <div style="background: var(--bg); border-radius: 20px; padding: 4vh 2vw; border: 1px solid var(--accent1-dim); transition: all 0.3s ease; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--accent1);"></div>
+        <div style="font-size: 3rem; margin-bottom: 2vh;">🏛️</div>
+        <h3 style="font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--text); margin-bottom: 1.5vh;">Medina of Tunis</h3>
+        <div style="display: inline-block; background: var(--accent2); color: var(--bg); padding: 0.5vh 1.5vw; border-radius: 15px; font-size: 0.8rem; font-weight: 600; margin-bottom: 2vh;">UNESCO Site</div>
+        <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6;">A living medina where 1,000-year-old alleys echo with artisan workshops, rooftop terraces overlook souks, and history breathes through every stone.</p>
+      </div>
+      
+      <!-- Andalusian Music Card -->
+      <div style="background: var(--bg); border-radius: 20px; padding: 4vh 2vw; border: 1px solid var(--accent2-dim); transition: all 0.3s ease; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--accent2);"></div>
+        <div style="font-size: 3rem; margin-bottom: 2vh;">🎵</div>
+        <h3 style="font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--text); margin-bottom: 1.5vh;">Andalusian Music</h3>
+        <div style="display: inline-block; background: var(--accent3); color: var(--text); padding: 0.5vh 1.5vw; border-radius: 15px; font-size: 0.8rem; font-weight: 600; margin-bottom: 2vh;">Intangible Heritage</div>
+        <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6;">Medieval melodies carried by exiled Andalusians still enchant audiences with complex maqams and poetic traditions spanning eight centuries.</p>
+      </div>
+      
+      <!-- Handicraft Souks Card -->
+      <div style="background: var(--bg); border-radius: 20px; padding: 4vh 2vw; border: 1px solid var(--accent3-dim); transition: all 0.3s ease; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--accent3);"></div>
+        <div style="font-size: 3rem; margin-bottom: 2vh;">⚱️</div>
+        <h3 style="font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--text); margin-bottom: 1.5vh;">Handicraft Souks</h3>
+        <div style="display: inline-block; background: var(--accent1); color: var(--text); padding: 0.5vh 1.5vw; border-radius: 15px; font-size: 0.8rem; font-weight: 600; margin-bottom: 2vh;">Artisan Legacy</div>
+        <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6;">Potters, weavers, and metalworkers practice ancient crafts in labyrinthine souks—each piece telling stories of Berber, Arab, and Mediterranean fusion.</p>
+      </div>
+      
+      <!-- Traditional Hammams Card -->
+      <div style="background: var(--bg); border-radius: 20px; padding: 4vh 2vw; border: 1px solid var(--text2); transition: all 0.3s ease; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--text);"></div>
+        <div style="font-size: 3rem; margin-bottom: 2vh;">♨️</div>
+        <h3 style="font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--text); margin-bottom: 1.5vh;">Traditional Hammams</h3>
+        <div style="display: inline-block; background: var(--surface); color: var(--text); padding: 0.5vh 1.5vw; border-radius: 15px; font-size: 0.8rem; font-weight: 600; margin-bottom: 2vh;">Social Ritual</div>
+        <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6;">Ottoman-era bathhouses where steaming rituals cleanse body and spirit, surrounded by marble arches and zellij tilework masterpieces.</p>
+      </div>
+    </div>
+    
+    <!-- Badges Row -->
+    <div style="display: flex; justify-content: center; gap: 2vw; flex-wrap: wrap; margin-top: 2vh;">
+      <div style="background: var(--accent1); color: var(--text); padding: 1.5vh 3vw; border-radius: 25px; font-family: var(--sans); font-weight: 600; font-size: 0.9rem;">
+        <i class="fas fa-music" style="margin-right: 8px;"></i>Quarterly Festivals
+      </div>
+      <div style="background: var(--accent2); color: var(--bg); padding: 1.5vh 3vw; border-radius: 25px; font-family: var(--sans); font-weight: 600; font-size: 0.9rem;">
+        <i class="fas fa-calendar-alt" style="margin-right: 8px;"></i>Year-Round Events
+      </div>
+      <div style="background: var(--accent3); color: var(--text); padding: 1.5vh 3vw; border-radius: 25px; font-family: var(--sans); font-weight: 600; font-size: 0.9rem;">
+        <i class="fas fa-users" style="margin-right: 8px;"></i>Living Community
+      </div>
+      <div style="background: var(--surface); color: var(--text); padding: 1.5vh 3vw; border-radius: 25px; font-family: var(--sans); font-weight: 600; font-size: 0.9rem; border: 1px solid var(--accent1-dim);">
+        <i class="fas fa-hands" style="margin-right: 8px;"></i>Artisan Hands
+      </div>
+    </div>
+    
+    <!-- Arabesque Divider -->
+    <div style="margin-top: auto;">
+      <div style="height: 1px; background: linear-gradient(90deg, transparent, var(--accent2), var(--accent3), var(--accent1), transparent); position: relative;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg); padding: 0 20px;">
+          <i class="fas fa-star" style="color: var(--accent2); font-size: 1.2rem;"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">The Medina of Tunis isn't a museum – it's a living, breathing city within a city where artisans still practice centuries-old crafts. Listen for Andalusian melodies in narrow alleys, watch potters shape clay as their ancestors did, and experience authentic hammam rituals.</aside>
+  <aside class="notes">The Medina of Tunis isn't a museum – it's a living, breathing city within a city where artisans still practice centuries-old crafts. Listen for Andalusian melodies in narrow alleys, watch potters shape clay as their ancestors did, and experience authentic hammam rituals.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%); position: relative; z-index: 1;">
+  <!-- Desert Pattern Background -->
+  <div style="position: absolute; inset: 0; opacity: 0.05; background-image: 
+    radial-gradient(circle at 15% 85%, var(--accent2) 2px, transparent 2px),
+    radial-gradient(circle at 85% 15%, var(--accent2) 2px, transparent 2px),
+    radial-gradient(circle at 50% 50%, var(--accent2) 2px, transparent 2px); 
+    background-size: 100px 100px;"></div>
+  
+  <!-- Sand Dunes Animation -->
+  <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 40%; background: linear-gradient(180deg, transparent 0%, var(--accent2-dim) 100%);">
+    <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 150px; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23fac775" fill-opacity="0.1" d="M0,192L48,176C96,160,192,128,288,138.7C384,149,480,192,576,192C672,192,768,149,864,138.7C960,128,1056,149,1152,154.7C1248,160,1344,149,1392,144L1440,144L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') bottom repeat-x; background-size: cover; animation: dune 20s linear infinite;"></div>
+  </div>
+  
+  <style>
+    @keyframes dune {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-25%); }
+    }
+  </style>
+  
+  <div class="s" style="position: relative; width: 100%; height: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4vw; padding: 8vh 5vw;">
+    <!-- Left Column - Content -->
+    <div style="display: flex; flex-direction: column; justify-content: center; gap: 4vh; z-index: 1;">
+      <div>
+        <span style="font-family: var(--sans); font-size: 1rem; color: var(--accent2); text-transform: uppercase; letter-spacing: 2px;">Sahara</span>
+        <h2 style="font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); color: var(--text); margin: 1vh 0;">Desert Mystique</h2>
+        <div style="width: 50px; height: 2px; background: var(--accent2);"></div>
+      </div>
+      
+      <!-- Feature Rows -->
+      <div style="display: flex; flex-direction: column; gap: 2.5vh;">
+        <div style="display: flex; align-items: center; gap: 2vw; padding: 2.5vh 2vw; background: rgba(250, 199, 117, 0.1); border-radius: 12px; border-left: 4px solid var(--accent2);">
+          <i class="fas fa-solar-system" style="font-size: 2.5rem; color: var(--accent2); min-width: 50px;"></i>
+          <div>
+            <div style="color: var(--text); font-family: var(--sans); font-weight: 600; font-size: 1.1rem;">Grand Erg Oriental Dunes</div>
+            <div style="color: var(--text2); font-size: 0.9rem;">Sea of golden sand waves stretching to the horizon</div>
+          </div>
+        </div>
+        
+        <div style="display: flex; align-items: center; gap: 2vw; padding: 2.5vh 2vw; background: var(--surface); border-radius: 12px; border-left: 4px solid var(--accent1);">
+          <i class="fas fa-fortress" style="font-size: 2.5rem; color: var(--accent1); min-width: 50px;"></i>
+          <div>
+            <div style="color: var(--text); font-family: var(--sans); font-weight: 600; font-size: 1.1rem;">Ksar Ouled Soltane Fortress</div>
+            <div style="color: var(--text2); font-size: 0.9rem;">Ancient granary villages frozen in time</div>
+          </div>
+        </div>
+        
+        <div style="display: flex; align-items: center; gap: 2vw; padding: 2.5vh 2vw; background: var(--surface); border-radius: 12px; border-left: 4px solid var(--accent3);">
+          <i class="fas fa-horse" style="font-size: 2.5rem; color: var(--accent3); min-width: 50px;"></i>
+          <div>
+            <div style="color: var(--text); font-family: var(--sans); font-weight: 600; font-size: 1.1rem;">Camel Trekking Expeditions</div>
+            <div style="color: var(--text2); font-size: 0.9rem;">Caravan journeys like ancient Bedouins</div>
+          </div>
+        </div>
+        
+        <div style="display: flex; align-items: center; gap: 2vw; padding: 2.5vh 2vw; background: var(--surface); border-radius: 12px; border-left: 4px solid var(--text);">
+          <i class="fas fa-star" style="font-size: 2.5rem; color: var(--text); min-width: 50px;"></i>
+          <div>
+            <div style="color: var(--text); font-family: var(--sans); font-weight: 600; font-size: 1.1rem;">Stargazing Under Milky Way</div>
+            <div style="color: var(--text2); font-size: 0.9rem;">Unpolluted skies revealing cosmic wonders</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right Column - Visual -->
+    <div style="display: flex; align-items: center; justify-content: center; position: relative; z-index: 1;">
+      <div style="width: 100%; max-width: 450px; aspect-ratio: 1; position: relative;">
+        <!-- Central Quote -->
+        <div style="position: absolute; inset: 0; background: var(--surface); border-radius: 50%; border: 3px solid var(--accent2); display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 10vh; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+          <div style="font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--text); text-align: center; font-style: italic;">
+            "In the desert,<br>
+            you become<br>
+            <span style="color: var(--accent2);">timeless</span>"
+          </div>
+          <div style="color: var(--text2); font-size: 0.9rem; margin-top: 2vh;">- Bedouin Wisdom</div>
+        </div>
+        
+        <!-- Icon Circles Around -->
+        <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 60px; background: var(--accent1); border-radius: 50%; border: 3px solid var(--bg); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+          <i class="fas fa-sun" style="color: var(--bg); font-size: 1.5rem;"></i>
+        </div>
+        <div style="position: absolute; bottom: 0; left: -10px; width: 50px; height: 50px; background: var(--accent3); border-radius: 50%; border: 3px solid var(--bg); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+          <i class="fas fa-moon" style="color: var(--bg); font-size: 1.3rem;"></i>
+        </div>
+        <div style="position: absolute; top: 30%; right: -15px; width: 55px; height: 55px; background: var(--accent2); border-radius: 50%; border: 3px solid var(--bg); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+          <i class="fas fa-star" style="color: var(--bg); font-size: 1.4rem;"></i>
+        </div>
+        <div style="position: absolute; bottom: 20%; right: 20px; width: 45px; height: 45px; background: var(--text); border-radius: 50%; border: 3px solid var(--bg); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+          <i class="fas fa-camel" style="color: var(--bg); font-size: 1.2rem;"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Beyond the coast lies Tunisia's soul – the Sahara. Ride camels across dunes that shift like liquid gold, sleep in traditional Bedouin camps, and witness sunsets that paint the desert in fiery hues. At night, the clearest skies reveal our galaxy in breathtaking detail.</aside>
+  <aside class="notes">Beyond the coast lies Tunisia's soul – the Sahara. Ride camels across dunes that shift like liquid gold, sleep in traditional Bedouin camps, and witness sunsets that paint the desert in fiery hues. At night, the clearest skies reveal our galaxy in breathtaking detail.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <iframe style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="about:blank"></iframe>
+<section style="background: linear-gradient(135deg, var(--bg) 0%, #0a3a68 100%); position: relative; z-index: 1;">
+  <!-- Cuisine Pattern Background -->
+  <div style="position: absolute; inset: 0; opacity: 0.03; background-image: 
+    radial-gradient(circle at 25% 75%, var(--accent2) 1px, transparent 1px),
+    radial-gradient(circle at 75% 25%, var(--accent1) 1px, transparent 1px); 
+    background-size: 40px 40px;"></div>
+  
+  <div class="s" style="position: relative; width: 100%; height: 100%; padding: 8vh 5vw; display: flex; flex-direction: column; gap: 5vh;">
+    <!-- Header -->
+    <div style="text-align: center;">
+      <span style="font-family: var(--sans); font-size: 1rem; color: var(--accent2); text-transform: uppercase; letter-spacing: 2px;">Cuisine</span>
+      <h2 style="font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.5rem); color: var(--text); margin: 1vh 0;">Flavors of the Medina</h2>
+      <div style="width: 60px; height: 2px; background: var(--accent1); margin: 0 auto;"></div>
+    </div>
+    
+    <!-- Food Images Grid (simulated) -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2vw; max-width: 1000px; margin: 0 auto; width: 100%;">
+      <div style="aspect-ratio: 1; background: var(--surface); border-radius: 15px; border: 2px solid var(--accent1); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1vh;">
+        <div style="font-size: 4rem;">🍲</div>
+        <div style="color: var(--text); font-weight: 600; text-align: center;">Couscous</div>
+      </div>
+      <div style="aspect-ratio: 1; background: var(--surface); border-radius: 15px; border: 2px solid var(--accent2); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1vh;">
+        <div style="font-size: 4rem;">🍳</div>
+        <div style="color: var(--text); font-weight: 600; text-align: center;">Brik</div>
+      </div>
+      <div style="aspect-ratio: 1; background: var(--surface); border-radius: 15px; border: 2px solid var(--accent3); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1vh;">
+        <div style="font-size: 4rem;">🌶️</div>
+        <div style="color: var(--text); font-weight: 600; text-align: center;">Harissa</div>
+      </div>
+      <div style="aspect-ratio: 1; background: var(--surface); border-radius: 15px; border: 2px solid var(--text); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1vh;">
+        <div style="font-size: 4rem;">🍯</div>
+        <div style="color: var(--text); font-weight: 600; text-align: center;">Makroudh</div>
+      </div>
+    </div>
+    
+    <!-- Cards Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2.5vw; max-width: 1100px; margin: 0 auto; width: 100%;">
+      <!-- Couscous Card -->
+      <div style="background: var(--surface); border-radius: 20px; padding: 4vh 2vw; border: 1px solid var(--accent1-dim); transition: all 0.3s ease; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--accent1);"></div>
+        <div style="font-size: 3rem; margin-bottom: 2vh;">⭐</div>
+        <h3 style="font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--text); margin-bottom: 1.5vh;">Couscous</h3>
+        <div style="display: inline-block; background: var(--accent1); color: var(--text); padding: 0.5vh 1.5vw; border-radius: 15px; font-size: 0.8rem; font-weight: 600; margin-bottom: 2vh;">National Treasure</div>
+        <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6;">Steamed semolina pearls fluffy as clouds, crowned with tender meats, aromatic vegetables, and chickpeas in rich broth.</p>
+      </div>
+      
+      <!-- Brik Card -->
+      <div style="background: var(--surface); border-radius: 20px; padding: 4vh 2vw; border: 1px solid var(--accent2-dim); transition: all 0.3s ease; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--accent2);"></div>
+        <div style="font-size: 3rem; margin-bottom: 2vh;">🍳</div>
+        <h3 style="font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--text); margin-bottom: 1.5vh;">Brik</h3>
+        <div style="display: inline-block; background: var(--accent2); color: var(--bg); padding: 0.5vh 1.5vw; border-radius: 15px; font-size: 0.8rem; font-weight: 600; margin-bottom: 2vh;">Crispy Delight</div>
+        <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6;">Golden pastry triangles shatter delicately to reveal molten egg yolk and tuna—a textural revelation.</p>
+      </div>
+      
+      <!-- Harissa Card -->
+      <div style="background: var(--surface); border-radius: 20px; padding: 4vh 2vw; border: 1px solid var(--accent3-dim); transition: all 0.3s ease; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--accent3);"></div>
+        <div style="font-size: 3rem; margin-bottom: 2vh;">🌶️</div>
+        <h3 style="font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--text); margin-bottom: 1.5vh;">Harissa</h3>
+        <div style="display: inline-block; background: var(--accent3); color: var(--text); padding: 0.5vh 1.5vw; border-radius: 15px; font-size: 0.8rem; font-weight: 600; margin-bottom: 2vh;">Fiery Passion</div>
+        <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6;">Roasted chili paste with garlic and cumin ignites meals with authentic Tunisian soul and depth.</p>
+      </div>
+      
+      <!-- Makroudh Card -->
+      <div style="background: var(--surface); border-radius: 20px; padding: 4vh 2vw; border: 1px solid var(--text2); transition: all 0.3s ease; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--text);"></div>
+        <div style="font-size: 3rem; margin-bottom: 2vh;">🍯</div>
+        <h3 style="font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--text); margin-bottom: 1.5vh;">Makroudh</h3>
+        <div style="display: inline-block; background: var(--text); color: var(--bg); padding: 0.5vh 1.5vw; border-radius: 15px; font-size: 0.8rem; font-weight: 600; margin-bottom: 2vh;">Date Pastry</div>
+        <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6;">Semolina pillows stuffed with caramelized dates—sweet poetry in pastry form, dipped in orange blossom water.</p>
+      </div>
+    </div>
+    
+    <!-- Chips Row -->
+    <div style="display: flex; justify-content: center; gap: 1.5vw; flex-wrap: wrap; margin-top: 2vh;">
+      <div style="background: var(--accent1); color: var(--text); padding: 1.5vh 2.5vw; border-radius: 20px; font-family: var(--sans); font-weight: 600; font-size: 0.9rem;">
+        <i class="fas fa-coffee" style="margin-right: 8px;"></i>Mint Tea Culture
+      </div>
+      <div style="background: var(--accent2); color: var(--bg); padding: 1.5vh 2.5vw; border-radius: 20px; font-family: var(--sans); font-weight: 600; font-size: 0.9rem;">
+        <i class="fas fa-bread-slice" style="margin-right: 8px;"></i>Tabouna Bread
+      </div>
+      <div style="background: var(--accent3); color: var(--text); padding: 1.5vh 2.5vw; border-radius: 20px; font-family: var(--sans); font-weight: 600; font-size: 0.9rem;">
+        <i class="fas fa-cheese" style="margin-right: 8px;"></i>Traditional Mechouia
+      </div>
+      <div style="background: var(--surface); color: var(--text); padding: 1.5vh 2.5vw; border-radius: 20px; font-family: var(--sans); font-weight: 600; font-size: 0.9rem; border: 1px solid var(--accent1-dim);">
+        <i class="fas fa-blender" style="margin-right: 8px;"></i>Fresh Smoothies
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Tunisian cuisine tells stories through spices. Fluffy couscous forms the meal foundation, crispy brik pastries delight with runny eggs, and harissa adds fiery depth to everything. Don't miss makroudh – date-filled semolina pillows that melt in your mouth.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <iframe style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="about:blank"></iframe>
+<section style="background: linear-gradient(135deg, var(--bg) 0%, var(--bg2) 100%); position: relative; z-index: 1;">
+  <!-- Pattern Background -->
+  <div style="position: absolute; inset: 0; opacity: 0.04; background-image: 
+    radial-gradient(circle at 20% 30%, var(--accent2) 1px, transparent 1px),
+    radial-gradient(circle at 80% 70%, var(--accent3) 1px, transparent 1px),
+    radial-gradient(circle at 50% 80%, var(--accent1) 1px, transparent 1px); 
+    background-size: 50px 50px;"></div>
+  
+  <div class="s" style="position: relative; width: 100%; height: 100%; padding: 8vh 5vw; display: flex; flex-direction: column; gap: 5vh;">
+    <!-- Header -->
+    <div style="text-align: center;">
+      <span style="font-family: var(--sans); font-size: 1rem; color: var(--accent2); text-transform: uppercase; letter-spacing: 2px;">Experiences</span>
+      <h2 style="font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.5rem); color: var(--text); margin: 1vh 0;">Your Adventure Awaits</h2>
+      <div style="width: 60px; height: 2px; background: var(--accent1); margin: 0 auto;"></div>
+    </div>
+    
+    <!-- Stat Cards -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3vw; max-width: 1200px; margin: 0 auto; width: 100%;">
+      <!-- 7 Days -->
+      <div style="background: var(--surface); border-radius: 20px; padding: 4vh 2vw; border: 1px solid var(--accent1-dim); transition: all 0.3s ease; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--accent1);"></div>
+        <div style="font-family: var(--serif); font-size: clamp(3rem, 6vw, 4rem); color: var(--accent1); font-weight: bold;">7</div>
+        <div style="color: var(--text2); font-family: var(--sans); font-size: 1rem; margin-bottom: 1vh;">Days</div>
+        <h3 style="font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--text); margin-bottom: 2vh;">Culture & Coast</h3>
+        <div style="display: flex; flex-direction: column; gap: 1vh;">
+          <div style="display: flex; align-items: center; gap: 1vw;">
+            <i class="fas fa-landmark" style="color: var(--accent2); font-size: 0.9rem;"></i>
+            <span style="color: var(--text2); font-size: 0.9rem;">Carthage Ruins</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1vw;">
+            <i class="fas fa-umbrella-beach" style="color: var(--accent2); font-size: 0.9rem;"></i>
+            <span style="color: var(--text2); font-size: 0.9rem;">Hammamet Beaches</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1vw;">
+            <i class="fas fa-mosque" style="color: var(--accent2); font-size: 0.9rem;"></i>
+            <span style="color: var(--text2); font-size: 0.9rem;">Medina Wandering</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 10 Days -->
+      <div style="background: var(--surface); border-radius: 20px; padding: 4vh 2vw; border: 1px solid var(--accent2-dim); transition: all 0.3s ease; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--accent2);"></div>
+        <div style="font-family: var(--serif); font-size: clamp(3rem, 6vw, 4rem); color: var(--accent2); font-weight: bold;">10</div>
+        <div style="color: var(--text2); font-family: var(--sans); font-size: 1rem; margin-bottom: 1vh;">Days</div>
+        <h3 style="font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--text); margin-bottom: 2vh;">Desert Expedition</h3>
+        <div style="display: flex; flex-direction: column; gap: 1vh;">
+          <div style="display: flex; align-items: center; gap: 1vw;">
+            <i class="fas fa-camel" style="color: var(--accent3); font-size: 0.9rem;"></i>
+            <span style="color: var(--text2); font-size: 0.9rem;">Camel Trekking</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1vw;">
+            <i class="fas fa-sun" style="color: var(--accent3); font-size: 0.9rem;"></i>
+            <span style="color: var(--text2); font-size: 0.9rem;">Sahara Sunset</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1vw;">
+            <i class="fas fa-star" style="color: var(--accent3); font-size: 0.9rem;"></i>
+            <span style="color: var(--text2); font-size: 0.9rem;">Stargazing Nights</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 14 Days -->
+      <div style="background: var(--surface); border-radius: 20px; padding: 4vh 2vw; border: 1px solid var(--accent3-dim); transition: all 0.3s ease; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--accent3);"></div>
+        <div style="font-family: var(--serif); font-size: clamp(3rem, 6vw, 4rem); color: var(--accent3); font-weight: bold;">14</div>
+        <div style="color: var(--text2); font-family: var(--sans); font-size: 1rem; margin-bottom: 1vh;">Days</div>
+        <h3 style="font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--text); margin-bottom: 2vh;">Complete Immersion</h3>
+        <div style="display: flex; flex-direction: column; gap: 1vh;">
+          <div style="display: flex; align-items: center; gap: 1vw;">
+            <i class="fas fa-mountain" style="color: var(--accent1); font-size: 0.9rem;"></i>
+            <span style="color: var(--text2); font-size: 0.9rem;">Mountain Villages</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1vw;">
+            <i class="fas fa-fortress" style="color: var(--accent1); font-size: 0.9rem;"></i>
+            <span style="color: var(--text2); font-size: 0.9rem;">Ksour Valley</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1vw;">
+            <i class="fas fa-water" style="color: var(--accent1); font-size: 0.9rem;"></i>
+            <span style="color: var(--text2); font-size: 0.9rem;">Coastal Villages</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Progress Rings -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 3vw; max-width: 900px; margin: 0 auto; width: 100%;">
+      <div style="aspect-ratio: 1; position: relative; display: flex; align-items: center; justify-content: center;">
+        <svg style="position: absolute; width: 100%; height: 100%; transform: rotate(-90deg);">
+          <circle cx="50%" cy="50%" r="40%" fill="none" stroke="var(--surface)" stroke-width="8" stroke-linecap="round"/>
+          <circle cx="50%" cy="50%" r="40%" fill="none" stroke="var(--accent1)" stroke-width="8" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="100"/>
+        </svg>
+        <div style="text-align: center; z-index: 1;">
+          <div style="font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--accent1); font-weight: bold;">35%</div>
+          <div style="color: var(--text2); font-size: 0.9rem;">Culture</div>
+        </div>
+      </div>
+      <div style="aspect-ratio: 1; position: relative; display: flex; align-items: center; justify-content: center;">
+        <svg style="position: absolute; width: 100%; height: 100%; transform: rotate(-90deg);">
+          <circle cx="50%" cy="50%" r="40%" fill="none" stroke="var(--surface)" stroke-width="8" stroke-linecap="round"/>
+          <circle cx="50%" cy="50%" r="40%" fill="none" stroke="var(--accent2)" stroke-width="8" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="75"/>
+        </svg>
+        <div style="text-align: center; z-index: 1;">
+          <div style="font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--accent2); font-weight: bold;">45%</div>
+          <div style="color: var(--text2); font-size: 0.9rem;">Adventure</div>
+        </div>
+      </div>
+      <div style="aspect-ratio: 1; position: relative; display: flex; align-items: center; justify-content: center;">
+        <svg style="position: absolute; width: 100%; height: 100%; transform: rotate(-90deg);">
+          <circle cx="50%" cy="50%" r="40%" fill="none" stroke="var(--surface)" stroke-width="8" stroke-linecap="round"/>
+          <circle cx="50%" cy="50%" r="40%" fill="none" stroke="var(--accent3)" stroke-width="8" stroke-linecap="round" stroke-dasharray="251" stroke-dashoffset="150"/>
+        </svg>
+        <div style="text-align: center; z-index: 1;">
+          <div style="font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--accent3); font-weight: bold;">20%</div>
+          <div style="color: var(--text2); font-size: 0.9rem;">Relaxation</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Badges -->
+    <div style="display: flex; justify-content: center; gap: 2vw; flex-wrap: wrap; margin-top: auto;">
+      <div style="background: var(--accent1); color: var(--text); padding: 1.5vh 3vw; border-radius: 25px; font-family: var(--sans); font-weight: 600; font-size: 0.9rem;">
+        <i class="fas fa-calendar-alt" style="margin-right: 8px;"></i>Year-Round Festivals
+      </div>
+      <div style="background: var(--accent2); color: var(--bg); padding: 1.5vh 3vw; border-radius: 25px; font-family: var(--sans); font-weight: 600; font-size: 0.9rem;">
+        <i class="fas fa-film" style="margin-right: 8px;"></i>Film Festival (Oct)
+      </div>
+      <div style="background: var(--accent3); color: var(--text); padding: 1.5vh 3vw; border-radius: 25px; font-family: var(--sans); font-weight: 600; font-size: 0.9rem;">
+        <i class="fas fa-calendar-week" style="margin-right: 8px;"></i>Date Festival (Dec)
+      </div>
+      <div style="background: var(--surface); color: var(--text); padding: 1.5vh 3vw; border-radius: 25px; font-family: var(--sans); font-weight: 600; font-size: 0.9rem; border: 1px solid var(--accent1-dim);">
+        <i class="fas fa-music" style="margin-right: 8px;"></i>Music Festivals
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Whether you have a week or two weeks, Tunisia delivers transformative experiences. Our 7-day itinerary covers Carthage and coastal gems, the 10-day adds Sahara adventures, while the full immersion includes mountain villages and lesser-known ruins. Time your visit with film or date festivals for extra magic.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <iframe style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="about:blank"></iframe>
+<section style="background: linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%); position: relative; z-index: 1;">
+  <!-- Travel Pattern Background -->
+  <div style="position: absolute; inset: 0; opacity: 0.03; background-image: 
+    radial-gradient(circle at 15% 85%, var(--accent2) 2px, transparent 2px),
+    radial-gradient(circle at 85% 15%, var(--accent3) 2px, transparent 2px),
+    radial-gradient(circle at 30% 50%, var(--accent1) 2px, transparent 2px),
+    radial-gradient(circle at 70% 50%, var(--text) 2px, transparent 2px); 
+    background-size: 80px 80px;"></div>
+  
+  <div class="s" style="position: relative; width: 100%; height: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4vw; padding: 8vh 5vw;">
+    <!-- Left Column - Content -->
+    <div style="display: flex; flex-direction: column; justify-content: center; gap: 4vh; z-index: 1;">
+      <div>
+        <span style="font-family: var(--sans); font-size: 1rem; color: var(--accent2); text-transform: uppercase; letter-spacing: 2px;">Practical</span>
+        <h2 style="font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); color: var(--text); margin: 1vh 0;">Seamless Travel</h2>
+        <div style="width: 50px; height: 2px; background: var(--accent1);"></div>
+      </div>
+      
+      <!-- Icon List -->
+      <div style="display: flex; flex-direction: column; gap: 3vh;">
+        <div style="display: flex; align-items: flex-start; gap: 2vw; padding: 2vh 0;">
+          <div style="background: var(--accent3); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <i class="fas fa-plane" style="color: var(--bg); font-size: 1.8rem;"></i>
+          </div>
+          <div>
+            <div style="color: var(--text); font-family: var(--sans); font-weight: 600; font-size: 1.2rem; margin-bottom: 0.5vh;">Direct European Flights</div>
+            <div style="color: var(--text2); font-size: 0.95rem;">Tunisair, Lufthansa, Air France connect major European cities in 2-3 hours with multiple daily departures.</div>
+          </div>
+        </div>
+        
+        <div style="display: flex; align-items: flex-start; gap: 2vw; padding: 2vh 0;">
+          <div style="background: var(--accent2); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <i class="fas fa-passport" style="color: var(--bg); font-size: 1.8rem;"></i>
+          </div>
+          <div>
+            <div style="color: var(--text); font-family: var(--sans); font-weight: 600; font-size: 1.2rem; margin-bottom: 0.5vh;">Visa-Free for Many Nations</div>
+            <div style="color: var(--text2); font-size: 0.95rem;">EU citizens, US, Canadian, and UK travelers enjoy visa-free entry for up to 90 days—pack your bags, not paperwork.</div>
+          </div>
+        </div>
+        
+        <div style="display: flex; align-items: flex-start; gap: 2vw; padding: 2vh 0;">
+          <div style="background: var(--accent1); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <i class="fas fa-hotel" style="color: var(--text); font-size: 1.8rem;"></i>
+          </div>
+          <div>
+            <div style="color: var(--text); font-family: var(--sans); font-weight: 600; font-size: 1.2rem; margin-bottom: 0.5vh;">Affordable Luxury</div>
+            <div style="color: var(--text2); font-size: 0.95rem;">Five-star resorts, boutique hotels, and charming guesthouses offer exceptional value at prices 30-40% lower than comparable Mediterranean destinations.</div>
+          </div>
+        </div>
+        
+        <div style="display: flex; align-items: flex-start; gap: 2vw; padding: 2vh 0;">
+          <div style="background: var(--text); border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <i class="fas fa-comments" style="color: var(--bg); font-size: 1.8rem;"></i>
+          </div>
+          <div>
+            <div style="color: var(--text); font-family: var(--sans); font-weight: 600; font-size: 1.2rem; margin-bottom: 0.5vh;">English-Friendly Resorts</div>
+            <div style="color: var(--text2); font-size: 0.95rem;">Major tourist areas have excellent English proficiency; resorts and restaurants cater to international guests with multilingual staff.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right Column - Map Visual -->
+    <div style="display: flex; align-items: center; justify-content: center; position: relative; z-index: 1;">
+      <div style="width: 100%; max-width: 450px; aspect-ratio: 1; position: relative;">
+        <!-- Map Visualization -->
+        <div style="position: absolute; inset: 0; background: var(--bg2); border-radius: 20px; border: 2px solid var(--accent2); overflow: hidden;">
+          <!-- Europe -->
+          <div style="position: absolute; top: 10%; left: 30%; color: var(--accent3); font-size: 0.8rem; font-weight: bold;">EUROPE</div>
+          <div style="position: absolute; top: 15%; left: 25%; width: 60px; height: 40px; border: 1px solid var(--accent3); border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--text2);">Paris<br>Berlin<br>London</div>
+          
+          <!-- Flight Paths -->
+          <svg style="position: absolute; inset: 0;">
+            <path d="M 100 70 Q 200 50 300 70" stroke="var(--accent3)" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+            <path d="M 80 90 Q 200 60 320 90" stroke="var(--accent3)" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+            <path d="M 90 110 Q 200 70 310 110" stroke="var(--accent3)" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+          </svg>
+          
+          <!-- Tunisia -->
+          <div style="position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%);">
+            <div style="background: var(--accent1); padding: 2vh 4vw; border-radius: 10px; border: 2px solid var(--accent2); text-align: center;">
+              <div style="font-family: var(--serif); font-size: 1.2rem; color: var(--text); font-weight: bold;">TUNISIA</div>
+              <div style="color: var(--accent2); font-size: 0.8rem;">North Africa</div>
+            </div>
+          </div>
+          
+          <!-- Flight Info -->
+          <div style="position: absolute; top: 40%; right: 10%; background: var(--surface); padding: 1.5vh 2vw; border-radius: 10px; border: 1px solid var(--accent3-dim);">
+            <div style="font-size: 0.8rem; color: var(--text2);">Flight Times</div>
+            <div style="font-size: 0.9rem; color: var(--text);">Paris: 2h</div>
+            <div style="font-size: 0.9rem; color: var(--text);">London: 2.5h</div>
+            <div style="font-size: 0.9rem; color: var(--text);">Berlin: 3h</div>
+          </div>
+        </div>
+        
+        <!-- Feature Row -->
+        <div style="position: absolute; bottom: -80px; left: 0; right: 0; background: var(--accent2); padding: 2vh 2vw; border-radius: 15px; border: 1px solid var(--accent3);">
+          <div style="display: flex; align-items: center; gap: 1.5vw; color: var(--bg);">
+            <i class="fas fa-info-circle" style="font-size: 1.5rem;"></i>
+            <div>
+              <div style="font-weight: 600; font-size: 1rem;">Easy Access</div>
+              <div style="font-size: 0.85rem;">Modern airports, reliable transfers, and tourist-friendly infrastructure</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Getting to Tunisia is easier than you think – direct flights from major European cities, and many nationalities enjoy visa-free entry. Modern resorts offer international comforts while maintaining authentic charm, and prices remain remarkably reasonable compared to other Mediterranean destinations.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <iframe style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="about:blank"></iframe>
+<section style="background: linear-gradient(135deg, var(--bg) 0%, var(--bg2) 100%); position: relative; z-index: 1;">
+  <!-- Sustainability Pattern Background -->
+  <div style="position: absolute; inset: 0; opacity: 0.03; background-image: 
+    radial-gradient(circle at 20% 80%, var(--accent2) 1px, transparent 1px),
+    radial-gradient(circle at 80% 20%, var(--accent3) 1px, transparent 1px),
+    radial-gradient(circle at 40% 60%, var(--accent1) 1px, transparent 1px); 
+    background-size: 60px 60px;"></div>
+  
+  <div class="s" style="position: relative; width: 100%; height: 100%; padding: 8vh 5vw; display: flex; flex-direction: column; gap: 5vh;">
+    <!-- Header -->
+    <div style="text-align: center;">
+      <span style="font-family: var(--sans); font-size: 1rem; color: var(--accent2); text-transform: uppercase; letter-spacing: 2px;">Sustainable</span>
+      <h2 style="font-family: var(--serif); font-size: clamp(2rem, 5vw, 3.5rem); color: var(--text); margin: 1vh 0;">Responsible Tourism</h2>
+      <div style="width: 60px; height: 2px; background: var(--accent1); margin: 0 auto;"></div>
+    </div>
+    
+    <!-- Cards Grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3vw; max-width: 1200px; margin: 0 auto; width: 100%;">
+      <!-- Eco-Lodges -->
+      <div style="background: var(--surface); border-radius: 20px; padding: 4vh 2vw; border: 1px solid var(--accent3-dim); transition: all 0.3s ease; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--accent3);"></div>
+        <div style="font-size: 3rem; margin-bottom: 2vh;">🏕️</div>
+        <h3 style="font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--text); margin-bottom: 1.5vh;">Eco-Lodges</h3>
+        <div style="display: inline-block; background: var(--accent3); color: var(--text); padding: 0.5vh 1.5vw; border-radius: 15px; font-size: 0.8rem; font-weight: 600; margin-bottom: 2vh;">Djebel Chambi</div>
+        <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6;">Solar-powered accommodations nestled in national parks, designed to minimize environmental impact while maximizing stargazing opportunities.</p>
+      </div>
+      
+      <!-- Community Tourism -->
+      <div style="background: var(--surface); border-radius: 20px; padding: 4vh 2vw; border: 1px solid var(--accent2-dim); transition: all 0.3s ease; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--accent2);"></div>
+        <div style="font-size: 3rem; margin-bottom: 2vh;">👨‍👩‍👧‍👦</div>
+        <h3 style="font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--text); margin-bottom: 1.5vh;">Community-Based Tourism</h3>
+        <div style="display: inline-block; background: var(--accent2); color: var(--bg); padding: 0.5vh 1.5vw; border-radius: 15px; font-size: 0.8rem; font-weight: 600; margin-bottom: 2vh;">Local Benefits</div>
+        <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6;">Homestays and local guides ensure tourism revenue supports families directly while offering authentic cultural exchange experiences.</p>
+      </div>
+      
+      <!-- Medina Heritage -->
+      <div style="background: var(--surface); border-radius: 20px; padding: 4vh 2vw; border: 1px solid var(--accent1-dim); transition: all 0.3s ease; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--accent1);"></div>
+        <div style="font-size: 3rem; margin-bottom: 2vh;">🏛️</div>
+        <h3 style="font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--text); margin-bottom: 1.5vh;">Preserving Medina Heritage</h3>
+        <div style="display: inline-block; background: var(--accent1); color: var(--text); padding: 0.5vh 1.5vw; border-radius: 15px; font-size: 0.8rem; font-weight: 600; margin-bottom: 2vh;">Conservation</div>
+        <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6;">Restoration projects maintain historic architecture while adaptive reuse creates sustainable economic opportunities for residents.</p>
+      </div>
+      
+      <!-- Marine Conservation -->
+      <div style="background: var(--surface); border-radius: 20px; padding: 4vh 2vw; border: 1px solid var(--text2); transition: all 0.3s ease; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--text);"></div>
+        <div style="font-size: 3rem; margin-bottom: 2vh;">🐠</div>
+        <h3 style="font-family: var(--serif); font-size: clamp(1.3rem, 2.5vw, 1.8rem); color: var(--text); margin-bottom: 1.5vh;">Marine Conservation</h3>
+        <div style="display: inline-block; background: var(--text); color: var(--bg); padding: 0.5vh 1.5vw; border-radius: 15px; font-size: 0.8rem; font-weight: 600; margin-bottom: 2vh;">Ocean Protection</div>
+        <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6;">Coral reef monitoring, sustainable fishing practices, and beach cleanup initiatives protect Tunisia's rich marine biodiversity.</p>
+      </div>
+    </div>
+    
+    <!-- Badges Row -->
+    <div style="display: flex; justify-content: center; gap: 2vw; flex-wrap: wrap; margin-top: 2vh;">
+      <div style="background: var(--accent1); color: var(--text); padding: 1.5vh 3vw; border-radius: 25px; font-family: var(--sans); font-weight: 600; font-size: 0.9rem;">
+        <i class="fas fa-leaf" style="margin-right: 8px;"></i>Green Certifications
+      </div>
+      <div style="background: var(--accent2); color: var(--bg); padding: 1.5vh 3vw; border-radius: 25px; font-family: var(--sans); font-weight: 600; font-size: 0.9rem;">
+        <i class="fas fa-hands-helping" style="margin-right: 8px;"></i>Community First
+      </div>
+      <div style="background: var(--accent3); color: var(--text); padding: 1.5vh 3vw; border-radius: 25px; font-family: var(--sans); font-weight: 600; font-size: 0.9rem;">
+        <i class="fas fa-monument" style="margin-right: 8px;"></i>Heritage Protection
+      </div>
+      <div style="background: var(--surface); color: var(--text); padding: 1.5vh 3vw; border-radius: 25px; font-family: var(--sans); font-weight: 600; font-size: 0.9rem; border: 1px solid var(--accent2-dim);">
+        <i class="fas fa-turtle" style="margin-right: 8px;"></i>Wildlife Preservation
+      </div>
+    </div>
+    
+    <!-- Divider -->
+    <div style="margin-top: auto;">
+      <div style="height: 1px; background: linear-gradient(90deg, transparent, var(--accent3), var(--accent2), var(--accent1), transparent); position: relative;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg); padding: 0 20px;">
+          <i class="fas fa-seedling" style="color: var(--accent2); font-size: 1.2rem;"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Tunisia increasingly focuses on sustainable travel. New eco-lodges minimize environmental impact in protected areas, community projects ensure tourism benefits local families, and conservation efforts protect both ancient sites and fragile marine ecosystems. Your visit helps preserve Tunisia's treasures.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <iframe style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;" src="about:blank"></iframe>
+<section style="background: linear-gradient(135deg, var(--bg) 0%, #0a2a4a 100%); position: relative; overflow: hidden; z-index: 1;">
+  <!-- Arabesque Pattern Overlay -->
+  <div style="position: absolute; inset: 0; opacity: 0.06; background-image: 
+    radial-gradient(circle at 20% 30%, var(--accent2) 2px, transparent 2px),
+    radial-gradient(circle at 80% 70%, var(--accent2) 2px, transparent 2px),
+    radial-gradient(circle at 40% 10%, var(--accent3) 2px, transparent 2px),
+    radial-gradient(circle at 60% 90%, var(--accent3) 2px, transparent 2px),
+    radial-gradient(circle at 10% 50%, var(--accent1) 2px, transparent 2px),
+    radial-gradient(circle at 90% 50%, var(--accent1) 2px, transparent 2px); 
+    background-size: 60px 60px;"></div>
+  
+  <!-- Floating Ornaments -->
+  <div style="position: absolute; top: 10vh; left: 8vw; width: 100px; height: 100px; opacity: 0.15;">
+    <div style="width: 100%; height: 100%; border: 2px solid var(--accent2); border-radius: 50%; position: relative;">
+      <div style="position: absolute; inset: 15px; border: 1px solid var(--accent2); border-radius: 50%;"></div>
+      <div style="position: absolute; inset: 30px; border: 1px solid var(--accent2); border-radius: 50%;"></div>
+    </div>
+  </div>
+  <div style="position: absolute; bottom: 15vh; right: 10vw; width: 80px; height: 80px; opacity: 0.1;">
+    <div style="width: 100%; height: 100%; border: 2px solid var(--accent3); transform: rotate(45deg); position: relative;">
+      <div style="position: absolute; inset: 10px; border: 1px solid var(--accent3);"></div>
+    </div>
+  </div>
+  <div style="position: absolute; top: 50vh; right: 20vw; width: 60px; height: 60px; opacity: 0.12;">
+    <div style="width: 100%; height: 100%; border: 2px solid var(--accent1); border-radius: 50%; position: relative;">
+      <div style="position: absolute; inset: 10px; border: 1px solid var(--accent1); border-radius: 50%;"></div>
+    </div>
+  </div>
+  
+  <div class="s cx" style="position: relative; z-index: 1; width: 100%; height: 100%; flex-direction: column; gap: 4vh; padding: 8vh 5vw;">
+    <!-- Main Content -->
+    <h1 style="font-family: var(--serif); font-size: clamp(3rem, 8vw, 6rem); color: var(--text); text-align: center; margin: 0; text-shadow: 0 2px 15px rgba(0,0,0,0.4);">
+      Answer the Call of Tunisia
+    </h1>
+    
+    <div style="width: 100px; height: 3px; background: var(--accent2); margin: 2vh 0;"></div>
+    
+    <h2 style="font-family: var(--sans); font-size: clamp(1.5rem, 3vw, 2.5rem); color: var(--text2); text-align: center; font-weight: 300; margin: 0; max-width: 800px;">
+      Your Journey Begins at tunisia.tn
+    </h2>
+    
+    <!-- Key Points -->
+    <div style="display: flex; flex-direction: column; gap: 2.5vh; margin-top: 4vh; align-items: center;">
+      <div style="background: rgba(226, 75, 74, 0.2); padding: 2vh 5vw; border-radius: 50px; border: 1px solid var(--accent1-dim); backdrop-filter: blur(5px);">
+        <span style="color: var(--accent2); font-family: var(--sans); font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 500;">
+          <i class="fas fa-star" style="margin-right: 10px;"></i>
+          Authentic Experiences Await
+        </span>
+      </div>
+      <div style="background: rgba(250, 199, 117, 0.15); padding: 2vh 5vw; border-radius: 50px; border: 1px solid var(--accent2-dim); backdrop-filter: blur(5px);">
+        <span style="color: var(--text); font-family: var(--sans); font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 500;">
+          <i class="fas fa-hand-holding-heart" style="margin-right: 10px;"></i>
+          Warm Tunisian Hospitality
+        </span>
+      </div>
+      <div style="background: rgba(55, 138, 221, 0.2); padding: 2vh 5vw; border-radius: 50px; border: 1px solid var(--accent3-dim); backdrop-filter: blur(5px);">
+        <span style="color: var(--accent3); font-family: var(--sans); font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 500;">
+          <i class="fas fa-calendar-check" style="margin-right: 10px;"></i>
+          Book Your Adventure Today
+        </span>
+      </div>
+    </div>
+    
+    <!-- Call to Action Button -->
+    <div style="margin-top: 5vh; position: relative;">
+      <a href="https://www.tunisia.tn" target="_blank" style="display: inline-block; background: var(--accent2); color: var(--bg); padding: 2.5vh 8vw; border-radius: 50px; font-family: var(--sans); font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 600; text-decoration: none; box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: all 0.3s ease; border: 2px solid var(--accent2-dim);">
+        <i class="fas fa-globe" style="margin-right: 10px;"></i>
+        Visit tunisia.tn
+      </a>
+    </div>
+    
+    <!-- Contact Info -->
+    <div style="margin-top: 3vh; text-align: center;">
+      <div style="color: var(--text2); font-family: var(--sans); font-size: 1rem;">
+        <i class="fas fa-phone" style="margin-right: 8px; color: var(--accent1);"></i> +216 71 000 000
+      </div>
+      <div style="color: var(--text2); font-family: var(--sans); font-size: 1rem; margin-top: 1vh;">
+        <i class="fas fa-envelope" style="margin-right: 8px; color: var(--accent3);"></i> info@tunisia.tn
+      </div>
+    </div>
+    
+    <!-- Social Icons -->
+    <div style="display: flex; gap: 2vw; margin-top: auto; justify-content: center;">
+      <div style="width: 50px; height: 50px; background: var(--accent1); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+        <i class="fab fa-facebook-f" style="color: var(--text); font-size: 1.2rem;"></i>
+      </div>
+      <div style="width: 50px; height: 50px; background: var(--accent2); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+        <i class="fab fa-instagram" style="color: var(--bg); font-size: 1.2rem;"></i>
+      </div>
+      <div style="width: 50px; height: 50px; background: var(--accent3); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+        <i class="fab fa-twitter" style="color: var(--text); font-size: 1.2rem;"></i>
+      </div>
+      <div style="width: 50px; height: 50px; background: var(--text); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
+        <i class="fab fa-youtube" style="color: var(--bg); font-size: 1.2rem;"></i>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Tunisia isn't just a destination – it's a feeling. It's the warmth of mint tea offered by strangers, the thrill of discovering hidden ruins, and the peace of desert solitude. Come write your own Tunisian story. Visit tunisia.tn to start planning your unforgettable journey.</aside>
+</section>
+  </div>
+
+<script>
+(function(){
+  const wraps = document.querySelectorAll('.slide-wrap');
+  const sections = document.querySelectorAll('.slide-wrap > section');
+  const total = wraps.length;
+  const counter = document.getElementById('slide-counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  // IntersectionObserver: mark the visible slide-wrap as .active (triggers CSS animations)
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        wraps.forEach(w => w.classList.remove('active'));
+        e.target.classList.add('active');
+        current = Array.from(wraps).indexOf(e.target);
+        if (counter) counter.textContent = (current+1) + ' / ' + total;
+        if (progress) progress.style.width = ((current+1)/total*100) + '%';
+      }
+    });
+  }, { threshold: 0.5 });
+  wraps.forEach(w => obs.observe(w));
+
+  // Activate first slide immediately
+  if (wraps[0]) wraps[0].classList.add('active');
+  if (counter) counter.textContent = '1 / ' + total;
+  if (progress) progress.style.width = (1/total*100) + '%';
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      if (current < total - 1) wraps[current + 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (current > 0) wraps[current - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      wraps[0].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      wraps[total - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'f' || e.key === 'F11') {
+      e.preventDefault();
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>

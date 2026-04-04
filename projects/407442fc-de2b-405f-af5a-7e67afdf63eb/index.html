@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ProjectForge - Turn your idea into a fully functional project in minutes — no coding required.">
+    <title>ProjectForge | Build Anything from Zero</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header" id="header">
+        <nav class="nav" aria-label="Main navigation">
+            <div class="nav__container">
+                <a href="#" class="nav__logo" aria-label="ProjectForge Home">
+                    <svg class="nav__logo-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="url(#logo-gradient)"/>
+                        <path d="M10 16L14 12L18 16L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10 20L14 16L18 20L22 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+                        <defs>
+                            <linearGradient id="logo-gradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#A855F7"/>
+                                <stop offset="1" stop-color="#7C3AED"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span class="nav__logo-text">ProjectForge</span>
+                </a>
+                
+                <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span class="nav__toggle-bar"></span>
+                    <span class="nav__toggle-bar"></span>
+                    <span class="nav__toggle-bar"></span>
+                </button>
+
+                <ul class="nav__menu" id="nav-menu">
+                    <li class="nav__item">
+                        <a href="#how-it-works" class="nav__link">How It Works</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#features" class="nav__link">Features</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#cta" class="nav__link">Pricing</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#cta" class="nav__link nav__link--cta">Get Started</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="hero">
+            <div class="hero__container">
+                <div class="hero__content">
+                    <div class="hero__badge">
+                        <span class="hero__badge-dot"></span>
+                        Now in Beta — Try Free
+                    </div>
+                    <h1 class="hero__title">
+                        Turn your idea into a <span class="hero__title-accent">fully functional project</span> in minutes
+                    </h1>
+                    <p class="hero__subtitle">
+                        No coding required. Describe what you want to build and watch ProjectForge generate a production-ready codebase instantly.
+                    </p>
+                    <div class="hero__actions">
+                        <a href="#cta" class="btn btn--primary">
+                            Try It Free
+                            <svg class="btn__icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <a href="#how-it-works" class="btn btn--secondary">
+                            <svg class="btn__icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M10.6667 4.66667L13.3333 8L10.6667 11.3333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 13.3333H3.33333C2.97971 13.3333 2.64057 13.1935 2.39052 12.9434C2.14048 12.6934 2 12.3542 2 12V4C2 3.64579 2.14048 3.30664 2.39052 3.0566C2.64057 2.80655 2.97971 2.66667 3.33333 2.66667H8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            View Demo
+                        </a>
+                    </div>
+                    <div class="hero__stats">
+                        <div class="hero__stat">
+                            <span class="hero__stat-value">10K+</span>
+                            <span class="hero__stat-label">Projects Generated</span>
+                        </div>
+                        <div class="hero__stat-divider"></div>
+                        <div class="hero__stat">
+                            <span class="hero__stat-value">50+</span>
+                            <span class="hero__stat-label">Tech Stacks</span>
+                        </div>
+                        <div class="hero__stat-divider"></div>
+                        <div class="hero__stat">
+                            <span class="hero__stat-value">4.9/5</span>
+                            <span class="hero__stat-label">User Rating</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero__visual">
+                    <div class="terminal">
+                        <div class="terminal__header">
+                            <div class="terminal__buttons">
+                                <span class="terminal__button terminal__button--close"></span>
+                                <span class="terminal__button terminal__button--minimize"></span>
+                                <span class="terminal__button terminal__button--maximize"></span>
+                            </div>
+                            <div class="terminal__title">ProjectForge CLI</div>
+                        </div>
+                        <div class="terminal__body">
+                            <div class="terminal__line terminal__line--prompt">
+                                <span class="terminal__prompt">$</span>
+                                <span class="terminal__command">projectforge init "my-ecommerce-store"</span>
+                            </div>
+                            <div class="terminal__line terminal__line--output">
+                                <span class="terminal__text">Initializing ProjectForge...</span>
+                            </div>
+                            <div class="terminal__line terminal__line--output">
+                                <span class="terminal__text">✓ Analyzing requirements: e-commerce store for handmade jewelry</span>
+                            </div>
+                            <div class="terminal__line terminal__line--output">
+                                <span class="terminal__text">✓ Generating project structure...</span>
+                            </div>
+                            <div class="terminal__line terminal__line--output">
+                                <span class="terminal__text">✓ Creating React components...</span>
+                            </div>
+                            <div class="terminal__line terminal__line--output">
+                                <span class="terminal__text">✓ Setting up database schema...</span>
+                            </div>
+                            <div class="terminal__line terminal__line--output">
+                                <span class="terminal__text">✓ Generating API endpoints...</span>
+                            </div>
+                            <div class="terminal__line terminal__line--output terminal__line--success">
+                                <span class="terminal__text">✓ Project ready in 2.3s</span>
+                            </div>
+                            <div class="terminal__line terminal__line--prompt">
+                                <span class="terminal__prompt">$</span>
+                                <span class="terminal__command">cd my-ecommerce-store && npm run dev</span>
+                            </div>
+                            <div class="terminal__line terminal__line--output terminal__line--running">
+                                <span class="terminal__text terminal__text--pulse">▲ Server running at http://localhost:3000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero__visual-decoration"></div>
+                </div>
+            </div>
+            <div class="hero__bg-gradient"></div>
+        </section>
+
+        <section class="how-it-works" id="how-it-works">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">How It Works</span>
+                    <h2 class="section-title">From idea to project in <span class="section-title-accent">three steps</span></h2>
+                    <p class="section-subtitle">No technical expertise required. Just describe what you want and let ProjectForge handle the rest.</p>
+                </div>
+                
+                <div class="steps">
+                    <div class="step">
+                        <div class="step__number">01</div>
+                        <div class="step__icon">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                                <path d="M5.25 7H22.75M5.25 14H16.625M5.25 21H12.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="step__title">Describe Your Vision</h3>
+                        <p class="step__description">Tell us what you want to build in plain language. "An e-commerce store for handmade jewelry with product galleries and checkout."</p>
+                        <div class="step__connector"></div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step__number">02</div>
+                        <div class="step__icon">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                                <path d="M14 3.5L14 24.5M3.5 14L24.5 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M7 7L21 21M21 7L7 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+                            </svg>
+                        </div>
+                        <h3 class="step__title">AI Does the Heavy Lifting</h3>
+                        <p class="step__description">Our AI analyzes your requirements and generates a complete project structure, codebase, database schema, and UI components.</p>
+                        <div class="step__connector"></div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="step__number">03</div>
+                        <div class="step__icon">
+                            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+                                <path d="M4.66667 14L11.6667 21L23.3333 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="step__title">Download & Deploy</h3>
+                        <p class="step__description">Get a production-ready project instantly. Download the code or deploy directly to your preferred hosting platform.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-tag">Features</span>
+                    <h2 class="section-title">Everything you need to <span class="section-title-accent">build faster</span></h2>
+                    <p class="section-subtitle">Powerful features designed for developers and non-developers alike.</p>
+                </div>
+                
+                <div class="features__grid">
+                    <div class="feature-card">
+                        <div class="feature-card__icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M13 10V3L4 14H11V21L20 10H13Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-card__title">Instant Generation</h3>
+                        <p class="feature-card__description">Go from idea to working code in under 3 minutes. No more staring at blank files.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-card__icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                                <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                                <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                                <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-card__title">Multiple Tech Stacks</h3>
+                        <p class="feature-card__description">Generate projects in React, Next.js, Vue, Node.js, Python, and 40+ more technologies.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-card__icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 20H21M3 12H21M3 4H15L21 10V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V4C3 3.46957 3.21071 2.96086 3.58579 2.58579C3.96086 2.21071 4.46957 2 5 2H13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-card__title">Customizable Templates</h3>
+                        <p class="feature-card__description">Start with pre-built templates and tweak every aspect to match your specific requirements.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-card__icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-card__title">Export Ready</h3>
+                        <p class="feature-card__description">Download as ZIP or deploy directly to Vercel, Netlify, AWS, or any hosting platform.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta" id="cta">
+            <div class="section-container">
+                <div class="cta__content">
+                    <h2 class="cta__title">Stop starting from scratch.<br><span class="cta__title-accent">Start building.</span></h2>
+                    <p class="cta__subtitle">Join thousands of developers and creators who ship faster with ProjectForge.</p>
+                    <div class="cta__actions">
+                        <a href="#" class="btn btn--primary btn--large">
+                            Try It Free Now
+                            <svg class="btn__icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M4.5 10H15.5M15.5 10L10.5 5M15.5 10L10.5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <span class="cta__note">No credit card required</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="section-container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <a href="#" class="footer__logo">
+                        <svg class="footer__logo-icon" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="32" height="32" rx="8" fill="url(#footer-logo-gradient)"/>
+                            <path d="M10 16L14 12L18 16L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M10 20L14 16L18 20L22 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+                            <defs>
+                                <linearGradient id="footer-logo-gradient" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#A855F7"/>
+                                    <stop offset="1" stop-color="#7C3AED"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span>ProjectForge</span>
+                    </a>
+                    <p class="footer__tagline">Build anything from zero.</p>
+                </div>
+                <div class="footer__links">
+                    <div class="footer__column">
+                        <h4 class="footer__heading">Product</h4>
+                        <ul class="footer__list">
+                            <li><a href="#">Features</a></li>
+                            <li><a href="#">Pricing</a></li>
+                            <li><a href="#">Documentation</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__column">
+                        <h4 class="footer__heading">Company</h4>
+                        <ul class="footer__list">
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Careers</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer__column">
+                        <h4 class="footer__heading">Legal</h4>
+                        <ul class="footer__list">
+                            <li><a href="#">Privacy</a></li>
+                            <li><a href="#">Terms</a></li>
+                            <li><a href="#">Security</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">&copy; 2024 ProjectForge. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

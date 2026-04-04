@@ -1,0 +1,100 @@
+/* Animations & Interaction States */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+@keyframes glowEffect {
+  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+/* History item arrival animation */
+.history-item {
+  animation: fadeIn 0.3s ease-out backwards;
+}
+
+.history-item:nth-child(1) { animation-delay: 0.05s; }
+.history-item:nth-child(2) { animation-delay: 0.1s; }
+.history-item:nth-child(3) { animation-delay: 0.15s; }
+
+/* Calculator card entry */
+.calculator-card {
+  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Interaction feedback */
+.btn:active {
+  animation: pulse 0.1s ease-in-out forwards;
+}
+
+.btn-primary:active {
+  animation: pulse 0.1s ease-in-out forwards, glowEffect 0.4s ease-out;
+}
+
+/* Screen transition */
+.current-operand {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.current-operand.updating {
+  opacity: 0.7;
+  transform: scale(0.98);
+}
+
+/* History panel transitions (Desktop) */
+@media (min-width: 769px) {
+  .history-panel[hidden] {
+    display: none;
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  .history-panel:not([hidden]) {
+    display: flex;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* History panel overlay (Mobile) */
+@media (max-width: 768px) {
+  .history-panel {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    visibility: hidden;
+  }
+
+  .history-panel:not([hidden]) {
+    visibility: visible;
+    transform: translateX(-340px) translateY(-50%); /* Slide into view */
+  }
+}
+
+/* Loading skeleton for history (if needed) */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0.02) 25%, 
+    rgba(255, 255, 255, 0.05) 50%, 
+    rgba(255, 255, 255, 0.02) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}

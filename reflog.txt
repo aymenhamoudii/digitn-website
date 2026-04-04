@@ -1,0 +1,81 @@
+e2eae8f HEAD@{0}: reset: moving to e2eae8f
+f35f77b HEAD@{1}: reset: moving to f35f77b
+e2eae8f HEAD@{2}: commit: style(builder): change palette suggest to inline dropdown instead of modal
+f35f77b HEAD@{3}: reset: moving to HEAD~1
+abfc7d8 HEAD@{4}: commit: style(builder): amplify visual impact of color palette selectors
+f35f77b HEAD@{5}: commit: fix(builder): initialize palette from presentationJson for ready projects
+2ebc9b3 HEAD@{6}: commit: fix(builder): fix presentation element selection and move color palette under chat
+b5dc1d7 HEAD@{7}: commit: feat(ui): add AI palette suggestions modal to presentation studio
+63487fb HEAD@{8}: commit: fix(api): use proper typed properties for palette suggestion endpoint
+82beb47 HEAD@{9}: commit: feat(api): add Next.js proxy route for palette suggestions
+c566270 HEAD@{10}: commit: feat(bridge): add AI palette suggestion endpoint
+ddc05d9 HEAD@{11}: commit: docs: clarify backend save requirement in palette design
+8316826 HEAD@{12}: commit: docs: add design spec for palette suggestions feature
+4dd6dbb HEAD@{13}: commit: feat: add presentation maker design spec
+c2967d6 HEAD@{14}: commit: fix(terminal): properly export listProjectMessages and persist terminal chat history on refresh
+46e76de HEAD@{15}: commit: fix(terminal): fetch builder chat history from API on page load
+e8ac19e HEAD@{16}: commit: style: simplify and clarify AI terminal messages and plan styles
+744e4be HEAD@{17}: commit: fix(terminal): preserve message formatting on page refresh
+8c7dfad HEAD@{18}: commit: fix(terminal): improve status messages and remove duplicate initialization text
+739210d HEAD@{19}: commit: fix(ui): add initializing workspace message to terminal on page load even when ready
+2c6dfae HEAD@{20}: commit: feat(limits): use dynamic limits from database instead of hardcoded config
+99563da HEAD@{21}: commit: feat(admin): add comprehensive admin panel with user, model, and limits management
+df2f83c HEAD@{22}: commit: fix(api): handle missing project names in analyze route
+57b8316 HEAD@{23}: commit: fix(ui): update dashboard quota lookup and project links
+1c027bf HEAD@{24}: commit: fix(bridge): use npx.cmd on Windows for builder.js
+5644999 HEAD@{25}: commit: fix(bridge): use npx.cmd on Windows for spawning claude-code
+34c3696 HEAD@{26}: commit: fix(bridge): syntax error in builder-chat
+c071cb0 HEAD@{27}: commit: fix(build): correct imports in Terminal page and Sidebar
+53a04d7 HEAD@{28}: commit: fix(db): correct project status enum constraint in migration
+72f2efd HEAD@{29}: commit: refactor(builder): switch form submission to analyze endpoint and remove old chat
+cd978f6 HEAD@{30}: commit: feat(pages): add terminal page
+2ca5c0b HEAD@{31}: commit: fix(builder): fix terminal chat iframe caching and CSS variables
+b4efadf HEAD@{32}: commit: feat(ui): add TerminalChat component with iframe preview
+59712bb HEAD@{33}: commit: fix: incorrect Supabase client import in questionnaire page
+b38f0a6 HEAD@{34}: commit: feat(pages): add questionnaire page
+3ded7ad HEAD@{35}: commit: fix: QuestionnaireForm options checked attribute and custom option for multi-select
+712e351 HEAD@{36}: commit: feat(ui): add QuestionnaireForm component
+5712ef7 HEAD@{37}: commit: fix: resolve builder API issues
+1feeb1c HEAD@{38}: commit: feat(api): add nextjs builder chat proxy route
+e00c92a HEAD@{39}: commit: feat(bridge): add post-build chat proxy route with history saving
+c465d8a HEAD@{40}: commit: refactor(bridge): update build start to handle answers
+e0a152a HEAD@{41}: commit: fix(api): add strict status check to builder start route
+238877a HEAD@{42}: commit: refactor(api): update start route to handle questionnaire answers and consume quota
+0bdbcb0 HEAD@{43}: commit: feat(api): add builder analysis proxy route with idempotency and active limit check
+fe24f61 HEAD@{44}: commit: feat(bridge): add project analysis route
+1fe5bff HEAD@{45}: commit: feat(db): add schema migration for builder redesign
+3d63886 HEAD@{46}: commit: docs(plan): fix sse buffer parsing literal string
+ef9467c HEAD@{47}: commit: docs(plan): finalize builder redesign plan addressing final review feedback
+f2d8c00 HEAD@{48}: commit: docs(plan): update builder instant terminal redesign plan with review feedback
+4d6fda0 HEAD@{49}: commit: docs(plan): add builder instant terminal redesign implementation plan
+4452f25 HEAD@{50}: commit: docs(spec): add complete Builder instant terminal redesign specification
+a8342fe HEAD@{51}: commit: docs: add comprehensive CLAUDE.md with full project context, architecture, data flows, and setup guide
+a4ffb44 HEAD@{52}: commit: fix: signup confirmation, body background, add auth buttons to landing page
+05dedad HEAD@{53}: commit: fix: add LanguageSwitcher, fix RLS, fix dark mode colors, add missing env vars
+3f1cbad HEAD@{54}: commit: fix: resolve 5 audit issues (builder bug, payment stubs, webhook handlers, settings page)
+310df28 HEAD@{55}: commit: docs(plan): mark task 1 of phase 6 as completed
+ae80694 HEAD@{56}: commit: feat(bridge): add auto-cleanup cron for 15-minute project expiry
+f7d9d61 HEAD@{57}: reset: moving to HEAD~1
+a8faf72 HEAD@{58}: commit: feat(bridge): add auto-cleanup cron for 15-minute project expiry
+f7d9d61 HEAD@{59}: commit: feat: add admin dashboard for 9Router configuration
+9e4dabe HEAD@{60}: commit: feat: secure admin routes via middleware
+202ec9a HEAD@{61}: commit (amend): feat: add settings page with payment options
+7beacd4 HEAD@{62}: commit: feat: add settings page with payment options
+4fde82a HEAD@{63}: commit: feat: add stripe and konnect webhook handlers
+de27535 HEAD@{64}: commit: feat: add checkout api for stripe and konnect
+6e58729 HEAD@{65}: commit: feat: add stripe and konnect payment utilities
+312b506 HEAD@{66}: commit: feat: add builder and projects list pages
+a52be9b HEAD@{67}: commit: feat(bridge): add build trigger and stream endpoints
+55daa2b HEAD@{68}: commit: feat: add builder UI components
+080bbdd HEAD@{69}: commit: feat(bridge): add claude code execution engine and zipper
+40092c9 HEAD@{70}: commit: feat: add Next.js builder trigger and stream proxies
+8d474f7 HEAD@{71}: commit: feat: complete Phase 1 - platform shell, routes, middleware, auth, PM2 configs
+5af01d0 HEAD@{72}: commit: feat: add platform config
+61ce087 HEAD@{73}: commit: feat: add complete DB schema
+48d4bd8 HEAD@{74}: commit: feat: switch from static export to SSR, add next-intl config
+1f95171 HEAD@{75}: commit: feat: add SaaS platform dependencies
+8f6fa34 HEAD@{76}: commit: Improve SEO for better Google ranking and visibility
+829f764 HEAD@{77}: commit: Remove Google verification HTML file (DNS verified)
+44c95a1 HEAD@{78}: commit: Add Google Search Console verification file
+054d977 HEAD@{79}: commit: Update sitemap and robots.txt for digitn.tech domain
+9cd6472 HEAD@{80}: commit (initial): Initial commit - DIGITN website ready for deployment

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>World War I: The Great War That Changed History</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Exo+2:wght@300;400;500;600;700&family=Share+Tech+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+    --bg: #5C1F0F;
+    --bg2: #6E2A14;
+    --surface: #7A3319;
+    --surface2: #6c3527;
+    --border: rgba(255,255,255,.07);
+    --border-md: rgba(255,255,255,.11);
+    --accent1: #C2714F;
+    --accent1-dim: rgba(194, 113, 79, 0.18);
+    --accent2: #04342C;
+    --accent2-dim: rgba(4, 52, 44, 0.18);
+    --accent3: #E8B89A;
+    --accent3-dim: rgba(232, 184, 154, 0.18);
+    --t1: #FAF0EA;
+    --t2: rgba(250, 240, 234, 0.6);
+    --t3: rgba(250, 240, 234, 0.3);
+    --mono: 'Share Tech Mono', monospace;
+    --sans: 'Exo 2', system-ui, sans-serif;
+    --serif: 'Orbitron', sans-serif;
+  }
+    
+  /* ─── Reset ─── */
+  ::-webkit-scrollbar{display:none}
+  *{scrollbar-width:none;-ms-overflow-style:none;box-sizing:border-box;margin:0;padding:0}
+  html{scroll-snap-type:y mandatory;overflow-y:scroll;overflow-x:hidden;scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  /* ─── Slide ─── */
+  section{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;padding:clamp(28px,5vh,56px) clamp(32px,5vw,72px);display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+  /* ─── Typography ─── */
+  h1,h2,h3{font-family:var(--serif);color:var(--t1);text-transform:none;letter-spacing:-.02em;font-weight:800;margin:0}
+  h1{font-size:clamp(1.8rem,4vw,3rem);line-height:1.1}
+  h2{font-size:clamp(1.3rem,2.8vw,2rem);margin-bottom:.4em}
+  h3{font-size:clamp(.8rem,1.2vw,1rem);font-weight:700}
+  p,li{font-size:clamp(.7rem,1vw,.88rem);line-height:1.65;color:var(--t2)}
+  ul{list-style:none;padding:0}
+  ul li{padding:4px 0}
+
+  /* ─── Stagger animation — triggers when slide scrolls into view ─── */
+  .s{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
+  .s>*{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+  section.active .s>*{opacity:1;transform:translateY(0)}
+  section.active .s>*:nth-child(1){transition-delay:.03s}
+  section.active .s>*:nth-child(2){transition-delay:.09s}
+  section.active .s>*:nth-child(3){transition-delay:.15s}
+  section.active .s>*:nth-child(4){transition-delay:.21s}
+  section.active .s>*:nth-child(5){transition-delay:.27s}
+  section.active .s>*:nth-child(6){transition-delay:.33s}
+  section.active .s>*:nth-child(7){transition-delay:.39s}
+  section.active .s>*:nth-child(8){transition-delay:.45s}
+  .cx{justify-content:center;align-items:center;text-align:center}
+
+  /* ─── Section Label ─── */
+  .sl{font-family:var(--mono);font-size:clamp(.55rem,.8vw,.72rem);color:var(--accent1);text-transform:uppercase;letter-spacing:3px;margin-bottom:4px;opacity:.9}
+
+  /* ─── Divider ─── */
+  .dv{height:1px;width:120px;background:linear-gradient(90deg,transparent,var(--border-md),transparent);margin:18px auto;border:none}
+
+  /* ─── Card ─── */
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:clamp(12px,1.5vw,20px);position:relative;overflow:hidden}
+  .card-accent1{border-top:2px solid var(--accent1)}
+  .card-accent2{border-top:2px solid var(--accent2)}
+  .card-accent3{border-top:2px solid var(--accent3)}
+
+  /* ─── Metric Pill ─── */
+  .metric{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:var(--surface2);border:1px solid var(--border-md);border-radius:40px;margin:3px}
+  .metric .num{font-family:var(--serif);font-size:clamp(.9rem,1.4vw,1.2rem);font-weight:900;color:var(--t1)}
+  .metric .lab{font-size:clamp(.5rem,.7vw,.62rem);color:var(--t2);text-transform:uppercase;letter-spacing:1px}
+
+  /* ─── Icon Circle ─── */
+  .ic{width:clamp(32px,3.5vw,44px);height:clamp(32px,3.5vw,44px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:clamp(12px,1.3vw,16px);flex-shrink:0;line-height:1}
+  .ic.accent1{background:var(--accent1-dim);color:var(--accent1)}
+  .ic.accent2{background:var(--accent2-dim);color:var(--accent2)}
+  .ic.accent3{background:var(--accent3-dim);color:var(--accent3)}
+
+  /* ─── Hover Card ─── */
+  .hcard{padding:clamp(14px,1.5vw,20px) clamp(10px,1.2vw,16px);border-radius:12px;background:var(--surface);border:1px solid var(--border);text-align:center;transition:border-color .25s,background .25s;display:flex;flex-direction:column;align-items:center;overflow:hidden}
+  .hcard:hover{background:var(--surface2);border-color:var(--border-md)}
+  .hcard .iw{width:clamp(36px,4vw,52px);height:clamp(36px,4vw,52px);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;background:var(--bg2);font-size:clamp(14px,1.5vw,20px);flex-shrink:0;line-height:1}
+
+  /* ─── Badge ─── */
+  .badge{display:inline-block;padding:4px 12px;border-radius:6px;font-family:var(--mono);font-size:clamp(.5rem,.7vw,.62rem);text-transform:uppercase;letter-spacing:1px;font-weight:600}
+  .badge.accent1{background:var(--accent1-dim);color:var(--accent1)}
+  .badge.accent2{background:var(--accent2-dim);color:var(--accent2)}
+  .badge.accent3{background:var(--accent3-dim);color:var(--accent3)}
+
+  /* ─── Chip ─── */
+  .chip{display:inline-block;padding:4px 12px;border-radius:20px;font-size:clamp(.5rem,.7vw,.62rem);font-family:var(--mono);border:1px solid;margin:2px}
+  .chip.accent1{border-color:var(--accent1);color:var(--accent1)}
+  .chip.accent2{border-color:var(--accent2);color:var(--accent2)}
+  .chip.accent3{border-color:var(--accent3);color:var(--accent3)}
+
+  /* ─── Feature Row ─── */
+  .frow{display:flex;align-items:center;gap:clamp(10px,1.2vw,16px);padding:clamp(8px,1vh,14px) 0;border-bottom:1px solid var(--border)}
+  .frow:last-child{border-bottom:none}
+  .frow .fi{flex-shrink:0}
+
+  /* ─── Ring Chart ─── */
+  .ring{position:relative;width:clamp(72px,8vw,110px);height:clamp(72px,8vw,110px);display:inline-flex;align-items:center;justify-content:center;flex-direction:column;flex-shrink:0}
+  .ring svg{position:absolute;width:100%;height:100%;transform:rotate(-90deg)}
+  .ring .rbg{fill:none;stroke:var(--surface2);stroke-width:6}
+  .ring .rprog{fill:none;stroke:var(--accent1);stroke-width:6;stroke-linecap:round}
+  .ring .rval{font-family:var(--serif);font-size:clamp(.9rem,1.5vw,1.4rem);font-weight:900;color:var(--t1);z-index:1}
+  .ring .rlab{font-family:var(--mono);font-size:clamp(.4rem,.6vw,.5rem);color:var(--t2);text-transform:uppercase;letter-spacing:1px;z-index:1}
+
+  /* ─── Timeline ─── */
+  .timeline{display:flex;gap:0;padding:16px 0}
+  .tl-item{flex:1;position:relative;padding:18px 12px 0;text-align:center}
+  .tl-item::before{content:'';position:absolute;top:8px;left:0;right:0;height:2px;background:var(--border-md)}
+  .tl-item:first-child::before{left:50%}
+  .tl-item:last-child::before{right:50%}
+  .tl-dot{width:12px;height:12px;border-radius:50%;margin:0 auto 10px;position:relative;z-index:1}
+  .tl-dot.accent1{background:var(--accent1);box-shadow:0 0 0 4px var(--accent1-dim)}
+  .tl-dot.accent2{background:var(--accent2);box-shadow:0 0 0 4px var(--accent2-dim)}
+  .tl-dot.accent3{background:var(--accent3);box-shadow:0 0 0 4px var(--accent3-dim)}
+
+  /* ─── Grids ─── */
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,1.2vw,16px);margin-top:12px}
+  .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(10px,1.2vw,16px);margin-top:12px}
+  .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1vw,14px);margin-top:12px}
+  .g5{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(6px,.8vw,12px);margin-top:12px}
+
+  /* ─── Image Box ─── */
+  .img-box{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;border-radius:12px;overflow:hidden;background:var(--surface);border:1px solid var(--border)}
+  .img-box img{max-width:100%;max-height:100%;object-fit:contain}
+
+  /* ─── Big Numbers ─── */
+  .bignum{font-family:var(--serif);font-size:clamp(2rem,4vw,3.5rem);font-weight:900;color:var(--t1);line-height:1}
+
+  /* ─── Header Meta ─── */
+  .hm{display:flex;gap:clamp(16px,2.5vw,30px);font-size:clamp(.55rem,.8vw,.7rem);color:var(--t3);font-weight:500}
+  .hm span{display:flex;align-items:center;gap:8px}
+
+  /* ─── Left border accents ─── */
+  .line-accent1{border-left:2px solid var(--accent1)}
+  .line-accent2{border-left:2px solid var(--accent2)}
+  .line-accent3{border-left:2px solid var(--accent3)}
+
+  /* ─── Flex utilities ─── */
+  .flex{display:flex}
+  .flex-col{flex-direction:column}
+  .flex-wrap{display:flex;flex-wrap:wrap}
+  .flex-center{display:flex;justify-content:center;align-items:center}
+  .flex-1{flex:1;min-height:0}
+  .gap-sm{gap:8px}
+  .gap-md{gap:16px}
+  .gap-lg{gap:24px}
+  .mt-auto{margin-top:auto}
+  .mb-sm{margin-bottom:8px}
+  .mb-md{margin-bottom:16px}
+
+  /* ─── Slide counter ─── */
+  #slide-counter{position:fixed;bottom:20px;right:24px;font-family:var(--mono);font-size:12px;color:var(--t3);background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:5px 12px;z-index:100;pointer-events:none}
+
+  /* ─── Progress bar ─── */
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--accent1);z-index:100;transition:width .3s ease}
+
+  </style>
+</head>
+<body>
+  <div id="progress" style="width:0"></div>
+  <div id="slide-counter">1 / 7</div>
+  <section>
+  <div class="s cx">
+    <div style="display:flex;gap:12px;margin-bottom:20px">
+      <div class="ic accent1"><i class="fas fa-globe"></i></div>
+      <div class="ic accent2"><i class="fas fa-shield-alt"></i></div>
+      <div class="ic accent3"><i class="fas fa-landmark"></i></div>
+    </div>
+    <h1 style="margin-bottom:12px">World War I</h1>
+    <p style="font-size:1.1em;color:var(--t2);margin-bottom:24px">The Great War That Reshaped the Modern World (1914-1918)</p>
+    <hr class="dv" style="margin-bottom:24px">
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+      <span class="badge accent1">1914–1918</span>
+      <span class="badge accent2">28 Nations</span>
+      <span class="badge accent3">17 Million Lives Lost</span>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">
+    Welcome the audience and set the stage for understanding one of history's most transformative conflicts. Emphasize that WWI fundamentally changed global politics, technology, and society in ways still felt today.
+  </aside>
+  <aside class="notes">Welcome the audience and set the stage for understanding one of history's most transformative conflicts. Emphasize that WWI fundamentally changed global politics, technology, and society in ways still felt today.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Overview</p>
+    <h2>What We'll Explore Today</h2>
+    <div class="g4" style="flex:1;min-height:0;margin-top:20px">
+      <div class="hcard">
+        <div class="iw"><div class="ic accent1"><i class="fas fa-fire"></i></div></div>
+        <h3>Causes of the War</h3>
+        <p>The tensions and events that ignited global conflict</p>
+      </div>
+      <div class="hcard">
+        <div class="iw"><div class="ic accent2"><i class="fas fa-handshake"></i></div></div>
+        <h3>Powers & Alliances</h3>
+        <p>The nations and coalitions that shaped the war</p>
+      </div>
+      <div class="hcard">
+        <div class="iw"><div class="ic accent3"><i class="fas fa-chess"></i></div></div>
+        <h3>Key Battles</h3>
+        <p>Turning points that determined the outcome</p>
+      </div>
+      <div class="hcard">
+        <div class="iw"><div class="ic accent1"><i class="fas fa-globe-americas"></i></div></div>
+        <h3>Lasting Impact</h3>
+        <p>How WWI reshaped the modern world</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">
+    Provide a roadmap of the presentation. Explain that understanding WWI requires examining the complex web of alliances, nationalism, and events that led to global conflict.
+  </aside>
+  <aside class="notes">Provide a roadmap of the presentation. Explain that understanding WWI requires examining the complex web of alliances, nationalism, and events that led to global conflict.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Origins</p>
+    <h2>The Spark That Ignited a World</h2>
+    <div style="display:flex;gap:22px;flex:1;min-height:0;margin-top:16px">
+      <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+        <div class="card card-accent1">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <div class="ic accent1" style="width:36px;height:36px"><i class="fas fa-crosshairs"></i></div>
+            <h3>The Assassination</h3>
+          </div>
+          <p>Archduke Franz Ferdinand killed in Sarajevo, June 28, 1914</p>
+          <span class="chip accent1" style="margin-top:8px">Trigger Event</span>
+        </div>
+        <div class="card card-accent2">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <div class="ic accent2" style="width:36px;height:36px"><i class="fas fa-flag"></i></div>
+            <h3>Rise of Nationalism</h3>
+          </div>
+          <p>Fierce national pride and competition across European empires</p>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+        <div class="card card-accent3">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <div class="ic accent3" style="width:36px;height:36px"><i class="fas fa-link"></i></div>
+            <h3>Alliance Systems</h3>
+          </div>
+          <p>Triple Entente vs Central Powers created a web of obligations</p>
+          <div style="display:flex;gap:6px;margin-top:8px">
+            <span class="badge accent2">Entente</span>
+            <span class="badge accent1">Central</span>
+          </div>
+        </div>
+        <div class="card card-accent1">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+            <div class="ic accent1" style="width:36px;height:36px"><i class="fas fa-bomb"></i></div>
+            <h3>Arms Race</h3>
+          </div>
+          <p>Military buildup and imperial competition fueled tensions</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">
+    Discuss how the assassination was merely the trigger for deeper tensions. Explain MAIN causes: Militarism, Alliances, Imperialism, and Nationalism.
+  </aside>
+  <aside class="notes">Discuss how the assassination was merely the trigger for deeper tensions. Explain MAIN causes: Militarism, Alliances, Imperialism, and Nationalism.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">The War</p>
+    <h2>Trench Warfare: A New Kind of Hell</h2>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin:16px 0">
+      <div class="metric"><span class="num">440</span><span class="lab">Miles of Trenches</span></div>
+      <div class="metric"><span class="num">1M+</span><span class="lab">Somme Casualties</span></div>
+      <div class="metric"><span class="num">4</span><span class="lab">Years of Stalemate</span></div>
+    </div>
+    <div style="flex:1;min-height:0;display:flex;flex-direction:column;gap:12px">
+      <div class="frow">
+        <div class="fi"><div class="ic accent1"><i class="fas fa-map-marked-alt"></i></div></div>
+        <div><h3>Western Front</h3><p>Stretched from Belgium to Switzerland, defining the war's deadly stalemate</p></div>
+      </div>
+      <div class="frow">
+        <div class="fi"><div class="ic accent2"><i class="fas fa-skull-crossbones"></i></div></div>
+        <div><h3>Brutal Conditions</h3><p>Soldiers endured mud, disease, rats, and constant shelling for months</p></div>
+      </div>
+      <div class="frow">
+        <div class="fi"><div class="ic accent3"><i class="fas fa-radiation"></i></div></div>
+        <div><h3>New Weapons</h3><p>Machine guns, poison gas, tanks, and aircraft transformed warfare forever</p></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">
+    Paint a vivid picture of trench warfare conditions. Emphasize the psychological and physical toll on soldiers. This was industrial warfare on an unprecedented scale.
+  </aside>
+  <aside class="notes">Paint a vivid picture of trench warfare conditions. Emphasize the psychological and physical toll on soldiers. This was industrial warfare on an unprecedented scale.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Impact</p>
+    <h2>The Staggering Human Cost</h2>
+    <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:24px 0">
+      <div class="metric"><span class="num" style="font-size:1.8em;color:var(--accent1)">17M</span><span class="lab">Total Deaths</span></div>
+      <div class="metric"><span class="num" style="font-size:1.8em;color:var(--accent3)">20M</span><span class="lab">Wounded</span></div>
+      <div class="metric"><span class="num" style="font-size:1.8em;color:var(--accent2)">4</span><span class="lab">Empires Collapsed</span></div>
+      <div class="metric"><span class="num" style="font-size:1.8em;color:var(--accent1)">40</span><span class="lab">New Nations</span></div>
+    </div>
+    <hr class="dv">
+    <div style="display:flex;gap:20px;justify-content:center;margin-top:24px">
+      <div class="ring">
+        <svg viewBox="0 0 120 120">
+          <circle class="rbg" cx="60" cy="60" r="52"/>
+          <circle class="rprog" cx="60" cy="60" r="52" stroke-dasharray="327" stroke-dashoffset="65"/>
+        </svg>
+        <div class="rval">80%</div>
+        <div class="rlab">European Men Mobilized</div>
+      </div>
+      <div class="ring">
+        <svg viewBox="0 0 120 120">
+          <circle class="rbg" cx="60" cy="60" r="52"/>
+          <circle class="rprog" cx="60" cy="60" r="52" stroke-dasharray="327" stroke-dashoffset="130"/>
+        </svg>
+        <div class="rval">60%</div>
+        <div class="rlab">Families Affected</div>
+      </div>
+      <div class="ring">
+        <svg viewBox="0 0 120 120">
+          <circle class="rbg" cx="60" cy="60" r="52"/>
+          <circle class="rprog" cx="60" cy="60" r="52" stroke-dasharray="327" stroke-dashoffset="229"/>
+        </svg>
+        <div class="rval">30%</div>
+        <div class="rlab">Soldiers KIA or MIA</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">
+    Let these numbers resonate with the audience. Compare casualties to populations they understand. Emphasize that nearly every family in participating nations was affected.
+  </aside>
+  <aside class="notes">Let these numbers resonate with the audience. Compare casualties to populations they understand. Emphasize that nearly every family in participating nations was affected.</aside>
+</section>
+  <section>
+  <div class="s">
+    <p class="sl">Aftermath</p>
+    <h2>From War to New World Order</h2>
+    <div class="timeline" style="margin-top:32px">
+      <div class="tl-item">
+        <div class="tl-dot accent1"></div>
+        <span class="badge accent1" style="margin-bottom:8px">Nov 1918</span>
+        <h3>Armistice Signed</h3>
+        <p>Fighting ends on the 11th hour of the 11th day</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot accent2"></div>
+        <span class="badge accent2" style="margin-bottom:8px">June 1919</span>
+        <h3>Treaty of Versailles</h3>
+        <p>Harsh terms imposed on Germany</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot accent3"></div>
+        <span class="badge accent3" style="margin-bottom:8px">1920</span>
+        <h3>League of Nations</h3>
+        <p>First attempt at global peacekeeping</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot accent1"></div>
+        <span class="badge accent1" style="margin-bottom:8px">1939</span>
+        <h3>Seeds of WWII</h3>
+        <p>Resentment leads to another global conflict</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:center;margin-top:28px">
+      <span class="chip accent1">German Reparations</span>
+      <span class="chip accent2">New Borders</span>
+      <span class="chip accent3">Colonial Changes</span>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">
+    Explain how the war's end created conditions for future conflict. The Treaty of Versailles' punitive measures against Germany would fuel resentment leading to WWII.
+  </aside>
+  <aside class="notes">Explain how the war's end created conditions for future conflict. The Treaty of Versailles' punitive measures against Germany would fuel resentment leading to WWII.</aside>
+</section>
+  <section>
+  <div class="s cx">
+    <p class="sl">Legacy</p>
+    <div style="display:flex;gap:12px;margin-bottom:20px">
+      <div class="ic accent1"><i class="fas fa-dove"></i></div>
+      <div class="ic accent2"><i class="fas fa-book"></i></div>
+      <div class="ic accent3"><i class="fas fa-lightbulb"></i></div>
+    </div>
+    <h2 style="margin-bottom:16px">Lessons from History</h2>
+    <hr class="dv" style="margin:20px auto;width:60%">
+    <blockquote style="font-family:var(--serif);font-size:1.3em;font-style:italic;color:var(--t1);max-width:700px;line-height:1.6;margin:20px 0">
+      "Those who cannot remember the past are condemned to repeat it."
+    </blockquote>
+    <p style="color:var(--t2);margin-bottom:24px">— George Santayana</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:16px">
+      <span class="badge accent1"><i class="fas fa-handshake" style="margin-right:6px"></i>Diplomacy Matters</span>
+      <span class="badge accent2"><i class="fas fa-users" style="margin-right:6px"></i>Understanding Others</span>
+      <span class="badge accent3"><i class="fas fa-peace" style="margin-right:6px"></i>Value of Peace</span>
+    </div>
+    <p style="color:var(--t2);margin-top:28px;font-size:0.85em;max-width:600px">WWI ended the old world order forever. The sacrifices of that generation remind us of the importance of building a more peaceful future.</p>
+  </div>
+  <aside class="notes" style="display:none">
+    Conclude by connecting WWI to today. Inspire students to see history as a teacher. The sacrifices of that generation remind us of the importance of diplomacy, understanding, and peace.
+  </aside>
+  <aside class="notes">Conclude by connecting WWI to today. Inspire students to see history as a teacher. The sacrifices of that generation remind us of the importance of diplomacy, understanding, and peace.</aside>
+</section>
+
+<script>
+(function(){
+  const sections = document.querySelectorAll('section');
+  const total = sections.length;
+  const counter = document.getElementById('slide-counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  // IntersectionObserver: mark the visible slide as .active (triggers CSS animations)
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        sections.forEach(s => s.classList.remove('active'));
+        e.target.classList.add('active');
+        current = Array.from(sections).indexOf(e.target);
+        if (counter) counter.textContent = (current+1) + ' / ' + total;
+        if (progress) progress.style.width = ((current+1)/total*100) + '%';
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s => obs.observe(s));
+
+  // Activate first slide immediately
+  if (sections[0]) sections[0].classList.add('active');
+  if (counter) counter.textContent = '1 / ' + total;
+  if (progress) progress.style.width = (1/total*100) + '%';
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      if (current < total - 1) sections[current + 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (current > 0) sections[current - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      sections[0].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      sections[total - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'f' || e.key === 'F11') {
+      e.preventDefault();
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>

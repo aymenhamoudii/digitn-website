@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Future of Smart AI</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+    --bg: #26215C;
+    --bg2: #3C3489;
+    --surface: #534AB7;
+    --surface2: #3c376c;
+    --border: rgba(255, 255, 255, .07);
+    --border-md: rgba(255, 255, 255, .11);
+    --accent1: #5DCAA5;
+    --accent1-dim: rgba(93, 202, 165, 0.18);
+    --accent2: #FAC775;
+    --accent2-dim: rgba(250, 199, 117, 0.18);
+    --accent3: #A9C4D8;
+    --accent3-dim: rgba(169, 196, 216, 0.18);
+    --t1: #F1EFE8;
+    --t2: #B4B2A9;
+    --t3: rgba(241, 239, 232, 0.3);
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+    --serif: 'Playfair Display', serif;
+  }
+    
+  ::-webkit-scrollbar { display: none }
+  * { scrollbar-width: none; -ms-overflow-style: none; box-sizing: border-box; }
+  html, body { overflow: hidden; margin: 0; padding: 0 }
+
+  .reveal { font-family: var(--sans); color: var(--t1); background: var(--bg) }
+  .reveal .slides { text-align: left }
+  .reveal .slides section { padding: 48px 68px; height: 100%; display: flex; flex-direction: column }
+  .reveal h1, .reveal h2, .reveal h3 { font-family: var(--serif); color: var(--t1); text-transform: none; letter-spacing: -.02em; font-weight: 800; margin: 0 }
+  .reveal h1 { font-size: 2.8em; line-height: 1.1 }
+  .reveal h2 { font-size: 1.85em; margin-bottom: 8px }
+  .reveal h3 { font-size: 1em; font-weight: 700 }
+  .reveal p, .reveal li { font-size: .74em; line-height: 1.7; color: var(--t2); margin: 0 }
+  .reveal ul { list-style: none; padding: 0; margin: 0 }
+  .reveal ul li { padding: 5px 0 }
+  .reveal .slide-number { font-family: var(--mono); font-size: 12px; color: var(--t3); background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 5px 12px; right: 28px; bottom: 28px }
+  .reveal .controls { color: var(--accent1); opacity: .3 }
+  .reveal .progress span { background: var(--accent1) }
+
+  /* Animation */
+  .s > * { opacity: 0; transform: translateY(16px); transition: all .45s cubic-bezier(.4, 0, .2, 1) }
+  section.present .s > * { opacity: 1; transform: translateY(0) }
+  section.present .s > *:nth-child(1) { transition-delay: .04s }
+  section.present .s > *:nth-child(2) { transition-delay: .10s }
+  section.present .s > *:nth-child(3) { transition-delay: .16s }
+  section.present .s > *:nth-child(4) { transition-delay: .22s }
+  section.present .s > *:nth-child(5) { transition-delay: .28s }
+  section.present .s > *:nth-child(6) { transition-delay: .34s }
+  section.present .s > *:nth-child(7) { transition-delay: .40s }
+  section.present .s > *:nth-child(8) { transition-delay: .46s }
+  section.present .s > *:nth-child(9) { transition-delay: .52s }
+  section.present .s > *:nth-child(10) { transition-delay: .58s }
+  .s { height: 100%; display: flex; flex-direction: column }
+  .cx { justify-content: center; align-items: center; text-align: center }
+
+  /* Section Label */
+  .sl { font-family: var(--mono); font-size: .48em; color: var(--accent1); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 6px; opacity: .9 }
+
+  /* Divider */
+  .dv { height: 1px; width: 120px; background: linear-gradient(90deg, transparent, var(--border-md), transparent); margin: 18px auto; border: none }
+
+  /* Card */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 22px; position: relative }
+  .card-accent1 { border-top: 2px solid var(--accent1) }
+  .card-accent2 { border-top: 2px solid var(--accent2) }
+  .card-accent3 { border-top: 2px solid var(--accent3) }
+
+  /* Metric Pill */
+  .metric { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; background: var(--surface2); border: 1px solid var(--border-md); border-radius: 40px; margin: 4px }
+  .metric .num { font-family: var(--serif); font-size: 1.25em; font-weight: 900; color: var(--t1) }
+  .metric .lab { font-size: .52em; color: var(--t2); text-transform: uppercase; letter-spacing: 1px }
+
+  /* Icon Circle */
+  .ic { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; line-height: 1 }
+  .ic.accent1 { background: var(--accent1-dim); color: var(--accent1) }
+  .ic.accent2 { background: var(--accent2-dim); color: var(--accent2) }
+  .ic.accent3 { background: var(--accent3-dim); color: var(--accent3) }
+
+  /* Hover Card */
+  .hcard { padding: 22px 18px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); text-align: center; transition: border-color .25s, background .25s; display: flex; flex-direction: column; align-items: center }
+  .hcard:hover { background: var(--surface2); border-color: var(--border-md) }
+  .hcard .iw { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; background: var(--bg2) }
+
+  /* Badge */
+  .badge { display: inline-block; padding: 4px 12px; border-radius: 6px; font-family: var(--mono); font-size: .42em; text-transform: uppercase; letter-spacing: 1px; font-weight: 600 }
+  .badge.accent1 { background: var(--accent1-dim); color: var(--accent1) }
+  .badge.accent2 { background: var(--accent2-dim); color: var(--accent2) }
+  .badge.accent3 { background: var(--accent3-dim); color: var(--accent3) }
+
+  /* Chip */
+  .chip { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: .48em; font-family: var(--mono); border: 1px solid; margin: 3px }
+  .chip.accent1 { border-color: var(--accent1); color: var(--accent1) }
+  .chip.accent2 { border-color: var(--accent2); color: var(--accent2) }
+  .chip.accent3 { border-color: var(--accent3); color: var(--accent3) }
+
+  /* Feature Row */
+  .frow { display: flex; align-items: center; gap: 18px; padding: 14px 0; border-bottom: 1px solid var(--border) }
+  .frow:last-child { border-bottom: none }
+  .frow .fi { flex-shrink: 0 }
+
+  /* Ring Chart */
+  .ring { position: relative; width: 120px; height: 120px; display: inline-flex; align-items: center; justify-content: center; flex-direction: column }
+  .ring svg { position: absolute; width: 100%; height: 100%; transform: rotate(-90deg) }
+  .ring .rbg { fill: none; stroke: var(--surface2); stroke-width: 8 }
+  .ring .rprog { fill: none; stroke: var(--accent1); stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset .6s ease }
+  .ring .rval { font-family: var(--serif); font-size: 1.5em; font-weight: 900; color: var(--t1); z-index: 1 }
+  .ring .rlab { font-family: var(--mono); font-size: .42em; color: var(--t2); text-transform: uppercase; letter-spacing: 1px; z-index: 1 }
+
+  /* Timeline */
+  .timeline { display: flex; gap: 0; padding: 20px 0 }
+  .tl-item { flex: 1; position: relative; padding: 20px 16px 0; text-align: center }
+  .tl-item::before { content: ''; position: absolute; top: 8px; left: 0; right: 0; height: 2px; background: var(--border-md) }
+  .tl-item:first-child::before { left: 50% }
+  .tl-item:last-child::before { right: 50% }
+  .tl-dot { width: 14px; height: 14px; border-radius: 50%; margin: 0 auto 12px; position: relative; z-index: 1 }
+  .tl-dot.accent1 { background: var(--accent1); box-shadow: 0 0 0 4px var(--accent1-dim) }
+  .tl-dot.accent2 { background: var(--accent2); box-shadow: 0 0 0 4px var(--accent2-dim) }
+  .tl-dot.accent3 { background: var(--accent3); box-shadow: 0 0 0 4px var(--accent3-dim) }
+
+  /* Grids */
+  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px }
+  .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 16px }
+  .g4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 16px }
+  .g5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 16px }
+
+  /* Image Box */
+  .img-box { flex:1; min-height:0; display:flex; align-items:center; justify-content:center; border-radius:14px; overflow:hidden; background:var(--surface); border:1px solid var(--border) }
+  .img-box img { max-width:100%; max-height:100%; object-fit:contain }
+
+  /* Big Numbers */
+  .bignum { font-family:var(--serif); font-size:3.2em; font-weight:900; color:var(--t1); line-height:1 }
+
+  /* Header Meta */
+  .hm { display:flex; gap:30px; font-size:.62em; color:var(--t3); font-weight:500 }
+  .hm span { display:flex; align-items:center; gap:9px }
+
+  /* Left border accents */
+  .line-accent1 { border-left:2px solid var(--accent1) }
+  .line-accent2 { border-left:2px solid var(--accent2) }
+  .line-accent3 { border-left:2px solid var(--accent3) }
+
+  /* Flex utilities */
+  .flex { display: flex }
+  .flex-col { flex-direction: column }
+  .flex-wrap { display:flex; flex-wrap:wrap }
+  .flex-center { display:flex; justify-content:center; align-items:center }
+  .flex-1 { flex:1 }
+  .gap-sm { gap: 8px }
+  .gap-md { gap: 16px }
+  .gap-lg { gap: 24px }
+  .mt-auto { margin-top: auto }
+  .mb-sm { margin-bottom: 8px }
+  .mb-md { margin-bottom: 16px }
+
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+  <div class="s cx" style="text-align:center">
+    <div style="display:flex;gap:12px;justify-content:center;margin-bottom:24px">
+      <span class="badge accent1"><i class="fas fa-robot"></i> Educational Technology</span>
+      <span class="badge accent2"><i class="fas fa-graduation-cap"></i> Student & Educator Focus</span>
+    </div>
+    <h1 style="font-size:3.2em;margin-bottom:18px">The Future of Smart AI</h1>
+    <p style="font-size:1.1em;color:var(--t2);max-width:700px;margin:0 auto 32px">Understanding Capabilities, Architecture, and Educational Impact</p>
+    <hr class="dv" style="max-width:400px;margin:0 auto 28px">
+    <div style="display:flex;gap:30px;font-size:.62em;color:var(--t3);font-weight:500;justify-content:center">
+      <span style="display:flex;align-items:center;gap:9px"><i class="fas fa-user" style="color:var(--accent1)"></i> DIGITN AI</span>
+      <span style="display:flex;align-items:center;gap:9px"><i class="fas fa-clock" style="color:var(--accent2)"></i> 10 Minutes</span>
+      <span style="display:flex;align-items:center;gap:9px"><i class="fas fa-users" style="color:var(--accent3)"></i> Students & Educators</span>
+    </div>
+  </div>
+  <aside class="notes">Welcome the audience and establish the educational context. Emphasize that this is about understanding AI as a tool for learning and teaching, not just technical jargon.</aside>
+</section>
+      <section>
+  <div class="s">
+    <p class="sl">Presentation Overview</p>
+    <h2>What We'll Explore Today</h2>
+    <p style="font-size:.76em;color:var(--t2);max-width:800px;margin-bottom:28px">A journey through four essential pillars — building from foundational concepts to practical implementation in educational settings.</p>
+    <div class="g4">
+      <div class="hcard">
+        <div class="iw"><div class="ic accent1"><i class="fas fa-lightbulb"></i></div></div>
+        <h3>Foundations</h3>
+        <p>What makes AI "smart"? Understanding the shift from rule-based systems to adaptive intelligence.</p>
+      </div>
+      <div class="hcard">
+        <div class="iw"><div class="ic accent2"><i class="fas fa-layer-group"></i></div></div>
+        <h3>Architecture</h3>
+        <p>How these systems actually work — neural networks, transformers, and data processing pipelines.</p>
+      </div>
+      <div class="hcard">
+        <div class="iw"><div class="ic accent3"><i class="fas fa-chalkboard-teacher"></i></div></div>
+        <h3>Applications</h3>
+        <p>Real-world educational impact — tutoring, assessment, curriculum adaptation, and accessibility.</p>
+      </div>
+      <div class="hcard">
+        <div class="iw"><div class="ic accent1"><i class="fas fa-rocket"></i></div></div>
+        <h3>Future</h3>
+        <p>Preparing for an AI-assisted world — literacy, ethics, and human-AI collaboration.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Walk through the four pillars of today's presentation. Emphasize that we'll spend significant time on technical architecture to demystify how AI functions.</aside>
+</section>
+      <section>
+  <div class="s">
+    <p class="sl">Understanding AI</p>
+    <h2>Defining Smart AI</h2>
+    <div style="display:flex;gap:28px;flex:1;min-height:0;margin-top:20px">
+      <div style="flex:1.1;display:flex;flex-direction:column;gap:14px">
+        <div class="frow">
+          <div class="fi"><div class="ic accent1"><i class="fas fa-database"></i></div></div>
+          <div>
+            <h3>Adaptive Learning</h3>
+            <p>Learning from data without explicit programming — discovering patterns through exposure rather than hard-coded rules.</p>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent2"><i class="fas fa-comments"></i></div></div>
+          <div>
+            <h3>Contextual Awareness</h3>
+            <p>Natural language understanding that captures nuance, tone, and intent — reading between the lines of human communication.</p>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent3"><i class="fas fa-chart-line"></i></div></div>
+          <div>
+            <h3>Predictive Intelligence</h3>
+            <p>Anticipating needs before explicit requests — moving from reactive responses to proactive assistance.</p>
+          </div>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+        <div class="card card-accent1">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+            <i class="fas fa-calculator" style="color:var(--accent1);font-size:1.2em"></i>
+            <h3 style="margin:0">Traditional Systems</h3>
+          </div>
+          <p style="font-size:.68em">Rule-based: "If input = X, output = Y" — fixed logic trees with no learning capability.</p>
+        </div>
+        <div class="card card-accent2">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+            <i class="fas fa-brain" style="color:var(--accent2);font-size:1.2em"></i>
+            <h3 style="margin:0">Smart AI Systems</h3>
+          </div>
+          <p style="font-size:.68em">Pattern-based: "Given similar inputs, predict probable outputs" — continuous learning and adaptation.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Distinguish between traditional rule-based systems and modern neural approaches. Use the example of a calculator (explicit rules) versus a language model (pattern recognition) to make it concrete for students.</aside>
+</section>
+      <section>
+  <div class="s">
+    <p class="sl">Core Capabilities</p>
+    <h2>Four Pillars of Smart AI</h2>
+    <p style="font-size:.76em;color:var(--t2);max-width:800px;margin-bottom:28px">These foundational capabilities enable AI systems to understand, learn, predict, and connect at unprecedented scale.</p>
+    <div class="g4">
+      <div class="card card-accent1">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <div class="ic accent1" style="width:36px;height:36px;font-size:.9em"><i class="fas fa-language"></i></div>
+          <h3 style="margin:0">Natural Language Processing</h3>
+        </div>
+        <p>Understanding human context, nuance, and intent — processing text and speech to capture meaning beyond literal words.</p>
+      </div>
+      <div class="card card-accent2">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <div class="ic accent2" style="width:36px;height:36px;font-size:.9em"><i class="fas fa-sync-alt"></i></div>
+          <h3 style="margin:0">Machine Learning Adaptation</h3>
+        </div>
+        <p>Improving through interaction and feedback — refining responses based on user corrections and new data exposure.</p>
+      </div>
+      <div class="card card-accent3">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <div class="ic accent3" style="width:36px;height:36px;font-size:.9em"><i class="fas fa-crystal-ball"></i></div>
+          <h3 style="margin:0">Predictive Analytics</h3>
+        </div>
+        <p>Anticipating needs before explicit requests — recognizing patterns to suggest actions and content proactively.</p>
+      </div>
+      <div class="card card-accent1">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <div class="ic accent1" style="width:36px;height:36px;font-size:.9em"><i class="fas fa-project-diagram"></i></div>
+          <h3 style="margin:0">Pattern Recognition</h3>
+        </div>
+        <p>Identifying connections across vast datasets — discovering hidden relationships invisible to human analysis.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">These four capabilities form the foundation. Ask the audience to consider which capability would most transform their current educational experience.</aside>
+</section>
+      <section>
+  <div class="s">
+    <p class="sl">Technical Deep Dive</p>
+    <h2>Architecture & Infrastructure</h2>
+    <div style="display:flex;gap:28px;flex:1;min-height:0;margin-top:20px">
+      <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+        <div class="frow">
+          <div class="fi"><div class="ic accent1"><i class="fas fa-cubes"></i></div></div>
+          <div>
+            <h3>Neural Network Layers</h3>
+            <p>Transformers and attention mechanisms — processing entire sequences simultaneously rather than word-by-word, enabling context understanding.</p>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent2"><i class="fas fa-stream"></i></div></div>
+          <div>
+            <h3>Data Processing Pipelines</h3>
+            <p>Tokenization, embedding, and vectorization — converting language into mathematical representations that machines can process.</p>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent3"><i class="fas fa-code-branch"></i></div></div>
+          <div>
+            <h3>Algorithm Frameworks</h3>
+            <p>Supervised, unsupervised, and reinforcement learning — different approaches to training based on labeled data, pattern discovery, or reward feedback.</p>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent1"><i class="fas fa-plug"></i></div></div>
+          <div>
+            <h3>Integration Protocols</h3>
+            <p>APIs and system interoperability — connecting AI capabilities to existing educational platforms and workflows.</p>
+          </div>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+        <div class="card" style="border-left:2px solid var(--accent1);flex:1;display:flex;flex-direction:column;justify-content:center">
+          <p style="font-size:.68em;margin-bottom:12px"><strong style="color:var(--t1)">Key Technologies:</strong></p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span class="chip accent1">PyTorch</span>
+            <span class="chip accent2">TensorFlow</span>
+            <span class="chip accent3">LLaMA</span>
+            <span class="chip accent1">GPT Architecture</span>
+            <span class="chip accent2">BERT</span>
+            <span class="chip accent3">Transformers</span>
+          </div>
+        </div>
+        <div style="flex:1;background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;padding:20px;display:flex;align-items:center;justify-content:center">
+          <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+            <!-- Input Layer -->
+            <circle cx="60" cy="60" r="18" fill="var(--accent1-dim)" stroke="var(--accent1)" stroke-width="1.5"/>
+            <circle cx="60" cy="100" r="18" fill="var(--accent1-dim)" stroke="var(--accent1)" stroke-width="1.5"/>
+            <circle cx="60" cy="140" r="18" fill="var(--accent1-dim)" stroke="var(--accent1)" stroke-width="1.5"/>
+            <text x="60" y="180" text-anchor="middle" fill="var(--t2)" font-family="var(--sans)" font-size="9">Input</text>
+            
+            <!-- Hidden Layer 1 -->
+            <circle cx="160" cy="50" r="16" fill="var(--accent2-dim)" stroke="var(--accent2)" stroke-width="1.5"/>
+            <circle cx="160" cy="90" r="16" fill="var(--accent2-dim)" stroke="var(--accent2)" stroke-width="1.5"/>
+            <circle cx="160" cy="130" r="16" fill="var(--accent2-dim)" stroke="var(--accent2)" stroke-width="1.5"/>
+            <circle cx="160" cy="170" r="16" fill="var(--accent2-dim)" stroke="var(--accent2)" stroke-width="1.5"/>
+            
+            <!-- Hidden Layer 2 -->
+            <circle cx="260" cy="60" r="16" fill="var(--accent3-dim)" stroke="var(--accent3)" stroke-width="1.5"/>
+            <circle cx="260" cy="110" r="16" fill="var(--accent3-dim)" stroke="var(--accent3)" stroke-width="1.5"/>
+            <circle cx="260" cy="160" r="16" fill="var(--accent3-dim)" stroke="var(--accent3)" stroke-width="1.5"/>
+            
+            <!-- Output Layer -->
+            <circle cx="340" cy="90" r="18" fill="var(--accent1-dim)" stroke="var(--accent1)" stroke-width="1.5"/>
+            <circle cx="340" cy="130" r="18" fill="var(--accent1-dim)" stroke="var(--accent1)" stroke-width="1.5"/>
+            <text x="340" y="180" text-anchor="middle" fill="var(--t2)" font-family="var(--sans)" font-size="9">Output</text>
+            
+            <!-- Connections -->
+            <line x1="78" y1="60" x2="144" y2="50" stroke="var(--accent1)" stroke-width=".8" opacity=".4"/>
+            <line x1="78" y1="100" x2="144" y2="90" stroke="var(--accent1)" stroke-width=".8" opacity=".4"/>
+            <line x1="78" y1="140" x2="144" y2="130" stroke="var(--accent1)" stroke-width=".8" opacity=".4"/>
+            <line x1="176" y1="90" x2="244" y2="110" stroke="var(--accent2)" stroke-width=".8" opacity=".4"/>
+            <line x1="276" y1="110" x2="322" y2="110" stroke="var(--accent3)" stroke-width=".8" opacity=".4"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">This is the technical heart of the presentation. Explain transformers using the analogy of reading a sentence while keeping the whole paragraph in mind. Use the chips to show specific technologies like PyTorch, TensorFlow, and LLaMA.</aside>
+</section>
+      <section>
+  <div class="s">
+    <p class="sl">Data Pipeline</p>
+    <h2>From Input to Insight</h2>
+    <p style="font-size:.76em;color:var(--t2);max-width:800px;margin-bottom:28px">The five-stage journey of how AI transforms raw input into meaningful output — and learns from every interaction.</p>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot accent1"></div>
+        <span class="badge accent1">Step 1</span>
+        <h3>Data Ingestion</h3>
+        <p>Multi-modal inputs including text, images, audio, and structured data enter the system simultaneously.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot accent2"></div>
+        <span class="badge accent2">Step 2</span>
+        <h3>Preprocessing</h3>
+        <p>Normalization, tokenization, and context window management prepare data for neural processing.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot accent3"></div>
+        <span class="badge accent3">Step 3</span>
+        <h3>Model Inference</h3>
+        <p>Parallel processing through billions of neural connections generates internal representations.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot accent1"></div>
+        <span class="badge accent1">Step 4</span>
+        <h3>Output Generation</h3>
+        <p>Probability-based token prediction produces coherent, contextually appropriate responses.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot accent2"></div>
+        <span class="badge accent2">Step 5</span>
+        <h3>Feedback Loop</h3>
+        <p>Reinforcement learning from human feedback refines the model for future interactions.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Walk through this pipeline slowly. Emphasize that 'understanding' is really statistical prediction at massive scale, but the emergent behaviors create genuine utility.</aside>
+</section>
+      <section>
+  <div class="s">
+    <p class="sl">Measurable Impact</p>
+    <h2>AI in Education: The Numbers</h2>
+    <p style="font-size:.76em;color:var(--t2);max-width:800px;margin-bottom:24px">Real metrics from current implementations in educational institutions worldwide.</p>
+    <div style="display:flex;gap:24px;flex:1;min-height:0">
+      <div style="flex:1;display:flex;flex-direction:column;gap:20px;justify-content:center">
+        <div class="metric">
+          <span class="num" style="color:var(--accent1)">85%</span>
+          <span class="lab">Reduction in research task time</span>
+        </div>
+        <div class="metric">
+          <span class="num" style="color:var(--accent2)">40%</span>
+          <span class="lab">Improvement in personalized learning</span>
+        </div>
+        <div class="metric">
+          <span class="num" style="color:var(--accent3)">60%</span>
+          <span class="lab">Decrease in grading overhead</span>
+        </div>
+        <div class="metric">
+          <span class="num" style="color:var(--accent1)">3×</span>
+          <span class="lab">Increase in accessibility coverage</span>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;gap:28px;align-items:center;justify-content:center">
+        <div class="ring">
+          <svg viewBox="0 0 120 120">
+            <circle class="rbg" cx="60" cy="60" r="52"/>
+            <circle class="rprog" cx="60" cy="60" r="52" stroke="var(--accent1)" stroke-dasharray="327" stroke-dashoffset="49"></circle>
+          </svg>
+          <div class="rval" style="color:var(--accent1)">85%</div>
+          <div class="rlab">Efficiency</div>
+        </div>
+        <div class="ring">
+          <svg viewBox="0 0 120 120">
+            <circle class="rbg" cx="60" cy="60" r="52"/>
+            <circle class="rprog" cx="60" cy="60" r="52" stroke="var(--accent2)" stroke-dasharray="327" stroke-dashoffset="131"></circle>
+          </svg>
+          <div class="rval" style="color:var(--accent2)">60%</div>
+          <div class="rlab">Time Saved</div>
+        </div>
+        <div class="ring">
+          <svg viewBox="0 0 120 120">
+            <circle class="rbg" cx="60" cy="60" r="52"/>
+            <circle class="rprog" cx="60" cy="60" r="52" stroke="var(--accent3)" stroke-dasharray="327" stroke-dashoffset="98"></circle>
+          </svg>
+          <div class="rval" style="color:var(--accent3)">70%</div>
+          <div class="rlab">Satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">These metrics represent current implementations in educational institutions. Remind the audience that these are tools to augment, not replace, human educational relationships.</aside>
+</section>
+      <section>
+  <div class="s">
+    <p class="sl">Practical Applications</p>
+    <h2>AI in the Classroom</h2>
+    <div style="display:flex;gap:28px;flex:1;min-height:0;margin-top:20px">
+      <div class="g2" style="flex:1.5">
+        <div class="card card-accent1">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <div class="ic accent1"><i class="fas fa-user-graduate"></i></div>
+            <h3>Intelligent Tutoring Systems</h3>
+          </div>
+          <p>24/7 personalized guidance that adapts to each student's pace, learning style, and knowledge gaps — providing immediate support when teachers are unavailable.</p>
+        </div>
+        <div class="card card-accent2">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <div class="ic accent2"><i class="fas fa-clipboard-check"></i></div>
+            <h3>Automated Assessment</h3>
+          </div>
+          <p>Immediate feedback on formative work enables rapid iteration and improvement — students understand errors while concepts are still fresh.</p>
+        </div>
+        <div class="card card-accent3">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <div class="ic accent3"><i class="fas fa-sliders-h"></i></div>
+            <h3>Curriculum Adaptation</h3>
+          </div>
+          <p>Real-time difficulty and pacing adjustments ensure every student is appropriately challenged — no one is bored or left behind.</p>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+        <div class="card" style="border-left:2px solid var(--accent1);flex:1">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+            <i class="fas fa-universal-access" style="color:var(--accent1);font-size:1.3em"></i>
+            <h3 style="margin:0">Accessibility Tools</h3>
+          </div>
+          <ul style="font-size:.68em;line-height:1.8;color:var(--t2);padding-left:18px">
+            <li>Real-time translation for ESL students</li>
+            <li>Text-to-speech for visual impairments</li>
+            <li>Speech-to-text for writing support</li>
+            <li>Simplified language options</li>
+            <li>Extended time accommodations</li>
+          </ul>
+        </div>
+        <div class="card" style="background:var(--accent1-dim);border:1px solid var(--accent1)">
+          <p style="font-size:.68em;line-height:1.7"><i class="fas fa-lightbulb" style="color:var(--accent1);margin-right:8px"></i><strong style="color:var(--t1)">Key Insight:</strong> These tools are force multipliers that allow educators to focus on mentorship and complex critical thinking instruction.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Focus on practical implementation. Educators should think of these as force multipliers that allow them to focus on mentorship and complex critical thinking instruction.</aside>
+</section>
+      <section style="background-image:radial-gradient(circle at 20% 20%, rgba(93, 202, 165, .04) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(250, 199, 117, .03) 0%, transparent 50%)">
+  <div class="s cx">
+    <div style="max-width:800px">
+      <i class="fas fa-quote-left" style="font-size:2em;color:var(--accent1);opacity:.3;margin-bottom:20px"></i>
+      <p style="font-family:var(--serif);font-size:1.6em;line-height:1.5;font-style:italic;color:var(--t1);margin-bottom:28px">AI doesn't replace educators; it amplifies their reach and impact. Technology handles information delivery; humans guide wisdom development.</p>
+      <hr class="dv" style="max-width:200px;margin:0 auto 24px">
+      <p style="font-size:.9em;color:var(--t2);margin-bottom:32px">The future belongs to those who can effectively collaborate with intelligent systems.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+        <span class="badge accent1"><i class="fas fa-handshake"></i> Collaboration</span>
+        <span class="badge accent2"><i class="fas fa-heart"></i> Human Connection</span>
+        <span class="badge accent3"><i class="fas fa-brain"></i> Critical Thinking</span>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Pause here. This is the philosophical core. Emphasize that critical thinking, empathy, and ethical reasoning remain uniquely human domains that become more important, not less.</aside>
+</section>
+      <section>
+  <div class="s">
+    <p class="sl">Future Preparation</p>
+    <h2>Preparing Students for Tomorrow</h2>
+    <div style="display:flex;gap:28px;flex:1;min-height:0;margin-top:20px">
+      <div style="flex:1;display:flex;flex-direction:column;gap:14px">
+        <div class="frow">
+          <div class="fi"><div class="ic accent1"><i class="fas fa-graduation-cap"></i></div></div>
+          <div>
+            <h3>Developing AI Literacy</h3>
+            <p>Understanding capabilities and limitations — knowing when to trust AI outputs and when to apply critical judgment.</p>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent2"><i class="fas fa-balance-scale"></i></div></div>
+          <div>
+            <h3>Ethical Reasoning</h3>
+            <p>Bias detection and responsible use — recognizing that AI systems reflect training data and human design choices.</p>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent3"><i class="fas fa-search"></i></div></div>
+          <div>
+            <h3>Critical Evaluation</h3>
+            <p>Verifying AI-generated content — fact-checking, source validation, and recognizing hallucinations or errors.</p>
+          </div>
+        </div>
+        <div class="frow">
+          <div class="fi"><div class="ic accent1"><i class="fas fa-sync"></i></div></div>
+          <div>
+            <h3>Continuous Adaptation</h3>
+            <p>Learning how to learn with evolving tools — developing metacognitive skills for an AI-assisted world.</p>
+          </div>
+        </div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:14px;justify-content:center">
+        <div class="card card-accent2">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+            <div class="ic accent2"><i class="fas fa-bullseye"></i></div>
+            <h3 style="margin:0">Actionable Takeaways</h3>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg2);border-radius:8px">
+              <span class="badge accent1">1</span>
+              <span style="font-size:.72em">Start with one AI tool</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg2);border-radius:8px">
+              <span class="badge accent2">2</span>
+              <span style="font-size:.72em">Experiment and iterate</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg2);border-radius:8px">
+              <span class="badge accent3">3</span>
+              <span style="font-size:.72em">Discuss ethics with students</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg2);border-radius:8px">
+              <span class="badge accent1">4</span>
+              <span style="font-size:.72em">Expand as comfort grows</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Shift to actionable takeaways. Students need to become savvy consumers and collaborators with AI, treating it as a thought partner that requires verification and critical oversight.</aside>
+</section>
+      <section style="background-image:radial-gradient(circle at 30% 70%, rgba(93, 202, 165, .05) 0%, transparent 50%), radial-gradient(circle at 70% 30%, rgba(250, 199, 117, .04) 0%, transparent 50%)">
+  <div class="s cx" style="text-align:center">
+    <div style="display:flex;gap:12px;justify-content:center;margin-bottom:24px">
+      <span class="badge accent1"><i class="fas fa-comments"></i> Open Discussion</span>
+      <span class="badge accent2"><i class="fas fa-share-alt"></i> Resources</span>
+    </div>
+    <h1 style="font-size:2.6em;margin-bottom:18px">Questions & Discussion</h1>
+    <p style="font-size:1.1em;color:var(--t2);max-width:600px;margin:0 auto 32px">Exploring the Future Together</p>
+    <hr class="dv" style="max-width:400px;margin:0 auto 28px">
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:24px">
+      <span class="chip accent1"><i class="fas fa-wrench"></i> Technical Questions</span>
+      <span class="chip accent2"><i class="fas fa-chalkboard"></i> Practical Applications</span>
+      <span class="chip accent3"><i class="fas fa-balance-scale"></i> Ethical Considerations</span>
+    </div>
+    <p style="font-size:.8em;color:var(--t3);max-width:500px;margin:0 auto"><i class="fas fa-envelope" style="color:var(--accent1);margin-right:8px"></i>Resources for continued learning will be shared after this session</p>
+  </div>
+  <aside class="notes">Close by reinforcing that AI is a tool for empowerment in education. Encourage educators to start small with one use case and expand as comfort grows.</aside>
+</section>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.js"></script>
+  <script>
+    Reveal.initialize({
+      controls: true,
+      controlsTutorial: false,
+      slideNumber: 'c/t',
+      progress: true,
+      transition: 'fade',
+      transitionSpeed: 'fast',
+      backgroundTransition: 'fade',
+      hash: true,
+      respondToHashChanges: true,
+      embedded: false,
+      help: true,
+      display: 'flex',
+      center: false,
+      width: 960,
+      height: 700,
+      margin: 0.04,
+      minScale: 0.2,
+      maxScale: 2.0
+    });
+  </script>
+</body>
+</html>

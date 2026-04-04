@@ -1,0 +1,15 @@
+Accessibility checklist (WCAG basics)
+
+- Semantic HTML: headings, landmarks, lists, and forms used appropriately.
+- Keyboard: All interactive items accessible via Tab; hamburger and menu keyboard-operable.
+- Focus: Focus outlines visible; accessibleFocus used for programmatic focus.
+- Color contrast: Text and UI use high-contrast neutrals and primary accents; verify with contrast tool.
+- Images: Decorative SVGs that are purely visual include empty alt or meaningful alt where necessary.
+- Forms: Labels are associated with inputs via for/id; status messages use aria-live for updates.
+- Map: Inserted iframe includes title attribute for screen readers.
+- Skip links: Not included by default but headings and anchor links provide navigation between sections.
+
+Testing tips:
+- Tab through all interactive elements and ensure visible focus.
+- Use a screen reader to verify form labels and status messages are announced.
+- Test color contrast with a contrast checker for normal text (4.5:1) and large text (3:1).

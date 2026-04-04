@@ -1,0 +1,134 @@
+#hero {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('https://images.unsplash.com/photo-1550966841-3ee7adac1661?auto=format&fit=crop&q=80&w=2000');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--linen-white);
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(42, 54, 40, 0.7), rgba(42, 54, 40, 0.4), rgba(42, 54, 40, 0.7));
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: 0 1.5rem;
+}
+
+.hero-subtitle {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards 0.3s;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  line-height: 1.1;
+  margin-bottom: var(--space-md);
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards 0.5s;
+}
+
+.hero-title em {
+  color: var(--gold-accent);
+}
+
+.hero-description {
+  font-size: 1.25rem;
+  max-width: 50ch;
+  margin: 0 auto var(--space-lg);
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards 0.7s;
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  opacity: 0;
+  animation: fadeInUp 1s ease forwards 0.9s;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.scroll-indicator .line {
+  width: 1px;
+  height: 60px;
+  background-color: var(--linen-white);
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-indicator .line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--gold-accent);
+  animation: scrollAnim 2s infinite cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollAnim {
+  0% { transform: translateY(-100%); }
+  50% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+
+@media (max-width: 768px) {
+  .hero-actions {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+  
+  .scroll-indicator {
+    display: none;
+  }
+}

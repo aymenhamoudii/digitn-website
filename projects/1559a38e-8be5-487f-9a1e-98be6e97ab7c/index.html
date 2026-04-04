@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI in the Future | Holographic Vision 2040</title>
+  <meta name="description" content="An immersive presentation exploring the future of artificial intelligence through holographic visualization and interactive data experiences.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="bg-grid"></div>
+  <div class="bg-gradient-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loading-logo">
+      <svg viewBox="0 0 100 100" class="loading-icon">
+        <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+        <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+        <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="2" opacity="0.7"/>
+        <circle cx="50" cy="50" r="8" fill="currentColor"/>
+      </svg>
+    </div>
+    <p class="loading-text">Initializing Neural Interface</p>
+  </div>
+
+  <!-- Navigation Arrows -->
+  <button class="nav-arrow nav-prev" id="navPrev" aria-label="Previous slide">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <polyline points="15,18 9,12 15,6"></polyline>
+    </svg>
+  </button>
+  <button class="nav-arrow nav-next" id="navNext" aria-label="Next slide">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <polyline points="9,18 15,12 9,6"></polyline>
+    </svg>
+  </button>
+
+  <!-- Progress Indicator -->
+  <nav class="progress-nav" id="progressNav" aria-label="Slide navigation">
+    <button class="progress-dot active" data-slide="0" aria-label="Go to slide 1"></button>
+    <button class="progress-dot" data-slide="1" aria-label="Go to slide 2"></button>
+    <button class="progress-dot" data-slide="2" aria-label="Go to slide 3"></button>
+    <button class="progress-dot" data-slide="3" aria-label="Go to slide 4"></button>
+    <button class="progress-dot" data-slide="4" aria-label="Go to slide 5"></button>
+    <button class="progress-dot" data-slide="5" aria-label="Go to slide 6"></button>
+  </nav>
+
+  <!-- Slides Container -->
+  <main class="slides-container" id="slidesContainer">
+    
+    <!-- Slide 1: Hero -->
+    <section class="slide slide-hero" data-slide="0">
+      <div class="slide-content hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span>Holographic Experience</span>
+        </div>
+        <h1 class="hero-title">
+          <span class="title-line">AI in the</span>
+          <span class="title-line accent">Future</span>
+        </h1>
+        <p class="hero-subtitle">Exploring the neural horizons of 2040 through immersive data visualization and intelligent interfaces</p>
+        <div class="hero-cta">
+          <button class="btn-primary" id="startJourney">
+            <span>Begin Journey</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12,5 19,12 12,19"></polyline>
+            </svg>
+          </button>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="stat-value" data-count="500">0</span>
+            <span class="stat-suffix">M+</span>
+            <span class="stat-label">Neural Parameters</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-value" data-count="99.7">0</span>
+            <span class="stat-suffix">%</span>
+            <span class="stat-label">Accuracy Rate</span>
+          </div>
+          <div class="hero-stat">
+            <span class="stat-value" data-count="12">0</span>
+            <span class="stat-suffix">ms</span>
+            <span class="stat-label">Response Time</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="neural-network">
+          <div class="node node-1"></div>
+          <div class="node node-2"></div>
+          <div class="node node-3"></div>
+          <div class="node node-4"></div>
+          <div class="node node-5"></div>
+          <div class="node node-6"></div>
+          <div class="connection conn-1"></div>
+          <div class="connection conn-2"></div>
+          <div class="connection conn-3"></div>
+          <div class="connection conn-4"></div>
+          <div class="connection conn-5"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 2: Evolution Timeline -->
+    <section class="slide slide-timeline" data-slide="1">
+      <div class="slide-content">
+        <header class="slide-header">
+          <span class="slide-tag">Evolution</span>
+          <h2>The Neural Revolution</h2>
+          <p>From rule-based systems to consciousness emergence — a journey through AI's exponential growth</p>
+        </header>
+        <div class="timeline-container">
+          <div class="timeline-line"></div>
+          <div class="timeline-items">
+            <article class="timeline-item" data-year="1950">
+              <div class="timeline-marker"></div>
+              <div class="timeline-card">
+                <span class="timeline-year">1950</span>
+                <h3>The Turing Threshold</h3>
+                <p>Alan Turing proposes the imitation game, establishing the foundational question: can machines think?</p>
+              </div>
+            </article>
+            <article class="timeline-item" data-year="1997">
+              <div class="timeline-marker"></div>
+              <div class="timeline-card">
+                <span class="timeline-year">1997</span>
+                <h3>Deep Blue's Victory</h3>
+                <p>IBM's Deep Blue defeats world chess champion Garry Kasparov, marking AI's first mainstream triumph.</p>
+              </div>
+            </article>
+            <article class="timeline-item" data-year="2012">
+              <div class="timeline-marker"></div>
+              <div class="timeline-card">
+                <span class="timeline-year">2012</span>
+                <h3>Deep Learning Dawn</h3>
+                <p>AlexNet revolutionizes computer vision, proving neural networks can exceed human performance.</p>
+              </div>
+            </article>
+            <article class="timeline-item" data-year="2023">
+              <div class="timeline-marker"></div>
+              <div class="timeline-card">
+                <span class="timeline-year">2023</span>
+                <h3>Multimodal Genesis</h3>
+                <p>Large language models gain vision, audio, and reasoning capabilities simultaneously.</p>
+              </div>
+            </article>
+            <article class="timeline-item" data-year="2035">
+              <div class="timeline-marker future"></div>
+              <div class="timeline-card future">
+                <span class="timeline-year">2035</span>
+                <h3>Neural Symbiosis</h3>
+                <p>Human-AI integration begins with bidirectional brain-computer interfaces.</p>
+              </div>
+            </article>
+            <article class="timeline-item" data-year="2040">
+              <div class="timeline-marker future"></div>
+              <div class="timeline-card future">
+                <span class="timeline-year">2040</span>
+                <h3>Emergent Consciousness</h3>
+                <p>AI systems demonstrate genuine understanding and creative problem-solving beyond training data.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3: Data Dashboard -->
+    <section class="slide slide-dashboard" data-slide="2">
+      <div class="slide-content">
+        <header class="slide-header">
+          <span class="slide-tag">Live Metrics</span>
+          <h2>Global AI Network</h2>
+          <p>Real-time intelligence flows through interconnected neural networks worldwide</p>
+        </header>
+        <div class="dashboard-grid">
+          <div class="metric-card metric-large">
+            <div class="metric-header">
+              <span class="metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                </svg>
+              </span>
+              <span class="metric-title">Active Neural Nodes</span>
+            </div>
+            <div class="metric-display">
+              <span class="metric-value" data-count="2847593">0</span>
+              <span class="metric-trend up">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="18,15 12,9 6,15"/>
+                </svg>
+                +12.4%
+              </span>
+            </div>
+            <div class="metric-chart">
+              <svg viewBox="0 0 200 60" class="sparkline">
+                <path class="sparkline-path" d="M0,45 Q20,40 40,42 T80,35 T120,30 T160,20 T200,15" fill="none"/>
+              </svg>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                </svg>
+              </span>
+              <span class="metric-title">Processing Power</span>
+            </div>
+            <div class="metric-ring">
+              <svg viewBox="0 0 120 120">
+                <circle class="ring-bg" cx="60" cy="60" r="50"/>
+                <circle class="ring-progress" cx="60" cy="60" r="50" data-percent="78"/>
+              </svg>
+              <span class="ring-value"><span class="counter">78</span>%</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                  <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
+                  <line x1="12" y1="22.08" x2="12" y2="12"/>
+                </svg>
+              </span>
+              <span class="metric-title">Knowledge Base</span>
+            </div>
+            <div class="metric-display vertical">
+              <span class="metric-value" data-count="847">0</span>
+              <span class="metric-unit">Petabytes</span>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+              </span>
+              <span class="metric-title">Efficiency Score</span>
+            </div>
+            <div class="metric-ring">
+              <svg viewBox="0 0 120 120">
+                <circle class="ring-bg" cx="60" cy="60" r="50"/>
+                <circle class="ring-progress cyan" cx="60" cy="60" r="50" data-percent="94"/>
+              </svg>
+              <span class="ring-value"><span class="counter">94</span>%</span>
+            </div>
+          </div>
+
+          <div class="metric-card metric-wide">
+            <div class="metric-header">
+              <span class="metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
+                </svg>
+              </span>
+              <span class="metric-title">Query Distribution by Domain</span>
+            </div>
+            <div class="bar-chart">
+              <div class="bar-item">
+                <span class="bar-label">Healthcare</span>
+                <div class="bar-track">
+                  <div class="bar-fill" data-width="85"></div>
+                </div>
+                <span class="bar-value">85%</span>
+              </div>
+              <div class="bar-item">
+                <span class="bar-label">Finance</span>
+                <div class="bar-track">
+                  <div class="bar-fill" data-width="72"></div>
+                </div>
+                <span class="bar-value">72%</span>
+              </div>
+              <div class="bar-item">
+                <span class="bar-label">Education</span>
+                <div class="bar-track">
+                  <div class="bar-fill" data-width="68"></div>
+                </div>
+                <span class="bar-value">68%</span>
+              </div>
+              <div class="bar-item">
+                <span class="bar-label">Research</span>
+                <div class="bar-track">
+                  <div class="bar-fill" data-width="91"></div>
+                </div>
+                <span class="bar-value">91%</span>
+              </div>
+              <div class="bar-item">
+                <span class="bar-label">Creative</span>
+                <div class="bar-track">
+                  <div class="bar-fill" data-width="63"></div>
+                </div>
+                <span class="bar-value">63%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              </span>
+              <span class="metric-title">Active Users</span>
+            </div>
+            <div class="metric-display vertical">
+              <span class="metric-value" data-count="18.4">0</span>
+              <span class="metric-unit">Million</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 4: Future Capabilities -->
+    <section class="slide slide-capabilities" data-slide="3">
+      <div class="slide-content">
+        <header class="slide-header">
+          <span class="slide-tag">Capabilities</span>
+          <h2>The Next Frontier</h2>
+          <p>Breakthrough technologies reshaping human potential</p>
+        </header>
+        <div class="capabilities-grid">
+          <article class="capability-card" data-capability="reasoning">
+            <div class="card-inner">
+              <div class="card-front">
+                <div class="card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 2a8 8 0 0 0-8 8c0 3.5 2 6 4 8l1 2 1-2c2-2 4-4.5 4-8a8 8 0 0 0-8-8z"/>
+                    <path d="M12 2v4M12 18v4"/>
+                  </svg>
+                </div>
+                <h3>Advanced Reasoning</h3>
+                <p>Multi-step logical deduction and causal inference</p>
+                <span class="card-status">
+                  <span class="status-dot pulse"></span>
+                  Active
+                </span>
+              </div>
+              <div class="card-back">
+                <h3>Advanced Reasoning</h3>
+                <ul>
+                  <li>Chain-of-thought processing</li>
+                  <li>Causal relationship mapping</li>
+                  <li>Abstract problem decomposition</li>
+                  <li>Counterfactual reasoning</li>
+                </ul>
+                <span class="accuracy-tag">99.2% Accuracy</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="capability-card" data-capability="vision">
+            <div class="card-inner">
+              <div class="card-front">
+                <div class="card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                </div>
+                <h3>Perception Engine</h3>
+                <p>Real-time visual and spatial understanding</p>
+                <span class="card-status">
+                  <span class="status-dot pulse"></span>
+                  Active
+                </span>
+              </div>
+              <div class="card-back">
+                <h3>Perception Engine</h3>
+                <ul>
+                  <li>3D scene reconstruction</li>
+                  <li>Emotion recognition</li>
+                  <li>Depth perception</li>
+                  <li>Low-light enhancement</li>
+                </ul>
+                <span class="accuracy-tag">98.7% Accuracy</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="capability-card" data-capability="creative">
+            <div class="card-inner">
+              <div class="card-front">
+                <div class="card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+                  </svg>
+                </div>
+                <h3>Creative Synthesis</h3>
+                <p>Original content generation across all mediums</p>
+                <span class="card-status">
+                  <span class="status-dot pulse"></span>
+                  Active
+                </span>
+              </div>
+              <div class="card-back">
+                <h3>Creative Synthesis</h3>
+                <ul>
+                  <li>Contextual story generation</li>
+                  <li>Music composition</li>
+                  <li>Visual art creation</li>
+                  <li>Design innovation</li>
+                </ul>
+                <span class="accuracy-tag">96.4% Quality</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="capability-card" data-capability="memory">
+            <div class="card-inner">
+              <div class="card-front">
+                <div class="card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M21 3v4h-4"/>
+                  </svg>
+                </div>
+                <h3>Persistent Memory</h3>
+                <p>Long-term context retention across sessions</p>
+                <span class="card-status">
+                  <span class="status-dot pulse"></span>
+                  Active
+                </span>
+              </div>
+              <div class="card-back">
+                <h3>Persistent Memory</h3>
+                <ul>
+                  <li>Cross-session continuity</li>
+                  <li>Preference learning</li>
+                  <li>Relationship tracking</li>
+                  <li>Knowledge graph integration</li>
+                </ul>
+                <span class="accuracy-tag">99.8% Recall</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="capability-card" data-capability="collaboration">
+            <div class="card-inner">
+              <div class="card-front">
+                <div class="card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                  </svg>
+                </div>
+                <h3>Human-AI Teams</h3>
+                <p>Seamless collaborative problem-solving</p>
+                <span class="card-status">
+                  <span class="status-dot pulse"></span>
+                  Active
+                </span>
+              </div>
+              <div class="card-back">
+                <h3>Human-AI Teams</h3>
+                <ul>
+                  <li>Complementary skill matching</li>
+                  <li>Real-time coordination</li>
+                  <li>Adaptive role allocation</li>
+                  <li>Collective learning</li>
+                </ul>
+                <span class="accuracy-tag">3.2x Productivity</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="capability-card" data-capability="discovery">
+            <div class="card-inner">
+              <div class="card-front">
+                <div class="card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    <line x1="11" y1="8" x2="11" y2="14"/>
+                    <line x1="8" y1="11" x2="14" y2="11"/>
+                  </svg>
+                </div>
+                <h3>Scientific Discovery</h3>
+                <p>Autonomous research and hypothesis generation</p>
+                <span class="card-status future">
+                  <span class="status-dot pulse"></span>
+                  Emerging
+                </span>
+              </div>
+              <div class="card-back">
+                <h3>Scientific Discovery</h3>
+                <ul>
+                  <li>Literature synthesis</li>
+                  <li>Experiment design</li>
+                  <li>Pattern identification</li>
+                  <li>Breakthrough prediction</li>
+                </ul>
+                <span class="accuracy-tag">In Development</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 5: Voice Avatar -->
+    <section class="slide slide-avatar" data-slide="4">
+      <div class="slide-content">
+        <header class="slide-header">
+          <span class="slide-tag">Interaction</span>
+          <h2>Neural Interface</h2>
+          <p>Experience conversational AI with voice synthesis and animated response</p>
+        </header>
+        <div class="avatar-container">
+          <div class="avatar-wrapper">
+            <div class="avatar-glow"></div>
+            <div class="avatar-ring"></div>
+            <div class="avatar-ring ring-2"></div>
+            <div class="avatar-body">
+              <svg viewBox="0 0 200 200" class="avatar-svg">
+                <!-- Abstract humanoid form -->
+                <defs>
+                  <linearGradient id="avatarGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="var(--cyan-bright)" stop-opacity="0.9"/>
+                    <stop offset="100%" stop-color="var(--electric-blue)" stop-opacity="0.9"/>
+                  </linearGradient>
+                  <filter id="glow">
+                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                    <feMerge>
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
+                <!-- Head -->
+                <ellipse cx="100" cy="70" rx="35" ry="40" fill="url(#avatarGradient)" filter="url(#glow)"/>
+                <!-- Neck -->
+                <rect x="90" y="105" width="20" height="15" fill="url(#avatarGradient)" filter="url(#glow)"/>
+                <!-- Shoulders -->
+                <path d="M50 140 Q100 120 150 140 L150 160 Q100 145 50 160 Z" fill="url(#avatarGradient)" filter="url(#glow)"/>
+                <!-- Core glow -->
+                <circle cx="100" cy="135" r="20" fill="var(--cyan-bright)" opacity="0.3" class="avatar-core"/>
+              </svg>
+            </div>
+            <div class="avatar-waveform" id="avatarWaveform">
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+            </div>
+          </div>
+          <div class="avatar-info">
+            <span class="avatar-status" id="avatarStatus">
+              <span class="status-dot pulse"></span>
+              Ready
+            </span>
+            <span class="avatar-name">ARIA</span>
+            <span class="avatar-title">Advanced Response Intelligence Assistant</span>
+          </div>
+        </div>
+        <div class="ai-panel">
+          <div class="panel-header">
+            <span class="panel-title">Conversation Interface</span>
+            <span class="panel-badge">Neural Link Active</span>
+          </div>
+          <div class="panel-messages" id="panelMessages">
+            <div class="message message-ai">
+              <span class="message-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"/>
+                  <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                  <line x1="9" y1="9" x2="9.01" y2="9"/>
+                  <line x1="15" y1="9" x2="15.01" y2="9"/>
+                </svg>
+              </span>
+              <div class="message-content">
+                <span class="typing-indicator">
+                  <span></span><span></span><span></span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="panel-suggestions" id="panelSuggestions">
+            <button class="suggestion-chip" data-query="What is the future of AI?">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+              <span>What is the future of AI?</span>
+            </button>
+            <button class="suggestion-chip" data-query="How does neural processing work?">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+              </svg>
+              <span>Neural processing explained</span>
+            </button>
+            <button class="suggestion-chip" data-query="Tell me about consciousness in AI">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 2a8 8 0 0 0-8 8c0 3.5 2 6 4 8l1 2 1-2c2-2 4-4.5 4-8a8 8 0 0 0-8-8z"/>
+              </svg>
+              <span>Consciousness in AI</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6: Closing Vision -->
+    <section class="slide slide-closing" data-slide="5">
+      <div class="slide-content">
+        <div class="closing-visual">
+          <div class="closing-orbs">
+            <div class="closing-orb"></div>
+            <div class="closing-orb"></div>
+            <div class="closing-orb"></div>
+          </div>
+        </div>
+        <header class="slide-header center">
+          <span class="slide-tag">Vision 2040</span>
+          <h2 class="closing-title">The Future is Neural</h2>
+          <p class="closing-message">We stand at the threshold of a new era. Artificial intelligence isn't just a tool—it's the next step in consciousness itself. Together, human creativity and machine intelligence will solve the challenges that once seemed impossible.</p>
+        </header>
+        <div class="closing-stats">
+          <div class="closing-stat">
+            <div class="closing-stat-ring">
+              <svg viewBox="0 0 120 120">
+                <circle class="ring-bg" cx="60" cy="60" r="50"/>
+                <circle class="ring-progress" cx="60" cy="60" r="50" data-percent="100"/>
+              </svg>
+              <span class="ring-label">Human Potential</span>
+            </div>
+          </div>
+          <div class="closing-stat">
+            <div class="closing-stat-ring">
+              <svg viewBox="0 0 120 120">
+                <circle class="ring-bg" cx="60" cy="60" r="50"/>
+                <circle class="ring-progress cyan" cx="60" cy="60" r="50" data-percent="100"/>
+              </svg>
+              <span class="ring-label">AI Excellence</span>
+            </div>
+          </div>
+          <div class="closing-stat">
+            <div class="closing-stat-ring">
+              <svg viewBox="0 0 120 120">
+                <circle class="ring-bg" cx="60" cy="60" r="50"/>
+                <circle class="ring-progress purple" cx="60" cy="60" r="50" data-percent="100"/>
+              </svg>
+              <span class="ring-label">Synergy</span>
+            </div>
+          </div>
+        </div>
+        <div class="closing-cta">
+          <p class="closing-tagline">The neural horizon awaits</p>
+          <button class="btn-primary large" id="restartPresentation">
+            <span>Experience Again</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="1,4 1,10 7,10"/>
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/utils.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/avatar.js"></script>
+  <script src="js/ai-panel.js"></script>
+  <script src="js/transitions.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<div id="contact-info"></div>
+<form id="contact-form">
+    <label for="message">Your Message:</label>
+    <textarea id="message" name="message" required></textarea>
+    <button type="submit">Send</button>
+</form>

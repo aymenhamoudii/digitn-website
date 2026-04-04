@@ -1,0 +1,166 @@
+/* Ordering Styles */
+.order-sidebar {
+    position: fixed;
+    top: 0;
+    right: -450px;
+    width: 450px;
+    height: 100%;
+    background-color: var(--color-white);
+    z-index: 2000;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.05);
+    transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+}
+
+.order-sidebar.active {
+    right: 0;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1500;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition-smooth);
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.order-header {
+    padding: 2.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-header h2 {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.close-btn {
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--color-slate-muted);
+}
+
+.order-items {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 2rem 2.5rem;
+}
+
+.empty-cart-message {
+    text-align: center;
+    color: var(--color-slate-muted);
+    font-weight: 300;
+    margin-top: 3rem;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.cart-item-info h4 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--color-slate);
+}
+
+.cart-item-info p {
+    font-size: 0.85rem;
+    color: var(--color-sage);
+    font-weight: 600;
+}
+
+.cart-item-qty {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.qty-btn {
+    width: 24px;
+    height: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--color-slate);
+}
+
+.order-footer {
+    padding: 2.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    background-color: var(--color-mint-light);
+}
+
+.order-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.btn-checkout {
+    width: 100%;
+    padding: 1.2rem;
+    background-color: var(--color-slate);
+    color: var(--color-white);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: var(--border-radius);
+}
+
+.btn-checkout:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Toast logic from base styling logic but specific to ordering */
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background-color: var(--color-sage);
+    color: var(--color-white);
+    padding: 0.75rem 2rem;
+    border-radius: 2rem;
+    z-index: 3000;
+    font-size: 0.9rem;
+    transition: var(--transition-smooth);
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.toast.visible {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+@media (max-width: 500px) {
+    .order-sidebar {
+        width: 100%;
+        right: -100%;
+    }
+}

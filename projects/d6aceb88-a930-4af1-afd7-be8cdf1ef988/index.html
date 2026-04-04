@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Omni-Man: Power Scaling &amp; Abilities</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+    --bg: #121212;
+    --bg2: #1E1E1E;
+    --surface: #2A2A2A;
+    --surface2: #2a2a2a;
+    --border: rgba(255,255,255,.07);
+    --border-md: rgba(255,255,255,.11);
+    --accent1: #E53935;
+    --accent1-dim: rgba(229, 57, 53, 0.18);
+    --accent2: #FFFFFF;
+    --accent2-dim: rgba(255, 255, 255, 0.18);
+    --accent3: #FBC02D;
+    --accent3-dim: rgba(251, 192, 45, 0.18);
+    --t1: #F5F5F5;
+    --t2: #B3B3B3;
+    --t3: rgba(245, 245, 245, 0.3);
+    --mono: 'Source Code Pro', monospace;
+    --sans: 'Source Sans 3', system-ui, sans-serif;
+    --serif: 'Cormorant Garamond', serif;
+  }
+    
+  /* ─── Reset ─── */
+  ::-webkit-scrollbar{display:none}
+  *{scrollbar-width:none;-ms-overflow-style:none;box-sizing:border-box;margin:0;padding:0}
+  html{scroll-snap-type:y mandatory;overflow-y:scroll;overflow-x:hidden;scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  /* ─── Slide (full viewport) ─── */
+  section{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+  /* ─── Stagger animation (.s container) ─── */
+  .s{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
+  .s>*{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+  section.active .s>*{opacity:1;transform:translateY(0)}
+  section.active .s>*:nth-child(1){transition-delay:.03s}
+  section.active .s>*:nth-child(2){transition-delay:.09s}
+  section.active .s>*:nth-child(3){transition-delay:.15s}
+  section.active .s>*:nth-child(4){transition-delay:.21s}
+  section.active .s>*:nth-child(5){transition-delay:.27s}
+  section.active .s>*:nth-child(6){transition-delay:.33s}
+  section.active .s>*:nth-child(7){transition-delay:.39s}
+  section.active .s>*:nth-child(8){transition-delay:.45s}
+
+  /* ─── Centering utility ─── */
+  .cx{justify-content:center;align-items:center;text-align:center}
+
+  /* ─── Speaker notes (hidden) ─── */
+  aside.notes{display:none!important}
+
+  /* ─── Slide counter ─── */
+  #slide-counter{position:fixed;bottom:2vh;right:2vw;font-family:var(--mono);font-size:1.6vh;color:var(--t3);background:var(--surface);border:1px solid var(--border);border-radius:1vh;padding:.8vh 1.6vh;z-index:100;pointer-events:none}
+
+  /* ─── Progress bar ─── */
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--accent1);z-index:100;transition:width .3s ease}
+
+  </style>
+</head>
+<body>
+  <div id="progress" style="width:0"></div>
+  <div id="slide-counter">1 / 12</div>
+  <section style="background-color: var(--bg); color: var(--t1); font-family: var(--sans); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; height: 100vh; width: 100vw;">
+  <div style="position: absolute; top: 0; left: 0; right: 0; height: 10px; background: linear-gradient(90deg, var(--accent1), var(--accent3), var(--accent2));"></div>
+  <div style="position: absolute; top: -20vh; right: -20vw; width: 60vw; height: 60vw; background: radial-gradient(circle, var(--accent1-dim) 0%, transparent 70%); opacity: 0.15; border-radius: 50%;"></div>
+  <div class="s cx" style="max-width: 1000px; text-align: center; z-index: 10; padding: 0 5vw;">
+    <div style="display: inline-block; padding: 8px 24px; background-color: var(--surface); border: 2px solid var(--border); border-radius: 30px; font-family: var(--mono); color: var(--accent3); text-transform: uppercase; letter-spacing: 3px; font-size: 0.9rem; margin-bottom: 4vh; font-weight: bold;">
+      <i class="fas fa-bolt" style="margin-right: 10px;"></i>Power Scaling Analysis
+    </div>
+    <h1 style="font-family: var(--serif); font-size: clamp(4rem, 10vw, 8rem); font-weight: 900; margin: 0; line-height: 1; text-transform: uppercase; letter-spacing: -2px; color: var(--accent2); text-shadow: 4px 4px 0px var(--accent1);">
+      OMNI-MAN
+    </h1>
+    <div style="width: 150px; height: 6px; background-color: var(--accent1); margin: 4vh auto; border-radius: 3px;"></div>
+    <h2 style="font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 300; color: var(--t2); margin: 0; line-height: 1.4; max-width: 800px;">
+      Earth's Greatest Champion: <br>
+      <span style="color: var(--accent2); font-weight: 600;">An Analysis of Power and Abilities</span>
+    </h2>
+  </div>
+  <aside class="notes" style="display:none">
+    Welcome, everyone. Today we are exploring the power scaling and abilities of Earth's greatest protector from the hit animated series: Omni-Man. We'll be keeping this spoiler-free for casual viewers.
+  </aside>
+  <aside class="notes">Welcome, everyone. Today we are exploring the power scaling and abilities of Earth's greatest protector from the hit animated series: Omni-Man. We'll be keeping this spoiler-free for casual viewers.</aside>
+</section>
+  <section style="background-color: var(--bg2); color: var(--t1); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; align-items: center;">
+  <div class="s" style="display: flex; width: 100%; height: 100%; max-width: 1400px; margin: 0 auto;">
+    <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 10vw 5vw 10vw 8vw;">
+      <div style="font-family: var(--mono); color: var(--accent1); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2vh; font-size: 1rem; display: flex; align-items: center;">
+        <span style="width: 40px; height: 2px; background-color: var(--accent1); margin-right: 15px;"></span>
+        Introduction
+      </div>
+      <h1 style="font-family: var(--serif); font-size: clamp(3rem, 5vw, 5rem); font-weight: 800; margin: 0 0 1vh 0; color: var(--accent2); line-height: 1.1;">
+        Who is <br><span style="color: var(--accent1);">Nolan Grayson?</span>
+      </h1>
+      <h3 style="font-size: 1.8rem; font-weight: 300; color: var(--t2); margin: 0 0 6vh 0; border-left: 4px solid var(--accent3); padding-left: 20px;">
+        The Man Behind the Mustache
+      </h3>
+      
+      <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 3vh;">
+        <li style="display: flex; align-items: flex-start; font-size: 1.5rem; line-height: 1.4; color: var(--t1);">
+          <div style="min-width: 40px; height: 40px; border-radius: 50%; background-color: var(--surface); display: flex; align-items: center; justify-content: center; margin-right: 20px; color: var(--accent3); margin-top: 5px;">
+            <i class="fas fa-globe"></i>
+          </div>
+          <div>Hails from the alien planet of <strong>Viltrum</strong></div>
+        </li>
+        <li style="display: flex; align-items: flex-start; font-size: 1.5rem; line-height: 1.4; color: var(--t1);">
+          <div style="min-width: 40px; height: 40px; border-radius: 50%; background-color: var(--surface); display: flex; align-items: center; justify-content: center; margin-right: 20px; color: var(--accent1); margin-top: 5px;">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div>Arrived on Earth to act as its sole protector</div>
+        </li>
+        <li style="display: flex; align-items: flex-start; font-size: 1.5rem; line-height: 1.4; color: var(--t1);">
+          <div style="min-width: 40px; height: 40px; border-radius: 50%; background-color: var(--surface); display: flex; align-items: center; justify-content: center; margin-right: 20px; color: var(--accent2); margin-top: 5px;">
+            <i class="fas fa-home"></i>
+          </div>
+          <div>Balances superhero life with a civilian family</div>
+        </li>
+      </ul>
+    </div>
+    
+    <div style="flex: 1; background-color: var(--surface); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+      <div style="position: absolute; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(229, 57, 53, 0.1) 0%, transparent 100%); z-index: 1;"></div>
+      <div style="width: 60%; height: 60%; border-radius: 20px; border: 2px dashed var(--border-md); display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; z-index: 2; background-color: rgba(30, 30, 30, 0.5); backdrop-filter: blur(10px);">
+        <i class="fas fa-user-astronaut" style="font-size: 8rem; color: var(--t3); margin-bottom: 20px;"></i>
+        <div style="font-family: var(--mono); color: var(--t2); font-size: 1.2rem; letter-spacing: 2px; text-transform: uppercase;">Classified File: Omni-Man</div>
+      </div>
+      <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 30%; background: linear-gradient(to top, var(--surface) 0%, transparent 100%); z-index: 3;"></div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">
+    Nolan Grayson appears to be a normal human, but he is actually an alien from Viltrum. He came to Earth decades ago, adopted the Omni-Man persona, and dedicated himself to protecting the planet.
+  </aside>
+  <aside class="notes">Nolan Grayson appears to be a normal human, but he is actually an alien from Viltrum. He came to Earth decades ago, adopted the Omni-Man persona, and dedicated himself to protecting the planet.</aside>
+</section>
+  <section style="background-color: var(--bg); color: var(--t1); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; flex-direction: column; padding: 10vh 8vw;">
+  <div class="s" style="width: 100%; height: 100%; max-width: 1600px; margin: 0 auto; display: flex; flex-direction: column;">
+    
+    <div style="margin-bottom: 8vh; text-align: center;">
+      <div style="font-family: var(--mono); color: var(--accent3); font-weight: bold; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 2vh; font-size: 1rem; display: inline-block; padding: 5px 15px; border: 1px solid var(--accent3); border-radius: 20px;">
+        Genetics
+      </div>
+      <h1 style="font-family: var(--serif); font-size: clamp(3rem, 5vw, 4.5rem); font-weight: 800; margin: 0; color: var(--accent2); line-height: 1.2;">
+        Viltrumite Physiology
+      </h1>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4vw; flex: 1; align-items: stretch;">
+      
+      <!-- Card 1 -->
+      <div style="background-color: var(--surface); border-radius: 24px; padding: 4vh 3vw; display: flex; flex-direction: column; align-items: center; text-align: center; border-top: 5px solid var(--accent1); box-shadow: 0 20px 40px rgba(0,0,0,0.4); position: relative; overflow: hidden;">
+        <div style="position: absolute; top: -20px; right: -20px; color: var(--surface2); font-size: 10rem; opacity: 0.3;">
+          <i class="fas fa-heartbeat"></i>
+        </div>
+        <div style="width: 100px; height: 100px; border-radius: 50%; background-color: var(--bg2); display: flex; align-items: center; justify-content: center; margin-bottom: 4vh; z-index: 2; border: 2px solid var(--accent1-dim);">
+          <i class="fas fa-dna" style="font-size: 3rem; color: var(--accent1);"></i>
+        </div>
+        <h3 style="font-size: 2rem; font-weight: 700; color: var(--accent2); margin: 0 0 2vh 0; z-index: 2;">Regeneration & Longevity</h3>
+        <p style="font-size: 1.3rem; color: var(--t2); line-height: 1.6; margin: 0; z-index: 2;">
+          Advanced cellular structure allows for incredibly slow aging and rapid healing from near-fatal injuries.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div style="background-color: var(--surface); border-radius: 24px; padding: 4vh 3vw; display: flex; flex-direction: column; align-items: center; text-align: center; border-top: 5px solid var(--accent3); box-shadow: 0 20px 40px rgba(0,0,0,0.4); position: relative; overflow: hidden; transform: translateY(-3vh);">
+        <div style="position: absolute; top: -20px; right: -20px; color: var(--surface2); font-size: 10rem; opacity: 0.3;">
+          <i class="fas fa-shield-virus"></i>
+        </div>
+        <div style="width: 100px; height: 100px; border-radius: 50%; background-color: var(--bg2); display: flex; align-items: center; justify-content: center; margin-bottom: 4vh; z-index: 2; border: 2px solid var(--accent3-dim);">
+          <i class="fas fa-dumbbell" style="font-size: 3rem; color: var(--accent3);"></i>
+        </div>
+        <h3 style="font-size: 2rem; font-weight: 700; color: var(--accent2); margin: 0 0 2vh 0; z-index: 2;">Physical Durability</h3>
+        <p style="font-size: 1.3rem; color: var(--t2); line-height: 1.6; margin: 0; z-index: 2;">
+          Extreme resistance to physical trauma, energy blasts, and impacts that would instantly destroy human biology.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div style="background-color: var(--surface); border-radius: 24px; padding: 4vh 3vw; display: flex; flex-direction: column; align-items: center; text-align: center; border-top: 5px solid var(--accent2); box-shadow: 0 20px 40px rgba(0,0,0,0.4); position: relative; overflow: hidden;">
+        <div style="position: absolute; top: -20px; right: -20px; color: var(--surface2); font-size: 10rem; opacity: 0.3;">
+          <i class="fas fa-meteor"></i>
+        </div>
+        <div style="width: 100px; height: 100px; border-radius: 50%; background-color: var(--bg2); display: flex; align-items: center; justify-content: center; margin-bottom: 4vh; z-index: 2; border: 2px solid var(--border-md);">
+          <i class="fas fa-space-shuttle" style="font-size: 3rem; color: var(--accent2);"></i>
+        </div>
+        <h3 style="font-size: 2rem; font-weight: 700; color: var(--accent2); margin: 0 0 2vh 0; z-index: 2;">Harsh Environment Adaptation</h3>
+        <p style="font-size: 1.3rem; color: var(--t2); line-height: 1.6; margin: 0; z-index: 2;">
+          Capable of surviving without oxygen in the vacuum of space for weeks on a single breath of air.
+        </p>
+      </div>
+
+    </div>
+  </div>
+  <aside class="notes" style="display:none">
+    The source of Omni-Man's power is his Viltrumite DNA. Their physiology is vastly superior to humans, allowing for slow aging, rapid healing, and survival in the vacuum of space.
+  </aside>
+  <aside class="notes">The source of Omni-Man's power is his Viltrumite DNA. Their physiology is vastly superior to humans, allowing for slow aging, rapid healing, and survival in the vacuum of space.</aside>
+</section>
+  <section style="background-color: var(--bg2); color: var(--t1); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; align-items: center; overflow: hidden;">
+  <div class="s" style="width: 100%; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: row; align-items: center; justify-content: space-between; padding: 0 5vw;">
+    
+    <div style="flex: 0 0 45%;">
+      <div style="font-family: var(--mono); color: var(--accent1); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2vh; font-size: 1rem; display: flex; align-items: center;">
+        <span style="width: 30px; height: 2px; background-color: var(--accent1); margin-right: 15px;"></span> Abilities
+      </div>
+      <h1 style="font-family: var(--serif); font-size: clamp(3.5rem, 5vw, 5rem); font-weight: 900; margin: 0 0 4vh 0; color: var(--accent2); line-height: 1.1;">
+        Unparalleled <br> Speed & Flight
+      </h1>
+      
+      <div style="display: flex; flex-direction: column; gap: 3vh;">
+        <div style="background-color: var(--surface); padding: 3vh 2vw; border-radius: 16px; border-left: 4px solid var(--accent3);">
+          <h4 style="margin: 0 0 1vh 0; color: var(--accent2); font-size: 1.5rem;">Interstellar Travel</h4>
+          <p style="margin: 0; color: var(--t2); font-size: 1.2rem; line-height: 1.5;">Capable of crossing solar systems in matters of days, achieving faster-than-light speeds in the vacuum of space.</p>
+        </div>
+        
+        <div style="background-color: var(--surface); padding: 3vh 2vw; border-radius: 16px; border-left: 4px solid var(--accent1);">
+          <h4 style="margin: 0 0 1vh 0; color: var(--accent2); font-size: 1.5rem;">Atmospheric Limits</h4>
+          <p style="margin: 0; color: var(--t2); font-size: 1.2rem; line-height: 1.5;">Flight within atmosphere is intentionally limited to prevent catastrophic friction burning of the planet's surface.</p>
+        </div>
+        
+        <div style="background-color: var(--surface); padding: 3vh 2vw; border-radius: 16px; border-left: 4px solid var(--accent2);">
+          <h4 style="margin: 0 0 1vh 0; color: var(--accent2); font-size: 1.5rem;">Matched Reflexes</h4>
+          <p style="margin: 0; color: var(--t2); font-size: 1.2rem; line-height: 1.5;">Perception and reaction times scale perfectly with his physical speed, allowing precise hypersonic maneuvering.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex: 0 0 50%; position: relative; height: 70vh; display: flex; align-items: center; justify-content: center;">
+      <!-- Speed Rings Visualization -->
+      <div style="position: absolute; width: 40vw; height: 40vw; border: 1px solid rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+        <div style="position: absolute; width: 30vw; height: 30vw; border: 2px dashed var(--accent1-dim); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+          <div style="position: absolute; width: 20vw; height: 20vw; border: 4px solid rgba(251, 192, 45, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <div style="width: 15vw; height: 15vw; background: radial-gradient(circle, var(--accent1) 0%, transparent 70%); opacity: 0.2; border-radius: 50%;"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Metrics overlay -->
+      <div style="z-index: 10; display: flex; flex-direction: column; gap: 4vh;">
+        <div style="background-color: rgba(42, 42, 42, 0.8); backdrop-filter: blur(10px); padding: 3vh 3vw; border-radius: 20px; text-align: center; border: 1px solid var(--border-md); transform: translateX(-5vw);">
+          <div style="font-family: var(--mono); color: var(--accent3); font-size: 1rem; letter-spacing: 2px; text-transform: uppercase;">Top Atmospheric Speed</div>
+          <div style="font-family: var(--serif); font-size: 4rem; font-weight: 900; color: var(--accent2); line-height: 1;">Mach 8.5+</div>
+        </div>
+        
+        <div style="background-color: rgba(42, 42, 42, 0.8); backdrop-filter: blur(10px); padding: 3vh 3vw; border-radius: 20px; text-align: center; border: 1px solid var(--border-md); transform: translateX(5vw);">
+          <div style="font-family: var(--mono); color: var(--accent1); font-size: 1rem; letter-spacing: 2px; text-transform: uppercase;">Reaction Time</div>
+          <div style="font-family: var(--serif); font-size: 4rem; font-weight: 900; color: var(--accent2); line-height: 1;">&lt; 0.001s</div>
+        </div>
+      </div>
+      
+      <i class="fas fa-fighter-jet" style="position: absolute; font-size: 8rem; color: var(--surface2); opacity: 0.3; transform: rotate(-45deg); top: 10%; right: 10%;"></i>
+    </div>
+    
+  </div>
+  <aside class="notes" style="display:none">
+    One of his most notable abilities is flight. Omni-Man doesn't just hover; he can travel between solar systems and maneuver in atmospheric combat at hypersonic speeds.
+  </aside>
+  <aside class="notes">One of his most notable abilities is flight. Omni-Man doesn't just hover; he can travel between solar systems and maneuver in atmospheric combat at hypersonic speeds.</aside>
+</section>
+  <section style="background-color: var(--bg); color: var(--t1); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+  <!-- Abstract Impact Graphic Background -->
+  <div style="position: absolute; left: 0; top: 0; width: 45vw; height: 100vh; background-color: var(--surface); display: flex; align-items: center; justify-content: center; overflow: hidden;">
+    <div style="width: 80vw; height: 80vw; border-radius: 50%; background: radial-gradient(circle, var(--accent1-dim) 0%, transparent 60%); position: absolute; left: -40vw;"></div>
+    <div style="position: absolute; left: 10vw; border-left: 2px dashed var(--accent1); height: 80vh; opacity: 0.5;"></div>
+    <div style="position: absolute; left: 20vw; border-left: 2px dashed var(--accent1); height: 60vh; opacity: 0.3;"></div>
+    <div style="position: absolute; left: 30vw; border-left: 2px dashed var(--accent1); height: 40vh; opacity: 0.1;"></div>
+    
+    <!-- Strength Meter -->
+    <div style="position: absolute; right: 4vw; top: 20vh; height: 60vh; width: 60px; background-color: var(--bg2); border-radius: 30px; border: 2px solid var(--border-md); display: flex; flex-direction: column; justify-content: flex-end; padding: 10px;">
+      <div style="width: 100%; height: 90%; background: linear-gradient(to top, var(--accent3), var(--accent1)); border-radius: 20px; position: relative;">
+        <div style="position: absolute; top: -15px; left: -20px; background-color: var(--surface2); color: var(--accent2); font-family: var(--mono); padding: 5px 10px; border-radius: 10px; font-size: 0.8rem; white-space: nowrap;">MAXIMUM CAPACITY: UNKNOWN</div>
+      </div>
+      <div style="width: 100%; height: 2px; background-color: var(--accent2); position: absolute; bottom: 30%; left: 0;"></div>
+      <div style="width: 100%; height: 2px; background-color: var(--accent2); position: absolute; bottom: 60%; left: 0;"></div>
+    </div>
+  </div>
+
+  <div class="s" style="width: 100%; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: row; align-items: center; z-index: 10; position: relative;">
+    
+    <div style="flex: 0 0 45%;">
+      <!-- Left side is handled by the absolute positioned graphic, but we leave this empty spacer to maintain flex layout -->
+    </div>
+
+    <div style="flex: 0 0 55%; padding: 0 5vw;">
+      <div style="font-family: var(--mono); color: var(--accent1); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2vh; font-size: 1rem; display: flex; align-items: center;">
+        <span style="width: 30px; height: 2px; background-color: var(--accent1); margin-right: 15px;"></span> Abilities
+      </div>
+      <h1 style="font-family: var(--serif); font-size: clamp(3rem, 5vw, 5rem); font-weight: 900; margin: 0 0 2vh 0; color: var(--accent2); line-height: 1.1; text-transform: uppercase;">
+        Immeasurable <br> <span style="color: var(--accent1);">Strength</span>
+      </h1>
+      <p style="font-size: 1.4rem; color: var(--t2); line-height: 1.6; margin-bottom: 6vh; max-width: 600px;">
+        Viltrumite muscle tissue is infinitely denser than human muscle, granting catastrophic levels of physical power.
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 4vh;">
+        
+        <div style="display: flex; align-items: flex-start;">
+          <div style="width: 60px; height: 60px; background-color: var(--surface2); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-right: 25px; flex-shrink: 0; border: 1px solid var(--accent3-dim);">
+            <i class="fas fa-weight-hanging" style="font-size: 1.8rem; color: var(--accent3);"></i>
+          </div>
+          <div>
+            <h3 style="margin: 0 0 1vh 0; font-size: 1.8rem; color: var(--accent2);">Lifting Capacity</h3>
+            <p style="margin: 0; font-size: 1.2rem; color: var(--t2); line-height: 1.5;">Can lift thousands of tons effortlessly. Casually stops moving trains, catches falling debris, and diverts asteroid impacts.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: flex-start;">
+          <div style="width: 60px; height: 60px; background-color: var(--surface2); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-right: 25px; flex-shrink: 0; border: 1px solid var(--accent1-dim);">
+            <i class="fas fa-bullseye" style="font-size: 1.8rem; color: var(--accent1);"></i>
+          </div>
+          <div>
+            <h3 style="margin: 0 0 1vh 0; font-size: 1.8rem; color: var(--accent2);">Kinetic Shockwaves</h3>
+            <p style="margin: 0; font-size: 1.2rem; color: var(--t2); line-height: 1.5;">Physical strikes carry enough kinetic energy to generate massive shockwaves, devastating surrounding environments.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: flex-start;">
+          <div style="width: 60px; height: 60px; background-color: var(--surface2); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-right: 25px; flex-shrink: 0; border: 1px solid var(--border-md);">
+            <i class="fas fa-chart-line" style="font-size: 1.8rem; color: var(--accent2);"></i>
+          </div>
+          <div>
+            <h3 style="margin: 0 0 1vh 0; font-size: 1.8rem; color: var(--accent2);">Conditioning Scaling</h3>
+            <p style="margin: 0; font-size: 1.2rem; color: var(--t2); line-height: 1.5;">Unlike humans, Viltrumite strength continues to increase significantly with sustained physical conditioning and age.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">
+    His physical strength is virtually limitless. He can casually catch falling debris, stop moving trains, and his punches carry enough kinetic energy to generate massive shockwaves.
+  </aside>
+  <aside class="notes">His physical strength is virtually limitless. He can casually catch falling debris, stop moving trains, and his punches carry enough kinetic energy to generate massive shockwaves.</aside>
+</section>
+  <section style="background-color: var(--bg2); color: var(--t1); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; flex-direction: column; justify-content: center; padding: 10vh 8vw;">
+  <div class="s cx" style="width: 100%; max-width: 1200px; margin: 0 auto;">
+    
+    <div style="text-align: center; margin-bottom: 8vh;">
+      <div style="font-family: var(--mono); color: var(--accent1); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2vh; font-size: 1rem;">
+        Abilities
+      </div>
+      <h1 style="font-family: var(--serif); font-size: clamp(3rem, 5vw, 4.5rem); font-weight: 800; margin: 0; color: var(--accent2); line-height: 1.1;">
+        Nigh-Invulnerability
+      </h1>
+      <p style="font-size: 1.5rem; color: var(--t2); margin: 2vh auto 0; max-width: 800px; line-height: 1.5;">
+        You can't hurt what you can't scratch. The sheer density of Viltrumite molecular structure renders standard forms of damage completely obsolete.
+      </p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 3vh;">
+      
+      <!-- Feature Row 1 -->
+      <div style="background-color: var(--surface); border-radius: 20px; padding: 4vh 4vw; display: flex; align-items: center; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: transform 0.3s ease;">
+        <div style="width: 80px; height: 80px; background-color: rgba(229, 57, 53, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 4vw; flex-shrink: 0;">
+          <i class="fas fa-shield-alt" style="font-size: 2.5rem; color: var(--accent1);"></i>
+        </div>
+        <div style="flex: 1;">
+          <h3 style="font-size: 2rem; font-weight: 700; color: var(--accent2); margin: 0 0 1vh 0;">Immune to Conventional Weaponry</h3>
+          <p style="font-size: 1.3rem; color: var(--t2); line-height: 1.5; margin: 0;">
+            Standard human weapons, heavy artillery, and explosives bounce off harmlessly. Projectiles simply shatter upon impact with his skin.
+          </p>
+        </div>
+      </div>
+
+      <!-- Feature Row 2 -->
+      <div style="background-color: var(--surface); border-radius: 20px; padding: 4vh 4vw; display: flex; align-items: center; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: transform 0.3s ease;">
+        <div style="width: 80px; height: 80px; background-color: rgba(251, 192, 45, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 4vw; flex-shrink: 0;">
+          <i class="fas fa-fire-alt" style="font-size: 2.5rem; color: var(--accent3);"></i>
+        </div>
+        <div style="flex: 1;">
+          <h3 style="font-size: 2rem; font-weight: 700; color: var(--accent2); margin: 0 0 1vh 0;">Withstands Extreme Heat & Radiation</h3>
+          <p style="font-size: 1.3rem; color: var(--t2); line-height: 1.5; margin: 0;">
+            Capable of surviving atmospheric reentry, bathing in magma, and withstanding extreme cosmic radiation without cellular degradation.
+          </p>
+        </div>
+      </div>
+
+      <!-- Feature Row 3 -->
+      <div style="background-color: var(--surface); border-radius: 20px; padding: 4vh 4vw; display: flex; align-items: center; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: transform 0.3s ease;">
+        <div style="width: 80px; height: 80px; background-color: rgba(255, 255, 255, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 4vw; flex-shrink: 0;">
+          <i class="fas fa-fist-raised" style="font-size: 2.5rem; color: var(--accent2);"></i>
+        </div>
+        <div style="flex: 1;">
+          <h3 style="font-size: 2rem; font-weight: 700; color: var(--accent2); margin: 0 0 1vh 0;">Requires Immense Force to Bleed</h3>
+          <p style="font-size: 1.3rem; color: var(--t2); line-height: 1.5; margin: 0;">
+            Only beings of similar power levels—such as other Viltrumites or top-tier super-beings—can generate the requisite force to actually draw blood or damage him.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <aside class="notes" style="display:none">
+    You can't hurt what you can't scratch. Standard human weapons, extreme temperatures, and heavy artillery bounce right off of him. Only beings of similar power can actually damage him.
+  </aside>
+  <aside class="notes">You can't hurt what you can't scratch. Standard human weapons, extreme temperatures, and heavy artillery bounce right off of him. Only beings of similar power can actually damage him.</aside>
+</section>
+  <section style="background-color: var(--bg); color: var(--t1); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; flex-direction: column; justify-content: center; padding: 10vh 8vw;">
+  <div class="s" style="width: 100%; max-width: 1400px; margin: 0 auto;">
+    
+    <div style="text-align: center; margin-bottom: 12vh;">
+      <div style="font-family: var(--mono); color: var(--accent3); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2vh; font-size: 1rem; display: inline-block; padding: 5px 15px; border: 1px solid var(--accent3); border-radius: 20px;">
+        Experience
+      </div>
+      <h1 style="font-family: var(--serif); font-size: clamp(3rem, 5vw, 4.5rem); font-weight: 800; margin: 0; color: var(--accent2); line-height: 1.1;">
+        Centuries of Combat
+      </h1>
+      <p style="font-size: 1.5rem; color: var(--t2); margin: 2vh auto 0; max-width: 800px; line-height: 1.5;">
+        Raw power is multiplied by millennia of battlefield experience and ruthless tactical conditioning.
+      </p>
+    </div>
+
+    <div style="position: relative; padding: 4vh 0;">
+      <!-- Timeline Line -->
+      <div style="position: absolute; top: 50%; left: 0; width: 100%; height: 4px; background-color: var(--surface2); transform: translateY(-50%); z-index: 1;"></div>
+      <div style="position: absolute; top: 50%; left: 0; width: 70%; height: 4px; background: linear-gradient(90deg, var(--accent1), var(--accent3)); transform: translateY(-50%); z-index: 2;"></div>
+
+      <!-- Timeline Nodes -->
+      <div style="display: flex; justify-content: space-between; position: relative; z-index: 10;">
+        
+        <!-- Node 1 -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 2vw; transform: translateY(-8vh);">
+          <div style="width: 60px; height: 60px; background-color: var(--bg); border: 4px solid var(--accent1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 3vh; box-shadow: 0 0 20px rgba(229, 57, 53, 0.4);">
+            <i class="fas fa-globe" style="color: var(--accent1); font-size: 1.5rem;"></i>
+          </div>
+          <div style="background-color: var(--surface); padding: 5px 15px; border-radius: 15px; font-family: var(--mono); font-size: 0.9rem; color: var(--accent1); margin-bottom: 2vh; border: 1px solid var(--accent1-dim);">ORIGIN</div>
+          <h3 style="font-size: 1.8rem; font-weight: 700; color: var(--accent2); margin: 0 0 1.5vh 0;">Viltrumite Training</h3>
+          <p style="font-size: 1.2rem; color: var(--t2); line-height: 1.5; margin: 0;">
+            Conditioned in the harsh, perfectionist society of Viltrum. Survived rigorous culling to become an elite warrior.
+          </p>
+        </div>
+
+        <!-- Node 2 -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 2vw; transform: translateY(8vh);">
+          <h3 style="font-size: 1.8rem; font-weight: 700; color: var(--accent2); margin: 0 0 1.5vh 0;">Interstellar Conquest</h3>
+          <p style="font-size: 1.2rem; color: var(--t2); line-height: 1.5; margin: 0; margin-bottom: 2vh;">
+            Deployed across countless alien worlds. Fought wars against diverse species and adapted to thousands of combat scenarios.
+          </p>
+          <div style="background-color: var(--surface); padding: 5px 15px; border-radius: 15px; font-family: var(--mono); font-size: 0.9rem; color: var(--accent3); margin-bottom: 3vh; border: 1px solid var(--accent3-dim);">EXPANSION</div>
+          <div style="width: 60px; height: 60px; background-color: var(--bg); border: 4px solid var(--accent3); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px rgba(251, 192, 45, 0.4);">
+            <i class="fas fa-meteor" style="color: var(--accent3); font-size: 1.5rem;"></i>
+          </div>
+        </div>
+
+        <!-- Node 3 -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 2vw; transform: translateY(-8vh);">
+          <div style="width: 60px; height: 60px; background-color: var(--bg); border: 4px solid var(--accent2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 3vh; box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);">
+            <i class="fas fa-earth-americas" style="color: var(--accent2); font-size: 1.5rem;"></i>
+          </div>
+          <div style="background-color: var(--surface); padding: 5px 15px; border-radius: 15px; font-family: var(--mono); font-size: 0.9rem; color: var(--t1); margin-bottom: 2vh; border: 1px solid var(--border-md);">CURRENT ERA</div>
+          <h3 style="font-size: 1.8rem; font-weight: 700; color: var(--accent2); margin: 0 0 1.5vh 0;">Defending Earth</h3>
+          <p style="font-size: 1.2rem; color: var(--t2); line-height: 1.5; margin: 0;">
+            Spent decades as Earth's primary protector, fighting monsters, supervillains, and interdimensional threats while hiding his true nature.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">
+    Power is nothing without skill. Nolan is thousands of years old and has fought in interstellar conflicts before he ever arrived on Earth, giving him a massive tactical advantage.
+  </aside>
+  <aside class="notes">Power is nothing without skill. Nolan is thousands of years old and has fought in interstellar conflicts before he ever arrived on Earth, giving him a massive tactical advantage.</aside>
+</section>
+  <section style="background-color: var(--bg2); color: var(--t1); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; align-items: center; justify-content: center; padding: 0 5vw;">
+  <div class="s" style="width: 100%; max-width: 1400px; display: flex; flex-direction: column; height: 80vh;">
+    
+    <div style="text-align: center; margin-bottom: 6vh;">
+      <div style="font-family: var(--mono); color: var(--accent1); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1vh; font-size: 1rem;">
+        Dynamics
+      </div>
+      <h1 style="font-family: var(--serif); font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 800; margin: 0 0 1vh 0; color: var(--accent2);">
+        Father & Son: The Grayson Lineage
+      </h1>
+      <h3 style="font-size: 1.5rem; font-weight: 300; color: var(--t2); margin: 0;">
+        Nolan and Mark
+      </h3>
+    </div>
+
+    <div style="display: flex; flex: 1; gap: 4vw; align-items: stretch;">
+      
+      <!-- Nolan Side -->
+      <div style="flex: 1; background: linear-gradient(180deg, var(--surface), rgba(42, 42, 42, 0.4)); border-radius: 20px; border: 1px solid var(--border-md); padding: 4vh 3vw; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 6px; background-color: var(--accent1);"></div>
+        <div style="width: 120px; height: 120px; border-radius: 50%; background-color: var(--bg); border: 4px solid var(--accent1); margin-bottom: 3vh; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(0,0,0,0.5);">
+          <i class="fas fa-user-tie" style="font-size: 4rem; color: var(--accent1);"></i>
+        </div>
+        <h2 style="font-family: var(--serif); font-size: 2.5rem; color: var(--accent2); margin: 0 0 1vh 0;">Omni-Man</h2>
+        <div style="font-family: var(--mono); color: var(--t2); font-size: 0.9rem; letter-spacing: 1px; margin-bottom: 4vh; text-transform: uppercase;">The Mentor</div>
+        
+        <div style="width: 100%; text-align: left; display: flex; flex-direction: column; gap: 2vh;">
+          <div style="background-color: rgba(0,0,0,0.2); padding: 15px 20px; border-radius: 10px; border-left: 3px solid var(--accent1);">
+            <strong style="color: var(--accent2); display: block; margin-bottom: 5px;">Approach</strong>
+            <span style="color: var(--t2); font-size: 1.1rem;">Ruthless efficiency, absolute pragmatism. Views humanity as fragile.</span>
+          </div>
+          <div style="background-color: rgba(0,0,0,0.2); padding: 15px 20px; border-radius: 10px; border-left: 3px solid var(--accent1);">
+            <strong style="color: var(--accent2); display: block; margin-bottom: 5px;">Experience</strong>
+            <span style="color: var(--t2); font-size: 1.1rem;">Thousands of years of combat. Unshakable confidence.</span>
+          </div>
+          <div style="background-color: rgba(0,0,0,0.2); padding: 15px 20px; border-radius: 10px; border-left: 3px solid var(--accent1);">
+            <strong style="color: var(--accent2); display: block; margin-bottom: 5px;">Role</strong>
+            <span style="color: var(--t2); font-size: 1.1rem;">Strict, demanding, pushing Mark to abandon human attachments.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VS Badge -->
+      <div style="display: flex; align-items: center; justify-content: center;">
+        <div style="width: 60px; height: 60px; background-color: var(--bg); border: 2px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-weight: bold; color: var(--t2); font-size: 1.2rem; z-index: 10; box-shadow: 0 0 15px rgba(0,0,0,0.5);">
+          VS
+        </div>
+      </div>
+
+      <!-- Mark Side -->
+      <div style="flex: 1; background: linear-gradient(180deg, var(--surface), rgba(42, 42, 42, 0.4)); border-radius: 20px; border: 1px solid var(--border-md); padding: 4vh 3vw; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; height: 6px; background-color: var(--accent3);"></div>
+        <div style="width: 120px; height: 120px; border-radius: 50%; background-color: var(--bg); border: 4px solid var(--accent3); margin-bottom: 3vh; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(0,0,0,0.5);">
+          <i class="fas fa-user-ninja" style="font-size: 4rem; color: var(--accent3);"></i>
+        </div>
+        <h2 style="font-family: var(--serif); font-size: 2.5rem; color: var(--accent2); margin: 0 0 1vh 0;">Invincible</h2>
+        <div style="font-family: var(--mono); color: var(--t2); font-size: 0.9rem; letter-spacing: 1px; margin-bottom: 4vh; text-transform: uppercase;">The Protégé</div>
+        
+        <div style="width: 100%; text-align: left; display: flex; flex-direction: column; gap: 2vh;">
+          <div style="background-color: rgba(0,0,0,0.2); padding: 15px 20px; border-radius: 10px; border-left: 3px solid var(--accent3);">
+            <strong style="color: var(--accent2); display: block; margin-bottom: 5px;">Approach</strong>
+            <span style="color: var(--t2); font-size: 1.1rem;">Compassionate, impulsive. Determined to save everyone.</span>
+          </div>
+          <div style="background-color: rgba(0,0,0,0.2); padding: 15px 20px; border-radius: 10px; border-left: 3px solid var(--accent3);">
+            <strong style="color: var(--accent2); display: block; margin-bottom: 5px;">Experience</strong>
+            <span style="color: var(--t2); font-size: 1.1rem;">Just learning. Makes mistakes and relies on resilience.</span>
+          </div>
+          <div style="background-color: rgba(0,0,0,0.2); padding: 15px 20px; border-radius: 10px; border-left: 3px solid var(--accent3);">
+            <strong style="color: var(--accent2); display: block; margin-bottom: 5px;">Role</strong>
+            <span style="color: var(--t2); font-size: 1.1rem;">Struggling to meet expectations while retaining his humanity.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <aside class="notes" style="display:none">
+    A core aspect of Nolan's character is his relationship with his son, Mark. As Mark develops his own powers, Nolan shifts from a protective father to a demanding mentor, highlighting their different perspectives on what it means to be a hero.
+  </aside>
+  <aside class="notes">A core aspect of Nolan's character is his relationship with his son, Mark. As Mark develops his own powers, Nolan shifts from a protective father to a demanding mentor, highlighting their different perspectives on what it means to be a hero.</aside>
+</section>
+  <section style="background-color: var(--bg); color: var(--t1); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; align-items: center; justify-content: center; padding: 0 5vw;">
+  <div class="s" style="width: 100%; max-width: 1400px; display: flex; flex-direction: row; gap: 6vw; align-items: center;">
+    
+    <!-- Left Column: Text & Context -->
+    <div style="flex: 0 0 40%;">
+      <div style="font-family: var(--mono); color: var(--accent3); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 2vh; font-size: 1rem; display: flex; align-items: center;">
+        <span style="width: 30px; height: 2px; background-color: var(--accent3); margin-right: 15px;"></span> Power Scaling
+      </div>
+      <h1 style="font-family: var(--serif); font-size: clamp(3rem, 4.5vw, 4.5rem); font-weight: 900; margin: 0 0 3vh 0; color: var(--accent2); line-height: 1.1;">
+        Where Does <br><span style="color: var(--accent1);">Omni-Man</span> Rank?
+      </h1>
+      
+      <div style="display: flex; flex-direction: column; gap: 3vh; margin-top: 5vh;">
+        <div style="display: flex; align-items: flex-start;">
+          <i class="fas fa-arrow-trend-up" style="color: var(--accent3); font-size: 1.5rem; margin-top: 5px; margin-right: 20px; width: 30px; text-align: center;"></i>
+          <div>
+            <h4 style="font-size: 1.5rem; color: var(--accent2); margin: 0 0 5px 0;">Surpasses Earth Heroes</h4>
+            <p style="font-size: 1.1rem; color: var(--t2); margin: 0; line-height: 1.5;">Outclasses virtually every other standard hero on Earth combined in raw stats.</p>
+          </div>
+        </div>
+        
+        <div style="display: flex; align-items: flex-start;">
+          <i class="fas fa-fist-raised" style="color: var(--accent1); font-size: 1.5rem; margin-top: 5px; margin-right: 20px; width: 30px; text-align: center;"></i>
+          <div>
+            <h4 style="font-size: 1.5rem; color: var(--accent2); margin: 0 0 5px 0;">Top-Tier Brawler</h4>
+            <p style="font-size: 1.1rem; color: var(--t2); margin: 0; line-height: 1.5;">Relies purely on physical might rather than energy projection, magic, or telepathy.</p>
+          </div>
+        </div>
+        
+        <div style="display: flex; align-items: flex-start;">
+          <i class="fas fa-globe" style="color: var(--accent2); font-size: 1.5rem; margin-top: 5px; margin-right: 20px; width: 30px; text-align: center;"></i>
+          <div>
+            <h4 style="font-size: 1.5rem; color: var(--accent2); margin: 0 0 5px 0;">Planetary Level Threat</h4>
+            <p style="font-size: 1.1rem; color: var(--t2); margin: 0; line-height: 1.5;">Capable of depopulating or destroying the surface of an entire planet single-handedly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Chart -->
+    <div style="flex: 0 0 55%; background-color: var(--surface); border-radius: 20px; padding: 5vh 4vw; border: 1px solid var(--border-md); box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
+      <h3 style="font-family: var(--mono); color: var(--t2); text-align: center; margin: 0 0 5vh 0; letter-spacing: 2px; font-size: 1rem; text-transform: uppercase;">Threat Level Classification Matrix</h3>
+      
+      <div style="display: flex; flex-direction: column; gap: 4vh;">
+        
+        <!-- Tier 1 -->
+        <div style="display: flex; align-items: center;">
+          <div style="width: 120px; font-family: var(--sans); font-weight: bold; color: var(--t2); text-align: right; padding-right: 20px;">Street Level</div>
+          <div style="flex: 1; height: 30px; background-color: var(--bg2); border-radius: 15px; overflow: hidden;">
+            <div style="width: 15%; height: 100%; background-color: #4CAF50; border-radius: 15px;"></div>
+          </div>
+        </div>
+        
+        <!-- Tier 2 -->
+        <div style="display: flex; align-items: center;">
+          <div style="width: 120px; font-family: var(--sans); font-weight: bold; color: var(--t2); text-align: right; padding-right: 20px;">City Level</div>
+          <div style="flex: 1; height: 30px; background-color: var(--bg2); border-radius: 15px; overflow: hidden;">
+            <div style="width: 35%; height: 100%; background-color: #2196F3; border-radius: 15px;"></div>
+          </div>
+        </div>
+        
+        <!-- Tier 3 -->
+        <div style="display: flex; align-items: center;">
+          <div style="width: 120px; font-family: var(--sans); font-weight: bold; color: var(--t2); text-align: right; padding-right: 20px;">Global Threat</div>
+          <div style="flex: 1; height: 30px; background-color: var(--bg2); border-radius: 15px; overflow: hidden;">
+            <div style="width: 65%; height: 100%; background-color: var(--accent3); border-radius: 15px; position: relative;"></div>
+          </div>
+        </div>
+        
+        <!-- Tier 4 -->
+        <div style="display: flex; align-items: center;">
+          <div style="width: 120px; font-family: var(--sans); font-weight: bold; color: var(--accent1); text-align: right; padding-right: 20px;">Planetary</div>
+          <div style="flex: 1; height: 40px; background-color: var(--bg2); border-radius: 20px; overflow: hidden; border: 2px solid var(--accent1-dim); box-shadow: 0 0 15px rgba(229,57,53,0.3);">
+            <div style="width: 95%; height: 100%; background: linear-gradient(90deg, var(--accent1-dim), var(--accent1)); border-radius: 18px; display: flex; align-items: center; justify-content: flex-end; padding-right: 15px; color: white; font-weight: bold; font-family: var(--mono); letter-spacing: 1px;">
+              OMNI-MAN
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+      <div style="display: flex; justify-content: space-between; margin-top: 2vh; padding-left: 120px; color: var(--t3); font-family: var(--mono); font-size: 0.8rem;">
+        <span>Low</span>
+        <span>Moderate</span>
+        <span>High</span>
+        <span>Extreme</span>
+      </div>
+    </div>
+    
+  </div>
+  <aside class="notes" style="display:none">
+    When we look at power scaling, Omni-Man sits at the absolute pinnacle of Earth's hierarchy. He represents a planetary-level threat, outclassing virtually every other hero in raw stats.
+  </aside>
+  <aside class="notes">When we look at power scaling, Omni-Man sits at the absolute pinnacle of Earth's hierarchy. He represents a planetary-level threat, outclassing virtually every other hero in raw stats.</aside>
+</section>
+  <section style="background-color: var(--bg2); color: var(--t1); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; flex-direction: column; justify-content: center; padding: 10vh 8vw;">
+  <div class="s cx" style="width: 100%; max-width: 1200px; margin: 0 auto;">
+    
+    <div style="text-align: center; margin-bottom: 8vh;">
+      <div style="display: inline-flex; align-items: center; justify-content: center; background-color: rgba(229, 57, 53, 0.1); border: 1px solid var(--accent1); color: var(--accent1); padding: 5px 20px; border-radius: 20px; font-family: var(--mono); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 3vh; font-size: 1rem;">
+        <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i> Vulnerabilities
+      </div>
+      <h1 style="font-family: var(--serif); font-size: clamp(3rem, 5vw, 4.5rem); font-weight: 800; margin: 0; color: var(--accent2); line-height: 1.1;">
+        Are There Weaknesses?
+      </h1>
+      <p style="font-size: 1.5rem; color: var(--t2); margin: 2vh auto 0; max-width: 800px; line-height: 1.5;">
+        While nearly invincible, Viltrumites aren't gods. They possess specific physiological limitations.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 3vw;">
+      
+      <!-- Weakness 1 -->
+      <div style="background-color: var(--surface); border-radius: 20px; padding: 5vh 3vw; display: flex; flex-direction: column; align-items: center; text-align: center; border: 1px solid var(--border-md); position: relative; overflow: hidden; transition: transform 0.3s ease;">
+        <div style="width: 80px; height: 80px; border-radius: 50%; background-color: var(--bg); display: flex; align-items: center; justify-content: center; margin-bottom: 3vh; border: 2px solid var(--accent3);">
+          <i class="fas fa-assistive-listening-systems" style="font-size: 2.5rem; color: var(--accent3);"></i>
+        </div>
+        <h3 style="font-size: 1.8rem; font-weight: 700; color: var(--accent2); margin: 0 0 2vh 0;">Equilibrium Disruption</h3>
+        <p style="font-size: 1.2rem; color: var(--t2); line-height: 1.6; margin: 0;">
+          Their flight requires a delicate inner ear balance. Specific, intense sonic frequencies can completely disrupt their equilibrium, causing severe pain and disabling flight.
+        </p>
+      </div>
+
+      <!-- Weakness 2 -->
+      <div style="background-color: var(--surface); border-radius: 20px; padding: 5vh 3vw; display: flex; flex-direction: column; align-items: center; text-align: center; border: 1px solid var(--border-md); position: relative; overflow: hidden; transition: transform 0.3s ease;">
+        <div style="width: 80px; height: 80px; border-radius: 50%; background-color: var(--bg); display: flex; align-items: center; justify-content: center; margin-bottom: 3vh; border: 2px solid var(--accent1);">
+          <i class="fas fa-sun" style="font-size: 2.5rem; color: var(--accent1);"></i>
+        </div>
+        <h3 style="font-size: 1.8rem; font-weight: 700; color: var(--accent2); margin: 0 0 2vh 0;">Extreme Sustained Heat</h3>
+        <p style="font-size: 1.2rem; color: var(--t2); line-height: 1.6; margin: 0;">
+          While they can survive magma, sustained exposure to astronomical temperatures—like the core or surface of a star—will eventually break down their cellular structure.
+        </p>
+      </div>
+
+      <!-- Weakness 3 -->
+      <div style="background-color: var(--surface); border-radius: 20px; padding: 5vh 3vw; display: flex; flex-direction: column; align-items: center; text-align: center; border: 1px solid var(--border-md); position: relative; overflow: hidden; transition: transform 0.3s ease;">
+        <div style="width: 80px; height: 80px; border-radius: 50%; background-color: var(--bg); display: flex; align-items: center; justify-content: center; margin-bottom: 3vh; border: 2px solid var(--accent2);">
+          <i class="fas fa-users" style="font-size: 2.5rem; color: var(--accent2);"></i>
+        </div>
+        <h3 style="font-size: 1.8rem; font-weight: 700; color: var(--accent2); margin: 0 0 2vh 0;">Overwhelming Force</h3>
+        <p style="font-size: 1.2rem; color: var(--t2); line-height: 1.6; margin: 0;">
+          The most consistent vulnerability is sheer, brute force from beings of equal or greater strength, such as other Viltrumites or genetically engineered monstrosities.
+        </p>
+      </div>
+
+    </div>
+  </div>
+  <aside class="notes" style="display:none">
+    While nearly invincible, Viltrumites aren't gods. Extreme sensory overload, specifically targeting their delicate inner ear for flight equilibrium, and sheer overwhelming force from equally powerful beings are their only real vulnerabilities.
+  </aside>
+  <aside class="notes">While nearly invincible, Viltrumites aren't gods. Extreme sensory overload, specifically targeting their delicate inner ear for flight equilibrium, and sheer overwhelming force from equally powerful beings are their only real vulnerabilities.</aside>
+</section>
+  <section style="background-color: var(--bg); color: var(--t1); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+  <!-- Abstract Background Elements -->
+  <div style="position: absolute; top: -10vh; right: -5vw; font-size: 40vw; color: var(--surface); opacity: 0.3; line-height: 1; font-family: var(--serif); pointer-events: none;">"</div>
+  <div style="position: absolute; bottom: -20vh; left: -5vw; font-size: 40vw; color: var(--surface); opacity: 0.3; line-height: 1; font-family: var(--serif); pointer-events: none; transform: rotate(180deg);">"</div>
+  
+  <div class="s cx" style="width: 100%; max-width: 1000px; padding: 0 5vw; position: relative; z-index: 10;">
+    
+    <div style="text-align: center; margin-bottom: 6vh;">
+      <div style="font-family: var(--mono); color: var(--accent3); font-weight: bold; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 2vh; font-size: 1rem;">
+        Legacy
+      </div>
+    </div>
+
+    <div style="position: relative; padding: 6vh 4vw; border-left: 8px solid var(--accent1); border-right: 8px solid var(--accent3); background: linear-gradient(90deg, rgba(229,57,53,0.05) 0%, rgba(251,192,45,0.05) 100%);">
+      <h1 style="font-family: var(--serif); font-size: clamp(2.5rem, 4vw, 3.5rem); font-weight: 300; margin: 0; color: var(--accent2); line-height: 1.4; text-align: center; font-style: italic;">
+        "Omni-Man serves as the ultimate benchmark. He redefines the archetype by showing us the <span style="color: var(--accent1); font-weight: 700;">terrifying reality</span> of what that level of power truly looks like in action."
+      </h1>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; margin-top: 8vh; gap: 4vw;">
+      <div style="flex: 1; text-align: center;">
+        <i class="fas fa-mask" style="font-size: 2rem; color: var(--accent2); margin-bottom: 15px;"></i>
+        <h4 style="font-size: 1.2rem; color: var(--accent2); margin: 0 0 10px 0;">Redefining the Archetype</h4>
+        <p style="font-size: 1rem; color: var(--t2); margin: 0;">Subverts the classic 'Superman' trope with brutal realism.</p>
+      </div>
+      
+      <div style="flex: 1; text-align: center;">
+        <i class="fas fa-weight-hanging" style="font-size: 2rem; color: var(--accent2); margin-bottom: 15px;"></i>
+        <h4 style="font-size: 1.2rem; color: var(--accent2); margin: 0 0 10px 0;">The Burden of Power</h4>
+        <p style="font-size: 1rem; color: var(--t2); margin: 0;">Highlights the psychological disconnect caused by immortality and invincibility.</p>
+      </div>
+
+      <div style="flex: 1; text-align: center;">
+        <i class="fas fa-film" style="font-size: 2rem; color: var(--accent2); margin-bottom: 15px;"></i>
+        <h4 style="font-size: 1.2rem; color: var(--accent2); margin: 0 0 10px 0;">Setting the Bar</h4>
+        <p style="font-size: 1rem; color: var(--t2); margin: 0;">Elevated the standard for kinetic, visceral action in modern animation.</p>
+      </div>
+    </div>
+
+  </div>
+  <aside class="notes" style="display:none">
+    Omni-Man serves as the ultimate benchmark in the series. He redefines the 'Superman' archetype by showing us the terrifying reality of what that level of power truly looks like in action.
+  </aside>
+  <aside class="notes">Omni-Man serves as the ultimate benchmark in the series. He redefines the 'Superman' archetype by showing us the terrifying reality of what that level of power truly looks like in action.</aside>
+</section>
+  <section style="background-color: var(--bg2); color: var(--t1); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+  <!-- Background radial gradient to draw focus -->
+  <div style="position: absolute; width: 100vw; height: 100vh; background: radial-gradient(circle at center, rgba(229, 57, 53, 0.1) 0%, transparent 60%);"></div>
+  
+  <div class="s cx" style="text-align: center; z-index: 10; max-width: 800px; padding: 0 5vw;">
+    
+    <!-- Logo Mark -->
+    <div style="width: 120px; height: 120px; background-color: var(--surface); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 5vh; border: 4px solid var(--accent1); box-shadow: 0 0 30px rgba(229, 57, 53, 0.4);">
+      <span style="font-family: var(--serif); font-size: 4rem; font-weight: 900; color: var(--accent2); letter-spacing: -2px;">O</span>
+    </div>
+
+    <h1 style="font-family: var(--serif); font-size: clamp(3rem, 6vw, 6rem); font-weight: 900; margin: 0 0 2vh 0; text-transform: uppercase; letter-spacing: 2px; color: var(--accent2);">
+      Thank You
+    </h1>
+    
+    <h2 style="font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 300; color: var(--t2); margin: 0 0 8vh 0;">
+      Any Questions on <span style="color: var(--accent3); font-weight: 600;">Power Scaling?</span>
+    </h2>
+    
+    <!-- Contact / Action Chips -->
+    <div style="display: flex; justify-content: center; gap: 2vw; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; background-color: var(--surface); padding: 10px 25px; border-radius: 30px; border: 1px solid var(--border-md); font-family: var(--mono); font-size: 1rem; color: var(--t1);">
+        <i class="fas fa-comments" style="color: var(--accent1); margin-right: 12px; font-size: 1.2rem;"></i> Open for Q&A
+      </div>
+      <div style="display: flex; align-items: center; background-color: var(--surface); padding: 10px 25px; border-radius: 30px; border: 1px solid var(--border-md); font-family: var(--mono); font-size: 1rem; color: var(--t1);">
+        <i class="fas fa-book-open" style="color: var(--accent3); margin-right: 12px; font-size: 1.2rem;"></i> Explore Viltrumite Lore
+      </div>
+    </div>
+    
+  </div>
+  <aside class="notes" style="display:none">
+    Thank you for joining this breakdown of Omni-Man's abilities. I'd now like to open the floor to any questions you might have about his power scaling or his dynamic with Mark.
+  </aside>
+  <aside class="notes">Thank you for joining this breakdown of Omni-Man's abilities. I'd now like to open the floor to any questions you might have about his power scaling or his dynamic with Mark.</aside>
+</section>
+
+<script>
+(function(){
+  const sections = document.querySelectorAll('section');
+  const total = sections.length;
+  const counter = document.getElementById('slide-counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  // IntersectionObserver: mark the visible slide as .active (triggers CSS animations)
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        sections.forEach(s => s.classList.remove('active'));
+        e.target.classList.add('active');
+        current = Array.from(sections).indexOf(e.target);
+        if (counter) counter.textContent = (current+1) + ' / ' + total;
+        if (progress) progress.style.width = ((current+1)/total*100) + '%';
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s => obs.observe(s));
+
+  // Activate first slide immediately
+  if (sections[0]) sections[0].classList.add('active');
+  if (counter) counter.textContent = '1 / ' + total;
+  if (progress) progress.style.width = (1/total*100) + '%';
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      if (current < total - 1) sections[current + 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (current > 0) sections[current - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      sections[0].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      sections[total - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'f' || e.key === 'F11') {
+      e.preventDefault();
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>

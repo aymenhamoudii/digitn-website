@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Ben 10: Omniverse — The Ultimate Alien Legacy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+    --bg: #0A0F0A;
+    --bg2: #111A11;
+    --surface: #162016;
+    --surface2: #232723;
+    --border: rgba(255,255,255,.07);
+    --border-md: rgba(255,255,255,.11);
+    --accent1: #39FF14;
+    --accent1-dim: rgba(57, 255, 20, 0.18);
+    --accent2: #1A8C00;
+    --accent2-dim: rgba(26, 140, 0, 0.18);
+    --accent3: #7FFF00;
+    --accent3-dim: rgba(127, 255, 0, 0.18);
+    --t1: #E8FFE8;
+    --t2: #9BBF9B;
+    --t3: rgba(232, 255, 232, 0.3);
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --serif: 'Plus Jakarta Sans', sans-serif;
+  }
+    
+  /* ─── Reset ─── */
+  ::-webkit-scrollbar{display:none}
+  *{scrollbar-width:none;-ms-overflow-style:none;box-sizing:border-box;margin:0;padding:0}
+  html{scroll-snap-type:y mandatory;overflow-y:scroll;overflow-x:hidden;scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  /* ─── Slide (full viewport) ─── */
+  section{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+  /* ─── Stagger animation (.s container) ─── */
+  .s{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
+  .s>*{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+  section.active .s>*{opacity:1;transform:translateY(0)}
+  section.active .s>*:nth-child(1){transition-delay:.03s}
+  section.active .s>*:nth-child(2){transition-delay:.09s}
+  section.active .s>*:nth-child(3){transition-delay:.15s}
+  section.active .s>*:nth-child(4){transition-delay:.21s}
+  section.active .s>*:nth-child(5){transition-delay:.27s}
+  section.active .s>*:nth-child(6){transition-delay:.33s}
+  section.active .s>*:nth-child(7){transition-delay:.39s}
+  section.active .s>*:nth-child(8){transition-delay:.45s}
+
+  /* ─── Centering utility ─── */
+  .cx{justify-content:center;align-items:center;text-align:center}
+
+  /* ─── Speaker notes (hidden) ─── */
+  aside.notes{display:none!important}
+
+  /* ─── Slide counter ─── */
+  #slide-counter{position:fixed;bottom:2vh;right:2vw;font-family:var(--mono);font-size:1.6vh;color:var(--t3);background:var(--surface);border:1px solid var(--border);border-radius:1vh;padding:.8vh 1.6vh;z-index:100;pointer-events:none}
+
+  /* ─── Progress bar ─── */
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--accent1);z-index:100;transition:width .3s ease}
+
+  </style>
+</head>
+<body>
+  <div id="progress" style="width:0"></div>
+  <div id="slide-counter">1 / 11</div>
+  <section style="background: var(--bg); position: relative; overflow: hidden; font-family: var(--sans);">
+
+  <!-- Animated radial background glow -->
+  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120vh; height: 120vh; background: radial-gradient(circle, rgba(57,255,20,0.08) 0%, rgba(57,255,20,0.03) 40%, transparent 70%); pointer-events: none; animation: pulse-bg 4s ease-in-out infinite;"></div>
+
+  <!-- Hexagon grid background pattern -->
+  <div style="position: absolute; inset: 0; opacity: 0.04; background-image: repeating-linear-gradient(60deg, var(--accent1) 0, var(--accent1) 1px, transparent 0, transparent 50%), repeating-linear-gradient(120deg, var(--accent1) 0, var(--accent1) 1px, transparent 0, transparent 50%); background-size: 40px 70px; pointer-events: none;"></div>
+
+  <!-- Top-left corner accent line -->
+  <div style="position: absolute; top: 0; left: 0; width: 200px; height: 3px; background: linear-gradient(90deg, var(--accent1), transparent);"></div>
+  <div style="position: absolute; top: 0; left: 0; width: 3px; height: 200px; background: linear-gradient(180deg, var(--accent1), transparent);"></div>
+
+  <!-- Bottom-right corner accent line -->
+  <div style="position: absolute; bottom: 0; right: 0; width: 200px; height: 3px; background: linear-gradient(270deg, var(--accent1), transparent);"></div>
+  <div style="position: absolute; bottom: 0; right: 0; width: 3px; height: 200px; background: linear-gradient(0deg, var(--accent1), transparent);"></div>
+
+  <!-- Omnitrix ring decoration -->
+  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 90vh; height: 90vh; border-radius: 50%; border: 1px solid rgba(57,255,20,0.05); pointer-events: none;"></div>
+  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 70vh; height: 70vh; border-radius: 50%; border: 1px solid rgba(57,255,20,0.08); pointer-events: none;"></div>
+
+  <style>
+    @keyframes pulse-bg {
+      0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.05); }
+    }
+    @keyframes spin-slow {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    @keyframes glow-pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(57,255,20,0.5), 0 0 40px rgba(57,255,20,0.3); }
+      50% { box-shadow: 0 0 40px rgba(57,255,20,0.8), 0 0 80px rgba(57,255,20,0.4), 0 0 120px rgba(57,255,20,0.2); }
+    }
+    @keyframes text-glow {
+      0%, 100% { text-shadow: 0 0 20px rgba(57,255,20,0.6), 0 0 40px rgba(57,255,20,0.3); }
+      50% { text-shadow: 0 0 40px rgba(57,255,20,0.9), 0 0 80px rgba(57,255,20,0.5); }
+    }
+  </style>
+
+  <div class="s cx" style="height: 100vh; flex-direction: column; gap: 0; padding: 6vh 8vw; position: relative; z-index: 1;">
+
+    <!-- Animated badge -->
+    <div style="display: flex; align-items: center; gap: 10px; background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); border-radius: 100px; padding: 8px 20px; margin-bottom: 4vh;">
+      <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent1); animation: glow-pulse 2s ease-in-out infinite;"></div>
+      <span style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent1);">Nostalgia Retrospective — 2012–2014</span>
+    </div>
+
+    <!-- Main title -->
+    <div style="text-align: center; margin-bottom: 2vh;">
+      <div style="font-family: var(--serif); font-size: clamp(3rem, 9vw, 8rem); font-weight: 900; color: var(--accent1); letter-spacing: -0.02em; line-height: 0.9; animation: text-glow 3s ease-in-out infinite; text-transform: uppercase;">BEN 10</div>
+      <div style="font-family: var(--serif); font-size: clamp(1.5rem, 5vw, 4rem); font-weight: 300; color: var(--t1); letter-spacing: 0.4em; text-transform: uppercase; margin-top: 0.5vh;">OMNIVERSE</div>
+    </div>
+
+    <!-- Glowing divider -->
+    <div style="display: flex; align-items: center; gap: 16px; margin: 3vh 0; width: 60%;">
+      <div style="flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--accent1));"></div>
+      <div style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--accent1); display: flex; align-items: center; justify-content: center; animation: glow-pulse 2s ease-in-out infinite;">
+        <div style="width: 16px; height: 16px; background: var(--accent1); border-radius: 50%;"></div>
+      </div>
+      <div style="flex: 1; height: 1px; background: linear-gradient(90deg, var(--accent1), transparent);"></div>
+    </div>
+
+    <!-- Subtitle -->
+    <div style="font-family: var(--sans); font-size: clamp(0.9rem, 1.8vw, 1.2rem); color: var(--t2); letter-spacing: 0.1em; text-align: center; max-width: 600px; line-height: 1.6; margin-bottom: 4vh;">The Ultimate Alien Legacy — A Nostalgia Retrospective</div>
+
+    <!-- Hero tagline chips -->
+    <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+      <div style="display: flex; align-items: center; gap: 8px; background: rgba(26,140,0,0.2); border: 1px solid rgba(26,140,0,0.4); border-radius: 8px; padding: 10px 18px;">
+        <i class="fas fa-dna" style="color: var(--accent2); font-size: 0.9rem;"></i>
+        <span style="font-family: var(--mono); font-size: 0.75rem; color: var(--t2); letter-spacing: 0.1em;">70+ Aliens</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; background: rgba(26,140,0,0.2); border: 1px solid rgba(26,140,0,0.4); border-radius: 8px; padding: 10px 18px;">
+        <i class="fas fa-tv" style="color: var(--accent2); font-size: 0.9rem;"></i>
+        <span style="font-family: var(--mono); font-size: 0.75rem; color: var(--t2); letter-spacing: 0.1em;">80 Episodes</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; background: rgba(26,140,0,0.2); border: 1px solid rgba(26,140,0,0.4); border-radius: 8px; padding: 10px 18px;">
+        <i class="fas fa-globe" style="color: var(--accent2); font-size: 0.9rem;"></i>
+        <span style="font-family: var(--mono); font-size: 0.75rem; color: var(--t2); letter-spacing: 0.1em;">Multiverse Saga</span>
+      </div>
+    </div>
+
+  </div>
+
+  <aside class="notes" style="display:none">Open with dramatic energy. This is a love letter to Omniverse — the era that pushed Ben 10 to its most ambitious. Let the audience feel the weight of nostalgia as we revisit what made this series legendary.</aside>
+  <aside class="notes">Open with dramatic energy. This is a love letter to Omniverse — the era that pushed Ben 10 to its most ambitious. Let the audience feel the weight of nostalgia as we revisit what made this series legendary.</aside>
+</section>
+  <section style="background: var(--bg); position: relative; overflow: hidden; font-family: var(--sans);">
+
+  <!-- Background gradient sweep -->
+  <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(57,255,20,0.04) 0%, transparent 50%, rgba(26,140,0,0.04) 100%); pointer-events: none;"></div>
+
+  <!-- Top accent line -->
+  <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent1), transparent);"></div>
+
+  <div class="s" style="height: 100vh; display: flex; flex-direction: column; padding: 6vh 8vw; position: relative; z-index: 1; justify-content: center; gap: 4vh;">
+
+    <!-- Section label + Title -->
+    <div>
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1.5vh;">Origins</div>
+      <h1 style="font-family: var(--serif); font-size: clamp(2rem, 4.5vw, 3.5rem); font-weight: 800; color: var(--t1); line-height: 1.1; margin: 0;">From Classic to Omniverse:<br><span style="color: var(--accent1);">The Evolution</span></h1>
+    </div>
+
+    <!-- Horizontal timeline -->
+    <div style="position: relative; display: flex; align-items: flex-start; justify-content: space-between; gap: 2vw; padding-top: 2vh;">
+
+      <!-- Connecting line -->
+      <div style="position: absolute; top: 28px; left: 5%; right: 5%; height: 2px; background: linear-gradient(90deg, rgba(57,255,20,0.2), var(--accent1), rgba(57,255,20,0.2));"></div>
+
+      <!-- Era 1: Original Series -->
+      <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 16px; position: relative;">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--surface); border: 2px solid rgba(57,255,20,0.3); display: flex; align-items: center; justify-content: center; position: relative; z-index: 1;">
+          <i class="fas fa-star" style="color: rgba(57,255,20,0.5); font-size: 1.1rem;"></i>
+        </div>
+        <div style="background: var(--surface); border: 1px solid rgba(57,255,20,0.2); border-radius: 12px; padding: 18px 16px; text-align: center; width: 100%;">
+          <div style="font-family: var(--mono); font-size: 1.3rem; font-weight: 700; color: rgba(57,255,20,0.5); margin-bottom: 6px;">2005</div>
+          <div style="font-size: 0.9rem; font-weight: 700; color: var(--t1); margin-bottom: 8px;">Original Series</div>
+          <div style="font-size: 0.75rem; color: var(--t2); line-height: 1.5;">The Omnitrix awakens on a 10-year-old boy's wrist</div>
+          <div style="margin-top: 10px; display: inline-block; background: rgba(57,255,20,0.08); border: 1px solid rgba(57,255,20,0.2); border-radius: 100px; padding: 3px 10px; font-family: var(--mono); font-size: 0.65rem; color: rgba(57,255,20,0.6); text-transform: uppercase; letter-spacing: 0.1em;">Classic</div>
+        </div>
+      </div>
+
+      <!-- Era 2: Alien Force -->
+      <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 16px; position: relative;">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--surface); border: 2px solid rgba(57,255,20,0.4); display: flex; align-items: center; justify-content: center; position: relative; z-index: 1;">
+          <i class="fas fa-bolt" style="color: rgba(57,255,20,0.65); font-size: 1.1rem;"></i>
+        </div>
+        <div style="background: var(--surface); border: 1px solid rgba(57,255,20,0.3); border-radius: 12px; padding: 18px 16px; text-align: center; width: 100%;">
+          <div style="font-family: var(--mono); font-size: 1.3rem; font-weight: 700; color: rgba(57,255,20,0.65); margin-bottom: 6px;">2008</div>
+          <div style="font-size: 0.9rem; font-weight: 700; color: var(--t1); margin-bottom: 8px;">Alien Force</div>
+          <div style="font-size: 0.75rem; color: var(--t2); line-height: 1.5;">A darker, older Ben faces galactic threats</div>
+          <div style="margin-top: 10px; display: inline-block; background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); border-radius: 100px; padding: 3px 10px; font-family: var(--mono); font-size: 0.65rem; color: rgba(57,255,20,0.7); text-transform: uppercase; letter-spacing: 0.1em;">Darker</div>
+        </div>
+      </div>
+
+      <!-- Era 3: Ultimate Alien -->
+      <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 16px; position: relative;">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--surface); border: 2px solid rgba(57,255,20,0.6); display: flex; align-items: center; justify-content: center; position: relative; z-index: 1;">
+          <i class="fas fa-fire" style="color: rgba(57,255,20,0.8); font-size: 1.1rem;"></i>
+        </div>
+        <div style="background: var(--surface); border: 1px solid rgba(57,255,20,0.4); border-radius: 12px; padding: 18px 16px; text-align: center; width: 100%;">
+          <div style="font-family: var(--mono); font-size: 1.3rem; font-weight: 700; color: rgba(57,255,20,0.8); margin-bottom: 6px;">2010</div>
+          <div style="font-size: 0.9rem; font-weight: 700; color: var(--t1); margin-bottom: 8px;">Ultimate Alien</div>
+          <div style="font-size: 0.75rem; color: var(--t2); line-height: 1.5;">Unlocking new power levels — the Ultimate forms</div>
+          <div style="margin-top: 10px; display: inline-block; background: rgba(57,255,20,0.12); border: 1px solid rgba(57,255,20,0.4); border-radius: 100px; padding: 3px 10px; font-family: var(--mono); font-size: 0.65rem; color: rgba(57,255,20,0.8); text-transform: uppercase; letter-spacing: 0.1em;">Evolved</div>
+        </div>
+      </div>
+
+      <!-- Era 4: Omniverse -->
+      <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 16px; position: relative;">
+        <div style="width: 56px; height: 56px; border-radius: 50%; background: rgba(57,255,20,0.15); border: 2px solid var(--accent1); display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; box-shadow: 0 0 20px rgba(57,255,20,0.4);">
+          <i class="fas fa-infinity" style="color: var(--accent1); font-size: 1.1rem;"></i>
+        </div>
+        <div style="background: rgba(57,255,20,0.06); border: 1px solid rgba(57,255,20,0.5); border-radius: 12px; padding: 18px 16px; text-align: center; width: 100%; box-shadow: 0 0 30px rgba(57,255,20,0.08);">
+          <div style="font-family: var(--mono); font-size: 1.3rem; font-weight: 700; color: var(--accent1); margin-bottom: 6px;">2012</div>
+          <div style="font-size: 0.9rem; font-weight: 700; color: var(--t1); margin-bottom: 8px;">Omniverse</div>
+          <div style="font-size: 0.75rem; color: var(--t2); line-height: 1.5;">The definitive multiverse saga — the culmination</div>
+          <div style="margin-top: 10px; display: inline-block; background: rgba(57,255,20,0.2); border: 1px solid var(--accent1); border-radius: 100px; padding: 3px 10px; font-family: var(--mono); font-size: 0.65rem; color: var(--accent1); text-transform: uppercase; letter-spacing: 0.1em; box-shadow: 0 0 10px rgba(57,255,20,0.3);">Definitive</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom note -->
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <div style="width: 3px; height: 36px; background: var(--accent1); border-radius: 2px;"></div>
+      <p style="font-size: 0.85rem; color: var(--t2); margin: 0; line-height: 1.6; max-width: 700px;">Each series built upon the last — <span style="color: var(--t1); font-weight: 600;">Omniverse was the culmination of everything.</span> More aliens, more universes, more ambition than any chapter before it.</p>
+    </div>
+
+  </div>
+
+  <aside class="notes" style="display:none">Walk the audience through the four eras quickly. Emphasize that each series built on the last — Omniverse was the culmination of everything. The art style shift was controversial but the scope was unmatched.</aside>
+  <aside class="notes">Walk the audience through the four eras quickly. Emphasize that each series built on the last — Omniverse was the culmination of everything. The art style shift was controversial but the scope was unmatched.</aside>
+</section>
+  <section style="background: var(--bg); position: relative; overflow: hidden; font-family: var(--sans);">
+
+  <!-- Background -->
+  <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(57,255,20,0.06) 0%, transparent 60%); pointer-events: none;"></div>
+  <div style="position: absolute; top: 0; right: 0; bottom: 0; width: 45%; background: linear-gradient(135deg, transparent 0%, rgba(57,255,20,0.03) 100%); pointer-events: none;"></div>
+
+  <!-- Top accent -->
+  <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent1), transparent);"></div>
+
+  <div class="s" style="height: 100vh; display: flex; align-items: center; padding: 6vh 8vw; position: relative; z-index: 1; gap: 6vw;">
+
+    <!-- LEFT: Text content -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 2.5vh;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent2);">The Device</div>
+
+      <h1 style="font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 900; color: var(--t1); line-height: 1.1; margin: 0;">The Omnitrix:<br><span style="color: var(--accent1);">More Than a Watch</span></h1>
+
+      <p style="font-size: 0.95rem; color: var(--t2); line-height: 1.7; margin: 0; max-width: 420px;">A living DNA library worn on the wrist of a 16-year-old. Not a weapon — a tool for peace, built by <span style="color: var(--t1); font-weight: 600;">Azmuth</span>, the greatest mind in three galaxies.</p>
+
+      <!-- Divider -->
+      <div style="height: 1px; width: 100%; background: linear-gradient(90deg, rgba(57,255,20,0.3), transparent); margin: 0.5vh 0;"></div>
+
+      <!-- Feature rows -->
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+
+        <div style="display: flex; align-items: flex-start; gap: 14px;">
+          <div style="width: 36px; height: 36px; min-width: 36px; border-radius: 8px; background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-palette" style="color: var(--accent1); font-size: 0.85rem;"></i>
+          </div>
+          <div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--t1); margin-bottom: 2px;">Sleek Omniverse Redesign</div>
+            <div style="font-size: 0.78rem; color: var(--t2); line-height: 1.5;">The iconic green hourglass symbol — reimagined for a new era</div>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: flex-start; gap: 14px;">
+          <div style="width: 36px; height: 36px; min-width: 36px; border-radius: 8px; background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-dna" style="color: var(--accent1); font-size: 0.85rem;"></i>
+          </div>
+          <div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--t1); margin-bottom: 2px;">One Million+ DNA Samples</div>
+            <div style="font-size: 0.78rem; color: var(--t2); line-height: 1.5;">A living catalogue of alien life across the known universe</div>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: flex-start; gap: 14px;">
+          <div style="width: 36px; height: 36px; min-width: 36px; border-radius: 8px; background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-unlock" style="color: var(--accent1); font-size: 0.85rem;"></i>
+          </div>
+          <div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--t1); margin-bottom: 2px;">Master Control</div>
+            <div style="font-size: 0.78rem; color: var(--t2); line-height: 1.5;">Instant, limitless transformation — the ultimate unlocked state</div>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: flex-start; gap: 14px;">
+          <div style="width: 36px; height: 36px; min-width: 36px; border-radius: 8px; background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-brain" style="color: var(--accent1); font-size: 0.85rem;"></i>
+          </div>
+          <div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--t1); margin-bottom: 2px;">Built by Azmuth</div>
+            <div style="font-size: 0.78rem; color: var(--t2); line-height: 1.5;">Creator: the foremost Galvan genius — greatest mind in three galaxies</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: Glowing ring diagram -->
+    <div style="flex: 0 0 auto; display: flex; align-items: center; justify-content: center; width: 36vw; height: 36vw; max-width: 400px; max-height: 400px; position: relative;">
+
+      <!-- Outer rotating ring -->
+      <div style="position: absolute; inset: 0; border-radius: 50%; border: 2px dashed rgba(57,255,20,0.2); animation: spin-slow 20s linear infinite;"></div>
+
+      <!-- Mid ring -->
+      <div style="position: absolute; inset: 8%; border-radius: 50%; border: 1px solid rgba(57,255,20,0.15);"></div>
+
+      <!-- Inner glow ring -->
+      <div style="position: absolute; inset: 18%; border-radius: 50%; border: 2px solid rgba(57,255,20,0.4); box-shadow: 0 0 40px rgba(57,255,20,0.2), inset 0 0 40px rgba(57,255,20,0.05);"></div>
+
+      <!-- Core omnitrix symbol -->
+      <div style="position: relative; z-index: 2; width: 50%; height: 50%; border-radius: 50%; background: radial-gradient(circle, rgba(57,255,20,0.25) 0%, rgba(57,255,20,0.1) 50%, transparent 80%); border: 3px solid var(--accent1); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 50px rgba(57,255,20,0.5), 0 0 100px rgba(57,255,20,0.2);">
+        <!-- Hourglass shape using clip-path -->
+        <div style="width: 55%; height: 55%; background: var(--accent1); clip-path: polygon(20% 0%, 80% 0%, 50% 50%, 80% 100%, 20% 100%, 50% 50%); filter: drop-shadow(0 0 8px rgba(57,255,20,0.8));"></div>
+      </div>
+
+      <!-- Orbit dots -->
+      <div style="position: absolute; top: 6%; left: 50%; transform: translateX(-50%); width: 10px; height: 10px; border-radius: 50%; background: var(--accent1); box-shadow: 0 0 10px var(--accent1);"></div>
+      <div style="position: absolute; bottom: 10%; right: 12%; width: 7px; height: 7px; border-radius: 50%; background: var(--accent2); box-shadow: 0 0 8px var(--accent2);"></div>
+      <div style="position: absolute; top: 30%; left: 3%; width: 6px; height: 6px; border-radius: 50%; background: var(--accent3); box-shadow: 0 0 8px var(--accent3);"></div>
+
+      <style>
+        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      </style>
+    </div>
+
+  </div>
+
+  <aside class="notes" style="display:none">Highlight the Omnitrix redesign in Omniverse specifically. The green hourglass symbol became the most recognizable icon of the franchise. Talk about the mythology behind the device — it's not just a weapon, it's a tool for peace.</aside>
+  <aside class="notes">Highlight the Omnitrix redesign in Omniverse specifically. The green hourglass symbol became the most recognizable icon of the franchise. Talk about the mythology behind the device — it's not just a weapon, it's a tool for peace.</aside>
+</section>
+  <section style="background: var(--bg); position: relative; overflow: hidden; font-family: var(--sans);">
+
+  <!-- Background gradient -->
+  <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 30%, rgba(57,255,20,0.05) 0%, transparent 60%); pointer-events: none;"></div>
+
+  <!-- Top accent -->
+  <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent1), transparent);"></div>
+
+  <div class="s" style="height: 100vh; display: flex; flex-direction: column; padding: 5vh 7vw 4vh; position: relative; z-index: 1; gap: 3vh;">
+
+    <!-- Header -->
+    <div style="display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+      <div>
+        <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.8vh;">The Roster</div>
+        <h1 style="font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; color: var(--t1); margin: 0;">The Iconic Ten — <span style="color: var(--accent1);">Core Aliens of Omniverse</span></h1>
+      </div>
+      <div style="background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); border-radius: 8px; padding: 8px 16px; font-family: var(--mono); font-size: 0.75rem; color: var(--accent1);">70+ Total Transformations</div>
+    </div>
+
+    <!-- Alien Card Grid - 4 columns, 2 rows -->
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 1fr); gap: 14px; flex: 1;">
+
+      <!-- Feedback -->
+      <div style="background: linear-gradient(135deg, rgba(57,255,20,0.1), var(--surface)); border: 1px solid rgba(57,255,20,0.4); border-radius: 14px; padding: 18px 16px; display: flex; flex-direction: column; gap: 10px; position: relative; overflow: hidden; box-shadow: 0 0 20px rgba(57,255,20,0.1);">
+        <div style="position: absolute; top: 0; right: 0; width: 60px; height: 60px; background: radial-gradient(circle at top right, rgba(57,255,20,0.12), transparent);"></div>
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(57,255,20,0.15); border: 1px solid rgba(57,255,20,0.4); display: flex; align-items: center; justify-content: center;">
+          <i class="fas fa-bolt" style="color: var(--accent1); font-size: 1rem;"></i>
+        </div>
+        <div style="font-size: 0.95rem; font-weight: 800; color: var(--t1);">Feedback</div>
+        <div style="font-size: 0.72rem; color: var(--t2); line-height: 1.5; flex: 1;">Fan-favorite electric absorber — restored in Omniverse's most emotional arc</div>
+        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+          <span style="background: rgba(57,255,20,0.12); border: 1px solid rgba(57,255,20,0.3); border-radius: 100px; padding: 2px 8px; font-family: var(--mono); font-size: 0.6rem; color: var(--accent1);">Conductoid</span>
+          <span style="background: rgba(57,255,20,0.06); border: 1px solid rgba(57,255,20,0.15); border-radius: 100px; padding: 2px 8px; font-family: var(--mono); font-size: 0.6rem; color: var(--t2);">Fan Fave</span>
+        </div>
+      </div>
+
+      <!-- Gravattack -->
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 16px; display: flex; flex-direction: column; gap: 10px; position: relative; overflow: hidden; transition: border-color 0.3s;" onmouseover="this.style.borderColor='rgba(57,255,20,0.3)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(26,140,0,0.2); border: 1px solid rgba(26,140,0,0.4); display: flex; align-items: center; justify-content: center;">
+          <i class="fas fa-globe" style="color: var(--accent2); font-size: 1rem;"></i>
+        </div>
+        <div style="font-size: 0.95rem; font-weight: 800; color: var(--t1);">Gravattack</div>
+        <div style="font-size: 0.72rem; color: var(--t2); line-height: 1.5; flex: 1;">Gravitational powerhouse — a living planet with total gravity control</div>
+        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+          <span style="background: rgba(26,140,0,0.15); border: 1px solid rgba(26,140,0,0.3); border-radius: 100px; padding: 2px 8px; font-family: var(--mono); font-size: 0.6rem; color: var(--accent2);">Galilean</span>
+          <span style="background: rgba(57,255,20,0.06); border: 1px solid rgba(57,255,20,0.15); border-radius: 100px; padding: 2px 8px; font-family: var(--mono); font-size: 0.6rem; color: var(--t2);">New</span>
+        </div>
+      </div>
+
+      <!-- Bloxx -->
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 16px; display: flex; flex-direction: column; gap: 10px; position: relative; overflow: hidden; transition: border-color 0.3s;" onmouseover="this.style.borderColor='rgba(57,255,20,0.3)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(26,140,0,0.2); border: 1px solid rgba(26,140,0,0.4); display: flex; align-items: center; justify-content: center;">
+          <i class="fas fa-cubes" style="color: var(--accent2); font-size: 1rem;"></i>
+        </div>
+        <div style="font-size: 0.95rem; font-weight: 800; color: var(--t1);">Bloxx</div>
+        <div style="font-size: 0.72rem; color: var(--t2); line-height: 1.5; flex: 1;">Shape-shifting builder — infinite structural forms, walls, cages, and more</div>
+        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+          <span style="background: rgba(26,140,0,0.15); border: 1px solid rgba(26,140,0,0.3); border-radius: 100px; padding: 2px 8px; font-family: var(--mono); font-size: 0.6rem; color: var(--accent2);">Segmentasapien</span>
+        </div>
+      </div>
+
+      <!-- Kickin Hawk -->
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 16px; display: flex; flex-direction: column; gap: 10px; position: relative; overflow: hidden; transition: border-color 0.3s;" onmouseover="this.style.borderColor='rgba(57,255,20,0.3)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(26,140,0,0.2); border: 1px solid rgba(26,140,0,0.4); display: flex; align-items: center; justify-content: center;">
+          <i class="fas fa-feather-alt" style="color: var(--accent2); font-size: 1rem;"></i>
+        </div>
+        <div style="font-size: 0.95rem; font-weight: 800; color: var(--t1);">Kickin Hawk</div>
+        <div style="font-size: 0.72rem; color: var(--t2); line-height: 1.5; flex: 1;">Street-level brawler — razor-sharp talons and ferocious combat instincts</div>
+        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+          <span style="background: rgba(26,140,0,0.15); border: 1px solid rgba(26,140,0,0.3); border-radius: 100px; padding: 2px 8px; font-family: var(--mono); font-size: 0.6rem; color: var(--accent2);">Caladan</span>
+          <span style="background: rgba(57,255,20,0.06); border: 1px solid rgba(57,255,20,0.15); border-radius: 100px; padding: 2px 8px; font-family: var(--mono); font-size: 0.6rem; color: var(--t2);">New</span>
+        </div>
+      </div>
+
+      <!-- Shocksquatch -->
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 16px; display: flex; flex-direction: column; gap: 10px; transition: border-color 0.3s;" onmouseover="this.style.borderColor='rgba(57,255,20,0.3)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(127,255,0,0.1); border: 1px solid rgba(127,255,0,0.3); display: flex; align-items: center; justify-content: center;">
+          <i class="fas fa-paw" style="color: var(--accent3); font-size: 1rem;"></i>
+        </div>
+        <div style="font-size: 0.95rem; font-weight: 800; color: var(--t1);">Shocksquatch</div>
+        <div style="font-size: 0.72rem; color: var(--t2); line-height: 1.5; flex: 1;">Electric Gimlinopithecus — thunderous strength with bioelectric fury</div>
+        <div style="display: flex; gap: 6px;">
+          <span style="background: rgba(127,255,0,0.08); border: 1px solid rgba(127,255,0,0.2); border-radius: 100px; padding: 2px 8px; font-family: var(--mono); font-size: 0.6rem; color: var(--accent3);">Electric</span>
+        </div>
+      </div>
+
+      <!-- Crashhopper -->
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 16px; display: flex; flex-direction: column; gap: 10px; transition: border-color 0.3s;" onmouseover="this.style.borderColor='rgba(57,255,20,0.3)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(26,140,0,0.2); border: 1px solid rgba(26,140,0,0.4); display: flex; align-items: center; justify-content: center;">
+          <i class="fas fa-chevron-up" style="color: var(--accent2); font-size: 1rem;"></i>
+        </div>
+        <div style="font-size: 0.95rem; font-weight: 800; color: var(--t1);">Crashhopper</div>
+        <div style="font-size: 0.72rem; color: var(--t2); line-height: 1.5; flex: 1;">Leaps of impossible force — using momentum as a devastating weapon</div>
+        <div style="display: flex; gap: 6px;">
+          <span style="background: rgba(26,140,0,0.15); border: 1px solid rgba(26,140,0,0.3); border-radius: 100px; padding: 2px 8px; font-family: var(--mono); font-size: 0.6rem; color: var(--accent2);">Orthopterran</span>
+        </div>
+      </div>
+
+      <!-- Atomix -->
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 16px; display: flex; flex-direction: column; gap: 10px; transition: border-color 0.3s;" onmouseover="this.style.borderColor='rgba(57,255,20,0.3)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); display: flex; align-items: center; justify-content: center;">
+          <i class="fas fa-atom" style="color: var(--accent1); font-size: 1rem;"></i>
+        </div>
+        <div style="font-size: 0.95rem; font-weight: 800; color: var(--t1);">Atomix</div>
+        <div style="font-size: 0.72rem; color: var(--t2); line-height: 1.5; flex: 1;">Nuclear fusion master — among the most powerful aliens in the entire Omnitrix</div>
+        <div style="display: flex; gap: 6px;">
+          <span style="background: rgba(57,255,20,0.08); border: 1px solid rgba(57,255,20,0.2); border-radius: 100px; padding: 2px 8px; font-family: var(--mono); font-size: 0.6rem; color: var(--accent1);">Nuclear</span>
+        </div>
+      </div>
+
+      <!-- Ball Weevil -->
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 16px; display: flex; flex-direction: column; gap: 10px; transition: border-color 0.3s;" onmouseover="this.style.borderColor='rgba(57,255,20,0.3)'" onmouseout="this.style.borderColor='var(--border)'">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(127,255,0,0.1); border: 1px solid rgba(127,255,0,0.25); display: flex; align-items: center; justify-content: center;">
+          <i class="fas fa-circle" style="color: var(--accent3); font-size: 1rem;"></i>
+        </div>
+        <div style="font-size: 0.95rem; font-weight: 800; color: var(--t1);">Ball Weevil</div>
+        <div style="font-size: 0.72rem; color: var(--t2); line-height: 1.5; flex: 1;">Creates explosive plasma balls — a surprisingly versatile and sticky offensive alien</div>
+        <div style="display: flex; gap: 6px;">
+          <span style="background: rgba(127,255,0,0.08); border: 1px solid rgba(127,255,0,0.2); border-radius: 100px; padding: 2px 8px; font-family: var(--mono); font-size: 0.6rem; color: var(--accent3);">Plasma</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <aside class="notes" style="display:none">Omniverse introduced more new aliens than any previous series. Focus on the ones that became fan favorites. Feedback's return was one of the most emotionally resonant moments in the entire franchise — don't skip that context.</aside>
+  <aside class="notes">Omniverse introduced more new aliens than any previous series. Focus on the ones that became fan favorites. Feedback's return was one of the most emotionally resonant moments in the entire franchise — don't skip that context.</aside>
+</section>
+  <section style="background: var(--bg); position: relative; overflow: hidden; font-family: var(--sans);">
+
+  <!-- Deep glow background -->
+  <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(57,255,20,0.07) 0%, transparent 65%); pointer-events: none;"></div>
+
+  <!-- Grid texture -->
+  <div style="position: absolute; inset: 0; opacity: 0.025; background-image: linear-gradient(rgba(57,255,20,1) 1px, transparent 1px), linear-gradient(90deg, rgba(57,255,20,1) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none;"></div>
+
+  <!-- Top + bottom accent lines -->
+  <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent1), transparent);"></div>
+  <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(57,255,20,0.3), transparent);"></div>
+
+  <style>
+    @keyframes counter-glow {
+      0%, 100% { text-shadow: 0 0 30px rgba(57,255,20,0.6), 0 0 60px rgba(57,255,20,0.3); }
+      50% { text-shadow: 0 0 60px rgba(57,255,20,0.9), 0 0 100px rgba(57,255,20,0.5), 0 0 140px rgba(57,255,20,0.2); }
+    }
+  </style>
+
+  <div class="s" style="height: 100vh; display: flex; flex-direction: column; padding: 5vh 8vw; position: relative; z-index: 1; gap: 4vh; justify-content: center;">
+
+    <!-- Header -->
+    <div>
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1.2vh;">By the Numbers</div>
+      <h1 style="font-family: var(--serif); font-size: clamp(2rem, 3.8vw, 3rem); font-weight: 900; color: var(--t1); margin: 0;">Omniverse <span style="color: var(--accent1);">by the Numbers</span></h1>
+    </div>
+
+    <!-- Stat blocks - large format -->
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; flex: 0 0 auto;">
+
+      <!-- Stat: 80 episodes -->
+      <div style="background: linear-gradient(145deg, rgba(57,255,20,0.08), var(--surface)); border: 1px solid rgba(57,255,20,0.35); border-radius: 16px; padding: 28px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; box-shadow: 0 0 30px rgba(57,255,20,0.08);">
+        <div style="font-family: var(--serif); font-size: clamp(3rem, 5vw, 5rem); font-weight: 900; color: var(--accent1); line-height: 1; animation: counter-glow 3s ease-in-out infinite;">80</div>
+        <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--t2);">Episodes</div>
+        <div style="height: 1px; width: 80%; background: rgba(57,255,20,0.2); margin: 4px 0;"></div>
+        <div style="font-size: 0.75rem; color: var(--t2); line-height: 1.5;">Across 8 complete seasons of content</div>
+        <div style="background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.25); border-radius: 100px; padding: 3px 12px; font-family: var(--mono); font-size: 0.6rem; color: var(--accent1);">8 Seasons</div>
+      </div>
+
+      <!-- Stat: 70+ aliens -->
+      <div style="background: linear-gradient(145deg, rgba(57,255,20,0.06), var(--surface)); border: 1px solid rgba(57,255,20,0.3); border-radius: 16px; padding: 28px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; box-shadow: 0 0 20px rgba(57,255,20,0.05);">
+        <div style="font-family: var(--serif); font-size: clamp(3rem, 5vw, 5rem); font-weight: 900; color: var(--accent1); line-height: 1; animation: counter-glow 3s ease-in-out infinite; animation-delay: 0.5s;">70<span style="font-size: 0.5em; color: var(--accent2);">+</span></div>
+        <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--t2);">Alien Forms</div>
+        <div style="height: 1px; width: 80%; background: rgba(57,255,20,0.2); margin: 4px 0;"></div>
+        <div style="font-size: 0.75rem; color: var(--t2); line-height: 1.5;">Unlocked or referenced throughout the series</div>
+        <div style="background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.25); border-radius: 100px; padding: 3px 12px; font-family: var(--mono); font-size: 0.6rem; color: var(--accent1);">New + Legacy</div>
+      </div>
+
+      <!-- Stat: 16 age -->
+      <div style="background: linear-gradient(145deg, rgba(57,255,20,0.06), var(--surface)); border: 1px solid rgba(57,255,20,0.3); border-radius: 16px; padding: 28px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px;">
+        <div style="font-family: var(--serif); font-size: clamp(3rem, 5vw, 5rem); font-weight: 900; color: var(--accent3); line-height: 1; animation: counter-glow 3s ease-in-out infinite; animation-delay: 1s; --glow-color: var(--accent3);">16</div>
+        <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--t2);">Ben's Age</div>
+        <div style="height: 1px; width: 80%; background: rgba(127,255,0,0.2); margin: 4px 0;"></div>
+        <div style="font-size: 0.75rem; color: var(--t2); line-height: 1.5;">At the start of Omniverse — a young hero, fully formed</div>
+        <div style="background: rgba(127,255,0,0.08); border: 1px solid rgba(127,255,0,0.25); border-radius: 100px; padding: 3px 12px; font-family: var(--mono); font-size: 0.6rem; color: var(--accent3);">Bellwood</div>
+      </div>
+
+      <!-- Stat: 10 years -->
+      <div style="background: linear-gradient(145deg, rgba(57,255,20,0.06), var(--surface)); border: 1px solid rgba(57,255,20,0.3); border-radius: 16px; padding: 28px 20px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px;">
+        <div style="font-family: var(--serif); font-size: clamp(3rem, 5vw, 5rem); font-weight: 900; color: var(--accent2); line-height: 1; animation: counter-glow 3s ease-in-out infinite; animation-delay: 1.5s;">10</div>
+        <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--t2);">Franchise Years</div>
+        <div style="height: 1px; width: 80%; background: rgba(26,140,0,0.2); margin: 4px 0;"></div>
+        <div style="font-size: 0.75rem; color: var(--t2); line-height: 1.5;">A decade of Ben 10 celebrated within Omniverse's run</div>
+        <div style="background: rgba(26,140,0,0.12); border: 1px solid rgba(26,140,0,0.3); border-radius: 100px; padding: 3px 12px; font-family: var(--mono); font-size: 0.6rem; color: var(--accent2);">2005–2014</div>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div style="display: flex; align-items: center; gap: 16px; background: rgba(57,255,20,0.04); border: 1px solid rgba(57,255,20,0.15); border-radius: 12px; padding: 16px 24px;">
+      <i class="fas fa-chart-bar" style="color: var(--accent1); font-size: 1.2rem;"></i>
+      <p style="font-size: 0.85rem; color: var(--t2); margin: 0; line-height: 1.5;">The 70+ alien figure tends to get the biggest reaction from fans who only remember the original ten. <span style="color: var(--t1); font-weight: 600;">Omniverse was, by every metric, the most expansive chapter in Ben 10 history.</span></p>
+    </div>
+
+  </div>
+
+  <aside class="notes" style="display:none">Let the numbers speak for themselves. These stats reinforce just how massive the Omniverse era was in scope. The 70+ aliens figure tends to get a strong reaction from fans who only remember the original ten.</aside>
+  <aside class="notes">Let the numbers speak for themselves. These stats reinforce just how massive the Omniverse era was in scope. The 70+ aliens figure tends to get a strong reaction from fans who only remember the original ten.</aside>
+</section>
+  <section style="background: var(--bg); position: relative; overflow: hidden; font-family: var(--sans);">
+
+  <!-- Dark red tint background for menace -->
+  <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(57,255,20,0.04) 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(57,20,20,0.08) 0%, transparent 50%); pointer-events: none;"></div>
+
+  <!-- Top accent -->
+  <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent1), transparent);"></div>
+
+  <div class="s" style="height: 100vh; display: flex; flex-direction: column; padding: 5.5vh 7.5vw; position: relative; z-index: 1; gap: 3vh;">
+
+    <!-- Header -->
+    <div>
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1vh;">The Antagonists</div>
+      <h1 style="font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; color: var(--t1); margin: 0;">Villains Worthy of the <span style="color: var(--accent1);">Omnitrix</span></h1>
+    </div>
+
+    <!-- Quote callout -->
+    <div style="background: rgba(57,255,20,0.05); border-left: 3px solid var(--accent1); border-radius: 0 10px 10px 0; padding: 12px 20px;">
+      <p style="font-family: var(--serif); font-size: 1rem; font-style: italic; color: var(--t2); margin: 0; line-height: 1.6;">"Every great hero is defined by the enemies willing to go further than they ever would."</p>
+    </div>
+
+    <!-- Villain card grid -->
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; flex: 1;">
+
+      <!-- Malware -->
+      <div style="background: linear-gradient(145deg, rgba(20,5,5,0.8), var(--surface)); border: 1px solid rgba(180,40,40,0.3); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 12px; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; border-radius: 50%; background: radial-gradient(circle, rgba(180,40,40,0.15), transparent); pointer-events: none;"></div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(180,40,40,0.2); border: 1px solid rgba(180,40,40,0.4); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <i class="fas fa-bug" style="color: #e04040; font-size: 1.1rem;"></i>
+          </div>
+          <div>
+            <div style="font-size: 1.05rem; font-weight: 800; color: var(--t1);">Malware</div>
+            <div style="font-family: var(--mono); font-size: 0.65rem; color: #e04040; letter-spacing: 0.1em;">Corrupted Galvanic Mechamorph</div>
+          </div>
+          <!-- Threat level -->
+          <div style="margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+            <div style="font-family: var(--mono); font-size: 0.6rem; color: var(--t3); text-transform: uppercase;">Threat</div>
+            <div style="display: flex; gap: 3px;">
+              <div style="width: 8px; height: 8px; border-radius: 2px; background: #e04040;"></div>
+              <div style="width: 8px; height: 8px; border-radius: 2px; background: #e04040;"></div>
+              <div style="width: 8px; height: 8px; border-radius: 2px; background: #e04040;"></div>
+              <div style="width: 8px; height: 8px; border-radius: 2px; background: #e04040;"></div>
+              <div style="width: 8px; height: 8px; border-radius: 2px; background: rgba(180,40,40,0.3);"></div>
+            </div>
+          </div>
+        </div>
+        <div style="height: 1px; background: rgba(180,40,40,0.2);"></div>
+        <p style="font-size: 0.8rem; color: var(--t2); line-height: 1.6; margin: 0; flex: 1;">A being denied repair who became pure destruction. Malware's arc is a <span style="color: var(--t1); font-weight: 600;">tragedy</span> — a villain whose rage had genuine roots. His corruption of Feedback made him deeply personal to Ben.</p>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <span style="background: rgba(180,40,40,0.15); border: 1px solid rgba(180,40,40,0.3); border-radius: 100px; padding: 3px 10px; font-family: var(--mono); font-size: 0.6rem; color: #e04040;">Personal Vendetta</span>
+          <span style="background: rgba(180,40,40,0.08); border: 1px solid rgba(180,40,40,0.2); border-radius: 100px; padding: 3px 10px; font-family: var(--mono); font-size: 0.6rem; color: #e04040;">Tragic Arc</span>
+        </div>
+      </div>
+
+      <!-- Albedo -->
+      <div style="background: linear-gradient(145deg, rgba(10,10,20,0.8), var(--surface)); border: 1px solid rgba(100,50,200,0.3); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 12px; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; border-radius: 50%; background: radial-gradient(circle, rgba(100,50,200,0.12), transparent); pointer-events: none;"></div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(100,50,200,0.2); border: 1px solid rgba(100,50,200,0.4); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <i class="fas fa-clone" style="color: #9070e0; font-size: 1.1rem;"></i>
+          </div>
+          <div>
+            <div style="font-size: 1.05rem; font-weight: 800; color: var(--t1);">Albedo</div>
+            <div style="font-family: var(--mono); font-size: 0.65rem; color: #9070e0; letter-spacing: 0.1em;">Ben's Dark Reflection</div>
+          </div>
+          <div style="margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+            <div style="font-family: var(--mono); font-size: 0.6rem; color: var(--t3); text-transform: uppercase;">Threat</div>
+            <div style="display: flex; gap: 3px;">
+              <div style="width: 8px; height: 8px; border-radius: 2px; background: #9070e0;"></div>
+              <div style="width: 8px; height: 8px; border-radius: 2px; background: #9070e0;"></div>
+              <div style="width: 8px; height: 8px; border-radius: 2px; background: #9070e0;"></div>
+              <div style="width: 8px; height: 8px; border-radius: 2px; background: #9070e0;"></div>
+              <div style="width: 8px; height: 8px; border-radius: 2px; background: rgba(100,50,200,0.3);"></div>
+            </div>
+          </div>
+        </div>
+        <div style="height: 1px; background: rgba(100,50,200,0.2);"></div>
+        <p style="font-size: 0.8rem; color: var(--t2); line-height: 1.6; margin: 0; flex: 1;">Wielding a red Omnitrix, obsessed with reclaiming his Galvan form. Albedo brings <span style="color: var(--t1); font-weight: 600;">philosophical depth</span> — a mirror to Ben, exploring what he could have become without a moral compass.</p>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <span style="background: rgba(100,50,200,0.12); border: 1px solid rgba(100,50,200,0.3); border-radius: 100px; padding: 3px 10px; font-family: var(--mono); font-size: 0.6rem; color: #9070e0;">Red Omnitrix</span>
+          <span style="background: rgba(100,50,200,0.08); border: 1px solid rgba(100,50,200,0.2); border-radius: 100px; padding: 3px 10px; font-family: var(--mono); font-size: 0.6rem; color: #9070e0;">Dark Mirror</span>
+        </div>
+      </div>
+
+      <!-- Vilgax -->
+      <div style="background: linear-gradient(145deg, rgba(10,15,5,0.8), var(--surface)); border: 1px solid rgba(57,255,20,0.2); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(57,255,20,0.08); border: 1px solid rgba(57,255,20,0.25); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <i class="fas fa-skull" style="color: rgba(57,255,20,0.7); font-size: 1.1rem;"></i>
+          </div>
+          <div>
+            <div style="font-size: 1.05rem; font-weight: 800; color: var(--t1);">Vilgax</div>
+            <div style="font-family: var(--mono); font-size: 0.65rem; color: rgba(57,255,20,0.6); letter-spacing: 0.1em;">Conqueror of Ten Worlds</div>
+          </div>
+          <div style="margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+            <div style="font-family: var(--mono); font-size: 0.6rem; color: var(--t3); text-transform: uppercase;">Threat</div>
+            <div style="display: flex; gap: 3px;">
+              <div style="width: 8px; height: 8px; border-radius: 2px; background: var(--accent1);"></div>
+              <div style="width: 8px; height: 8px; border-radius: 2px; background: var(--accent1);"></div>
+              <div style="width: 8px; height: 8px; border-radius: 2px; background: var(--accent1);"></div>
+              <div style="width: 8px; height: 8px; border-radius: 2px; background: var(--accent1);"></div>
+              <div style="width: 8px; height: 8px; border-radius: 2px; background: var(--accent1);"></div>
+            </div>
+          </div>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--t2); line-height: 1.6; margin: 0;">Returns more menacing than ever — his multiversal reach in Omniverse elevated him beyond a singular threat to an existential one.</p>
+      </div>
+
+      <!-- The Faction -->
+      <div style="background: linear-gradient(145deg, rgba(10,15,5,0.8), var(--surface)); border: 1px solid rgba(57,255,20,0.2); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 44px; height: 44px; border-radius: 10px; background: rgba(57,255,20,0.08); border: 1px solid rgba(57,255,20,0.25); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <i class="fas fa-users" style="color: rgba(57,255,20,0.7); font-size: 1.1rem;"></i>
+          </div>
+          <div>
+            <div style="font-size: 1.05rem; font-weight: 800; color: var(--t1);">The Faction</div>
+            <div style="font-family: var(--mono); font-size: 0.65rem; color: rgba(57,255,20,0.6); letter-spacing: 0.1em;">Psychobos · Khyber · Malware</div>
+          </div>
+          <div style="margin-left: auto; display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+            <div style="font-family: var(--mono); font-size: 0.6rem; color: var(--t3); text-transform: uppercase;">Threat</div>
+            <div style="display: flex; gap: 3px;">
+              <div style="width: 8px; height: 8px; border-radius: 2px; background: var(--accent2);"></div>
+              <div style="width: 8px; height: 8px; border-radius: 2px; background: var(--accent2);"></div>
+              <div style="width: 8px; height: 8px; border-radius: 2px; background: var(--accent2);"></div>
+              <div style="width: 8px; height: 8px; border-radius: 2px; background: var(--accent2);"></div>
+              <div style="width: 8px; height: 8px; border-radius: 2px; background: rgba(26,140,0,0.3);"></div>
+            </div>
+          </div>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--t2); line-height: 1.6; margin: 0;">A deadly trio united by purpose — a genius, a hunter, and a destroyer. Their combined schemes formed the backbone of Omniverse's opening arc.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <aside class="notes" style="display:none">Omniverse had some of the deepest villain writing in the franchise. Malware's arc was a tragedy — a being denied repair who became pure destruction. Albedo's obsession with reclaiming his true form added philosophical depth.</aside>
+  <aside class="notes">Omniverse had some of the deepest villain writing in the franchise. Malware's arc was a tragedy — a being denied repair who became pure destruction. Albedo's obsession with reclaiming his true form added philosophical depth.</aside>
+</section>
+  <section style="background: var(--bg); position: relative; overflow: hidden; font-family: var(--sans);">
+
+  <!-- Background glow centered-left -->
+  <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 25% 50%, rgba(57,255,20,0.07) 0%, transparent 55%); pointer-events: none;"></div>
+
+  <!-- Top accent -->
+  <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent1), transparent);"></div>
+
+  <div class="s" style="height: 100vh; display: flex; align-items: center; padding: 6vh 8vw; position: relative; z-index: 1; gap: 6vw;">
+
+    <!-- LEFT: Character visual card -->
+    <div style="flex: 0 0 auto; width: 30vw; max-width: 340px; display: flex; flex-direction: column; gap: 16px;">
+
+      <!-- Character "portrait" card -->
+      <div style="background: linear-gradient(160deg, rgba(57,255,20,0.1), rgba(26,140,0,0.08), var(--surface)); border: 1px solid rgba(57,255,20,0.4); border-radius: 20px; padding: 28px; text-align: center; position: relative; overflow: hidden; box-shadow: 0 0 40px rgba(57,255,20,0.1);">
+        <!-- Decorative ring -->
+        <div style="position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; border-radius: 50%; border: 1px solid rgba(57,255,20,0.15); pointer-events: none;"></div>
+        <div style="position: absolute; bottom: -20px; left: -20px; width: 80px; height: 80px; border-radius: 50%; border: 1px solid rgba(57,255,20,0.1); pointer-events: none;"></div>
+
+        <!-- Icon avatar -->
+        <div style="width: 90px; height: 90px; border-radius: 50%; background: radial-gradient(circle, rgba(57,255,20,0.2), rgba(57,255,20,0.05)); border: 2px solid var(--accent1); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 0 30px rgba(57,255,20,0.3);">
+          <i class="fas fa-user-astronaut" style="color: var(--accent1); font-size: 2.2rem;"></i>
+        </div>
+
+        <div style="font-family: var(--serif); font-size: 1.5rem; font-weight: 900; color: var(--t1); margin-bottom: 4px;">Rook Blonko</div>
+        <div style="font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent2); margin-bottom: 16px;">Revonnah · Plumber Rookie</div>
+
+        <!-- Stat bars -->
+        <div style="display: flex; flex-direction: column; gap: 8px; text-align: left;">
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 3px;">
+              <span style="font-family: var(--mono); font-size: 0.6rem; color: var(--t2); text-transform: uppercase; letter-spacing: 0.1em;">Combat</span>
+              <span style="font-family: var(--mono); font-size: 0.6rem; color: var(--accent1);">95</span>
+            </div>
+            <div style="height: 4px; background: rgba(57,255,20,0.1); border-radius: 2px;"><div style="width: 95%; height: 100%; background: var(--accent1); border-radius: 2px; box-shadow: 0 0 8px rgba(57,255,20,0.5);"></div></div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 3px;">
+              <span style="font-family: var(--mono); font-size: 0.6rem; color: var(--t2); text-transform: uppercase; letter-spacing: 0.1em;">Tactics</span>
+              <span style="font-family: var(--mono); font-size: 0.6rem; color: var(--accent1);">98</span>
+            </div>
+            <div style="height: 4px; background: rgba(57,255,20,0.1); border-radius: 2px;"><div style="width: 98%; height: 100%; background: var(--accent1); border-radius: 2px; box-shadow: 0 0 8px rgba(57,255,20,0.5);"></div></div>
+          </div>
+          <div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 3px;">
+              <span style="font-family: var(--mono); font-size: 0.6rem; color: var(--t2); text-transform: uppercase; letter-spacing: 0.1em;">Loyalty</span>
+              <span style="font-family: var(--mono); font-size: 0.6rem; color: var(--accent1);">100</span>
+            </div>
+            <div style="height: 4px; background: rgba(57,255,20,0.1); border-radius: 2px;"><div style="width: 100%; height: 100%; background: var(--accent1); border-radius: 2px; box-shadow: 0 0 8px rgba(57,255,20,0.5);"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trait badges -->
+      <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+        <span style="background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); border-radius: 100px; padding: 5px 12px; font-family: var(--mono); font-size: 0.65rem; color: var(--accent1);">By the Book</span>
+        <span style="background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); border-radius: 100px; padding: 5px 12px; font-family: var(--mono); font-size: 0.65rem; color: var(--accent1);">Honorable</span>
+        <span style="background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); border-radius: 100px; padding: 5px 12px; font-family: var(--mono); font-size: 0.65rem; color: var(--accent1);">Proto-Tool</span>
+        <span style="background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); border-radius: 100px; padding: 5px 12px; font-family: var(--mono); font-size: 0.65rem; color: var(--accent1);">Fan Favorite</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: Content -->
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 2.5vh;">
+
+      <div>
+        <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1vh;">New Faces</div>
+        <h1 style="font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; color: var(--t1); margin: 0 0 0.5vh;">Rook Blonko:<br><span style="color: var(--accent1);">The Perfect Partner</span></h1>
+        <p style="font-family: var(--serif); font-size: 1rem; font-style: italic; color: var(--t2); margin: 0;">By the book. By the blade. By Ben's side.</p>
+      </div>
+
+      <!-- Divider -->
+      <div style="height: 1px; background: linear-gradient(90deg, rgba(57,255,20,0.3), transparent);"></div>
+
+      <!-- Feature list -->
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+
+        <div style="display: flex; align-items: flex-start; gap: 14px;">
+          <div style="width: 36px; height: 36px; min-width: 36px; border-radius: 50%; background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-map-marker-alt" style="color: var(--accent1); font-size: 0.85rem;"></i>
+          </div>
+          <div>
+            <div style="font-size: 0.9rem; font-weight: 700; color: var(--t1); margin-bottom: 3px;">Revonnah Native, Plumber Rookie</div>
+            <div style="font-size: 0.8rem; color: var(--t2); line-height: 1.5;">Assigned as Ben's partner fresh out of the Plumber Academy — green but exceptional</div>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: flex-start; gap: 14px;">
+          <div style="width: 36px; height: 36px; min-width: 36px; border-radius: 50%; background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-crosshairs" style="color: var(--accent1); font-size: 0.85rem;"></i>
+          </div>
+          <div>
+            <div style="font-size: 0.9rem; font-weight: 700; color: var(--t1); margin-bottom: 3px;">The Proto-Tool</div>
+            <div style="font-size: 0.8rem; color: var(--t2); line-height: 1.5;">A multi-function energy weapon capable of transforming into dozens of combat configurations</div>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: flex-start; gap: 14px;">
+          <div style="width: 36px; height: 36px; min-width: 36px; border-radius: 50%; background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-laugh-wink" style="color: var(--accent1); font-size: 0.85rem;"></i>
+          </div>
+          <div>
+            <div style="font-size: 0.9rem; font-weight: 700; color: var(--t1); margin-bottom: 3px;">Perfect Comedic & Dramatic Contrast</div>
+            <div style="font-size: 0.8rem; color: var(--t2); line-height: 1.5;">His rigid by-the-book personality clashed brilliantly with Ben's reckless improvisation style</div>
+          </div>
+        </div>
+
+        <div style="display: flex; align-items: flex-start; gap: 14px;">
+          <div style="width: 36px; height: 36px; min-width: 36px; border-radius: 50%; background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); display: flex; align-items: center; justify-content: center;">
+            <i class="fas fa-heart" style="color: var(--accent1); font-size: 0.85rem;"></i>
+          </div>
+          <div>
+            <div style="font-size: 0.9rem; font-weight: 700; color: var(--t1); margin-bottom: 3px;">One of Omniverse's Most Beloved Additions</div>
+            <div style="font-size: 0.8rem; color: var(--t2); line-height: 1.5;">Skeptical fans became his loudest advocates by season two — a true fan-earned legacy</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <aside class="notes" style="display:none">Rook was the secret weapon of Omniverse. He gave Ben someone to play off of — their dynamic drove the entire series. Fans who were skeptical at first became his loudest advocates by season two.</aside>
+  <aside class="notes">Rook was the secret weapon of Omniverse. He gave Ben someone to play off of — their dynamic drove the entire series. Fans who were skeptical at first became his loudest advocates by season two.</aside>
+</section>
+  <section style="background: var(--bg); position: relative; overflow: hidden; font-family: var(--sans);">
+
+  <!-- Split background: two-era feel -->
+  <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(57,255,20,0.04) 0%, transparent 50%, rgba(57,255,20,0.02) 100%); pointer-events: none;"></div>
+  <div style="position: absolute; top: 0; left: 50%; bottom: 0; width: 1px; background: linear-gradient(180deg, transparent, rgba(57,255,20,0.25), transparent); pointer-events: none;"></div>
+
+  <!-- Top accent -->
+  <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent1), transparent 50%, var(--accent2));"></div>
+
+  <div class="s" style="height: 100vh; display: flex; flex-direction: column; padding: 5.5vh 7vw; position: relative; z-index: 1; gap: 3vh;">
+
+    <!-- Header -->
+    <div style="text-align: center;">
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1vh;">Storytelling</div>
+      <h1 style="font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; color: var(--t1); margin: 0;">Past & Present: <span style="color: var(--accent1);">The Dual Timeline Narrative</span></h1>
+    </div>
+
+    <!-- Two-column timeline -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3vw; flex: 1;">
+
+      <!-- LEFT: Present Day -->
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid rgba(57,255,20,0.2);">
+          <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--accent1); box-shadow: 0 0 12px var(--accent1); flex-shrink: 0;"></div>
+          <div>
+            <div style="font-family: var(--serif); font-size: 1.1rem; font-weight: 800; color: var(--accent1);">Present Day</div>
+            <div style="font-family: var(--mono); font-size: 0.65rem; color: var(--t2); letter-spacing: 0.1em;">Ben, Age 16 · Bellwood</div>
+          </div>
+        </div>
+
+        <!-- Timeline items - present -->
+        <div style="display: flex; flex-direction: column; gap: 14px; padding-left: 8px; border-left: 2px solid rgba(57,255,20,0.2);">
+
+          <div style="position: relative; padding-left: 18px; background: var(--surface); border: 1px solid rgba(57,255,20,0.15); border-radius: 10px; padding: 14px 14px 14px 32px;">
+            <div style="position: absolute; left: -7px; top: 50%; transform: translateY(-50%); width: 12px; height: 12px; border-radius: 50%; background: var(--accent1); border: 2px solid var(--bg);"></div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--t1); margin-bottom: 4px;">Partnered with Rook</div>
+            <div style="font-size: 0.75rem; color: var(--t2); line-height: 1.5;">New dynamic drives season one's tone — experienced hero meets disciplined rookie</div>
+          </div>
+
+          <div style="position: relative; padding-left: 18px; background: var(--surface); border: 1px solid rgba(57,255,20,0.15); border-radius: 10px; padding: 14px 14px 14px 32px;">
+            <div style="position: absolute; left: -7px; top: 50%; transform: translateY(-50%); width: 12px; height: 12px; border-radius: 50%; background: var(--accent1); border: 2px solid var(--bg);"></div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--t1); margin-bottom: 4px;">Battling Multiversal Threats</div>
+            <div style="font-size: 0.75rem; color: var(--t2); line-height: 1.5;">The Faction, Vilgax, interdimensional crises — stakes have never been higher</div>
+          </div>
+
+          <div style="position: relative; background: var(--surface); border: 1px solid rgba(57,255,20,0.15); border-radius: 10px; padding: 14px 14px 14px 32px;">
+            <div style="position: absolute; left: -7px; top: 50%; transform: translateY(-50%); width: 12px; height: 12px; border-radius: 50%; background: var(--accent1); border: 2px solid var(--bg);"></div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--t1); margin-bottom: 4px;">Arcs with Lasting Consequences</div>
+            <div style="font-size: 0.75rem; color: var(--t2); line-height: 1.5;">Events in the present are shaped by what we later discover in the past timeline</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Young Ben -->
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid rgba(26,140,0,0.3);">
+          <div style="width: 10px; height: 10px; border-radius: 50%; background: var(--accent2); box-shadow: 0 0 12px var(--accent2); flex-shrink: 0;"></div>
+          <div>
+            <div style="font-family: var(--serif); font-size: 1.1rem; font-weight: 800; color: var(--accent2);">Young Ben</div>
+            <div style="font-family: var(--mono); font-size: 0.65rem; color: var(--t2); letter-spacing: 0.1em;">Ben, Age 10 · Summer Road Trip</div>
+          </div>
+        </div>
+
+        <!-- Timeline items - past -->
+        <div style="display: flex; flex-direction: column; gap: 14px; padding-left: 8px; border-left: 2px solid rgba(26,140,0,0.3);">
+
+          <div style="position: relative; background: rgba(26,140,0,0.06); border: 1px solid rgba(26,140,0,0.2); border-radius: 10px; padding: 14px 14px 14px 32px;">
+            <div style="position: absolute; left: -7px; top: 50%; transform: translateY(-50%); width: 12px; height: 12px; border-radius: 50%; background: var(--accent2); border: 2px solid var(--bg);"></div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--t1); margin-bottom: 4px;">Origins of Iconic Aliens</div>
+            <div style="font-size: 0.75rem; color: var(--t2); line-height: 1.5;">Flashback stories reveal how Ben first discovered and named his most beloved transformations</div>
+          </div>
+
+          <div style="position: relative; background: rgba(26,140,0,0.06); border: 1px solid rgba(26,140,0,0.2); border-radius: 10px; padding: 14px 14px 14px 32px;">
+            <div style="position: absolute; left: -7px; top: 50%; transform: translateY(-50%); width: 12px; height: 12px; border-radius: 50%; background: var(--accent2); border: 2px solid var(--bg);"></div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--t1); margin-bottom: 4px;">Honoring the Original Series</div>
+            <div style="font-size: 0.75rem; color: var(--t2); line-height: 1.5;">Young Ben's art style differed visually — a clever cue distinguishing the two eras on screen</div>
+          </div>
+
+          <div style="position: relative; background: rgba(26,140,0,0.06); border: 1px solid rgba(26,140,0,0.2); border-radius: 10px; padding: 14px 14px 14px 32px;">
+            <div style="position: absolute; left: -7px; top: 50%; transform: translateY(-50%); width: 12px; height: 12px; border-radius: 50%; background: var(--accent2); border: 2px solid var(--bg);"></div>
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--t1); margin-bottom: 4px;">Welcoming New Viewers</div>
+            <div style="font-size: 0.75rem; color: var(--t2); line-height: 1.5;">Young Ben stories gave newcomers an accessible entry point alongside veteran fans</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Connecting bottom insight -->
+    <div style="display: flex; align-items: center; gap: 12px; background: rgba(57,255,20,0.04); border: 1px solid rgba(57,255,20,0.15); border-radius: 12px; padding: 14px 20px;">
+      <i class="fas fa-link" style="color: var(--accent1); font-size: 1rem; flex-shrink: 0;"></i>
+      <p style="font-size: 0.82rem; color: var(--t2); margin: 0; line-height: 1.5;"><span style="color: var(--t1); font-weight: 600;">The two timelines converged in key arcs</span> — moments where what young Ben experienced explained why present Ben acts the way he does. A rare narrative innovation for animated television.</p>
+    </div>
+
+  </div>
+
+  <aside class="notes" style="display:none">This was an underrated narrative innovation. Showing young Ben alongside current Ben let the show honor its roots while pushing forward. The art style difference between the two timelines was a clever visual cue.</aside>
+  <aside class="notes">This was an underrated narrative innovation. Showing young Ben alongside current Ben let the show honor its roots while pushing forward. The art style difference between the two timelines was a clever visual cue.</aside>
+</section>
+  <section style="background: var(--bg); position: relative; overflow: hidden; font-family: var(--sans);">
+
+  <!-- Background -->
+  <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, rgba(57,255,20,0.06) 0%, transparent 60%); pointer-events: none;"></div>
+  <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent1), transparent);"></div>
+
+  <style>
+    @keyframes card-glow-pulse {
+      0%, 100% { box-shadow: 0 0 0 rgba(57,255,20,0); }
+      50% { box-shadow: 0 0 25px rgba(57,255,20,0.15); }
+    }
+  </style>
+
+  <div class="s" style="height: 100vh; display: flex; flex-direction: column; padding: 5vh 7.5vw; position: relative; z-index: 1; gap: 3.5vh;">
+
+    <!-- Header -->
+    <div>
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1vh;">Deep Cuts</div>
+      <h1 style="font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; color: var(--t1); margin: 0;">Omniverse's <span style="color: var(--accent1);">Greatest Moments</span></h1>
+    </div>
+
+    <!-- Moment Cards - ranked -->
+    <div style="display: flex; flex-direction: column; gap: 14px; flex: 1; justify-content: center;">
+
+      <!-- #1 Feedback's Removal -->
+      <div style="display: flex; gap: 18px; background: linear-gradient(120deg, rgba(57,255,20,0.1), rgba(57,255,20,0.04)); border: 1px solid rgba(57,255,20,0.4); border-radius: 14px; padding: 18px 20px; align-items: flex-start; animation: card-glow-pulse 4s ease-in-out infinite; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent1); border-radius: 2px 0 0 2px;"></div>
+        <div style="font-family: var(--serif); font-size: 3rem; font-weight: 900; color: rgba(57,255,20,0.15); line-height: 1; min-width: 50px; text-align: center;">#1</div>
+        <div style="flex: 1;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px; flex-wrap: wrap;">
+            <div style="font-size: 1rem; font-weight: 800; color: var(--t1);">Feedback's Removal</div>
+            <span style="background: rgba(57,255,20,0.15); border: 1px solid rgba(57,255,20,0.35); border-radius: 100px; padding: 2px 10px; font-family: var(--mono); font-size: 0.6rem; color: var(--accent1);">Greatest Hits S1</span>
+            <span style="background: rgba(57,255,20,0.08); border: 1px solid rgba(57,255,20,0.2); border-radius: 100px; padding: 2px 10px; font-family: var(--mono); font-size: 0.6rem; color: var(--t2);">Emotional Peak</span>
+          </div>
+          <p style="font-size: 0.82rem; color: var(--t2); margin: 0; line-height: 1.6;">The trauma of losing your favorite alien as a child — told in a haunting flashback. Young Ben's grief was a watershed moment for emotional storytelling in the franchise.</p>
+        </div>
+      </div>
+
+      <!-- #2 Store 23 -->
+      <div style="display: flex; gap: 18px; background: var(--surface); border: 1px solid rgba(57,255,20,0.3); border-radius: 14px; padding: 18px 20px; align-items: flex-start; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent2); border-radius: 2px 0 0 2px;"></div>
+        <div style="font-family: var(--serif); font-size: 3rem; font-weight: 900; color: rgba(57,255,20,0.1); line-height: 1; min-width: 50px; text-align: center;">#2</div>
+        <div style="flex: 1;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px; flex-wrap: wrap;">
+            <div style="font-size: 1rem; font-weight: 800; color: var(--t1);">Store 23</div>
+            <span style="background: rgba(26,140,0,0.12); border: 1px solid rgba(26,140,0,0.3); border-radius: 100px; padding: 2px 10px; font-family: var(--mono); font-size: 0.6rem; color: var(--accent2);">Best Episode</span>
+            <span style="background: rgba(57,255,20,0.08); border: 1px solid rgba(57,255,20,0.2); border-radius: 100px; padding: 2px 10px; font-family: var(--mono); font-size: 0.6rem; color: var(--t2);">S3 · Multiverse</span>
+          </div>
+          <p style="font-size: 0.82rem; color: var(--t2); margin: 0; line-height: 1.6;">Ben meets a version of himself from an alternate universe — widely considered the finest single episode in the entire franchise. Emotionally intelligent, funny, and thematically rich.</p>
+        </div>
+      </div>
+
+      <!-- #3 Frogs of War -->
+      <div style="display: flex; gap: 18px; background: var(--surface); border: 1px solid rgba(57,255,20,0.2); border-radius: 14px; padding: 18px 20px; align-items: flex-start; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: rgba(57,255,20,0.4); border-radius: 2px 0 0 2px;"></div>
+        <div style="font-family: var(--serif); font-size: 3rem; font-weight: 900; color: rgba(57,255,20,0.08); line-height: 1; min-width: 50px; text-align: center;">#3</div>
+        <div style="flex: 1;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px; flex-wrap: wrap;">
+            <div style="font-size: 1rem; font-weight: 800; color: var(--t1);">The Frogs of War</div>
+            <span style="background: rgba(57,255,20,0.08); border: 1px solid rgba(57,255,20,0.2); border-radius: 100px; padding: 2px 10px; font-family: var(--mono); font-size: 0.6rem; color: var(--t2);">2-Part Epic · S2</span>
+          </div>
+          <p style="font-size: 0.82rem; color: var(--t2); margin: 0; line-height: 1.6;">A sweeping Incursean invasion arc that showed Omniverse at its most cinematic — global stakes, iconic alien action, and a universe on the brink.</p>
+        </div>
+      </div>
+
+      <!-- #4 Malgax Attacks -->
+      <div style="display: flex; gap: 18px; background: var(--surface); border: 1px solid rgba(57,255,20,0.2); border-radius: 14px; padding: 18px 20px; align-items: flex-start; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: rgba(57,255,20,0.3); border-radius: 2px 0 0 2px;"></div>
+        <div style="font-family: var(--serif); font-size: 3rem; font-weight: 900; color: rgba(57,255,20,0.08); line-height: 1; min-width: 50px; text-align: center;">#4</div>
+        <div style="flex: 1;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px; flex-wrap: wrap;">
+            <div style="font-size: 1rem; font-weight: 800; color: var(--t1);">Malgax Attacks</div>
+            <span style="background: rgba(57,255,20,0.08); border: 1px solid rgba(57,255,20,0.2); border-radius: 100px; padding: 2px 10px; font-family: var(--mono); font-size: 0.6rem; color: var(--t2);">Finale Arc</span>
+          </div>
+          <p style="font-size: 0.82rem; color: var(--t2); margin: 0; line-height: 1.6;">The ultimate villain team-up — Malware fused with Vilgax. The finale arc brought together Omniverse's deepest threads in one spectacular confrontation.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <aside class="notes" style="display:none">These moments define why Omniverse resonates so deeply. Store 23 is widely considered one of the best episodes in the entire franchise — it's emotionally intelligent, funny, and thematically rich. Take a moment on Feedback's arc — it hit hard.</aside>
+  <aside class="notes">These moments define why Omniverse resonates so deeply. Store 23 is widely considered one of the best episodes in the entire franchise — it's emotionally intelligent, funny, and thematically rich. Take a moment on Feedback's arc — it hit hard.</aside>
+</section>
+  <section style="background: var(--bg); position: relative; overflow: hidden; font-family: var(--sans);">
+
+  <!-- Background glow -->
+  <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 60%, rgba(57,255,20,0.07) 0%, transparent 60%); pointer-events: none;"></div>
+  <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent1), transparent);"></div>
+
+  <div class="s" style="height: 100vh; display: flex; flex-direction: column; padding: 5.5vh 7.5vw; position: relative; z-index: 1; gap: 3vh;">
+
+    <!-- Header -->
+    <div>
+      <div style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent2); margin-bottom: 1vh;">Impact</div>
+      <h1 style="font-family: var(--serif); font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; color: var(--t1); margin: 0;">The Legacy of <span style="color: var(--accent1);">Omniverse</span></h1>
+    </div>
+
+    <!-- Quote highlight box -->
+    <div style="background: rgba(57,255,20,0.06); border: 1px solid rgba(57,255,20,0.25); border-radius: 16px; padding: 20px 24px; position: relative;">
+      <div style="position: absolute; top: -1px; left: 32px; width: 60px; height: 2px; background: var(--accent1);"></div>
+      <i class="fas fa-quote-left" style="color: rgba(57,255,20,0.3); font-size: 1.5rem; margin-bottom: 8px; display: block;"></i>
+      <p style="font-family: var(--serif); font-size: 1.05rem; font-style: italic; color: var(--t1); line-height: 1.7; margin: 0;">Time has been kind to Omniverse. What was once divisive is now deeply beloved — because it was <span style="color: var(--accent1);">ambitious, weird, and earnest</span> in ways that only become clearer with distance.</p>
+    </div>
+
+    <!-- Mosaic legacy grid -->
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; flex: 1;">
+
+      <!-- Legacy item 1 -->
+      <div style="background: var(--surface); border: 1px solid rgba(57,255,20,0.2); border-radius: 14px; padding: 20px; display: flex; gap: 14px; align-items: flex-start; transition: border-color 0.3s;" onmouseover="this.style.borderColor='rgba(57,255,20,0.4)'" onmouseout="this.style.borderColor='rgba(57,255,20,0.2)'">
+        <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <i class="fas fa-expand-arrows-alt" style="color: var(--accent1); font-size: 1rem;"></i>
+        </div>
+        <div>
+          <div style="font-size: 0.95rem; font-weight: 700; color: var(--t1); margin-bottom: 6px;">Expanded the Universe</div>
+          <p style="font-size: 0.78rem; color: var(--t2); line-height: 1.6; margin: 0;">Omniverse pushed the Ben 10 universe beyond any single planet or timeline — weaving a true cosmic tapestry across dimensions, histories, and realities.</p>
+          <!-- Legacy bar -->
+          <div style="margin-top: 10px; display: flex; align-items: center; gap: 8px;">
+            <div style="flex: 1; height: 3px; background: rgba(57,255,20,0.1); border-radius: 2px;"><div style="width: 92%; height: 100%; background: linear-gradient(90deg, var(--accent1), var(--accent2)); border-radius: 2px;"></div></div>
+            <span style="font-family: var(--mono); font-size: 0.6rem; color: var(--accent1);">92%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Legacy item 2 -->
+      <div style="background: var(--surface); border: 1px solid rgba(57,255,20,0.2); border-radius: 14px; padding: 20px; display: flex; gap: 14px; align-items: flex-start; transition: border-color 0.3s;" onmouseover="this.style.borderColor='rgba(57,255,20,0.4)'" onmouseout="this.style.borderColor='rgba(57,255,20,0.2)'">
+        <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <i class="fas fa-code-branch" style="color: var(--accent1); font-size: 1rem;"></i>
+        </div>
+        <div>
+          <div style="font-size: 0.95rem; font-weight: 700; color: var(--t1); margin-bottom: 6px;">Franchise-Defining Concepts</div>
+          <p style="font-size: 0.78rem; color: var(--t2); line-height: 1.6; margin: 0;">Alternate universe Bens, multiversal crossovers, deep alien lore — concepts introduced here became permanent pillars of the Ben 10 mythology.</p>
+          <div style="margin-top: 10px; display: flex; align-items: center; gap: 8px;">
+            <div style="flex: 1; height: 3px; background: rgba(57,255,20,0.1); border-radius: 2px;"><div style="width: 88%; height: 100%; background: linear-gradient(90deg, var(--accent1), var(--accent2)); border-radius: 2px;"></div></div>
+            <span style="font-family: var(--mono); font-size: 0.6rem; color: var(--accent1);">88%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Legacy item 3 -->
+      <div style="background: var(--surface); border: 1px solid rgba(57,255,20,0.2); border-radius: 14px; padding: 20px; display: flex; gap: 14px; align-items: flex-start; transition: border-color 0.3s;" onmouseover="this.style.borderColor='rgba(57,255,20,0.4)'" onmouseout="this.style.borderColor='rgba(57,255,20,0.2)'">
+        <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <i class="fas fa-redo" style="color: var(--accent1); font-size: 1rem;"></i>
+        </div>
+        <div>
+          <div style="font-size: 0.95rem; font-weight: 700; color: var(--t1); margin-bottom: 6px;">Critical Reevaluation</div>
+          <p style="font-size: 0.78rem; color: var(--t2); line-height: 1.6; margin: 0;">The Omniverse art style was controversial in 2012. Today, it's celebrated. The fanbase that grew up with it defends it passionately — and for very good reason.</p>
+          <div style="margin-top: 10px; display: flex; align-items: center; gap: 8px;">
+            <div style="flex: 1; height: 3px; background: rgba(57,255,20,0.1); border-radius: 2px;"><div style="width: 85%; height: 100%; background: linear-gradient(90deg, var(--accent1), var(--accent2)); border-radius: 2px;"></div></div>
+            <span style="font-family: var(--mono); font-size: 0.6rem; color: var(--accent1);">85%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Legacy item 4 -->
+      <div style="background: var(--surface); border: 1px solid rgba(57,255,20,0.2); border-radius: 14px; padding: 20px; display: flex; gap: 14px; align-items: flex-start; transition: border-color 0.3s;" onmouseover="this.style.borderColor='rgba(57,255,20,0.4)'" onmouseout="this.style.borderColor='rgba(57,255,20,0.2)'">
+        <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <i class="fas fa-trophy" style="color: var(--accent1); font-size: 1rem;"></i>
+        </div>
+        <div>
+          <div style="font-size: 0.95rem; font-weight: 700; color: var(--t1); margin-bottom: 6px;">An Enduring Young Hero</div>
+          <p style="font-size: 0.78rem; color: var(--t2); line-height: 1.6; margin: 0;">Omniverse cemented Ben Tennyson as one of animation's most enduring young heroes — funny, flawed, brave, and genuinely worthy of the device he wears.</p>
+          <div style="margin-top: 10px; display: flex; align-items: center; gap: 8px;">
+            <div style="flex: 1; height: 3px; background: rgba(57,255,20,0.1); border-radius: 2px;"><div style="width: 97%; height: 100%; background: linear-gradient(90deg, var(--accent1), var(--accent2)); border-radius: 2px;"></div></div>
+            <span style="font-family: var(--mono); font-size: 0.6rem; color: var(--accent1);">97%</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <aside class="notes" style="display:none">This is the emotional core of the retrospective. Acknowledge that Omniverse was divisive when it aired — but time has been kind to it. The fanbase that grew up with it defends it passionately, and for good reason. It was ambitious, weird, and deeply earnest.</aside>
+  <aside class="notes">This is the emotional core of the retrospective. Acknowledge that Omniverse was divisive when it aired — but time has been kind to it. The fanbase that grew up with it defends it passionately, and for good reason. It was ambitious, weird, and deeply earnest.</aside>
+</section>
+  <section style="background: var(--bg); position: relative; overflow: hidden; font-family: var(--sans);">
+
+  <!-- Deep atmospheric glow -->
+  <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 60%, rgba(57,255,20,0.12) 0%, rgba(57,255,20,0.04) 35%, transparent 65%); pointer-events: none;"></div>
+
+  <!-- Hexagon grid pattern -->
+  <div style="position: absolute; inset: 0; opacity: 0.03; background-image: repeating-linear-gradient(60deg, var(--accent1) 0, var(--accent1) 1px, transparent 0, transparent 50%), repeating-linear-gradient(120deg, var(--accent1) 0, var(--accent1) 1px, transparent 0, transparent 50%); background-size: 50px 90px; pointer-events: none;"></div>
+
+  <!-- Corner accents -->
+  <div style="position: absolute; top: 0; left: 0; width: 300px; height: 2px; background: linear-gradient(90deg, var(--accent1), transparent);"></div>
+  <div style="position: absolute; top: 0; left: 0; width: 2px; height: 300px; background: linear-gradient(180deg, var(--accent1), transparent);"></div>
+  <div style="position: absolute; bottom: 0; right: 0; width: 300px; height: 2px; background: linear-gradient(270deg, var(--accent1), transparent);"></div>
+  <div style="position: absolute; bottom: 0; right: 0; width: 2px; height: 300px; background: linear-gradient(0deg, var(--accent1), transparent);"></div>
+
+  <style>
+    @keyframes ring-pulse {
+      0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 0.5; transform: translate(-50%, -50%) scale(1.03); }
+    }
+    @keyframes ring-spin-slow {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    @keyframes ring-spin-rev {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(-360deg); }
+    }
+    @keyframes hero-text-glow {
+      0%, 100% { text-shadow: 0 0 30px rgba(57,255,20,0.7), 0 0 60px rgba(57,255,20,0.4); }
+      50% { text-shadow: 0 0 60px rgba(57,255,20,1), 0 0 100px rgba(57,255,20,0.6), 0 0 160px rgba(57,255,20,0.3); }
+    }
+    @keyframes core-pulse {
+      0%, 100% { box-shadow: 0 0 40px rgba(57,255,20,0.5), 0 0 80px rgba(57,255,20,0.25), inset 0 0 30px rgba(57,255,20,0.1); }
+      50% { box-shadow: 0 0 80px rgba(57,255,20,0.8), 0 0 160px rgba(57,255,20,0.4), inset 0 0 50px rgba(57,255,20,0.2); }
+    }
+  </style>
+
+  <div class="s cx" style="height: 100vh; flex-direction: column; gap: 0; padding: 6vh 8vw; position: relative; z-index: 1;">
+
+    <!-- Omnitrix glow ring system - decorative background -->
+    <div style="position: absolute; top: 50%; left: 50%; width: 85vh; height: 85vh; border-radius: 50%; border: 1px solid rgba(57,255,20,0.06); transform: translate(-50%, -50%); pointer-events: none;"></div>
+    <div style="position: absolute; top: 50%; left: 50%; width: 65vh; height: 65vh; border-radius: 50%; border: 1px dashed rgba(57,255,20,0.08); animation: ring-spin-slow 30s linear infinite; pointer-events: none;"></div>
+    <div style="position: absolute; top: 50%; left: 50%; width: 48vh; height: 48vh; border-radius: 50%; border: 1px dashed rgba(57,255,20,0.12); animation: ring-spin-rev 20s linear infinite; pointer-events: none;"></div>
+
+    <!-- Closing badge top -->
+    <div style="display: flex; align-items: center; gap: 10px; background: rgba(57,255,20,0.08); border: 1px solid rgba(57,255,20,0.25); border-radius: 100px; padding: 8px 20px; margin-bottom: 5vh;">
+      <i class="fas fa-star" style="color: var(--accent1); font-size: 0.7rem;"></i>
+      <span style="font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent1);">Omniverse Retrospective · 2005–2014</span>
+      <i class="fas fa-star" style="color: var(--accent1); font-size: 0.7rem;"></i>
+    </div>
+
+    <!-- Central omnitrix core -->
+    <div style="width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(57,255,20,0.3), rgba(57,255,20,0.1) 60%, transparent); border: 3px solid var(--accent1); display: flex; align-items: center; justify-content: center; margin-bottom: 4vh; animation: core-pulse 3s ease-in-out infinite;">
+      <!-- Hourglass -->
+      <div style="width: 45px; height: 45px; background: var(--accent1); clip-path: polygon(20% 0%, 80% 0%, 50% 50%, 80% 100%, 20% 100%, 50% 50%); filter: drop-shadow(0 0 10px rgba(57,255,20,1));"></div>
+    </div>
+
+    <!-- Hero headline -->
+    <div style="font-family: var(--serif); font-size: clamp(3.5rem, 9vw, 8rem); font-weight: 900; color: var(--accent1); line-height: 0.9; letter-spacing: -0.02em; text-align: center; animation: hero-text-glow 3s ease-in-out infinite; text-transform: uppercase; margin-bottom: 2vh;">Going Hero</div>
+
+    <!-- Tagline divider -->
+    <div style="display: flex; align-items: center; gap: 16px; width: 55%; margin-bottom: 2.5vh;">
+      <div style="flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(57,255,20,0.5));"></div>
+      <div style="width: 6px; height: 6px; border-radius: 50%; background: var(--accent1);"></div>
+      <div style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(57,255,20,0.5), transparent);"></div>
+    </div>
+
+    <!-- Subtitle -->
+    <div style="font-family: var(--serif); font-size: clamp(1rem, 2.2vw, 1.5rem); color: var(--t2); letter-spacing: 0.05em; text-align: center; font-style: italic; margin-bottom: 4vh;">It's Hero Time — and it always will be.</div>
+
+    <!-- Three closing pillars -->
+    <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; max-width: 800px;">
+
+      <div style="flex: 1; min-width: 200px; background: rgba(57,255,20,0.05); border: 1px solid rgba(57,255,20,0.2); border-radius: 12px; padding: 16px 18px; text-align: center;">
+        <i class="fas fa-infinity" style="color: var(--accent1); font-size: 1.2rem; margin-bottom: 8px; display: block;"></i>
+        <div style="font-size: 0.8rem; font-weight: 700; color: var(--t1); margin-bottom: 4px;">Most Expansive Chapter</div>
+        <div style="font-size: 0.72rem; color: var(--t2); line-height: 1.5;">No other Ben 10 series matched Omniverse in sheer scope, scale, and ambition</div>
+      </div>
+
+      <div style="flex: 1; min-width: 200px; background: rgba(57,255,20,0.05); border: 1px solid rgba(57,255,20,0.2); border-radius: 12px; padding: 16px 18px; text-align: center;">
+        <i class="fas fa-heart" style="color: var(--accent1); font-size: 1.2rem; margin-bottom: 8px; display: block;"></i>
+        <div style="font-size: 0.8rem; font-weight: 700; color: var(--t1); margin-bottom: 4px;">Lives On in Every Fan</div>
+        <div style="font-size: 0.72rem; color: var(--t2); line-height: 1.5;">The aliens, the Omnitrix, and the adventures are carried by every fan who watched</div>
+      </div>
+
+      <div style="flex: 1; min-width: 200px; background: rgba(57,255,20,0.05); border: 1px solid rgba(57,255,20,0.2); border-radius: 12px; padding: 16px 18px; text-align: center;">
+        <i class="fas fa-award" style="color: var(--accent1); font-size: 1.2rem; margin-bottom: 8px; display: block;"></i>
+        <div style="font-size: 0.8rem; font-weight: 700; color: var(--t1); margin-bottom: 4px;">Undeniable Legacy</div>
+        <div style="font-size: 0.72rem; color: var(--t2); line-height: 1.5;">Whatever comes next — Omniverse stands as a landmark in animated storytelling</div>
+      </div>
+
+    </div>
+
+    <!-- Footer credit -->
+    <div style="position: absolute; bottom: 3vh; font-family: var(--mono); font-size: 0.6rem; color: rgba(155,191,155,0.4); letter-spacing: 0.2em; text-transform: uppercase;">Ben 10: Omniverse · Cartoon Network · 2012–2014</div>
+
+  </div>
+
+  <aside class="notes" style="display:none">Close with conviction and nostalgia. Bring it back to what Ben 10 always was at its heart — a kid with an impossible device, a universe to explore, and the courage to be a hero. Leave the audience feeling the warmth of what made them fall in love with this franchise.</aside>
+  <aside class="notes">Close with conviction and nostalgia. Bring it back to what Ben 10 always was at its heart — a kid with an impossible device, a universe to explore, and the courage to be a hero. Leave the audience feeling the warmth of what made them fall in love with this franchise.</aside>
+</section>
+
+<script>
+(function(){
+  const sections = document.querySelectorAll('section');
+  const total = sections.length;
+  const counter = document.getElementById('slide-counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  // IntersectionObserver: mark the visible slide as .active (triggers CSS animations)
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        sections.forEach(s => s.classList.remove('active'));
+        e.target.classList.add('active');
+        current = Array.from(sections).indexOf(e.target);
+        if (counter) counter.textContent = (current+1) + ' / ' + total;
+        if (progress) progress.style.width = ((current+1)/total*100) + '%';
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s => obs.observe(s));
+
+  // Activate first slide immediately
+  if (sections[0]) sections[0].classList.add('active');
+  if (counter) counter.textContent = '1 / ' + total;
+  if (progress) progress.style.width = (1/total*100) + '%';
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      if (current < total - 1) sections[current + 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (current > 0) sections[current - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      sections[0].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      sections[total - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'f' || e.key === 'F11') {
+      e.preventDefault();
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>

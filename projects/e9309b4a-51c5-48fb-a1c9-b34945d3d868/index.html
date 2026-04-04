@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Rustic Hearth | Farm-to-Table Restaurant</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="loader" id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <nav class="navbar" id="navbar">
+        <div class="nav-content">
+            <a href="#" class="logo">The Rustic Hearth</a>
+            <div class="nav-links">
+                <a href="#menu">Menu</a>
+                <a href="#story">Our Story</a>
+                <a href="#gallery">Ambiance</a>
+                <a href="#reviews">Reviews</a>
+            </div>
+            <button class="btn-primary" id="nav-reserve-btn">Book a Table</button>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 3D Canvas Container -->
+    <div id="canvas-container"></div>
+
+    <main class="content-overlay">
+        <!-- Hero Section -->
+        <section class="hero parallax-section" id="home">
+            <div class="hero-content">
+                <h1 class="parallax-element" data-speed="0.3">Rooted in Nature.</h1>
+                <p class="parallax-element" data-speed="0.5">Experience organic, farm-to-table dining in a warm, rustic setting.</p>
+                <button class="btn-primary parallax-element" data-speed="0.8" id="hero-reserve-btn">Make a Reservation</button>
+            </div>
+        </section>
+
+        <!-- Signature Menu Item Showcase -->
+        <section class="menu-showcase parallax-section" id="menu">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Signature Dishes</h2>
+                    <p>Crafted with seasonal ingredients from local farms</p>
+                </div>
+                <div class="menu-grid" id="menu-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Restaurant Story & Chef Intro -->
+        <section class="story parallax-section" id="story">
+            <div class="container">
+                <div class="story-content">
+                    <div class="story-text">
+                        <h2>Our Story</h2>
+                        <p>Founded in 2015 by Chef Elena Rossi, The Rustic Hearth began with a simple philosophy: food should be grown with care and prepared with respect. We partner directly with over twenty local farms to bring you the freshest seasonal ingredients.</p>
+                        <p>Every dish tells the story of our region's rich agricultural heritage, reimagined through contemporary culinary techniques.</p>
+                        <div class="chef-signature">
+                            <span class="chef-name">Elena Rossi</span>
+                            <span class="chef-title">Executive Chef & Founder</span>
+                        </div>
+                    </div>
+                    <div class="story-image-container parallax-element" data-speed="0.2">
+                        <div class="story-image" id="story-img-placeholder"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ambiance Gallery -->
+        <section class="gallery parallax-section" id="gallery">
+            <div class="container">
+                <div class="section-header">
+                    <h2>The Atmosphere</h2>
+                    <p>A warm, inviting space designed for connection</p>
+                </div>
+                <div class="gallery-grid" id="gallery-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews -->
+        <section class="reviews parallax-section" id="reviews">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Guest Experiences</h2>
+                </div>
+                <div class="reviews-slider" id="reviews-slider">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container footer-content">
+                <div class="footer-col">
+                    <h3>The Rustic Hearth</h3>
+                    <p>123 Harvest Lane<br>Portland, OR 97204</p>
+                    <p>contact@rustichearth.com<br>(555) 123-4567</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Hours</h3>
+                    <p>Mon - Thu: 5pm - 10pm<br>Fri - Sat: 5pm - 11pm<br>Sunday: 4pm - 9pm</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#">Instagram</a>
+                        <a href="#">Facebook</a>
+                        <a href="#">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 The Rustic Hearth. All rights reserved.</p>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Reservation Modal -->
+    <div class="modal" id="reservation-modal">
+        <div class="modal-content">
+            <button class="close-modal" aria-label="Close modal">&times;</button>
+            <h2>Book a Table</h2>
+            <form id="reservation-form">
+                <div class="form-group">
+                    <label for="res-name">Name</label>
+                    <input type="text" id="res-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="res-email">Email</label>
+                    <input type="email" id="res-email" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="res-date">Date</label>
+                        <input type="date" id="res-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="res-time">Time</label>
+                        <select id="res-time" required>
+                            <option value="17:00">5:00 PM</option>
+                            <option value="18:00">6:00 PM</option>
+                            <option value="19:00">7:00 PM</option>
+                            <option value="20:00">8:00 PM</option>
+                            <option value="21:00">9:00 PM</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="res-guests">Guests</label>
+                        <select id="res-guests" required>
+                            <option value="1">1 Person</option>
+                            <option value="2" selected>2 People</option>
+                            <option value="3">3 People</option>
+                            <option value="4">4 People</option>
+                            <option value="5">5 People</option>
+                            <option value="6+">6+ People</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary w-100">Confirm Reservation</button>
+            </form>
+            <div id="reservation-success" class="hidden">
+                <div class="success-icon">✓</div>
+                <h3>Reservation Confirmed!</h3>
+                <p>We look forward to hosting you.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/3d-scene.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

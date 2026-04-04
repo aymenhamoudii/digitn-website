@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Aubier | Fine Dining & Forest Gastronomy</title>
+    <meta name="description" content="Experience the essence of forest-to-table fine dining at L'Aubier. Earthy flavors, elegant atmosphere, and seasonal ingredients.">
+    
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/gallery.css">
+    <link rel="stylesheet" href="css/footer.css">
+</head>
+<body>
+    <header id="main-header">
+        <nav class="nav-container">
+            <div class="nav-logo">
+                <a href="#">L'AUBIER</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#about">Our Story</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-cta">
+                <a href="#menu" class="btn btn-outline">Reservations</a>
+            </div>
+            <button class="mobile-nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <span class="hero-subtitle">Est. 1984</span>
+                <h1 class="hero-title">Culinary Poetry <br>from the <em>Heart of the Woods</em></h1>
+                <p class="hero-description">A journey through seasonal landscapes, curated for the discerning palate.</p>
+                <div class="hero-actions">
+                    <a href="#menu" class="btn btn-primary">View Menu</a>
+                    <a href="#about" class="btn btn-ghost">Our Philosophy</a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <span>Scroll</span>
+                <div class="line"></div>
+            </div>
+        </section>
+
+        <section id="about" class="section about-section">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-content">
+                        <h2 class="section-title">Rooted in Nature</h2>
+                        <p class="section-text">At L'Aubier, we believe that the most profound flavors are found in the quiet corners of the forest. Our chefs work in harmony with the lunar cycles and seasons, foraging wild botanicals and partnering with local heritage farmers.</p>
+                        <p class="section-text">Every plate is a canvas reflecting the specific terroir of our region, delivered with an understated elegance that respects the integrity of the ingredient.</p>
+                    </div>
+                    <div class="about-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=1000" alt="Chef preparing a seasonal dish" class="about-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="menu" class="section menu-section">
+            <div class="container">
+                <div class="menu-header">
+                    <h2 class="section-title centered">The Seasonal Collection</h2>
+                    <p class="section-subtitle centered">A curated selection of our current offerings</p>
+                </div>
+                
+                <div class="menu-tabs">
+                    <button class="menu-tab-btn active" data-category="starters">Starters</button>
+                    <button class="menu-tab-btn" data-category="mains">Main Courses</button>
+                    <button class="menu-tab-btn" data-category="desserts">Desserts</button>
+                </div>
+
+                <div id="menu-container" class="menu-grid">
+                    <!-- Menu items will be injected here by app.js -->
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="section gallery-section">
+            <div class="container">
+                <h2 class="section-title centered">Visual Narratives</h2>
+                <div class="gallery-asymmetric">
+                    <div class="gallery-item large">
+                        <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=1200" alt="Elegant restaurant interior">
+                    </div>
+                    <div class="gallery-item tall">
+                        <img src="https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&q=80&w=800" alt="Plated duck breast">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80&w=800" alt="Ambiance lighting">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1550966841-3ee7adac1661?auto=format&fit=crop&q=80&w=800" alt="Wine pouring">
+                    </div>
+                    <div class="gallery-item wide">
+                        <img src="https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&q=80&w=1200" alt="Private dining area">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3 class="footer-logo">L'AUBIER</h3>
+                    <p>Where the forest meets the table.</p>
+                </div>
+                <div class="footer-info">
+                    <h4>Location</h4>
+                    <p>42 Pine Needle Lane<br>Alpine Ridge, VT 05401</p>
+                </div>
+                <div class="footer-info">
+                    <h4>Hours</h4>
+                    <p>Tue - Thu: 5pm - 10pm<br>Fri - Sat: 5pm - 11pm<br>Sun: 4pm - 9pm</p>
+                </div>
+                <div class="footer-info">
+                    <h4>Contact</h4>
+                    <p>+1 (802) 555-0123<br>concierge@laubier.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 L'Aubier Gastronomy. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram">IG</a>
+                    <a href="#" aria-label="Facebook">FB</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/menu-data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

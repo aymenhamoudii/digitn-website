@@ -1,0 +1,123 @@
+/* Location & Footer Styling */
+.location-section {
+    padding: var(--space-xl) 0;
+    background-color: var(--color-mint-bg);
+}
+
+.location-info {
+    flex: 1;
+    min-width: 300px;
+    padding-right: var(--space-lg);
+}
+
+.info-block {
+    margin-bottom: var(--space-md);
+}
+
+.info-block h3 {
+    font-size: 1.1rem;
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-sage);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.info-block p {
+    font-size: 1.1rem;
+    color: var(--color-slate-muted);
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: var(--space-md);
+}
+
+.social-links a {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    color: var(--color-slate);
+    border-bottom: 1px solid var(--color-slate);
+    padding-bottom: 2px;
+}
+
+.map-container {
+    flex: 1.5;
+    min-width: 450px;
+    height: 450px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-med);
+}
+
+.map-placeholder iframe {
+    filter: grayscale(1) invert(0.1) contrast(1.1);
+}
+
+/* Footer Styling */
+.main-footer {
+    padding: var(--space-lg) 0;
+    background-color: var(--color-slate);
+    color: var(--color-pearl);
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    text-align: center;
+}
+
+.footer-logo {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    letter-spacing: 0.3em;
+    font-weight: 300;
+}
+
+.footer-legal {
+    width: 100%;
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-legal p {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.footer-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer-links a {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.footer-links a:hover {
+    color: var(--color-pearl);
+}
+
+@media (max-width: 1024px) {
+    .map-container {
+        min-width: 100%;
+        margin-top: var(--space-md);
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-legal {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}

@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Invincible: Blood, Legacy, and Choice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&family=Open+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+    --bg: #0D1321;
+    --bg2: #1D2D44;
+    --surface: #2B3A55;
+    --surface2: #252b37;
+    --border: rgba(255,255,255,.07);
+    --border-md: rgba(255,255,255,.11);
+    --accent1: #FFD166;
+    --accent1-dim: rgba(255, 209, 102, 0.18);
+    --accent2: #EF476F;
+    --accent2-dim: rgba(239, 71, 111, 0.18);
+    --accent3: #118AB2;
+    --accent3-dim: rgba(17, 138, 178, 0.18);
+    --t1: #F8F9FA;
+    --t2: #ADB5BD;
+    --t3: rgba(248, 249, 250, 0.3);
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Open Sans', system-ui, sans-serif;
+    --serif: 'Poppins', sans-serif;
+  }
+    
+  /* ─── Reset ─── */
+  ::-webkit-scrollbar{display:none}
+  *{scrollbar-width:none;-ms-overflow-style:none;box-sizing:border-box;margin:0;padding:0}
+  html{scroll-snap-type:y mandatory;overflow-y:scroll;overflow-x:hidden;scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  /* ─── Slide (full viewport) ─── */
+  section{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+  /* ─── Stagger animation (.s container) ─── */
+  .s{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
+  .s>*{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+  section.active .s>*{opacity:1;transform:translateY(0)}
+  section.active .s>*:nth-child(1){transition-delay:.03s}
+  section.active .s>*:nth-child(2){transition-delay:.09s}
+  section.active .s>*:nth-child(3){transition-delay:.15s}
+  section.active .s>*:nth-child(4){transition-delay:.21s}
+  section.active .s>*:nth-child(5){transition-delay:.27s}
+  section.active .s>*:nth-child(6){transition-delay:.33s}
+  section.active .s>*:nth-child(7){transition-delay:.39s}
+  section.active .s>*:nth-child(8){transition-delay:.45s}
+
+  /* ─── Centering utility ─── */
+  .cx{justify-content:center;align-items:center;text-align:center}
+
+  /* ─── Speaker notes (hidden) ─── */
+  aside.notes{display:none!important}
+
+  /* ─── Slide counter ─── */
+  #slide-counter{position:fixed;bottom:2vh;right:2vw;font-family:var(--mono);font-size:1.6vh;color:var(--t3);background:var(--surface);border:1px solid var(--border);border-radius:1vh;padding:.8vh 1.6vh;z-index:100;pointer-events:none}
+
+  /* ─── Progress bar ─── */
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--accent1);z-index:100;transition:width .3s ease}
+
+  </style>
+</head>
+<body>
+  <div id="progress" style="width:0"></div>
+  <div id="slide-counter">1 / 10</div>
+  <section style="background-color: var(--bg); color: var(--text); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden; background-image: radial-gradient(circle at 50% 50%, var(--surface) 2px, transparent 2px); background-size: 30px 30px; box-sizing: border-box;">
+  <div class="s cx" style="text-align: center; z-index: 10;">
+    <div style="background: var(--accent1); color: var(--bg); padding: 1rem 2rem; font-size: 1.5rem; font-weight: 800; text-transform: uppercase; letter-spacing: 4px; border: 4px solid var(--text); box-shadow: 8px 8px 0px var(--accent2); transform: rotate(-2deg); margin-bottom: 2rem; display: inline-block;">
+      Invincible Universe
+    </div>
+    <h1 style="font-size: 8vw; font-weight: 900; text-transform: uppercase; margin: 0; line-height: 1; text-shadow: 4px 4px 0px var(--accent3), 8px 8px 0px var(--accent2); color: var(--text); font-family: var(--serif);">INVINCIBLE</h1>
+    <h2 style="font-size: 2.5vw; color: var(--accent1); margin-top: 2rem; font-weight: 700; background: var(--bg); padding: 0.5rem 1rem; border-left: 6px solid var(--accent2);">A Journey of Blood, Legacy, and Choice</h2>
+  </div>
+  <aside class="notes" style="display:none">Welcome everyone. Today we are diving deep into the lore and emotional core of Invincible, exploring what makes this comic and animated series a masterpiece of character development and storytelling.</aside>
+  <aside class="notes">Welcome everyone. Today we are diving deep into the lore and emotional core of Invincible, exploring what makes this comic and animated series a masterpiece of character development and storytelling.</aside>
+</section>
+  <section style="background-color: var(--bg2); color: var(--text); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; align-items: center; justify-content: center; padding: 5vw; box-sizing: border-box;">
+  <div class="s" style="display: flex; width: 100%; max-width: 1400px; gap: 4rem; align-items: center;">
+    <div style="flex: 1; position: relative;">
+      <div style="background: var(--accent3); height: 60vh; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%); display: flex; align-items: center; justify-content: center; border: 6px solid var(--text); box-shadow: 12px 12px 0px var(--accent1);">
+        <i class="fas fa-bolt" style="font-size: 15vw; color: var(--bg); text-shadow: 4px 4px 0px var(--text);"></i>
+      </div>
+      <div style="position: absolute; bottom: -20px; right: -20px; background: var(--accent2); color: var(--text); padding: 1rem 2rem; font-weight: bold; font-size: 1.5rem; transform: rotate(-5deg); box-shadow: 4px 4px 0px var(--bg);">THE ORIGIN</div>
+    </div>
+    <div style="flex: 1;">
+      <h2 style="font-size: 4vw; font-weight: 900; margin: 0 0 1rem 0; color: var(--accent1); text-transform: uppercase; text-shadow: 3px 3px 0px var(--bg);">The Weight of a Legacy</h2>
+      <h3 style="font-size: 2vw; color: var(--text2); margin: 0 0 3rem 0; font-family: var(--mono); border-bottom: 2px solid var(--surface); padding-bottom: 1rem;">Mark Grayson's Awakening</h3>
+      <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 2rem;">
+        <li style="display: flex; align-items: center; gap: 1.5rem; font-size: 1.5rem;"><i class="fas fa-caret-right" style="color: var(--accent2); font-size: 2rem;"></i> <span>Late-blooming powers</span></li>
+        <li style="display: flex; align-items: center; gap: 1.5rem; font-size: 1.5rem;"><i class="fas fa-caret-right" style="color: var(--accent2); font-size: 2rem;"></i> <span>The immense pressure of living up to Omni-Man</span></li>
+        <li style="display: flex; align-items: center; gap: 1.5rem; font-size: 1.5rem;"><i class="fas fa-caret-right" style="color: var(--accent2); font-size: 2rem;"></i> <span>First hesitant steps as an independent hero</span></li>
+      </ul>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Mark Grayson didn't just get powers; he inherited a monumental legacy. His journey begins not with triumph, but with the heavy, relatable burden of expectation and finding his own identity.</aside>
+  <aside class="notes">Mark Grayson didn't just get powers; he inherited a monumental legacy. His journey begins not with triumph, but with the heavy, relatable burden of expectation and finding his own identity.</aside>
+</section>
+  <section style="background-color: var(--bg); color: var(--text); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; flex-direction: column; padding: 5vw; box-sizing: border-box; justify-content: center;">
+  <div class="s">
+    <div style="text-align: center; margin-bottom: 6rem;">
+      <span style="background: var(--accent2); color: var(--text); padding: 0.5rem 1.5rem; font-family: var(--mono); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; border-radius: 50px;">Character Arc</span>
+      <h2 style="font-size: 4vw; font-weight: 900; margin: 1rem 0; color: var(--text); text-transform: uppercase;">Evolution of a Hero</h2>
+      <p style="font-size: 1.5vw; color: var(--accent1);">The Trials of Invincible</p>
+    </div>
+    
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; position: relative; max-width: 1200px; margin: 0 auto;">
+      <div style="position: absolute; top: 40px; left: 5%; right: 5%; height: 8px; background: var(--surface); z-index: 1;"></div>
+      
+      <div style="flex: 1; text-align: center; position: relative; z-index: 2; padding: 0 1rem;">
+        <div style="width: 80px; height: 80px; background: var(--bg); border: 6px solid var(--accent3); border-radius: 50%; margin: 0 auto 2rem auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 6px var(--bg), 0 0 0 10px var(--surface);">
+          <i class="fas fa-child" style="color: var(--accent3); font-size: 2rem;"></i>
+        </div>
+        <h3 style="font-size: 1.8rem; color: var(--accent1); margin-bottom: 0.5rem;">Phase I</h3>
+        <p style="font-size: 1.2rem; color: var(--text2); line-height: 1.4;">Naive beginnings &amp; discovery of powers</p>
+      </div>
+      
+      <div style="flex: 1; text-align: center; position: relative; z-index: 2; padding: 0 1rem;">
+        <div style="width: 80px; height: 80px; background: var(--bg); border: 6px solid var(--accent2); border-radius: 50%; margin: 0 auto 2rem auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 6px var(--bg), 0 0 0 10px var(--surface); transform: scale(1.1);">
+          <i class="fas fa-heart-broken" style="color: var(--accent2); font-size: 2rem;"></i>
+        </div>
+        <h3 style="font-size: 1.8rem; color: var(--accent2); margin-bottom: 0.5rem;">Phase II</h3>
+        <p style="font-size: 1.2rem; color: var(--text2); line-height: 1.4;">The trauma of truth &amp; devastating betrayal</p>
+      </div>
+      
+      <div style="flex: 1; text-align: center; position: relative; z-index: 2; padding: 0 1rem;">
+        <div style="width: 80px; height: 80px; background: var(--bg); border: 6px solid var(--accent1); border-radius: 50%; margin: 0 auto 2rem auto; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 6px var(--bg), 0 0 0 10px var(--surface);">
+          <i class="fas fa-globe" style="color: var(--accent1); font-size: 2rem;"></i>
+        </div>
+        <h3 style="font-size: 1.8rem; color: var(--accent1); margin-bottom: 0.5rem;">Phase III</h3>
+        <p style="font-size: 1.2rem; color: var(--text2); line-height: 1.4;">Accepting the responsibility of the universe</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Mark's arc is defined by trauma and immense resilience. This timeline shows how every brutal battle forced him to mature, breaking classic superhero tropes and forcing him to earn the name 'Invincible'.</aside>
+  <aside class="notes">Mark's arc is defined by trauma and immense resilience. This timeline shows how every brutal battle forced him to mature, breaking classic superhero tropes and forcing him to earn the name 'Invincible'.</aside>
+</section>
+  <section style="background-color: var(--bg); color: var(--text); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; justify-content: center; align-items: center; box-sizing: border-box; background-image: linear-gradient(135deg, var(--bg) 0%, var(--surface) 100%);">
+  <div class="s cx" style="max-width: 1000px; padding: 4rem; position: relative;">
+    <i class="fas fa-quote-left" style="position: absolute; top: 0; left: 0; font-size: 8rem; color: var(--accent2); opacity: 0.2;"></i>
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <span style="color: var(--accent2); font-weight: bold; letter-spacing: 4px; text-transform: uppercase;">The Climax</span>
+    </div>
+    <h2 style="font-size: 5vw; font-weight: 900; line-height: 1.1; margin: 0 0 1rem 0; text-align: center; color: var(--text); font-family: var(--serif);">The Turning Point</h2>
+    <h3 style="font-size: 2vw; text-align: center; color: var(--text2); font-weight: 400; margin-bottom: 4rem;">Earth's Darkest Hour</h3>
+    
+    <div style="border-left: 8px solid var(--accent1); padding-left: 3rem; margin-top: 2rem;">
+      <ul style="list-style: none; padding: 0; margin: 0; font-size: 1.8rem; line-height: 1.6; color: var(--text);">
+        <li style="margin-bottom: 1.5rem;"><strong style="color: var(--accent1);">01.</strong> The devastating clash in Chicago</li>
+        <li style="margin-bottom: 1.5rem;"><strong style="color: var(--accent1);">02.</strong> Shattered illusions of the father figure</li>
+        <li><strong style="color: var(--accent1);">03.</strong> The catalyst for cosmic expansion</li>
+      </ul>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">The confrontation between Mark and Nolan is the emotional anchor of the series. It shatters the illusion of the flawless father and acts as the catalyst that sets the grander cosmic lore into motion.</aside>
+  <aside class="notes">The confrontation between Mark and Nolan is the emotional anchor of the series. It shatters the illusion of the flawless father and acts as the catalyst that sets the grander cosmic lore into motion.</aside>
+</section>
+  <section style="background-color: var(--bg2); color: var(--text); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; flex-direction: column; justify-content: center; padding: 5vw; box-sizing: border-box;">
+  <div class="s">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem;">
+      <div>
+        <span style="color: var(--accent3); font-family: var(--mono); text-transform: uppercase; letter-spacing: 2px;">Character Arc</span>
+        <h2 style="font-size: 3.5vw; font-weight: 900; margin: 0.5rem 0; text-transform: uppercase;">Nolan's Redemption Arc</h2>
+        <p style="font-size: 1.5vw; color: var(--text2); margin: 0;">Can a Conqueror Change?</p>
+      </div>
+      <div style="background: var(--accent2); padding: 1rem 2rem; font-weight: bold; border-radius: 8px; transform: rotate(2deg);">
+        <i class="fas fa-fire-alt" style="margin-right: 10px;"></i> Omni-Man
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem;">
+      <div style="background: var(--surface); padding: 3rem 2rem; border-radius: 16px; border-top: 8px solid var(--accent3); box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: transform 0.3s;">
+        <i class="fas fa-shield-alt" style="font-size: 3rem; color: var(--accent3); margin-bottom: 1.5rem;"></i>
+        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text);">The Loyal Soldier</h3>
+        <p style="color: var(--text2); line-height: 1.5; margin-bottom: 2rem;">Conditioned for centuries to believe in Viltrumite supremacy and ruthless conquest.</p>
+        <div style="width: 100%; height: 8px; background: var(--bg); border-radius: 4px; overflow: hidden;">
+          <div style="width: 100%; height: 100%; background: var(--accent3);"></div>
+        </div>
+        <div style="font-size: 0.8rem; color: var(--text2); margin-top: 0.5rem; text-align: right; font-family: var(--mono);">EMPATHY: 0%</div>
+      </div>
+      
+      <div style="background: var(--surface); padding: 3rem 2rem; border-radius: 16px; border-top: 8px solid var(--accent1); box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: translateY(-20px);">
+        <i class="fas fa-heart" style="font-size: 3rem; color: var(--accent1); margin-bottom: 1.5rem;"></i>
+        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text);">Crack in the Armor</h3>
+        <p style="color: var(--text2); line-height: 1.5; margin-bottom: 2rem;">Discovering that human love and family connection offer a strength greater than absolute power.</p>
+        <div style="width: 100%; height: 8px; background: var(--bg); border-radius: 4px; overflow: hidden;">
+          <div style="width: 50%; height: 100%; background: var(--accent1);"></div>
+        </div>
+        <div style="font-size: 0.8rem; color: var(--text2); margin-top: 0.5rem; text-align: right; font-family: var(--mono);">EMPATHY: 50%</div>
+      </div>
+
+      <div style="background: var(--surface); padding: 3rem 2rem; border-radius: 16px; border-top: 8px solid var(--accent2); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+        <i class="fas fa-hand-holding-heart" style="font-size: 3rem; color: var(--accent2); margin-bottom: 1.5rem;"></i>
+        <h3 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--text);">Ultimate Sacrifice</h3>
+        <p style="color: var(--text2); line-height: 1.5; margin-bottom: 2rem;">Turning against his own invincible empire to protect Earth and his son at all costs.</p>
+        <div style="width: 100%; height: 8px; background: var(--bg); border-radius: 4px; overflow: hidden;">
+          <div style="width: 100%; height: 100%; background: var(--accent2);"></div>
+        </div>
+        <div style="font-size: 0.8rem; color: var(--text2); margin-top: 0.5rem; text-align: right; font-family: var(--mono);">EMPATHY: 100%</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Nolan Grayson's arc is arguably the most profound in the lore. We watch a ruthless, thousands-of-years-old conqueror realize that human love is a greater strength than absolute physical power.</aside>
+  <aside class="notes">Nolan Grayson's arc is arguably the most profound in the lore. We watch a ruthless, thousands-of-years-old conqueror realize that human love is a greater strength than absolute physical power.</aside>
+</section>
+  <section style="background-color: var(--bg); color: var(--text); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; flex-direction: column; justify-content: center; padding: 5vw; box-sizing: border-box; position: relative;">
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.05; background-image: repeating-linear-gradient(45deg, var(--text) 0, var(--text) 2px, transparent 2px, transparent 10px); z-index: 0;"></div>
+  
+  <div class="s" style="z-index: 1;">
+    <div style="text-align: center; margin-bottom: 5rem;">
+      <h2 style="font-size: 4vw; font-weight: 900; margin: 0; color: var(--accent2); text-transform: uppercase; letter-spacing: 2px;">The Viltrumite Threat</h2>
+      <p style="font-size: 2vw; color: var(--text); font-family: var(--serif); font-style: italic;">Cosmic Scale of the Empire</p>
+    </div>
+
+    <div style="display: flex; justify-content: center; gap: 4vw; align-items: center;">
+      <div style="text-align: center; background: var(--surface); padding: 3rem; border-radius: 50%; width: 25vw; height: 25vw; display: flex; flex-direction: column; justify-content: center; border: 4px dashed var(--accent3); position: relative;">
+        <i class="fas fa-globe-americas" style="font-size: 3rem; color: var(--accent3); margin-bottom: 1rem;"></i>
+        <div style="font-size: 5vw; font-weight: 900; line-height: 1; color: var(--text);">1,000s</div>
+        <div style="font-size: 1.2vw; color: var(--text2); text-transform: uppercase; margin-top: 1rem; letter-spacing: 1px;">Conquered Worlds</div>
+      </div>
+      
+      <div style="text-align: center; background: var(--accent2); padding: 3rem; border-radius: 50%; width: 30vw; height: 30vw; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 0 50px rgba(239, 71, 111, 0.4); transform: scale(1.1); z-index: 2; border: 8px solid var(--bg);">
+        <i class="fas fa-skull" style="font-size: 4rem; color: var(--bg); margin-bottom: 1rem;"></i>
+        <div style="font-size: 8vw; font-weight: 900; line-height: 1; color: var(--text);">&lt;50</div>
+        <div style="font-size: 1.5vw; color: var(--bg); font-weight: bold; text-transform: uppercase; margin-top: 1rem; letter-spacing: 2px;">Pure-Bloods Left</div>
+      </div>
+
+      <div style="text-align: center; background: var(--surface); padding: 3rem; border-radius: 50%; width: 25vw; height: 25vw; display: flex; flex-direction: column; justify-content: center; border: 4px dashed var(--accent1);">
+        <i class="fas fa-fist-raised" style="font-size: 3rem; color: var(--accent1); margin-bottom: 1rem;"></i>
+        <div style="font-size: 4vw; font-weight: 900; line-height: 1; color: var(--text);">100%</div>
+        <div style="font-size: 1.2vw; color: var(--text2); text-transform: uppercase; margin-top: 1rem; letter-spacing: 1px;">Survival of the Fittest</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">To understand the stakes, we must look at the Viltrum Empire. Despite their terrifying power across thousands of worlds, their numbers are dwindling. This hidden weakness makes Earth, and Mark, uniquely important to the universe.</aside>
+  <aside class="notes">To understand the stakes, we must look at the Viltrum Empire. Despite their terrifying power across thousands of worlds, their numbers are dwindling. This hidden weakness makes Earth, and Mark, uniquely important to the universe.</aside>
+</section>
+  <section style="background-color: var(--bg); color: var(--text); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; align-items: center; box-sizing: border-box; padding: 0 5vw;">
+  <div class="s" style="display: flex; width: 100%; gap: 5vw; align-items: center;">
+    
+    <div style="flex: 0 0 40%;">
+      <div style="background: var(--surface); padding: 2rem; border-radius: 20px; position: relative; border: 4px solid var(--accent2); box-shadow: -15px 15px 0px rgba(239, 71, 111, 0.2);">
+        <div style="background: var(--accent2); width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: absolute; top: -50px; right: -30px; border: 6px solid var(--bg); box-shadow: 0 5px 15px rgba(0,0,0,0.5);">
+          <i class="fas fa-atom" style="font-size: 3rem; color: var(--text);"></i>
+        </div>
+        <h2 style="font-size: 3.5vw; font-weight: 900; margin: 0 0 0.5rem 0; color: var(--text); text-transform: uppercase;">Atom Eve</h2>
+        <h3 style="font-size: 1.5vw; color: var(--accent2); margin: 0 0 2rem 0; font-family: var(--serif); font-style: italic;">Power and True Purpose</h3>
+        
+        <p style="font-size: 1.2rem; line-height: 1.6; color: var(--text2); margin-bottom: 2rem;">
+          Samantha Eve Wilkins represents an alternative view on heroism. Rather than merely fighting villains, she grapples with the responsibility of possessing reality-altering abilities.
+        </p>
+      </div>
+    </div>
+
+    <div style="flex: 1; display: flex; flex-direction: column; gap: 2rem;">
+      <div style="background: var(--bg2); padding: 2rem; border-radius: 12px; border-left: 8px solid var(--accent1); display: flex; align-items: center; gap: 2rem; transform: translateX(-20px);">
+        <i class="fas fa-vial" style="font-size: 2.5rem; color: var(--accent1);"></i>
+        <div style="font-size: 1.5rem; font-weight: bold;">Traumatic origins and government design</div>
+      </div>
+      
+      <div style="background: var(--bg2); padding: 2rem; border-radius: 12px; border-left: 8px solid var(--accent3); display: flex; align-items: center; gap: 2rem; transform: translateX(20px);">
+        <i class="fas fa-ban" style="font-size: 2.5rem; color: var(--accent3);"></i>
+        <div style="font-size: 1.5rem; font-weight: bold;">Rejecting the superhero establishment</div>
+      </div>
+
+      <div style="background: var(--bg2); padding: 2rem; border-radius: 12px; border-left: 8px solid var(--accent2); display: flex; align-items: center; gap: 2rem; transform: translateX(-10px);">
+        <i class="fas fa-seedling" style="font-size: 2.5rem; color: var(--accent2);"></i>
+        <div style="font-size: 1.5rem; font-weight: bold;">Using power to enact systemic, humanitarian good</div>
+      </div>
+    </div>
+    
+  </div>
+  <aside class="notes" style="display:none">Samantha Eve Wilkins represents an alternative view on heroism. Instead of just punching villains, she grapples with how to use her reality-altering powers for actual humanitarian good, inspiring Mark's own worldview.</aside>
+  <aside class="notes">Samantha Eve Wilkins represents an alternative view on heroism. Instead of just punching villains, she grapples with how to use her reality-altering powers for actual humanitarian good, inspiring Mark's own worldview.</aside>
+</section>
+  <section style="background-color: var(--bg2); color: var(--text); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; flex-direction: column; justify-content: center; padding: 5vw; box-sizing: border-box;">
+  <div class="s">
+    <div style="text-align: center; margin-bottom: 4rem;">
+      <h2 style="font-size: 3.5vw; font-weight: 900; margin: 0; color: var(--text); text-transform: uppercase;">The Defenders of Earth</h2>
+      <p style="font-size: 1.5vw; color: var(--accent3); margin-top: 0.5rem; letter-spacing: 1px;">A Flawed but Resilient Alliance</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 2rem; max-width: 1000px; margin: 0 auto;">
+      
+      <div style="display: flex; align-items: center; gap: 3rem; background: var(--surface); padding: 2rem; border-radius: 16px; border-right: 6px solid var(--accent1);">
+        <div style="background: var(--bg); width: 80px; height: 80px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 2px solid var(--text2);">
+          <i class="fas fa-user-secret" style="font-size: 2.5rem; color: var(--accent1);"></i>
+        </div>
+        <div>
+          <h3 style="font-size: 1.8rem; margin: 0 0 0.5rem 0; color: var(--text);">Cecil Stedman</h3>
+          <p style="font-size: 1.2rem; margin: 0; color: var(--text2);">The grey morality of defense. Making impossible, ruthless choices to keep the planet safe.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 3rem; background: var(--surface); padding: 2rem; border-radius: 16px; flex-direction: row-reverse; text-align: right; border-left: 6px solid var(--accent3);">
+        <div style="background: var(--bg); width: 80px; height: 80px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 2px solid var(--text2);">
+          <i class="fas fa-eye" style="font-size: 2.5rem; color: var(--accent3);"></i>
+        </div>
+        <div>
+          <h3 style="font-size: 1.8rem; margin: 0 0 0.5rem 0; color: var(--text);">Allen the Alien</h3>
+          <p style="font-size: 1.2rem; margin: 0; color: var(--text2);">The cosmic perspective. Connecting Earth to the wider interstellar struggle against Viltrum.</p>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 3rem; background: var(--surface); padding: 2rem; border-radius: 16px; border-right: 6px solid var(--accent2);">
+        <div style="background: var(--bg); width: 80px; height: 80px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 2px solid var(--text2);">
+          <i class="fas fa-users" style="font-size: 2.5rem; color: var(--accent2);"></i>
+        </div>
+        <div>
+          <h3 style="font-size: 1.8rem; margin: 0 0 0.5rem 0; color: var(--text);">Guardians of the Globe</h3>
+          <p style="font-size: 1.2rem; margin: 0; color: var(--text2);">Rebuilding hope. A fractured team learning to stand together after ultimate betrayal.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Mark doesn't fight alone. Characters like Cecil and Allen expand the lore, introducing deep moral ambiguity and interstellar politics that complicate Mark's originally black-and-white view of justice.</aside>
+  <aside class="notes">Mark doesn't fight alone. Characters like Cecil and Allen expand the lore, introducing deep moral ambiguity and interstellar politics that complicate Mark's originally black-and-white view of justice.</aside>
+</section>
+  <section style="background-color: var(--bg); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; position: relative; overflow: hidden; box-sizing: border-box;">
+  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120px; height: 120px; background: var(--text); border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; font-size: 3rem; font-weight: 900; color: var(--bg); border: 8px solid var(--bg); font-style: italic;">
+    VS
+  </div>
+
+  <div class="s" style="display: flex; width: 100%; height: 100%;">
+    <div style="flex: 1; background: var(--bg2); padding: 8vw 5vw; display: flex; flex-direction: column; justify-content: center; border-right: 2px solid rgba(255,255,255,0.1);">
+      <h2 style="font-size: 4vw; font-weight: 900; margin: 0 0 1rem 0; color: var(--accent2); text-transform: uppercase;">Viltrum</h2>
+      <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 2rem;">
+        <li style="display: flex; align-items: flex-start; gap: 1rem;">
+          <i class="fas fa-times" style="color: var(--accent2); font-size: 1.5rem; margin-top: 5px;"></i>
+          <span style="font-size: 1.5vw; color: var(--text); line-height: 1.4;">Perfection achieved through ruthless subjugation</span>
+        </li>
+        <li style="display: flex; align-items: flex-start; gap: 1rem;">
+          <i class="fas fa-times" style="color: var(--accent2); font-size: 1.5rem; margin-top: 5px;"></i>
+          <span style="font-size: 1.5vw; color: var(--text); line-height: 1.4;">Emotion viewed as a fatal biological weakness</span>
+        </li>
+        <li style="display: flex; align-items: flex-start; gap: 1rem;">
+          <i class="fas fa-times" style="color: var(--accent2); font-size: 1.5rem; margin-top: 5px;"></i>
+          <span style="font-size: 1.5vw; color: var(--text); line-height: 1.4;">Cold, absolute physical strength</span>
+        </li>
+      </ul>
+    </div>
+
+    <div style="flex: 1; background: var(--surface); padding: 8vw 5vw; display: flex; flex-direction: column; justify-content: center; text-align: right;">
+      <h2 style="font-size: 4vw; font-weight: 900; margin: 0 0 1rem 0; color: var(--accent3); text-transform: uppercase;">Earth</h2>
+      <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 2rem; align-items: flex-end;">
+        <li style="display: flex; align-items: flex-start; gap: 1rem; flex-direction: row-reverse;">
+          <i class="fas fa-check" style="color: var(--accent3); font-size: 1.5rem; margin-top: 5px;"></i>
+          <span style="font-size: 1.5vw; color: var(--text); line-height: 1.4;">Strength derived from connection and compassion</span>
+        </li>
+        <li style="display: flex; align-items: flex-start; gap: 1rem; flex-direction: row-reverse;">
+          <i class="fas fa-check" style="color: var(--accent3); font-size: 1.5rem; margin-top: 5px;"></i>
+          <span style="font-size: 1.5vw; color: var(--text); line-height: 1.4;">Vulnerability as a source of immense resilience</span>
+        </li>
+        <li style="display: flex; align-items: flex-start; gap: 1rem; flex-direction: row-reverse;">
+          <i class="fas fa-check" style="color: var(--accent3); font-size: 1.5rem; margin-top: 5px;"></i>
+          <span style="font-size: 1.5vw; color: var(--text); line-height: 1.4;">Choosing to protect rather than conquer</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="position: absolute; top: 40px; left: 50%; transform: translateX(-50%); text-align: center; z-index: 10;">
+    <span style="background: var(--bg); color: var(--text2); padding: 0.5rem 1.5rem; font-family: var(--mono); font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; border-radius: 20px;">An Ideological Warfare</span>
+  </div>
+
+  <aside class="notes" style="display:none">At its core, Invincible is a war of ideologies. It's not just about who hits harder; it's a deeply emotional struggle about whether empathy and human vulnerability can overcome ruthless, cold perfection.</aside>
+  <aside class="notes">At its core, Invincible is a war of ideologies. It's not just about who hits harder; it's a deeply emotional struggle about whether empathy and human vulnerability can overcome ruthless, cold perfection.</aside>
+</section>
+  <section style="background-color: var(--bg); color: var(--text); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden; box-sizing: border-box;">
+  <div style="position: absolute; top: -10vw; left: -10vw; width: 50vw; height: 50vw; background: var(--accent2); border-radius: 50%; filter: blur(100px); opacity: 0.2; z-index: 0;"></div>
+  <div style="position: absolute; bottom: -10vw; right: -10vw; width: 40vw; height: 40vw; background: var(--accent3); border-radius: 50%; filter: blur(100px); opacity: 0.2; z-index: 0;"></div>
+
+  <div class="s cx" style="text-align: center; z-index: 10; max-width: 1200px; padding: 2rem;">
+    <div style="display: inline-block; border: 2px solid var(--accent1); color: var(--accent1); padding: 0.5rem 1.5rem; border-radius: 30px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2rem;">
+      The Ultimate Takeaway
+    </div>
+    
+    <h1 style="font-size: 7vw; font-weight: 900; line-height: 1.1; margin: 0 0 2rem 0; color: var(--text); font-family: var(--serif);">
+      "What Will You Have <span style="color: var(--accent2); display: block;">After 500 Years?</span>"
+    </h1>
+    
+    <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 4rem;">
+      <div style="background: rgba(255,255,255,0.05); padding: 1.5rem 2.5rem; border-radius: 12px; border-bottom: 4px solid var(--accent3); backdrop-filter: blur(10px);">
+        <i class="fas fa-dna" style="font-size: 2rem; color: var(--accent3); margin-bottom: 1rem;"></i>
+        <div style="font-size: 1.2rem; font-weight: bold;">Triumph of Humanity</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.05); padding: 1.5rem 2.5rem; border-radius: 12px; border-bottom: 4px solid var(--accent1); backdrop-filter: blur(10px);">
+        <i class="fas fa-heart" style="font-size: 2rem; color: var(--accent1); margin-bottom: 1rem;"></i>
+        <div style="font-size: 1.2rem; font-weight: bold;">Choosing Love</div>
+      </div>
+      <div style="background: rgba(255,255,255,0.05); padding: 1.5rem 2.5rem; border-radius: 12px; border-bottom: 4px solid var(--accent2); backdrop-filter: blur(10px);">
+        <i class="fas fa-sun" style="font-size: 2rem; color: var(--accent2); margin-bottom: 1rem;"></i>
+        <div style="font-size: 1.2rem; font-weight: bold;">Uplifting Legacy</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">When Nolan brutally asks Mark what he will have after 500 years, Mark's simple answer—'You, Dad'—is the soul of the series. It's an uplifting, inspiring reminder that even in a universe of gods, humanity is the ultimate superpower.</aside>
+  <aside class="notes">When Nolan brutally asks Mark what he will have after 500 years, Mark's simple answer—'You, Dad'—is the soul of the series. It's an uplifting, inspiring reminder that even in a universe of gods, humanity is the ultimate superpower.</aside>
+</section>
+
+<script>
+(function(){
+  const sections = document.querySelectorAll('section');
+  const total = sections.length;
+  const counter = document.getElementById('slide-counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  // IntersectionObserver: mark the visible slide as .active (triggers CSS animations)
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        sections.forEach(s => s.classList.remove('active'));
+        e.target.classList.add('active');
+        current = Array.from(sections).indexOf(e.target);
+        if (counter) counter.textContent = (current+1) + ' / ' + total;
+        if (progress) progress.style.width = ((current+1)/total*100) + '%';
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s => obs.observe(s));
+
+  // Activate first slide immediately
+  if (sections[0]) sections[0].classList.add('active');
+  if (counter) counter.textContent = '1 / ' + total;
+  if (progress) progress.style.width = (1/total*100) + '%';
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      if (current < total - 1) sections[current + 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (current > 0) sections[current - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      sections[0].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      sections[total - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'f' || e.key === 'F11') {
+      e.preventDefault();
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>

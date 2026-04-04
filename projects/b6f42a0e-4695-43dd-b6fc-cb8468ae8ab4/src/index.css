@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-charcoal-950 text-cream-100 font-body antialiased;
+  }
+
+  ::selection {
+    @apply bg-bronze-500/30 text-cream-50;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32 px-4 md:px-8 lg:px-12;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-bronze-300 via-bronze-400 to-bronze-500 bg-clip-text text-transparent;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-4 
+           bg-bronze-500 text-charcoal-950 font-medium tracking-wide
+           transition-all duration-300 ease-elegant
+           hover:bg-bronze-400 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-bronze-500/20
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bronze-400 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal-900
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-8 py-4 
+           border border-bronze-500/50 text-bronze-300 font-medium tracking-wide
+           transition-all duration-300 ease-elegant
+           hover:bg-bronze-500/10 hover:border-bronze-400 hover:text-bronze-200
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bronze-400 focus-visible:ring-offset-2 focus-visible:ring-offset-charcoal-900;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-charcoal-800 border border-charcoal-600 
+           text-cream-100 placeholder:text-charcoal-500
+           transition-all duration-300
+           focus:outline-none focus:border-bronze-500 focus:ring-1 focus:ring-bronze-500/30;
+  }
+
+  .link-underline {
+    @apply relative inline-block;
+  }
+
+  .link-underline::after {
+    @apply content-[''] absolute -bottom-1 left-0 w-0 h-px bg-bronze-400 
+           transition-all duration-300 ease-elegant;
+  }
+
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+
+  .card-dark {
+    @apply bg-charcoal-800/50 backdrop-blur-sm border border-charcoal-700/50;
+  }
+
+  .reveal {
+    @apply opacity-0 translate-y-8 transition-all duration-700 ease-elegant;
+  }
+
+  .reveal.active {
+    @apply opacity-100 translate-y-0;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .grain-overlay {
+    @apply pointer-events-none fixed inset-0 opacity-[0.03] z-50 mix-blend-overlay;
+  }
+}

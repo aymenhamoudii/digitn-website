@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Retro neon Snake - classic arcade action with cyberpunk flair">
+    <title>SNAKE</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <header class="game-header">
+            <div class="score-panel">
+                <div class="score-item">
+                    SCORE
+                    <span id="score-display" class="score-value">000</span>
+                </div>
+                <div class="score-item">
+                    HIGH
+                    <span id="high-score-display" class="score-value">000</span>
+                </div>
+            </div>
+            <h1 class="game-title">SNAKE</h1>
+            <div class="controls-hint">
+                ↑ ↓ ← → or swipe
+            </div>
+        </header>
+
+        <!-- Canvas Container -->
+        <div class="canvas-wrapper">
+            <canvas id="game-canvas" width="640" height="640" aria-label="Snake game board"></canvas>
+        </div>
+
+        <!-- Start Screen Overlay -->
+        <div id="start-overlay" class="overlay">
+            <div class="overlay-content">
+                <div class="neon-title">SNAKE</div>
+                <p class="start-subtitle">RETRO ARCADE EDITION</p>
+                <button id="start-btn" class="neon-button">PRESS START</button>
+                <div class="instructions">
+                    <p>Arrow keys or swipe to move</p>
+                    <p>Eat the glowing orbs • Avoid the walls</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Over Overlay -->
+        <div id="game-over-overlay" class="overlay hidden">
+            <div class="overlay-content">
+                <div class="neon-title game-over-text">GAME OVER</div>
+                <div class="final-score-container">
+                    <p>YOUR SCORE</p>
+                    <span id="final-score-display" class="final-score">000</span>
+                </div>
+                <button id="restart-btn" class="neon-button">RESTART MISSION</button>
+                <div id="new-high-score" class="new-high hidden">
+                    ★ NEW HIGH SCORE ★
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts loaded in correct dependency order (global scope - no modules) -->
+    <script src="js/renderer.js"></script>
+    <script src="js/snake.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/demo-data.js"></script>
+</body>
+</html>

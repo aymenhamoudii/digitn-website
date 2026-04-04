@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Glass Calculator | DIGITN AI</title>
+    <meta name="description" content="A high-performance scientific calculator with glassmorphism design and dark mode.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-blobs" aria-hidden="true">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="calculator-container">
+        <!-- Header Controls -->
+        <header class="calc-header">
+            <button id="theme-toggle" class="icon-btn" aria-label="Toggle dark/light mode" title="Toggle Theme">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+            <div class="mode-indicator">
+                <span id="angle-mode">RAD</span>
+            </div>
+            <button id="history-toggle" class="icon-btn" aria-label="Toggle history" title="View History">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </button>
+        </header>
+
+        <!-- Display Area -->
+        <section class="display-section" aria-live="polite">
+            <div id="prev-operation" class="expression-display" aria-hidden="true"></div>
+            <div id="current-display" class="main-display" tabindex="0">0</div>
+        </section>
+
+        <!-- Button Grid -->
+        <section class="keypad">
+            <!-- Row 1 -->
+            <button class="btn btn-sci" data-func="deg-rad" aria-label="Toggle Degrees and Radians">Deg</button>
+            <button class="btn btn-sci" data-val="pi" aria-label="Pi">π</button>
+            <button class="btn btn-sci" data-val="e" aria-label="Euler's number">e</button>
+            <button class="btn btn-sci btn-clear" data-action="clear" aria-label="Clear">C</button>
+            <button class="btn btn-sci" data-action="delete" aria-label="Delete last character">⌫</button>
+
+            <!-- Row 2 -->
+            <button class="btn btn-sci" data-func="pow2" aria-label="X squared">x²</button>
+            <button class="btn btn-sci" data-func="inv" aria-label="One divided by X">1/x</button>
+            <button class="btn btn-sci" data-func="abs" aria-label="Absolute value">|x|</button>
+            <button class="btn btn-sci" data-func="exp" aria-label="Exponential function">exp</button>
+            <button class="btn btn-sci" data-val="mod" aria-label="Modulo">mod</button>
+
+            <!-- Row 3 -->
+            <button class="btn btn-sci" data-func="sqrt" aria-label="Square root">√</button>
+            <button class="btn btn-sci" data-val="(" aria-label="Open parenthesis">(</button>
+            <button class="btn btn-sci" data-val=")" aria-label="Close parenthesis">)</button>
+            <button class="btn btn-sci" data-func="fact" aria-label="Factorial">n!</button>
+            <button class="btn btn-op" data-val="/" aria-label="Divide">÷</button>
+
+            <!-- Row 4 -->
+            <button class="btn btn-sci" data-func="powy" aria-label="X to the power of Y">xʸ</button>
+            <button class="btn btn-num" data-val="7">7</button>
+            <button class="btn btn-num" data-val="8">8</button>
+            <button class="btn btn-num" data-val="9">9</button>
+            <button class="btn btn-op" data-val="*" aria-label="Multiply">×</button>
+
+            <!-- Row 5 -->
+            <button class="btn btn-sci" data-func="log" aria-label="Logarithm base 10">log</button>
+            <button class="btn btn-num" data-val="4">4</button>
+            <button class="btn btn-num" data-val="5">5</button>
+            <button class="btn btn-num" data-val="6">6</button>
+            <button class="btn btn-op" data-val="-" aria-label="Subtract">−</button>
+
+            <!-- Row 6 -->
+            <button class="btn btn-sci" data-func="ln" aria-label="Natural logarithm">ln</button>
+            <button class="btn btn-num" data-val="1">1</button>
+            <button class="btn btn-num" data-val="2">2</button>
+            <button class="btn btn-num" data-val="3">3</button>
+            <button class="btn btn-op" data-val="+" aria-label="Add">+</button>
+
+            <!-- Row 7 -->
+            <button class="btn btn-sci" data-func="sin" aria-label="Sine">sin</button>
+            <button class="btn btn-sci" data-func="cos" aria-label="Cosine">cos</button>
+            <button class="btn btn-num" data-val="0">0</button>
+            <button class="btn btn-num" data-val=".">.</button>
+            <button class="btn btn-equals" data-action="calculate" aria-label="Equals">=</button>
+        </section>
+
+        <!-- Sidebar for History -->
+        <aside id="history-panel" class="history-panel hidden" aria-labelledby="history-title">
+            <div class="history-header">
+                <h3 id="history-title">History</h3>
+                <button id="clear-history" class="text-btn" aria-label="Clear history">Clear</button>
+            </div>
+            <ul id="history-list" role="list"></ul>
+        </aside>
+    </main>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>

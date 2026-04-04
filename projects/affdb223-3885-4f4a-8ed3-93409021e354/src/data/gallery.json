@@ -1,0 +1,5 @@
+[
+  { "id": "g1", "src": "/src/assets/hero.jpg", "alt": "Dining room overview", "caption": "Main dining room" },
+  { "id": "g2", "src": "/src/assets/hero.jpg", "alt": "Chef plating", "caption": "Chef at work" },
+  { "id": "g3", "src": "/src/assets/hero.jpg", "alt": "Dessert close-up", "caption": "Seasonal dessert" }
+]

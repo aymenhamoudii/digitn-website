@@ -1,0 +1,73 @@
+projects/1457f7d8-3e3d-49b9-a600-494c6c08d14b/src/app/layout.tsx(2,10): error TS2305: Module '"next-google-fonts"' has no exported member 'Playfair_Display'.
+projects/1457f7d8-3e3d-49b9-a600-494c6c08d14b/src/app/layout.tsx(2,28): error TS2305: Module '"next-google-fonts"' has no exported member 'Lato'.
+src/app/(marketing)/page.tsx(208,5): error TS2304: Cannot find name 'api'.
+src/app/(marketing)/page.tsx(208,32): error TS7006: Parameter 'user' implicitly has an 'any' type.
+src/app/(platform)/app/chat/[id]/page.tsx(24,25): error TS2339: Property 'user' does not exist on type 'Conversation'.
+src/app/(platform)/app/page.tsx(33,62): error TS2367: This comparison appears to be unintentional because the types '"analyzing" | "planning" | "building" | "ready" | "failed"' and '"expired"' have no overlap.
+src/app/(platform)/app/settings/page.tsx(119,25): error TS18047: 'searchParams' is possibly 'null'.
+src/app/(platform)/app/settings/page.tsx(135,24): error TS2304: Cannot find name 'api'.
+src/app/(platform)/app/settings/page.tsx(149,25): error TS2304: Cannot find name 'api'.
+src/app/(platform)/app/settings/page.tsx(160,28): error TS2304: Cannot find name 'api'.
+src/app/(platform)/app/settings/page.tsx(161,46): error TS7006: Parameter 'p' implicitly has an 'any' type.
+src/app/api/admin/config/route.ts(13,23): error TS2304: Cannot find name 'createClient'.
+src/app/api/admin/config/route.ts(37,23): error TS2304: Cannot find name 'createClient'.
+src/app/api/admin/stats/route.ts(6,23): error TS2304: Cannot find name 'createClient'.
+src/app/api/admin/users/route.ts(6,23): error TS2304: Cannot find name 'createClient'.
+src/app/api/admin/users/route.ts(21,23): error TS2304: Cannot find name 'createClient'.
+src/app/api/builder/analyze/route.ts(59,17): error TS2339: Property 'checkQuota' does not exist on type 'typeof import("C:/Users/Administrator/Downloads/Telegram Desktop/digitn-pro-website-slim/digitn-pro/src/lib/api/server")'.
+src/app/api/builder/chat/[id]/route.ts(24,54): error TS2304: Cannot find name 'supabase'.
+src/app/api/builder/chat/[id]/route.ts(43,17): error TS2339: Property 'checkQuota' does not exist on type 'typeof import("C:/Users/Administrator/Downloads/Telegram Desktop/digitn-pro-website-slim/digitn-pro/src/lib/api/server")'.
+src/app/api/builder/chat/[id]/route.ts(55,40): error TS2304: Cannot find name 'supabase'.
+src/app/api/builder/chat/route.ts(18,17): error TS2339: Property 'checkQuota' does not exist on type 'typeof import("C:/Users/Administrator/Downloads/Telegram Desktop/digitn-pro-website-slim/digitn-pro/src/lib/api/server")'.
+src/app/api/builder/create/route.ts(20,17): error TS2339: Property 'checkQuota' does not exist on type 'typeof import("C:/Users/Administrator/Downloads/Telegram Desktop/digitn-pro-website-slim/digitn-pro/src/lib/api/server")'.
+src/app/api/builder/create/route.ts(33,25): error TS2304: Cannot find name 'tierData'.
+src/app/api/builder/create/route.ts(33,60): error TS2304: Cannot find name 'tierData'.
+src/app/api/builder/create/route.ts(35,42): error TS2304: Cannot find name 'supabase'.
+src/app/api/builder/create/route.ts(49,34): error TS2304: Cannot find name 'supabase'.
+src/app/api/builder/create/route.ts(60,7): error TS2561: Object literal may only specify known properties, but 'conversation_id' does not exist in type 'Partial<Project>'. Did you mean to write 'conversation'?
+src/app/api/builder/start/route.ts(24,54): error TS2304: Cannot find name 'supabase'.
+src/app/api/builder/start/route.ts(59,19): error TS2339: Property 'checkQuota' does not exist on type 'typeof import("C:/Users/Administrator/Downloads/Telegram Desktop/digitn-pro-website-slim/digitn-pro/src/lib/api/server")'.
+src/app/api/chat/stream/route.ts(18,17): error TS2339: Property 'checkQuota' does not exist on type 'typeof import("C:/Users/Administrator/Downloads/Telegram Desktop/digitn-pro-website-slim/digitn-pro/src/lib/api/server")'.
+src/app/api/conversations/[id]/route.ts(15,34): error TS2304: Cannot find name 'supabase'.
+src/app/api/projects/[id]/files/route.ts(22,37): error TS2304: Cannot find name 'supabase'.
+src/app/api/subscriptions/create/route.ts(32,36): error TS2304: Cannot find name 'supabaseAdmin'.
+src/app/api/webhooks/konnect/route.ts(52,11): error TS2304: Cannot find name 'supabaseAdmin'.
+src/app/api/webhooks/konnect/route.ts(64,11): error TS2304: Cannot find name 'supabaseAdmin'.
+src/app/api/webhooks/stripe/route.ts(39,15): error TS2304: Cannot find name 'supabaseAdmin'.
+src/app/api/webhooks/stripe/route.ts(52,15): error TS2304: Cannot find name 'supabaseAdmin'.
+src/app/api/webhooks/stripe/route.ts(65,37): error TS2304: Cannot find name 'supabaseAdmin'.
+src/app/api/webhooks/stripe/route.ts(72,17): error TS2304: Cannot find name 'supabaseAdmin'.
+src/app/api/webhooks/stripe/route.ts(79,19): error TS2304: Cannot find name 'supabaseAdmin'.
+src/app/api/webhooks/stripe/route.ts(92,37): error TS2304: Cannot find name 'supabaseAdmin'.
+src/app/api/webhooks/stripe/route.ts(100,17): error TS2304: Cannot find name 'supabaseAdmin'.
+src/app/api/webhooks/stripe/route.ts(106,17): error TS2304: Cannot find name 'supabaseAdmin'.
+src/app/auth/callback/route.ts(12,29): error TS2304: Cannot find name 'supabase'.
+src/app/auth/forgot-password/page.tsx(20,29): error TS2304: Cannot find name 'supabase'.
+src/app/auth/login/page.tsx(22,29): error TS2304: Cannot find name 'supabase'.
+src/app/auth/login/page.tsx(32,11): error TS2304: Cannot find name 'supabase'.
+src/app/auth/reset-password/page.tsx(21,40): error TS2304: Cannot find name 'supabase'.
+src/app/auth/reset-password/page.tsx(21,73): error TS7006: Parameter 'event' implicitly has an 'any' type.
+src/app/auth/reset-password/page.tsx(32,29): error TS2304: Cannot find name 'supabase'.
+src/app/auth/signup/page.tsx(23,35): error TS2304: Cannot find name 'supabase'.
+src/app/auth/signup/page.tsx(44,11): error TS2304: Cannot find name 'supabase'.
+src/components/builder/TerminalChat.tsx(2105,13): error TS2322: Type '{ projectId: string; projectName: string; projectType: string; projectStack: string; showPreview: true; onTogglePreview: () => void; fullHeight: true; onFixErrors: (prompt: any) => void; }' is not assignable to type 'IntrinsicAttributes & ClientPreviewProps'.
+  Property 'projectStack' does not exist on type 'IntrinsicAttributes & ClientPreviewProps'.
+src/components/builder/TerminalChat.tsx(2109,27): error TS7006: Parameter 'prompt' implicitly has an 'any' type.
+src/components/chat/ChatInterface.tsx(57,24): error TS2304: Cannot find name 'api'.
+src/components/chat/ChatInterface.tsx(59,28): error TS2304: Cannot find name 'supabase'.
+src/components/chat/ChatInterface.tsx(82,30): error TS2304: Cannot find name 'supabase'.
+src/components/chat/ModelSelector.tsx(237,61): error TS2345: Argument of type 'ChatModel' is not assignable to parameter of type 'string'.
+src/components/layout/Sidebar.tsx(29,11): error TS2304: Cannot find name 'supabase'.
+src/components/layout/Sidebar.tsx(60,15): error TS18047: 'pathname' is possibly 'null'.
+src/test/unit/auth-google.test.tsx(50,56): error TS2339: Property 'toBeInTheDocument' does not exist on type 'Assertion<HTMLElement>'.
+src/test/unit/auth-google.test.tsx(64,56): error TS2339: Property 'toBeInTheDocument' does not exist on type 'Assertion<HTMLElement>'.
+src/test/unit/builder-questionnaire-page.test.tsx(54,47): error TS2339: Property 'toBeInTheDocument' does not exist on type 'Assertion<HTMLElement>'.
+src/test/unit/builder-questionnaire-page.test.tsx(55,57): error TS2339: Property 'toBeInTheDocument' does not exist on type 'Assertion<HTMLElement>'.
+src/test/unit/project-files-route.test.ts(28,7): error TS2741: Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+src/test/unit/quota.test.ts(11,10): error TS2305: Module '"@/lib/quota"' has no exported member 'consumeQuota'.
+src/test/unit/quota.test.ts(11,24): error TS2305: Module '"@/lib/quota"' has no exported member 'getUserQuota'.
+src/test/unit/terminal-chat-history.test.tsx(61,41): error TS2339: Property 'toBeInTheDocument' does not exist on type 'Assertion<HTMLElement>'.
+src/test/unit/terminal-chat-history.test.tsx(62,44): error TS2339: Property 'toBeInTheDocument' does not exist on type 'Assertion<HTMLElement>'.
+src/test/unit/terminal-chat-history.test.tsx(100,41): error TS2339: Property 'toBeInTheDocument' does not exist on type 'Assertion<HTMLElement>'.
+src/test/unit/terminal-chat-history.test.tsx(101,44): error TS2339: Property 'toBeInTheDocument' does not exist on type 'Assertion<HTMLElement>'.
+src/test/unit/terminal-chat-history.test.tsx(131,50): error TS2339: Property 'toBeInTheDocument' does not exist on type 'Assertion<HTMLElement | null>'.

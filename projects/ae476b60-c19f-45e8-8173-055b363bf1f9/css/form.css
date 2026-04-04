@@ -1,0 +1,6 @@
+/* Reservation form styling */
+.reservation-section {padding:2rem var(--space-4); background:var(--bg-card); margin-bottom:2rem;}
+#reservationForm {max-width:500px; margin:0 auto; display:grid; gap:var(--space-2);}
+/* reuse .form-group from global */
+#reservationForm button {justify-self:center;}
+/* Toast already defined globally */

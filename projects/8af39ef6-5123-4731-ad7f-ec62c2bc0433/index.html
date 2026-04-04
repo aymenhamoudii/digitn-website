@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>The Backrooms: Psychology of Liminal Spaces</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&family=Josefin+Sans:wght@300;400;500;600;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+    --bg: #11100D;
+    --bg2: #1A1915;
+    --surface: #26241D;
+    --surface2: #292825;
+    --border: rgba(255,255,255,.07);
+    --border-md: rgba(255,255,255,.11);
+    --accent1: #E6C762;
+    --accent1-dim: rgba(230, 199, 98, 0.18);
+    --accent2: #FF3366;
+    --accent2-dim: rgba(255, 51, 102, 0.18);
+    --accent3: #00FFFF;
+    --accent3-dim: rgba(0, 255, 255, 0.18);
+    --t1: #EAE6D9;
+    --t2: #A6A18E;
+    --t3: rgba(234, 230, 217, 0.3);
+    --mono: 'Courier Prime', monospace;
+    --sans: 'Josefin Sans', system-ui, sans-serif;
+    --serif: 'Merriweather', serif;
+  }
+    
+  /* ─── Reset ─── */
+  ::-webkit-scrollbar{display:none}
+  *{scrollbar-width:none;-ms-overflow-style:none;box-sizing:border-box;margin:0;padding:0}
+  html{scroll-snap-type:y mandatory;overflow-y:scroll;overflow-x:hidden;scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  /* ─── Slide (full viewport) ─── */
+  section{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+  /* ─── Stagger animation (.s container) ─── */
+  .s{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
+  .s>*{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+  section.active .s>*{opacity:1;transform:translateY(0)}
+  section.active .s>*:nth-child(1){transition-delay:.03s}
+  section.active .s>*:nth-child(2){transition-delay:.09s}
+  section.active .s>*:nth-child(3){transition-delay:.15s}
+  section.active .s>*:nth-child(4){transition-delay:.21s}
+  section.active .s>*:nth-child(5){transition-delay:.27s}
+  section.active .s>*:nth-child(6){transition-delay:.33s}
+  section.active .s>*:nth-child(7){transition-delay:.39s}
+  section.active .s>*:nth-child(8){transition-delay:.45s}
+
+  /* ─── Centering utility ─── */
+  .cx{justify-content:center;align-items:center;text-align:center}
+
+  /* ─── Speaker notes (hidden) ─── */
+  aside.notes{display:none!important}
+
+  /* ─── Slide counter ─── */
+  #slide-counter{position:fixed;bottom:2vh;right:2vw;font-family:var(--mono);font-size:1.6vh;color:var(--t3);background:var(--surface);border:1px solid var(--border);border-radius:1vh;padding:.8vh 1.6vh;z-index:100;pointer-events:none}
+
+  /* ─── Progress bar ─── */
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--accent1);z-index:100;transition:width .3s ease}
+
+  </style>
+</head>
+<body>
+  <div id="progress" style="width:0"></div>
+  <div id="slide-counter">1 / 11</div>
+  <section style="background-color: var(--bg); color: var(--text); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; font-family: var(--sans);">
+  <!-- Scanlines overlay -->
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); background-size: 100% 4px, 3px 100%; pointer-events: none; z-index: 10;"></div>
+  
+  <!-- VHS Tracking / Date -->
+  <div style="position: absolute; top: 5vh; left: 5vw; font-family: var(--mono); font-size: 2.5vh; color: var(--text); text-shadow: 2px 0 var(--accent2), -2px 0 var(--accent3); z-index: 5; display: flex; align-items: center; gap: 1vw;">
+    <i class="fas fa-play" style="font-size: 2vh;"></i> PLAY <span style="margin-left: 2vw;">SP 0:00:00</span>
+  </div>
+
+  <div class="s cx" style="z-index: 2; width: 80vw; max-width: 1200px; text-align: center;">
+    <h1 style="font-family: var(--serif); font-size: 10vh; font-weight: 800; line-height: 1.1; margin-bottom: 2vh; text-transform: uppercase; letter-spacing: -0.02em; position: relative; display: inline-block;">
+      <span style="position: relative; z-index: 2;">Noclip Out of Reality</span>
+      <!-- Glitch layers -->
+      <span style="position: absolute; top: 0; left: -2px; width: 100%; height: 100%; color: var(--accent2); z-index: 1; opacity: 0.8; mix-blend-mode: screen;">Noclip Out of Reality</span>
+      <span style="position: absolute; top: 0; left: 2px; width: 100%; height: 100%; color: var(--accent3); z-index: 1; opacity: 0.8; mix-blend-mode: screen;">Noclip Out of Reality</span>
+    </h1>
+    
+    <h2 style="font-family: var(--mono); font-size: 3vh; color: var(--accent1); margin-bottom: 8vh; letter-spacing: 0.1em; text-transform: uppercase;">The Psychology, Lore, and Timeline of The Backrooms</h2>
+    
+    <div style="display: flex; flex-direction: column; gap: 2vh; align-items: center;">
+      <div style="background: rgba(38, 36, 29, 0.7); border-left: 4px solid var(--accent1); padding: 2vh 3vw; font-size: 2.5vh; width: 60%; text-align: left; box-shadow: 4px 4px 0 rgba(0,0,0,0.5);">
+        An exploration of liminal space psychology
+      </div>
+      <div style="background: rgba(38, 36, 29, 0.7); border-left: 4px solid var(--accent2); padding: 2vh 3vw; font-size: 2.5vh; width: 60%; text-align: left; box-shadow: 4px 4px 0 rgba(0,0,0,0.5);">
+        Deep dive into extended Wiki lore
+      </div>
+      <div style="background: rgba(38, 36, 29, 0.7); border-left: 4px solid var(--accent3); padding: 2vh 3vw; font-size: 2.5vh; width: 60%; text-align: left; box-shadow: 4px 4px 0 rgba(0,0,0,0.5);">
+        The timeline of an internet phenomenon
+      </div>
+    </div>
+  </div>
+  
+  <div style="position: absolute; bottom: 5vh; right: 5vw; font-family: var(--mono); font-size: 2vh; color: var(--text2); z-index: 5;">
+    REC • <span style="color: var(--accent2);">[||||||||  ]</span>
+  </div>
+
+  <aside class="notes" style="display:none">
+    Welcome, everyone. Today we are exploring the internet's most pervasive collaborative horror project: The Backrooms. We will trace its timeline from a simple 4chan post to a massive, crowd-sourced mythos, and uncover why these empty spaces trigger such profound psychological dread.
+  </aside>
+  <aside class="notes">Welcome, everyone. Today we are exploring the internet's most pervasive collaborative horror project: The Backrooms. We will trace its timeline from a simple 4chan post to a massive, crowd-sourced mythos, and uncover why these empty spaces trigger such profound psychological dread.</aside>
+</section>
+  <section style="background-color: var(--bg2); color: var(--text); height: 100vh; width: 100vw; overflow: hidden; position: relative; font-family: var(--sans); display: flex; align-items: center; justify-content: center;">
+
+  <!-- Subtle VHS grain overlay -->
+  <div style="position: absolute; inset: 0; background: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.08%22/%3E%3C/svg%3E'); pointer-events: none; z-index: 10;"></div>
+
+  <div class="s" style="width: 85vw; height: 80vh; max-width: 1400px; display: grid; grid-template-columns: 1fr 1fr; gap: 6vw; z-index: 5;">
+    
+    <!-- Left Column: Visual -->
+    <div style="display: flex; align-items: center; justify-content: center; position: relative;">
+      <!-- Polaroid Frame -->
+      <div style="background-color: #EEEEDD; padding: 2vh 2vw 10vh 2vw; box-shadow: 15px 15px 30px rgba(0,0,0,0.8), inset 0 0 40px rgba(0,0,0,0.1); transform: rotate(-3deg); position: relative; width: 100%; max-width: 35vw;">
+        <!-- Inner image area placeholder (liminal hallway vibe) -->
+        <div style="background-color: var(--surface); height: 40vh; border: 1px solid rgba(0,0,0,0.2); box-shadow: inset 0 0 50px rgba(0,0,0,0.5); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+          <!-- Distorted inner geometry -->
+          <div style="width: 200%; height: 200%; background: repeating-linear-gradient(45deg, var(--accent1) 0, var(--accent1) 5px, rgba(230, 199, 98, 0.2) 5px, rgba(230, 199, 98, 0.2) 20px); opacity: 0.15; position: absolute;"></div>
+          <i class="fas fa-door-open" style="font-size: 15vh; color: var(--bg); opacity: 0.6; text-shadow: 0 0 20px var(--accent1);"></i>
+          
+          <!-- VHS Timestamp -->
+          <div style="position: absolute; bottom: 1vh; right: 1vw; font-family: var(--mono); font-size: 2.5vh; color: #fff; text-shadow: 2px 2px 0 #000, -1px -1px 0 var(--accent2); letter-spacing: 0.1em; opacity: 0.8;">
+            OCT 26 1998
+          </div>
+        </div>
+        <div style="position: absolute; bottom: 3vh; left: 0; width: 100%; text-align: center; font-family: 'Courier New', Courier, monospace; color: #333; font-size: 2.5vh; opacity: 0.7; transform: rotate(1deg);">
+          Level_1_Corridor.jpg
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Text -->
+    <div style="display: flex; flex-direction: column; justify-content: center;">
+      <!-- Section Label -->
+      <div style="display: inline-block; padding: 0.5vh 1vw; background: var(--accent1); color: var(--bg); font-family: var(--mono); font-weight: bold; font-size: 2vh; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 2vh; align-self: flex-start; box-shadow: 3px 3px 0 var(--accent2);">
+        <i class="fas fa-brain" style="margin-right: 1vw;"></i>Psychology
+      </div>
+      
+      <h2 style="font-family: var(--serif); font-size: 6vh; line-height: 1.1; margin-bottom: 5vh; text-shadow: 3px 3px 0 var(--bg), 4px 4px 0 var(--accent2);">
+        The Anatomy of a<br><span style="color: var(--accent1);">Liminal Space</span>
+      </h2>
+
+      <!-- Definition Card -->
+      <div style="background-color: var(--surface); border: 1px solid var(--accent2); padding: 4vh 3vw; margin-bottom: 5vh; position: relative;">
+        <div style="position: absolute; top: -1.5vh; left: 2vw; background: var(--bg); padding: 0 1vw; font-family: var(--mono); color: var(--text2); font-size: 2vh;">DEFINITION</div>
+        <div style="font-family: var(--sans); font-size: 3vh; line-height: 1.4; color: var(--text);">
+          "Transitional areas—places you pass through, not places you stay. When these spaces are empty, the brain struggles to process the lack of context."
+        </div>
+      </div>
+
+      <!-- Key Points -->
+      <ul style="list-style-type: none; padding: 0; margin: 0; font-size: 2.5vh; line-height: 1.8; color: var(--text2); font-family: var(--mono);">
+        <li style="margin-bottom: 2vh; display: flex; align-items: flex-start;">
+          <i class="fas fa-caret-right" style="color: var(--accent1); margin-top: 0.5vh; margin-right: 1vw; font-size: 3vh;"></i>
+          <span>Transitional thresholds (hallways, waiting rooms)</span>
+        </li>
+        <li style="margin-bottom: 2vh; display: flex; align-items: flex-start;">
+          <i class="fas fa-caret-right" style="color: var(--accent1); margin-top: 0.5vh; margin-right: 1vw; font-size: 3vh;"></i>
+          <span><strong>Kenophobia:</strong> the fear of empty voids</span>
+        </li>
+        <li style="margin-bottom: 2vh; display: flex; align-items: flex-start;">
+          <i class="fas fa-caret-right" style="color: var(--accent1); margin-top: 0.5vh; margin-right: 1vw; font-size: 3vh;"></i>
+          <span>Absence of intended purpose creates tension</span>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
+  <aside class="notes" style="display:none">
+    Before we delve into the lore, we must understand the psychology. Liminal spaces are transitional areas—places you pass through, not places you stay. When these spaces are empty, our brains struggle to process the lack of context. This triggers kenophobia, the fear of empty voids, making the mundane feel deeply hostile.
+  </aside>
+
+  <aside class="notes">Before we delve into the lore, we must understand the psychology. Liminal spaces are transitional areas—places you pass through, not places you stay. When these spaces are empty, our brains struggle to process the lack of context. This triggers kenophobia, the fear of empty voids, making the mundane feel deeply hostile.</aside>
+</section>
+  <section style="background-color: var(--bg); color: var(--text); height: 100vh; width: 100vw; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--sans); position: relative; overflow: hidden;">
+
+  <!-- Glitch scanline background -->
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(255,51,102,0.02) 50%, rgba(0,0,0,0) 100%); background-size: 100% 8px; pointer-events: none; z-index: 0;"></div>
+
+  <div class="s" style="width: 80vw; max-width: 1200px; display: flex; flex-direction: column; z-index: 5;">
+    
+    <!-- Header Area -->
+    <div style="margin-bottom: 6vh; text-align: left; border-bottom: 2px solid var(--surface); padding-bottom: 3vh; position: relative;">
+      <div style="display: inline-block; background-color: var(--accent1); color: var(--bg); font-family: var(--mono); font-weight: bold; font-size: 1.8vh; padding: 0.5vh 1vw; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2vh;">
+        <i class="fas fa-folder-open" style="margin-right: 1vw;"></i>Origins
+      </div>
+      <h2 style="font-family: var(--serif); font-size: 7vh; line-height: 1; margin: 0; color: var(--text); text-shadow: 2px 2px 0 rgba(255,51,102,0.5);">
+        Genesis: May 12, 2019
+      </h2>
+    </div>
+
+    <!-- Vertical Timeline Layout -->
+    <div style="display: flex; gap: 4vw; height: 50vh;">
+      
+      <!-- Left: Timeline Track -->
+      <div style="display: flex; flex-direction: column; align-items: center; position: relative; width: 5vw;">
+        <!-- Connecting Line -->
+        <div style="position: absolute; top: 2vh; bottom: 0; width: 4px; background: linear-gradient(to bottom, var(--accent1), var(--accent2), transparent); z-index: 1;"></div>
+        
+        <!-- Nodes -->
+        <div style="z-index: 2; display: flex; flex-direction: column; justify-content: space-between; height: 100%; width: 100%;">
+          
+          <div style="display: flex; align-items: center; position: relative; margin-top: 2vh;">
+            <div style="width: 2vw; height: 2vw; background-color: var(--bg); border: 3px solid var(--accent1); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px var(--accent1);">
+              <div style="width: 1vw; height: 1vw; background-color: var(--accent1); border-radius: 50%;"></div>
+            </div>
+            <div style="position: absolute; left: 3vw; font-family: var(--mono); font-size: 2vh; color: var(--accent1); white-space: nowrap;">
+              > Thread #22661164
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; position: relative;">
+            <div style="width: 2vw; height: 2vw; background-color: var(--bg); border: 3px solid var(--accent2); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px var(--accent2);"></div>
+            <div style="position: absolute; left: 3vw; font-family: var(--mono); font-size: 2vh; color: var(--accent2); white-space: nowrap;">
+              > Image Uploaded
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; position: relative; margin-bottom: 5vh;">
+            <div style="width: 2vw; height: 2vw; background-color: var(--bg); border: 3px dashed var(--accent3); border-radius: 50%; display: flex; align-items: center; justify-content: center;"></div>
+            <div style="position: absolute; left: 3vw; font-family: var(--mono); font-size: 2vh; color: var(--text2); white-space: nowrap;">
+              > Mythos Established
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Right: Archived Post Card and Key Points -->
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 4vh; padding-left: 8vw;">
+        
+        <!-- Archived Post Card -->
+        <div style="background-color: #F0E0D6; border: 1px solid #D9BFB7; padding: 2vh 2vw; font-family: 'Verdana', sans-serif; position: relative; box-shadow: 10px 10px 0 rgba(0,0,0,0.5);">
+          <!-- Post header -->
+          <div style="color: #117743; font-size: 2vh; margin-bottom: 2vh; display: flex; gap: 1vw; flex-wrap: wrap;">
+            <span style="font-weight: bold;">Anonymous</span>
+            <span>05/12/19(Sun)22:13:53</span>
+            <span>No.22661164</span>
+            <span style="color: #0000FF; cursor: pointer;">[Reply]</span>
+          </div>
+          
+          <!-- Post Content Layout -->
+          <div style="display: flex; gap: 2vw;">
+            <!-- Thumbnail Placeholder -->
+            <div style="width: 15vh; height: 15vh; background-color: var(--accent1); border: 2px solid #333; display: flex; align-items: center; justify-content: center; opacity: 0.8;">
+              <i class="fas fa-image" style="font-size: 4vh; color: #333;"></i>
+            </div>
+            <!-- Text Content -->
+            <div style="flex: 1; font-size: 2.2vh; color: #800000; line-height: 1.4;">
+              If you're not careful and you noclip out of reality in the wrong areas, you'll end up in the Backrooms, where it's nothing but the stink of old moist carpet, the madness of mono-yellow, the endless background noise of fluorescent lights at maximum hum-buzz, and approximately six hundred million square miles of randomly segmented empty rooms to be trapped in.
+            </div>
+          </div>
+          <!-- Grunge Overlay -->
+          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0,0.1) 100%); pointer-events: none;"></div>
+        </div>
+
+        <!-- Key Points -->
+        <div style="display: flex; flex-direction: column; gap: 2vh;">
+          <div style="display: flex; align-items: center; gap: 1vw; font-family: var(--sans); font-size: 2.8vh; color: var(--text);">
+            <i class="fas fa-ghost" style="color: var(--accent3); font-size: 3vh; width: 3vw; text-align: center;"></i>
+            <span>Started on 4chan's <strong>/x/ paranormal board</strong></span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1vw; font-family: var(--sans); font-size: 2.8vh; color: var(--text);">
+            <i class="fas fa-comment-dots" style="color: var(--accent3); font-size: 3vh; width: 3vw; text-align: center;"></i>
+            <span>Prompt: <em>"Post disquieting images"</em></span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1vw; font-family: var(--sans); font-size: 2.8vh; color: var(--text);">
+            <i class="fas fa-lightbulb" style="color: var(--accent3); font-size: 3vh; width: 3vw; text-align: center;"></i>
+            <span>Original text established the <strong>'Mono-yellow'</strong> and <strong>'Hum-buzz'</strong></span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <aside class="notes" style="display:none">
+    The phenomenon began on May 12, 2019, on a 4chan paranormal thread. An anonymous user posted a picture of an empty, yellow office space. Another user replied with the foundational lore: if you noclip out of reality, you end up here. The mono-yellow wallpaper, the damp carpet, and the hum of fluorescent lights were born in this single post.
+  </aside>
+
+  <aside class="notes">The phenomenon began on May 12, 2019, on a 4chan paranormal thread. An anonymous user posted a picture of an empty, yellow office space. Another user replied with the foundational lore: if you noclip out of reality, you end up here. The mono-yellow wallpaper, the damp carpet, and the hum of fluorescent lights were born in this single post.</aside>
+</section>
+  <section style="background-color: #B59E50; color: var(--text); height: 100vh; width: 100vw; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--sans); position: relative; overflow: hidden; box-shadow: inset 0 0 20vh 10vh rgba(0,0,0,0.8);">
+
+  <!-- Immersive Background Filter (Mono-Yellow Wallpaper Simulation) -->
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(45deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 2px, transparent 2px, transparent 10px), repeating-linear-gradient(-45deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 2px, transparent 2px, transparent 10px); background-color: var(--accent1); mix-blend-mode: multiply; opacity: 0.8; z-index: 1;"></div>
+  
+  <!-- Vignette / Lighting Effect -->
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, transparent 10%, rgba(17,16,13,0.95) 90%); pointer-events: none; z-index: 2;"></div>
+  
+  <!-- Subtle fluorescent flicker effect via animation but simulated static here with layered shadows -->
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,200,0.02); z-index: 3;"></div>
+
+  <div class="s cx" style="z-index: 10; width: 80vw; max-width: 1000px; text-align: center; display: flex; flex-direction: column; align-items: center;">
+    
+    <!-- Warning Badge -->
+    <div style="background-color: var(--accent2); color: var(--bg); padding: 1vh 2vw; font-family: var(--mono); font-size: 2vh; font-weight: bold; text-transform: uppercase; letter-spacing: 0.15em; display: inline-flex; align-items: center; gap: 1vw; box-shadow: 0 0 20px var(--accent2); margin-bottom: 4vh; transform: skewX(-10deg);">
+      <i class="fas fa-exclamation-triangle"></i>
+      SURVIVAL DIFFICULTY: CLASS 1
+      <i class="fas fa-exclamation-triangle"></i>
+    </div>
+
+    <!-- Title -->
+    <h1 style="font-family: var(--serif); font-size: 10vh; font-weight: 900; color: var(--bg); margin: 0 0 6vh 0; text-transform: uppercase; letter-spacing: -0.05em; text-shadow: 2px 2px 0 var(--accent1), -2px -2px 0 var(--text2); position: relative;">
+      Level 0<br>
+      <span style="font-size: 5vh; font-weight: 400; font-family: var(--mono); letter-spacing: 0.2em; color: var(--text);">The Lobby</span>
+    </h1>
+
+    <!-- Floating Text / Key Points -->
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 3vw; margin-top: 2vh;">
+      
+      <div style="background: rgba(17, 16, 13, 0.85); border: 1px solid var(--accent1); padding: 4vh 3vw; width: 25vw; min-width: 250px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(5px); transform: translateY(-2vh);">
+        <i class="fas fa-ruler-combined" style="font-size: 5vh; color: var(--accent1); margin-bottom: 2vh;"></i>
+        <h3 style="font-family: var(--sans); font-size: 3vh; color: var(--text); margin: 0 0 1vh 0;">Scale</h3>
+        <p style="font-family: var(--mono); font-size: 2vh; color: var(--text2); line-height: 1.5; margin: 0;">600 million square miles of randomly segmented rooms</p>
+      </div>
+
+      <div style="background: rgba(17, 16, 13, 0.85); border: 1px solid var(--accent3); padding: 4vh 3vw; width: 25vw; min-width: 250px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(5px); transform: translateY(2vh);">
+        <i class="fas fa-cubes" style="font-size: 5vh; color: var(--accent3); margin-bottom: 2vh;"></i>
+        <h3 style="font-family: var(--sans); font-size: 3vh; color: var(--text); margin: 0 0 1vh 0;">Geometry</h3>
+        <p style="font-family: var(--mono); font-size: 2vh; color: var(--text2); line-height: 1.5; margin: 0;">Non-Euclidean geometry</p>
+      </div>
+
+      <div style="background: rgba(17, 16, 13, 0.85); border: 1px solid var(--accent2); padding: 4vh 3vw; width: 25vw; min-width: 250px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); backdrop-filter: blur(5px); transform: translateY(-2vh);">
+        <i class="fas fa-volume-mute" style="font-size: 5vh; color: var(--accent2); margin-bottom: 2vh;"></i>
+        <h3 style="font-family: var(--sans); font-size: 3vh; color: var(--text); margin: 0 0 1vh 0;">Psychology</h3>
+        <p style="font-family: var(--mono); font-size: 2vh; color: var(--text2); line-height: 1.5; margin: 0;">Total sensory deprivation and profound isolation</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <aside class="notes" style="display:none">
+    This is Level 0, often called 'The Lobby'. It is 600 million square miles of randomly segmented rooms. The true horror here isn't a monster; it's the architecture itself. The non-Euclidean geometry means you can walk in a straight line and end up where you started, leading to rapid psychological deterioration.
+  </aside>
+
+  <aside class="notes">This is Level 0, often called 'The Lobby'. It is 600 million square miles of randomly segmented rooms. The true horror here isn't a monster; it's the architecture itself. The non-Euclidean geometry means you can walk in a straight line and end up where you started, leading to rapid psychological deterioration.</aside>
+</section>
+  <section style="background-color: var(--bg2); color: var(--text); height: 100vh; width: 100vw; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--sans); position: relative; overflow: hidden;">
+
+  <!-- Decorative glitch elements -->
+  <div style="position: absolute; top: 10vh; left: -5vw; width: 20vw; height: 1px; background: var(--accent3); opacity: 0.5;"></div>
+  <div style="position: absolute; bottom: 10vh; right: -5vw; width: 30vw; height: 1px; background: var(--accent2); opacity: 0.5;"></div>
+  
+  <div class="s" style="width: 85vw; max-width: 1400px; display: flex; flex-direction: column; gap: 6vh; z-index: 5;">
+    
+    <!-- Header -->
+    <div style="text-align: center;">
+      <div style="display: inline-block; background-color: var(--surface); color: var(--accent1); font-family: var(--mono); font-weight: bold; font-size: 2vh; padding: 0.5vh 1.5vw; text-transform: uppercase; letter-spacing: 0.2em; border: 1px solid var(--accent1); margin-bottom: 2vh; box-shadow: 0 0 10px rgba(230, 199, 98, 0.2);">
+        <i class="fas fa-database" style="margin-right: 1vw;"></i>The Wiki Lore
+      </div>
+      <h2 style="font-family: var(--serif); font-size: 8vh; line-height: 1; margin: 0; color: var(--text); text-transform: uppercase; letter-spacing: -0.02em;">
+        Expanding the Infinite
+      </h2>
+    </div>
+
+    <!-- Stats Grid -->
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4vw;">
+      
+      <!-- Stat 1 -->
+      <div style="background-color: var(--surface); border-top: 4px solid var(--accent1); padding: 5vh 3vw; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);">
+        <div style="position: absolute; top: 1vh; left: 1vw; font-family: var(--mono); font-size: 1.5vh; color: var(--text2); opacity: 0.5;">DATABLOCK_01</div>
+        <!-- SVG Progress Ring representation -->
+        <div style="position: relative; width: 15vh; height: 15vh; display: flex; align-items: center; justify-content: center; margin-bottom: 3vh;">
+          <svg style="position: absolute; width: 100%; height: 100%; transform: rotate(-90deg);" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--bg)" stroke-width="8" />
+            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--accent1)" stroke-width="8" stroke-dasharray="283" stroke-dashoffset="56" />
+          </svg>
+          <i class="fas fa-layer-group" style="font-size: 5vh; color: var(--accent1);"></i>
+        </div>
+        <div style="font-family: var(--mono); font-size: 8vh; font-weight: bold; color: var(--text); line-height: 1; margin-bottom: 1vh; text-shadow: 2px 2px 0 var(--bg);">
+          1000<span style="color: var(--accent1);">+</span>
+        </div>
+        <div style="font-family: var(--sans); font-size: 2.5vh; color: var(--text2); text-transform: uppercase; letter-spacing: 0.1em; text-align: center;">
+          Documented Levels
+        </div>
+      </div>
+
+      <!-- Stat 2 -->
+      <div style="background-color: var(--surface); border-top: 4px solid var(--accent3); padding: 5vh 3vw; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);">
+        <div style="position: absolute; top: 1vh; left: 1vw; font-family: var(--mono); font-size: 1.5vh; color: var(--text2); opacity: 0.5;">DATABLOCK_02</div>
+        <div style="position: relative; width: 15vh; height: 15vh; display: flex; align-items: center; justify-content: center; margin-bottom: 3vh;">
+          <svg style="position: absolute; width: 100%; height: 100%; transform: rotate(-90deg);" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--bg)" stroke-width="8" />
+            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--accent3)" stroke-width="8" stroke-dasharray="283" stroke-dashoffset="113" />
+          </svg>
+          <i class="fas fa-box-open" style="font-size: 5vh; color: var(--accent3);"></i>
+        </div>
+        <div style="font-family: var(--mono); font-size: 8vh; font-weight: bold; color: var(--text); line-height: 1; margin-bottom: 1vh; text-shadow: 2px 2px 0 var(--bg);">
+          1000s
+        </div>
+        <div style="font-family: var(--sans); font-size: 2.5vh; color: var(--text2); text-transform: uppercase; letter-spacing: 0.1em; text-align: center;">
+          Anomalous Objects
+        </div>
+      </div>
+
+      <!-- Stat 3 -->
+      <div style="background-color: var(--surface); border-top: 4px solid var(--accent2); padding: 5vh 3vw; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);">
+        <div style="position: absolute; top: 1vh; left: 1vw; font-family: var(--mono); font-size: 1.5vh; color: var(--text2); opacity: 0.5;">DATABLOCK_03</div>
+        <div style="position: relative; width: 15vh; height: 15vh; display: flex; align-items: center; justify-content: center; margin-bottom: 3vh;">
+          <svg style="position: absolute; width: 100%; height: 100%; transform: rotate(-90deg);" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--bg)" stroke-width="8" />
+            <circle cx="50" cy="50" r="45" fill="none" stroke="var(--accent2)" stroke-width="8" stroke-dasharray="283" stroke-dashoffset="198" />
+          </svg>
+          <i class="fas fa-skull-crossbones" style="font-size: 5vh; color: var(--accent2);"></i>
+        </div>
+        <div style="font-family: var(--mono); font-size: 8vh; font-weight: bold; color: var(--text); line-height: 1; margin-bottom: 1vh; text-shadow: 2px 2px 0 var(--bg);">
+          0-5<span style="color: var(--accent2);">+</span>
+        </div>
+        <div style="font-family: var(--sans); font-size: 2.5vh; color: var(--text2); text-transform: uppercase; letter-spacing: 0.1em; text-align: center;">
+          Difficulty Classes
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Data Chips -->
+    <div style="display: flex; justify-content: center; gap: 2vw; flex-wrap: wrap;">
+      <span style="background: var(--bg); border: 1px solid var(--text2); padding: 1vh 2vw; font-family: var(--mono); font-size: 1.8vh; color: var(--text2); border-radius: 50px;">
+        <i class="fas fa-check-circle" style="color: var(--accent1); margin-right: 0.5vw;"></i> CLASS 0 (SAFE)
+      </span>
+      <span style="background: var(--bg); border: 1px solid var(--accent3); padding: 1vh 2vw; font-family: var(--mono); font-size: 1.8vh; color: var(--text); border-radius: 50px; box-shadow: 0 0 10px rgba(0,255,255,0.2);">
+        <i class="fas fa-exclamation-circle" style="color: var(--accent3); margin-right: 0.5vw;"></i> CLASS 3 (UNSAFE)
+      </span>
+      <span style="background: var(--bg); border: 1px solid var(--accent2); padding: 1vh 2vw; font-family: var(--mono); font-size: 1.8vh; color: var(--accent2); border-radius: 50px; box-shadow: 0 0 10px rgba(255,51,102,0.3);">
+        <i class="fas fa-radiation" style="margin-right: 0.5vw;"></i> CLASS 5 (DEADZONE)
+      </span>
+    </div>
+
+  </div>
+
+  <aside class="notes" style="display:none">
+    The community took the original concept and ran with it. The Backrooms Wiki now features thousands of levels. To organize this chaos, the community created the Survival Difficulty Class system, grading levels from Class 0 (safe) to Class 5 (environmental hazards and high entity presence) and beyond.
+  </aside>
+
+  <aside class="notes">The community took the original concept and ran with it. The Backrooms Wiki now features thousands of levels. To organize this chaos, the community created the Survival Difficulty Class system, grading levels from Class 0 (safe) to Class 5 (environmental hazards and high entity presence) and beyond.</aside>
+</section>
+  <section style="background-color: var(--bg); color: var(--text); height: 100vh; width: 100vw; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--sans); position: relative; overflow: hidden;">
+
+  <!-- Tactical Grid Background -->
+  <div style="position: absolute; inset: 0; background-image: linear-gradient(var(--surface) 1px, transparent 1px), linear-gradient(90deg, var(--surface) 1px, transparent 1px); background-size: 50px 50px; opacity: 0.2; pointer-events: none;"></div>
+
+  <!-- HUD Corner Elements -->
+  <div style="position: absolute; top: 3vh; left: 3vw; width: 5vw; height: 5vw; border-top: 3px solid var(--accent3); border-left: 3px solid var(--accent3); opacity: 0.6;"></div>
+  <div style="position: absolute; bottom: 3vh; right: 3vw; width: 5vw; height: 5vw; border-bottom: 3px solid var(--accent3); border-right: 3px solid var(--accent3); opacity: 0.6;"></div>
+
+  <div class="s" style="width: 85vw; max-width: 1400px; display: flex; flex-direction: column; gap: 6vh; z-index: 5;">
+    
+    <!-- Header -->
+    <div style="text-align: left;">
+      <div style="display: inline-block; background-color: var(--accent3); color: var(--bg); font-family: var(--mono); font-weight: bold; font-size: 2vh; padding: 0.5vh 1vw; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 2vh; box-shadow: 2px 2px 0 var(--accent2);">
+        <i class="fas fa-users-cog" style="margin-right: 1vw;"></i>Factions
+      </div>
+      <h2 style="font-family: var(--serif); font-size: 7vh; line-height: 1; margin: 0; color: var(--text); text-transform: uppercase; text-shadow: 0 0 10px rgba(0,255,255,0.3);">
+        Humanity's Response: <span style="color: var(--accent3);">The M.E.G.</span>
+      </h2>
+    </div>
+
+    <!-- 3 Cards Grid -->
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 3vw;">
+      
+      <!-- Card 1 -->
+      <div style="background-color: rgba(38, 36, 29, 0.85); border: 1px solid var(--surface); padding: 5vh 3vw; position: relative; backdrop-filter: blur(5px); box-shadow: inset 0 0 30px rgba(0,0,0,0.8); overflow: hidden; display: flex; flex-direction: column; align-items: center; text-align: center;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--accent1);"></div>
+        <!-- Icon Circle -->
+        <div style="width: 12vh; height: 12vh; border-radius: 50%; background: var(--bg); border: 2px dashed var(--accent1); display: flex; align-items: center; justify-content: center; margin-bottom: 4vh; box-shadow: 0 0 15px rgba(230, 199, 98, 0.2);">
+          <i class="fas fa-globe" style="font-size: 5vh; color: var(--accent1);"></i>
+        </div>
+        <h3 style="font-family: var(--sans); font-size: 3vh; color: var(--text); margin: 0 0 2vh 0; text-transform: uppercase; letter-spacing: 0.1em;">
+          Major Explorer Group
+        </h3>
+        <p style="font-family: var(--sans); font-size: 2.2vh; color: var(--text2); line-height: 1.6; margin: 0;">
+          The primary human faction dedicated to survival, organization, and the mapping of the Backrooms.
+        </p>
+        <!-- Faction Badge -->
+        <div style="margin-top: auto; padding-top: 3vh;">
+          <span style="font-family: var(--mono); font-size: 1.5vh; color: var(--accent1); background: rgba(230, 199, 98, 0.1); padding: 0.5vh 1vw; border-radius: 4px; border: 1px solid rgba(230, 199, 98, 0.3);">EST. 2020</span>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div style="background-color: rgba(38, 36, 29, 0.85); border: 1px solid var(--surface); padding: 5vh 3vw; position: relative; backdrop-filter: blur(5px); box-shadow: inset 0 0 30px rgba(0,0,0,0.8); overflow: hidden; display: flex; flex-direction: column; align-items: center; text-align: center; transform: translateY(-2vh);">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--accent3);"></div>
+        <!-- Icon Circle -->
+        <div style="width: 12vh; height: 12vh; border-radius: 50%; background: var(--bg); border: 2px dashed var(--accent3); display: flex; align-items: center; justify-content: center; margin-bottom: 4vh; box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);">
+          <i class="fas fa-campground" style="font-size: 5vh; color: var(--accent3);"></i>
+        </div>
+        <h3 style="font-family: var(--sans); font-size: 3vh; color: var(--text); margin: 0 0 2vh 0; text-transform: uppercase; letter-spacing: 0.1em;">
+          Base Alpha
+        </h3>
+        <p style="font-family: var(--sans); font-size: 2.2vh; color: var(--text2); line-height: 1.6; margin: 0;">
+          The central headquarters located on Level 1, acting as a safe haven and main operational hub for wanderers.
+        </p>
+        <div style="margin-top: auto; padding-top: 3vh;">
+          <span style="font-family: var(--mono); font-size: 1.5vh; color: var(--accent3); background: rgba(0, 255, 255, 0.1); padding: 0.5vh 1vw; border-radius: 4px; border: 1px solid rgba(0, 255, 255, 0.3);">LOC: LEVEL 1</span>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div style="background-color: rgba(38, 36, 29, 0.85); border: 1px solid var(--surface); padding: 5vh 3vw; position: relative; backdrop-filter: blur(5px); box-shadow: inset 0 0 30px rgba(0,0,0,0.8); overflow: hidden; display: flex; flex-direction: column; align-items: center; text-align: center;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--accent2);"></div>
+        <!-- Icon Circle -->
+        <div style="width: 12vh; height: 12vh; border-radius: 50%; background: var(--bg); border: 2px dashed var(--accent2); display: flex; align-items: center; justify-content: center; margin-bottom: 4vh; box-shadow: 0 0 15px rgba(255, 51, 102, 0.2);">
+          <i class="fas fa-file-medical-alt" style="font-size: 5vh; color: var(--accent2);"></i>
+        </div>
+        <h3 style="font-family: var(--sans); font-size: 3vh; color: var(--text); margin: 0 0 2vh 0; text-transform: uppercase; letter-spacing: 0.1em;">
+          Core Directives
+        </h3>
+        <p style="font-family: var(--sans); font-size: 2.2vh; color: var(--text2); line-height: 1.6; margin: 0;">
+          Focused on documenting anomalous entities, rescuing stranded individuals, and establishing trade routes.
+        </p>
+        <div style="margin-top: auto; padding-top: 3vh;">
+          <span style="font-family: var(--mono); font-size: 1.5vh; color: var(--accent2); background: rgba(255, 51, 102, 0.1); padding: 0.5vh 1vw; border-radius: 4px; border: 1px solid rgba(255, 51, 102, 0.3);">STATUS: ACTIVE</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <aside class="notes" style="display:none">
+    In this expanded lore, humans aren't just victims; they organize. The Major Explorer Group, or M.E.G., is the primary human faction. They establish outposts, map levels, and try to protect wanderers. It shifted the narrative from pure isolation to collaborative survival.
+  </aside>
+
+  <aside class="notes">In this expanded lore, humans aren't just victims; they organize. The Major Explorer Group, or M.E.G., is the primary human faction. They establish outposts, map levels, and try to protect wanderers. It shifted the narrative from pure isolation to collaborative survival.</aside>
+</section>
+  <section style="background-color: var(--bg2); color: var(--text); height: 100vh; width: 100vw; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--sans); position: relative; overflow: hidden;">
+
+  <!-- Warning overlay scanlines -->
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(0deg, rgba(255, 51, 102, 0.05) 50%, rgba(0, 0, 0, 0.1) 50%); background-size: 100% 4px; pointer-events: none; z-index: 1;"></div>
+
+  <div class="s" style="width: 85vw; max-width: 1400px; display: grid; grid-template-columns: 1fr 1fr; gap: 5vw; z-index: 5;">
+    
+    <!-- Left Column: Text & List -->
+    <div style="display: flex; flex-direction: column; justify-content: center;">
+      <div style="display: inline-block; background-color: var(--accent2); color: var(--bg); font-family: var(--mono); font-weight: bold; font-size: 2vh; padding: 0.5vh 1vw; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 2vh; align-self: flex-start; box-shadow: 2px 2px 0 var(--text);">
+        <i class="fas fa-biohazard" style="margin-right: 1vw;"></i>Entities
+      </div>
+      
+      <h2 style="font-family: var(--serif); font-size: 7vh; line-height: 1.1; margin: 0 0 5vh 0; color: var(--text); text-transform: uppercase; text-shadow: 2px 0 0 var(--accent2), -2px 0 0 var(--accent3);">
+        Denizens of the Void
+      </h2>
+
+      <!-- Entity List -->
+      <div style="display: flex; flex-direction: column; gap: 3vh;">
+        
+        <!-- Smilers -->
+        <div style="background: var(--surface); border-left: 5px solid var(--accent1); padding: 3vh 2vw; position: relative; box-shadow: 5px 5px 0 rgba(0,0,0,0.5);">
+          <div style="position: absolute; top: 1vh; right: 1vw; background: var(--bg); border: 1px solid var(--accent2); color: var(--accent2); font-family: var(--mono); font-size: 1.5vh; padding: 0.2vh 0.5vw; letter-spacing: 0.1em;">THREAT: HIGH</div>
+          <h3 style="font-family: var(--mono); font-size: 2.8vh; color: var(--accent1); margin: 0 0 1vh 0; text-transform: uppercase;">
+            <i class="fas fa-smile-beam" style="margin-right: 1vw;"></i>Smilers
+          </h3>
+          <p style="font-family: var(--sans); font-size: 2vh; color: var(--text2); line-height: 1.5; margin: 0;">
+            Hostile entities that lurk in pure darkness. They are drawn to light sources and characterized by their glowing, wide-toothed grins. Do not break eye contact.
+          </p>
+        </div>
+
+        <!-- Facelings -->
+        <div style="background: var(--surface); border-left: 5px solid var(--accent3); padding: 3vh 2vw; position: relative; box-shadow: 5px 5px 0 rgba(0,0,0,0.5);">
+          <div style="position: absolute; top: 1vh; right: 1vw; background: var(--bg); border: 1px solid var(--accent1); color: var(--accent1); font-family: var(--mono); font-size: 1.5vh; padding: 0.2vh 0.5vw; letter-spacing: 0.1em;">THREAT: VARIES</div>
+          <h3 style="font-family: var(--mono); font-size: 2.8vh; color: var(--accent3); margin: 0 0 1vh 0; text-transform: uppercase;">
+            <i class="fas fa-user-alt-slash" style="margin-right: 1vw;"></i>Facelings
+          </h3>
+          <p style="font-family: var(--sans); font-size: 2vh; color: var(--text2); line-height: 1.5; margin: 0;">
+            Humanoid figures entirely lacking facial features. Often behave like normal humans but trigger severe uncanny valley responses. Behavior ranges from docile to violently hostile.
+          </p>
+        </div>
+
+        <!-- Hounds -->
+        <div style="background: var(--surface); border-left: 5px solid var(--accent2); padding: 3vh 2vw; position: relative; box-shadow: 5px 5px 0 rgba(0,0,0,0.5);">
+          <div style="position: absolute; top: 1vh; right: 1vw; background: var(--bg); border: 1px solid var(--accent2); color: var(--accent2); font-family: var(--mono); font-size: 1.5vh; padding: 0.2vh 0.5vw; letter-spacing: 0.1em;">THREAT: EXTREME</div>
+          <h3 style="font-family: var(--mono); font-size: 2.8vh; color: var(--accent2); margin: 0 0 1vh 0; text-transform: uppercase;">
+            <i class="fas fa-dog" style="margin-right: 1vw;"></i>Hounds
+          </h3>
+          <p style="font-family: var(--sans); font-size: 2vh; color: var(--text2); line-height: 1.5; margin: 0;">
+            Aggressive, biomechanical anomalies walking on all fours. Highly territorial and fast. Paranoia of being hunted escalates when their growls echo down the corridors.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Right Column: Glitch Visual -->
+    <div style="display: flex; align-items: center; justify-content: center; position: relative;">
+      
+      <!-- Frame -->
+      <div style="width: 80%; height: 70%; border: 2px solid var(--surface); position: relative; background: var(--bg); overflow: hidden; box-shadow: inset 0 0 50px rgba(0,0,0,0.9), 0 0 30px rgba(255,51,102,0.1);">
+        
+        <!-- Entity Abstract Representation -->
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20vh; height: 20vh; background: radial-gradient(circle, var(--accent2) 0%, transparent 60%); filter: blur(10px); opacity: 0.6; mix-blend-mode: screen;"></div>
+        <div style="position: absolute; top: 40%; left: 45%; transform: translate(-50%, -50%); width: 15vh; height: 15vh; background: radial-gradient(circle, var(--accent3) 0%, transparent 50%); filter: blur(5px); opacity: 0.4; mix-blend-mode: screen;"></div>
+        
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 2vh;">
+          <div style="font-family: var(--mono); font-size: 10vh; color: var(--text); opacity: 0.9; text-shadow: 4px 0 var(--accent2), -4px 0 var(--accent3);">
+            <i class="fas fa-eye"></i>
+          </div>
+        </div>
+
+        <!-- Glitch Borders/Artifacts -->
+        <div style="position: absolute; top: 10%; left: -5%; width: 110%; height: 2%; background: var(--accent3); opacity: 0.5;"></div>
+        <div style="position: absolute; top: 60%; left: -5%; width: 110%; height: 4%; background: var(--accent2); opacity: 0.5; mix-blend-mode: overlay;"></div>
+        <div style="position: absolute; top: 80%; left: -5%; width: 110%; height: 1%; background: var(--text); opacity: 0.3;"></div>
+
+        <!-- Meta Text -->
+        <div style="position: absolute; bottom: 1vh; right: 1vw; font-family: var(--mono); font-size: 1.5vh; color: var(--accent2);">
+          [ENTITY_DATA_CORRUPTED]
+        </div>
+        <div style="position: absolute; top: 1vh; left: 1vw; font-family: var(--mono); font-size: 1.5vh; color: var(--text2);">
+          SYS.LOG.8992
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+
+  <aside class="notes" style="display:none">
+    While Level 0 is famously devoid of life, deeper levels introduce 'Entities'. Smilers lurk in pure darkness, Facelings mimic human behavior but trigger the uncanny valley, and Hounds patrol the tight corridors. The psychological dread shifts from isolation to the paranoia of being hunted.
+  </aside>
+
+  <aside class="notes">While Level 0 is famously devoid of life, deeper levels introduce 'Entities'. Smilers lurk in pure darkness, Facelings mimic human behavior but trigger the uncanny valley, and Hounds patrol the tight corridors. The psychological dread shifts from isolation to the paranoia of being hunted.</aside>
+</section>
+  <section style="background-color: var(--bg); color: var(--text); height: 100vh; width: 100vw; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--sans); position: relative; overflow: hidden;">
+
+  <!-- VHS Overall Screen Effects -->
+  <!-- Scanlines -->
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(255,255,255,0) 50%, rgba(0,0,0,0.15) 50%); background-size: 100% 4px; pointer-events: none; z-index: 20;"></div>
+  <!-- Color Bleed Overlay -->
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle, transparent 40%, rgba(0, 255, 255, 0.05) 80%, rgba(255, 51, 102, 0.05) 100%); pointer-events: none; z-index: 10;"></div>
+  
+  <!-- "PLAY" VHS UI -->
+  <div style="position: absolute; top: 5vh; left: 5vw; font-family: var(--mono); font-size: 4vh; color: var(--text); text-shadow: 2px 0 var(--accent2), -2px 0 var(--accent3); z-index: 15; opacity: 0.9;">
+    ► PLAY <br><span style="font-size: 2vh; letter-spacing: 0.2em;">00:14:42</span>
+  </div>
+
+  <div class="s cx" style="z-index: 5; width: 80vw; max-width: 1200px; display: flex; flex-direction: column; align-items: center; position: relative;">
+    
+    <!-- Section Label -->
+    <div style="display: inline-block; background-color: var(--accent1); color: var(--bg); font-family: var(--mono); font-weight: bold; font-size: 2vh; padding: 0.5vh 1.5vw; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 4vh; transform: skewX(-5deg); box-shadow: 3px 3px 0 var(--accent2);">
+      <i class="fas fa-video" style="margin-right: 1vw;"></i>The VHS Era
+    </div>
+
+    <!-- Title -->
+    <h2 style="font-family: var(--serif); font-size: 6vh; line-height: 1; margin: 0 0 8vh 0; color: var(--text); text-transform: uppercase; letter-spacing: 0.05em; text-align: center;">
+      The <span style="color: var(--accent3);">Kane Pixels</span> Revolution
+    </h2>
+
+    <!-- Large Featured Quote Block -->
+    <div style="position: relative; padding: 6vh 4vw; background: rgba(38, 36, 29, 0.4); border-left: 8px solid var(--accent3); border-right: 8px solid var(--accent2); text-align: center; max-width: 900px; box-shadow: 0 10px 40px rgba(0,0,0,0.8);">
+      
+      <!-- Quote Marks -->
+      <div style="position: absolute; top: -6vh; left: 2vw; font-family: var(--serif); font-size: 15vh; color: var(--surface); opacity: 0.8; z-index: 0; text-shadow: 2px 2px 0 var(--accent3);">
+        "
+      </div>
+      <div style="position: absolute; bottom: -10vh; right: 2vw; font-family: var(--serif); font-size: 15vh; color: var(--surface); opacity: 0.8; z-index: 0; text-shadow: -2px -2px 0 var(--accent2); transform: rotate(180deg);">
+        "
+      </div>
+
+      <!-- Quote Text -->
+      <p style="font-family: var(--serif); font-size: 4vh; line-height: 1.4; color: var(--text); margin: 0; position: relative; z-index: 2; text-shadow: 0 0 10px rgba(255,255,255,0.2);">
+        We are no longer looking at an empty room. We are looking at a <span style="color: var(--accent1);">government experiment</span> that cracked the foundation of reality itself.
+      </p>
+
+      <!-- Author Tag -->
+      <div style="margin-top: 4vh; font-family: var(--mono); font-size: 2vh; color: var(--accent3); text-transform: uppercase; letter-spacing: 0.1em; position: relative; z-index: 2;">
+        — The Async Research Institute
+      </div>
+
+    </div>
+
+    <!-- Key Points (Chips below the quote) -->
+    <div style="display: flex; gap: 2vw; justify-content: center; margin-top: 8vh; flex-wrap: wrap;">
+      
+      <div style="background: var(--bg2); border: 1px solid var(--accent1); padding: 1.5vh 2vw; font-family: var(--sans); font-size: 2vh; color: var(--text); display: flex; align-items: center; gap: 1vw;">
+        <i class="fas fa-building" style="color: var(--accent1);"></i> Introduced the <strong>Async Institute</strong>
+      </div>
+
+      <div style="background: var(--bg2); border: 1px solid var(--accent3); padding: 1.5vh 2vw; font-family: var(--sans); font-size: 2vh; color: var(--text); display: flex; align-items: center; gap: 1vw;">
+        <i class="fas fa-calendar-alt" style="color: var(--accent3);"></i> Set the lore in <strong>March 1990</strong>
+      </div>
+
+      <div style="background: var(--bg2); border: 1px solid var(--accent2); padding: 1.5vh 2vw; font-family: var(--sans); font-size: 2vh; color: var(--text); display: flex; align-items: center; gap: 1vw;">
+        <i class="fas fa-tape" style="color: var(--accent2);"></i> Popularized <strong>'Found Footage'</strong>
+      </div>
+
+    </div>
+
+  </div>
+
+  <aside class="notes" style="display:none">
+    In 2022, a 16-year-old filmmaker named Kane Pixels revolutionized the mythos. He created a YouTube series presenting the Backrooms as a government experiment gone wrong by the Async Research Institute in 1990. This popularized the VHS found-footage aesthetic that defines the Backrooms today.
+  </aside>
+
+  <aside class="notes">In 2022, a 16-year-old filmmaker named Kane Pixels revolutionized the mythos. He created a YouTube series presenting the Backrooms as a government experiment gone wrong by the Async Research Institute in 1990. This popularized the VHS found-footage aesthetic that defines the Backrooms today.</aside>
+</section>
+  <section style="background-color: var(--bg2); color: var(--text); height: 100vh; width: 100vw; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--sans); position: relative; overflow: hidden;">
+
+  <!-- Subtle grid overlay -->
+  <div style="position: absolute; inset: 0; background-image: radial-gradient(var(--surface) 1px, transparent 1px); background-size: 30px 30px; opacity: 0.15; pointer-events: none; z-index: 1;"></div>
+
+  <!-- Decorative glitch line -->
+  <div style="position: absolute; top: 15vh; left: 0; width: 100vw; height: 1px; background: linear-gradient(90deg, transparent, var(--accent2), transparent); opacity: 0.3; z-index: 2;"></div>
+  
+  <div class="s" style="width: 85vw; max-width: 1400px; display: flex; flex-direction: column; gap: 5vh; z-index: 5;">
+    
+    <!-- Header -->
+    <div style="text-align: center;">
+      <div style="display: inline-block; background-color: var(--accent1); color: var(--bg); font-family: var(--mono); font-weight: bold; font-size: 2vh; padding: 0.5vh 1.5vw; text-transform: uppercase; letter-spacing: 0.2em; border: 1px solid var(--accent1); margin-bottom: 2vh; box-shadow: 0 0 10px rgba(230, 199, 98, 0.2);">
+        <i class="fas fa-globe-americas" style="margin-right: 1vw;"></i>Cultural Impact
+      </div>
+      <h2 style="font-family: var(--serif); font-size: 7vh; line-height: 1; margin: 0; color: var(--text); text-transform: uppercase; letter-spacing: -0.02em; text-shadow: 2px 2px 0 var(--accent2);">
+        A Viral Phenomenon
+      </h2>
+    </div>
+
+    <!-- 4-Block Grid -->
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 3vw;">
+      
+      <!-- Block 1: Games -->
+      <div style="background-color: var(--surface); border: 2px solid rgba(230, 199, 98, 0.3); padding: 4vh 3vw; display: flex; align-items: center; gap: 2vw; position: relative; box-shadow: 5px 5px 0 rgba(0,0,0,0.5); transition: transform 0.3s ease;">
+        <div style="position: absolute; top: -1vh; left: 2vw; background: var(--bg); padding: 0 1vw; font-family: var(--mono); color: var(--accent1); font-size: 1.5vh; border: 1px solid var(--accent1);">01 // INTERACTIVE</div>
+        <div style="width: 10vh; height: 10vh; background: rgba(230, 199, 98, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <i class="fas fa-gamepad" style="font-size: 5vh; color: var(--accent1);"></i>
+        </div>
+        <div>
+          <h3 style="font-family: var(--serif); font-size: 3vh; color: var(--text); margin: 0 0 1vh 0;">Indie Horror Games</h3>
+          <p style="font-family: var(--sans); font-size: 2vh; color: var(--text2); line-height: 1.5; margin: 0;">
+            An explosion of interactive adaptations spanning from obscure indie titles to massive Roblox and Steam hits.
+          </p>
+        </div>
+      </div>
+
+      <!-- Block 2: TikTok -->
+      <div style="background-color: var(--surface); border: 2px solid rgba(0, 255, 255, 0.3); padding: 4vh 3vw; display: flex; align-items: center; gap: 2vw; position: relative; box-shadow: 5px 5px 0 rgba(0,0,0,0.5);">
+        <div style="position: absolute; top: -1vh; left: 2vw; background: var(--bg); padding: 0 1vw; font-family: var(--mono); color: var(--accent3); font-size: 1.5vh; border: 1px solid var(--accent3);">02 // SOCIAL MEDIA</div>
+        <div style="width: 10vh; height: 10vh; background: rgba(0, 255, 255, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <i class="fab fa-tiktok" style="font-size: 5vh; color: var(--accent3);"></i>
+        </div>
+        <div>
+          <h3 style="font-family: var(--serif); font-size: 3vh; color: var(--text); margin: 0 0 1vh 0;">'Liminal Space' Trends</h3>
+          <p style="font-family: var(--sans); font-size: 2vh; color: var(--text2); line-height: 1.5; margin: 0;">
+            Billions of views dedicated to romanticizing and exploring empty, transitional spaces through short-form video.
+          </p>
+        </div>
+      </div>
+
+      <!-- Block 3: Cinema -->
+      <div style="background-color: var(--surface); border: 2px solid rgba(255, 51, 102, 0.3); padding: 4vh 3vw; display: flex; align-items: center; gap: 2vw; position: relative; box-shadow: 5px 5px 0 rgba(0,0,0,0.5);">
+        <div style="position: absolute; top: -1vh; left: 2vw; background: var(--bg); padding: 0 1vw; font-family: var(--mono); color: var(--accent2); font-size: 1.5vh; border: 1px solid var(--accent2);">03 // FILM & TV</div>
+        <div style="width: 10vh; height: 10vh; background: rgba(255, 51, 102, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <i class="fas fa-film" style="font-size: 5vh; color: var(--accent2);"></i>
+        </div>
+        <div>
+          <h3 style="font-family: var(--serif); font-size: 3vh; color: var(--text); margin: 0 0 1vh 0;">Cinematic Adaptations</h3>
+          <p style="font-family: var(--sans); font-size: 2vh; color: var(--text2); line-height: 1.5; margin: 0;">
+            Leaping from internet niche to mainstream culture with a highly anticipated feature film adaptation in development by A24.
+          </p>
+        </div>
+      </div>
+
+      <!-- Block 4: Storytelling -->
+      <div style="background-color: var(--surface); border: 2px solid rgba(234, 230, 217, 0.3); padding: 4vh 3vw; display: flex; align-items: center; gap: 2vw; position: relative; box-shadow: 5px 5px 0 rgba(0,0,0,0.5);">
+        <div style="position: absolute; top: -1vh; left: 2vw; background: var(--bg); padding: 0 1vw; font-family: var(--mono); color: var(--text); font-size: 1.5vh; border: 1px solid var(--text);">04 // EVOLUTION</div>
+        <div style="width: 10vh; height: 10vh; background: rgba(234, 230, 217, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <i class="fas fa-book-open" style="font-size: 5vh; color: var(--text);"></i>
+        </div>
+        <div>
+          <h3 style="font-family: var(--serif); font-size: 3vh; color: var(--text); margin: 0 0 1vh 0;">Open-Source Storytelling</h3>
+          <p style="font-family: var(--sans); font-size: 2vh; color: var(--text2); line-height: 1.5; margin: 0;">
+            A new era of collaborative worldbuilding, proving that a decentralised community can build a cohesive mythos.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Play Counts Footer -->
+    <div style="display: flex; justify-content: center; gap: 4vw; margin-top: 2vh; font-family: var(--mono); font-size: 2.5vh; color: var(--accent1);">
+      <div style="display: flex; align-items: center; gap: 1vw;">
+        <i class="fas fa-eye"></i> 100M+ VIEWS
+      </div>
+      <div style="display: flex; align-items: center; gap: 1vw;">
+        <i class="fas fa-users"></i> GLOBAL REACH
+      </div>
+      <div style="display: flex; align-items: center; gap: 1vw;">
+        <i class="fas fa-fire"></i> TRENDING
+      </div>
+    </div>
+
+  </div>
+
+  <aside class="notes" style="display:none">
+    The Backrooms has leaped from niche forums to mainstream culture. It spawned hundreds of indie games, massive TikTok trends romanticizing liminal spaces, and even a feature film adaptation in development by A24. It is the ultimate example of internet-age open-source storytelling.
+  </aside>
+
+  <aside class="notes">The Backrooms has leaped from niche forums to mainstream culture. It spawned hundreds of indie games, massive TikTok trends romanticizing liminal spaces, and even a feature film adaptation in development by A24. It is the ultimate example of internet-age open-source storytelling.</aside>
+</section>
+  <section style="background-color: var(--bg); color: var(--text); height: 100vh; width: 100vw; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--sans); position: relative; overflow: hidden;">
+
+  <!-- Glitch scanline background -->
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 4px); pointer-events: none; z-index: 1;"></div>
+
+  <div class="s" style="width: 90vw; max-width: 1500px; display: flex; flex-direction: column; align-items: center; z-index: 5;">
+    
+    <!-- Header Area -->
+    <div style="text-align: center; margin-bottom: 15vh;">
+      <div style="display: inline-block; background-color: var(--surface); color: var(--accent1); font-family: var(--mono); font-weight: bold; font-size: 2vh; padding: 0.5vh 1vw; text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 2vh; border-bottom: 2px solid var(--accent1);">
+        <i class="fas fa-history" style="margin-right: 1vw;"></i>Timeline Summary
+      </div>
+      <h2 style="font-family: var(--serif); font-size: 6vh; line-height: 1; margin: 0; color: var(--text); text-transform: uppercase; letter-spacing: 0.05em; text-shadow: 2px 2px 0 var(--accent2);">
+        Evolution of the Mythos
+      </h2>
+    </div>
+
+    <!-- Horizontal Timeline Container -->
+    <div style="position: relative; width: 80vw; max-width: 1200px; height: 30vh; display: flex; align-items: center;">
+      
+      <!-- Central Horizontal Track -->
+      <div style="position: absolute; top: 50%; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--accent1), var(--accent3), var(--accent2), var(--text)); transform: translateY(-50%); box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);"></div>
+
+      <!-- Timeline Nodes Container -->
+      <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 10;">
+        
+        <!-- Node 1: 2019 (Top) -->
+        <div style="display: flex; flex-direction: column; align-items: center; width: 20vw; transform: translateY(-8vh);">
+          <div style="background: var(--surface); border: 1px solid var(--accent1); padding: 2vh 1.5vw; text-align: center; margin-bottom: 2vh; box-shadow: 4px 4px 0 rgba(230, 199, 98, 0.3); position: relative;">
+            <div style="font-family: var(--serif); font-size: 2.5vh; color: var(--text); margin-bottom: 0.5vh;">The Original 4chan Post</div>
+            <div style="font-family: var(--sans); font-size: 1.8vh; color: var(--text2);">The single creepy image that started it all.</div>
+            <!-- Connecting Line -->
+            <div style="position: absolute; bottom: -3vh; left: 50%; width: 2px; height: 3vh; background: var(--accent1); transform: translateX(-50%);"></div>
+          </div>
+          <div style="width: 2vw; height: 2vw; background: var(--bg); border: 4px solid var(--accent1); border-radius: 50%; box-shadow: 0 0 15px var(--accent1); z-index: 15;"></div>
+          <div style="font-family: var(--mono); font-size: 3vh; color: var(--accent1); font-weight: bold; margin-top: 1vh; letter-spacing: 0.1em; transform: translateY(3vh);">2019</div>
+        </div>
+
+        <!-- Node 2: 2020 (Bottom) -->
+        <div style="display: flex; flex-direction: column; align-items: center; width: 20vw; transform: translateY(8vh);">
+          <div style="font-family: var(--mono); font-size: 3vh; color: var(--accent3); font-weight: bold; margin-bottom: 1vh; letter-spacing: 0.1em; transform: translateY(-3vh);">2020</div>
+          <div style="width: 2vw; height: 2vw; background: var(--bg); border: 4px solid var(--accent3); border-radius: 50%; box-shadow: 0 0 15px var(--accent3); z-index: 15;"></div>
+          <div style="background: var(--surface); border: 1px solid var(--accent3); padding: 2vh 1.5vw; text-align: center; margin-top: 2vh; box-shadow: 4px 4px 0 rgba(0, 255, 255, 0.3); position: relative;">
+            <!-- Connecting Line -->
+            <div style="position: absolute; top: -3vh; left: 50%; width: 2px; height: 3vh; background: var(--accent3); transform: translateX(-50%);"></div>
+            <div style="font-family: var(--serif); font-size: 2.5vh; color: var(--text); margin-bottom: 0.5vh;">Birth of the Wikis</div>
+            <div style="font-family: var(--sans); font-size: 1.8vh; color: var(--text2);">Explosion of collaborative worldbuilding.</div>
+          </div>
+        </div>
+
+        <!-- Node 3: 2022 (Top) -->
+        <div style="display: flex; flex-direction: column; align-items: center; width: 20vw; transform: translateY(-8vh);">
+          <div style="background: var(--surface); border: 1px solid var(--accent2); padding: 2vh 1.5vw; text-align: center; margin-bottom: 2vh; box-shadow: 4px 4px 0 rgba(255, 51, 102, 0.3); position: relative;">
+            <div style="font-family: var(--serif); font-size: 2.5vh; color: var(--text); margin-bottom: 0.5vh;">Kane Pixels Series</div>
+            <div style="font-family: var(--sans); font-size: 1.8vh; color: var(--text2);">The VHS "Found Footage" analog horror renaissance.</div>
+            <!-- Connecting Line -->
+            <div style="position: absolute; bottom: -3vh; left: 50%; width: 2px; height: 3vh; background: var(--accent2); transform: translateX(-50%);"></div>
+          </div>
+          <div style="width: 2vw; height: 2vw; background: var(--bg); border: 4px solid var(--accent2); border-radius: 50%; box-shadow: 0 0 15px var(--accent2); z-index: 15;"></div>
+          <div style="font-family: var(--mono); font-size: 3vh; color: var(--accent2); font-weight: bold; margin-top: 1vh; letter-spacing: 0.1em; transform: translateY(3vh);">2022</div>
+        </div>
+
+        <!-- Node 4: Present (Bottom) -->
+        <div style="display: flex; flex-direction: column; align-items: center; width: 20vw; transform: translateY(8vh);">
+          <div style="font-family: var(--mono); font-size: 3vh; color: var(--text); font-weight: bold; margin-bottom: 1vh; letter-spacing: 0.1em; transform: translateY(-3vh);">PRESENT</div>
+          <div style="width: 2vw; height: 2vw; background: var(--bg); border: 4px solid var(--text); border-radius: 50%; box-shadow: 0 0 15px rgba(234, 230, 217, 0.5); z-index: 15;"></div>
+          <div style="background: var(--surface); border: 1px solid var(--text); padding: 2vh 1.5vw; text-align: center; margin-top: 2vh; box-shadow: 4px 4px 0 rgba(234, 230, 217, 0.3); position: relative;">
+            <!-- Connecting Line -->
+            <div style="position: absolute; top: -3vh; left: 50%; width: 2px; height: 3vh; background: var(--text); transform: translateX(-50%);"></div>
+            <div style="font-family: var(--serif); font-size: 2.5vh; color: var(--text); margin-bottom: 0.5vh;">Mainstream Icon</div>
+            <div style="font-family: var(--sans); font-size: 1.8vh; color: var(--text2);">Cornerstone of modern internet horror.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <aside class="notes" style="display:none">
+    To summarize the timeline: It started in 2019 as a single creepy image. 2020 saw the explosion of the Wikis and collaborative worldbuilding. 2022 brought the VHS analog horror renaissance via Kane Pixels, leading us to today, where it stands as a cornerstone of modern internet horror.
+  </aside>
+
+  <aside class="notes">To summarize the timeline: It started in 2019 as a single creepy image. 2020 saw the explosion of the Wikis and collaborative worldbuilding. 2022 brought the VHS analog horror renaissance via Kane Pixels, leading us to today, where it stands as a cornerstone of modern internet horror.</aside>
+</section>
+  <section style="background-color: var(--bg); color: var(--text); height: 100vh; width: 100vw; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: var(--sans); position: relative; overflow: hidden;">
+
+  <!-- Minimal vignette for deep darkness -->
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, transparent 0%, var(--bg) 80%); pointer-events: none; z-index: 10;"></div>
+
+  <!-- VHS Stop UI overlay -->
+  <div style="position: absolute; top: 5vh; left: 5vw; font-family: var(--mono); font-size: 3vh; color: var(--text); z-index: 15; opacity: 0.6; display: flex; align-items: center; gap: 1vw;">
+    <i class="fas fa-stop"></i> STOP
+  </div>
+  
+  <div style="position: absolute; bottom: 5vh; right: 5vw; font-family: var(--mono); font-size: 2vh; color: var(--text); z-index: 15; opacity: 0.6;">
+    EJECTING...
+  </div>
+
+  <div class="s cx" style="z-index: 5; width: 70vw; max-width: 1000px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+    
+    <!-- Title -->
+    <h1 style="font-family: var(--serif); font-size: 8vh; line-height: 1.1; margin: 0 0 3vh 0; color: var(--text); text-transform: uppercase; letter-spacing: -0.02em; position: relative;">
+      Be Careful Where You Wander.
+      <!-- Subtle glitch layer -->
+      <span style="position: absolute; top: 0; left: -2px; width: 100%; height: 100%; color: var(--accent2); z-index: -1; opacity: 0.5;">Be Careful Where You Wander.</span>
+    </h1>
+
+    <!-- Glitch Divider -->
+    <div style="width: 100%; height: 2px; position: relative; margin: 2vh 0 6vh 0; display: flex; justify-content: center; align-items: center;">
+      <div style="width: 100%; height: 1px; background: rgba(255, 255, 255, 0.2);"></div>
+      <div style="position: absolute; left: 30%; width: 10%; height: 3px; background: var(--accent2);"></div>
+      <div style="position: absolute; left: 60%; width: 5%; height: 3px; background: var(--accent3);"></div>
+    </div>
+
+    <!-- Centered Warning / Key Points -->
+    <div style="background: rgba(38, 36, 29, 0.3); border: 1px dashed rgba(234, 230, 217, 0.2); padding: 4vh 4vw; margin-bottom: 6vh; max-width: 800px; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);">
+      <p style="font-family: var(--sans); font-size: 2.5vh; color: var(--text2); line-height: 1.6; margin: 0 0 2vh 0;">
+        The Backrooms endure because they reflect very modern anxieties...
+      </p>
+      <ul style="list-style: none; padding: 0; margin: 0; text-align: left; display: inline-block;">
+        <li style="font-family: var(--mono); font-size: 2.2vh; color: var(--text); margin-bottom: 1vh; display: flex; align-items: center; gap: 1vw;">
+          <i class="fas fa-arrow-right" style="color: var(--accent1);"></i> The dread of endless, sterile corporate spaces.
+        </li>
+        <li style="font-family: var(--mono); font-size: 2.2vh; color: var(--text); display: flex; align-items: center; gap: 1vw;">
+          <i class="fas fa-arrow-right" style="color: var(--accent1);"></i> The fear of slipping through reality and being entirely forgotten.
+        </li>
+      </ul>
+    </div>
+
+    <!-- Subtitle / Outro -->
+    <h2 style="font-family: var(--mono); font-size: 2.5vh; font-weight: normal; color: var(--accent1); letter-spacing: 0.2em; text-transform: uppercase; margin: 0;">
+      Thank you for exploring the Backrooms.
+    </h2>
+
+  </div>
+
+  <aside class="notes" style="display:none">
+    Ultimately, the Backrooms endures because it reflects a very modern anxiety: the fear of sterile, endless corporate spaces, and the dread of slipping through the cracks of reality and being entirely forgotten. Thank you for joining me. Don't noclip.
+  </aside>
+
+  <aside class="notes">Ultimately, the Backrooms endures because it reflects a very modern anxiety: the fear of sterile, endless corporate spaces, and the dread of slipping through the cracks of reality and being entirely forgotten. Thank you for joining me. Don't noclip.</aside>
+</section>
+
+<script>
+(function(){
+  const sections = document.querySelectorAll('section');
+  const total = sections.length;
+  const counter = document.getElementById('slide-counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  // IntersectionObserver: mark the visible slide as .active (triggers CSS animations)
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        sections.forEach(s => s.classList.remove('active'));
+        e.target.classList.add('active');
+        current = Array.from(sections).indexOf(e.target);
+        if (counter) counter.textContent = (current+1) + ' / ' + total;
+        if (progress) progress.style.width = ((current+1)/total*100) + '%';
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s => obs.observe(s));
+
+  // Activate first slide immediately
+  if (sections[0]) sections[0].classList.add('active');
+  if (counter) counter.textContent = '1 / ' + total;
+  if (progress) progress.style.width = (1/total*100) + '%';
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      if (current < total - 1) sections[current + 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (current > 0) sections[current - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      sections[0].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      sections[total - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'f' || e.key === 'F11') {
+      e.preventDefault();
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>

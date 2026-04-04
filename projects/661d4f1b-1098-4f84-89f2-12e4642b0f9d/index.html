@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Fristo — Elegant Restaurant</title>
+  <meta name="description" content="Fristo — an elegant restaurant offering refined seasonal cuisine.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a href="#home" class="brand" aria-label="Fristo home">
+        <img src="assets/logo.svg" alt="Fristo logo" class="logo">
+        <span class="sr-only">Fristo</span>
+      </a>
+
+      <nav class="main-nav" role="navigation" aria-label="Primary">
+        <button class="nav-toggle" aria-expanded="false" aria-controls="primary-menu" aria-label="Toggle navigation">
+          <span class="hamburger"></span>
+        </button>
+        <ul id="primary-menu" class="menu" role="menubar">
+          <li role="none"><a role="menuitem" href="#home">Home</a></li>
+          <li role="none"><a role="menuitem" href="#menu">Menu</a></li>
+          <li role="none"><a role="menuitem" href="#about">About</a></li>
+          <li role="none"><a role="menuitem" href="#reservations">Reservations</a></li>
+          <li role="none"><a role="menuitem" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" role="main">
+
+    <section id="home" class="hero" aria-labelledby="home-title">
+      <div class="container hero-inner">
+        <div class="hero-media" aria-hidden="true">
+          <img src="assets/hero.svg" alt="Chef plating a dish" class="hero-image">
+        </div>
+        <div class="hero-content">
+          <h1 id="home-title">Fristo</h1>
+          <p class="lead">Seasonal dining with an elegant touch — thoughtfully sourced, beautifully plated.</p>
+          <p>
+            <a class="btn btn-primary" href="#reservations">Make a reservation</a>
+            <a class="btn btn-ghost" href="#menu">View menu</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu" class="section" aria-labelledby="menu-title">
+      <div class="container">
+        <h2 id="menu-title">Our Menu</h2>
+        <p class="section-intro">A curated selection of seasonal dishes crafted with attention to detail.</p>
+        <div id="menu-grid" class="menu-grid" role="list">
+          <!-- Menu items rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section" aria-labelledby="about-title">
+      <div class="container about-grid">
+        <div class="about-text">
+          <h2 id="about-title">About Fristo</h2>
+          <p>Fristo began as a small kitchen with big ideas: to create a welcoming place where flavors and hospitality meet. We focus on seasonal ingredients, sustainable suppliers, and polished service.</p>
+          <p>Our team blends classical technique with modern sensibilities — every plate tells a story.</p>
+        </div>
+        <div class="about-team">
+          <figure>
+            <img src="assets/team1.svg" alt="Head chef portrait" class="team-photo">
+            <figcaption>Chef Martina Rossi — Head Chef</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/team2.svg" alt="Sous chef portrait" class="team-photo">
+            <figcaption>Lucas Park — Sous Chef</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="reservations" class="section" aria-labelledby="res-title">
+      <div class="container">
+        <h2 id="res-title">Reservations</h2>
+        <p class="section-intro">We do not offer online booking here — use the form to submit details and we'll hold a table on request. This form validates input and saves a draft locally for convenience.</p>
+
+        <form id="reservation-form" class="form" novalidate aria-describedby="res-help">
+          <div id="res-help" class="sr-only">All fields are required unless marked optional.</div>
+
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" class="input" required minlength="2">
+
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" class="input" required>
+
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" class="input" inputmode="tel" required>
+
+          <label for="date">Date</label>
+          <input id="date" name="date" type="date" class="input" required>
+
+          <label for="time">Time</label>
+          <input id="time" name="time" type="time" class="input" required>
+
+          <label for="party">Party size</label>
+          <input id="party" name="party" type="number" min="1" max="20" value="2" class="input" required>
+
+          <label for="notes">Notes <span class="muted">(optional)</span></label>
+          <textarea id="notes" name="notes" rows="4" class="input"></textarea>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Submit request</button>
+            <button type="button" id="save-draft" class="btn btn-secondary">Save draft</button>
+            <div id="form-status" role="status" aria-live="polite" class="form-status"></div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact" aria-labelledby="contact-title">
+      <div class="container contact-grid">
+        <div class="contact-info">
+          <h2 id="contact-title">Contact & Location</h2>
+          <p>123 Market Street, Suite 5<br>Open Tue–Sun, 17:30–22:30</p>
+
+          <ul class="contact-list">
+            <li><strong>Phone:</strong> <a href="tel:+1234567890">+1 (234) 567-890</a></li>
+            <li><strong>Email:</strong> <a href="mailto:hello@fristo.example">hello@fristo.example</a></li>
+            <li><strong>Hours:</strong> Tue–Sun 17:30–22:30</li>
+          </ul>
+
+          <p>
+            <button id="view-map" class="btn btn-ghost" aria-controls="map">View map</button>
+          </p>
+        </div>
+
+        <div class="contact-map" id="map" aria-hidden="true">
+          <!-- Map iframe inserted lazily by JS -->
+          <div class="map-placeholder" aria-hidden="true">
+            <img src="assets/contact-bg.svg" alt="Contact background" class="contact-bg">
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> Fristo — All rights reserved.</p>
+      <nav aria-label="Footer">
+        <ul class="footer-links">
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#about">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Scripts: dependency order is important (no modules) -->
+  <script src="js/utils.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+/* Animations and Transition Effects */
+
+.grid-cell {
+  transition: background-color 0.2s ease;
+}
+
+button {
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+#game-grid {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#scoreboard {
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0.8;
+  }
+  to {
+    opacity: 1;
+  }
+}

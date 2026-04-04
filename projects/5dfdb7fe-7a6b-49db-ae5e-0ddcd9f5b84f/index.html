@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>AEON DIRGE: A Dark Space Opera</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;800;900&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+    --bg: #0A0A0C;
+    --bg2: #141417;
+    --surface: #1E1E24;
+    --surface2: #232324;
+    --border: rgba(255,255,255,.07);
+    --border-md: rgba(255,255,255,.11);
+    --accent1: #E0E0E5;
+    --accent1-dim: rgba(224, 224, 229, 0.18);
+    --accent2: #D83A27;
+    --accent2-dim: rgba(216, 58, 39, 0.18);
+    --accent3: #45B6C6;
+    --accent3-dim: rgba(69, 182, 198, 0.18);
+    --t1: #FFFFFF;
+    --t2: #A0A0A5;
+    --t3: rgba(255, 255, 255, 0.3);
+    --mono: 'Fira Code', monospace;
+    --sans: 'Outfit', system-ui, sans-serif;
+    --serif: 'Fraunces', serif;
+  }
+    
+  /* ─── Reset ─── */
+  ::-webkit-scrollbar{display:none}
+  *{scrollbar-width:none;-ms-overflow-style:none;box-sizing:border-box;margin:0;padding:0}
+  html{scroll-snap-type:y mandatory;overflow-y:scroll;overflow-x:hidden;scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  /* ─── Slide (full viewport) ─── */
+  section{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+  /* ─── Stagger animation (.s container) ─── */
+  .s{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
+  .s>*{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+  section.active .s>*{opacity:1;transform:translateY(0)}
+  section.active .s>*:nth-child(1){transition-delay:.03s}
+  section.active .s>*:nth-child(2){transition-delay:.09s}
+  section.active .s>*:nth-child(3){transition-delay:.15s}
+  section.active .s>*:nth-child(4){transition-delay:.21s}
+  section.active .s>*:nth-child(5){transition-delay:.27s}
+  section.active .s>*:nth-child(6){transition-delay:.33s}
+  section.active .s>*:nth-child(7){transition-delay:.39s}
+  section.active .s>*:nth-child(8){transition-delay:.45s}
+
+  /* ─── Centering utility ─── */
+  .cx{justify-content:center;align-items:center;text-align:center}
+
+  /* ─── Speaker notes (hidden) ─── */
+  aside.notes{display:none!important}
+
+  /* ─── Slide counter ─── */
+  #slide-counter{position:fixed;bottom:2vh;right:2vw;font-family:var(--mono);font-size:1.6vh;color:var(--t3);background:var(--surface);border:1px solid var(--border);border-radius:1vh;padding:.8vh 1.6vh;z-index:100;pointer-events:none}
+
+  /* ─── Progress bar ─── */
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--accent1);z-index:100;transition:width .3s ease}
+
+  </style>
+</head>
+<body>
+  <div id="progress" style="width:0"></div>
+  <div id="slide-counter">1 / 11</div>
+  <section style="background: var(--bg); color: var(--t1, #FFFFFF); font-family: var(--sans); display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden; height: 100vh; width: 100vw;">
+  <!-- Grid background overlay -->
+  <div style="position: absolute; inset: 0; background-image: linear-gradient(var(--bg2) 1px, transparent 1px), linear-gradient(90deg, var(--bg2) 1px, transparent 1px); background-size: 50px 50px; opacity: 0.3;"></div>
+  
+  <div class="s cx" style="z-index: 10; text-align: center;">
+    <div style="font-family: var(--mono); color: var(--accent2); font-size: 1rem; letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: 2vh;">System Initialized // Project Pitch</div>
+    <h1 style="font-family: var(--sans); font-weight: 900; font-size: 8vw; letter-spacing: -0.02em; margin: 0; line-height: 1; text-transform: uppercase; background: linear-gradient(180deg, var(--t1, #FFFFFF) 0%, var(--accent1) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AEON DIRGE</h1>
+    <div style="width: 200px; height: 2px; background: linear-gradient(90deg, transparent, var(--accent3), transparent); margin: 4vh auto;"></div>
+    <p style="font-size: 1.8vw; color: var(--t2, #A0A0A5); max-width: 60vw; margin: 0 auto; line-height: 1.5; font-weight: 300;">At the edge of the universe, the only thing colder than space is the truth.</p>
+    
+    <div style="display: flex; gap: 20px; justify-content: center; margin-top: 6vh;">
+      <span style="border: 1px solid var(--accent1); padding: 8px 16px; font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.1em; color: var(--accent1); background: rgba(224, 224, 229, 0.05); text-transform: uppercase;">Epic Space Opera</span>
+      <span style="border: 1px solid var(--accent2); padding: 8px 16px; font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.1em; color: var(--accent2); background: rgba(216, 58, 39, 0.05); text-transform: uppercase;">Dark & Dystopian</span>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Welcome, investors and partners. Today we unveil AEON DIRGE, our upcoming cinematic experience set in a deeply dystopian, dying universe. Let the stark visuals set the tone.</aside>
+</section>
+  <section style="background: var(--bg); color: var(--t1, #FFFFFF); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; align-items: center; position: relative;">
+  <div class="s" style="display: flex; width: 100%; height: 100%; padding: 8vw;">
+    <!-- Left text -->
+    <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; padding-right: 6vw;">
+      <div style="font-family: var(--mono); color: var(--t2, #A0A0A5); font-size: 0.9rem; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 2vh; display: flex; align-items: center; gap: 10px;">
+        <span style="display: inline-block; width: 30px; height: 1px; background: var(--accent3);"></span>
+        The Premise
+      </div>
+      <h2 style="font-size: 4.5vw; font-weight: 800; line-height: 1.1; margin-bottom: 4vh; text-transform: uppercase;">A Galaxy Running<br><span style="color: var(--accent2);">On Empty</span></h2>
+      <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 3vh;">
+        <li style="display: flex; align-items: flex-start; gap: 20px;">
+          <i class="fas fa-crosshairs" style="color: var(--accent1); margin-top: 5px; font-size: 1.2rem;"></i>
+          <span style="font-size: 1.4vw; color: var(--t2, #A0A0A5); line-height: 1.5;">Humanity is fractured into desperate, warring colonies</span>
+        </li>
+        <li style="display: flex; align-items: flex-start; gap: 20px;">
+          <i class="fas fa-battery-empty" style="color: var(--accent2); margin-top: 5px; font-size: 1.2rem;"></i>
+          <span style="font-size: 1.4vw; color: var(--t2, #A0A0A5); line-height: 1.5;">Resources are depleted; hope is a luxury</span>
+        </li>
+        <li style="display: flex; align-items: flex-start; gap: 20px;">
+          <i class="fas fa-satellite" style="color: var(--accent3); margin-top: 5px; font-size: 1.2rem;"></i>
+          <span style="font-size: 1.4vw; color: var(--t2, #A0A0A5); line-height: 1.5;">The aesthetic is clinical, stark, and unforgiving</span>
+        </li>
+      </ul>
+    </div>
+    <!-- Right visual -->
+    <div style="flex: 1; display: flex; justify-content: center; align-items: center; position: relative;">
+      <div style="position: absolute; width: 35vw; height: 35vw; border: 1px solid rgba(224,224,229,0.1); border-radius: 50%; display: flex; justify-content: center; align-items: center;">
+        <div style="width: 25vw; height: 25vw; border: 1px dashed rgba(69,182,198,0.4); border-radius: 50%; animation: spin 60s linear infinite;"></div>
+        <i class="fas fa-globe" style="position: absolute; font-size: 15vw; color: var(--surface); text-shadow: 0 0 40px rgba(224,224,229,0.2);"></i>
+        <div style="position: absolute; background: linear-gradient(90deg, transparent, var(--accent1), transparent); height: 1px; width: 150%;"></div>
+        <div style="position: absolute; background: linear-gradient(180deg, transparent, var(--accent1), transparent); width: 1px; height: 150%;"></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">The premise is bleak. Humanity has expanded, but not prospered. The environments are clinical and stark white, contrasting with the dark void of space.</aside>
+</section>
+  <section style="background: var(--bg); color: var(--t1, #FFFFFF); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; flex-direction: column; justify-content: center; padding: 8vw;">
+  <div class="s" style="width: 100%;">
+    <div style="text-align: center; margin-bottom: 8vh;">
+      <div style="font-family: var(--mono); color: var(--accent1); font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1vh;">// The Core Mystery</div>
+      <h2 style="font-size: 4vw; font-weight: 800; text-transform: uppercase; margin: 0; letter-spacing: 2px;">The Obsidian Tear</h2>
+    </div>
+    
+    <div style="display: flex; gap: 3vw; justify-content: center;">
+      <!-- Card 1 -->
+      <div style="flex: 1; background: var(--surface); border: 1px solid rgba(224,224,229,0.1); padding: 4vw 2.5vw; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; text-align: center;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent2);"></div>
+        <div style="width: 4vw; height: 4vw; border-radius: 50%; background: rgba(216, 58, 39, 0.1); display: flex; justify-content: center; align-items: center; margin-bottom: 2vh; border: 1px solid var(--accent2);">
+          <i class="fas fa-meteor" style="color: var(--accent2); font-size: 1.5vw;"></i>
+        </div>
+        <h3 style="font-size: 1.5vw; font-weight: 700; margin-bottom: 2vh; text-transform: uppercase;">Spatial Anomaly</h3>
+        <p style="font-size: 1.1vw; color: var(--t2, #A0A0A5); line-height: 1.6;">A massive spatial rift currently destabilizing and consuming entire star sectors.</p>
+      </div>
+
+      <!-- Card 2 -->
+      <div style="flex: 1; background: var(--surface); border: 1px solid rgba(224,224,229,0.1); padding: 4vw 2.5vw; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; text-align: center;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent3);"></div>
+        <div style="width: 4vw; height: 4vw; border-radius: 50%; background: rgba(69, 182, 198, 0.1); display: flex; justify-content: center; align-items: center; margin-bottom: 2vh; border: 1px solid var(--accent3);">
+          <i class="fas fa-wave-square" style="color: var(--accent3); font-size: 1.5vw;"></i>
+        </div>
+        <h3 style="font-size: 1.5vw; font-weight: 700; margin-bottom: 2vh; text-transform: uppercase;">Haunting Frequency</h3>
+        <p style="font-size: 1.1vw; color: var(--t2, #A0A0A5); line-height: 1.6;">Emits a biological, low-band frequency that infects communication networks.</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div style="flex: 1; background: var(--surface); border: 1px solid rgba(224,224,229,0.1); padding: 4vw 2.5vw; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; text-align: center;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent1);"></div>
+        <div style="width: 4vw; height: 4vw; border-radius: 50%; background: rgba(224, 224, 229, 0.1); display: flex; justify-content: center; align-items: center; margin-bottom: 2vh; border: 1px solid var(--accent1);">
+          <i class="fas fa-microchip" style="color: var(--accent1); font-size: 1.5vw;"></i>
+        </div>
+        <h3 style="font-size: 1.5vw; font-weight: 700; margin-bottom: 2vh; text-transform: uppercase;">Defies Physics</h3>
+        <p style="font-size: 1.1vw; color: var(--t2, #A0A0A5); line-height: 1.6;">Behaves unlike any known celestial body, breaking fundamental engineering laws.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">The central driver of our plot is the Obsidian Tear. It's not just a black hole; it's a cosmic anomaly that seems almost alive, emitting frequencies that drive crews mad.</aside>
+</section>
+  <section style="background: var(--bg); color: var(--t1, #FFFFFF); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; flex-direction: column; justify-content: center; padding: 8vw;">
+  <div class="s" style="width: 100%;">
+    <div style="margin-bottom: 12vh;">
+      <div style="font-family: var(--mono); color: var(--accent3); font-size: 0.9rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1vh;">Lore & History</div>
+      <h2 style="font-size: 3.5vw; font-weight: 800; text-transform: uppercase; margin: 0;">The Fall of the Silver Fleet</h2>
+    </div>
+
+    <div style="position: relative; display: flex; justify-content: space-between; align-items: flex-start;">
+      <!-- Main Line -->
+      <div style="position: absolute; top: 2vw; left: 0; width: 100%; height: 2px; background: rgba(224,224,229,0.2);"></div>
+      
+      <!-- Timeline Node 1 -->
+      <div style="flex: 1; position: relative; padding-right: 2vw;">
+        <div style="width: 4vw; height: 4vw; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent1); display: flex; justify-content: center; align-items: center; position: relative; z-index: 2; margin-bottom: 3vh;">
+          <span style="font-family: var(--mono); font-weight: bold; font-size: 1vw;">2240</span>
+        </div>
+        <h4 style="font-size: 1.4vw; font-weight: bold; color: var(--accent1); margin-bottom: 1vh; text-transform: uppercase;">Discovery</h4>
+        <p style="font-size: 1vw; color: var(--t2, #A0A0A5); line-height: 1.5;">The Vanguard discovers the anomaly during a routine deep-space sweep.</p>
+      </div>
+
+      <!-- Timeline Node 2 -->
+      <div style="flex: 1; position: relative; padding-right: 2vw;">
+        <div style="width: 4vw; height: 4vw; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent2); display: flex; justify-content: center; align-items: center; position: relative; z-index: 2; margin-bottom: 3vh; box-shadow: 0 0 15px rgba(216,58,39,0.3);">
+          <span style="font-family: var(--mono); font-weight: bold; font-size: 1vw; color: var(--accent2);">2241</span>
+        </div>
+        <h4 style="font-size: 1.4vw; font-weight: bold; color: var(--accent2); margin-bottom: 1vh; text-transform: uppercase;">Contact Lost</h4>
+        <p style="font-size: 1vw; color: var(--t2, #A0A0A5); line-height: 1.5;">First contact protocols fail. All communications from the fleet go entirely dark.</p>
+      </div>
+
+      <!-- Timeline Node 3 -->
+      <div style="flex: 1; position: relative;">
+        <div style="width: 4vw; height: 4vw; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent3); display: flex; justify-content: center; align-items: center; position: relative; z-index: 2; margin-bottom: 3vh;">
+          <span style="font-family: var(--mono); font-weight: bold; font-size: 1vw; color: var(--accent3);">2245</span>
+        </div>
+        <h4 style="font-size: 1.4vw; font-weight: bold; color: var(--accent3); margin-bottom: 1vh; text-transform: uppercase;">The Ghost Fleet</h4>
+        <p style="font-size: 1vw; color: var(--t2, #A0A0A5); line-height: 1.5;">The remains of the fleet are found perfectly preserved, but entirely empty.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">This timeline details the inciting incident. The highly advanced Silver Fleet went in to investigate and simply vanished, leaving their pristine white ships adrift.</aside>
+</section>
+  <section style="background: var(--bg); color: var(--t1, #FFFFFF); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; overflow: hidden;">
+  <div class="s" style="display: flex; width: 100%; height: 100%;">
+    <!-- Left Visual / Image Frame -->
+    <div style="flex: 1; background: var(--surface); position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; border-right: 1px solid rgba(224,224,229,0.1);">
+      <div style="position: absolute; inset: 2vw; border: 1px solid rgba(224,224,229,0.3); padding: 2vw; display: flex; flex-direction: column;">
+        <div style="display: flex; justify-content: space-between; font-family: var(--mono); font-size: 0.8rem; color: var(--t2, #A0A0A5); margin-bottom: auto;">
+          <span>CAM_04</span>
+          <span>REC // STERILE SECTOR</span>
+        </div>
+        <div style="flex: 1; display: flex; justify-content: center; align-items: center;">
+          <i class="fas fa-hospital-symbol" style="font-size: 10vw; color: var(--accent1); opacity: 0.8; filter: drop-shadow(0 0 20px rgba(224,224,229,0.5));"></i>
+        </div>
+        <div style="font-family: var(--mono); font-size: 0.8rem; color: var(--accent3); margin-top: auto;">
+          SYS.TEMP: 14°C // O2: 18%
+        </div>
+      </div>
+      <!-- Scanline effect -->
+      <div style="position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px);"></div>
+    </div>
+    
+    <!-- Right Text -->
+    <div style="flex: 1; padding: 10vw 8vw; display: flex; flex-direction: column; justify-content: center;">
+      <div style="font-family: var(--mono); color: var(--t2, #A0A0A5); font-size: 0.9rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 2vh;">World Building</div>
+      <h2 style="font-size: 4vw; font-weight: 800; text-transform: uppercase; margin: 0 0 6vh 0; line-height: 1.1;">Clinical Cold<br><span style="color: var(--accent1);">Stations</span></h2>
+      
+      <div style="display: flex; flex-direction: column; gap: 4vh;">
+        <div style="display: flex; gap: 1.5vw; align-items: flex-start;">
+          <div style="color: var(--accent1); font-family: var(--mono); font-size: 1.2vw; padding-top: 0.2vw;">01 //</div>
+          <p style="font-size: 1.2vw; color: var(--t1, #FFFFFF); margin: 0; line-height: 1.6;">Sterile, hyper-white interiors explicitly designed to contrast the dark void of deep space.</p>
+        </div>
+        <div style="display: flex; gap: 1.5vw; align-items: flex-start;">
+          <div style="color: var(--accent1); font-family: var(--mono); font-size: 1.2vw; padding-top: 0.2vw;">02 //</div>
+          <p style="font-size: 1.2vw; color: var(--t1, #FFFFFF); margin: 0; line-height: 1.6;">Claustrophobic, angular corridors echoing with the hum of life-support machinery.</p>
+        </div>
+        <div style="display: flex; gap: 1.5vw; align-items: flex-start;">
+          <div style="color: var(--accent2); font-family: var(--mono); font-size: 1.2vw; padding-top: 0.2vw;">03 //</div>
+          <p style="font-size: 1.2vw; color: var(--t1, #FFFFFF); margin: 0; line-height: 1.6;">Oppressive artificial intelligence systems monitoring every breath and heartbeat.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Visually, the stations are stark white and silver. It's an oppressive, clinical cleanliness that feels more like a hospital for a dying species than a home.</aside>
+</section>
+  <section style="background: var(--bg); color: var(--t1, #FFFFFF); font-family: var(--sans); height: 100vh; width: 100vw; padding: 6vw;">
+  <div class="s" style="height: 100%; display: flex; flex-direction: column;">
+    <!-- Header -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid rgba(224,224,229,0.2); padding-bottom: 2vh; margin-bottom: 4vh;">
+      <div>
+        <div style="font-family: var(--mono); color: var(--t2, #A0A0A5); font-size: 0.9rem; letter-spacing: 0.2em; text-transform: uppercase;">Project Mechanics</div>
+        <h2 style="font-size: 3vw; font-weight: 800; text-transform: uppercase; margin: 1vh 0 0 0;">Survival Statistics</h2>
+      </div>
+      <div style="font-family: var(--mono); font-size: 1.5vw; color: var(--accent3);">SYS_DASHBOARD_v9</div>
+    </div>
+
+    <!-- Dashboard Grid -->
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); gap: 2vw; flex: 1;">
+      <!-- Metric 1: O2 -->
+      <div style="background: var(--surface); border: 1px solid rgba(224,224,229,0.1); padding: 2vw; display: flex; flex-direction: column; justify-content: space-between;">
+        <div style="display: flex; justify-content: space-between; font-family: var(--mono); color: var(--t2, #A0A0A5); font-size: 0.9vw;">
+          <span>OXYGEN DEPLETION</span>
+          <i class="fas fa-wind"></i>
+        </div>
+        <div style="font-size: 4vw; font-weight: bold; font-family: var(--mono); color: var(--accent2);">14%</div>
+        <div>
+          <div style="width: 100%; height: 4px; background: rgba(255,255,255,0.1); margin-bottom: 1vh;">
+            <div style="width: 14%; height: 100%; background: var(--accent2);"></div>
+          </div>
+          <div style="font-size: 0.9vw; color: var(--t2, #A0A0A5);">Critical tension mechanic</div>
+        </div>
+      </div>
+
+      <!-- Metric 2: Hull -->
+      <div style="background: var(--surface); border: 1px solid rgba(224,224,229,0.1); padding: 2vw; display: flex; flex-direction: column; justify-content: space-between;">
+        <div style="display: flex; justify-content: space-between; font-family: var(--mono); color: var(--t2, #A0A0A5); font-size: 0.9vw;">
+          <span>HULL INTEGRITY</span>
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <div style="font-size: 4vw; font-weight: bold; font-family: var(--mono); color: var(--accent1);">89%</div>
+        <div>
+          <div style="width: 100%; height: 4px; background: rgba(255,255,255,0.1); margin-bottom: 1vh;">
+            <div style="width: 89%; height: 100%; background: var(--accent1);"></div>
+          </div>
+          <div style="font-size: 0.9vw; color: var(--t2, #A0A0A5);">Structural monitoring overlay</div>
+        </div>
+      </div>
+
+      <!-- Metric 3: Sanity -->
+      <div style="grid-row: span 2; background: var(--surface); border: 1px solid rgba(224,224,229,0.1); padding: 2vw; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative;">
+        <div style="position: absolute; top: 2vw; left: 2vw; font-family: var(--mono); color: var(--t2, #A0A0A5); font-size: 0.9vw;">CREW SANITY INDEX</div>
+        
+        <!-- SVG Ring -->
+        <svg viewBox="0 0 100 100" style="width: 60%; transform: rotate(-90deg); margin-bottom: 3vh;">
+          <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="5" />
+          <circle cx="50" cy="50" r="45" fill="none" stroke="var(--accent3)" stroke-width="5" stroke-dasharray="283" stroke-dashoffset="150" />
+        </svg>
+        
+        <div style="position: absolute; font-size: 3.5vw; font-weight: bold; font-family: var(--mono); color: var(--accent3);">47%</div>
+        <p style="text-align: center; font-size: 1.1vw; color: var(--t2, #A0A0A5); margin-top: 2vh;">Sanity indices dropping exponentially near the anomaly boundary.</p>
+      </div>
+
+      <!-- Wide Alert Banner -->
+      <div style="grid-column: span 2; background: rgba(216, 58, 39, 0.05); border: 1px solid var(--accent2); padding: 2vw; display: flex; align-items: center; gap: 2vw;">
+        <i class="fas fa-exclamation-triangle" style="font-size: 3vw; color: var(--accent2); animation: pulse 2s infinite;"></i>
+        <div>
+          <h4 style="margin: 0 0 0.5vh 0; font-size: 1.4vw; color: var(--accent2); text-transform: uppercase;">Resource Management Focus</h4>
+          <p style="margin: 0; font-size: 1vw; color: var(--t2, #A0A0A5);">Whether film tension or interactive gameplay, statistics enforce the grim reality of survival.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Whether viewed as film tension or game mechanics, the stats are grim. Everything is about resource management, pushing the audience to the edge of their seats.</aside>
+</section>
+  <section style="background: var(--bg); color: var(--t1, #FFFFFF); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; justify-content: center; align-items: center; position: relative;">
+  <!-- Waveform decorative background -->
+  <div style="position: absolute; inset: 0; opacity: 0.1; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+    <svg width="120%" height="50%" preserveAspectRatio="none">
+      <path d="M0,50 Q10,20 20,50 T40,50 T60,50 T80,50 T100,50" fill="none" stroke="var(--accent1)" stroke-width="2" />
+      <path d="M0,50 Q10,80 20,50 T40,50 T60,50 T80,50 T100,50" fill="none" stroke="var(--accent3)" stroke-width="4" stroke-dasharray="10 5" />
+    </svg>
+  </div>
+
+  <div class="s cx" style="width: 70vw; text-align: center; position: relative; z-index: 10;">
+    <div style="font-family: var(--mono); color: var(--t2, #A0A0A5); font-size: 0.9rem; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 4vh;">The Antagonist // Voice of the Void</div>
+    
+    <i class="fas fa-quote-left" style="font-size: 4vw; color: var(--surface); text-shadow: 0 0 20px rgba(224,224,229,0.3); margin-bottom: 2vh;"></i>
+    
+    <h2 style="font-size: 3.5vw; font-weight: 300; line-height: 1.3; margin-bottom: 6vh; font-family: var(--serif), var(--sans);">
+      "It doesn't want to kill us;<br>
+      <strong style="color: var(--accent1); font-weight: 800;">it wants to digest our reality.</strong>"
+    </h2>
+    
+    <div style="display: inline-flex; flex-direction: column; align-items: center;">
+      <div style="border: 1px solid var(--accent3); padding: 1vh 2vw; display: inline-flex; align-items: center; gap: 1vw; background: rgba(69, 182, 198, 0.05);">
+        <div style="width: 10px; height: 10px; background: var(--accent3); border-radius: 50%; box-shadow: 0 0 10px var(--accent3);"></div>
+        <span style="font-family: var(--mono); font-size: 1vw; color: var(--accent3); letter-spacing: 0.1em;">NO PHYSICAL FORM // PSYCHOLOGICAL HORROR</span>
+      </div>
+      <p style="margin-top: 3vh; font-size: 1.2vw; color: var(--t2, #A0A0A5); max-width: 40vw;">The anomaly communicates through dead comms channels. The universe itself is the hostile entity.</p>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Our antagonist isn't an alien empire. It's the void itself, speaking through the static of our sterile, clinical technology. 'It doesn't want to kill us; it wants to digest our reality.'</aside>
+</section>
+  <section style="background: var(--bg); color: var(--t1, #FFFFFF); font-family: var(--sans); height: 100vh; width: 100vw; display: flex;">
+  <div class="s" style="display: flex; width: 100%;">
+    <!-- Narrow Text Column -->
+    <div style="width: 40vw; padding: 8vw 4vw 8vw 6vw; display: flex; flex-direction: column; justify-content: center;">
+      <div style="font-family: var(--mono); color: var(--accent1); font-size: 0.9rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 2vh;">Visual Targets</div>
+      <h2 style="font-size: 3.5vw; font-weight: 800; text-transform: uppercase; margin: 0 0 4vh 0; line-height: 1.1;">Stark<br>Contrast<br>Aesthetics</h2>
+      
+      <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 3vh;">
+        <li style="display: flex; gap: 15px; align-items: flex-start;">
+          <i class="fas fa-adjust" style="color: var(--accent1); font-size: 1.2vw; margin-top: 0.3vw;"></i>
+          <span style="font-size: 1.1vw; color: var(--t2, #A0A0A5); line-height: 1.5;">Blinding silvers against absolute black (#0A0A0C)</span>
+        </li>
+        <li style="display: flex; gap: 15px; align-items: flex-start;">
+          <i class="fas fa-lightbulb" style="color: var(--accent1); font-size: 1.2vw; margin-top: 0.3vw;"></i>
+          <span style="font-size: 1.1vw; color: var(--t2, #A0A0A5); line-height: 1.5;">Harsh, directional lighting with minimal fill</span>
+        </li>
+        <li style="display: flex; gap: 15px; align-items: flex-start;">
+          <i class="fas fa-font" style="color: var(--accent1); font-size: 1.2vw; margin-top: 0.3vw;"></i>
+          <span style="font-size: 1.1vw; color: var(--t2, #A0A0A5); line-height: 1.5;">Industrial, blocky typography for UI/HUD</span>
+        </li>
+      </ul>
+    </div>
+    
+    <!-- Wide Visual Column -->
+    <div style="width: 60vw; background: var(--bg2); padding: 8vw; display: flex; flex-direction: column; justify-content: center; position: relative; border-left: 1px solid rgba(224,224,229,0.1);">
+      
+      <!-- Tech Diagram abstraction -->
+      <div style="flex: 1; border: 1px solid rgba(224,224,229,0.2); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 4vh;">
+        <!-- Grid lines -->
+        <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 20px 20px;"></div>
+        
+        <!-- Center tech geometric shape -->
+        <div style="width: 20vw; height: 20vw; border: 2px solid var(--accent1); transform: rotate(45deg); display: flex; justify-content: center; align-items: center; position: relative;">
+          <div style="width: 18vw; height: 18vw; border: 1px dashed var(--t2, #A0A0A5); position: absolute;"></div>
+          <div style="width: 10vw; height: 10vw; background: var(--bg); border: 2px solid var(--accent2); transform: rotate(-45deg); display: flex; justify-content: center; align-items: center;">
+            <i class="fas fa-eye" style="color: var(--accent2); font-size: 3vw;"></i>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Color Swatches -->
+      <div style="display: flex; gap: 1vw; height: 6vh;">
+        <div style="flex: 1; background: #0A0A0C; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.8vw; color: #FFF;">#0A0A0C</div>
+        <div style="flex: 1; background: #E0E0E5; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.8vw; color: #000;">#E0E0E5</div>
+        <div style="flex: 1; background: #D83A27; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.8vw; color: #FFF;">#D83A27</div>
+        <div style="flex: 1; background: #45B6C6; display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 0.8vw; color: #000;">#45B6C6</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Our visual targets lean heavily into high contrast. The blinding clinical silvers of the ship interiors against the deep, terrifying black of the cosmic void.</aside>
+</section>
+  <section style="background: var(--bg); color: var(--t1, #FFFFFF); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; flex-direction: column; padding: 6vw 8vw;">
+  <div class="s" style="width: 100%; height: 100%; display: flex; flex-direction: column;">
+    
+    <div style="margin-bottom: 6vh;">
+      <div style="font-family: var(--mono); color: var(--t2, #A0A0A5); font-size: 0.9rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1vh;">Production Roadmap</div>
+      <h2 style="font-size: 3vw; font-weight: 800; text-transform: uppercase; margin: 0;">Phases of the Unknown</h2>
+    </div>
+    
+    <div style="display: flex; flex-direction: column; gap: 2vh; flex: 1; justify-content: center;">
+      <!-- Step 1 -->
+      <div style="display: flex; align-items: center; background: var(--surface); border: 1px solid rgba(224,224,229,0.2); border-left: 4px solid var(--accent1); padding: 2vh 3vw;">
+        <div style="font-family: var(--mono); font-size: 2vw; font-weight: bold; color: var(--accent1); margin-right: 3vw;">01</div>
+        <div style="flex: 1;">
+          <h3 style="font-size: 1.5vw; margin: 0 0 0.5vh 0; text-transform: uppercase;">Concept & Pre-vis</h3>
+          <p style="font-size: 1vw; color: var(--t2, #A0A0A5); margin: 0;">Establishing core dystopian aesthetic and clinical visuals.</p>
+        </div>
+        <div style="font-family: var(--mono); font-size: 0.8vw; background: rgba(224,224,229,0.1); color: var(--accent1); padding: 0.5vh 1vw; border-radius: 20px;"><i class="fas fa-check"></i> COMPLETED</div>
+      </div>
+
+      <!-- Step 2 -->
+      <div style="display: flex; align-items: center; background: var(--surface); border: 1px solid rgba(69,182,198,0.4); border-left: 4px solid var(--accent3); padding: 2vh 3vw; box-shadow: 0 0 20px rgba(69,182,198,0.1);">
+        <div style="font-family: var(--mono); font-size: 2vw; font-weight: bold; color: var(--accent3); margin-right: 3vw;">02</div>
+        <div style="flex: 1;">
+          <h3 style="font-size: 1.5vw; margin: 0 0 0.5vh 0; text-transform: uppercase;">Vertical Slice / Trailer</h3>
+          <p style="font-size: 1vw; color: var(--t2, #A0A0A5); margin: 0;">Building the tension showcase and core mechanical loop.</p>
+        </div>
+        <div style="font-family: var(--mono); font-size: 0.8vw; background: rgba(69,182,198,0.1); color: var(--accent3); padding: 0.5vh 1vw; border-radius: 20px;"><i class="fas fa-sync fa-spin"></i> IN PROGRESS</div>
+      </div>
+
+      <!-- Step 3 -->
+      <div style="display: flex; align-items: center; background: var(--bg2); border: 1px solid rgba(224,224,229,0.05); border-left: 4px solid var(--t2, #A0A0A5); padding: 2vh 3vw; opacity: 0.6;">
+        <div style="font-family: var(--mono); font-size: 2vw; font-weight: bold; color: var(--t2, #A0A0A5); margin-right: 3vw;">03</div>
+        <div style="flex: 1;">
+          <h3 style="font-size: 1.5vw; margin: 0 0 0.5vh 0; text-transform: uppercase;">Principal Photography / Main Dev</h3>
+          <p style="font-size: 1vw; color: var(--t2, #A0A0A5); margin: 0;">Full-scale production of sets, assets, and narrative sequences.</p>
+        </div>
+        <div style="font-family: var(--mono); font-size: 0.8vw; border: 1px solid var(--t2, #A0A0A5); color: var(--t2, #A0A0A5); padding: 0.5vh 1vw; border-radius: 20px;">PENDING</div>
+      </div>
+
+      <!-- Step 4 -->
+      <div style="display: flex; align-items: center; background: var(--bg2); border: 1px solid rgba(224,224,229,0.05); border-left: 4px solid var(--t2, #A0A0A5); padding: 2vh 3vw; opacity: 0.4;">
+        <div style="font-family: var(--mono); font-size: 2vw; font-weight: bold; color: var(--t2, #A0A0A5); margin-right: 3vw;">04</div>
+        <div style="flex: 1;">
+          <h3 style="font-size: 1.5vw; margin: 0 0 0.5vh 0; text-transform: uppercase;">Post-Production & VFX</h3>
+          <p style="font-size: 1vw; color: var(--t2, #A0A0A5); margin: 0;">Visual effects for the Obsidian Tear and audio mastering.</p>
+        </div>
+        <div style="font-family: var(--mono); font-size: 0.8vw; border: 1px solid var(--t2, #A0A0A5); color: var(--t2, #A0A0A5); padding: 0.5vh 1vw; border-radius: 20px;">PENDING</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Here is our roadmap. We have completed the concept art phase establishing our dystopian look, and are currently building the vertical slice to showcase the tension.</aside>
+</section>
+  <section style="background: var(--bg); color: var(--t1, #FFFFFF); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; align-items: center; justify-content: center; padding: 6vw;">
+  <div class="s" style="width: 100%; height: 100%; display: flex; flex-direction: column;">
+    
+    <div style="text-align: center; margin-bottom: 8vh;">
+      <div style="font-family: var(--mono); color: var(--accent2); font-size: 1rem; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 1vh;">The Ask</div>
+      <h2 style="font-size: 4vw; font-weight: 800; text-transform: uppercase; margin: 0;">Funding the Dark</h2>
+    </div>
+    
+    <div style="display: flex; gap: 4vw; flex: 1;">
+      <!-- Main Metric -->
+      <div style="flex: 1.2; background: var(--surface); border: 1px solid var(--accent1); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4vw; position: relative;">
+        <!-- corner brackets -->
+        <div style="position: absolute; top: 1vw; left: 1vw; width: 2vw; height: 2vw; border-top: 2px solid var(--accent1); border-left: 2px solid var(--accent1);"></div>
+        <div style="position: absolute; bottom: 1vw; right: 1vw; width: 2vw; height: 2vw; border-bottom: 2px solid var(--accent1); border-right: 2px solid var(--accent1);"></div>
+        
+        <div style="font-family: var(--mono); font-size: 1.2vw; color: var(--t2, #A0A0A5); margin-bottom: 1vh; text-transform: uppercase;">Required Capital</div>
+        <div style="font-size: 8vw; font-weight: 900; line-height: 1; color: var(--t1, #FFFFFF); font-family: var(--mono); margin-bottom: 2vh; text-shadow: 0 0 30px rgba(224,224,229,0.3);">$15M</div>
+        <p style="text-align: center; font-size: 1.2vw; color: var(--t2, #A0A0A5); max-width: 80%;">Funding required for Phase 2 and 3 completion, encompassing intensive VFX and massive clinical sets.</p>
+      </div>
+
+      <!-- Secondary Metrics -->
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 3vh;">
+        <!-- Sub metric 1 -->
+        <div style="flex: 1; background: var(--bg2); border: 1px solid rgba(224,224,229,0.1); padding: 3vw; display: flex; flex-direction: column; justify-content: center;">
+          <i class="fas fa-calendar-alt" style="font-size: 2vw; color: var(--accent3); margin-bottom: 2vh;"></i>
+          <div style="font-size: 3vw; font-weight: 700; margin-bottom: 1vh; font-family: var(--mono);">Q4 Next Year</div>
+          <div style="font-size: 1vw; color: var(--t2, #A0A0A5); text-transform: uppercase; font-family: var(--mono); letter-spacing: 1px;">Target Release</div>
+        </div>
+        
+        <!-- Sub metric 2 -->
+        <div style="flex: 1; background: var(--bg2); border: 1px solid rgba(224,224,229,0.1); padding: 3vw; display: flex; flex-direction: column; justify-content: center;">
+          <i class="fas fa-users" style="font-size: 2vw; color: var(--accent1); margin-bottom: 2vh;"></i>
+          <div style="font-size: 3vw; font-weight: 700; margin-bottom: 1vh; font-family: var(--mono);">25M+</div>
+          <div style="font-size: 1vw; color: var(--t2, #A0A0A5); text-transform: uppercase; font-family: var(--mono); letter-spacing: 1px;">Projected Sci-Fi Audience</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">To bring this epic space opera to life, we are looking for a $15M investment. This covers the intensive VFX required for the Obsidian Tear and the massive clinical sets.</aside>
+</section>
+  <section style="background: var(--bg); color: var(--t1, #FFFFFF); font-family: var(--sans); height: 100vh; width: 100vw; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+  <!-- Radial gradient void effect -->
+  <div style="position: absolute; inset: 0; background: radial-gradient(circle at center, transparent 0%, var(--bg) 70%), repeating-radial-gradient(circle at center, rgba(224,224,229,0.05) 0, rgba(224,224,229,0.05) 1px, transparent 1px, transparent 20px);"></div>
+  
+  <div class="s cx" style="z-index: 10; text-align: center; display: flex; flex-direction: column; align-items: center;">
+    
+    <div style="width: 8vw; height: 8vw; border: 2px solid var(--accent1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 4vh; background: var(--bg);">
+      <i class="fas fa-meteor" style="font-size: 3vw; color: var(--accent1);"></i>
+    </div>
+    
+    <h1 style="font-size: 6vw; font-weight: 900; text-transform: uppercase; margin: 0 0 2vh 0; letter-spacing: -0.02em;">Enter the Void</h1>
+    <p style="font-size: 1.8vw; color: var(--t2, #A0A0A5); margin: 0 0 6vh 0; font-weight: 300;">Will you help us build the end of the universe?</p>
+    
+    <!-- CTA Button -->
+    <a href="#" style="display: inline-block; padding: 1.5vh 3vw; background: var(--accent1); color: var(--bg); font-family: var(--mono); font-size: 1.2vw; font-weight: bold; text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6vh; transition: all 0.3s;">Join the Vanguard</a>
+    
+    <!-- Contact Info -->
+    <div style="display: flex; gap: 2vw; justify-content: center;">
+      <div style="background: var(--surface); padding: 1vh 2vw; border: 1px solid rgba(224,224,229,0.2); font-family: var(--mono); font-size: 0.9vw; color: var(--t2, #A0A0A5); display: flex; align-items: center; gap: 10px;">
+        <i class="fas fa-envelope" style="color: var(--accent3);"></i> directors@aeondirge.space
+      </div>
+      <div style="background: var(--surface); padding: 1vh 2vw; border: 1px solid rgba(224,224,229,0.2); font-family: var(--mono); font-size: 0.9vw; color: var(--t2, #A0A0A5); display: flex; align-items: center; gap: 10px;">
+        <i class="fas fa-file-invoice" style="color: var(--accent1);"></i> Investment Packets at Exit
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Thank you for your time. The universe of AEON DIRGE is dark, beautiful, and terrifying. We invite you to join us on this journey into the cosmic mystery.</aside>
+</section>
+
+<script>
+(function(){
+  const sections = document.querySelectorAll('section');
+  const total = sections.length;
+  const counter = document.getElementById('slide-counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  // IntersectionObserver: mark the visible slide as .active (triggers CSS animations)
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        sections.forEach(s => s.classList.remove('active'));
+        e.target.classList.add('active');
+        current = Array.from(sections).indexOf(e.target);
+        if (counter) counter.textContent = (current+1) + ' / ' + total;
+        if (progress) progress.style.width = ((current+1)/total*100) + '%';
+      }
+    });
+  }, { threshold: 0.5 });
+  sections.forEach(s => obs.observe(s));
+
+  // Activate first slide immediately
+  if (sections[0]) sections[0].classList.add('active');
+  if (counter) counter.textContent = '1 / ' + total;
+  if (progress) progress.style.width = (1/total*100) + '%';
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      if (current < total - 1) sections[current + 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (current > 0) sections[current - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      sections[0].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      sections[total - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'f' || e.key === 'F11') {
+      e.preventDefault();
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>

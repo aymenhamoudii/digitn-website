@@ -1,0 +1,16 @@
+/* Reservations form and bookings list styles */
+
+.reservations-grid{display:grid;grid-template-columns:1fr 360px;gap:var(--space-6);align-items:start}
+@media (max-width:780px){
+  .reservations-grid{grid-template-columns:1fr}
+}
+
+.reservation-form-card{padding:var(--space-6)}
+.form-actions{display:flex;gap:var(--space-3);align-items:center}
+
+.booking-list{max-height:320px;overflow:auto;border-radius:8px;padding:0;margin-top:var(--space-4);background:#fff;border:1px solid var(--neutral-100)}
+.booking-item .meta{color:var(--neutral-500)}
+.booking-item .status.pending{color:var(--warning)}
+.booking-item .status.confirmed{color:var(--success)}
+
+.export-btn{background:transparent;border:1px dashed var(--neutral-300);padding:0.5rem 0.75rem;border-radius:6px}

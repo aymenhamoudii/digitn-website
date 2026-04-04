@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-lux-ivory text-lux-charcoal font-body antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    @apply bg-lux-brass text-lux-white;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-20 lg:py-24;
+  }
+
+  .heading-1 {
+    @apply font-display text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-lux-black;
+  }
+
+  .heading-2 {
+    @apply font-display text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-lux-black;
+  }
+
+  .heading-3 {
+    @apply font-display text-2xl md:text-3xl font-medium tracking-tight text-lux-black;
+  }
+
+  .heading-4 {
+    @apply font-display text-xl md:text-2xl font-medium text-lux-black;
+  }
+
+  .body-large {
+    @apply text-lg leading-relaxed text-lux-graphite;
+  }
+
+  .body-text {
+    @apply text-base leading-relaxed text-lux-graphite;
+  }
+
+  .body-small {
+    @apply text-sm leading-relaxed text-lux-pewter;
+  }
+
+  .link-underline {
+    @apply relative inline-block;
+  }
+
+  .link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-px bg-lux-brass transition-all duration-300 ease-lux;
+  }
+
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-lux-black text-lux-white font-medium 
+           rounded-none transition-all duration-300 ease-lux
+           hover:bg-lux-brass hover:shadow-lux-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-lux-brass focus-visible:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 border-2 border-lux-black text-lux-black 
+           font-medium rounded-none bg-transparent transition-all duration-300 ease-lux
+           hover:bg-lux-black hover:text-lux-white focus:outline-none focus-visible:ring-2 focus-visible:ring-lux-black focus-visible:ring-offset-2;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center px-4 py-2 text-lux-charcoal font-medium 
+           transition-all duration-300 ease-lux
+           hover:text-lux-brass focus:outline-none focus-visible:ring-2 focus-visible:ring-lux-brass;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-lux-white border border-lux-silver/30 rounded-none
+           font-body text-lux-charcoal placeholder-lux-pewter/60
+           transition-all duration-200
+           focus:outline-none focus:border-lux-brass focus:ring-1 focus:ring-lux-brass/30;
+  }
+
+  .card {
+    @apply bg-lux-white p-6 shadow-lux-md transition-all duration-300 ease-lux;
+  }
+
+  .card-hover {
+    @apply hover:shadow-lux-xl hover:-translate-y-1;
+  }
+
+  .divider {
+    @apply w-16 h-px bg-lux-brass my-8;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-lux-brass to-lux-brass-dark bg-clip-text text-transparent;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

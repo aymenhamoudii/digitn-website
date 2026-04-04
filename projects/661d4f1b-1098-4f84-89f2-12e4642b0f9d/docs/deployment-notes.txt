@@ -1,0 +1,14 @@
+Deployment notes
+
+- This project is intentionally built for direct file:// usage. Do NOT add type="module" to script tags or use export/import in JS files.
+- Script load order must remain:
+  1. js/utils.js
+  2. js/data.js
+  3. js/ui.js
+  4. js/map.js
+  5. js/app.js
+
+- If hosting on a web server, simply upload the directory. No build required.
+- To swap the map provider: edit js/map.js and change iframe.src to a different embed URL. OpenStreetMap was used to avoid API keys.
+- To add images, place them in assets/ and update js/data.js or index.html accordingly.
+- For production hosting, serve over HTTPS.

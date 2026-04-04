@@ -1,0 +1,32 @@
+/* Responsive utilities and breakpoints (mobile-first) */
+
+/* Base mobile spacing and touch targets */
+button, .btn{min-height:44px}
+
+@media (min-width:640px){
+  .container{padding:0 var(--space-6)}
+}
+
+@media (min-width:1024px){
+  .container{padding:0 var(--space-12)}
+  .hero-inner{grid-template-columns:1fr 520px}
+  .header-inner{padding:var(--space-4) 0}
+}
+
+/* Improve focus ring visibility on keyboard navigation */
+:focus{outline:3px solid rgba(36, 8, 0, 0.08);outline-offset:2px}
+
+/* Utility columns */
+.row{display:flex;flex-wrap:wrap;gap:var(--space-4)}
+.col{flex:1}
+
+/* Hide nav list on small screens until toggled */
+.nav-list{list-style:none}
+
+/* Make images responsive */
+img{max-width:100%;height:auto}
+
+/* Smaller footers */
+@media (max-width:520px){
+  .footer-inner{flex-direction:column;align-items:flex-start}
+}

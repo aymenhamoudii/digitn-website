@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeamSync - Admin Portal</title>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/directory.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                    <span class="brand-text">TeamSync</span>
+                </div>
+                <button id="sidebar-toggle" class="icon-btn" aria-label="Toggle Sidebar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-link active" data-view="dashboard-view">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="#" class="nav-link" data-view="directory-view">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    <span class="nav-text">Directory</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Wrapper -->
+        <main class="main-content">
+            <header class="topbar">
+                <h2 id="page-title">Dashboard Overview</h2>
+                <div class="user-profile">
+                    <div class="avatar-small">AM</div>
+                </div>
+            </header>
+            
+            <div class="content-area">
+                <!-- View: Dashboard -->
+                <section id="dashboard-view" class="view-section active">
+                    <div class="dashboard-grid">
+                        <!-- Metrics row -->
+                        <div class="metric-card" style="border-top: 4px solid var(--pastel-mint);">
+                            <p class="metric-title">Total Active</p>
+                            <h3 class="metric-value" id="metric-active">0</h3>
+                            <p class="metric-trend positive">+3 this month</p>
+                        </div>
+                        <div class="metric-card" style="border-top: 4px solid var(--pastel-peach);">
+                            <p class="metric-title">Pending Approvals</p>
+                            <h3 class="metric-value" id="metric-pending">0</h3>
+                            <p class="metric-trend neutral">Requires action</p>
+                        </div>
+                        <div class="metric-card" style="border-top: 4px solid var(--pastel-lilac);">
+                            <p class="metric-title">Departments</p>
+                            <h3 class="metric-value" id="metric-depts">0</h3>
+                            <p class="metric-trend positive">Fully staffed</p>
+                        </div>
+                        <div class="metric-card" style="border-top: 4px solid var(--pastel-blue);">
+                            <p class="metric-title">Avg Performance</p>
+                            <h3 class="metric-value" id="metric-perf">0%</h3>
+                            <p class="metric-trend positive">+2.4% vs last Q</p>
+                        </div>
+
+                        <!-- Complex Cards -->
+                        <div class="chart-card">
+                            <div class="card-header">
+                                <h3>Department Performance</h3>
+                                <span class="badge">Q3 Analytics</span>
+                            </div>
+                            <div id="performance-chart-container" class="chart-container"></div>
+                        </div>
+
+                        <div class="activity-card">
+                            <div class="card-header">
+                                <h3>Recent Activity</h3>
+                            </div>
+                            <div id="activity-list" class="activity-list"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- View: Directory -->
+                <section id="directory-view" class="view-section">
+                    <div class="directory-header">
+                        <div class="directory-actions">
+                            <input type="text" id="directory-search" placeholder="Search team members..." class="search-input">
+                            <select class="filter-select">
+                                <option value="all">All Departments</option>
+                                <option value="engineering">Engineering</option>
+                                <option value="design">Design</option>
+                                <option value="product">Product</option>
+                            </select>
+                        </div>
+                        <button class="btn-primary">+ Add Member</button>
+                    </div>
+                    <div id="directory-grid" class="directory-grid">
+                        <!-- Employee cards will be injected here -->
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts (Ordered for dependency: Data -> Components -> App Logic) -->
+    <script src="js/demo-data.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/directory.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

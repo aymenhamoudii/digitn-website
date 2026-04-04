@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Jumper</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="A colorful neon platformer game">
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div id="ui-layer">
+            <div id="start-screen" class="screen">
+                <h1>NEON JUMPER</h1>
+                <p>Press <kbd>SPACE</kbd> or <kbd>UP</kbd> to Jump</p>
+                <p class="subtitle">Double Jump Available!</p>
+                <button id="start-btn" class="btn">START GAME</button>
+            </div>
+            
+            <div id="game-over-screen" class="screen hidden">
+                <h1>CRASHED!</h1>
+                <div class="score-board">
+                    <p>Score: <span id="final-score" class="highlight">0</span></p>
+                    <p>High Score: <span id="high-score" class="highlight">0</span></p>
+                </div>
+                <button id="restart-btn" class="btn">PLAY AGAIN</button>
+            </div>
+            
+            <div id="hud" class="hidden">
+                <div class="score-display">SCORE: <span id="current-score">0</span></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

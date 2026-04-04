@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Internal Profile: Subject HL-01</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;700&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+    --bg: #042C53;
+    --bg2: #063d73;
+    --surface: #0a4a82;
+    --surface2: #1d4164;
+    --border: rgba(255,255,255,.07);
+    --border-md: rgba(255,255,255,.11);
+    --accent1: #E24B4A;
+    --accent1-dim: rgba(226, 75, 74, 0.18);
+    --accent2: #FAC775;
+    --accent2-dim: rgba(250, 199, 117, 0.18);
+    --accent3: #378ADD;
+    --accent3-dim: rgba(55, 138, 221, 0.18);
+    --t1: #FCEBEB;
+    --t2: #C0C0C0;
+    --t3: rgba(252, 235, 235, 0.3);
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+    --serif: 'Space Grotesk', sans-serif;
+  }
+    
+  /* ─── Reset ─── */
+  ::-webkit-scrollbar{display:none}
+  *{scrollbar-width:none;-ms-overflow-style:none;box-sizing:border-box;margin:0;padding:0}
+  html{overflow-y:scroll;overflow-x:hidden;scroll-behavior:smooth;scroll-snap-type:y mandatory}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  /* ─── Slide wrapper (viewport-sized snap target) ─── */
+  .slide-wrap{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--bg);position:relative}
+
+  /* ─── Slide (fluid responsive canvas) ─── */
+  section{width:100%;height:100%;display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+  /* ─── Stagger animation (.s container) ─── */
+  .s{display:flex;flex-direction:column;flex:1;min-height:0;padding:6vh 6vw;box-sizing:border-box;overflow:hidden}
+  .s>*{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+  .slide-wrap.active .s>*{opacity:1;transform:translateY(0)}
+  .slide-wrap.active .s>*:nth-child(1){transition-delay:.03s}
+  .slide-wrap.active .s>*:nth-child(2){transition-delay:.09s}
+  .slide-wrap.active .s>*:nth-child(3){transition-delay:.15s}
+  .slide-wrap.active .s>*:nth-child(4){transition-delay:.21s}
+  .slide-wrap.active .s>*:nth-child(5){transition-delay:.27s}
+  .slide-wrap.active .s>*:nth-child(6){transition-delay:.33s}
+  .slide-wrap.active .s>*:nth-child(7){transition-delay:.39s}
+  .slide-wrap.active .s>*:nth-child(8){transition-delay:.45s}
+
+  /* ─── Centering utility ─── */
+  .cx{display:flex;justify-content:center;align-items:center;text-align:center}
+
+  /* ─── Speaker notes (hidden) ─── */
+  aside.notes{display:none!important}
+
+  /* ─── Slide counter ─── */
+  #slide-counter{position:fixed;bottom:16px;right:24px;font-family:var(--mono);font-size:13px;color:var(--t3);background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:6px 14px;z-index:100;pointer-events:none}
+
+  /* ─── Progress bar ─── */
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--accent1);z-index:100;transition:width .3s ease}
+
+  /* ─── Print/PDF Styles ─── */
+  @media print {
+    ::-webkit-scrollbar { display: none !important; }
+    html, body { overflow: visible !important; scroll-snap-type: none !important; margin: 0 !important; padding: 0 !important; }
+    body { background-color: var(--bg) !important; -webkit-print-color-adjust: exact; color-adjust: exact; }
+    .slide-wrap { width: 100vw !important; height: 100vh !important; scroll-snap-align: none !important; page-break-after: always !important; page-break-inside: avoid !important; }
+    .slide-wrap:last-child { page-break-after: auto !important; }
+    .slide-wrap.active .s>*, .slide-wrap .s>* { opacity: 1 !important; transform: none !important; transition: none !important; }
+    #slide-counter, #progress { display: none !important; }
+  }
+
+  </style>
+</head>
+<body>
+  <div id="progress" style="width: 9.09091%;"></div>
+  <div id="slide-counter">1 / 11</div>
+  <div class="slide-wrap active">
+    <section style="background: var(--bg); color: var(--t1); font-family: var(--sans); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 5vh 5vw; position: relative; overflow: hidden;">
+  <!-- Background Decorative Elements -->
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, var(--bg) 0%, var(--bg2) 100%); z-index: -1;"></div>
+  <div style="position: absolute; top: -10vh; right: -10vw; width: 40vw; height: 40vw; background: radial-gradient(circle, var(--accent1-dim) 0%, transparent 70%); opacity: 0.3; filter: blur(50px);"></div>
+  
+  <div class="s cx" style="width: 100%; max-width: 80rem; z-index: 1;">
+    <!-- Vought Badge -->
+    <div style="display: inline-flex; align-items: center; gap: 1rem; background: var(--surface); padding: 0.8rem 1.5rem; border-radius: 50px; border: 1px solid var(--accent2); margin-bottom: 5vh; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+      <i class="fas fa-shield-alt" style="color: var(--accent2); font-size: clamp(1rem, 2vw, 1.5rem);"></i>
+      <span style="font-family: var(--mono); font-weight: 700; letter-spacing: 0.2rem; color: var(--accent2); font-size: clamp(0.7rem, 1.5vw, 0.9rem); text-transform: uppercase;">Vought International Internal</span>
+    </div>
+
+    <!-- Main Title Group -->
+    <h1 style="font-family: var(--serif); font-size: clamp(2.5rem, 10vw, 7rem); line-height: 1; margin: 0; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; color: var(--t1);">
+      The <span style="color: var(--accent1);">Homelander</span>
+    </h1>
+    <h2 style="font-family: var(--sans); font-size: clamp(1.1rem, 3vw, 2.5rem); font-weight: 300; margin-top: 2vh; color: var(--accent2); opacity: 0.9;">
+      Comprehensive Psychological Profile: Subject HL-01
+    </h2>
+
+    <!-- Divider -->
+    <div style="width: 6rem; height: 4px; background: var(--accent2); margin: 6vh 0; border-radius: 2px;"></div>
+
+    <!-- Status Cards -->
+    <div style="display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; width: 100%;">
+      <div style="background: var(--surface); padding: 1.5rem 2.5rem; border-left: 4px solid var(--accent1); text-align: left; flex: 1 1 18rem; max-width: 25rem;">
+        <div style="font-family: var(--mono); font-size: 0.8rem; text-transform: uppercase; color: var(--accent1); margin-bottom: 0.5rem;">Security Status</div>
+        <div style="font-size: clamp(1rem, 2vw, 1.3rem); font-weight: 600; color: var(--t1);">CLASSIFIED: LEVEL 7</div>
+      </div>
+      <div style="background: var(--surface); padding: 1.5rem 2.5rem; border-left: 4px solid var(--accent2); text-align: left; flex: 1 1 18rem; max-width: 25rem;">
+        <div style="font-family: var(--mono); font-size: 0.8rem; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.5rem;">Primary Objective</div>
+        <div style="font-size: clamp(1rem, 2vw, 1.3rem); font-weight: 600; color: var(--t1);">RISK ASSESSMENT</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confidential Stamp -->
+  <div style="position: absolute; bottom: 5vh; right: 5vw; transform: rotate(-15deg); border: 4px solid var(--accent1); color: var(--accent1); padding: 0.5rem 1.5rem; font-family: var(--mono); font-weight: 900; font-size: clamp(1rem, 3vw, 1.8rem); opacity: 0.6; text-transform: uppercase; pointer-events: none;">
+    Confidential
+  </div>
+  <aside class="notes">Welcome to this internal briefing. We are analyzing Subject HL-01, known to the public as Homelander, focusing on his psychological evolution and recent behavioral shifts. This is a Level 7 security clearance document. Do not disseminate.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background: var(--bg2); color: var(--t1); font-family: var(--sans); padding: 5vh 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+  <div class="s" style="width: 100%; max-width: 90vw; margin: 0 auto;">
+    <!-- Section Label -->
+    <div style="font-family: var(--mono); color: var(--accent3); font-size: clamp(0.8rem, 1.5vw, 1rem); margin-bottom: 2vh; text-transform: uppercase; letter-spacing: 0.3em; font-weight: 700;">
+      Executive Summary
+    </div>
+    
+    <h2 style="font-family: var(--serif); font-size: clamp(2rem, 6vw, 4.5rem); margin-bottom: 6vh; line-height: 1.1; font-weight: 800;">
+      The Perfect <span style="color: var(--accent2);">Product</span>
+    </h2>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); gap: 3vw; align-items: stretch; width: 100%;">
+      <!-- Card 1 -->
+      <div style="background: var(--surface); padding: 5vh 2.5vw; border-radius: 8px; position: relative; overflow: hidden; display: flex; flex-direction: column; border-top: 6px solid var(--accent3); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+        <i class="fas fa-microchip" style="font-size: clamp(2rem, 4vw, 3rem); color: var(--accent3); margin-bottom: 3vh; opacity: 0.5;"></i>
+        <h3 style="font-size: clamp(1.4rem, 2.5vw, 1.8rem); margin-bottom: 2vh; color: var(--accent2);">Engineered Excellence</h3>
+        <p style="font-size: clamp(0.9rem, 1.2vw, 1.1rem); line-height: 1.6; color: var(--t2); margin-bottom: 3vh;">
+          Not born, but built. Homelander represents the pinnacle of Vought's chemical engineering, achieving physical capabilities that exceed all prior benchmarks by a factor of 400%.
+        </p>
+        <div style="margin-top: auto; font-family: var(--mono); font-size: 0.8rem; color: var(--accent3);">BIO-METRIC: OPTIMAL</div>
+      </div>
+
+      <!-- Card 2 -->
+      <div style="background: var(--surface); padding: 5vh 2.5vw; border-radius: 8px; position: relative; overflow: hidden; display: flex; flex-direction: column; border-top: 6px solid var(--accent2); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+        <i class="fas fa-chart-line" style="font-size: clamp(2rem, 4vw, 3rem); color: var(--accent2); margin-bottom: 3vh; opacity: 0.5;"></i>
+        <h3 style="font-size: clamp(1.4rem, 2.5vw, 1.8rem); margin-bottom: 2vh; color: var(--accent2);">Unrivaled Marketability</h3>
+        <p style="font-size: clamp(0.9rem, 1.2vw, 1.1rem); line-height: 1.6; color: var(--t2); margin-bottom: 3vh;">
+          A global Q-score that remains unprecedented. He is the face of American Exceptionalism, driving 68% of Vought's annual consumer revenue across all demographics.
+        </p>
+        <div style="margin-top: auto; font-family: var(--mono); font-size: 0.8rem; color: var(--accent2);">VALUATION: TRILLION+</div>
+      </div>
+
+      <!-- Card 3 -->
+      <div style="background: var(--surface); padding: 5vh 2.5vw; border-radius: 8px; position: relative; overflow: hidden; display: flex; flex-direction: column; border-top: 6px solid var(--accent1); box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+        <i class="fas fa-exclamation-triangle" style="font-size: clamp(2rem, 4vw, 3rem); color: var(--accent1); margin-bottom: 3vh; opacity: 0.5;"></i>
+        <h3 style="font-size: clamp(1.4rem, 2.5vw, 1.8rem); margin-bottom: 2vh; color: var(--accent1);">Stability Concerns</h3>
+        <p style="font-size: clamp(0.9rem, 1.2vw, 1.1rem); line-height: 1.6; color: var(--t2); margin-bottom: 3vh;">
+          Internal monitoring suggests increasing emotional volatility. The subject's dependency on public approval has created a fragile psychological framework with high failure risk.
+        </p>
+        <div style="margin-top: auto; font-family: var(--mono); font-size: 0.8rem; color: var(--accent1);">THREAT LEVEL: CRITICAL</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">To the world, he is a god. To Vought, he is our most valuable asset. This summary outlines the duality of his existence as a hero and a manufactured product. We must balance his immense market value against the growing threat of psychological collapse.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background: var(--bg); color: var(--t1); font-family: var(--sans); padding: 5vh 5vw; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
+  <!-- Lab Grid Effect -->
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(var(--accent3-dim) 1px, transparent 1px); background-size: 5vw 5vh; opacity: 0.1; z-index: 0;"></div>
+  
+  <div class="s" style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 5vw; z-index: 1; align-items: center; justify-content: center; width: 100%; max-width: 90vw; margin: 0 auto;">
+    
+    <!-- Visual Block (Left) -->
+    <div style="flex: 1 1 25rem; position: relative; height: clamp(20rem, 60vh, 40rem); display: flex; align-items: center; justify-content: center; background: var(--surface); border-radius: 12px; box-shadow: inset 0 0 100px rgba(0,0,0,0.5), 0 10px 40px rgba(0,0,0,0.3); border: 2px solid var(--accent3-dim);">
+      <div style="text-align: center; padding: 2rem;">
+        <i class="fas fa-flask" style="font-size: clamp(4rem, 8vw, 7rem); color: var(--accent3); margin-bottom: 2rem;"></i>
+        <div style="font-family: var(--mono); color: var(--accent3); font-size: 1.1rem; letter-spacing: 0.3em; margin-bottom: 1rem;">FACILITY 04</div>
+        <div style="font-size: 0.9rem; color: var(--t2); opacity: 0.7;">CONTROLLED DEVELOPMENT ENVIRONMENT</div>
+        <div style="margin-top: 3rem; background: var(--accent1-dim); color: var(--t1); padding: 1rem 2rem; border-radius: 4px; border: 1px solid var(--accent1); display: inline-block; font-weight: 700; text-transform: uppercase; font-size: 0.8rem;">Classified Origins</div>
+      </div>
+      <!-- Labeling Overlays -->
+      <div style="position: absolute; top: 1.5rem; left: 1.5rem; font-family: var(--mono); font-size: 0.7rem; color: var(--accent3);">SUBJECT: HL-01</div>
+      <div style="position: absolute; bottom: 1.5rem; right: 1.5rem; font-family: var(--mono); font-size: 0.7rem; color: var(--accent3);">D-SCALE: MAX</div>
+    </div>
+
+    <!-- Content Block (Right) -->
+    <div style="flex: 1 1 30rem; display: flex; flex-direction: column;">
+      <div style="font-family: var(--mono); color: var(--accent1); font-size: 0.9rem; margin-bottom: 2vh; text-transform: uppercase; letter-spacing: 0.3em; font-weight: 700;">
+        Origins
+      </div>
+      <h2 style="font-family: var(--serif); font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 4vh; line-height: 1.1; font-weight: 800; color: var(--accent2);">Laboratory Genesis</h2>
+      
+      <div style="display: flex; flex-direction: column; gap: 4vh;">
+        <div style="display: flex; gap: 2rem; align-items: flex-start;">
+          <div style="width: 4rem; height: 4rem; background: var(--accent1); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.5rem; box-shadow: 0 0 20px rgba(226,75,74,0.3); color: white;">
+            <i class="fas fa-microscope"></i>
+          </div>
+          <div>
+            <h4 style="font-size: clamp(1.2rem, 2vw, 1.6rem); margin-bottom: 0.5rem; color: var(--t1);">Sterile Development</h4>
+            <p style="font-size: clamp(0.9rem, 1.2vw, 1.1rem); line-height: 1.6; color: var(--t2);">Years of observation in Lab 4 with zero human contact outside of medical and scientific staff. This lack of primary caregivers created a permanent void in social and emotional intelligence.</p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 2rem; align-items: flex-start;">
+          <div style="width: 4rem; height: 4rem; background: var(--accent2); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.5rem; box-shadow: 0 0 20px rgba(250,199,117,0.3); color: var(--bg);">
+            <i class="fas fa-baby"></i>
+          </div>
+          <div>
+            <h4 style="font-size: clamp(1.2rem, 2vw, 1.6rem); margin-bottom: 0.5rem; color: var(--t1);">Stunted Emotional Growth</h4>
+            <p style="font-size: clamp(0.9rem, 1.2vw, 1.1rem); line-height: 1.6; color: var(--t2);">The subject developed power as a substitute for connection. His childhood was defined by testing cycles, leading to a worldview where survival is linked only to performance and supremacy.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <aside class="notes">Homelander's upbringing in a controlled lab environment is the root of his current instability. Without traditional maternal or paternal figures, his emotional development was stunted in favor of raw power. He was raised as a specimen, not a person.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background: var(--bg2); color: var(--t1); font-family: var(--sans); padding: 5vh 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+  <div class="s" style="width: 100%; max-width: 90vw; margin: 0 auto; text-align: center;">
+    <!-- Section Label -->
+    <div style="font-family: var(--mono); color: var(--accent2); font-size: clamp(0.8rem, 1.5vw, 1rem); margin-bottom: 2vh; text-transform: uppercase; letter-spacing: 0.3em; font-weight: 700;">
+      Psychological Framework
+    </div>
+    
+    <h2 style="font-family: var(--serif); font-size: clamp(2rem, 6vw, 4.5rem); margin-bottom: 8vh; line-height: 1.1; font-weight: 800;">
+      The <span style="color: var(--accent1);">Narcissistic</span> Core
+    </h2>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 3vw; align-items: start; width: 100%;">
+      
+      <!-- Psychology Card 1 -->
+      <div style="background: var(--surface); padding: 5vh 2.5vw; border-radius: 12px; position: relative; border-bottom: 8px solid var(--accent1); box-shadow: 0 15px 40px rgba(0,0,0,0.4); text-align: left; display: flex; flex-direction: column; height: 100%;">
+        <div style="width: clamp(4rem, 8vw, 5.5rem); height: clamp(4rem, 8vw, 5.5rem); background: var(--accent1-dim); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 3vh; border: 2px solid var(--accent1);">
+          <i class="fas fa-bullhorn" style="font-size: clamp(1.5rem, 3vw, 2.5rem); color: var(--t1);"></i>
+        </div>
+        <h3 style="font-size: clamp(1.3rem, 2.5vw, 1.8rem); margin-bottom: 2vh; color: var(--accent2);">Chronic Adulation Need</h3>
+        <p style="font-size: clamp(0.9rem, 1.2vw, 1.1rem); line-height: 1.6; color: var(--t2);">
+          Subject's existence is fueled by the continuous feedback loop of public worship. Without it, he experiences acute psychic distress similar to substance withdrawal.
+        </p>
+      </div>
+
+      <!-- Psychology Card 2 -->
+      <div style="background: var(--surface); padding: 5vh 2.5vw; border-radius: 12px; position: relative; border-bottom: 8px solid var(--accent2); box-shadow: 0 15px 40px rgba(0,0,0,0.4); text-align: left; display: flex; flex-direction: column; height: 100%;">
+        <div style="width: clamp(4rem, 8vw, 5.5rem); height: clamp(4rem, 8vw, 5.5rem); background: var(--accent2-dim); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 3vh; border: 2px solid var(--accent2);">
+          <i class="fas fa-heart-crack" style="font-size: clamp(1.5rem, 3vw, 2.5rem); color: var(--t1);"></i>
+        </div>
+        <h3 style="font-size: clamp(1.3rem, 2.5vw, 1.8rem); margin-bottom: 2vh; color: var(--accent2);">Fragility of Ego</h3>
+        <p style="font-size: clamp(0.9rem, 1.2vw, 1.1rem); line-height: 1.6; color: var(--t2);">
+          Despite his physical invincibility, his ego is paper-thin. A single critical remark from a civilian can trigger a violent outburst as his self-worth is entirely externalized.
+        </p>
+      </div>
+
+      <!-- Psychology Card 3 -->
+      <div style="background: var(--surface); padding: 5vh 2.5vw; border-radius: 12px; position: relative; border-bottom: 8px solid var(--accent3); box-shadow: 0 15px 40px rgba(0,0,0,0.4); text-align: left; display: flex; flex-direction: column; height: 100%;">
+        <div style="width: clamp(4rem, 8vw, 5.5rem); height: clamp(4rem, 8vw, 5.5rem); background: var(--accent3-dim); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 3vh; border: 2px solid var(--accent3);">
+          <i class="fas fa-eye-slash" style="font-size: clamp(1.5rem, 3vw, 2.5rem); color: var(--t1);"></i>
+        </div>
+        <h3 style="font-size: clamp(1.3rem, 2.5vw, 1.8rem); margin-bottom: 2vh; color: var(--accent2);">Empathy Deficit</h3>
+        <p style="font-size: clamp(0.9rem, 1.2vw, 1.1rem); line-height: 1.6; color: var(--t2);">
+          Total lack of genuine empathy spectrum. He views other beings as tools, fans, or obstacles—never as individuals with inherent rights or value.
+        </p>
+      </div>
+
+    </div>
+  </div>
+  <aside class="notes">Analysis shows a clinical level of narcissism. He doesn't just want love; he requires absolute worship to maintain his sense of self. Any perceived slight—no matter how small—is viewed as a total existential threat, making him the most dangerous glass-cannon ego in history.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background: var(--bg); color: var(--t1); font-family: var(--sans); padding: 5vh 5vw; display: flex; flex-direction: column; justify-content: center; position: relative;">
+  <div class="s" style="width: 100%; max-width: 90vw; margin: 0 auto;">
+    
+    <!-- Header -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 6vh; border-bottom: 2px solid var(--accent3-dim); padding-bottom: 2vh;">
+      <div>
+        <div style="font-family: var(--mono); color: var(--accent3); font-size: 0.9rem; margin-bottom: 1vh; text-transform: uppercase; letter-spacing: 0.3em; font-weight: 700;">Interpersonal Dynamics</div>
+        <h2 style="font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 4rem); line-height: 1.1; font-weight: 800; color: var(--accent2);">The <span style="color: var(--accent1);">Oedipal</span> Anchor</h2>
+      </div>
+      <div style="font-family: var(--mono); font-size: 0.8rem; color: var(--t2); opacity: 0.6; text-align: right; display: none; @media (min-width: 768px) { display: block; }">
+        RELATIONSHIP CLASSIFICATION: TOXIC/DEPENDENT
+      </div>
+    </div>
+
+    <!-- Mapping Layout -->
+    <div style="display: flex; flex-wrap: wrap; gap: 3vw; justify-content: center; align-items: center; min-height: 40vh;">
+      
+      <!-- Subject Card -->
+      <div style="flex: 1 1 20rem; background: var(--surface); padding: 4vh 2.5vw; border-radius: 12px; border: 2px solid var(--accent1); box-shadow: 0 10px 40px rgba(226,75,74,0.2); position: relative; text-align: center;">
+        <div style="font-family: var(--mono); font-size: 0.7rem; color: var(--accent1); margin-bottom: 2vh;">CENTRAL SUBJECT</div>
+        <i class="fas fa-user-shield" style="font-size: clamp(2.5rem, 5vw, 4rem); color: var(--accent1); margin-bottom: 2vh;"></i>
+        <h3 style="font-size: clamp(1.5rem, 3vw, 2.2rem); margin-bottom: 1vh; color: var(--t1);">HOMELANDER</h3>
+        <p style="font-size: 0.9rem; color: var(--t2);">Primary Node of Influence</p>
+      </div>
+
+      <!-- Connector -->
+      <div style="flex: 0 0 5vw; display: flex; align-items: center; justify-content: center; min-width: 3rem;">
+        <div style="width: 100%; height: 4px; background: linear-gradient(90deg, var(--accent1), var(--accent3)); position: relative;">
+          <i class="fas fa-arrows-left-right" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg); padding: 0.5rem; color: var(--accent2); font-size: 1.2rem;"></i>
+        </div>
+      </div>
+
+      <!-- Relational Card -->
+      <div style="flex: 1 1 20rem; background: var(--surface); padding: 4vh 2.5vw; border-radius: 12px; border: 2px solid var(--accent3); box-shadow: 0 10px 40px rgba(55,138,221,0.2); text-align: center;">
+        <div style="font-family: var(--mono); font-size: 0.7rem; color: var(--accent3); margin-bottom: 2vh;">SURROGATE NODE</div>
+        <i class="fas fa-female" style="font-size: clamp(2.5rem, 5vw, 4rem); color: var(--accent3); margin-bottom: 2vh;"></i>
+        <h3 style="font-size: clamp(1.5rem, 3vw, 2.2rem); margin-bottom: 1vh; color: var(--t1);">MADELYN STILLWELL</h3>
+        <p style="font-size: 0.9rem; color: var(--t2);">Maternal Proxy &amp; Controller</p>
+      </div>
+
+    </div>
+
+    <!-- Details Box -->
+    <div style="margin-top: 5vh; background: rgba(255,255,255,0.03); padding: 3vh 2.5vw; border-radius: 8px; border-left: 6px solid var(--accent2); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: 2rem;">
+      <div>
+        <h4 style="color: var(--accent2); font-size: 1rem; margin-bottom: 0.5rem; text-transform: uppercase; font-weight: 700;">Maternal Search</h4>
+        <p style="font-size: 0.9rem; line-height: 1.5; color: var(--t2);">The subject’s primary motivation is a desperate, failed attempt to recreate a mother-child bond through high-ranking Vought executives.</p>
+      </div>
+      <div>
+        <h4 style="color: var(--accent2); font-size: 1rem; margin-bottom: 0.5rem; text-transform: uppercase; font-weight: 700;">The Genetic Legacy</h4>
+        <p style="font-size: 0.9rem; line-height: 1.5; color: var(--t2);">Shift towards patriarchal dominance through biological offspring (Ryan). The search for a mirror rather than a connection.</p>
+      </div>
+      <div>
+        <h4 style="color: var(--accent2); font-size: 1rem; margin-bottom: 0.5rem; text-transform: uppercase; font-weight: 700;">Dominance Loop</h4>
+        <p style="font-size: 0.9rem; line-height: 1.5; color: var(--t2);">Any connection that poses a threat to his supremacy is eventually neutralized, perpetuating his cycle of total isolation.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">His relationship with Madelyn Stillwell highlights a deep-seated need for a maternal figure, which he paradoxically destroys when it conflicts with his need for dominance. He doesn't want peers; he wants caregivers he can control, and children who mirror his own divinity.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background: var(--bg2); color: var(--text); font-family: var(--sans); padding: 5vh 5vw; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
+  
+  <div class="s" style="width: 100%; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+    
+    <!-- Section Header -->
+    <div style="font-family: var(--mono); color: var(--accent1); font-size: 1.1rem; margin-bottom: 2vh; text-transform: uppercase; letter-spacing: 0.4em; font-weight: 900;">Identity Conflict</div>
+    <h2 style="font-family: var(--serif); font-size: clamp(3rem, 6vw, 5rem); margin-bottom: 10vh; line-height: 1.1; font-weight: 800; text-align: center;">
+      God <span style="color: var(--accent1);">vs.</span> Human
+    </h2>
+
+    <!-- Contrast Layout -->
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 4vw; width: 100%; justify-content: center; align-items: stretch;">
+      
+      <!-- GOD PERSPECTIVE -->
+      <div style="flex: 1 1 400px; background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%); padding: 4rem 3rem; border-radius: 12px; border: 3px solid var(--accent2); box-shadow: 0 30px 60px rgba(0,0,0,0.5); text-align: center; position: relative;">
+        <i class="fas fa-crown" style="font-size: 5rem; color: var(--accent2); margin-bottom: 3rem;"></i>
+        <h3 style="font-size: 2.2rem; margin-bottom: 2rem; color: var(--text);">The Superior Being</h3>
+        <p style="font-size: 1.2rem; line-height: 1.8; color: var(--text2); margin-bottom: 3rem;">
+          Views humans as "muddies"—insects to be tolerated, not respected. He identifies as a distinct biological class that is naturally entitled to absolute rule.
+        </p>
+        <div style="font-family: var(--mono); font-size: 1rem; color: var(--accent2); font-weight: 700; border-top: 1px solid var(--accent2-dim); padding-top: 2rem; text-transform: uppercase;">Perceived Status: DIVINE</div>
+      </div>
+
+      <!-- HUMAN REALITY -->
+      <div style="flex: 1 1 400px; background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%); padding: 4rem 3rem; border-radius: 12px; border: 3px solid var(--accent1); box-shadow: 0 30px 60px rgba(0,0,0,0.5); text-align: center; position: relative;">
+        <i class="fas fa-heart-pulse" style="font-size: 5rem; color: var(--accent1); margin-bottom: 3rem;"></i>
+        <h3 style="font-size: 2.2rem; margin-bottom: 2rem; color: var(--text);">The Fragile Human</h3>
+        <p style="font-size: 1.2rem; line-height: 1.8; color: var(--text2); margin-bottom: 3rem;">
+          Despite his disgust for humanity, his entire identity is parasitic on human validation. He is trapped in a loop of needing the approval of those he deems inferior.
+        </p>
+        <div style="font-family: var(--mono); font-size: 1rem; color: var(--accent1); font-weight: 700; border-top: 1px solid var(--accent1-dim); padding-top: 2rem; text-transform: uppercase;">Actual State: BROKEN</div>
+      </div>
+
+    </div>
+
+    <!-- Central Slogan -->
+    <div style="margin-top: 8vh; padding: 2rem 5rem; border: 2px dashed var(--accent3); border-radius: 4px; font-family: var(--serif); font-style: italic; font-size: 1.5rem; color: var(--accent3); max-width: 800px; text-align: center;">
+      "I can do whatever I want." — The ultimate mantra of a god who lacks the emotional maturity to be human.
+    </div>
+
+  </div>
+  <aside class="notes">Homelander views humans as 'muddies' or insects, yet his entire identity is built on their approval. This dissonance—being a god who needs the love of ants—is the primary driver of his violent outbursts. He hates himself for being human enough to need them.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background: var(--bg); color: var(--text); font-family: var(--sans); padding: 5vh 5vw; display: flex; flex-direction: column; justify-content: center; position: relative;">
+  
+  <div class="s" style="width: 100%; max-width: 1400px; margin: 0 auto;">
+    
+    <!-- Header -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 6vh; border-bottom: 3px solid var(--accent1); padding-bottom: 2vh;">
+      <div>
+        <div style="font-family: var(--mono); color: var(--accent1); font-size: 1rem; margin-bottom: 1vh; text-transform: uppercase; letter-spacing: 0.3em; font-weight: 700;">Leadership Style</div>
+        <h2 style="font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 1.1; font-weight: 800; color: var(--text);">Tyranny in <span style="color: var(--accent3);">The Seven</span></h2>
+      </div>
+      <div style="font-family: var(--mono); font-size: 0.9rem; color: var(--text2); opacity: 0.6; text-align: right;">
+        STATUS: MONARCHIC SHIFT
+      </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 4vw; width: 100%; justify-content: center; align-items: center; min-height: 60vh;">
+      
+      <!-- Leadership Model (Left) -->
+      <div style="flex: 1 1 500px; display: flex; flex-direction: column; gap: 3rem;">
+        
+        <div style="background: var(--surface2); padding: 2.5rem; border-radius: 8px; border-left: 8px solid var(--accent1); display: flex; gap: 2.5rem; align-items: center; box-shadow: 10px 10px 40px rgba(0,0,0,0.3);">
+          <i class="fas fa-eye" style="font-size: 3rem; color: var(--accent1);"></i>
+          <div>
+            <h3 style="font-size: 1.8rem; margin-bottom: 0.8rem; color: var(--text);">Fear-Based Governance</h3>
+            <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text2);">Replacement of trust with absolute terror. Team members are monitored via physical intimidation and psychological manipulation.</p>
+          </div>
+        </div>
+
+        <div style="background: var(--surface2); padding: 2.5rem; border-radius: 8px; border-left: 8px solid var(--accent2); display: flex; gap: 2.5rem; align-items: center; box-shadow: 10px 10px 40px rgba(0,0,0,0.3);">
+          <i class="fas fa-chess-pawn" style="font-size: 3rem; color: var(--accent2);"></i>
+          <div>
+            <h3 style="font-size: 1.8rem; margin-bottom: 0.8rem; color: var(--text);">The Seven as Props</h3>
+            <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text2);">Other heroes are treated as set dressing. Their primary function is to enhance his image or suffer for his amusement.</p>
+          </div>
+        </div>
+
+        <div style="background: var(--surface2); padding: 2.5rem; border-radius: 8px; border-left: 8px solid var(--accent3); display: flex; gap: 2.5rem; align-items: center; box-shadow: 10px 10px 40px rgba(0,0,0,0.3);">
+          <i class="fas fa-gavel" style="font-size: 3rem; color: var(--accent3);"></i>
+          <div>
+            <h3 style="font-size: 1.8rem; margin-bottom: 0.8rem; color: var(--text);">Absolute Sovereignty</h3>
+            <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text2);">Total bypass of Vought corporate chain of command. He is the law, the judge, and the executioner within the group.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Hierarchy Visual (Right) -->
+      <div style="flex: 1 1 350px; text-align: center; background: rgba(255,255,255,0.05); padding: 4rem 2rem; border-radius: 50%; border: 2px dashed var(--accent1-dim); position: relative; max-width: 500px; margin: 0 auto;">
+        <div style="position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); background: var(--accent1); color: var(--text); padding: 1.5rem 3rem; border-radius: 4px; font-weight: 800; font-size: 2rem; box-shadow: 0 0 40px rgba(226,75,74,0.4); text-transform: uppercase;">
+          KING
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 2rem; margin-top: 2rem;">
+          <div style="font-family: var(--mono); color: var(--accent1); font-size: 1.2rem; opacity: 0.8;">EVERYONE ELSE</div>
+          <div style="display: flex; justify-content: center; gap: 1.5rem; opacity: 0.5; color: var(--text2); font-size: 2rem;">
+            <i class="fas fa-user"></i>
+            <i class="fas fa-user"></i>
+            <i class="fas fa-user"></i>
+            <i class="fas fa-user"></i>
+            <i class="fas fa-user"></i>
+            <i class="fas fa-user"></i>
+          </div>
+          <div style="width: 80%; height: 2px; background: var(--accent1-dim); margin: 0 auto;"></div>
+          <div style="font-family: var(--mono); color: var(--accent1); font-size: 1rem; opacity: 0.6; text-transform: uppercase; font-weight: 700;">SUBJECTS / TOOLS</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <aside class="notes">His leadership of the Seven has shifted from a corporate team dynamic to an absolute monarchy. He treats other members as extensions of his own will rather than peers. This environment of terror has led to several high-profile desertions and a total collapse of internal morale.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background: var(--bg2); color: var(--text); font-family: var(--sans); padding: 5vh 5vw; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
+  
+  <div class="s" style="width: 100%; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+    
+    <!-- Section Label -->
+    <div style="font-family: var(--mono); color: var(--accent1); font-size: 1.1rem; margin-bottom: 2vh; text-transform: uppercase; letter-spacing: 0.4em; font-weight: 900;">Evolutionary Timeline</div>
+    <h2 style="font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 8vh; line-height: 1.1; font-weight: 800; text-align: center;">
+      Path to <span style="color: var(--accent1);">Radicalization</span>
+    </h2>
+
+    <!-- Timeline Wrapper -->
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; gap: 2rem; justify-content: center; position: relative; padding-top: 5vh;">
+      
+      <!-- Central Line (Horizontal) -->
+      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: var(--accent3-dim); opacity: 0.3; display: none; /* Hidden on mobile by default but logic for visual line below */"></div>
+
+      <!-- Timeline Event 1 -->
+      <div style="flex: 1 1 350px; background: var(--surface); padding: 3rem 2rem; border-radius: 12px; border-top: 8px solid var(--accent3); box-shadow: 0 20px 50px rgba(0,0,0,0.4); position: relative;">
+        <div style="position: absolute; top: -3rem; left: 50%; transform: translateX(-50%); width: 4.5rem; height: 4.5rem; background: var(--accent3); border-radius: 50%; border: 4px solid var(--bg2); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.2rem;">S2</div>
+        <h3 style="font-size: 1.6rem; margin-top: 1rem; margin-bottom: 1.5rem; color: var(--accent2); text-align: center;">The Stormfront Catalyst</h3>
+        <p style="font-size: 1rem; line-height: 1.6; color: var(--text2); text-align: center;">Introduction of supremacist ideologies. Subject begins to view his physical superiority through a political lens, moving beyond corporate interests.</p>
+      </div>
+
+      <!-- Timeline Event 2 -->
+      <div style="flex: 1 1 350px; background: var(--surface); padding: 3rem 2rem; border-radius: 12px; border-top: 8px solid var(--accent2); box-shadow: 0 20px 50px rgba(0,0,0,0.4); position: relative;">
+        <div style="position: absolute; top: -3rem; left: 50%; transform: translateX(-50%); width: 4.5rem; height: 4.5rem; background: var(--accent2); border-radius: 50%; border: 4px solid var(--bg2); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.2rem; color: var(--bg);">S3</div>
+        <h3 style="font-size: 1.6rem; margin-top: 1rem; margin-bottom: 1.5rem; color: var(--accent2); text-align: center;">Public Mask Slippage</h3>
+        <p style="font-size: 1rem; line-height: 1.6; color: var(--text2); text-align: center;">The infamous "I am better than you" speech. Subject tests the limits of public acceptability, finding that his most aggressive self is his most popular.</p>
+      </div>
+
+      <!-- Timeline Event 3 -->
+      <div style="flex: 1 1 350px; background: var(--surface); padding: 3rem 2rem; border-radius: 12px; border-top: 8px solid var(--accent1); box-shadow: 0 20px 50px rgba(0,0,0,0.4); position: relative;">
+        <div style="position: absolute; top: -3rem; left: 50%; transform: translateX(-50%); width: 4.5rem; height: 4.5rem; background: var(--accent1); border-radius: 50%; border: 4px solid var(--bg2); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.2rem;">S4</div>
+        <h3 style="font-size: 1.6rem; margin-top: 1rem; margin-bottom: 1.5rem; color: var(--accent2); text-align: center;">Overt Fascist Rhetoric</h3>
+        <p style="font-size: 1rem; line-height: 1.6; color: var(--text2); text-align: center;">Transition to political leader. Subject no longer seeks to protect the status quo, but to dismantle it in favor of a "natural order" based on power.</p>
+      </div>
+
+    </div>
+
+    <div style="margin-top: 10vh; font-family: var(--mono); color: var(--accent1); font-size: 1.5rem; letter-spacing: 0.2em; font-weight: 800; border: 4px solid var(--accent1); padding: 1.5rem 3.5rem; text-transform: uppercase; background: rgba(226,75,74,0.1);">
+      Trajectory: UNCONTROLLABLE
+    </div>
+
+  </div>
+  <aside class="notes">Recent seasons show a shift from corporate-friendly heroism to overt radicalization. The influence of Stormfront accelerated his belief in his own natural right to rule. The most concerning data point is that his popularity increases the more unhinged he becomes. We are losing the ability to mask his true nature.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background: var(--bg); color: var(--text); font-family: var(--sans); padding: 5vh 5vw; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
+  
+  <div class="s" style="width: 100%; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+    
+    <!-- Section Label -->
+    <div style="font-family: var(--mono); color: var(--accent1); font-size: 1.1rem; margin-bottom: 2vh; text-transform: uppercase; letter-spacing: 0.4em; font-weight: 900;">Risk Analysis</div>
+    <h2 style="font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 10vh; line-height: 1.1; font-weight: 800; text-align: center; color: var(--accent2);">Behavioral <span style="color: var(--accent1);">Redlines</span></h2>
+
+    <div style="width: 100%; display: flex; flex-direction: column; gap: 6vh; max-width: 1000px;">
+      
+      <!-- Metric 1 -->
+      <div style="width: 100%;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
+          <h3 style="font-size: 1.8rem; margin: 0; color: var(--text);">Escalation of Lethal Force</h3>
+          <span style="font-family: var(--mono); font-size: 1.5rem; color: var(--accent1); font-weight: 900;">+400% YOY</span>
+        </div>
+        <div style="width: 100%; height: 2.5rem; background: var(--surface); border-radius: 4px; padding: 0.5rem; border: 1px solid var(--accent1-dim); overflow: hidden;">
+          <div style="width: 92%; height: 100%; background: linear-gradient(90deg, var(--accent3), var(--accent1)); border-radius: 2px; box-shadow: 0 0 20px rgba(226,75,74,0.5);"></div>
+        </div>
+        <div style="margin-top: 1rem; font-family: var(--mono); font-size: 0.9rem; color: var(--text2); opacity: 0.6; display: flex; justify-content: space-between;">
+          <span>BASELINE: SEASON 1</span>
+          <span>CURRENT: EXTREME RISK</span>
+        </div>
+      </div>
+
+      <!-- Metric 2 -->
+      <div style="width: 100%;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem;">
+          <h3 style="font-size: 1.8rem; margin: 0; color: var(--text);">Disregard for Collateral</h3>
+          <span style="font-family: var(--mono); font-size: 1.5rem; color: var(--accent2); font-weight: 900;">TOTAL</span>
+        </div>
+        <div style="width: 100%; height: 2.5rem; background: var(--surface); border-radius: 4px; padding: 0.5rem; border: 1px solid var(--accent2-dim); overflow: hidden;">
+          <div style="width: 98%; height: 100%; background: linear-gradient(90deg, var(--accent3), var(--accent2)); border-radius: 2px; box-shadow: 0 0 20px rgba(250,199,117,0.3);"></div>
+        </div>
+        <div style="margin-top: 1rem; font-family: var(--mono); font-size: 0.9rem; color: var(--text2); opacity: 0.6; display: flex; justify-content: space-between;">
+          <span>VOUGHT PROTOCOL: IGNORED</span>
+          <span>STATUS: CRITICAL FAILURE</span>
+        </div>
+      </div>
+
+      <!-- Warning Badges -->
+      <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 4vh; justify-content: center;">
+        <div style="background: var(--accent1); color: var(--text); padding: 0.8rem 1.5rem; font-family: var(--mono); font-weight: 900; font-size: 1rem; text-transform: uppercase; border-radius: 4px; box-shadow: 0 5px 20px rgba(226,75,74,0.4); display: flex; align-items: center; gap: 1rem;">
+          <i class="fas fa-exclamation-triangle"></i> BYPASS PROTOCOL 24
+        </div>
+        <div style="background: var(--surface); color: var(--accent2); border: 2px solid var(--accent2); padding: 0.8rem 1.5rem; font-family: var(--mono); font-weight: 900; font-size: 1rem; text-transform: uppercase; border-radius: 4px; display: flex; align-items: center; gap: 1rem;">
+          <i class="fas fa-biohazard"></i> BIO-STABILITY: UNSTABLE
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <aside class="notes">We are tracking a 400% increase in unsanctioned lethal incidents. The subject is no longer responding to traditional PR mitigation or corporate threats. He has effectively bypasssed all Vought containment protocols and is acting as an independent, nuclear-level hazard.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background: var(--bg2); color: var(--text); font-family: var(--sans); padding: 5vh 5vw; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
+  
+  <div class="s" style="width: 100%; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+    
+    <!-- Section Label -->
+    <div style="font-family: var(--mono); color: var(--accent3); font-size: 1.1rem; margin-bottom: 2vh; text-transform: uppercase; letter-spacing: 0.4em; font-weight: 900;">Public Perception</div>
+    <h2 style="font-family: var(--serif); font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 10vh; line-height: 1.1; font-weight: 800; text-align: center;">
+      The <span style="color: var(--accent2);">Manufactured</span> Image
+    </h2>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 4vw; width: 100%; justify-content: center; align-items: stretch;">
+      
+      <!-- Public Image Card -->
+      <div style="background: var(--surface); padding: 4rem 3rem; border-radius: 12px; border: 4px solid var(--accent3); box-shadow: 0 30px 60px rgba(0,0,0,0.5); position: relative; overflow: hidden;">
+        <i class="fas fa-flag-usa" style="position: absolute; top: 1rem; right: 1rem; font-size: 8rem; color: var(--accent3-dim); opacity: 0.1;"></i>
+        <div style="font-family: var(--mono); font-size: 1rem; color: var(--accent3); margin-bottom: 1.5rem; text-transform: uppercase; font-weight: 700;">PUBLIC: THE SAVIOR</div>
+        <h3 style="font-size: 2.2rem; margin-bottom: 2rem; color: var(--text);">America’s Hero</h3>
+        <p style="font-size: 1.2rem; line-height: 1.8; color: var(--text2); margin-bottom: 3rem;">
+          The global symbol of safety, strength, and family values. Market research shows a 94% approval rating among key demographic heartlands despite any "media controversy."
+        </p>
+        <div style="display: flex; gap: 1rem; align-items: center; background: rgba(55,138,221,0.1); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--accent3-dim);">
+          <i class="fas fa-chart-pie" style="font-size: 2.5rem; color: var(--accent3);"></i>
+          <span style="font-family: var(--mono); font-size: 1.2rem; color: var(--text);">SENTIMENT: OPTIMAL</span>
+        </div>
+      </div>
+
+      <!-- Internal Reality Card -->
+      <div style="background: var(--surface); padding: 4rem 3rem; border-radius: 12px; border: 4px solid var(--accent1); box-shadow: 0 30px 60px rgba(0,0,0,0.5); position: relative; overflow: hidden;">
+        <i class="fas fa-skull-crossbones" style="position: absolute; top: 1rem; right: 1rem; font-size: 8rem; color: var(--accent1-dim); opacity: 0.1;"></i>
+        <div style="font-family: var(--mono); font-size: 1rem; color: var(--accent1); margin-bottom: 1.5rem; text-transform: uppercase; font-weight: 700;">INTERNAL: THE ASSET</div>
+        <h3 style="font-size: 2.2rem; margin-bottom: 2rem; color: var(--text);">The Uncontrollable Threat</h3>
+        <p style="font-size: 1.2rem; line-height: 1.8; color: var(--text2); margin-bottom: 3rem;">
+          A biological WMD with zero containment protocols. Every public interaction is a potential extinction-level PR disaster that Vought is increasingly unable to bridge.
+        </p>
+        <div style="display: flex; gap: 1rem; align-items: center; background: rgba(226,75,74,0.1); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--accent1-dim);">
+          <i class="fas fa-skull" style="font-size: 2.5rem; color: var(--accent1);"></i>
+          <span style="font-family: var(--mono); font-size: 1.2rem; color: var(--text);">SENTIMENT: LETHAL FAILURE</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Final Thought -->
+    <div style="margin-top: 6vh; text-align: center; color: var(--text2); font-size: 1.1rem; max-width: 900px; line-height: 1.6; font-style: italic;">
+      "The erosion of plausible deniability is now our primary corporate risk factor." — Vought Legal Compliance Dept.
+    </div>
+
+  </div>
+  <aside class="notes">The gap between the public persona and reality is widening. Vought must prepare for the eventuality that this gap becomes impossible to bridge. When the world finds out what he really is, the Vought brand will be permanently compromised. Our goal is to maintain the mask for as long as possible.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="background: var(--bg); color: var(--text); font-family: var(--sans); padding: 5vh 5vw; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; overflow: hidden;">
+  
+  <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, var(--bg2) 0%, var(--bg) 100%); z-index: -1;"></div>
+  
+  <div class="s cx" style="width: 100%; max-width: 1200px; z-index: 1;">
+    
+    <!-- Large Vought Icon -->
+    <i class="fas fa-shield-halved" style="font-size: 8rem; color: var(--accent3); margin-bottom: 3rem; text-shadow: 0 0 40px rgba(55,138,221,0.5);"></i>
+
+    <!-- Closing Message -->
+    <h2 style="font-family: var(--serif); font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 2rem; line-height: 1.1; font-weight: 800; color: var(--text);">
+      Saving the World, <span style="color: var(--accent3);">Together.</span>
+    </h2>
+    <p style="font-family: var(--sans); font-size: 1.5rem; font-weight: 300; margin-bottom: 5rem; color: var(--accent2); opacity: 0.8; letter-spacing: 0.1em; text-transform: uppercase;">
+      Crisis Management: Phase 24-B Initiated
+    </p>
+
+    <!-- Slogan Card -->
+    <div style="background: var(--surface); padding: 4rem; border-radius: 4px; border-top: 10px solid var(--accent3); box-shadow: 0 30px 60px rgba(0,0,0,0.5); width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 3rem;">
+      
+      <div style="display: flex; flex-direction: row; gap: 2rem; justify-content: space-around; flex-wrap: wrap;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+          <i class="fas fa-ban" style="font-size: 2.5rem; color: var(--accent1);"></i>
+          <span style="font-family: var(--mono); font-size: 0.9rem; text-transform: uppercase; color: var(--text2);">Media Blackout</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+          <i class="fas fa-file-contract" style="font-size: 2.5rem; color: var(--accent2);"></i>
+          <span style="font-family: var(--mono); font-size: 0.9rem; text-transform: uppercase; color: var(--text2);">NDAs Enforced</span>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+          <i class="fas fa-shield-virus" style="font-size: 2.5rem; color: var(--accent3);"></i>
+          <span style="font-family: var(--mono); font-size: 0.9rem; text-transform: uppercase; color: var(--text2);">Active Mitigation</span>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid var(--surface2); padding-top: 3rem; font-family: var(--serif); font-size: 1.8rem; font-style: italic; color: var(--text);">
+        "For a Better Future — Vought International"
+      </div>
+
+    </div>
+
+    <!-- Confidential Footer -->
+    <div style="margin-top: 5vh; font-family: var(--mono); color: var(--accent1); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.3em; background: rgba(0,0,0,0.3); padding: 1rem 2rem; border-radius: 50px;">
+      Classified // Internal Use Only // Do Not Replicate
+    </div>
+
+  </div>
+  <aside class="notes">Thank you for your attention. Remember: everything we discussed remains strictly confidential. We are Vought. We are the future. Any leaks regarding Subject HL-01 will be dealt with via Level 4 termination protocols. We are saving the world, together.</aside>
+</section>
+  </div>
+
+<script>
+(function(){
+  const wraps = document.querySelectorAll('.slide-wrap');
+  const sections = document.querySelectorAll('.slide-wrap > section');
+  const total = wraps.length;
+  const counter = document.getElementById('slide-counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  // IntersectionObserver: mark the visible slide-wrap as .active (triggers CSS animations)
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        wraps.forEach(w => w.classList.remove('active'));
+        e.target.classList.add('active');
+        current = Array.from(wraps).indexOf(e.target);
+        if (counter) counter.textContent = (current+1) + ' / ' + total;
+        if (progress) progress.style.width = ((current+1)/total*100) + '%';
+      }
+    });
+  }, { threshold: 0.5 });
+  wraps.forEach(w => obs.observe(w));
+
+  // Activate first slide immediately
+  if (wraps[0]) wraps[0].classList.add('active');
+  if (counter) counter.textContent = '1 / ' + total;
+  if (progress) progress.style.width = (1/total*100) + '%';
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      if (current < total - 1) wraps[current + 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (current > 0) wraps[current - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      wraps[0].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      wraps[total - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'f' || e.key === 'F11') {
+      e.preventDefault();
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+})();
+</script>
+
+
+</body></html>

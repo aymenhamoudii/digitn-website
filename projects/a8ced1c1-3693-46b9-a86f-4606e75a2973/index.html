@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Health Care Actually Matters</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+    --bg: #26215C;
+    --bg2: #3C3489;
+    --surface: #534AB7;
+    --surface2: #3c376c;
+    --border: rgba(255, 255, 255, .07);
+    --border-md: rgba(255, 255, 255, .11);
+    --accent1: #1D9E75;
+    --accent1-dim: rgba(29, 158, 117, 0.18);
+    --accent2: #EF9F27;
+    --accent2-dim: rgba(239, 159, 39, 0.18);
+    --accent3: #D85A30;
+    --accent3-dim: rgba(216, 90, 48, 0.18);
+    --t1: #F1EFE8;
+    --t2: #D3D1C7;
+    --t3: rgba(241, 239, 232, 0.3);
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+    --serif: 'Playfair Display', serif;
+  }
+    
+  ::-webkit-scrollbar { display: none }
+  * { scrollbar-width: none; -ms-overflow-style: none; box-sizing: border-box; }
+  html, body { overflow: hidden; margin: 0; padding: 0 }
+
+  .reveal { font-family: var(--sans); color: var(--t1); background: var(--bg) }
+  .reveal .slides { text-align: left }
+  .reveal .slides section { padding: 48px 68px; height: 100%; display: flex; flex-direction: column }
+  .reveal h1, .reveal h2, .reveal h3 { font-family: var(--serif); color: var(--t1); text-transform: none; letter-spacing: -.02em; font-weight: 800; margin: 0 }
+  .reveal h1 { font-size: 2.8em; line-height: 1.1 }
+  .reveal h2 { font-size: 1.85em; margin-bottom: 8px }
+  .reveal h3 { font-size: 1em; font-weight: 700 }
+  .reveal p, .reveal li { font-size: .74em; line-height: 1.7; color: var(--t2); margin: 0 }
+  .reveal ul { list-style: none; padding: 0; margin: 0 }
+  .reveal ul li { padding: 5px 0 }
+  .reveal .slide-number { font-family: var(--mono); font-size: 12px; color: var(--t3); background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 5px 12px; right: 28px; bottom: 28px }
+  .reveal .controls { color: var(--accent1); opacity: .3 }
+  .reveal .progress span { background: var(--accent1) }
+
+  /* Animation */
+  .s > * { opacity: 0; transform: translateY(16px); transition: all .45s cubic-bezier(.4, 0, .2, 1) }
+  section.present .s > * { opacity: 1; transform: translateY(0) }
+  section.present .s > *:nth-child(1) { transition-delay: .04s }
+  section.present .s > *:nth-child(2) { transition-delay: .10s }
+  section.present .s > *:nth-child(3) { transition-delay: .16s }
+  section.present .s > *:nth-child(4) { transition-delay: .22s }
+  section.present .s > *:nth-child(5) { transition-delay: .28s }
+  section.present .s > *:nth-child(6) { transition-delay: .34s }
+  section.present .s > *:nth-child(7) { transition-delay: .40s }
+  section.present .s > *:nth-child(8) { transition-delay: .46s }
+  section.present .s > *:nth-child(9) { transition-delay: .52s }
+  section.present .s > *:nth-child(10) { transition-delay: .58s }
+  .s { height: 100%; display: flex; flex-direction: column }
+  .cx { justify-content: center; align-items: center; text-align: center }
+
+  /* Section Label */
+  .sl { font-family: var(--mono); font-size: .48em; color: var(--accent1); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 6px; opacity: .9 }
+
+  /* Divider */
+  .dv { height: 1px; width: 120px; background: linear-gradient(90deg, transparent, var(--border-md), transparent); margin: 18px auto; border: none }
+
+  /* Card */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 22px; position: relative }
+  .card-accent1 { border-top: 2px solid var(--accent1) }
+  .card-accent2 { border-top: 2px solid var(--accent2) }
+  .card-accent3 { border-top: 2px solid var(--accent3) }
+
+  /* Metric Pill */
+  .metric { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; background: var(--surface2); border: 1px solid var(--border-md); border-radius: 40px; margin: 4px }
+  .metric .num { font-family: var(--serif); font-size: 1.25em; font-weight: 900; color: var(--t1) }
+  .metric .lab { font-size: .52em; color: var(--t2); text-transform: uppercase; letter-spacing: 1px }
+
+  /* Icon Circle */
+  .ic { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; line-height: 1 }
+  .ic.accent1 { background: var(--accent1-dim); color: var(--accent1) }
+  .ic.accent2 { background: var(--accent2-dim); color: var(--accent2) }
+  .ic.accent3 { background: var(--accent3-dim); color: var(--accent3) }
+
+  /* Hover Card */
+  .hcard { padding: 22px 18px; border-radius: 14px; background: var(--surface); border: 1px solid var(--border); text-align: center; transition: border-color .25s, background .25s; display: flex; flex-direction: column; align-items: center }
+  .hcard:hover { background: var(--surface2); border-color: var(--border-md) }
+  .hcard .iw { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; background: var(--bg2) }
+
+  /* Badge */
+  .badge { display: inline-block; padding: 4px 12px; border-radius: 6px; font-family: var(--mono); font-size: .42em; text-transform: uppercase; letter-spacing: 1px; font-weight: 600 }
+  .badge.accent1 { background: var(--accent1-dim); color: var(--accent1) }
+  .badge.accent2 { background: var(--accent2-dim); color: var(--accent2) }
+  .badge.accent3 { background: var(--accent3-dim); color: var(--accent3) }
+
+  /* Chip */
+  .chip { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: .48em; font-family: var(--mono); border: 1px solid; margin: 3px }
+  .chip.accent1 { border-color: var(--accent1); color: var(--accent1) }
+  .chip.accent2 { border-color: var(--accent2); color: var(--accent2) }
+  .chip.accent3 { border-color: var(--accent3); color: var(--accent3) }
+
+  /* Feature Row */
+  .frow { display: flex; align-items: center; gap: 18px; padding: 14px 0; border-bottom: 1px solid var(--border) }
+  .frow:last-child { border-bottom: none }
+  .frow .fi { flex-shrink: 0 }
+
+  /* Ring Chart */
+  .ring { position: relative; width: 120px; height: 120px; display: inline-flex; align-items: center; justify-content: center; flex-direction: column }
+  .ring svg { position: absolute; width: 100%; height: 100%; transform: rotate(-90deg) }
+  .ring .rbg { fill: none; stroke: var(--surface2); stroke-width: 8 }
+  .ring .rprog { fill: none; stroke: var(--accent1); stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset .6s ease }
+  .ring .rval { font-family: var(--serif); font-size: 1.5em; font-weight: 900; color: var(--t1); z-index: 1 }
+  .ring .rlab { font-family: var(--mono); font-size: .42em; color: var(--t2); text-transform: uppercase; letter-spacing: 1px; z-index: 1 }
+
+  /* Timeline */
+  .timeline { display: flex; gap: 0; padding: 20px 0 }
+  .tl-item { flex: 1; position: relative; padding: 20px 16px 0; text-align: center }
+  .tl-item::before { content: ''; position: absolute; top: 8px; left: 0; right: 0; height: 2px; background: var(--border-md) }
+  .tl-item:first-child::before { left: 50% }
+  .tl-item:last-child::before { right: 50% }
+  .tl-dot { width: 14px; height: 14px; border-radius: 50%; margin: 0 auto 12px; position: relative; z-index: 1 }
+  .tl-dot.accent1 { background: var(--accent1); box-shadow: 0 0 0 4px var(--accent1-dim) }
+  .tl-dot.accent2 { background: var(--accent2); box-shadow: 0 0 0 4px var(--accent2-dim) }
+  .tl-dot.accent3 { background: var(--accent3); box-shadow: 0 0 0 4px var(--accent3-dim) }
+
+  /* Grids */
+  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px }
+  .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 16px }
+  .g4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 16px }
+  .g5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 16px }
+
+  /* Image Box */
+  .img-box { border-radius: 14px; overflow: hidden; background: var(--surface); border: 1px solid var(--border) }
+  .img-box img { width: 100%; display: block }
+
+  /* Flex utilities */
+  .flex { display: flex }
+  .flex-col { flex-direction: column }
+  .gap-sm { gap: 8px }
+  .gap-md { gap: 16px }
+  .gap-lg { gap: 24px }
+  .mt-auto { margin-top: auto }
+  .mb-sm { margin-bottom: 8px }
+  .mb-md { margin-bottom: 16px }
+
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-background="var(--bg)">
+  <div class="s cx">
+    <div class="metric-row" style="margin-bottom: 24px;">
+      <span class="badge accent1"><i class="fas fa-heartbeat" style="margin-right: 6px;"></i>5 MIN READ</span>
+      <span class="badge accent2"><i class="fas fa-graduation-cap" style="margin-right: 6px;"></i>FOR STUDENTS</span>
+    </div>
+    <h1 style="font-size: 2.4em; max-width: 900px;">Why Health Care Actually Matters (No, Really)</h1>
+    <p style="font-size: 1.1em; color: var(--t2); margin-top: 16px;">A real talk guide for busy students</p>
+    <hr class="dv" style="margin: 32px auto; width: 120px;">
+    <p style="font-size: 0.85em; color: var(--t3);"><i class="fas fa-lightbulb accent2"></i> Health isn't just for emergencies • Small habits = big benefits • Campus resources are easier than you think</p>
+  </div>
+  <aside class="notes">Welcome students with energy. Acknowledge that health care sounds like a boring adult thing, but frame it as essential for crushing their academic and social goals. Mention that this won't be a lecture.</aside>
+</section>
+      <section data-background="var(--bg2)">
+  <div class="s">
+    <p class="sl">THE REALITY CHECK</p>
+    <h2>You're Not Invincible (Sorry)</h2>
+    <div class="frow">
+      <div class="fi"><div class="ic accent1"><i class="fas fa-hospital-user"></i></div></div>
+      <div>
+        <h3>80% skip annual checkups</h3>
+        <p>Young adults skip doctor visits because they "feel fine"—but feeling fine isn't the same as being healthy. That cough you ignored for three weeks? It could've been caught early.</p>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fi"><div class="ic accent2"><i class="fas fa-money-bill-wave"></i></div></div>
+      <div>
+        <h3>Today's skip = tomorrow's emergency</h3>
+        <p>Preventable issues become expensive emergencies. Catching things early is cheaper, easier, and way less stressful than dealing with a crisis during finals week.</p>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="fi"><div class="ic accent3"><i class="fas fa-brain"></i></div></div>
+      <div>
+        <h3>Mental health = GPA</h3>
+        <p>Stress, anxiety, and untreated mental health issues directly impact your grades and graduation rates. Your mind is an organ too—take care of it.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Break the invincibility myth gently. Use relatable examples like 'that cough you ignored for three weeks' or stress affecting finals. Emphasize that catching things early is cheaper and easier.</aside>
+</section>
+      <section data-background="var(--bg)">
+  <div class="s">
+    <p class="sl">BY THE NUMBERS</p>
+    <h2>The Stats That'll Wake You Up</h2>
+    <div style="display: flex; justify-content: center; gap: 40px; margin-top: 40px; flex-wrap: wrap;">
+      <div class="metric">
+        <span class="num" style="color: var(--accent3);">$1,200</span>
+        <span class="lab">Average ER visit</span>
+      </div>
+      <div class="metric">
+        <span class="num" style="color: var(--accent1);">$50</span>
+        <span class="lab">At student health</span>
+      </div>
+      <div class="metric">
+        <span class="num" style="color: var(--accent2);">68%</span>
+        <span class="lab">Grades affected</span>
+      </div>
+    </div>
+    <div style="margin-top: 50px;">
+      <div class="card card-accent1" style="display: inline-block; margin: 0 10px;">
+        <span class="badge accent1"><i class="fas fa-piggy-bank"></i> MONEY SMART</span>
+        <p style="margin-top: 12px;">That's 24x more expensive! </p>
+      </div>
+      <div class="card card-accent2" style="display: inline-block; margin: 0 10px;">
+        <span class="badge accent2"><i class="fas fa-book-open"></i> GRADES</span>
+        <p style="margin-top: 12px;">Health issues tank academic performance</p>
+      </div>
+    </div>
+    <div class="ring" style="margin-top: 40px;">
+      <svg viewBox="0 0 120 120">
+        <circle class="rbg" cx="60" cy="60" r="52"/>
+        <circle class="rprog" cx="60" cy="60" r="52" stroke-dasharray="327" stroke-dashoffset="33" style="stroke: var(--accent1);"/>
+      </svg>
+      <div class="rval" style="color: var(--accent1);">90%</div>
+      <div class="rlab">Chronic diseases preventable</div>
+    </div>
+  </div>
+  <aside class="notes">Hit them with the financial reality first—students care about money. Then connect health to academic success. Pause after the ER cost number to let it sink in.</aside>
+</section>
+      <section data-background="var(--bg2)">
+  <div class="s">
+    <p class="sl">MYTHBUSTING</p>
+    <h2>Let's Clear the Air</h2>
+    <div class="g2" style="margin-top: 30px;">
+      <div class="card card-accent1">
+        <div class="ic accent3" style="margin-bottom: 16px;"><i class="fas fa-times-circle"></i></div>
+        <h3>"I'm too young for serious issues"</h3>
+        <p>Reality: Diabetes, hypertension, and mental health conditions often start in your 20s. Early detection changes everything.</p>
+        <span class="chip accent1"><i class="fas fa-check"></i> BUSTED</span>
+      </div>
+      <div class="card card-accent2">
+        <div class="ic accent3" style="margin-bottom: 16px;"><i class="fas fa-times-circle"></i></div>
+        <h3>"I can't afford insurance"</h3>
+        <p>Reality: Most students stay on parents' plans until 26. Campus health centers often provide free or low-cost care.</p>
+        <span class="chip accent2"><i class="fas fa-check"></i> BUSTED</span>
+      </div>
+      <div class="card card-accent3">
+        <div class="ic accent3" style="margin-bottom: 16px;"><i class="fas fa-times-circle"></i></div>
+        <h3>"The ER is fine for routine stuff"</h3>
+        <p>Reality: ERs are for emergencies. You'll wait hours and pay 24x more than student health for basic care.</p>
+        <span class="chip accent3"><i class="fas fa-check"></i> BUSTED</span>
+      </div>
+      <div class="card card-accent1">
+        <div class="ic accent3" style="margin-bottom: 16px;"><i class="fas fa-times-circle"></i></div>
+        <h3>"Mental health struggles make me weak"</h3>
+        <p>Reality: 1 in 4 college students seek mental health support. Asking for help is strength, not weakness.</p>
+        <span class="chip accent1"><i class="fas fa-check"></i> BUSTED</span>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Address common student misconceptions with empathy, not judgment. For the insurance myth, mention most students are covered by parents or school plans. Keep the tone casual—'We've all thought this'.</aside>
+</section>
+      <section data-background="var(--bg)">
+  <div class="s">
+    <p class="sl">YOUR GAME PLAN</p>
+    <h2>Health Care in 4 Easy Steps</h2>
+    <div class="timeline" style="margin-top: 40px;">
+      <div class="tl-item">
+        <div class="tl-dot accent1"></div>
+        <div class="tl-content">
+          <span class="badge accent1">STEP 1</span>
+          <h3>Locate Your Student Health Center</h3>
+          <p>It's probably behind the gym or next to the dining hall. Bookmark the location now.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot accent2"></div>
+        <div class="tl-content">
+          <span class="badge accent2">STEP 2</span>
+          <h3>Download Your Insurance App</h3>
+          <p>Screenshot your insurance card. Save the student health center number in your contacts.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot accent3"></div>
+        <div class="tl-content">
+          <span class="badge accent3">STEP 3</span>
+          <h3>Book One Preventative Appointment</h3>
+          <p>Just one. Physical, dental cleaning, eye exam—pick one and get it on the calendar.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot accent1" style="background: var(--accent1);"><i class="fas fa-user-friends" style="color: var(--bg); font-size: 12px;"></i></div>
+        <div class="tl-content">
+          <span class="badge accent1">STEP 4</span>
+          <h3>Find Your Person</h3>
+          <p>An accountability buddy makes health care social and way less scary. Tag team it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Walk through practical first steps. Emphasize that student health centers are often free or super cheap. The 'find your person' step makes it social and less scary.</aside>
+</section>
+      <section data-background="var(--bg2)">
+  <div class="s cx">
+    <p class="sl">A QUICK METAPHOR</p>
+    <div style="font-size: 1.6em; font-family: var(--serif); font-style: italic; color: var(--t1); max-width: 800px; line-height: 1.4;">
+      "Think of health care like your phone charger..."
+    </div>
+    <hr class="dv" style="width: 80px; margin: 30px auto;">
+    <p style="font-size: 1.1em; color: var(--t2); max-width: 700px;">
+      You don't think about it until you're at <span style="color: var(--accent3); font-weight: 700;">2%</span> and panicking.
+    </p>
+    <div class="g2" style="margin-top: 40px; max-width: 700px;">
+      <div class="card card-accent1">
+        <div class="ic accent1" style="margin-bottom: 12px;"><i class="fas fa-battery-full"></i></div>
+        <h3>Prevention = Portable Battery</h3>
+        <p>Small checkups keep you charged up</p>
+      </div>
+      <div class="card card-accent2">
+        <div class="ic accent2" style="margin-bottom: 12px;"><i class="fas fa-tools"></i></div>
+        <h3>Self-Care = Maintenance</h3>
+        <p>Not selfish, just smart upkeep</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">Use the phone battery metaphor to make it relatable. Pause for effect after the quote. Connect this to the idea that investing small amounts of time now prevents crisis mode later.</aside>
+</section>
+      <section data-background="var(--bg)">
+  <div class="s">
+    <p class="sl">TAKE ACTION</p>
+    <h2>Start Today (Yes, Today)</h2>
+    <div class="g3" style="margin-top: 30px;">
+      <div class="hcard">
+        <div class="iw"><div class="ic accent1"><i class="fas fa-mobile-alt"></i></div></div>
+        <h3>Screenshot This</h3>
+        <p>Save your student health center number to your phone right now</p>
+        <span class="chip accent1">30 seconds</span>
+      </div>
+      <div class="hcard">
+        <div class="iw"><div class="ic accent2"><i class="fas fa-comment-dots"></i></div></div>
+        <h3>Text a Friend</h3>
+        <p>"Want to be health accountability buddies?" Send it. Do it now.</p>
+        <span class="chip accent2">1 minute</span>
+      </div>
+      <div class="hcard">
+        <div class="iw"><div class="ic accent3"><i class="fas fa-calendar-check"></i></div></div>
+        <h3>Book the Appointment</h3>
+        <p>Before you leave class today. Schedule that one checkup.</p>
+        <span class="chip accent3">2 minutes</span>
+      </div>
+    </div>
+    <div class="card card-accent1" style="margin-top: 30px; display: inline-block;">
+      <div class="ic accent1" style="display: inline-block; margin-right: 12px; vertical-align: middle;"><i class="fas fa-glass-cheers"></i></div>
+      <span style="vertical-align: middle;"><strong>Celebrate!</strong> Taking care of your future self is worth celebrating 🎉</span>
+    </div>
+  </div>
+  <aside class="notes">Give them immediate, actionable steps they can literally do in the next 5 minutes. Make it feel achievable and urgent but not overwhelming. This is the persuasive climax.</aside>
+</section>
+      <section data-background="var(--bg2)">
+  <div class="s cx">
+    <div class="metric-row" style="margin-bottom: 24px;">
+      <span class="badge accent1"><i class="fas fa-heart" style="margin-right: 6px;"></i>YOU GOT THIS</span>
+    </div>
+    <h1 style="font-size: 2.2em;">Your Future Self Already Says Thanks</h1>
+    <hr class="dv" style="width: 100px; margin: 28px auto;">
+    <div class="g3" style="max-width: 800px; margin-top: 20px;">
+      <div style="text-align: center;">
+        <div class="ic accent1" style="margin: 0 auto 12px;"><i class="fas fa-seedling"></i></div>
+        <p style="font-size: 0.85em; color: var(--t2);">Small steps today create healthy habits tomorrow</p>
+      </div>
+      <div style="text-align: center;">
+        <div class="ic accent2" style="margin: 0 auto 12px;"><i class="fas fa-star"></i></div>
+        <p style="font-size: 0.85em; color: var(--t2);">You are worth the time and investment</p>
+      </div>
+      <div style="text-align: center;">
+        <div class="ic accent3" style="margin: 0 auto 12px;"><i class="fas fa-hand-holding-heart"></i></div>
+        <p style="font-size: 0.85em; color: var(--t2);">The student health center is your friend, not the enemy</p>
+      </div>
+    </div>
+    <p style="margin-top: 36px; font-size: 1em; color: var(--t2);"><i class="fas fa-comments" style="color: var(--accent1); margin-right: 8px;"></i>Questions? Let's chat after.</p>
+  </div>
+  <aside class="notes">Close with encouragement and positivity. Remind them that taking care of themselves is actually an act of rebellion against the 'burnt out student' stereotype. Leave them feeling empowered, not guilty.</aside>
+</section>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.min.js"></script>
+  <script>
+    Reveal.initialize({
+      controls: true,
+      controlsTutorial: false,
+      slideNumber: 'c/t',
+      progress: true,
+      transition: 'fade',
+      transitionSpeed: 'fast',
+      backgroundTransition: 'fade',
+      hash: true,
+      respondToHashChanges: true,
+      embedded: false,
+      help: true,
+      display: 'flex',
+      center: false,
+      width: 960,
+      height: 700,
+      margin: 0.04,
+      minScale: 0.2,
+      maxScale: 2.0
+    });
+  </script>
+</body>
+</html>

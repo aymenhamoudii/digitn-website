@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>backrooms</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+    --bg: #3D2E02;
+    --bg2: #60450A;
+    --surface: #2C2A20;
+    --surface2: #50431b;
+    --border: rgba(255,255,255,.07);
+    --border-md: rgba(255,255,255,.11);
+    --accent1: #D4AC0D;
+    --accent1-dim: rgba(212, 172, 13, 0.18);
+    --accent2: #04342C;
+    --accent2-dim: rgba(4, 52, 44, 0.18);
+    --accent3: #2C2C2A;
+    --accent3-dim: rgba(44, 44, 42, 0.18);
+    --t1: #FEF9E7;
+    --t2: #BFAF8C;
+    --t3: rgba(254, 249, 231, 0.3);
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+    --serif: 'Playfair Display', serif;
+  }
+    
+  /* ─── Reset ─── */
+  ::-webkit-scrollbar{display:none}
+  *{scrollbar-width:none;-ms-overflow-style:none;box-sizing:border-box;margin:0;padding:0}
+  html{overflow-y:scroll;overflow-x:hidden;scroll-behavior:smooth;scroll-snap-type:y mandatory}
+  body{background:var(--bg);color:var(--t1);font-family:var(--sans);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+
+  /* ─── Slide wrapper (viewport-sized snap target) ─── */
+  .slide-wrap{width:100vw;height:100vh;scroll-snap-align:start;scroll-snap-stop:always;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--bg);position:relative}
+
+  /* ─── Slide (fluid responsive canvas) ─── */
+  section{width:100%;height:100%;display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+  /* ─── Stagger animation (.s container) ─── */
+  .s{display:flex;flex-direction:column;flex:1;min-height:0;padding:6vh 6vw;box-sizing:border-box;overflow:hidden}
+  .s>*{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+  .slide-wrap.active .s>*{opacity:1;transform:translateY(0)}
+  .slide-wrap.active .s>*:nth-child(1){transition-delay:.03s}
+  .slide-wrap.active .s>*:nth-child(2){transition-delay:.09s}
+  .slide-wrap.active .s>*:nth-child(3){transition-delay:.15s}
+  .slide-wrap.active .s>*:nth-child(4){transition-delay:.21s}
+  .slide-wrap.active .s>*:nth-child(5){transition-delay:.27s}
+  .slide-wrap.active .s>*:nth-child(6){transition-delay:.33s}
+  .slide-wrap.active .s>*:nth-child(7){transition-delay:.39s}
+  .slide-wrap.active .s>*:nth-child(8){transition-delay:.45s}
+
+  /* ─── Centering utility ─── */
+  .cx{display:flex;justify-content:center;align-items:center;text-align:center}
+
+  /* ─── Speaker notes (hidden) ─── */
+  aside.notes{display:none!important}
+
+  /* ─── Slide counter ─── */
+  #slide-counter{position:fixed;bottom:16px;right:24px;font-family:var(--mono);font-size:13px;color:var(--t3);background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:6px 14px;z-index:100;pointer-events:none}
+
+  /* ─── Progress bar ─── */
+  #progress{position:fixed;top:0;left:0;height:3px;background:var(--accent1);z-index:100;transition:width .3s ease}
+
+  /* ─── Print/PDF Styles ─── */
+  @media print {
+    ::-webkit-scrollbar { display: none !important; }
+    html, body { overflow: visible !important; scroll-snap-type: none !important; margin: 0 !important; padding: 0 !important; }
+    body { background-color: var(--bg) !important; -webkit-print-color-adjust: exact; color-adjust: exact; }
+    .slide-wrap { width: 100vw !important; height: 100vh !important; scroll-snap-align: none !important; page-break-after: always !important; page-break-inside: avoid !important; }
+    .slide-wrap:last-child { page-break-after: auto !important; }
+    .slide-wrap.active .s>*, .slide-wrap .s>* { opacity: 1 !important; transform: none !important; transition: none !important; }
+    #slide-counter, #progress { display: none !important; }
+  }
+
+  </style>
+</head>
+<body>
+  <div id="progress" style="width:0"></div>
+  <div id="slide-counter">1 / 12</div>
+  <div class="slide-wrap">
+    <section style="width:100%;height:100%;background: linear-gradient(180deg, color-mix(in srgb, var(--bg) 60%, rgba(0,0,0,0.0)), var(--bg)); display:flex; align-items:center; justify-content:center; overflow:hidden;"> 
+  <!-- Load fonts & icons once (safe to include in first slide) -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <div class="s cx" style="width:92%;max-width:1400px;gap:3.5vh;flex-direction:column;"> 
+    <div style="width:100%;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:2vh;"> 
+      <div style="display:flex;flex-direction:column;gap:1vh;"> 
+        <div style="font-family:var(--serif);color:var(--t1);font-weight:900;letter-spacing:0.02em;font-size:clamp(2.8rem,6.5vw,5.2rem);line-height:0.95;">Backrooms</div>
+        <div style="font-family:var(--sans);color:var(--t2);font-weight:600;font-size:clamp(1rem,2.2vw,1.4rem);">An introduction to the psychological maze</div>
+      </div>
+      <div style="display:flex;gap:1vw;align-items:center;flex-wrap:wrap;"> 
+        <div style="background: linear-gradient(180deg, color-mix(in srgb, var(--accent1) 12%, rgba(255,255,255,0)), var(--accent1));color:var(--bg);padding:0.6rem 1rem;border-radius:999px;font-family:var(--sans);font-weight:700;font-size:clamp(0.7rem,1.6vw,1rem);box-shadow:0 0.8vh 2vh rgba(0,0,0,0.45);">DIGITN AI</div>
+        <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.04);color:var(--t2);padding:0.6rem 1rem;border-radius:999px;font-family:var(--sans);font-weight:600;font-size:clamp(0.7rem,1.6vw,1rem);">Atmospheric primer</div>
+      </div>
+    </div>
+
+    <div style="width:100%;display:flex;align-items:center;gap:3vw;flex-wrap:wrap;"> 
+      <div style="flex:1 1 48%;min-width:280px;max-width:70%;background:linear-gradient(160deg, rgba(212,172,13,0.12), rgba(4,52,44,0.03));border-radius:1.2rem;padding:3.5vh 3.5vw;backdrop-filter:blur(2px);box-shadow:0 8px 30px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.02);"> 
+        <div style="font-family:var(--sans);color:var(--t1);font-size:clamp(1rem,2.2vw,1.2rem);font-weight:600;margin-bottom:1vh;">Concept</div>
+        <div style="font-family:var(--sans);color:var(--t2);font-weight:400;font-size:clamp(0.95rem,1.9vw,1.05rem);">An endless, fluorescent office liminal space — familiar architecture turned oppressive.</div>
+      </div>
+      <div style="flex:1 1 44%;min-width:220px;max-width:40%;display:flex;flex-direction:column;gap:1.2vh;"> 
+        <div style="background:linear-gradient(180deg, rgba(212,172,13,0.12), transparent);padding:2.5vh 2.5vw;border-radius:1rem;border-left:6px solid var(--accent1);"> 
+          <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(1rem,2vw,1.1rem);">Tone goal</div>
+          <div style="font-family:var(--sans);color:var(--t2);font-weight:500;font-size:clamp(0.9rem,1.7vw,1rem);">Unsettling, immersive ambience — mood over mechanics.</div>
+        </div>
+        <div style="height:6vh;display:flex;align-items:center;gap:1vw;"> 
+          <div style="flex:0 0 auto;width:6vh;height:6vh;border-radius:999px;background:var(--accent1);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(212,172,13,0.14);"> 
+            <i class="fas fa-exclamation" style="color:var(--bg);font-size:calc(3vh);"></i>
+          </div>
+          <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.95rem,1.9vw,1.05rem);">Expect sensory cues: sickly light, repetitive geometry, low hum. We'll focus on feeling.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="width:100%;height:0.25rem;background:linear-gradient(90deg, rgba(212,172,13,0.9), rgba(4,52,44,0.6));border-radius:1rem;margin-top:2vh;box-shadow:0 8px 30px rgba(4,52,44,0.2);"></div>
+  </div>
+  <aside class="notes" style="display:none">Welcome the audience and set expectations. Introduce yourself as DIGITN AI. Explain this deck is an atmospheric primer for newcomers; emphasize mood over mechanics.</aside>
+  <aside class="notes">Welcome the audience and set expectations. Introduce yourself as DIGITN AI. Explain this deck is an atmospheric primer for newcomers; emphasize mood over mechanics.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="width:100%;height:100%;background:linear-gradient(180deg,var(--bg2),var(--bg));display:flex;align-items:center;justify-content:center;overflow:hidden;"> 
+  <div class="s" style="width:94%;max-width:1300px;display:flex;flex-direction:column;gap:3vh;padding:3vh;"> 
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2vh;"> 
+      <div style="font-family:var(--serif);color:var(--t1);font-size:clamp(1.6rem,3.8vw,2.6rem);font-weight:700;">What We'll Explore</div>
+      <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.85rem,1.8vw,1.05rem);">Overview • Origins • Atmosphere • Mechanics • Design</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px,1fr));gap:3vw;align-items:start;width:100%;"> 
+      <div style="background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));padding:3vh 2.5vw;border-radius:1rem;border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:1.4vh;"> 
+        <div style="display:flex;align-items:center;gap:1.2vw;"> 
+          <div style="width:6.2vh;height:6.2vh;border-radius:999px;background:var(--accent1);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(212,172,13,0.12);"> 
+            <i class="fas fa-book" style="color:var(--bg);font-size:calc(3vh);"></i>
+          </div>
+          <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(1rem,2.2vw,1.15rem);">Definition & Origin</div>
+        </div>
+        <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.9rem,1.9vw,1rem);">How a single uncanny image and caption grew into a sprawling internet myth.</div>
+      </div>
+
+      <div style="background:linear-gradient(180deg, rgba(4,52,44,0.04), rgba(255,255,255,0.02));padding:3vh 2.5vw;border-radius:1rem;border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:1.4vh;"> 
+        <div style="display:flex;align-items:center;gap:1.2vw;"> 
+          <div style="width:6.2vh;height:6.2vh;border-radius:999px;background:var(--accent2);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(4,52,44,0.12);"> 
+            <i class="fas fa-lightbulb" style="color:var(--t1);font-size:calc(2.8vh);"></i>
+          </div>
+          <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(1rem,2.2vw,1.15rem);">Core Sensations</div>
+        </div>
+        <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.9rem,1.9vw,1rem);">Nostalgia, wrongness, temporal distortion: what makes the Backrooms feel uncanny.</div>
+      </div>
+
+      <div style="background:linear-gradient(180deg, rgba(44,44,42,0.03), rgba(255,255,255,0.01));padding:3vh 2.5vw;border-radius:1rem;border:1px solid rgba(255,255,255,0.03);display:flex;flex-direction:column;gap:1.4vh;"> 
+        <div style="display:flex;align-items:center;gap:1.2vw;"> 
+          <div style="width:6.2vh;height:6.2vh;border-radius:999px;background:var(--accent3);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(44,44,42,0.12);"> 
+            <i class="fas fa-map" style="color:var(--t1);font-size:calc(2.6vh);"></i>
+          </div>
+          <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(1rem,2.2vw,1.15rem);">Structure: Levels & Rules</div>
+        </div>
+        <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.9rem,1.9vw,1rem);">An informal taxonomy — levels, transitions, and the mutable rules of the space.</div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:center;gap:2vw;flex-wrap:wrap;margin-top:2vh;"> 
+      <div style="font-family:var(--sans);color:var(--t2);background:rgba(255,255,255,0.02);padding:0.6rem 1rem;border-radius:999px;border:1px solid rgba(255,255,255,0.03);">Iconography anchors each topic</div>
+      <div style="font-family:var(--sans);color:var(--t2);background:linear-gradient(90deg, rgba(212,172,13,0.08), rgba(4,52,44,0.03));padding:0.6rem 1rem;border-radius:999px;border-left:4px solid var(--accent1);">Focus on immersive elements</div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Briefly preview sections. Use iconography to anchor each topic: origin, atmosphere, rules, levels, and creative guidance. Note the immersive focus.</aside>
+  <aside class="notes">Briefly preview sections. Use iconography to anchor each topic: origin, atmosphere, rules, levels, and creative guidance. Note the immersive focus.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="width:100%;height:100%;background:linear-gradient(180deg,var(--bg),var(--surface));display:flex;align-items:center;justify-content:center;overflow:hidden;"> 
+  <div class="s" style="width:94%;max-width:1400px;display:flex;gap:3.5vh;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:3vh;"> 
+    <div style="flex:1 1 44%;min-width:320px;display:flex;flex-direction:column;gap:1.6vh;"> 
+      <div style="font-family:var(--serif);color:var(--t1);font-size:clamp(1.5rem,3.8vw,2.6rem);font-weight:700;">Origins & Cultural Roots</div>
+      <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.95rem,1.9vw,1.05rem);">From a single uncanny image and caption to a collaborative, memetic myth — influenced by liminal photography and urban folklore.</div>
+
+      <div style="display:flex;flex-direction:column;gap:1vw;margin-top:2vh;"> 
+        <div style="display:flex;align-items:flex-start;gap:1.2vw;"> 
+          <div style="width:5.8vh;height:5.8vh;border-radius:8px;background:var(--accent1);display:flex;align-items:center;justify-content:center;color:var(--bg);box-shadow:0 8px 20px rgba(212,172,13,0.12);"> 
+            <i class="fas fa-camera" style="font-size:calc(2.6vh);"></i>
+          </div>
+          <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.9rem,1.9vw,1rem);">Liminal spaces photography emphasized empty, transitional places — the Backrooms translated that aesthetic into narrative space.</div>
+        </div>
+
+        <div style="display:flex;align-items:flex-start;gap:1.2vw;"> 
+          <div style="width:5.8vh;height:5.8vh;border-radius:8px;background:var(--accent2);display:flex;align-items:center;justify-content:center;color:var(--t1);box-shadow:0 8px 20px rgba(4,52,44,0.12);"> 
+            <i class="fas fa-comments" style="font-size:calc(2.6vh);"></i>
+          </div>
+          <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.9rem,1.9vw,1rem);">Creepypasta and forum culture allowed collaborative expansion: users added levels, rules, and entities — a living folklore.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:1 1 52%;min-width:320px;display:flex;flex-direction:column;gap:1.6vh;align-items:center;"> 
+      <div style="width:100%;max-height:54vh;min-height:30vh;border-radius:1rem;overflow:hidden;display:flex;align-items:flex-end;justify-content:flex-start;background:linear-gradient(180deg, rgba(212,172,13,0.12), rgba(44,44,42,0.06)), url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=1a7b3d0b3f0b1e34f8a2a4d5c6e8f0d9') center/cover no-repeat;border:1px solid rgba(0,0,0,0.25);box-shadow:0 12px 40px rgba(0,0,0,0.6);"> 
+        <div style="background:linear-gradient(180deg,transparent,rgba(0,0,0,0.6));color:var(--t1);padding:2.2vh 2.2vw;width:100%;"> 
+          <div style="font-family:var(--sans);font-weight:700;font-size:clamp(1rem,2.2vw,1.2rem);">Memetic growth</div>
+          <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.85rem,1.8vw,1rem);">Community contributions expanded the concept far beyond its origin — levels, maps, and rules multiplied.</div>
+        </div>
+      </div>
+
+      <div style="width:100%;display:flex;justify-content:space-between;gap:2vw;flex-wrap:wrap;margin-top:1.2vh;"> 
+        <div style="flex:1 1 48%;min-width:180px;background:rgba(255,255,255,0.02);padding:1.4vh 1.6vw;border-radius:0.8rem;border-left:5px solid var(--accent2);"> 
+          <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(0.9rem,1.9vw,1rem);">Late 2010s</div>
+          <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.85rem,1.7vw,0.95rem);">Snapshot: a turning point when the image became a shared archetype online.</div>
+        </div>
+        <div style="flex:1 1 48%;min-width:180px;background:rgba(255,255,255,0.02);padding:1.4vh 1.6vw;border-radius:0.8rem;border-left:5px solid var(--accent1);"> 
+          <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(0.9rem,1.9vw,1rem);">Urban folklore</div>
+          <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.85rem,1.7vw,0.95rem);">The Backrooms borrowed motifs from hauntology and modern folk tales: repeated motifs, warnings, and 'do not enter' tone.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Explain the Backrooms started as a single uncanny image + caption and evolved into a collective myth. Mention how community contributions expanded levels and lore (memetic growth).</aside>
+  <aside class="notes">Explain the Backrooms started as a single uncanny image + caption and evolved into a collective myth. Mention how community contributions expanded levels and lore (memetic growth).</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="width:100%;height:100%;background:linear-gradient(180deg,var(--bg),var(--bg2));display:flex;align-items:center;justify-content:center;overflow:hidden;"> 
+  <div class="s cx" style="width:96%;max-width:1400px;flex-direction:column;gap:3.5vh;padding:3vh;"> 
+    <div style="width:100%;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:2vh;"> 
+      <div style="font-family:var(--serif);color:var(--t1);font-size:clamp(1.6rem,4.8vw,3.6rem);font-weight:700;">The Setting: Fluorescent Offices</div>
+      <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.9rem,1.9vw,1.05rem);">Sickly yellow light, stained carpet, low hum</div>
+    </div>
+
+    <div style="width:100%;display:flex;gap:3vw;flex-wrap:wrap;align-items:stretch;"> 
+      <div style="flex:1 1 60%;min-width:320px;border-radius:1rem;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,0.7);"> 
+        <div style="width:100%;max-height:56vh;min-height:30vh;background:linear-gradient(180deg, rgba(212,172,13,0.18), rgba(44,44,42,0.03)), url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=1a7b3d0b3f0b1e34f8a2a4d5c6e8f0d9') center/cover no-repeat;display:flex;flex-direction:column;justify-content:flex-end;padding:3vh;"> 
+          <div style="background:rgba(0,0,0,0.45);padding:1.6vh 1.6vw;border-radius:0.8rem;border-left:6px solid var(--accent1);"> 
+            <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(1.1rem,2.5vw,1.5rem);">Sickly yellow-tinted rooms, low ceilings</div>
+            <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.9rem,1.9vw,1rem);">Visual repetition—carpets, vents, fluorescents—creates a rhythm that becomes oppressive.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="flex:1 1 36%;min-width:260px;display:flex;flex-direction:column;gap:1.6vh;"> 
+        <div style="background:linear-gradient(180deg, rgba(212,172,13,0.08), rgba(4,52,44,0.03));padding:2.2vh 2.2vw;border-radius:0.9rem;border:1px solid rgba(255,255,255,0.03);"> 
+          <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(1rem,2.2vw,1.2rem);">Key motifs</div>
+          <ul style="margin:0.8vh 0 0 1.2rem;padding:0;list-style:none;font-family:var(--sans);color:var(--t2);font-size:clamp(0.85rem,1.8vw,0.95rem);line-height:1.6;"> 
+            <li style="margin-bottom:0.8vh;">Repetitive carpet patterns that never quite align</li>
+            <li style="margin-bottom:0.8vh;">Buzzing, slightly out-of-tune fluorescent lights</li>
+            <li style="margin-bottom:0.8vh;">Dull, water-stained ceilings and vents</li>
+          </ul>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.02);padding:2vh;border-radius:0.9rem;border-left:5px solid var(--accent3);"> 
+          <div style="display:flex;align-items:center;gap:1vw;"> 
+            <div style="width:5.6vh;height:5.6vh;border-radius:8px;background:var(--accent1);display:flex;align-items:center;justify-content:center;color:var(--bg);"> 
+              <i class="fas fa-volume-low" style="font-size:calc(2.2vh);"></i>
+            </div>
+            <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(0.95rem,1.9vw,1.05rem);">The low hum</div>
+          </div>
+          <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.85rem,1.8vw,0.95rem);margin-top:1vh;">A consistent low-frequency hum—subtle, mechanical, and unnerving. It anchors the space and masks direction.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Use a large visual of an empty fluorescent office to transmit feeling. Point out small details that create unease: pattern repetition, incongruous scale, and the oppressive hum.</aside>
+  <aside class="notes">Use a large visual of an empty fluorescent office to transmit feeling. Point out small details that create unease: pattern repetition, incongruous scale, and the oppressive hum.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="width:100%;height:100%;background:linear-gradient(180deg,var(--surface),var(--bg));display:flex;align-items:center;justify-content:center;overflow:hidden;"> 
+  <div class="s cx" style="width:92%;max-width:1200px;flex-direction:column;gap:3vh;padding:4vh;"> 
+    <div style="font-family:var(--serif);color:var(--t1);font-size:clamp(1.6rem,4.5vw,3.2rem);font-weight:700;text-align:center;">"It looked like every office I'd ever felt nostalgic for — and none of them at the same time."</div>
+    <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.95rem,2vw,1.1rem);text-align:center;max-width:85%;">— community contributor</div>
+
+    <div style="display:flex;gap:2.5vw;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:2.5vh;"> 
+      <div style="width:8vh;height:8vh;border-radius:999px;background:var(--accent1);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px rgba(212,172,13,0.14);"> 
+        <i class="fas fa-eye" style="color:var(--bg);font-size:calc(3.6vh);"></i>
+      </div>
+      <div style="width:8vh;height:8vh;border-radius:999px;background:var(--accent2);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 40px rgba(4,52,44,0.14);"> 
+        <i class="fas fa-clock" style="color:var(--t1);font-size:calc(3.6vh);"></i>
+      </div>
+    </div>
+
+    <div style="width:100%;max-width:60%;display:flex;justify-content:space-between;gap:1.2vw;flex-wrap:wrap;margin-top:2vh;"> 
+      <div style="flex:1 1 48%;min-width:160px;background:rgba(255,255,255,0.02);padding:1.2vh 1.2vw;border-radius:0.8rem;border-left:4px solid var(--accent1);"> 
+        <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(0.9rem,1.9vw,1rem);">Isolation</div>
+        <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.8rem,1.6vw,0.95rem);">Familiar objects in a context that offers no social anchors.</div>
+      </div>
+      <div style="flex:1 1 48%;min-width:160px;background:rgba(255,255,255,0.02);padding:1.2vh 1.2vw;border-radius:0.8rem;border-left:4px solid var(--accent2);"> 
+        <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(0.9rem,1.9vw,1rem);">Temporal distortion</div>
+        <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.8rem,1.6vw,0.95rem);">Time feels stretched or looped — minutes become hours without a clear cause.</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Read or display an evocative community quote that captures liminality. Emphasize psychological effects: derealization, nostalgia-for-no-place, and creeping dread.</aside>
+  <aside class="notes">Read or display an evocative community quote that captures liminality. Emphasize psychological effects: derealization, nostalgia-for-no-place, and creeping dread.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="width:100%;height:100%;background:linear-gradient(180deg,var(--bg2),var(--surface));display:flex;align-items:center;justify-content:center;overflow:hidden;"> 
+  <div class="s" style="width:94%;max-width:1300px;display:flex;flex-direction:column;gap:3.5vh;padding:3vh;"> 
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2vh;"> 
+      <div style="font-family:var(--serif);color:var(--t1);font-size:clamp(1.5rem,3.8vw,2.6rem);font-weight:700;">Rules & Mechanics</div>
+      <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.85rem,1.8vw,1rem);">Guiding principles creators use</div>
+    </div>
+
+    <div style="display:flex;gap:3vw;flex-wrap:wrap;align-items:flex-start;"> 
+      <div style="flex:1 1 48%;min-width:280px;background:linear-gradient(180deg, rgba(212,172,13,0.06), transparent);padding:2.2vh 2.2vw;border-radius:1rem;border-left:6px solid var(--accent1);"> 
+        <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(1rem,2.4vw,1.25rem);">Core rules</div>
+        <ul style="margin:1vh 0 0 1.2rem;padding:0;list-style:none;color:var(--t2);font-family:var(--sans);font-size:clamp(0.9rem,1.9vw,1rem);line-height:1.6;"> 
+          <li style="margin-bottom:0.8vh;">• No guaranteed exits — navigation is unreliable</li>
+          <li style="margin-bottom:0.8vh;">• Persistence: objects and paths may change or loop</li>
+          <li style="margin-bottom:0.8vh;">• Levels have different rules; danger varies</li>
+        </ul>
+      </div>
+
+      <div style="flex:1 1 44%;min-width:240px;display:flex;flex-direction:column;gap:1.2vh;"> 
+        <div style="background:rgba(255,255,255,0.02);padding:1.6vh 1.6vw;border-radius:0.9rem;border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;gap:1vw;"> 
+          <div style="width:6vh;height:6vh;border-radius:8px;background:var(--accent3);display:flex;align-items:center;justify-content:center;color:var(--t1);"> 
+            <i class="fas fa-compass" style="font-size:calc(2.4vh);"></i>
+          </div>
+          <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(0.95rem,1.9vw,1.05rem);">Navigation is unreliable</div>
+        </div>
+
+        <div style="background:linear-gradient(90deg, rgba(4,52,44,0.06), rgba(212,172,13,0.04));padding:1.6vh 1.6vw;border-radius:0.9rem;border-left:5px solid var(--accent2);"> 
+          <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(0.95rem,1.9vw,1.05rem);">Environmental cues</div>
+          <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.85rem,1.8vw,0.95rem);margin-top:0.6vh;">Changes in light, hum, or texture often signal transitions between areas or levels.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:center;gap:2vw;margin-top:1.6vh;"> 
+      <div style="font-family:var(--sans);color:var(--t2);background:rgba(255,255,255,0.02);padding:0.6rem 1rem;border-radius:999px;border:1px solid rgba(255,255,255,0.03);">Rules are flexible across community creations</div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Describe the commonly cited 'rules' used by creators: persistence, inconsistent geometry, and environmental signaling. Stress that rules vary across community interpretations.</aside>
+  <aside class="notes">Describe the commonly cited 'rules' used by creators: persistence, inconsistent geometry, and environmental signaling. Stress that rules vary across community interpretations.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="width:100%;height:100%;background:linear-gradient(180deg,var(--bg),var(--surface));display:flex;align-items:center;justify-content:center;overflow:hidden;"> 
+  <div class="s" style="width:94%;max-width:1400px;display:flex;flex-direction:column;gap:3.5vh;padding:3vh;"> 
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2vh;"> 
+      <div style="font-family:var(--serif);color:var(--t1);font-size:clamp(1.6rem,3.8vw,2.6rem);font-weight:700;">Level 0 and Beyond</div>
+      <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.85rem,1.8vw,1rem);">A short level progression</div>
+    </div>
+
+    <div style="display:flex;gap:3vw;flex-wrap:wrap;align-items:flex-start;"> 
+      <div style="flex:1 1 65%;min-width:320px;display:flex;flex-direction:column;gap:1.2vh;"> 
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2vw;"> 
+          <div style="background:linear-gradient(180deg, rgba(212,172,13,0.08), rgba(255,255,255,0.01));padding:1.6vh 1.2vw;border-radius:0.9rem;border-left:6px solid var(--accent1);"> 
+            <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(0.95rem,1.9vw,1.05rem);">Level 0</div>
+            <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.8rem,1.7vw,0.95rem);margin-top:0.6vh;">The iconic beige‑yellow lobby: buzzing fluorescents, stained carpet, low ceilings. Entry point for most stories.</div>
+          </div>
+
+          <div style="background:linear-gradient(180deg, rgba(4,52,44,0.06), rgba(255,255,255,0.01));padding:1.6vh 1.2vw;border-radius:0.9rem;border-left:6px solid var(--accent2);"> 
+            <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(0.95rem,1.9vw,1.05rem);">Level 1</div>
+            <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.8rem,1.7vw,0.95rem);margin-top:0.6vh;">Less tame — industrial spaces, hot machinery, and louder mechanical noises; navigation becomes riskier.</div>
+          </div>
+
+          <div style="background:linear-gradient(180deg, rgba(44,44,42,0.04), rgba(255,255,255,0.01));padding:1.6vh 1.2vw;border-radius:0.9rem;border-left:6px solid var(--accent3);"> 
+            <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(0.95rem,1.9vw,1.05rem);">Higher Levels</div>
+            <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.8rem,1.7vw,0.95rem);margin-top:0.6vh;">Themed or anomalous areas: outdoors‑like emptiness, impossible geometry, and hostile entities in some accounts.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="flex:1 1 30%;min-width:220px;display:flex;flex-direction:column;gap:1.2vh;align-items:center;"> 
+        <div style="width:100%;background:rgba(255,255,255,0.02);padding:2vh;border-radius:0.9rem;border-left:6px solid var(--accent1);display:flex;flex-direction:column;gap:1vh;"> 
+          <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(1rem,2.2vw,1.15rem);">Timeline</div>
+          <div style="display:flex;flex-direction:column;gap:1vh;width:100%;"> 
+            <div style="display:flex;align-items:center;gap:1vw;"> 
+              <div style="width:1.2rem;height:1.2rem;border-radius:999px;background:var(--accent1);box-shadow:0 6px 14px rgba(212,172,13,0.1);"></div>
+              <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.85rem,1.7vw,0.95rem);">Start: Level 0 (entry point)</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:1vw;"> 
+              <div style="width:1.2rem;height:1.2rem;border-radius:999px;background:var(--accent2);box-shadow:0 6px 14px rgba(4,52,44,0.1);"></div>
+              <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.85rem,1.7vw,0.95rem);">Progression: sensory escalation and unpredictable geometry</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:1vw;"> 
+              <div style="width:1.2rem;height:1.2rem;border-radius:999px;background:var(--accent3);box-shadow:0 6px 14px rgba(44,44,42,0.1);"></div>
+              <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.85rem,1.7vw,0.95rem);">End: no single end — branching, thematic levels</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.85rem,1.7vw,0.95rem);text-align:center;">Use this progression to understand how aesthetics and threat change as you 'descend' or 'branch' into new levels.</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Walk through a short level progression starting at Level 0. Use timeline cards to show how aesthetic and threat escalate or change between levels.</aside>
+  <aside class="notes">Walk through a short level progression starting at Level 0. Use timeline cards to show how aesthetic and threat escalate or change between levels.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="width:100%;height:100%;background:linear-gradient(180deg,var(--bg2),var(--bg));display:flex;align-items:center;justify-content:center;overflow:hidden;"> 
+  <div class="s" style="width:94%;max-width:1300px;display:flex;flex-direction:column;gap:3.5vh;padding:3vh;"> 
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2vh;"> 
+      <div style="font-family:var(--serif);color:var(--t1);font-size:clamp(1.6rem,3.8vw,2.6rem);font-weight:700;">Sensory Cues That Create Unease</div>
+      <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.85rem,1.8vw,1rem);">Qualitative metrics to simulate atmosphere</div>
+    </div>
+
+    <div style="display:flex;gap:3vw;flex-wrap:wrap;align-items:flex-start;"> 
+      <div style="flex:1 1 48%;min-width:300px;background:linear-gradient(180deg, rgba(212,172,13,0.06), rgba(4,52,44,0.02));padding:2.4vh 2.4vw;border-radius:1rem;border-left:6px solid var(--accent1);"> 
+        <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(1rem,2.2vw,1.15rem);">Light</div>
+        <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.9rem,1.9vw,1rem);margin-top:0.8vh;">Constant fluorescent with intermittent, slightly desynced flicker. Color temp tilted sickly yellow — use for sustained discomfort rather than sudden scares.</div>
+
+        <div style="margin-top:1.4vh;width:100%;height:2.2rem;border-radius:999px;background:linear-gradient(90deg,var(--accent1),rgba(212,172,13,0.2));overflow:hidden;"> 
+          <div style="width:68%;height:100%;background:linear-gradient(90deg,rgba(0,0,0,0.08),transparent);border-radius:999px;"> </div>
+        </div>
+      </div>
+
+      <div style="flex:1 1 48%;min-width:300px;display:flex;flex-direction:column;gap:1.2vh;"> 
+        <div style="background:rgba(255,255,255,0.02);padding:2.2vh 2.2vw;border-radius:1rem;border-left:6px solid var(--accent3);"> 
+          <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(1rem,2.2vw,1.15rem);">Sound</div>
+          <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.9rem,1.9vw,1rem);margin-top:0.8vh;">Low monotone hum, distant metallic clanks, and unplaceable footsteps. Use texture over volume to maintain unease over time.</div>
+        </div>
+
+        <div style="display:flex;gap:1.2vw;align-items:center;justify-content:space-between;margin-top:1.2vh;flex-wrap:wrap;"> 
+          <div style="flex:1 1 48%;min-width:160px;background:linear-gradient(180deg, rgba(4,52,44,0.05), rgba(255,255,255,0.01));padding:1.2vh 1vw;border-radius:0.8rem;"> 
+            <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(0.95rem,1.9vw,1rem);">Repetition</div>
+            <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.8rem,1.6vw,0.95rem);margin-top:0.6vh;">Patterned elements that don't resolve: carpet repeats, identical cubicles, doors that lead to more identical spaces.</div>
+          </div>
+
+          <div style="flex:1 1 48%;min-width:160px;background:linear-gradient(180deg, rgba(212,172,13,0.06), rgba(255,255,255,0.01));padding:1.2vh 1vw;border-radius:0.8rem;border-left:4px solid var(--accent1);"> 
+            <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(0.95rem,1.9vw,1rem);">Spatial cues</div>
+            <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.8rem,1.6vw,0.95rem);margin-top:0.6vh;">Subtle changes — carpet seams, altered ceiling tiles, shifts in hum — are the primary signals of transition.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:center;margin-top:1.6vh;"> 
+      <div style="font-family:var(--sans);color:var(--t2);background:linear-gradient(90deg,rgba(212,172,13,0.06),rgba(4,52,44,0.03));padding:0.6rem 1rem;border-radius:999px;">Use these cues as levers to escalate tension slowly.</div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Present sensory 'metrics' (qualitative) to help the audience recognize what to simulate: light temperature, repetition frequency, reverberation. Mention how subtle variations escalate tension.</aside>
+  <aside class="notes">Present sensory 'metrics' (qualitative) to help the audience recognize what to simulate: light temperature, repetition frequency, reverberation. Mention how subtle variations escalate tension.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="width:100%;height:100%;background:linear-gradient(180deg,var(--bg),var(--bg2));display:flex;align-items:center;justify-content:center;overflow:hidden;"> 
+  <div class="s" style="width:94%;max-width:1300px;display:flex;gap:3.5vh;flex-wrap:wrap;padding:3vh;align-items:center;justify-content:center;"> 
+    <div style="flex:1 1 48%;min-width:320px;display:flex;flex-direction:column;gap:1.4vh;"> 
+      <div style="font-family:var(--serif);color:var(--t1);font-size:clamp(1.5rem,4vw,2.6rem);font-weight:700;">Psychological Impact</div>
+      <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.95rem,1.9vw,1.05rem);">How liminal spaces affect perception and emotion.</div>
+
+      <div style="display:flex;gap:1.2vw;flex-wrap:wrap;margin-top:2vh;"> 
+        <div style="flex:1 1 48%;min-width:180px;background:rgba(255,255,255,0.02);padding:1.2vh 1.2vw;border-radius:0.8rem;border-left:5px solid var(--accent1);"> 
+          <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(0.95rem,1.9vw,1.05rem);">Nostalgia & Uncanny</div>
+          <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.8rem,1.6vw,0.95rem);margin-top:0.6vh;">Triggers familiar memories without context — childhood places reconstituted into a dreamlike environment.</div>
+        </div>
+        <div style="flex:1 1 48%;min-width:180px;background:rgba(255,255,255,0.02);padding:1.2vh 1.2vw;border-radius:0.8rem;border-left:5px solid var(--accent3);"> 
+          <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(0.95rem,1.9vw,1.05rem);">Anxiety & Helplessness</div>
+          <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.8rem,1.6vw,0.95rem);margin-top:0.6vh;">Endlessness and monotony remove agency; small changes feel threatening because they break expected patterns.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:1 1 44%;min-width:320px;display:flex;flex-direction:column;align-items:center;gap:1.2vh;"> 
+      <div style="width:100%;height:34vh;border-radius:1rem;background:linear-gradient(180deg,rgba(212,172,13,0.08),rgba(4,52,44,0.03));display:flex;align-items:center;justify-content:center;flex-direction:column;padding:1.2vh;"> 
+        <div style="font-family:var(--sans);color:var(--t1);font-weight:800;font-size:clamp(2.4rem,6vw,4.2rem);line-height:0.9;">The Feeling</div>
+        <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.9rem,1.9vw,1.05rem);text-align:center;margin-top:0.8vh;max-width:80%;">A slow-building, inescapable sense of wrongness — the space itself becomes the antagonist.</div>
+      </div>
+
+      <div style="width:100%;display:flex;justify-content:center;gap:1vw;margin-top:1.2vh;flex-wrap:wrap;"> 
+        <div style="background:rgba(255,255,255,0.02);padding:0.6rem 1rem;border-radius:999px;color:var(--t2);font-family:var(--sans);">Pattern recognition gone wrong</div>
+        <div style="background:linear-gradient(90deg, rgba(212,172,13,0.06), rgba(4,52,44,0.03));padding:0.6rem 1rem;border-radius:999px;color:var(--t2);font-family:var(--sans);">Spatial anxiety and time distortion</div>
+      </div>
+    </div>
+
+    <div style="width:100%;display:flex;justify-content:center;margin-top:1.6vh;"> 
+      <div style="font-family:var(--sans);color:var(--t2);background:rgba(255,255,255,0.02);padding:0.6rem 1rem;border-radius:999px;">Explain cognitive responses and compare normal vs liminal emotional reactions.</div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Explain cognitive responses: pattern recognition gone wrong, spatial anxiety, and time distortion. Use a simple visual to compare normal vs liminal emotional responses.</aside>
+  <aside class="notes">Explain cognitive responses: pattern recognition gone wrong, spatial anxiety, and time distortion. Use a simple visual to compare normal vs liminal emotional responses.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="width:100%;height:100%;background:linear-gradient(180deg,var(--surface),var(--bg));display:flex;align-items:center;justify-content:center;overflow:hidden;"> 
+  <div class="s" style="width:94%;max-width:1400px;display:flex;flex-direction:column;gap:3.5vh;padding:3vh;"> 
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2vh;"> 
+      <div style="font-family:var(--serif);color:var(--t1);font-size:clamp(1.5rem,4vw,2.6rem);font-weight:700;">Designing the Backrooms Vibe</div>
+      <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.85rem,1.8vw,1rem);">Practical tips for creators</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2vw;align-items:start;"> 
+      <div style="background:linear-gradient(180deg, rgba(212,172,13,0.08), rgba(255,255,255,0.01));padding:2vh;border-radius:1rem;border-left:6px solid var(--accent1);"> 
+        <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(1rem,2.2vw,1.15rem);">Lighting</div>
+        <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.9rem,1.9vw,1rem);margin-top:0.6vh;">Harsh, yellow‑tinted fluorescents with slow, irregular flicker. Avoid sudden jump scares — build pressure with sustained discomfort.</div>
+      </div>
+
+      <div style="background:linear-gradient(180deg, rgba(4,52,44,0.06), rgba(255,255,255,0.01));padding:2vh;border-radius:1rem;border-left:6px solid var(--accent2);"> 
+        <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(1rem,2.2vw,1.15rem);">Spatial Design</div>
+        <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.9rem,1.9vw,1rem);margin-top:0.6vh;">Use repetition, slight asymmetry, and off‑scale rooms. Small inconsistencies are more unsettling than overt horror elements.</div>
+      </div>
+
+      <div style="background:linear-gradient(180deg, rgba(44,44,42,0.04), rgba(255,255,255,0.01));padding:2vh;border-radius:1rem;border-left:6px solid var(--accent3);"> 
+        <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(1rem,2.2vw,1.15rem);">Sound Design</div>
+        <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.9rem,1.9vw,1rem);margin-top:0.6vh;">Layer low-frequency hums, distant mechanical noises, and muffled irregularities. Let sound textures evolve slowly to raise tension.</div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:1.2vw;flex-wrap:wrap;justify-content:center;margin-top:2vh;"> 
+      <div style="font-family:var(--sans);color:var(--t2);background:rgba(255,255,255,0.02);padding:0.6rem 1rem;border-radius:999px;">Do: build slow escalation</div>
+      <div style="font-family:var(--sans);color:var(--t2);background:linear-gradient(90deg, rgba(212,172,13,0.04), rgba(4,52,44,0.02));padding:0.6rem 1rem;border-radius:999px;">Don't: rely on gore or jump scares</div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Provide pragmatic tips for writers, game designers, and sound designers to recreate the vibe. Offer examples and short dos & don'ts for authenticity.</aside>
+  <aside class="notes">Provide pragmatic tips for writers, game designers, and sound designers to recreate the vibe. Offer examples and short dos & don'ts for authenticity.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="width:100%;height:100%;background:linear-gradient(180deg,var(--bg),var(--surface));display:flex;align-items:center;justify-content:center;overflow:hidden;"> 
+  <div class="s" style="width:94%;max-width:1200px;display:flex;flex-direction:column;gap:3.5vh;padding:3vh;"> 
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:2vh;"> 
+      <div style="font-family:var(--serif);color:var(--t1);font-size:clamp(1.6rem,3.8vw,2.6rem);font-weight:700;">Community Etiquette & Safety</div>
+      <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.85rem,1.8vw,1rem);">Responsible engagement</div>
+    </div>
+
+    <div style="display:flex;gap:3vw;flex-wrap:wrap;align-items:flex-start;"> 
+      <div style="flex:1 1 48%;min-width:280px;background:linear-gradient(180deg, rgba(212,172,13,0.06), rgba(255,255,255,0.01));padding:2.2vh 2.2vw;border-radius:1rem;border-left:6px solid var(--accent1);"> 
+        <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(1rem,2.2vw,1.15rem);">Content sensitivity</div>
+        <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.9rem,1.9vw,1rem);margin-top:0.8vh;">The Backrooms can include disorienting and disturbing material. Use content warnings and consider audience vulnerability before sharing intense media.</div>
+      </div>
+
+      <div style="flex:1 1 44%;min-width:240px;display:flex;flex-direction:column;gap:1.2vh;"> 
+        <div style="background:rgba(255,255,255,0.02);padding:1.6vh 1.6vw;border-radius:0.9rem;border:1px solid rgba(255,255,255,0.03);display:flex;align-items:center;gap:1vw;"> 
+          <div style="width:6vh;height:6vh;border-radius:8px;background:var(--accent3);display:flex;align-items:center;justify-content:center;color:var(--t1);"> 
+            <i class="fas fa-shield-alt" style="font-size:calc(2.4vh);"></i>
+          </div>
+          <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(0.95rem,1.9vw,1.05rem);">Respect warnings</div>
+        </div>
+
+        <div style="background:linear-gradient(90deg, rgba(4,52,44,0.06), rgba(212,172,13,0.04));padding:1.6vh 1.6vw;border-radius:0.9rem;border-left:5px solid var(--accent2);"> 
+          <div style="font-family:var(--sans);color:var(--t1);font-weight:700;font-size:clamp(0.95rem,1.9vw,1.05rem);">Credit creators</div>
+          <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.85rem,1.7vw,0.95rem);margin-top:0.6vh;">Attribute community work and avoid harmful speculation about real individuals. Maintain safe, ethical storytelling.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:center;gap:1.2vw;margin-top:1.6vh;"> 
+      <div style="font-family:var(--sans);color:var(--t2);background:rgba(255,255,255,0.02);padding:0.6rem 1rem;border-radius:999px;">Be kind and warn of intense content</div>
+      <div style="font-family:var(--sans);color:var(--t2);background:linear-gradient(90deg, rgba(212,172,13,0.06), rgba(4,52,44,0.03));padding:0.6rem 1rem;border-radius:999px;">Credit and protect community creators</div>
+    </div>
+  </div>
+  <aside class="notes" style="display:none">Remind the audience about content sensitivity and ethical engagement with community lore. Encourage constructive participation and trigger warnings when sharing intense material.</aside>
+  <aside class="notes">Remind the audience about content sensitivity and ethical engagement with community lore. Encourage constructive participation and trigger warnings when sharing intense material.</aside>
+</section>
+  </div>
+  <div class="slide-wrap">
+    <section style="width:100%;height:100%;background:linear-gradient(180deg,var(--bg2),var(--bg));display:flex;align-items:center;justify-content:center;overflow:hidden;"> 
+  <div class="s cx" style="width:94%;max-width:1200px;flex-direction:column;gap:3.5vh;padding:4vh;"> 
+    <div style="font-family:var(--serif);color:var(--t1);font-size:clamp(1.8rem,5vw,3.2rem);font-weight:800;">Closing: The Experience Matters Most</div>
+    <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.95rem,2vw,1.1rem);text-align:center;max-width:80%;">Atmosphere over detail — the Backrooms live in feeling.</div>
+
+    <div style="display:flex;gap:3vw;flex-wrap:wrap;align-items:center;justify-content:center;margin-top:2vh;"> 
+      <a href="#" style="text-decoration:none;display:inline-flex;align-items:center;gap:1vw;padding:0.9rem 1.4rem;border-radius:999px;background:var(--accent1);color:var(--bg);font-family:var(--sans);font-weight:700;font-size:clamp(0.95rem,1.9vw,1.1rem);box-shadow:0 12px 36px rgba(212,172,13,0.18);">Explore curated resources</a>
+      <a href="#" style="text-decoration:none;display:inline-flex;align-items:center;gap:1vw;padding:0.9rem 1.4rem;border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));color:var(--t1);font-family:var(--sans);font-weight:700;font-size:clamp(0.95rem,1.9vw,1.1rem);border:1px solid rgba(255,255,255,0.03);">Join community guides</a>
+    </div>
+
+    <div style="width:100%;height:0.25rem;background:linear-gradient(90deg, rgba(212,172,13,0.9), rgba(4,52,44,0.6));border-radius:1rem;margin-top:2vh;box-shadow:0 8px 30px rgba(4,52,44,0.2);"></div>
+
+    <div style="font-family:var(--sans);color:var(--t2);font-size:clamp(0.9rem,1.9vw,1rem);margin-top:1.2vh;text-align:center;">Core message: the psychological and atmospheric experience is central. For more resources, ask DIGITN AI.</div>
+  </div>
+  <aside class="notes" style="display:none">Summarize the key takeaway: how mood, sensory detail, and liminality create the Backrooms. Invite further reading and safe community exploration. Sign off as DIGITN AI and offer to share resource links on request.</aside>
+  <aside class="notes">Summarize the key takeaway: how mood, sensory detail, and liminality create the Backrooms. Invite further reading and safe community exploration. Sign off as DIGITN AI and offer to share resource links on request.</aside>
+</section>
+  </div>
+
+<script>
+(function(){
+  const wraps = document.querySelectorAll('.slide-wrap');
+  const sections = document.querySelectorAll('.slide-wrap > section');
+  const total = wraps.length;
+  const counter = document.getElementById('slide-counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  // IntersectionObserver: mark the visible slide-wrap as .active (triggers CSS animations)
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && e.intersectionRatio > 0.5) {
+        wraps.forEach(w => w.classList.remove('active'));
+        e.target.classList.add('active');
+        current = Array.from(wraps).indexOf(e.target);
+        if (counter) counter.textContent = (current+1) + ' / ' + total;
+        if (progress) progress.style.width = ((current+1)/total*100) + '%';
+      }
+    });
+  }, { threshold: 0.5 });
+  wraps.forEach(w => obs.observe(w));
+
+  // Activate first slide immediately
+  if (wraps[0]) wraps[0].classList.add('active');
+  if (counter) counter.textContent = '1 / ' + total;
+  if (progress) progress.style.width = (1/total*100) + '%';
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      if (current < total - 1) wraps[current + 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (current > 0) wraps[current - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      wraps[0].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      wraps[total - 1].scrollIntoView({ behavior: 'smooth' });
+    } else if (e.key === 'f' || e.key === 'F11') {
+      e.preventDefault();
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+})();
+</script>
+</body>
+</html>

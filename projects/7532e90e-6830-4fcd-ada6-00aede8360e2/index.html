@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Artisan Studio - Crafting Digital Experiences with Purpose">
+    <title>Artisan Studio | Digital Craftsmanship</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav__logo">
+                <span class="nav__logo-text">Artisan</span>
+            </a>
+            <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="nav__toggle-bar"></span>
+                <span class="nav__toggle-bar"></span>
+                <span class="nav__toggle-bar"></span>
+            </button>
+            <ul class="nav__menu" id="navMenu" role="menubar">
+                <li class="nav__item" role="none">
+                    <a href="#features" class="nav__link" role="menuitem">Features</a>
+                </li>
+                <li class="nav__item" role="none">
+                    <a href="#work" class="nav__link" role="menuitem">Work</a>
+                </li>
+                <li class="nav__item" role="none">
+                    <a href="#testimonials" class="nav__link" role="menuitem">Testimonials</a>
+                </li>
+                <li class="nav__item" role="none">
+                    <a href="#contact" class="nav__link nav__link--cta" role="menuitem">Get in Touch</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main">
+        <section class="hero" id="hero">
+            <div class="hero__container container">
+                <div class="hero__content">
+                    <span class="hero__label">Digital Craftsmanship</span>
+                    <h1 class="hero__title">We build experiences that <em>resonate</em></h1>
+                    <p class="hero__description">A boutique studio crafting bespoke digital products for brands who value substance over trends. Every pixel intentional, every interaction meaningful.</p>
+                    <div class="hero__actions">
+                        <a href="#contact" class="btn btn--primary">Start Your Project</a>
+                        <a href="#work" class="btn btn--ghost">View Our Work</a>
+                    </div>
+                </div>
+                <div class="hero__visual">
+                    <div class="hero__shape hero__shape--primary"></div>
+                    <div class="hero__shape hero__shape--secondary"></div>
+                    <div class="hero__image-wrapper">
+                        <div class="hero__image-placeholder" aria-hidden="true">
+                            <span class="hero__image-icon">✦</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-header__label">What We Do</span>
+                    <h2 class="section-header__title">Services tailored to your vision</h2>
+                </header>
+                <div class="features__grid">
+                    <article class="feature-card feature-card--tall">
+                        <span class="feature-card__icon" aria-hidden="true">◈</span>
+                        <h3 class="feature-card__title">Brand Strategy</h3>
+                        <p class="feature-card__description">We dive deep into what makes your brand unique, crafting positioning that cuts through the noise and connects with the right audience.</p>
+                        <ul class="feature-card__list">
+                            <li>Market research & analysis</li>
+                            <li>Brand positioning</li>
+                            <li>Visual identity systems</li>
+                        </ul>
+                    </article>
+                    <article class="feature-card">
+                        <span class="feature-card__icon" aria-hidden="true">◇</span>
+                        <h3 class="feature-card__title">Product Design</h3>
+                        <p class="feature-card__description">From concept to launch, we design digital products that users love and businesses rely on.</p>
+                    </article>
+                    <article class="feature-card">
+                        <span class="feature-card__icon" aria-hidden="true">○</span>
+                        <h3 class="feature-card__title">Development</h3>
+                        <p class="feature-card__description">Clean, performant code built with modern technologies. We engineer for scale and maintainability.</p>
+                    </article>
+                    <article class="feature-card feature-card--wide">
+                        <span class="feature-card__icon" aria-hidden="true">◎</span>
+                        <h3 class="feature-card__title">Ongoing Partnership</h3>
+                        <p class="feature-card__description">We don't just hand off and disappear. Our team provides continuous support, iterations, and strategic guidance as your product evolves. We become an extension of your team, invested in your long-term success.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="work" id="work">
+            <div class="container">
+                <header class="section-header section-header--center">
+                    <span class="section-header__label">Selected Projects</span>
+                    <h2 class="section-header__title">Work that speaks for itself</h2>
+                </header>
+                <div class="work__grid">
+                    <article class="work-card">
+                        <div class="work-card__image" aria-hidden="true">
+                            <span class="work-card__symbol">Aa</span>
+                        </div>
+                        <div class="work-card__content">
+                            <span class="work-card__category">Brand Identity</span>
+                            <h3 class="work-card__title">Meridian Capital</h3>
+                            <p class="work-card__description">Complete rebrand for a boutique investment firm, positioning them for high-net-worth clientele.</p>
+                        </div>
+                    </article>
+                    <article class="work-card work-card--featured">
+                        <div class="work-card__image" aria-hidden="true">
+                            <span class="work-card__symbol">∞</span>
+                        </div>
+                        <div class="work-card__content">
+                            <span class="work-card__category">Product Design</span>
+                            <h3 class="work-card__title">Concord Health</h3>
+                            <p class="work-card__description">Patient portal redesign reducing appointment booking time by 67% through intuitive UX patterns.</p>
+                        </div>
+                    </article>
+                    <article class="work-card">
+                        <div class="work-card__image" aria-hidden="true">
+                            <span class="work-card__symbol">△</span>
+                        </div>
+                        <div class="work-card__content">
+                            <span class="work-card__category">Web Development</span>
+                            <h3 class="work-card__title">Strömmen Architects</h3>
+                            <p class="work-card__description">Portfolio website showcasing award-winning residential and commercial projects.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials" id="testimonials">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-header__label">Client Stories</span>
+                    <h2 class="section-header__title">Words from our partners</h2>
+                </header>
+                <div class="testimonials__grid" id="testimonialsGrid">
+                    <article class="testimonial-card">
+                        <blockquote class="testimonial-card__quote">
+                            <p>"Artisan didn't just build us a website—they helped us understand how digital could transform our entire business. The attention to detail was extraordinary."</p>
+                        </blockquote>
+                        <footer class="testimonial-card__author">
+                            <div class="testimonial-card__avatar" aria-hidden="true">RK</div>
+                            <div class="testimonial-card__info">
+                                <cite class="testimonial-card__name">Rebecca Kim</cite>
+                                <span class="testimonial-card__role">CEO, Meridian Capital</span>
+                            </div>
+                        </footer>
+                    </article>
+                    <article class="testimonial-card">
+                        <blockquote class="testimonial-card__quote">
+                            <p>"Working with their team felt like a true collaboration. They challenged our assumptions and pushed us toward better solutions at every turn."</p>
+                        </blockquote>
+                        <footer class="testimonial-card__author">
+                            <div class="testimonial-card__avatar" aria-hidden="true">MP</div>
+                            <div class="testimonial-card__info">
+                                <cite class="testimonial-card__name">Marcus Patel</cite>
+                                <span class="testimonial-card__role">Director of Product, Concord Health</span>
+                            </div>
+                        </footer>
+                    </article>
+                    <article class="testimonial-card">
+                        <blockquote class="testimonial-card__quote">
+                            <p>"The results speak volumes. Our conversion rate increased 340% within three months of launch. Worth every penny and then some."</p>
+                        </blockquote>
+                        <footer class="testimonial-card__author">
+                            <div class="testimonial-card__avatar" aria-hidden="true">SL</div>
+                            <div class="testimonial-card__info">
+                                <cite class="testimonial-card__name">Sofia Lindqvist</cite>
+                                <span class="testimonial-card__role">Founder, Strömmen Architects</span>
+                            </div>
+                        </footer>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact" id="contact">
+            <div class="container">
+                <div class="contact__wrapper">
+                    <div class="contact__content">
+                        <span class="section-header__label">Get Started</span>
+                        <h2 class="contact__title">Let's create something remarkable</h2>
+                        <p class="contact__description">Ready to elevate your digital presence? Tell us about your project and we'll respond within 24 hours.</p>
+                        <div class="contact__info">
+                            <div class="contact__info-item">
+                                <span class="contact__info-label">Email</span>
+                                <a href="mailto:hello@artisan.studio" class="contact__info-value">hello@artisan.studio</a>
+                            </div>
+                            <div class="contact__info-item">
+                                <span class="contact__info-label">Phone</span>
+                                <a href="tel:+15551234567" class="contact__info-value">+1 (555) 123-4567</a>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="contact-form" id="contactForm" novalidate>
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" id="name" name="name" class="form-input" required autocomplete="name" placeholder="Jane Smith">
+                            <span class="form-error" id="nameError" role="alert"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-input" required autocomplete="email" placeholder="jane@company.com">
+                            <span class="form-error" id="emailError" role="alert"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="projectType" class="form-label">Project Type</label>
+                            <select id="projectType" name="projectType" class="form-input form-select" required>
+                                <option value="" disabled selected>Select a category</option>
+                                <option value="branding">Brand Strategy & Identity</option>
+                                <option value="product">Product Design</option>
+                                <option value="development">Development</option>
+                                <option value="full">Full Project</option>
+                            </select>
+                            <span class="form-error" id="projectTypeError" role="alert"></span>
+                        </div>
+                        <div class="form-group form-group--full">
+                            <label for="message" class="form-label">Project Details</label>
+                            <textarea id="message" name="message" class="form-input form-textarea" rows="4" required placeholder="Tell us about your project, timeline, and budget..."></textarea>
+                            <span class="form-error" id="messageError" role="alert"></span>
+                        </div>
+                        <div class="form-group form-group--full">
+                            <button type="submit" class="btn btn--primary btn--full" id="submitBtn">
+                                <span class="btn__text">Send Message</span>
+                                <span class="btn__loading" aria-hidden="true">Sending...</span>
+                            </button>
+                        </div>
+                        <div class="form-success" id="formSuccess" role="status" aria-live="polite">
+                            <span class="form-success__icon">✓</span>
+                            <p class="form-success__message">Thank you! We'll be in touch within 24 hours.</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <a href="#" class="footer__logo">Artisan</a>
+                    <p class="footer__tagline">Crafting digital experiences with purpose since 2018.</p>
+                </div>
+                <nav class="footer__nav" aria-label="Footer navigation">
+                    <ul class="footer__links">
+                        <li><a href="#features" class="footer__link">Features</a></li>
+                        <li><a href="#work" class="footer__link">Work</a></li>
+                        <li><a href="#testimonials" class="footer__link">Testimonials</a></li>
+                        <li><a href="#contact" class="footer__link">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="footer__social">
+                    <a href="#" class="footer__social-link" aria-label="Twitter">Tw</a>
+                    <a href="#" class="footer__social-link" aria-label="LinkedIn">Li</a>
+                    <a href="#" class="footer__social-link" aria-label="Instagram">Ig</a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">&copy; 2024 Artisan Studio. All rights reserved.</p>
+                <div class="footer__legal">
+                    <a href="#" class="footer__legal-link">Privacy Policy</a>
+                    <a href="#" class="footer__legal-link">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/demo-data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

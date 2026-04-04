@@ -1,0 +1,18 @@
+# Web Framework
+Django>=4.2,<5.0
+djangorestframework>=3.14
+
+# CORS
+django-cors-headers>=4.0
+
+# Database
+psycopg2-binary>=2.9  # PostgreSQL driver (Supabase / production)
+
+# Environment
+python-dotenv>=1.0
+
+# Production server
+gunicorn>=21.0
+
+# Optional: token auth (included in djangorestframework, but needed for rest_framework.authtoken)
+# djangorestframework is enough — authtoken is a built-in DRF app
